@@ -1,7 +1,8 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
+[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -358,6 +359,10 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=16]
 
+[sub_resource type="CapsuleShape2D" id=35]
+radius = 7.0
+height = 6.0
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -365,7 +370,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 31
+frame = 39
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
@@ -392,3 +397,10 @@ parameters/playback = SubResource( 16 )
 parameters/Attack/blend_position = Vector2( -0.295512, -0.442056 )
 parameters/Idle/blend_position = Vector2( -0.00254023, 0.113793 )
 parameters/Run/blend_position = Vector2( -0.368332, 0.654962 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 35 )
+
+[editable path="Hitbox"]
