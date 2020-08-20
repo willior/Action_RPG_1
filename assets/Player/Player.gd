@@ -57,3 +57,6 @@ func move_state(delta):
 # warning-ignore:unused_argument
 func attack_state(delta):
 	animationState.travel("Attack")
+	
+func attack_animation_finished():
+	state = MOVE
