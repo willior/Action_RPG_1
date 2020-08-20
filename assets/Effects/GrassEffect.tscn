@@ -7,10 +7,13 @@ script/source = "extends Node2D
 
 onready var animatedSprite = $AnimatedSprite
 
-
-
 func _ready():
-	pass
+	animatedSprite.frame = 0
+	animatedSprite.play(\"Animate\")
+
+
+func _on_AnimatedSprite_animation_finished():
+	queue_free()
 "
 
 [sub_resource type="AtlasTexture" id=2]
@@ -48,5 +51,7 @@ script = SubResource( 1 )
 frames = SubResource( 7 )
 animation = "Animate"
 frame = 4
+playing = true
 centered = false
 offset = Vector2( -8, -8 )
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
