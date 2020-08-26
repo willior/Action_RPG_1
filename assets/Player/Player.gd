@@ -19,9 +19,11 @@ var roll_moving = false
 onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+onready var swordHitbox = $HitboxPivot/SwordHitbox
 
 func _ready():
 	animationTree.active = true # animation not active until game starts
+	swordHitbox.knockback_vector = roll_vector
 
 func _process(delta):
 	match state:
@@ -44,6 +46,8 @@ func move_state(delta):
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		roll_vector = input_vector
+		swordHitbox.knockback_vector = input_vector
+		
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
 		animationTree.set("parameters/Attack/blend_position", input_vector)
