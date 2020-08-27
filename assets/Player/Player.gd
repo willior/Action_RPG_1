@@ -15,6 +15,7 @@ var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var roll_moving = false
+var stats = PlayerStats
 
 onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
 onready var animationTree = $AnimationTree
@@ -22,6 +23,7 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 
 func _ready():
+	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = roll_vector
 
@@ -92,3 +94,6 @@ func roll_stop():
 	
 func roll_animation_finished():
 	state = MOVE
+
+func _on_Hurtbox_area_entered(area):
+	stats.health -= 1

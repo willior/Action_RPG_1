@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/Enemies/Bat.png" type="Texture" id=1]
 [ext_resource path="res://assets/Shadows/SmallShadow.png" type="Texture" id=2]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=6]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=11]
 script/source = "extends KinematicBody2D
 
 const EnemyDeathEffect = preload(\"res://assets/Effects/EnemyDeathEffect.tscn\")
@@ -50,8 +51,8 @@ func _physics_process(delta):
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
-				var direction = (player.global_position - global_position).normalized()
-				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+				var direction = (player.global_position - global_position).normalized() # gets the distance between player and bat, then normalizes it so that it's a length of 1
+				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta) # multiplies that by the MAX_SPEED value
 			else:
 				sprite.speed_scale = 1
 				state = IDLE
@@ -101,34 +102,34 @@ func _on_Stats_no_health():
 	queue_free()
 "
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
 region = Rect2( 16, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 16, 24 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=17]
 animations = [ {
 "frames": [  ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "fly",
 "speed": 10.0
@@ -144,12 +145,15 @@ height = 4.0
 [sub_resource type="CircleShape2D" id=10]
 radius = 56.0089
 
+[sub_resource type="CircleShape2D" id=18]
+radius = 4.0
+
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
-script = SubResource( 1 )
+script = SubResource( 11 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 7 )
+frames = SubResource( 17 )
 animation = "fly"
 playing = true
 offset = Vector2( 0, -12 )
@@ -169,7 +173,6 @@ position = Vector2( 0, -14 )
 shape = SubResource( 9 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
-max_health = 4
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -181,9 +184,18 @@ wait_time = 0.5
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 1, 1, 0.2 )
 shape = SubResource( 10 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 6 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0, -14 )
+shape = SubResource( 18 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hurtbox"]
 
 [editable path="PlayerDetectionZone"]
+
+[editable path="Hitbox"]
