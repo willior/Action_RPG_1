@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/Enemies/Bat.png" type="Texture" id=1]
 [ext_resource path="res://assets/Shadows/SmallShadow.png" type="Texture" id=2]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -30,6 +31,7 @@ onready var timer = $Timer
 onready var anim = $AnimatedSprite
 onready var tween = $Tween
 onready var hurtbox = $Hurtbox
+onready var playerDetectionZone = $PlayerDetectionZone
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -38,10 +40,20 @@ func _physics_process(delta):
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			seek_player()
 		WANDER:
 			pass
 		CHASE:
-			pass
+			var player = playerDetectionZone.player
+			if player != null:
+				var direction = (player.global_position - global_position).normalized()
+				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+				
+	velocity = move_and_slide(velocity)
+			
+func seek_player():
+	if playerDetectionZone.can_see_player():
+		state = CHASE
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
@@ -120,6 +132,9 @@ radius = 4.0
 radius = 8.0
 height = 4.0
 
+[sub_resource type="CircleShape2D" id=10]
+radius = 56.0089
+
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
 script = SubResource( 1 )
@@ -151,7 +166,15 @@ max_health = 4
 wait_time = 0.5
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+modulate = Color( 1, 1, 1, 0.2 )
+shape = SubResource( 10 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hurtbox"]
+
+[editable path="PlayerDetectionZone"]
