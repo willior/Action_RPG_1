@@ -11,4 +11,4 @@ func get_push_vector():
 		var area = areas[0] # gets the FIRST area overlap and stores it in var area
 		push_vector = area.global_position.direction_to(global_position) # getting a vector that goes from ITS global position to OUR global position
 		push_vector = push_vector.normalized()
-		
+	return push_vector # will return 0 if not colliding with anything
