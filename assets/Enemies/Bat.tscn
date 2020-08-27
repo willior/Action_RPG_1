@@ -14,6 +14,7 @@ onready var stats = $Stats
 onready var timer = $Timer
 onready var anim = $AnimatedSprite
 onready var tween = $Tween
+onready var hurtbox = $Hurtbox
 
 func _ready():
 	print(stats.max_health)
@@ -28,7 +29,7 @@ func _on_Hurtbox_area_entered(area):
 
 func _on_Stats_no_health():
 	anim.playing = false
-	
+	hurtbox.set_deferred(\"monitoring\", false)
 	tween.interpolate_property(anim,
 	\"modulate\",
 	Color(1, 1, 1, 1),
@@ -46,6 +47,7 @@ func _on_Stats_no_health():
 	Tween.EASE_OUT
 	)
 	tween.start()
+	
 	timer.start()
 	yield(timer, \"timeout\")
 	queue_free()
@@ -98,7 +100,7 @@ script = SubResource( 8 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "fly"
-frame = 2
+frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 
