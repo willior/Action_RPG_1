@@ -155,6 +155,7 @@ script = SubResource( 11 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 17 )
 animation = "fly"
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 
