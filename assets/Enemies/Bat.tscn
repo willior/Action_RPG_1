@@ -13,6 +13,7 @@ var knockback = Vector2.ZERO
 onready var stats = $Stats
 onready var timer = $Timer
 onready var anim = $AnimatedSprite
+onready var tween = $Tween
 
 func _ready():
 	print(stats.max_health)
@@ -27,6 +28,24 @@ func _on_Hurtbox_area_entered(area):
 
 func _on_Stats_no_health():
 	anim.playing = false
+	
+	tween.interpolate_property(anim,
+	\"modulate\",
+	Color(1, 1, 1, 1),
+	Color(1, 0, 0, 0),
+	.5,
+	Tween.TRANS_LINEAR,
+	Tween.EASE_OUT
+	)
+	tween.interpolate_property($ShadowSprite,
+	\"modulate\",
+	Color(1, 1, 1, 1),
+	Color(1, 1, 1, 0),
+	.5,
+	Tween.TRANS_LINEAR,
+	Tween.EASE_OUT
+	)
+	tween.start()
 	timer.start()
 	yield(timer, \"timeout\")
 	queue_free()
@@ -79,7 +98,7 @@ script = SubResource( 8 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "fly"
-frame = 1
+frame = 4
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -100,6 +119,8 @@ shape = SubResource( 9 )
 max_health = 2
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
