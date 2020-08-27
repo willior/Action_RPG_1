@@ -23,7 +23,7 @@ func _physics_process(delta):
 	knockback = move_and_slide(knockback)
 
 func _on_Hurtbox_area_entered(area):
-	stats.health -= 1
+	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	knockback = area.knockback_vector * 120 # knockback velocity
 
 func _on_Stats_no_health():
@@ -98,7 +98,7 @@ script = SubResource( 8 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "fly"
-frame = 4
+frame = 2
 playing = true
 offset = Vector2( 0, -12 )
 
