@@ -28,3 +28,9 @@ func create_hit_effect():
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter
+
+func _on_Hurtbox_invincibility_started():
+	set_deferred("monitorable", false)
+
+func _on_Hurtbox_invincibility_ended():
+	monitorable = true
