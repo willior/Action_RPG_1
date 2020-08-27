@@ -5,8 +5,10 @@
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Stats.tscn" type="PackedScene" id=4]
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
+
+const EnemyDeathEffect = preload(\"res://assets/Effects/EnemyDeathEffect.tscn\")
 
 var knockback = Vector2.ZERO
 
@@ -28,65 +30,72 @@ func _on_Hurtbox_area_entered(area):
 	knockback = area.knockback_vector * 120 # knockback velocity
 
 func _on_Stats_no_health():
-	anim.playing = false
-	hurtbox.set_deferred(\"monitoring\", false)
+	anim.playing = false # stop animation
+	hurtbox.set_deferred(\"monitoring\", false) # turn off hurtbox
+	
+	tween.interpolate_property(anim,
+	\"offset:y\",
+	-12,
+	0,
+	0.5,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
+	
 	tween.interpolate_property(anim,
 	\"modulate\",
 	Color(1, 1, 1, 1),
-	Color(1, 0, 0, 0),
-	.5,
+	Color(1, 0, 0, 1),
+	0.5,
 	Tween.TRANS_LINEAR,
-	Tween.EASE_OUT
-	)
-	tween.interpolate_property($ShadowSprite,
-	\"modulate\",
-	Color(1, 1, 1, 1),
-	Color(1, 1, 1, 0),
-	.5,
-	Tween.TRANS_LINEAR,
-	Tween.EASE_OUT
+	Tween.EASE_IN
 	)
 	tween.start()
 	
 	timer.start()
 	yield(timer, \"timeout\")
+	
+	var enemyDeathEffect = EnemyDeathEffect.instance()
+	get_parent().add_child(enemyDeathEffect)
+	enemyDeathEffect.global_position = global_position
+	
 	queue_free()
 "
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 16, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 16, 24 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [  ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "fly",
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=8]
 radius = 4.0
 
 [sub_resource type="CapsuleShape2D" id=9]
@@ -95,10 +104,10 @@ height = 4.0
 
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
-script = SubResource( 8 )
+script = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 6 )
+frames = SubResource( 7 )
 animation = "fly"
 frame = 1
 playing = true
@@ -108,9 +117,10 @@ offset = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -118,9 +128,10 @@ position = Vector2( 0, -14 )
 shape = SubResource( 9 )
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
-max_health = 2
+max_health = 4
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
