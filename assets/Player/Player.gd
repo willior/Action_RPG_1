@@ -17,6 +17,7 @@ var roll_vector = Vector2.DOWN
 var roll_moving = false
 var stats = PlayerStats
 
+onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
@@ -100,3 +101,9 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= 1
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()
+
+func _on_Hurtbox_invincibility_started():
+	sprite.modulate = Color(0,1,1,1)
+
+func _on_Hurtbox_invincibility_ended():
+	sprite.modulate = Color(1,1,1,1)
