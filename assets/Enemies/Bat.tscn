@@ -82,8 +82,22 @@ func seek_player():
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
-	knockback = area.knockback_vector * 160 # knockback velocity
 	hurtbox.create_hit_effect()
+	
+	sprite.modulate = Color(1,1,0)
+	if stats.health > 0:
+		knockback = area.knockback_vector * 160 # knockback velocity
+		tween.interpolate_property(sprite,
+		\"modulate\",
+		Color(1, 1, 0),
+		Color(1, 1, 1),
+		0.2,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+		)
+		tween.start()
+	else:
+		knockback = area.knockback_vector * 320 # knockback velocity on killing blow
 
 func _on_Stats_no_health():
 	sprite.playing = false # stop animation
@@ -102,8 +116,8 @@ func _on_Stats_no_health():
 	
 	tween.interpolate_property(sprite,
 	\"modulate\",
-	Color(1, 1, 1, 1),
-	Color(1, 0, 0, 1),
+	Color(1, 1, 0),
+	Color(1, 0, 0),
 	0.5,
 	Tween.TRANS_LINEAR,
 	Tween.EASE_IN
@@ -167,7 +181,7 @@ radius = 56.0089
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id=12]
-radius = 3.16228
+radius = 5.0
 
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
@@ -176,7 +190,7 @@ script = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "fly"
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -184,6 +198,7 @@ offset = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 8 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
@@ -209,6 +224,7 @@ modulate = Color( 1, 1, 1, 0.2 )
 shape = SubResource( 10 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
+visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
