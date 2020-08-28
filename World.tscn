@@ -491,7 +491,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 position = Vector2( 160, 90 )
 texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 180 )
+region_rect = Rect2( 0, 0, 960, 560 )
 
 [node name="DirtPathTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -510,6 +510,15 @@ tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 1, -65534, 0, 2, -65532, 0, 0
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 111, 21 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.13
+drag_margin_top = 0.13
+drag_margin_right = 0.12
+drag_margin_bottom = 0.11
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -647,3 +656,7 @@ position = Vector2( 256, 128 )
 position = Vector2( 272, 88 )
 
 [node name="HealthUI" parent="." instance=ExtResource( 9 )]
+margin_left = -40.0
+margin_top = -64.0
+margin_right = 20.0
+margin_bottom = -52.0

@@ -3,7 +3,7 @@ extends KinematicBody2D
 const ACCELERATION = 1600
 const MAX_SPEED = 100
 const ROLL_SPEED = 200
-const FRICTION = 3200
+const FRICTION = 800
 
 enum {
 	MOVE,
@@ -82,9 +82,12 @@ func move():
 
 # warning-ignore:unused_argument
 func attack_state(delta):
+	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
 	animationState.travel("Attack")
+	move()
 	
 func attack_animation_finished():
+	velocity = Vector2.ZERO
 	state = MOVE
 
 # warning-ignore:unused_argument
