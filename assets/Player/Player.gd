@@ -43,7 +43,6 @@ func _process(delta):
 			attack_state(delta)
 			
 		HIT:
-			print("hit!")
 			hit_state(delta)
 
 func move_state(delta):
@@ -62,6 +61,7 @@ func move_state(delta):
 		animationTree.set("parameters/Run/blend_position", input_vector)
 		animationTree.set("parameters/Attack/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
+		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
@@ -104,8 +104,9 @@ func roll_animation_finished():
 	state = MOVE
 	
 func hit_state(delta):
-	velocity = Vector2.ZERO
+	velocity = -roll_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
+	move()
 	
 func hit_animation_finished():
 	state = MOVE

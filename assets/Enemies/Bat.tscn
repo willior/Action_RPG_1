@@ -29,6 +29,8 @@ var knockback = Vector2.ZERO
 
 var state = IDLE
 
+var rng = RandomNumberGenerator.new()
+
 onready var stats = $Stats
 onready var timer = $Timer
 onready var sprite = $AnimatedSprite
@@ -39,7 +41,9 @@ onready var playerDetectionZone = $PlayerDetectionZone
 onready var softCollision = $SoftCollision
 
 func _ready():
-	sprite.frame = 0
+	rng.randomize()
+	sprite.frame = rng.randi_range(0, 4)
+	print(sprite.frame)
 	sprite.speed_scale = 1
 
 func _physics_process(delta):
@@ -78,7 +82,7 @@ func seek_player():
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
-	knockback = area.knockback_vector * 140 # knockback velocity
+	knockback = area.knockback_vector * 160 # knockback velocity
 	hurtbox.create_hit_effect()
 
 func _on_Stats_no_health():
@@ -172,7 +176,7 @@ script = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "fly"
-frame = 2
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 
