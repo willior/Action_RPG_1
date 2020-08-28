@@ -506,19 +506,19 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 1, -65534, 0, 2, -65532, 0, 0, -65531, 0, 1, -65530, 0, 2, -65528, 0, 0, -65527, 0, 1, -65526, 0, 2, 0, 0, 131072, 1, 0, 65542, 2, 0, 65538, 4, 0, 65536, 5, 0, 65537, 6, 0, 65538, 8, 0, 131072, 9, 0, 65542, 10, 0, 65538, 65537, 0, 65540, 65538, 0, 131074, 65540, 0, 65536, 65541, 0, 65537, 65542, 0, 65538, 65545, 0, 65536, 65546, 0, 65538, 131073, 0, 131075, 131076, 0, 65540, 131077, 0, 131073, 131078, 0, 131074, 131081, 0, 65536, 131082, 0, 65538, 196611, 0, 4, 196612, 0, 196615, 196617, 0, 65536, 196618, 0, 65538, 262145, 0, 196608, 262146, 0, 196609, 262147, 0, 196615, 262153, 0, 65536, 262154, 0, 65538, 327688, 0, 0, 327689, 0, 131078, 327690, 0, 65538, 393224, 0, 131072, 393225, 0, 131073, 393226, 0, 131074 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 111, 21 )
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 111, 21 )
 
-[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
-current = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-drag_margin_left = 0.13
-drag_margin_top = 0.13
-drag_margin_right = 0.12
-drag_margin_bottom = 0.11
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -655,8 +655,13 @@ position = Vector2( 256, 128 )
 [node name="Bat5" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 272, 88 )
 
-[node name="HealthUI" parent="." instance=ExtResource( 9 )]
-margin_left = -40.0
-margin_top = -64.0
-margin_right = 20.0
-margin_bottom = -52.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 9 )]
+show_behind_parent = true
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 64.0
+margin_bottom = 16.0
+
+[editable path="CanvasLayer/HealthUI"]
