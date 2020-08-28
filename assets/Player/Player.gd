@@ -8,7 +8,8 @@ const FRICTION = 3200
 enum {
 	MOVE,
 	ROLL,
-	ATTACK
+	ATTACK,
+	HIT
 }
 
 var state = MOVE
@@ -40,6 +41,10 @@ func _process(delta):
 			
 		ATTACK:
 			attack_state(delta)
+			
+		HIT:
+			print("hit!")
+			hit_state(delta)
 
 func move_state(delta):
 	# if player is not moving
@@ -97,9 +102,17 @@ func roll_stop():
 	
 func roll_animation_finished():
 	state = MOVE
+	
+func hit_state(delta):
+	velocity = Vector2.ZERO
+	animationState.travel("Hit")
+	
+func hit_animation_finished():
+	state = MOVE
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= 1
+	state = HIT
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
 
