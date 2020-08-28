@@ -23,6 +23,7 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
+onready var collision = $Hurtbox/CollisionShape2D
 
 func _ready():
 	stats.connect("no_health", self, "queue_free")
@@ -99,11 +100,13 @@ func roll_animation_finished():
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= 1
-	hurtbox.start_invincibility(0.5)
+	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
 
 func _on_Hurtbox_invincibility_started():
+	collision.set_deferred("disabled", true)
 	sprite.modulate = Color(0,1,1,1)
 
 func _on_Hurtbox_invincibility_ended():
+	collision.set_deferred("disabled", false)
 	sprite.modulate = Color(1,1,1,1)
