@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const PlayerHurtSound = preload("res://assets/Player/PlayerHurtSound.tscn")
+
 const ACCELERATION = 1600
 const MAX_SPEED = 100
 const ROLL_SPEED = 200
@@ -30,6 +32,7 @@ func _ready():
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = roll_vector
+	collision.disabled = false
 
 func _process(delta):
 	match state:
@@ -119,6 +122,9 @@ func _on_Hurtbox_area_entered(area):
 	state = HIT
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
+	
+	var playerHurtSound = PlayerHurtSound.instance()
+	get_tree().current_scene.add_child(playerHurtSound)
 
 func _on_Hurtbox_invincibility_started():
 	collision.set_deferred("disabled", true)
