@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=6]
 [ext_resource path="res://assets/Music and Sounds/Swipe.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/Music and Sounds/Evade.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
+
+[sub_resource type="ShaderMaterial" id=59]
+shader = ExtResource( 9 )
+shader_param/active = false
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -981,6 +986,39 @@ height = 12.0
 radius = 5.0
 height = 0.0
 
+[sub_resource type="Animation" id=60]
+resource_name = "Start"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "Stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -990,6 +1028,7 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 59 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
@@ -1055,6 +1094,10 @@ disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Start = SubResource( 60 )
+anims/Stop = SubResource( 61 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

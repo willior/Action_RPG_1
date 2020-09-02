@@ -24,6 +24,7 @@ onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
@@ -129,7 +130,9 @@ func _on_Hurtbox_area_entered(area):
 func _on_Hurtbox_invincibility_started():
 	collision.set_deferred("disabled", true)
 	sprite.modulate = Color(0,1,1,1)
+	blinkAnimationPlayer.play("Start")
 
 func _on_Hurtbox_invincibility_ended():
 	collision.set_deferred("disabled", false)
 	sprite.modulate = Color(1,1,1,1)
+	blinkAnimationPlayer.play("Stop")
