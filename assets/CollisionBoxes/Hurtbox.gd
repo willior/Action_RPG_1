@@ -30,8 +30,6 @@ func create_hit_effect():
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter
 
-
-
 # unused signal methods
 func _on_Hurtbox_invincibility_started():
 	pass

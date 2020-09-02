@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/Enemies/Bat.png" type="Texture" id=1]
 [ext_resource path="res://assets/Shadows/SmallShadow.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -43,6 +44,7 @@ onready var hurtbox = $Hurtbox
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
+onready var animationPlayer = $AnimationPlayer
 
 func _ready():
 	rng.randomize()
@@ -106,6 +108,7 @@ func pick_random_state(state_list):
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	hurtbox.create_hit_effect()
+	hurtbox.start_invincibility(0.4)
 	
 	sprite.modulate = Color(1,1,0)
 	if stats.health > 0:
@@ -155,7 +158,19 @@ func _on_Stats_no_health():
 	enemyDeathEffect.global_position = global_position
 	
 	queue_free()
+
+
+func _on_Hurtbox_invincibility_started():
+	animationPlayer.play(\"Start\")
+
+
+func _on_Hurtbox_invincibility_ended():
+	animationPlayer.play(\"Stop\")
 "
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 9 )
+shader_param/active = false
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -206,13 +221,48 @@ radius = 4.0
 [sub_resource type="CircleShape2D" id=12]
 radius = 5.0
 
+[sub_resource type="Animation" id=14]
+resource_name = "Start"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "Stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
 script = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 13 )
 frames = SubResource( 7 )
 animation = "fly"
+frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -258,7 +308,13 @@ shape = SubResource( 11 )
 shape = SubResource( 12 )
 
 [node name="WanderController" parent="." instance=ExtResource( 8 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Start = SubResource( 14 )
+anims/Stop = SubResource( 15 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hurtbox"]
