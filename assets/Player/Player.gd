@@ -119,7 +119,7 @@ func hit_animation_finished():
 	state = MOVE
 
 func _on_Hurtbox_area_entered(area):
-	stats.health -= 1
+	stats.health -= area.damage
 	state = HIT
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
@@ -128,11 +128,9 @@ func _on_Hurtbox_area_entered(area):
 	get_tree().current_scene.add_child(playerHurtSound)
 
 func _on_Hurtbox_invincibility_started():
-	collision.set_deferred("disabled", true)
 	sprite.modulate = Color(0,1,1,1)
 	blinkAnimationPlayer.play("Start")
 
 func _on_Hurtbox_invincibility_ended():
-	collision.set_deferred("disabled", false)
 	sprite.modulate = Color(1,1,1,1)
 	blinkAnimationPlayer.play("Stop")

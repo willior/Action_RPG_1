@@ -5,6 +5,7 @@ const HitEffect = preload("res://assets/Effects/HitEffect.tscn")
 var invincible = false setget set_invincible
 
 onready var timer = $Timer
+onready var collision = $CollisionShape2D
 
 signal invincibility_started
 signal invincibility_ended
@@ -32,7 +33,7 @@ func _on_Timer_timeout():
 
 # unused signal methods
 func _on_Hurtbox_invincibility_started():
-	pass
+	collision.set_deferred("disabled", true)
 
 func _on_Hurtbox_invincibility_ended():
-	pass
+	collision.set_deferred("disabled", false)
