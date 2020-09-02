@@ -18,6 +18,7 @@ export var ACCELERATION = 300
 export var MAX_SPEED = 40
 export var WANDER_SPEED = 20
 export var FRICTION = 200
+export var WANDER_TARGET_RANGE = 4
 
 enum {
 	IDLE,
@@ -69,6 +70,9 @@ func _physics_process(delta):
 				
 			var direction = global_position.direction_to(wanderController.target_position) # gets the direction by grabbing the target position in the WanderController
 			velocity = velocity.move_toward(direction * WANDER_SPEED, ACCELERATION * delta)
+			
+			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE:
+				state = pick_random_state([IDLE, WANDER])
 				
 		CHASE:
 			var player = playerDetectionZone.player
@@ -208,7 +212,7 @@ script = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "fly"
-frame = 4
+frame = 2
 playing = true
 offset = Vector2( 0, -12 )
 
