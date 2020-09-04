@@ -50,7 +50,6 @@ func _process(delta):
 			hit_state(delta)
 
 func move_state(delta):
-	# if player is not moving
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
