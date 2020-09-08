@@ -94,6 +94,7 @@ func attack_animation_finished():
 	state = MOVE
 
 func enemy_killed(experience_from_kill):
+	prints(stats.experience, 'current exp')
 	prints(experience_from_kill, "exp gained")
 
 # warning-ignore:unused_argument
