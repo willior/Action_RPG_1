@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -9,11 +9,7 @@
 [ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/World/Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=10]
-[ext_resource path="res://assets/UI/slot.png" type="Texture" id=11]
-[ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=12]
-[ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=13]
-[ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=14]
+[ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -490,10 +486,6 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 } ]
 0/z_index = 0
 
-[sub_resource type="DynamicFont" id=50]
-size = 14
-font_data = ExtResource( 10 )
-
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
@@ -673,58 +665,6 @@ margin_top = 4.0
 margin_right = 64.0
 margin_bottom = 16.0
 
-[node name="ExpBar" type="Control" parent="GUI"]
-margin_left = 3.0
-margin_top = 160.0
-margin_right = 163.0
-margin_bottom = 176.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="ExpBar" parent="GUI" instance=ExtResource( 10 )]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/ExpBar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="GUI/ExpBar/HBoxContainer"]
-margin_right = 16.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 16, 16 )
-texture = ExtResource( 11 )
-expand = true
-
-[node name="Label" type="Label" parent="GUI/ExpBar/HBoxContainer/TextureRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = SubResource( 50 )
-text = "77"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureProgress" type="TextureProgress" parent="GUI/ExpBar"]
-margin_left = 20.0
-margin_top = 11.0
-margin_right = 140.0
-margin_bottom = 15.0
-rect_min_size = Vector2( 120, 3 )
-size_flags_vertical = 8
-value = 70.0
-rounded = true
-texture_under = ExtResource( 13 )
-texture_over = ExtResource( 14 )
-texture_progress = ExtResource( 12 )
-tint_progress = Color( 1, 0.654902, 0, 0.501961 )
-nine_patch_stretch = true
-stretch_margin_left = 2
-stretch_margin_top = 2
-stretch_margin_right = 2
-stretch_margin_bottom = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[editable path="GUI/ExpBar"]

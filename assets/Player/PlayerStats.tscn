@@ -6,14 +6,16 @@ script/source = "extends Node
 export(int) var max_health = 4 setget set_max_health
 var health = max_health setget set_health
 
-var level = 1
-var experience = 0
-var experience_required = 200
+export(int) var experience_required = 200 setget set_max_experience
+var experience = 0 setget set_experience
+var level = 1 setget set_level
 var experience_total = 0
 
 signal no_health
 signal health_changed(value)
 signal max_health_changed(value)
+signal experience_changed(value)
+signal max_experience_changed(value)
 
 func set_max_health(value):
 	max_health = value
@@ -26,9 +28,22 @@ func set_health(value):
 	emit_signal(\"health_changed\", health) # every time the health is set, emits a signal \"health_changed\" along with an argument, our new health value
 	if health <= 0:
 		emit_signal(\"no_health\")
+		
+func set_max_experience(value):
+	experience_required = value
+	emit_signal(\"max_experience_changed\", experience_required)
+	
+func set_experience(value):
+	experience = value
+	emit_signal(\"experience_changed\", experience)
+	
+func set_level(value):
+	level = value
+	emit_signal(\"level_changed\", level)
 
 func _ready():
 	self.health = max_health
+	self.experience = experience_total
 "
 
 [node name="PlayerStats" type="Node"]

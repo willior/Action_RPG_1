@@ -94,17 +94,12 @@ func attack_animation_finished():
 	state = MOVE
 
 func enemy_killed(experience_from_kill):
-	prints(stats.experience, 'current exp')
-	prints(experience_from_kill, "exp gained")
-	
 	stats.experience += experience_from_kill
 	stats.experience_total += experience_from_kill
 	
 	while stats.experience >= stats.experience_required:
 		level_up()
 		stats.experience -= stats.experience_required
-	prints(stats.experience, 'exp after kill')
-	prints(stats.experience_total, 'exp total')
 	
 func level_up():
 	prints('level up!', stats.level)
