@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/Music and Sounds/Swipe.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/Music and Sounds/Evade.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
+[ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -1024,6 +1025,8 @@ frame = 36
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
 shape = SubResource( 2 )
+
+[node name="PlayerStats" parent="." instance=ExtResource( 10 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/AttackDown = SubResource( 3 )

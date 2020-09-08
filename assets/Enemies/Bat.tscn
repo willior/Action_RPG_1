@@ -33,7 +33,7 @@ var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
 var state = IDLE
-var experience_pool = 100
+var experience_pool = 80
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -265,6 +265,7 @@ script = SubResource( 1 )
 material = SubResource( 2 )
 frames = SubResource( 8 )
 animation = "fly"
+frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 
