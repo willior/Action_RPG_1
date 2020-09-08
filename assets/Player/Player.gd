@@ -93,6 +93,9 @@ func attack_animation_finished():
 	velocity = Vector2.ZERO
 	state = MOVE
 
+func enemy_killed(experience_from_kill):
+	prints(experience_from_kill, "exp gained")
+
 # warning-ignore:unused_argument
 func roll_state(delta):
 	if roll_moving:
