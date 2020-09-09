@@ -55,6 +55,7 @@ func move_state(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
+	stats.stamina += 0.1
 	
 	# if player is moving
 	if input_vector != Vector2.ZERO:
@@ -110,7 +111,11 @@ func level_up():
 	
 	stats.max_health += 1
 	stats.health += 1
+	stats.max_stamina += 15
 	stats.strength += 1
+	
+func roll_stamina_drain():
+	stats.stamina -= 15
 
 func roll_state():
 	if roll_moving:

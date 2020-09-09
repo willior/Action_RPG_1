@@ -10,15 +10,15 @@
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 [ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=57]
 shader = ExtResource( 9 )
 shader_param/active = false
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=58]
 radius = 4.0
 height = 4.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=59]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -85,7 +85,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=60]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -152,7 +152,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=61]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -219,7 +219,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=62]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -287,7 +287,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=63]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -327,7 +327,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=64]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -367,7 +367,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=65]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -407,7 +407,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=66]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -447,7 +447,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=67]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -463,7 +463,7 @@ tracks/0/keys = {
 "values": [ 18 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=68]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -479,7 +479,7 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=69]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -495,7 +495,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=70]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -511,7 +511,7 @@ tracks/0/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=71]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -532,9 +532,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "roll_stamina_drain"
+}, {
 "args": [  ],
 "method": "roll_stop"
 }, {
@@ -569,7 +572,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=72]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -590,9 +593,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "roll_stamina_drain"
+}, {
 "args": [  ],
 "method": "roll_stop"
 }, {
@@ -627,7 +633,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=73]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -648,9 +654,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "roll_stamina_drain"
+}, {
 "args": [  ],
 "method": "roll_stop"
 }, {
@@ -685,7 +694,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=74]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -706,9 +715,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "roll_stamina_drain"
+}, {
 "args": [  ],
 "method": "roll_stop"
 }, {
@@ -743,7 +755,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=75]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -759,7 +771,7 @@ tracks/0/keys = {
 "values": [ 19, 20, 21, 22, 23, 18 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=76]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -775,7 +787,7 @@ tracks/0/keys = {
 "values": [ 13, 14, 15, 16, 17, 12 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=77]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -791,7 +803,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 0 ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=78]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -962,14 +974,13 @@ states/Run/position = Vector2( 431, 58 )
 transitions = [ "Idle", "Run", SubResource( 48 ), "Run", "Idle", SubResource( 49 ), "Idle", "Attack", SubResource( 50 ), "Attack", "Idle", SubResource( 51 ), "Idle", "Roll", SubResource( 52 ), "Roll", "Idle", SubResource( 53 ), "Idle", "Hit", SubResource( 54 ), "Hit", "Idle", SubResource( 55 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=57]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=79]
 
-[sub_resource type="CapsuleShape2D" id=59]
+[sub_resource type="CapsuleShape2D" id=80]
 radius = 5.0
 height = 0.0
 
-[sub_resource type="Animation" id=60]
-resource_name = "Start"
+[sub_resource type="Animation" id=81]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -985,8 +996,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=61]
-resource_name = "Stop"
+[sub_resource type="Animation" id=82]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -1010,44 +1020,44 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 1 )
+material = SubResource( 57 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 40
+frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
-shape = SubResource( 2 )
+shape = SubResource( 58 )
 
 [node name="PlayerStats" parent="." instance=ExtResource( 10 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/AttackDown = SubResource( 3 )
-anims/AttackLeft = SubResource( 4 )
-anims/AttackRight = SubResource( 5 )
-anims/AttackUp = SubResource( 6 )
-anims/HitDown = SubResource( 7 )
-anims/HitLeft = SubResource( 8 )
-anims/HitRight = SubResource( 9 )
-anims/HitUp = SubResource( 10 )
-anims/IdleDown = SubResource( 11 )
-anims/IdleLeft = SubResource( 12 )
-anims/IdleRight = SubResource( 13 )
-anims/IdleUp = SubResource( 14 )
-anims/RollDown = SubResource( 15 )
-anims/RollLeft = SubResource( 16 )
-anims/RollRight = SubResource( 17 )
-anims/RollUp = SubResource( 18 )
-anims/RunDown = SubResource( 19 )
-anims/RunLeft = SubResource( 20 )
-anims/RunRight = SubResource( 21 )
-anims/RunUp = SubResource( 22 )
+anims/AttackDown = SubResource( 59 )
+anims/AttackLeft = SubResource( 60 )
+anims/AttackRight = SubResource( 61 )
+anims/AttackUp = SubResource( 62 )
+anims/HitDown = SubResource( 63 )
+anims/HitLeft = SubResource( 64 )
+anims/HitRight = SubResource( 65 )
+anims/HitUp = SubResource( 66 )
+anims/IdleDown = SubResource( 67 )
+anims/IdleLeft = SubResource( 68 )
+anims/IdleRight = SubResource( 69 )
+anims/IdleUp = SubResource( 70 )
+anims/RollDown = SubResource( 71 )
+anims/RollLeft = SubResource( 72 )
+anims/RollRight = SubResource( 73 )
+anims/RollUp = SubResource( 74 )
+anims/RunDown = SubResource( 75 )
+anims/RunLeft = SubResource( 76 )
+anims/RunRight = SubResource( 77 )
+anims/RunUp = SubResource( 78 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 56 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 57 )
+parameters/playback = SubResource( 79 )
 parameters/Attack/blend_position = Vector2( 0, 1 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
 parameters/Idle/blend_position = Vector2( 0, 1 )
@@ -1065,15 +1075,15 @@ collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -5 )
-shape = SubResource( 59 )
+shape = SubResource( 80 )
 disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 60 )
-anims/Stop = SubResource( 61 )
+anims/Start = SubResource( 81 )
+anims/Stop = SubResource( 82 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
