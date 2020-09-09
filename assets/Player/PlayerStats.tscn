@@ -6,7 +6,7 @@ script/source = "extends Node
 var max_health = 3 setget set_max_health
 var health = max_health setget set_health
 
-var strength = 2 setget set_strength
+onready var strength = 1 setget set_strength
 
 var experience_required = 100 setget set_max_experience
 var experience = 0 setget set_experience
@@ -54,7 +54,6 @@ func _ready():
 	self.health = max_health
 	self.experience = experience_total
 	self.strength = strength
-	print(strength)
 "
 
 [node name="PlayerStats" type="Node"]

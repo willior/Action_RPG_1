@@ -1,9 +1,8 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
-[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Player/SwordHitbox.gd" type="Script" id=4]
+[ext_resource path="res://assets/Player/SwordHitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=6]
 [ext_resource path="res://assets/Music and Sounds/Swipe.wav" type="AudioStream" id=7]
@@ -965,10 +964,6 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=57]
 
-[sub_resource type="CapsuleShape2D" id=58]
-radius = 11.0
-height = 12.0
-
 [sub_resource type="CapsuleShape2D" id=59]
 radius = 5.0
 height = 0.0
@@ -1064,14 +1059,6 @@ position = Vector2( 0, -4 )
 rotation = 1.5708
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
-position = Vector2( 15, 0 )
-collision_mask = 8
-script = ExtResource( 4 )
-
-[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
-position = Vector2( -9.53674e-07, 0 )
-shape = SubResource( 58 )
-disabled = true
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 collision_layer = 4

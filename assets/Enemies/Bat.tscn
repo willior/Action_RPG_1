@@ -161,10 +161,8 @@ func _on_BatStats_no_health():
 	
 	queue_free()
 
-
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play(\"Start\")
-
 
 func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play(\"Stop\")
@@ -211,15 +209,14 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=9]
 radius = 4.0
 
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 8.0
-height = 4.0
+[sub_resource type="CircleShape2D" id=16]
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id=11]
 radius = 56.0089
 
-[sub_resource type="CircleShape2D" id=12]
-radius = 4.0
+[sub_resource type="CircleShape2D" id=17]
+radius = 3.16228
 
 [sub_resource type="CircleShape2D" id=13]
 radius = 5.0
@@ -265,7 +262,6 @@ script = SubResource( 1 )
 material = SubResource( 2 )
 frames = SubResource( 8 )
 animation = "fly"
-frame = 2
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -282,7 +278,7 @@ collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -14 )
-shape = SubResource( 10 )
+shape = SubResource( 16 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -290,20 +286,20 @@ wait_time = 0.5
 [node name="Tween" type="Tween" parent="."]
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 0, 0, 0.196078 )
 shape = SubResource( 11 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
-visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2( 0, -11 )
-shape = SubResource( 12 )
+shape = SubResource( 17 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource( 13 )
