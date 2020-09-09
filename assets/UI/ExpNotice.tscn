@@ -5,35 +5,34 @@
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [node name="ExpNotice" type="Control"]
-anchor_right = 0.115
-anchor_bottom = 0.228
-margin_right = -6.8
-margin_bottom = -12.04
+anchor_left = -0.05
+anchor_top = -0.178
+anchor_right = 0.05
+margin_top = 0.0400009
 script = ExtResource( 2 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Label" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.65098, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "XP"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="HBoxContainer"]
-margin_top = 8.0
-margin_right = 12.0
-margin_bottom = 21.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 0.584314, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "exp"
-align = 1
-valign = 1
-
 [node name="Timer" type="Timer" parent="."]
+
+[node name="Tween" type="Tween" parent="."]

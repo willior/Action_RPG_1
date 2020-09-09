@@ -678,6 +678,9 @@ margin_bottom = 16.0
 
 [node name="ExpBar" parent="GUI" instance=ExtResource( 10 )]
 
+[node name="ExpBarTexture" parent="GUI/ExpBar" index="1"]
+tint_progress = Color( 1, 0.654902, 0, 0.501961 )
+
 [node name="StaminaBar" parent="GUI" instance=ExtResource( 14 )]
 margin_left = 4.0
 margin_top = 16.0
