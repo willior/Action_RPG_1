@@ -79,8 +79,9 @@ func move_state(delta):
 		state = ATTACK
 		
 	if Input.is_action_just_pressed("roll"):
-		roll_moving = true
-		state = ROLL
+		if stats.stamina > 0:
+			roll_moving = true
+			state = ROLL
 		
 func move():
 	velocity = move_and_slide(velocity)
@@ -115,17 +116,20 @@ func level_up():
 	stats.strength += 1
 	
 func roll_stamina_drain():
-	stats.stamina -= 15
+	if stats.stamina > 0:
+		stats.stamina -= 15
 
 func roll_state():
+	roll_start()
+		
+func roll_start():
 	if roll_moving:
-		velocity = roll_vector * ROLL_SPEED
+			velocity = roll_vector * ROLL_SPEED
 	else:
 		velocity = roll_vector * (ROLL_SPEED/4)
-	
 	animationState.travel("Roll")
 	move()
-	
+
 func roll_stop():
 	roll_moving = false
 	
