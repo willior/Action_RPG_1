@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/World/Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/UI/pixelBlack.png" type="Texture" id=11]
+[ext_resource path="res://World.gd" type="Script" id=12]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -487,6 +489,8 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/z_index = 0
 
 [node name="World" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 12 )
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 160, 88 )
@@ -514,6 +518,7 @@ drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
 [node name="YSort" type="YSort" parent="."]
+pause_mode = 1
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 111, 21 )
@@ -666,5 +671,16 @@ margin_right = 64.0
 margin_bottom = 16.0
 
 [node name="ExpBar" parent="GUI" instance=ExtResource( 10 )]
+
+[node name="Dim" type="TextureRect" parent="GUI"]
+visible = false
+modulate = Color( 0, 0, 0, 0.505882 )
+margin_right = 320.0
+margin_bottom = 180.0
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [editable path="GUI/ExpBar"]

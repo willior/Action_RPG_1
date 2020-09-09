@@ -107,6 +107,7 @@ func enemy_killed(experience_from_kill):
 	
 func level_up():
 	stats.level += 1
+	
 	stats.max_health += 1
 	stats.health += 1
 	stats.strength += 1
