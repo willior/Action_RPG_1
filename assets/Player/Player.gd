@@ -28,6 +28,7 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
+onready var timer = $Timer
 
 func _ready():
 	stats.connect("no_health", self, "queue_free")
@@ -41,7 +42,7 @@ func _process(delta):
 			move_state(delta)
 			
 		ROLL:
-			roll_state(delta)
+			roll_state()
 			
 		ATTACK:
 			attack_state(delta)
@@ -94,21 +95,23 @@ func attack_animation_finished():
 	state = MOVE
 
 func enemy_killed(experience_from_kill):
+	timer.start()
+	yield(timer, "timeout")
 	stats.experience += experience_from_kill
 	stats.experience_total += experience_from_kill
 	
 	while stats.experience >= stats.experience_required:
 		level_up()
 		stats.experience -= stats.experience_required
+		stats.experience_required *= 1.618034
 	
 func level_up():
-	prints('level up!', stats.level)
 	stats.level += 1
 	stats.max_health += 1
-	stats.health = stats.max_health
+	stats.health += 1
+	stats.strength += 1
 
-# warning-ignore:unused_argument
-func roll_state(delta):
+func roll_state():
 	if roll_moving:
 		velocity = roll_vector * ROLL_SPEED
 	else:

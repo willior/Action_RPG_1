@@ -1,3 +1,8 @@
 extends "res://assets/CollisionBoxes/Hitbox.gd"
 
-# var knockback_vector = Vector2.ZERO
+func set_strength(strength):
+	self.damage = strength
+	print(strength)
+
+func _ready():
+	PlayerStats.connect("strength_changed", self, "set_strength")

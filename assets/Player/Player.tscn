@@ -630,7 +630,6 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=17]
 length = 0.5
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -958,7 +957,7 @@ states/Hit/position = Vector2( 88, 58 )
 states/Idle/node = SubResource( 37 )
 states/Idle/position = Vector2( 236, 58 )
 states/Roll/node = SubResource( 42 )
-states/Roll/position = Vector2( 431, 183 )
+states/Roll/position = Vector2( 338, 123 )
 states/Run/node = SubResource( 47 )
 states/Run/position = Vector2( 431, 58 )
 transitions = [ "Idle", "Run", SubResource( 48 ), "Run", "Idle", SubResource( 49 ), "Idle", "Attack", SubResource( 50 ), "Attack", "Idle", SubResource( 51 ), "Idle", "Roll", SubResource( 52 ), "Roll", "Idle", SubResource( 53 ), "Idle", "Hit", SubResource( 54 ), "Hit", "Idle", SubResource( 55 ) ]
@@ -1020,7 +1019,7 @@ material = SubResource( 1 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 36
+frame = 40
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
@@ -1080,6 +1079,7 @@ collision_layer = 4
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -5 )
 shape = SubResource( 59 )
+disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
@@ -1087,6 +1087,9 @@ stream = ExtResource( 8 )
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Start = SubResource( 60 )
 anims/Stop = SubResource( 61 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

@@ -33,7 +33,7 @@ var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
 var state = IDLE
-var experience_pool = 80
+var experience_pool = 110
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -265,7 +265,7 @@ script = SubResource( 1 )
 material = SubResource( 2 )
 frames = SubResource( 8 )
 animation = "fly"
-frame = 3
+frame = 2
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -276,7 +276,6 @@ texture = ExtResource( 2 )
 shape = SubResource( 9 )
 
 [node name="BatStats" parent="." instance=ExtResource( 4 )]
-max_health = 2
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
