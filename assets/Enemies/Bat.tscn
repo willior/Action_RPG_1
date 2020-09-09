@@ -265,7 +265,7 @@ script = SubResource( 1 )
 material = SubResource( 2 )
 frames = SubResource( 8 )
 animation = "fly"
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 

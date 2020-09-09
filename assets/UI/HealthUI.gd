@@ -13,10 +13,6 @@ func set_hearts(value):
 	
 func set_max_hearts(value):
 	max_hearts = value
-	
-	#max_hearts = max(value, 1)
-	# self.hearts = min(hearts, max_hearts)
-	
 	if heartUIEmpty != null:
 		heartUIEmpty.rect_size.x = max_hearts * 15
 	

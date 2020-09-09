@@ -16,6 +16,7 @@ signal health_changed(value)
 signal max_health_changed(value)
 signal experience_changed(value)
 signal max_experience_changed(value)
+signal level_changed(value)
 
 func set_max_health(value):
 	max_health = value
