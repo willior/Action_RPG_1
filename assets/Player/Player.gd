@@ -21,6 +21,7 @@ var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var roll_moving = false
 var stats = PlayerStats
+var playerIsDead = false
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
@@ -168,11 +169,10 @@ func _on_Hurtbox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
 	
 func game_over():
-	queue_free()
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
-	get_node("/root/World/GUI/HealthUI").queue_free()
-	get_node("/root/World/GUI/ExpBar").queue_free()
-	get_node("/root/World/GUI/StaminaBar").queue_free()
-	
+	get_node("/root/World/GUI/HealthUI").visible = false
+	get_node("/root/World/GUI/ExpBar").visible = false
+	get_node("/root/World/GUI/StaminaBar").visible = false
+	self.visible = false
 	get_tree().paused = true

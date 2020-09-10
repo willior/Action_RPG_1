@@ -25,3 +25,7 @@ func _ready():
 	Tween.EASE_IN
 	)
 	tween.start()
+
+func _process(delta):
+	if Input.is_action_just_pressed("start"):
+		prints('continue #', PlayerStats.continue_count)
