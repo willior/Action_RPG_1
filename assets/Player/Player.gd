@@ -21,7 +21,7 @@ var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var roll_moving = false
 var stats = PlayerStats
-var playerIsDead = false
+var attackQueued = false
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
@@ -93,10 +93,16 @@ func move():
 func attack_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
 	animationState.travel("Attack")
+	if Input.is_action_just_pressed("attack"):
+		attackQueued = true
 	move()
 	
 func attack_animation_finished():
 	velocity = Vector2.ZERO
+	if attackQueued:
+		animationState.travel("Attack2")
+		attackQueued = false
+		return
 	state = MOVE
 
 func enemy_killed(experience_from_kill):

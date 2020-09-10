@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -844,6 +844,31 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=61]
+animation = "AttackLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=62]
+animation = "AttackDown"
+
+[sub_resource type="AnimationNodeAnimation" id=63]
+animation = "AttackRight"
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "AttackUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=65]
+blend_point_0/node = SubResource( 61 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 62 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 63 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 64 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=28]
 animation = "HitLeft"
 
@@ -960,18 +985,24 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=55]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=66]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+
 [sub_resource type="AnimationNodeStateMachine" id=56]
 states/Attack/node = SubResource( 27 )
 states/Attack/position = Vector2( 236, 183 )
+states/Attack2/node = SubResource( 65 )
+states/Attack2/position = Vector2( 88, 183 )
 states/Hit/node = SubResource( 32 )
 states/Hit/position = Vector2( 88, 58 )
 states/Idle/node = SubResource( 37 )
 states/Idle/position = Vector2( 236, 58 )
 states/Roll/node = SubResource( 42 )
-states/Roll/position = Vector2( 338, 123 )
+states/Roll/position = Vector2( 431, 183 )
 states/Run/node = SubResource( 47 )
 states/Run/position = Vector2( 431, 58 )
-transitions = [ "Idle", "Run", SubResource( 48 ), "Run", "Idle", SubResource( 49 ), "Idle", "Attack", SubResource( 50 ), "Attack", "Idle", SubResource( 51 ), "Idle", "Roll", SubResource( 52 ), "Roll", "Idle", SubResource( 53 ), "Idle", "Hit", SubResource( 54 ), "Hit", "Idle", SubResource( 55 ) ]
+transitions = [ "Idle", "Run", SubResource( 48 ), "Run", "Idle", SubResource( 49 ), "Idle", "Attack", SubResource( 50 ), "Attack", "Idle", SubResource( 51 ), "Idle", "Roll", SubResource( 52 ), "Roll", "Idle", SubResource( 53 ), "Idle", "Hit", SubResource( 54 ), "Hit", "Idle", SubResource( 55 ), "Attack", "Attack2", SubResource( 66 ), "Attack2", "Idle", SubResource( 67 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=57]
@@ -1024,7 +1055,7 @@ material = SubResource( 1 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 18
+frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
@@ -1059,6 +1090,7 @@ tree_root = SubResource( 56 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 57 )
 parameters/Attack/blend_position = Vector2( 0, 1 )
+parameters/Attack2/blend_position = Vector2( -0.98546, -0.00699306 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
 parameters/Idle/blend_position = Vector2( 0, 1 )
 parameters/Roll/blend_position = Vector2( 0, 1 )
@@ -1069,6 +1101,9 @@ position = Vector2( 0, -4 )
 rotation = 1.5708
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
+disabled = false
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 collision_layer = 4
