@@ -1,9 +1,21 @@
 extends Node2D
 
 onready var dim = $GUI/Dim
+onready var timer = $Timer
+
+const BAT = preload("res://assets/Enemies/Bat.tscn")
+
+func spawner():
+	timer.start()
+	yield(timer, "timeout")
+	var batSpawn = BAT.instance()
+	batSpawn.global_position.x = 72
+	batSpawn.global_position.y = 120
+	get_node("/root/World/YSort").add_child(batSpawn)
+	spawner()
 
 func _ready():
-	pass
+	spawner()
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):

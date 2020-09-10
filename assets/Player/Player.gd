@@ -13,6 +13,7 @@ enum {
 	MOVE,
 	ROLL,
 	ATTACK,
+	ATTACK2,
 	HIT
 }
 
@@ -36,7 +37,7 @@ onready var timer = $Timer
 func _ready():
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
-	swordHitbox.knockback_vector = roll_vector
+	swordHitbox.knockback_vector = roll_vector / 4
 	collision.disabled = false
 
 func _process(delta):
@@ -49,6 +50,9 @@ func _process(delta):
 			
 		ATTACK:
 			attack_state(delta)
+			
+		ATTACK2:
+			attack2_state(delta)
 			
 		HIT:
 			hit_state(delta)
@@ -64,10 +68,10 @@ func move_state(delta):
 	if input_vector != Vector2.ZERO:
 		roll_vector = input_vector
 		swordHitbox.knockback_vector = input_vector
-		
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
 		animationTree.set("parameters/Attack/blend_position", input_vector)
+		animationTree.set("parameters/Attack2/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
@@ -89,22 +93,26 @@ func move_state(delta):
 func move():
 	velocity = move_and_slide(velocity)
 
-# warning-ignore:unused_argument
 func attack_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
-	animationState.travel("Attack")
+	if attackQueued == false:
+		animationState.travel("Attack")
 	if Input.is_action_just_pressed("attack"):
+		print('attack queued!')
 		attackQueued = true
 	move()
 	
+func attack2_state(delta):
+	animationState.travel("Attack2")
+
 func attack_animation_finished():
 	velocity = Vector2.ZERO
 	if attackQueued:
-		animationState.travel("Attack2")
 		attackQueued = false
-		return
-	state = MOVE
-
+		state = ATTACK2
+	else:
+		state = MOVE
+	
 func enemy_killed(experience_from_kill):
 	timer.start()
 	yield(timer, "timeout")

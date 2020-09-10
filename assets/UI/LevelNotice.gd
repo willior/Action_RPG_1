@@ -2,7 +2,6 @@ extends Control
 
 onready var timer = $Timer
 onready var levelText = $Label
-onready var tween = $Tween
 
 var levelDisplay
 
