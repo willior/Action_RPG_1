@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 const PlayerHurtSound = preload("res://assets/Player/PlayerHurtSound.tscn")
+const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
+const GameOver = preload("res://assets/UI/GameOver.tscn")
 
 const ACCELERATION = 1600
 const MAX_SPEED = 100
@@ -31,7 +33,7 @@ onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
 
 func _ready():
-	stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = roll_vector
 	collision.disabled = false
@@ -109,6 +111,10 @@ func enemy_killed(experience_from_kill):
 	
 func level_up():
 	stats.level += 1
+	var levelNotice = LevelNotice.instance()
+	levelNotice.rect_position = global_position
+	levelNotice.levelDisplay = stats.level
+	get_node("/root").add_child(levelNotice)
 	
 	stats.max_health += 1
 	stats.health += 1
@@ -160,3 +166,13 @@ func _on_Hurtbox_invincibility_started():
 func _on_Hurtbox_invincibility_ended():
 	sprite.modulate = Color(1,1,1,1)
 	blinkAnimationPlayer.play("Stop")
+	
+func game_over():
+	queue_free()
+	var gameOver = GameOver.instance()
+	get_node("/root/World/GUI").add_child(gameOver)
+	get_node("/root/World/GUI/HealthUI").queue_free()
+	get_node("/root/World/GUI/ExpBar").queue_free()
+	get_node("/root/World/GUI/StaminaBar").queue_free()
+	
+	get_tree().paused = true

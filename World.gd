@@ -10,3 +10,4 @@ func _process(delta):
 			else:
 				get_tree().paused = false
 				dim.visible = false
+				
