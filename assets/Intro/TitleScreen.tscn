@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/Intro/IntroBlack.png" type="Texture" id=2]
+[ext_resource path="res://assets/Intro/TitleScreen.gd" type="Script" id=3]
+[ext_resource path="res://assets/Music and Sounds/461B_hello_drone.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/Intro/wisteria.png" type="Texture" id=5]
+[ext_resource path="res://assets/Intro/ziggy.png" type="Texture" id=6]
+[ext_resource path="res://assets/Intro/iggy.png" type="Texture" id=7]
+[ext_resource path="res://assets/Intro/TitleScreen.png" type="Texture" id=8]
+[ext_resource path="res://assets/Intro/NewGame.png" type="Texture" id=9]
+[ext_resource path="res://assets/Intro/NewGameSelected.png" type="Texture" id=10]
+[ext_resource path="res://assets/Intro/QuitGame.png" type="Texture" id=11]
+[ext_resource path="res://assets/Intro/QuitGameSelected.png" type="Texture" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[node name="TitleScreen" type="Node"]
+script = ExtResource( 3 )
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Wisteria" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+texture = ExtResource( 5 )
+offset = Vector2( 160, 88 )
+
+[node name="Title" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 160, 45 )
+texture = ExtResource( 8 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 60
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 106.0
+margin_top = 60.0
+margin_right = 214.0
+margin_bottom = 164.0
+size_flags_horizontal = 4
+custom_constants/separation = 4
+
+[node name="Label1" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 108.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+text = "Will Graham-Simpkins"
+align = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_top = 17.0
+margin_right = 108.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 1 )
+text = "presents"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 108.0
+margin_bottom = 34.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Iggy" type="Sprite" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 20, 10 )
+texture = ExtResource( 7 )
+
+[node name="Ziggy" type="Sprite" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 84, 10 )
+texture = ExtResource( 6 )
+
+[node name="TitleMenu" type="VBoxContainer" parent="MarginContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 128.0
+margin_top = 110.0
+margin_right = 192.0
+margin_bottom = 164.0
+size_flags_horizontal = 4
+size_flags_vertical = 12
+custom_constants/separation = -10
+alignment = 1
+
+[node name="NewGame" type="TextureButton" parent="MarginContainer/TitleMenu"]
+margin_right = 64.0
+margin_bottom = 32.0
+focus_neighbour_left = NodePath("../QuitGame")
+focus_neighbour_top = NodePath("../QuitGame")
+focus_neighbour_right = NodePath("../QuitGame")
+focus_neighbour_bottom = NodePath("../QuitGame")
+focus_next = NodePath("../QuitGame")
+focus_previous = NodePath("../QuitGame")
+texture_normal = ExtResource( 9 )
+texture_focused = ExtResource( 10 )
+
+[node name="QuitGame" type="TextureButton" parent="MarginContainer/TitleMenu"]
+margin_top = 22.0
+margin_right = 64.0
+margin_bottom = 54.0
+focus_neighbour_left = NodePath("../NewGame")
+focus_neighbour_top = NodePath("../NewGame")
+focus_neighbour_right = NodePath("../NewGame")
+focus_neighbour_bottom = NodePath("../NewGame")
+focus_next = NodePath("../NewGame")
+focus_previous = NodePath("../NewGame")
+texture_normal = ExtResource( 11 )
+texture_focused = ExtResource( 12 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="MenuTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+[connection signal="pressed" from="MarginContainer/TitleMenu/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="MarginContainer/TitleMenu/QuitGame" to="." method="_on_QuitGame_pressed"]
