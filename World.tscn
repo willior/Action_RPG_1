@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/World/Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World.gd" type="Script" id=12]
 [ext_resource path="res://assets/UI/StaminaBar.gd" type="Script" id=13]
 [ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=14]
@@ -494,7 +495,11 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [node name="World" type="Node2D"]
 pause_mode = 2
+position = Vector2( 25, -3 )
 script = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Background" type="Sprite" parent="."]
 position = Vector2( 160, 88 )
@@ -530,6 +535,9 @@ position = Vector2( 111, 21 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
+
+[node name="Skeleton" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 15, 75 )
 
 [node name="Bushes" type="YSort" parent="YSort"]
 

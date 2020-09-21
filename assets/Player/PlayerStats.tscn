@@ -3,7 +3,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
 
-var max_health = 3 setget set_max_health
+var max_health = 4 setget set_max_health
 var health = max_health setget set_health
 var max_stamina = (max_health * 15) setget set_max_stamina
 var stamina = max_stamina setget set_stamina

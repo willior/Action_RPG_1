@@ -268,7 +268,6 @@ script = SubResource( 1 )
 material = SubResource( 2 )
 frames = SubResource( 8 )
 animation = "fly"
-frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -281,6 +280,7 @@ shape = SubResource( 9 )
 [node name="BatStats" parent="." instance=ExtResource( 4 )]
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
+visible = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
@@ -293,7 +293,6 @@ wait_time = 0.5
 [node name="Tween" type="Tween" parent="."]
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
-visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 0, 0, 0.196078 )

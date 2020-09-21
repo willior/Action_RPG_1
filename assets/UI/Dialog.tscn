@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/UI/Dialog.gd" type="Script" id=1]
+[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
 
 [node name="Polygon2D" type="Polygon2D"]
 position = Vector2( 0, -67.2 )
@@ -13,9 +17,11 @@ margin_left = 24.0
 margin_top = 134.0
 margin_right = 296.0
 margin_bottom = 162.0
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "Hello. I am a sign. I'm an inanimate object with no personality. If you think otherwise, you must be mistaken."
 text = "Hello. I am a sign. I'm an inanimate object with no personality. If you think otherwise, you must be mistaken."
+scroll_active = false
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

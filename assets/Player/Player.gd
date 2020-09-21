@@ -12,6 +12,7 @@ const FRICTION = 800
 enum {
 	MOVE,
 	ROLL,
+	ACTION,
 	ATTACK,
 	ATTACK2,
 	HIT
@@ -34,6 +35,8 @@ onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
 
+var interactable = false
+
 func _ready():
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
@@ -47,6 +50,9 @@ func _process(delta):
 			
 		ROLL:
 			roll_state()
+			
+		ACTION:
+			action_state(delta)
 			
 		ATTACK:
 			attack_state(delta)
@@ -83,7 +89,11 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("attack"):
-		state = ATTACK
+		if interactable:
+			state = ACTION
+			
+		else:
+			state = ATTACK
 		
 	if Input.is_action_just_pressed("roll"):
 		if stats.stamina > 0:
@@ -92,6 +102,10 @@ func move_state(delta):
 		
 func move():
 	velocity = move_and_slide(velocity)
+	
+func action_state(delta):
+	print('action!')
+	state = MOVE
 
 func attack_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
