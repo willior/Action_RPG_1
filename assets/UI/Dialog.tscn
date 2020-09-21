@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/UI/Dialog.gd" type="Script" id=1]
+
+[node name="Polygon2D" type="Polygon2D"]
+position = Vector2( 0, -67.2 )
+scale = Vector2( 1, 1.4 )
+color = Color( 0.137255, 0.14902, 0.439216, 1 )
+polygon = PoolVector2Array( 16, 168, 16, 128, 304, 128, 304, 168 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 24.0
+margin_top = 134.0
+margin_right = 296.0
+margin_bottom = 162.0
+bbcode_enabled = true
+bbcode_text = "Hello. I am a sign. I'm an inanimate object with no personality. If you think otherwise, you must be mistaken."
+text = "Hello. I am a sign. I'm an inanimate object with no personality. If you think otherwise, you must be mistaken."
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+[connection signal="timeout" from="Timer" to="RichTextLabel" method="_on_Timer_timeout"]
