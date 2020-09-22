@@ -6,42 +6,42 @@
 [ext_resource path="res://assets/Music and Sounds/cursHi.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=5]
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=8]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 192, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 256, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 320, 0, 64, 64 )
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=8]
 radius = 6.0
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=9]
 radius = 8.0
 height = 1.74851
 
@@ -55,13 +55,13 @@ texture = ExtResource( 5 )
 offset = Vector2( 0, 10 )
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D"]
-frames = SubResource( 5 )
-frame = 1
+frames = SubResource( 7 )
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 0, 9 )
-shape = SubResource( 1 )
+shape = SubResource( 8 )
 
 [node name="SkeletonTalkBox" type="Area2D" parent="KinematicBody2D"]
 collision_layer = 128
@@ -69,7 +69,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/SkeletonTalkBox"]
 position = Vector2( 0, 2 )
-shape = SubResource( 2 )
+shape = SubResource( 9 )
 
 [node name="AudioCursHi" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

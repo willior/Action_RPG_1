@@ -236,22 +236,21 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=9]
 radius = 4.0
 
-[sub_resource type="CircleShape2D" id=16]
-
 [sub_resource type="CircleShape2D" id=10]
-radius = 9.0
 
 [sub_resource type="CircleShape2D" id=11]
-radius = 56.0089
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id=12]
-radius = 3.16228
+radius = 56.0089
 
 [sub_resource type="CircleShape2D" id=13]
+radius = 3.16228
+
+[sub_resource type="CircleShape2D" id=14]
 radius = 5.0
 
-[sub_resource type="Animation" id=14]
-resource_name = "Start"
+[sub_resource type="Animation" id=15]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -267,8 +266,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=15]
-resource_name = "Stop"
+[sub_resource type="Animation" id=16]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
@@ -309,14 +307,14 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BatTalkBox"]
 position = Vector2( 0, -14 )
-shape = SubResource( 16 )
+shape = SubResource( 10 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -14 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -327,25 +325,25 @@ wait_time = 0.5
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 0, 0, 0.196078 )
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 7 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 
 [node name="WanderController" parent="." instance=ExtResource( 8 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 14 )
-anims/Stop = SubResource( 15 )
+anims/Start = SubResource( 15 )
+anims/Stop = SubResource( 16 )
 [connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
 [connection signal="area_entered" from="BatTalkBox" to="." method="_on_BatTalkBox_area_entered"]
 [connection signal="area_exited" from="BatTalkBox" to="." method="_on_BatTalkBox_area_exited"]

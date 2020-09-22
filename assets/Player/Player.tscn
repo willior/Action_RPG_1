@@ -1107,15 +1107,15 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=63]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+[sub_resource type="AnimationNodeStateMachineTransition" id=64]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+[sub_resource type="AnimationNodeStateMachineTransition" id=66]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
 
-[sub_resource type="AnimationNodeStateMachine" id=64]
+[sub_resource type="AnimationNodeStateMachine" id=68]
 states/Attack/node = SubResource( 28 )
 states/Attack/position = Vector2( 88, 117 )
 states/Attack2/node = SubResource( 33 )
@@ -1128,21 +1128,21 @@ states/Roll/node = SubResource( 48 )
 states/Roll/position = Vector2( 579, 117 )
 states/Run/node = SubResource( 53 )
 states/Run/position = Vector2( 423, 117 )
-transitions = [ "Idle", "Run", SubResource( 54 ), "Run", "Idle", SubResource( 55 ), "Idle", "Attack", SubResource( 56 ), "Attack", "Idle", SubResource( 57 ), "Idle", "Roll", SubResource( 58 ), "Roll", "Idle", SubResource( 59 ), "Idle", "Hit", SubResource( 60 ), "Hit", "Idle", SubResource( 61 ), "Attack", "Attack2", SubResource( 62 ), "Attack2", "Idle", SubResource( 63 ), "Attack", "Hit", SubResource( 70 ), "Attack2", "Hit", SubResource( 71 ), "Roll", "Hit", SubResource( 72 ), "Run", "Hit", SubResource( 73 ) ]
+transitions = [ "Idle", "Run", SubResource( 54 ), "Run", "Idle", SubResource( 55 ), "Idle", "Attack", SubResource( 56 ), "Attack", "Idle", SubResource( 57 ), "Idle", "Roll", SubResource( 58 ), "Roll", "Idle", SubResource( 59 ), "Idle", "Hit", SubResource( 60 ), "Hit", "Idle", SubResource( 61 ), "Attack", "Attack2", SubResource( 62 ), "Attack2", "Idle", SubResource( 63 ), "Attack", "Hit", SubResource( 64 ), "Attack2", "Hit", SubResource( 65 ), "Roll", "Hit", SubResource( 66 ), "Run", "Hit", SubResource( 67 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -289.099, -16.6367 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=65]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=69]
 
-[sub_resource type="CapsuleShape2D" id=66]
+[sub_resource type="CapsuleShape2D" id=70]
 radius = 9.0
 height = 14.0
 
-[sub_resource type="CapsuleShape2D" id=67]
+[sub_resource type="CapsuleShape2D" id=71]
 radius = 5.0
 height = 0.0
 
-[sub_resource type="Animation" id=68]
+[sub_resource type="Animation" id=72]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -1158,7 +1158,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=69]
+[sub_resource type="Animation" id=73]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -1219,9 +1219,9 @@ anims/RunRight = SubResource( 22 )
 anims/RunUp = SubResource( 23 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 64 )
+tree_root = SubResource( 68 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 65 )
+parameters/playback = SubResource( 69 )
 parameters/Attack/blend_position = Vector2( 0, 1 )
 parameters/Attack2/blend_position = Vector2( 0.70017, -0.0187501 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
@@ -1247,26 +1247,27 @@ collision_mask = 128
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/ActionHitbox"]
-shape = SubResource( 66 )
+shape = SubResource( 70 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -5 )
-shape = SubResource( 67 )
+shape = SubResource( 71 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 68 )
-anims/Stop = SubResource( 69 )
+anims/Start = SubResource( 72 )
+anims/Stop = SubResource( 73 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 
 [node name="TalkTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
