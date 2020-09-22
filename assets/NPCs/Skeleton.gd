@@ -8,6 +8,7 @@ onready var talkBox = $KinematicBody2D/SkeletonTalkBox/CollisionShape2D
 
 var interactable = false
 var talkable = false
+var speaker = "Skeleton: "
 
 func _process(delta):
 	# skeleton talk
@@ -21,6 +22,9 @@ func _process(delta):
 			"In which case...",
 			"I'm still a skeleton."
 		]
+		dialogBox.speakerName = str(speaker)
+		for x in range(0, dialogBox.dialog.size()):
+			dialogBox.dialog[x] = str(speaker + dialogBox.dialog[x])
 		get_node("/root/World/GUI").add_child(dialogBox)
 		player.talkTimer.start()
 		

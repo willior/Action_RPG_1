@@ -15,7 +15,8 @@ func spawner():
 	spawner()
 
 func _ready():
-	spawner()
+	pass
+	# spawner()
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
@@ -29,7 +30,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("start"):
 		if get_node("/root/World/YSort/Player").talking:
 			return
-			print('start pressed in dialog')
 		if PlayerStats.health <= 0:
 			get_tree().paused = false
 			get_node("/root/World/GUI/GameOver").visible = false

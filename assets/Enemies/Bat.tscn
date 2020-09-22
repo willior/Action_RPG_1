@@ -188,11 +188,11 @@ func _on_Hurtbox_invincibility_ended():
 
 func _on_BatTalkBox_area_entered(area):
 	interactable = true
-	player.interacting = true
+	# player.interacting = true
 
 func _on_BatTalkBox_area_exited(area):
 	interactable = false
-	player.interacting = false
+	# player.interacting = false
 "
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -291,7 +291,7 @@ script = SubResource( 1 )
 material = SubResource( 2 )
 frames = SubResource( 8 )
 animation = "fly"
-frame = 3
+frame = 4
 playing = true
 offset = Vector2( 0, -12 )
 

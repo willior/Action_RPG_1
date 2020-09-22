@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -1107,21 +1107,30 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=63]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+
 [sub_resource type="AnimationNodeStateMachine" id=64]
 states/Attack/node = SubResource( 28 )
-states/Attack/position = Vector2( 236, 183 )
+states/Attack/position = Vector2( 88, 117 )
 states/Attack2/node = SubResource( 33 )
-states/Attack2/position = Vector2( 88, 183 )
+states/Attack2/position = Vector2( 235, 117 )
 states/Hit/node = SubResource( 38 )
-states/Hit/position = Vector2( 88, 58 )
+states/Hit/position = Vector2( 355, -6 )
 states/Idle/node = SubResource( 43 )
-states/Idle/position = Vector2( 236, 58 )
+states/Idle/position = Vector2( 88, -6 )
 states/Roll/node = SubResource( 48 )
-states/Roll/position = Vector2( 431, 183 )
+states/Roll/position = Vector2( 579, 117 )
 states/Run/node = SubResource( 53 )
-states/Run/position = Vector2( 431, 58 )
-transitions = [ "Idle", "Run", SubResource( 54 ), "Run", "Idle", SubResource( 55 ), "Idle", "Attack", SubResource( 56 ), "Attack", "Idle", SubResource( 57 ), "Idle", "Roll", SubResource( 58 ), "Roll", "Idle", SubResource( 59 ), "Idle", "Hit", SubResource( 60 ), "Hit", "Idle", SubResource( 61 ), "Attack", "Attack2", SubResource( 62 ), "Attack2", "Idle", SubResource( 63 ) ]
+states/Run/position = Vector2( 423, 117 )
+transitions = [ "Idle", "Run", SubResource( 54 ), "Run", "Idle", SubResource( 55 ), "Idle", "Attack", SubResource( 56 ), "Attack", "Idle", SubResource( 57 ), "Idle", "Roll", SubResource( 58 ), "Roll", "Idle", SubResource( 59 ), "Idle", "Hit", SubResource( 60 ), "Hit", "Idle", SubResource( 61 ), "Attack", "Attack2", SubResource( 62 ), "Attack2", "Idle", SubResource( 63 ), "Attack", "Hit", SubResource( 70 ), "Attack2", "Hit", SubResource( 71 ), "Roll", "Hit", SubResource( 72 ), "Run", "Hit", SubResource( 73 ) ]
 start_node = "Idle"
+graph_offset = Vector2( -289.099, -16.6367 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=65]
 

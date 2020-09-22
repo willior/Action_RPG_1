@@ -9,6 +9,7 @@ var dialog = [
 	]
 	
 var dialog_index = 0
+var speakerName = " "
 
 onready var label = $RichTextLabel
 
@@ -16,7 +17,8 @@ func _ready():
 	
 	# sets the text to that contained in the matching dialog_index array container
 	label.set_bbcode(dialog[dialog_index])
-	label.set_visible_characters(0)
+	label.set_visible_characters(speakerName.length())
+	print(speakerName.length())
 	label.set_process_input(true)
 	get_node("/root/World/YSort/Player").talking = true
 	get_tree().paused = true
@@ -37,7 +39,7 @@ func _input(event):
 				dialog_index += 1
 				# setting the dialog
 				label.set_bbcode(dialog[dialog_index])
-				label.set_visible_characters(0)
+				label.set_visible_characters(speakerName.length())
 		# if the amount of visible characters is less than the total amount of characters:
 		else:
 			# displays all the characters in the current dialog_index
