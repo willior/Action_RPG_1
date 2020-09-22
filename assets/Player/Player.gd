@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 const PlayerHurtSound = preload("res://assets/Player/PlayerHurtSound.tscn")
+
+const Notice = preload("res://assets/UI/Notice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 
@@ -36,6 +38,7 @@ onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
+onready var notice = $Notice
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
@@ -44,6 +47,11 @@ func _ready():
 	collision.disabled = false
 
 func _process(delta):
+	if interactable:
+		notice.visible = true
+	else:
+		notice.visible = false
+	
 	match state:
 		MOVE:
 			move_state(delta)

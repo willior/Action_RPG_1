@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/Music and Sounds/Evade.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 [ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/UI/Notice.gd" type="Script" id=11]
+[ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -1176,7 +1178,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 60
-frame = 7
+frame = 84
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
@@ -1218,9 +1220,14 @@ parameters/Idle/blend_position = Vector2( 0, 1 )
 parameters/Roll/blend_position = Vector2( 0, 1 )
 parameters/Run/blend_position = Vector2( 0, 1 )
 
+[node name="Notice" parent="." instance=ExtResource( 12 )]
+visible = false
+margin_right = 0.0
+margin_bottom = 0.0
+script = ExtResource( 11 )
+
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 4.71239
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 

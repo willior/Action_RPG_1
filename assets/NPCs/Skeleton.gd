@@ -1,6 +1,7 @@
 extends Node2D
 
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const Notice = preload("res://assets/UI/Notice.tscn")
 
 onready var player = get_parent().get_node("Player")
 onready var timer = $Timer
@@ -33,7 +34,6 @@ func _process(delta):
 		timer.start()
 
 func _on_Area2D_area_entered(area):
-	print("area entered")
 	player.interactable = true
 
 func _on_Area2D_area_exited(area):
@@ -41,4 +41,3 @@ func _on_Area2D_area_exited(area):
 	
 func _on_Timer_timeout():
 	collision.disabled = false
-	print('timeout')

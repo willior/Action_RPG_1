@@ -9,8 +9,8 @@ func spawner():
 	timer.start()
 	yield(timer, "timeout")
 	var batSpawn = BAT.instance()
-	batSpawn.global_position.x = 72
-	batSpawn.global_position.y = 120
+	batSpawn.position.x = 72
+	batSpawn.position.y = 120
 	get_node("/root/World/YSort").add_child(batSpawn)
 	spawner()
 
@@ -32,6 +32,7 @@ func _process(delta):
 			print('start pressed in dialog')
 		if PlayerStats.health <= 0:
 			get_tree().paused = false
+			get_node("/root/World/GUI/GameOver").visible = false
 			get_node("/root/World/GUI/GameOver").queue_free()
 			get_node("/root/World/GUI/HealthUI").visible = true
 			get_node("/root/World/GUI/ExpBar").visible = true
