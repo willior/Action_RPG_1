@@ -11,7 +11,7 @@ var talkable = false
 
 func _process(delta):
 	# skeleton talk
-	if (talkable && player.talking == true && Input.is_action_pressed("attack") && player.talkTimer.is_stopped()):
+	if (talkable && player.talking && Input.is_action_pressed("attack") && player.talkTimer.is_stopped()):
 		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
@@ -25,7 +25,7 @@ func _process(delta):
 		player.talkTimer.start()
 		
 	# skeleton examine
-	if (interactable == true && Input.is_action_pressed("examine") && player.talkTimer.is_stopped()):
+	if (interactable && Input.is_action_pressed("examine") && player.talkTimer.is_stopped()):
 		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
@@ -40,6 +40,7 @@ func _on_SkeletonTalkBox_area_entered(area):
 	player.interacting = true
 	talkable = true
 	interactable = true
+	$AudioCursHi.play()
 
 func _on_SkeletonTalkBox_area_exited(area):
 	player.talking = false

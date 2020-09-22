@@ -92,6 +92,16 @@ func _physics_process(delta):
 		velocity += softCollision.get_push_vector() * delta * 400
 		
 	velocity = move_and_slide(velocity)
+	
+	if (interactable && Input.is_action_pressed(\"examine\") && player.talkTimer.is_stopped()):
+		# talkBox.disabled = true
+		var dialogBox = DialogBox.instance()
+		dialogBox.dialog = [
+			\"Bats are mammals of the Chiroptera order.\",
+			\"They are the only mammals capable of true and sustained flight.\"
+		]
+		get_node(\"/root/World/GUI\").add_child(dialogBox)
+		player.talkTimer.start()
 			
 func accelerate_towards_point(point, speed, delta):
 	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position in the WanderController
@@ -179,14 +189,6 @@ func _on_Hurtbox_invincibility_ended():
 func _on_BatTalkBox_area_entered(area):
 	interactable = true
 	player.interacting = true
-	if (interactable && Input.is_action_pressed(\"examine\") && player.talkTimer.is_stopped()):
-		# talkBox.disabled = true
-		var dialogBox = DialogBox.instance()
-		dialogBox.dialog = [
-			\"Bats are mammals of the Chiroptera order. They are the only mammals capable of true and sustained flight.\"
-		]
-		get_node(\"/root/World/GUI\").add_child(dialogBox)
-		player.talkTimer.start()
 
 func _on_BatTalkBox_area_exited(area):
 	interactable = false
@@ -289,6 +291,7 @@ script = SubResource( 1 )
 material = SubResource( 2 )
 frames = SubResource( 8 )
 animation = "fly"
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 

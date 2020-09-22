@@ -49,11 +49,6 @@ func _ready():
 	collision.disabled = false
 
 func _process(delta):
-	if talkTimer.is_stopped():
-		actionHitbox.disabled = false
-	else:
-		actionHitbox.disabled = true
-		
 	if interacting:
 		notice.visible = true
 	else:
@@ -108,8 +103,6 @@ func move_state(delta):
 			]
 			get_node("/root/World/GUI").add_child(dialogBox)
 			talkTimer.start()
-		elif interacting:
-			pass
 	
 	if Input.is_action_just_pressed("attack"):
 		if !talking:
@@ -220,3 +213,6 @@ func game_over():
 	get_node("/root/World/GUI/StaminaBar").visible = false
 	self.visible = false
 	get_tree().paused = true
+
+func _on_TalkTimer_timeout():
+	actionHitbox.disabled = false

@@ -15,7 +15,4 @@ shader_param/active = false
 [node name="AnimatedSprite" parent="Bat" index="0"]
 material = SubResource( 1 )
 
-[node name="Hurtbox" parent="Bat" index="4"]
-visible = true
-
 [editable path="Bat"]

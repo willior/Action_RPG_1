@@ -13,6 +13,7 @@ var dialog_index = 0
 onready var label = $RichTextLabel
 
 func _ready():
+	
 	# sets the text to that contained in the matching dialog_index array container
 	label.set_bbcode(dialog[dialog_index])
 	label.set_visible_characters(0)
@@ -22,6 +23,7 @@ func _ready():
 	
 func _input(event):
 	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine"):
+		# if at the end of the dialog
 		if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog.size()-1):
 			get_node("/root/World/YSort/Player").talking = false
 			get_tree().paused = false
@@ -46,4 +48,8 @@ func _input(event):
 		print(label.get_total_character_count())
 
 func _on_Timer_timeout():
-	label.set_visible_characters(label.get_visible_characters()+1)
+	if label.get_visible_characters() <= label.get_total_character_count():
+		$AudioStreamPlayer.play()
+		label.set_visible_characters(label.get_visible_characters()+1)
+	else:
+		$AudioStreamPlayer.stop()
