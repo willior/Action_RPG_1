@@ -24,6 +24,8 @@ var roll_vector = Vector2.DOWN
 var roll_moving = false
 var stats = PlayerStats
 var attackQueued = false
+var interactable = false
+var talking = false
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
@@ -34,8 +36,6 @@ onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
-
-var interactable = false
 
 func _ready():
 	stats.connect("no_health", self, "game_over")

@@ -2,8 +2,10 @@ extends Polygon2D
 
 var dialog = [
 	"Hello.",
-	"Or good evening.",
-	"Whatever."
+	"You are reading the default dialog box message.",
+	"You're not supposed to be reading this message.",
+	"Something must have gone terribly, terribly wrong.",
+	"If only this game was made by a competent programmer..."
 	]
 	
 var dialog_index = 0
@@ -15,13 +17,15 @@ func _ready():
 	label.set_bbcode(dialog[dialog_index])
 	label.set_visible_characters(0)
 	label.set_process_input(true)
+	get_node("/root/World/YSort/Player").talking = true
 	get_tree().paused = true
 	
 func _input(event):
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine"):
 		if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog.size()-1):
-			queue_free()
+			get_node("/root/World/YSort/Player").talking = false
 			get_tree().paused = false
+			queue_free()
 			
 		# if the amount of visible characters is above the total amount of characters in the current index:
 		elif label.get_visible_characters() > label.get_total_character_count():

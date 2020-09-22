@@ -27,6 +27,9 @@ func _process(delta):
 			dim.visible = false
 			
 	if Input.is_action_just_pressed("start"):
+		if get_node("/root/World/YSort/Player").talking:
+			return
+			print('start pressed in dialog')
 		if PlayerStats.health <= 0:
 			get_tree().paused = false
 			get_node("/root/World/GUI/GameOver").queue_free()

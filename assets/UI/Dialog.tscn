@@ -28,6 +28,7 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+pause_mode = 2
 wait_time = 0.05
 autostart = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

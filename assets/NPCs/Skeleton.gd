@@ -7,6 +7,7 @@ onready var timer = $Timer
 onready var collision = $KinematicBody2D/Area2D/CollisionShape2D
 
 func _process(delta):
+	# skeleton talk
 	if (player.interactable == true && Input.is_action_pressed("attack") && timer.is_stopped()):
 		collision.disabled = true
 		var dialogBox = DialogBox.instance()
@@ -19,7 +20,17 @@ func _process(delta):
 		]
 		get_node("/root/World/GUI").add_child(dialogBox)
 		timer.start()
-
+		
+	# skeleton examine
+	if (player.interactable == true && Input.is_action_pressed("examine") && timer.is_stopped()):
+		collision.disabled = true
+		var dialogBox = DialogBox.instance()
+		dialogBox.dialog = [
+			"A friendly looking skeleton.",
+			"Actually, you can't tell the difference between rude and friendly skeletons, so you can't be sure."
+		]
+		get_node("/root/World/GUI").add_child(dialogBox)
+		timer.start()
 
 func _on_Area2D_area_entered(area):
 	print("area entered")
