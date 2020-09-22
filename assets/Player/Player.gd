@@ -15,7 +15,6 @@ const FRICTION = 800
 enum {
 	MOVE,
 	ROLL,
-	ACTION,
 	ATTACK,
 	ATTACK2,
 	HIT
@@ -36,6 +35,7 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
+onready var actionHitbox = $HitboxPivot/ActionHitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
@@ -49,6 +49,11 @@ func _ready():
 	collision.disabled = false
 
 func _process(delta):
+	if talkTimer.is_stopped():
+		actionHitbox.disabled = false
+	else:
+		actionHitbox.disabled = true
+		
 	if interactable:
 		notice.visible = true
 	else:
@@ -60,9 +65,6 @@ func _process(delta):
 			
 		ROLL:
 			roll_state()
-			
-		ACTION:
-			action_state(delta)
 			
 		ATTACK:
 			attack_state(delta)
@@ -110,9 +112,7 @@ func move_state(delta):
 			talkTimer.start()
 	
 	if Input.is_action_just_pressed("attack"):
-		if interactable:
-			state = MOVE
-		else:
+		if !talking:
 			state = ATTACK
 		
 	if Input.is_action_just_pressed("roll"):
@@ -122,10 +122,6 @@ func move_state(delta):
 		
 func move():
 	velocity = move_and_slide(velocity)
-	
-func action_state(delta):
-	print('action!')
-	state = MOVE
 
 func attack_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
