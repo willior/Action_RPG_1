@@ -5,6 +5,7 @@ const PlayerHurtSound = preload("res://assets/Player/PlayerHurtSound.tscn")
 const Notice = preload("res://assets/UI/Notice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
+const DialogBox = preload("res://assets/UI/Dialog.tscn")
 
 const ACCELERATION = 1600
 const MAX_SPEED = 100
@@ -38,6 +39,7 @@ onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
+onready var talkTimer = $TalkTimer
 onready var notice = $Notice
 
 func _ready():
@@ -96,10 +98,20 @@ func move_state(delta):
 	
 	move()
 	
+	if Input.is_action_just_pressed("examine"):
+		if !interactable && talkTimer.is_stopped():
+			var dialogBox = DialogBox.instance()
+			dialogBox.dialog = [
+			"You find nothing of interest."
+			]
+			get_node("/root/World/GUI").add_child(dialogBox)
+			talkTimer.start()
+		elif interactable:
+			talkTimer.start()
+	
 	if Input.is_action_just_pressed("attack"):
 		if interactable:
-			state = ACTION
-			
+			state = MOVE
 		else:
 			state = ATTACK
 		

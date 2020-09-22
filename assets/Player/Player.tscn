@@ -1256,6 +1256,9 @@ anims/Stop = SubResource( 69 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="TalkTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
