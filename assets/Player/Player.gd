@@ -26,7 +26,7 @@ var roll_vector = Vector2.DOWN
 var roll_moving = false
 var stats = PlayerStats
 var attackQueued = false
-var interactable = false
+var interacting = false
 var talking = false
 
 onready var sprite = $Sprite
@@ -54,7 +54,7 @@ func _process(delta):
 	else:
 		actionHitbox.disabled = true
 		
-	if interactable:
+	if interacting:
 		notice.visible = true
 	else:
 		notice.visible = false
@@ -101,15 +101,15 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("examine"):
-		if !interactable && talkTimer.is_stopped():
+		if !interacting && talkTimer.is_stopped():
 			var dialogBox = DialogBox.instance()
 			dialogBox.dialog = [
 			"You find nothing of interest."
 			]
 			get_node("/root/World/GUI").add_child(dialogBox)
 			talkTimer.start()
-		elif interactable:
-			talkTimer.start()
+		elif interacting:
+			pass
 	
 	if Input.is_action_just_pressed("attack"):
 		if !talking:

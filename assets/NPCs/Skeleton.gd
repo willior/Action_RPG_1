@@ -6,9 +6,12 @@ const Notice = preload("res://assets/UI/Notice.tscn")
 onready var player = get_parent().get_node("Player")
 onready var talkBox = $KinematicBody2D/SkeletonTalkBox/CollisionShape2D
 
+var interactable = false
+var talkable = false
+
 func _process(delta):
 	# skeleton talk
-	if (player.talking == true && Input.is_action_pressed("attack") && player.talkTimer.is_stopped()):
+	if (talkable && player.talking == true && Input.is_action_pressed("attack") && player.talkTimer.is_stopped()):
 		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
@@ -22,7 +25,7 @@ func _process(delta):
 		player.talkTimer.start()
 		
 	# skeleton examine
-	if (player.interactable == true && Input.is_action_pressed("examine") && player.talkTimer.is_stopped()):
+	if (interactable == true && Input.is_action_pressed("examine") && player.talkTimer.is_stopped()):
 		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
@@ -34,9 +37,12 @@ func _process(delta):
 
 func _on_SkeletonTalkBox_area_entered(area):
 	player.talking = true
-	player.interactable = true
-	print('talkbox area entered')
+	player.interacting = true
+	talkable = true
+	interactable = true
 
 func _on_SkeletonTalkBox_area_exited(area):
 	player.talking = false
-	player.interactable = false
+	player.interacting = false
+	talkable = false
+	interactable = false

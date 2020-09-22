@@ -36,6 +36,7 @@ var knockback = Vector2.ZERO
 
 var state = IDLE
 var experience_pool = 110
+var interactable = false
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -176,19 +177,20 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play(\"Stop\")
 
 func _on_BatTalkBox_area_entered(area):
-	player.interactable = true
-	if (Input.is_action_pressed(\"examine\") && player.talkTimer.is_stopped()):
+	interactable = true
+	player.interacting = true
+	if (interactable && Input.is_action_pressed(\"examine\") && player.talkTimer.is_stopped()):
 		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
-			\"Bats are mammals of the Chiroptera order. The only mammals capapble of true and sustained flight.\"
+			\"Bats are mammals of the Chiroptera order. They are the only mammals capable of true and sustained flight.\"
 		]
 		get_node(\"/root/World/GUI\").add_child(dialogBox)
 		player.talkTimer.start()
 
-
 func _on_BatTalkBox_area_exited(area):
-	player.interactable = false
+	interactable = false
+	player.interacting = false
 "
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -287,7 +289,6 @@ script = SubResource( 1 )
 material = SubResource( 2 )
 frames = SubResource( 8 )
 animation = "fly"
-frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 
