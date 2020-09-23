@@ -19,15 +19,20 @@ onready var menuTimer = $MenuTimer
 
 var transTime = 2
 var menuOn = false
+var menuSkipped = false
 
-func _process(delta):
-	if Input.is_action_just_pressed("start") && !menuOn:
+func _input(event):
+	if event.is_action_pressed("start") && !menuSkipped:
 		titleMenu()
+	if (event.is_action_pressed("ui_up") || event.is_action_pressed("ui_down") || event.is_action_pressed("ui_left") || event.is_action_pressed("ui_right") ) && menuOn:
+		$AudioMenu.play()
+		
+func _process(delta):
+	pass
 
 func _ready():
 	
 	while !menuOn:
-		
 		label1.visible = false
 		
 		timer.start()
@@ -234,7 +239,7 @@ func _ready():
 	
 func titleMenu():
 	
-	menuOn = true
+	menuSkipped = true
 	
 	timer.queue_free()
 	label1.queue_free()
@@ -269,10 +274,25 @@ func titleMenu():
 	menuTimer.wait_time = transTime /2
 	menuTimer.start()
 	yield(menuTimer, "timeout")
+	menuOn = true
 	newGameButton.grab_focus()
 
 func _on_NewGame_pressed():
+	$AudioSelect.play()
+	audio.stop()
+	menuOn = false
+	titleMenu.queue_free()
+	menuTimer.wait_time = transTime / 8
+	menuTimer.start()
+	yield(menuTimer, "timeout")
 	get_tree().change_scene("res://World.tscn")
 
 func _on_QuitGame_pressed():
+	$AudioSelect.play()
+	audio.stop()
+	menuOn = false
+	titleMenu.queue_free()
+	menuTimer.wait_time = transTime / 8
+	menuTimer.start()
+	yield(menuTimer, "timeout")
 	get_tree().quit()
