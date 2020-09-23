@@ -910,10 +910,16 @@ position = Vector2( 256, 128 )
 position = Vector2( 272, 88 )
 
 [node name="HeartPickup" parent="YSort" instance=ExtResource( 19 )]
-position = Vector2( -176, -104 )
+position = Vector2( -248, 280 )
 
 [node name="HeartPickup2" parent="YSort" instance=ExtResource( 19 )]
-position = Vector2( -192, -104 )
+position = Vector2( -232, 280 )
+
+[node name="HeartPickup4" parent="YSort" instance=ExtResource( 19 )]
+position = Vector2( -248, 296 )
+
+[node name="HeartPickup3" parent="YSort" instance=ExtResource( 19 )]
+position = Vector2( -232, 296 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2

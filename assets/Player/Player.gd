@@ -106,7 +106,9 @@ func move_state(delta):
 			talkTimer.start()
 	
 	if Input.is_action_just_pressed("attack"):
+		print('attack button pressed')
 		if !talking:
+			print('entering attack state')
 			state = ATTACK
 		
 	if Input.is_action_just_pressed("roll"):
@@ -118,9 +120,13 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func attack_state(delta):
+	print('attack state entered')
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
 	if attackQueued == false:
+		print('attackQueued = false')
 		animationState.travel("Attack")
+	# else: state = MOVE
+	
 	if Input.is_action_just_pressed("attack"):
 		print('attack queued!')
 		attackQueued = true
@@ -184,6 +190,7 @@ func roll_animation_finished():
 func hit_state(delta):
 	velocity = -roll_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
+	if attackQueued: attackQueued = false
 	move()
 	
 func hit_animation_finished():
