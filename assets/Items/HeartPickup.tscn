@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HeartPickup.gd" type="Script" id=1]
 [ext_resource path="res://assets/Items/Heart.png" type="Texture" id=2]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Music and Sounds/cursHi.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/Items/HeartCollectBox.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.0
@@ -26,6 +27,7 @@ shape = SubResource( 1 )
 [node name="HeartCollectBox" type="Area2D" parent="."]
 collision_layer = 256
 collision_mask = 0
+script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HeartCollectBox"]
 shape = SubResource( 2 )

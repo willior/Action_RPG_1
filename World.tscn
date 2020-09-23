@@ -1078,7 +1078,7 @@ position = Vector2( 80, 80 )
 script = SubResource( 50 )
 
 [node name="Bat6" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( -272, 40 )
+position = Vector2( -136, -96 )
 script = SubResource( 50 )
 
 [node name="Bat7" parent="YSort" instance=ExtResource( 7 )]

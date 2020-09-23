@@ -29,4 +29,5 @@ func _on_HeartTalkBox_area_exited(area):
 	interactable = false
 
 func _on_HeartCollectBox_area_entered(area):
+	
 	queue_free()

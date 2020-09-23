@@ -37,6 +37,7 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var actionHitbox = $HitboxPivot/ActionHitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
+onready var collect = $Collectbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
@@ -204,6 +205,9 @@ func _on_Hurtbox_invincibility_started():
 func _on_Hurtbox_invincibility_ended():
 	sprite.modulate = Color(1,1,1,1)
 	blinkAnimationPlayer.play("Stop")
+	
+func _on_Collectbox_area_entered(area):
+	stats.health += area.recovery
 	
 func game_over():
 	get_node("/root/World/Music").stream_paused = true
