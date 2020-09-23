@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=50]
 script/source = "extends KinematicBody2D
 
 const EnemyDeathEffect = preload(\"res://assets/Effects/EnemyDeathEffect.tscn\")
@@ -127,7 +127,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 	
 	sprite.modulate = Color(1,1,0)
 	if stats.health > 0:
-		knockback = area.knockback_vector * 100 # knockback velocity
+		knockback = area.knockback_vector * 120 # knockback velocity
 		tween.interpolate_property(sprite,
 		\"modulate\",
 		Color(1, 1, 0),
@@ -195,62 +195,62 @@ func _on_BatTalkBox_area_exited(area):
 	# player.interacting = false
 "
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=51]
 resource_local_to_scene = true
 shader = ExtResource( 9 )
 shader_param/active = false
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=52]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=53]
 atlas = ExtResource( 1 )
 region = Rect2( 16, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=54]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=55]
 atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=56]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 16, 24 )
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=57]
 animations = [ {
 "frames": [  ],
 "loop": true,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ) ],
 "loop": true,
 "name": "fly",
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=58]
 radius = 4.0
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=59]
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=60]
 radius = 9.0
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=61]
 radius = 56.0089
 
-[sub_resource type="CircleShape2D" id=13]
+[sub_resource type="CircleShape2D" id=62]
 radius = 3.16228
 
-[sub_resource type="CircleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=63]
 radius = 5.0
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=64]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -266,7 +266,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=65]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
@@ -283,13 +283,13 @@ tracks/0/keys = {
 
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
-script = SubResource( 1 )
+script = SubResource( 50 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-material = SubResource( 2 )
-frames = SubResource( 8 )
+material = SubResource( 51 )
+frames = SubResource( 57 )
 animation = "fly"
-frame = 4
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -297,7 +297,7 @@ offset = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 9 )
+shape = SubResource( 58 )
 
 [node name="BatStats" parent="." instance=ExtResource( 4 )]
 
@@ -307,14 +307,14 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BatTalkBox"]
 position = Vector2( 0, -14 )
-shape = SubResource( 10 )
+shape = SubResource( 59 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -14 )
-shape = SubResource( 11 )
+shape = SubResource( 60 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -322,28 +322,29 @@ wait_time = 0.5
 [node name="Tween" type="Tween" parent="."]
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 0, 0, 0.196078 )
-shape = SubResource( 12 )
+shape = SubResource( 61 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 13 )
+shape = SubResource( 62 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 7 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 14 )
+shape = SubResource( 63 )
 
 [node name="WanderController" parent="." instance=ExtResource( 8 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 15 )
-anims/Stop = SubResource( 16 )
+anims/Start = SubResource( 64 )
+anims/Stop = SubResource( 65 )
 [connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
 [connection signal="area_entered" from="BatTalkBox" to="." method="_on_BatTalkBox_area_entered"]
 [connection signal="area_exited" from="BatTalkBox" to="." method="_on_BatTalkBox_area_exited"]

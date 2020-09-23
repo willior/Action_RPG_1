@@ -46,6 +46,7 @@ radius = 8.0
 height = 1.74851
 
 [node name="Skeleton" type="Node2D"]
+position = Vector2( 0, -8 )
 script = ExtResource( 2 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
@@ -56,7 +57,7 @@ offset = Vector2( 0, 10 )
 
 [node name="Sprite" type="AnimatedSprite" parent="KinematicBody2D"]
 frames = SubResource( 7 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]

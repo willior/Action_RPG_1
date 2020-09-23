@@ -206,6 +206,7 @@ func _on_Hurtbox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
 	
 func game_over():
+	get_node("/root/World/Music").stream_paused = true
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
 	get_node("/root/World/GUI/HealthUI").visible = false

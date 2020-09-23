@@ -1130,7 +1130,7 @@ states/Run/node = SubResource( 53 )
 states/Run/position = Vector2( 423, 117 )
 transitions = [ "Idle", "Run", SubResource( 54 ), "Run", "Idle", SubResource( 55 ), "Idle", "Attack", SubResource( 56 ), "Attack", "Idle", SubResource( 57 ), "Idle", "Roll", SubResource( 58 ), "Roll", "Idle", SubResource( 59 ), "Idle", "Hit", SubResource( 60 ), "Hit", "Idle", SubResource( 61 ), "Attack", "Attack2", SubResource( 62 ), "Attack2", "Idle", SubResource( 63 ), "Attack", "Hit", SubResource( 64 ), "Attack2", "Hit", SubResource( 65 ), "Roll", "Hit", SubResource( 66 ), "Run", "Hit", SubResource( 67 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -289.099, -16.6367 )
+graph_offset = Vector2( -289.099, -160.85 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=69]
 
@@ -1237,6 +1237,7 @@ script = ExtResource( 11 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
+rotation = 1.5708
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 
@@ -1255,6 +1256,7 @@ collision_layer = 4
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -5 )
 shape = SubResource( 71 )
+disabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

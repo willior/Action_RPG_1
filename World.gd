@@ -2,21 +2,29 @@ extends Node2D
 
 onready var dim = $GUI/Dim
 onready var timer = $Timer
+onready var music = $Music
 
 const BAT = preload("res://assets/Enemies/Bat.tscn")
 
+var count = 0
+
 func spawner():
-	timer.start()
-	yield(timer, "timeout")
-	var batSpawn = BAT.instance()
-	batSpawn.position.x = 72
-	batSpawn.position.y = 120
-	get_node("/root/World/YSort").add_child(batSpawn)
-	spawner()
+	if count > 20:
+		return
+	
+	else:
+		timer.start()
+		yield(timer, "timeout")
+		var batSpawn = BAT.instance()
+		batSpawn.position.x = 72
+		batSpawn.position.y = 120
+		get_node("/root/World/YSort").add_child(batSpawn)
+		spawner()
+		count =+ 1
+	
 
 func _ready():
-	pass
-	# spawner()
+	music.play()
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
@@ -31,6 +39,7 @@ func _process(delta):
 		if get_node("/root/World/YSort/Player").talking:
 			return
 		if PlayerStats.health <= 0:
+			music.stream_paused = false
 			get_tree().paused = false
 			get_node("/root/World/GUI/GameOver").visible = false
 			get_node("/root/World/GUI/GameOver").queue_free()
@@ -43,8 +52,10 @@ func _process(delta):
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
 			
 		elif get_tree().paused == false:
+			music.stream_paused = true
 			get_tree().paused = true
 			dim.visible = true
 		else:
+			music.stream_paused = false
 			get_tree().paused = false
 			dim.visible = false

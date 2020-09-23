@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Bush.wav-28dadb54ce963b266266fc33fa80c944.sample"
+
+[deps]
+
+source_file="res://assets/Music and Sounds/Bush.wav"
+dest_files=[ "res://.import/Bush.wav-28dadb54ce963b266266fc33fa80c944.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
