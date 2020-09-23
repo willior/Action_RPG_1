@@ -166,10 +166,10 @@ func _on_BatStats_no_health():
 	expNotice.expDisplay = experience_pool
 	get_node("/root").add_child(expNotice)
 	
-	var heartPickup = HeartPickup.instance()
-	print(heartPickup)
-	heartPickup.global_position = global_position
-	get_node("/root/World/YSort").add_child(heartPickup)
+	if player.stats.health < player.stats.max_health && randi() % 2 == 1:
+		var heartPickup = HeartPickup.instance()
+		heartPickup.global_position = global_position
+		get_node("/root/World/YSort").add_child(heartPickup)
 	
 	queue_free()
 
