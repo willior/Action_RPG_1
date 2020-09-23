@@ -1,10 +1,8 @@
 extends Node2D
 
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
-const Notice = preload("res://assets/UI/Notice.tscn")
 
 onready var player = get_parent().get_node("Player")
-onready var talkBox = $KinematicBody2D/SkeletonTalkBox/CollisionShape2D
 
 var interactable = false
 var talkable = false
@@ -13,7 +11,6 @@ var speaker = "Skeleton: "
 func _process(delta):
 	# skeleton talk
 	if (talkable && Input.is_action_pressed("attack") && player.talkTimer.is_stopped()):
-		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
 			"Hello.",
@@ -30,7 +27,6 @@ func _process(delta):
 		
 	# skeleton examine
 	if (interactable && Input.is_action_pressed("examine") && player.talkTimer.is_stopped()):
-		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
 			"A friendly looking skeleton.",

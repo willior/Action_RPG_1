@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://HeartPickup.gd" type="Script" id=1]
 [ext_resource path="res://assets/Items/Heart.png" type="Texture" id=2]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Music and Sounds/cursHi.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.0
@@ -19,13 +20,18 @@ collision_layer = 256
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 texture = ExtResource( 2 )
 
-[node name="TalkBox" parent="KinematicBody2D" instance=ExtResource( 3 )]
+[node name="HeartTalkBox" parent="KinematicBody2D" instance=ExtResource( 3 )]
 
-[node name="CollisionShape2D" parent="KinematicBody2D/TalkBox" index="0"]
+[node name="CollisionShape2D" parent="KinematicBody2D/HeartTalkBox" index="0"]
 position = Vector2( 0, 0 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 shape = SubResource( 2 )
 
-[editable path="KinematicBody2D/TalkBox"]
+[node name="AudioCursHi" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+[connection signal="area_entered" from="KinematicBody2D/HeartTalkBox" to="." method="_on_HeartTalkBox_area_entered"]
+[connection signal="area_exited" from="KinematicBody2D/HeartTalkBox" to="." method="_on_HeartTalkBox_area_exited"]
+
+[editable path="KinematicBody2D/HeartTalkBox"]

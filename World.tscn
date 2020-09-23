@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=16]
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=17]
 [ext_resource path="res://assets/Music and Sounds/fieldSong1.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/Items/HeartPickup.tscn" type="PackedScene" id=19]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -1099,6 +1100,12 @@ script = SubResource( 50 )
 [node name="Bat5" parent="YSort" instance=ExtResource( 7 )]
 position = Vector2( 272, 88 )
 script = SubResource( 50 )
+
+[node name="HeartPickup" parent="YSort" instance=ExtResource( 19 )]
+position = Vector2( -176, -104 )
+
+[node name="HeartPickup2" parent="YSort" instance=ExtResource( 19 )]
+position = Vector2( -192, -104 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2

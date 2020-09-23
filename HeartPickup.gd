@@ -1,16 +1,29 @@
 extends Node2D
 
+const DialogBox = preload("res://assets/UI/Dialog.tscn")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var player = get_parent().get_node("Player")
 
+var interactable = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	
+func _process(delta):
+	if (interactable && Input.is_action_pressed("examine") && player.talkTimer.is_stopped()):
+		# talkBox.disabled = true
+		var dialogBox = DialogBox.instance()
+		dialogBox.dialog = [
+			"A heart-shaped box."
+		]
+		get_node("/root/World/GUI").add_child(dialogBox)
+		player.talkTimer.start()
 
+func _on_HeartTalkBox_area_entered(area):
+	player.interacting = true
+	interactable = true
+	$AudioCursHi.play()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_HeartTalkBox_area_exited(area):
+	player.interacting = false
+	interactable = false

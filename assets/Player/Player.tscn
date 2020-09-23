@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -1142,6 +1142,9 @@ height = 14.0
 radius = 5.0
 height = 0.0
 
+[sub_resource type="CapsuleShape2D" id=74]
+height = 5.43185
+
 [sub_resource type="Animation" id=72]
 length = 0.2
 loop = true
@@ -1190,6 +1193,7 @@ hframes = 60
 frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 rotation = -1.5708
 shape = SubResource( 2 )
 
@@ -1257,6 +1261,14 @@ collision_layer = 4
 position = Vector2( 0, -5 )
 shape = SubResource( 71 )
 disabled = true
+
+[node name="Collectbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectbox"]
+position = Vector2( -0.488346, -7.73805 )
+shape = SubResource( 74 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
