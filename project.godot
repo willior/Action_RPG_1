@@ -121,6 +121,7 @@ start={
 2d_physics/layer_6="SoftCollisions"
 2d_physics/layer_7="NPC"
 2d_physics/layer_8="NPCTalkbox"
+2d_physics/layer_9="Items"
 
 [rendering]
 
