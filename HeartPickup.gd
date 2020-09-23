@@ -27,3 +27,6 @@ func _on_HeartTalkBox_area_entered(area):
 func _on_HeartTalkBox_area_exited(area):
 	player.interacting = false
 	interactable = false
+
+func _on_HeartCollectBox_area_entered(area):
+	queue_free()
