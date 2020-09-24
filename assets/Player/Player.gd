@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-# const PlayerHurtSound = preload("res://assets/Player/PlayerHurtSound.tscn")
-
 const Notice = preload("res://assets/UI/Notice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
@@ -183,14 +181,10 @@ func level_up():
 	
 func roll_stamina_drain():
 	stats.stamina -= 15
-	
-	print(hurtbox.timer.is_stopped())
-	
-	if !hurtbox.timer.is_stopped(): 
-		prints(str(hurtbox.timer.get_time_left()) + ' is greater than iframes, retaining iTime')
-	else:
+	if hurtbox.timer.is_stopped(): 
 		hurtbox.start_invincibility(stats.iframes)
-		print('applying iframes to iTime')
+	else:
+		pass
 		
 func roll_state():
 	if roll_moving:
@@ -208,7 +202,6 @@ func roll_animation_finished():
 	
 func _on_Hurtbox_area_entered(area):
 	damageTaken = area.damage
-	# hurtbox.set_collision_layer_bit(4, false)
 	state = HIT
 	
 func hit_damage():
