@@ -164,7 +164,7 @@ func _on_BatStats_no_health():
 	var expNotice = ExpNotice.instance()
 	expNotice.rect_position = global_position
 	expNotice.expDisplay = stats.experience_pool
-	get_node("/root").add_child(expNotice)
+	get_node("/root/World").add_child(expNotice)
 	
 	if player.stats.health < player.stats.max_health && randi() % 2 == 1:
 		var heartPickup = HeartPickup.instance()
