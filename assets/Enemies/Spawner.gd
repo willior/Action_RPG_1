@@ -11,7 +11,6 @@ func _ready():
 	spawner()
 
 func spawner():
-	print(count)
 	if count > 20:
 		return
 	

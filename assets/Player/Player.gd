@@ -20,6 +20,13 @@ enum {
 	HIT
 }
 
+enum {
+	LEVELHEALTH,
+	LEVELSTAMINA,
+	LEVELSTRENGTH,
+	LEVELSPEED
+}
+
 var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
@@ -28,6 +35,8 @@ var stats = PlayerStats
 var attackQueued = false
 var interacting = false
 var talking = false
+var levelStats = [0, 1, 2, 3]
+var levelResult = 0
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
@@ -107,9 +116,7 @@ func move_state(delta):
 			talkTimer.start()
 	
 	if Input.is_action_just_pressed("attack"):
-		print('attack button pressed')
 		if !talking:
-			print('entering attack state')
 			state = ATTACK
 		
 	if Input.is_action_just_pressed("roll"):
@@ -123,15 +130,12 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func attack_state(delta):
-	print('attack state entered')
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
 	if attackQueued == false:
-		print('attackQueued = false')
 		animationState.travel("Attack")
 	# else: state = MOVE
 	
 	if Input.is_action_just_pressed("attack"):
-		print('attack queued!')
 		attackQueued = true
 	move()
 	
@@ -159,16 +163,38 @@ func enemy_killed(experience_from_kill):
 	
 func level_up():
 	stats.level += 1
+	stats.health += 1
 	var levelNotice = LevelNotice.instance()
 	levelNotice.rect_position = global_position
 	levelNotice.levelDisplay = stats.level
 	get_node("/root").add_child(levelNotice)
-	
-	stats.max_health += 1
-	stats.health += 1
-	stats.max_stamina += 15
-	stats.strength += 1
-	stats.iframes += 0.1
+	var choice = levelStats[randi() % levelStats.size()]
+	print(choice)
+	match choice:
+		LEVELHEALTH:
+			stats.max_health += 1
+			print('max health raised')
+			#levelNotice.actual_string = levelNotice.format_string % "HEALTH"
+			levelNotice.statDisplay = "VIOLENT NATURE"
+		LEVELSTAMINA:
+			stats.max_stamina += 15
+			print('max stamina raised')
+			#levelNotice.actual_string = levelNotice.format_string % "PERSEVERENCE"
+			levelNotice.statDisplay = "PERSEVERENCE"
+		LEVELSTRENGTH:
+			stats.strength += 1
+			#levelNotice.actual_string = levelNotice.format_string % "STRENGTH"
+			levelNotice.statDisplay = "STRENGTH"
+		LEVELSPEED:
+			stats.iframes += 0.1
+			print('speed raised')
+			#levelNotice.actual_string = levelNotice.format_string % "SWIFTNESS"
+			levelNotice.statDisplay = "SWIFTNESS"
+			
+	# if choice == 0: stats.max_health += 1
+	# elif choice == 2: stats.max_stamina += 15
+	# elif choice == 3: stats.strength += 1
+	# elif choice == 4: stats.iframes += 0.1
 	
 func roll_stamina_drain():
 	hurtbox.start_invincibility(stats.iframes)

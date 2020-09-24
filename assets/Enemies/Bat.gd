@@ -23,7 +23,7 @@ var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
 var state = IDLE
-var experience_pool = 110
+var experience_pool = 1110
 var interactable = false
 
 onready var stats = $BatStats
