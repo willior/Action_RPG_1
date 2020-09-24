@@ -16,7 +16,7 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
-shader_param/active = false
+shader_param/active = true
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 4.0
@@ -621,7 +621,7 @@ tracks/2/path = NodePath("Hurtbox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -682,7 +682,7 @@ tracks/2/path = NodePath("Hurtbox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -743,7 +743,7 @@ tracks/2/path = NodePath("Hurtbox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -804,7 +804,7 @@ tracks/2/path = NodePath("Hurtbox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -1191,7 +1191,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 60
-frame = 59
+frame = 45
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -1245,9 +1245,6 @@ position = Vector2( 0, -4 )
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 
-[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
-disabled = false
-
 [node name="ActionHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
 collision_layer = 0
@@ -1263,6 +1260,7 @@ collision_layer = 4
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -5 )
 shape = SubResource( 71 )
+disabled = true
 
 [node name="Collectbox" type="Area2D" parent="."]
 collision_layer = 0

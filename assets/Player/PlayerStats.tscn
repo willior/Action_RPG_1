@@ -7,6 +7,7 @@ var max_health = 4 setget set_max_health
 var health = max_health setget set_health
 var max_stamina = (max_health * 15) setget set_max_stamina
 var stamina = max_stamina setget set_stamina
+var iframes = 0.1 setget set_iframes
 
 onready var strength = 1 setget set_strength
 
@@ -23,6 +24,7 @@ signal max_health_changed(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
 signal strength_changed(value)
+signal iframes_changed(value)
 
 signal experience_changed(value)
 signal max_experience_changed(value)
@@ -52,6 +54,10 @@ func set_stamina(value):
 func set_strength(value):
 	strength = value
 	emit_signal(\"strength_changed\", strength)
+	
+func set_iframes(value):
+	iframes = value
+	emit_signal(\"iframes_changed\", iframes)
 		
 func set_max_experience(value):
 	experience_required = value
@@ -70,6 +76,7 @@ func _ready():
 	self.experience = experience_total
 	self.strength = strength
 	self.stamina = max_stamina
+	self.iframes = iframes
 "
 
 [node name="PlayerStats" type="Node"]

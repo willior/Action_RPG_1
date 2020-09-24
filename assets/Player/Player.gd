@@ -168,14 +168,18 @@ func level_up():
 	stats.health += 1
 	stats.max_stamina += 15
 	stats.strength += 1
+	stats.iframes += 0.1
 	
 func roll_stamina_drain():
+	hurtbox.start_invincibility(stats.iframes)
 	stats.stamina -= 15
 
 func roll_state():
 	roll_start()
 		
 func roll_start():
+	# blinkAnimationPlayer.play("Start")
+	# 
 	if roll_moving:
 			velocity = roll_vector * ROLL_SPEED
 	else:
@@ -185,6 +189,7 @@ func roll_start():
 
 func roll_stop():
 	roll_moving = false
+	# blinkAnimationPlayer.play("Stop")
 	
 func roll_animation_finished():
 	state = MOVE
