@@ -23,7 +23,6 @@ var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 
 var state = IDLE
-var experience_pool = 1110
 var interactable = false
 
 onready var stats = $BatStats
@@ -133,7 +132,7 @@ func _on_BatStats_no_health():
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
 	hitbox.queue_free()
 	state = DEAD
-	player.enemy_killed(experience_pool)
+	player.enemy_killed(stats.experience_pool)
 	
 	tween.interpolate_property(sprite,
 	"offset:y",
@@ -163,7 +162,7 @@ func _on_BatStats_no_health():
 	
 	var expNotice = ExpNotice.instance()
 	expNotice.rect_position = global_position
-	expNotice.expDisplay = experience_pool
+	expNotice.expDisplay = stats.experience_pool
 	get_node("/root").add_child(expNotice)
 	
 	if player.stats.health < player.stats.max_health && randi() % 2 == 1:

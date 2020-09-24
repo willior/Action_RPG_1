@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/Music and Sounds/death.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/Audio/death.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/UI/GameOver.gd" type="Script" id=2]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=3]
 

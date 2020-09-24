@@ -2,7 +2,8 @@
 
 [ext_resource path="res://assets/Effects/Effect.gd" type="Script" id=1]
 [ext_resource path="res://assets/Effects/EnemyDeathEffect.png" type="Texture" id=2]
-[ext_resource path="res://assets/Music and Sounds/EnemyDie.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/Audio/EnemyDie.wav" type="AudioStream" id=3]
+
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )

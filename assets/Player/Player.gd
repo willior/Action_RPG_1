@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const PlayerHurtSound = preload("res://assets/Player/PlayerHurtSound.tscn")
+# const PlayerHurtSound = preload("res://assets/Player/PlayerHurtSound.tscn")
 
 const Notice = preload("res://assets/UI/Notice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
@@ -35,6 +35,7 @@ var stats = PlayerStats
 var attackQueued = false
 var interacting = false
 var talking = false
+var dying = false
 var levelStats = [0, 1, 2, 3]
 var levelResult = 0
 
@@ -51,13 +52,15 @@ onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
-onready var noStamina = $AudioNoStamina
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = roll_vector / 4
 	collision.disabled = false
+
+func test(dir):
+	print('test ' + dir)
 
 func _process(delta):
 	if interacting:
@@ -66,20 +69,11 @@ func _process(delta):
 		notice.visible = false
 	
 	match state:
-		MOVE:
-			move_state(delta)
-			
-		ROLL:
-			roll_state()
-			
-		ATTACK:
-			attack_state(delta)
-			
-		ATTACK2:
-			attack2_state(delta)
-			
-		HIT:
-			hit_state(delta)
+		MOVE: move_state(delta)
+		ROLL: roll_state()
+		ATTACK: attack_state(delta)
+		ATTACK2: attack2_state(delta)
+		HIT: hit_state()
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -124,7 +118,8 @@ func move_state(delta):
 			roll_moving = true
 			state = ROLL
 		else:
-			noStamina.play()
+			$AudioStreamPlayer.stream = load("res://assets/Audio/Bamboo.wav")
+			$AudioStreamPlayer.play()
 		
 func move():
 	velocity = move_and_slide(velocity)
@@ -163,7 +158,6 @@ func enemy_killed(experience_from_kill):
 	
 func level_up():
 	stats.level += 1
-	stats.health += 1
 	var levelNotice = LevelNotice.instance()
 	levelNotice.rect_position = global_position
 	levelNotice.levelDisplay = stats.level
@@ -172,36 +166,23 @@ func level_up():
 	match choice:
 		LEVELHEALTH:
 			stats.max_health += 1
-			print('max health raised')
-			#levelNotice.actual_string = levelNotice.format_string % "HEALTH"
+			stats.health += 1
 			levelNotice.statDisplay = "WILLPOWER"
 			levelNotice.statColor = Color(1, 0.272549, 0.315686)
-			print(levelNotice.statColor)
 		LEVELSTAMINA:
 			stats.max_stamina += 15
-			print('max stamina raised')
-			#levelNotice.actual_string = levelNotice.format_string % "PERSEVERENCE"
 			levelNotice.statDisplay = "PERSEVERENCE"
 			levelNotice.statColor = Color(0.372549, 1, 0.415686)
 		LEVELSTRENGTH:
 			stats.strength += 1
-			#levelNotice.actual_string = levelNotice.format_string % "STRENGTH"
 			levelNotice.statDisplay = "VIOLENT NATURE"
 			levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
 		LEVELSPEED:
 			stats.iframes += 0.1
-			print('speed raised')
-			#levelNotice.actual_string = levelNotice.format_string % "SWIFTNESS"
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
 			
 	get_node("/root").add_child(levelNotice)
-	
-			
-	# if choice == 0: stats.max_health += 1
-	# elif choice == 2: stats.max_stamina += 15
-	# elif choice == 3: stats.strength += 1
-	# elif choice == 4: stats.iframes += 0.1
 	
 func roll_stamina_drain():
 	hurtbox.start_invincibility(stats.iframes)
@@ -211,8 +192,6 @@ func roll_state():
 	roll_start()
 		
 func roll_start():
-	# blinkAnimationPlayer.play("Start")
-	# 
 	if roll_moving:
 			velocity = roll_vector * ROLL_SPEED
 	else:
@@ -222,12 +201,11 @@ func roll_start():
 
 func roll_stop():
 	roll_moving = false
-	# blinkAnimationPlayer.play("Stop")
 	
 func roll_animation_finished():
 	state = MOVE
 	
-func hit_state(delta):
+func hit_state():
 	velocity = -roll_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
 	if attackQueued: attackQueued = false
@@ -242,8 +220,8 @@ func _on_Hurtbox_area_entered(area):
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
 	
-	var playerHurtSound = PlayerHurtSound.instance()
-	get_tree().current_scene.add_child(playerHurtSound)
+	#var playerHurtSound = PlayerHurtSound.instance()
+	#get_tree().current_scene.add_child(playerHurtSound)
 
 func _on_Hurtbox_invincibility_started():
 	sprite.modulate = Color(0,1,1,1)
@@ -257,7 +235,10 @@ func _on_Collectbox_area_entered(area):
 	stats.health += area.recovery
 	
 func game_over():
+	dying = true
 	get_node("/root/World/Music").stream_paused = true
+	#timer.start()
+	#yield(timer, "timeout")
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
 	get_node("/root/World/GUI/HealthUI").visible = false

@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=15]
 [ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=16]
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=17]
-[ext_resource path="res://assets/Music and Sounds/fieldSong1.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/Audio/fieldSong1.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/Items/HeartPickup.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/Enemies/Spawner.gd" type="Script" id=20]
 
@@ -968,6 +968,7 @@ margin_bottom = 180.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="BatSpawner" type="Node2D" parent="."]
+pause_mode = 1
 position = Vector2( -175.406, -85.759 )
 script = ExtResource( 20 )
 

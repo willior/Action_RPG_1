@@ -5,7 +5,6 @@ onready var tween = $Tween
 onready var timer = $Timer
 
 func _ready():
-	
 	$AudioStreamPlayer.play()
 	tween.interpolate_property(gameOverFlash,
 	"color",
@@ -33,8 +32,11 @@ func _ready():
 	
 	yield(timer, "timeout")
 	$Label.visible = true
-
-func _process(delta):
-	if Input.is_action_just_pressed("start"):
+	
+func _input(event):
+	if event.is_action_pressed("start"):
 		prints('continue #', PlayerStats.continue_count)
-		queue_free()
+
+#func _process(delta):
+	#if Input.is_action_just_pressed("start"):
+		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -6,13 +6,13 @@
 [ext_resource path="res://assets/Player/ActionHitbox.gd" type="Script" id=4]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=6]
-[ext_resource path="res://assets/Music and Sounds/Swipe.wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/Music and Sounds/Evade.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/Audio/Swipe.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/Audio/Evade.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 [ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/Notice.gd" type="Script" id=11]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/Music and Sounds/Bamboo.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -76,7 +76,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioSword")
+tracks/4/path = NodePath("AudioStreamPlayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -143,7 +143,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioSword")
+tracks/4/path = NodePath("AudioStreamPlayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -210,7 +210,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioSword")
+tracks/4/path = NodePath("AudioStreamPlayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -277,7 +277,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioSword")
+tracks/4/path = NodePath("AudioStreamPlayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -344,7 +344,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioSword")
+tracks/4/path = NodePath("AudioStreamPlayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -358,7 +358,24 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
+[sub_resource type="Animation" id=75]
+resource_name = "Death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:flip_v")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [sub_resource type="Animation" id=8]
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -397,8 +414,23 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.185891,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=9]
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -437,8 +469,37 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.177998,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "LEFT" ],
+"method": "test"
+} ]
+}
 
 [sub_resource type="Animation" id=10]
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -477,8 +538,23 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.179763,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=11]
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -516,6 +592,20 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.183848,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=12]
@@ -629,7 +719,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioSword")
+tracks/3/path = NodePath("AudioStreamPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -690,7 +780,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioSword")
+tracks/3/path = NodePath("AudioStreamPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -751,7 +841,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioSword")
+tracks/3/path = NodePath("AudioStreamPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -812,7 +902,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioSword")
+tracks/3/path = NodePath("AudioStreamPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -1189,6 +1279,7 @@ texture = ExtResource( 6 )
 material = SubResource( 1 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
+flip_v = true
 vframes = 2
 hframes = 60
 frame = 84
@@ -1206,6 +1297,7 @@ anims/AttackDown = SubResource( 4 )
 anims/AttackLeft = SubResource( 5 )
 anims/AttackRight = SubResource( 6 )
 anims/AttackUp = SubResource( 7 )
+anims/Death = SubResource( 75 )
 anims/HitDown = SubResource( 8 )
 anims/HitLeft = SubResource( 9 )
 anims/HitRight = SubResource( 10 )
@@ -1270,11 +1362,8 @@ collision_mask = 256
 position = Vector2( -0.488346, -7.73805 )
 shape = SubResource( 72 )
 
-[node name="AudioSword" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
-
-[node name="AudioNoStamina" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 13 )
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Start = SubResource( 73 )

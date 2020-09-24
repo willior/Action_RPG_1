@@ -3,6 +3,7 @@ extends Node2D
 onready var dim = $GUI/Dim
 # onready var timer = $Timer
 onready var music = $Music
+onready var player = $YSort/Player
 
 func _ready():
 	music.play()
@@ -17,9 +18,10 @@ func _process(delta):
 			dim.visible = false
 			
 	if Input.is_action_just_pressed("start"):
-		if get_node("/root/World/YSort/Player").talking:
+		if player.talking:
 			return
 		if PlayerStats.health <= 0:
+			player.dying = false
 			music.stream_paused = false
 			get_tree().paused = false
 			get_node("/root/World/GUI/GameOver").visible = false
@@ -28,7 +30,8 @@ func _process(delta):
 			get_node("/root/World/GUI/ExpBar").visible = true
 			get_node("/root/World/GUI/StaminaBar").visible = true
 			get_node("/root/World/YSort/Player").visible = true
-			PlayerStats.health += 1
+			# get_node("/root/World/YSort/Player/Sprite").flip_v = false
+			PlayerStats.health += PlayerStats.max_health
 			PlayerStats.continue_count += 1
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
 			

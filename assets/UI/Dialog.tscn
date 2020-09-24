@@ -2,7 +2,8 @@
 
 [ext_resource path="res://assets/UI/Dialog.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://assets/Music and Sounds/dialogue.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/Audio/dialogue.wav" type="AudioStream" id=3]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )

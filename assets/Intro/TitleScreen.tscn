@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Intro/IntroBlack.png" type="Texture" id=2]
 [ext_resource path="res://assets/Intro/TitleScreen.gd" type="Script" id=3]
-[ext_resource path="res://assets/Music and Sounds/461B_hello_drone.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/Audio/461B_hello_drone.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/Intro/wisteria.png" type="Texture" id=5]
 [ext_resource path="res://assets/Intro/ziggy.png" type="Texture" id=6]
 [ext_resource path="res://assets/Intro/iggy.png" type="Texture" id=7]
@@ -12,8 +12,9 @@
 [ext_resource path="res://assets/Intro/NewGameSelected.png" type="Texture" id=10]
 [ext_resource path="res://assets/Intro/QuitGame.png" type="Texture" id=11]
 [ext_resource path="res://assets/Intro/QuitGameSelected.png" type="Texture" id=12]
-[ext_resource path="res://assets/Music and Sounds/cursLo.wav" type="AudioStream" id=13]
-[ext_resource path="res://assets/Music and Sounds/cursHi.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=14]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
