@@ -14,7 +14,8 @@ func _process(delta):
 		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
-			"A heart-shaped box."
+			"A heart-shaped box. It's full of chocolate!",
+			"Actually, there's only one left."
 		]
 		get_node("/root/World/GUI").add_child(dialogBox)
 		player.talkTimer.start()

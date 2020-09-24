@@ -42,6 +42,7 @@ onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
+onready var noStamina = $AudioNoStamina
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
@@ -115,6 +116,8 @@ func move_state(delta):
 		if stats.stamina > 0:
 			roll_moving = true
 			state = ROLL
+		else:
+			noStamina.play()
 		
 func move():
 	velocity = move_and_slide(velocity)
@@ -167,8 +170,7 @@ func level_up():
 	stats.strength += 1
 	
 func roll_stamina_drain():
-	if stats.stamina > 0:
-		stats.stamina -= 15
+	stats.stamina -= 15
 
 func roll_state():
 	roll_start()

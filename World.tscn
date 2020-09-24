@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=17]
 [ext_resource path="res://assets/Music and Sounds/fieldSong1.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/Items/HeartPickup.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/Enemies/Spawner.gd" type="Script" id=20]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -966,7 +967,11 @@ margin_right = 320.0
 margin_bottom = 180.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="BatSpawner" type="Node2D" parent="."]
+position = Vector2( -175.406, -85.759 )
+script = ExtResource( 20 )
+
+[node name="Timer" type="Timer" parent="BatSpawner"]
 wait_time = 2.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

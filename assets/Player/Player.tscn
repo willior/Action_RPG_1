@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/Notice.gd" type="Script" id=11]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/Music and Sounds/Bamboo.wav" type="AudioStream" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -75,7 +76,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/path = NodePath("AudioSword")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -142,7 +143,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/path = NodePath("AudioSword")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -209,7 +210,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/path = NodePath("AudioSword")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -276,7 +277,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/path = NodePath("AudioSword")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -343,7 +344,7 @@ tracks/3/keys = {
 "values": [ false, true ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/path = NodePath("AudioSword")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -628,7 +629,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/path = NodePath("AudioSword")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -689,7 +690,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/path = NodePath("AudioSword")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -750,7 +751,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/path = NodePath("AudioSword")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -811,7 +812,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/path = NodePath("AudioSword")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -1142,10 +1143,10 @@ height = 14.0
 radius = 5.0
 height = 0.0
 
-[sub_resource type="CapsuleShape2D" id=74]
+[sub_resource type="CapsuleShape2D" id=72]
 height = 5.43185
 
-[sub_resource type="Animation" id=72]
+[sub_resource type="Animation" id=73]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -1161,7 +1162,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=73]
+[sub_resource type="Animation" id=74]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -1190,7 +1191,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 60
-frame = 18
+frame = 59
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -1244,6 +1245,9 @@ position = Vector2( 0, -4 )
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 
+[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
+disabled = false
+
 [node name="ActionHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
 collision_layer = 0
@@ -1259,7 +1263,6 @@ collision_layer = 4
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -5 )
 shape = SubResource( 71 )
-disabled = true
 
 [node name="Collectbox" type="Area2D" parent="."]
 collision_layer = 0
@@ -1267,14 +1270,17 @@ collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collectbox"]
 position = Vector2( -0.488346, -7.73805 )
-shape = SubResource( 74 )
+shape = SubResource( 72 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+[node name="AudioSword" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="AudioNoStamina" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 72 )
-anims/Stop = SubResource( 73 )
+anims/Start = SubResource( 73 )
+anims/Stop = SubResource( 74 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

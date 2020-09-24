@@ -1,27 +1,8 @@
 extends Node2D
 
 onready var dim = $GUI/Dim
-onready var timer = $Timer
+# onready var timer = $Timer
 onready var music = $Music
-
-const BAT = preload("res://assets/Enemies/Bat.tscn")
-
-var count = 0
-
-func spawner():
-	if count > 20:
-		return
-	
-	else:
-		timer.start()
-		yield(timer, "timeout")
-		var batSpawn = BAT.instance()
-		batSpawn.position.x = 72
-		batSpawn.position.y = 120
-		get_node("/root/World/YSort").add_child(batSpawn)
-		spawner()
-		count =+ 1
-	
 
 func _ready():
 	music.play()
