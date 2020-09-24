@@ -182,13 +182,14 @@ func level_up():
 	get_node("/root").add_child(levelNotice)
 	
 func roll_stamina_drain():
-	hurtbox.start_invincibility(stats.iframes)
 	stats.stamina -= 15
-
-func roll_state():
-	roll_start()
+	if !hurtbox.timer.is_stopped(): 
+		prints(str(hurtbox.timer.get_time_left()) + ' is greater than iframes, retaining iTime')
+	else:
+		hurtbox.start_invincibility(stats.iframes)
+		print('applying iframes to iTime')
 		
-func roll_start():
+func roll_state():
 	if roll_moving:
 			velocity = roll_vector * ROLL_SPEED
 	else:
@@ -201,9 +202,7 @@ func roll_stop():
 	
 func roll_animation_finished():
 	state = MOVE
-
-# when the player gets hit, the player state is changed to HIT.
-
+	
 func _on_Hurtbox_area_entered(area):
 	damageTaken = area.damage
 	# hurtbox.set_collision_layer_bit(4, false)

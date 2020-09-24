@@ -27,7 +27,7 @@ func set_invincible(value):
 		emit_signal("invincibility_ended")
 		
 func start_invincibility(duration):
-	collision.set_deferred("disabled", true)
+	print('starting i timer')
 	self.invincible = true
 	timer.start(duration)
 
@@ -40,7 +40,7 @@ func create_hit_effect():
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter
 
-func _on_Hurtbox_invincibility_started(): pass
-
+func _on_Hurtbox_invincibility_started():
+	collision.set_deferred("disabled", true)
 func _on_Hurtbox_invincibility_ended():
 	collision.set_deferred("disabled", false)
