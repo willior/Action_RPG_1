@@ -15,7 +15,7 @@ func spawner():
 		return
 	
 	else:
-		timer.start()
+		timer.start(0.5)
 		yield(timer, "timeout")
 		var batSpawn = BAT.instance()
 		batSpawn.position = position

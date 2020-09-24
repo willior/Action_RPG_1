@@ -9,7 +9,6 @@ var statDisplay
 var statColor
 
 func _ready():
-	print(statColor)
 	levelText.set_text("LEVEL " + str(levelDisplay) )
 	statText.set_text(statDisplay)
 	statText.add_color_override("font_color", statColor)

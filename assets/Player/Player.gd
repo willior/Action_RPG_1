@@ -162,7 +162,6 @@ func level_up():
 	levelNotice.rect_position = global_position
 	levelNotice.levelDisplay = stats.level
 	var choice = levelStats[randi() % levelStats.size()]
-	print(choice)
 	match choice:
 		LEVELHEALTH:
 			stats.max_health += 1

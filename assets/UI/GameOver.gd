@@ -5,6 +5,7 @@ onready var tween = $Tween
 onready var timer = $Timer
 
 func _ready():
+	print('GAME OVER')
 	$AudioStreamPlayer.play()
 	tween.interpolate_property(gameOverFlash,
 	"color",
