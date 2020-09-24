@@ -19,4 +19,4 @@ func _ready():
 	queue_free()
 
 func _process(delta):
-	rect_position.y += 0.5
+	rect_position.y += 0.4

@@ -174,7 +174,7 @@ func level_up():
 			stats.iframes += 0.1
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
-			
+	
 	get_node("/root").add_child(levelNotice)
 	
 func roll_stamina_drain():

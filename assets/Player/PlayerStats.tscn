@@ -9,7 +9,7 @@ var max_stamina = (max_health * 15) setget set_max_stamina
 var stamina = max_stamina setget set_stamina
 var iframes = 0.1 setget set_iframes
 
-onready var strength = 1 setget set_strength
+onready var strength = 4 setget set_strength
 
 var experience_required = 100 setget set_max_experience
 var experience = 0 setget set_experience
