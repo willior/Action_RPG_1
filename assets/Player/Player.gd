@@ -31,6 +31,7 @@ var roll_vector = Vector2.DOWN
 var roll_moving = false
 var damageTaken = 0
 var stats = PlayerStats
+var attackIndex = 0
 var attackQueued = false
 var interacting = false
 var talking = false
@@ -65,7 +66,9 @@ func _process(delta):
 		notice.visible = false
 	
 	match state:
-		MOVE: move_state(delta)
+		MOVE:
+			attackIndex = 0
+			move_state(delta)
 		ROLL: roll_state()
 		ATTACK: attack_state(delta)
 		ATTACK2: attack2_state(delta)
@@ -119,25 +122,45 @@ func move_state(delta):
 		
 func move():
 	velocity = move_and_slide(velocity)
+	
+	# 1st attack pressed: state switches to attack, plays attack1
+	# 2nd attack pressed: attackQueued becomes true
+	# on attack_animation_finished, checks attackQueued
+	# if true, plays attack2; attackQueued becomes false
+	# 3rd attack pressed: attackQueued becomes true
+	# on attack_aimation_finished, checks attackQueued
+	# if true, plays attack1; attackQueued becomes false, etc.
 
 func attack_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
+	
 	if attackQueued == false:
 		animationState.travel("Attack")
-	# else: state = MOVE
 	
 	if Input.is_action_just_pressed("attack"):
 		attackQueued = true
 	move()
 	
 func attack2_state(delta):
-	animationState.travel("Attack2")
+	if attackQueued == false:
+		animationState.travel("Attack2")
+	
+	if Input.is_action_just_pressed("attack"):
+		attackQueued = true
 
 func attack_animation_finished():
-	velocity = Vector2.ZERO
 	if attackQueued:
 		attackQueued = false
 		state = ATTACK2
+			
+	else:
+		state = MOVE
+		
+func attack2_animation_finished():
+	print(attackQueued)
+	if attackQueued:
+		attackQueued = false
+		state = ATTACK
 	else:
 		state = MOVE
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -44,11 +44,11 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.301 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "attack_animation_finished"
+"method": "attack2_animation_finished"
 } ]
 }
 tracks/2/type = "value"
@@ -1156,6 +1156,8 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=68]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
 [sub_resource type="AnimationNodeStateMachine" id=69]
 states/Attack/node = SubResource( 29 )
 states/Attack/position = Vector2( 49, 142 )
@@ -1169,7 +1171,7 @@ states/Roll/node = SubResource( 49 )
 states/Roll/position = Vector2( 473, 148 )
 states/Run/node = SubResource( 54 )
 states/Run/position = Vector2( -125, 103 )
-transitions = [ "Idle", "Run", SubResource( 55 ), "Run", "Idle", SubResource( 56 ), "Idle", "Attack", SubResource( 57 ), "Attack", "Idle", SubResource( 58 ), "Idle", "Roll", SubResource( 59 ), "Roll", "Idle", SubResource( 60 ), "Idle", "Hit", SubResource( 61 ), "Hit", "Idle", SubResource( 62 ), "Attack", "Attack2", SubResource( 63 ), "Attack2", "Idle", SubResource( 64 ), "Attack", "Hit", SubResource( 65 ), "Attack2", "Hit", SubResource( 66 ), "Roll", "Hit", SubResource( 67 ), "Run", "Hit", SubResource( 68 ) ]
+transitions = [ "Idle", "Run", SubResource( 55 ), "Run", "Idle", SubResource( 56 ), "Idle", "Attack", SubResource( 57 ), "Attack", "Idle", SubResource( 58 ), "Idle", "Roll", SubResource( 59 ), "Roll", "Idle", SubResource( 60 ), "Idle", "Hit", SubResource( 61 ), "Hit", "Idle", SubResource( 62 ), "Attack", "Attack2", SubResource( 63 ), "Attack2", "Idle", SubResource( 64 ), "Attack", "Hit", SubResource( 65 ), "Attack2", "Hit", SubResource( 66 ), "Roll", "Hit", SubResource( 67 ), "Run", "Hit", SubResource( 68 ), "Attack2", "Attack", SubResource( 76 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -380.97, -40.2217 )
 
@@ -1230,7 +1232,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 60
-frame = 55
+frame = 84
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -1284,6 +1286,9 @@ script = ExtResource( 11 )
 position = Vector2( 0, -4 )
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
+disabled = false
 
 [node name="ActionHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
