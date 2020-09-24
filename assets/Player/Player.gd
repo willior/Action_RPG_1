@@ -167,7 +167,6 @@ func level_up():
 	var levelNotice = LevelNotice.instance()
 	levelNotice.rect_position = global_position
 	levelNotice.levelDisplay = stats.level
-	get_node("/root").add_child(levelNotice)
 	var choice = levelStats[randi() % levelStats.size()]
 	print(choice)
 	match choice:
@@ -175,21 +174,29 @@ func level_up():
 			stats.max_health += 1
 			print('max health raised')
 			#levelNotice.actual_string = levelNotice.format_string % "HEALTH"
-			levelNotice.statDisplay = "VIOLENT NATURE"
+			levelNotice.statDisplay = "WILLPOWER"
+			levelNotice.statColor = Color(1, 0.272549, 0.315686)
+			print(levelNotice.statColor)
 		LEVELSTAMINA:
 			stats.max_stamina += 15
 			print('max stamina raised')
 			#levelNotice.actual_string = levelNotice.format_string % "PERSEVERENCE"
 			levelNotice.statDisplay = "PERSEVERENCE"
+			levelNotice.statColor = Color(0.372549, 1, 0.415686)
 		LEVELSTRENGTH:
 			stats.strength += 1
 			#levelNotice.actual_string = levelNotice.format_string % "STRENGTH"
-			levelNotice.statDisplay = "STRENGTH"
+			levelNotice.statDisplay = "VIOLENT NATURE"
+			levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
 		LEVELSPEED:
 			stats.iframes += 0.1
 			print('speed raised')
 			#levelNotice.actual_string = levelNotice.format_string % "SWIFTNESS"
 			levelNotice.statDisplay = "SWIFTNESS"
+			levelNotice.statColor = Color(1, 1, 0.415686)
+			
+	get_node("/root").add_child(levelNotice)
+	
 			
 	# if choice == 0: stats.max_health += 1
 	# elif choice == 2: stats.max_stamina += 15

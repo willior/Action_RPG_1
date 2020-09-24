@@ -2,28 +2,19 @@ extends Control
 
 onready var timer = $Timer
 onready var levelText = $VBoxContainer/LabelLevel
-onready var statText = $VBoxContainer/LabelLevelStat
+onready var statText = $VBoxContainer/HBoxContainer/LabelLevelStat
 
 var levelDisplay
 var statDisplay
-
-# Define a format string with placeholder '%s'
-var format_string = "%s UP"
-
-# Using the '%' operator, the placeholder is replaced with the desired value
-var actual_string = format_string % statDisplay
+var statColor
 
 func _ready():
-	print(actual_string)
+	print(statColor)
 	levelText.set_text("LEVEL " + str(levelDisplay) )
-	statText.set_text(actual_string)
+	statText.set_text(statDisplay)
+	statText.add_color_override("font_color", statColor)
 	# tween.interpolate_property(expText, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	# tween.start()
-	print(statDisplay)
-	print(str(statDisplay))
-	# statText.set_text(statDisplay + " UP")
-	
-	
 	timer.start()
 	yield(timer, "timeout")
 	queue_free()
