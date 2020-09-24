@@ -11,7 +11,7 @@ func _ready():
 	spawner()
 
 func spawner():
-	if count > 20:
+	if count > 100:
 		return
 	
 	else:

@@ -48,8 +48,8 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var actionHitbox = $HitboxPivot/ActionHitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
-onready var collect = $Collectbox
 onready var collision = $Hurtbox/CollisionShape2D
+onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
@@ -183,6 +183,9 @@ func level_up():
 	
 func roll_stamina_drain():
 	stats.stamina -= 15
+	
+	print(hurtbox.timer.is_stopped())
+	
 	if !hurtbox.timer.is_stopped(): 
 		prints(str(hurtbox.timer.get_time_left()) + ' is greater than iframes, retaining iTime')
 	else:
@@ -206,13 +209,12 @@ func roll_animation_finished():
 func _on_Hurtbox_area_entered(area):
 	damageTaken = area.damage
 	# hurtbox.set_collision_layer_bit(4, false)
-	hurtbox.start_invincibility(1)
-	hurtbox.create_hit_effect()
-	# stats.health -= area.damage
 	state = HIT
 	
 func hit_damage():
 	stats.health -= damageTaken
+	hurtbox.start_invincibility(1)
+	hurtbox.create_hit_effect()
 	
 func hit_state(delta):
 	velocity = -roll_vector * (ROLL_SPEED/2)
