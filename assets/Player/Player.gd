@@ -31,6 +31,7 @@ var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN
 var roll_moving = false
+var damageTaken = 0
 var stats = PlayerStats
 var attackQueued = false
 var interacting = false
@@ -59,9 +60,6 @@ func _ready():
 	swordHitbox.knockback_vector = roll_vector / 4
 	collision.disabled = false
 
-func test(dir):
-	print('test ' + dir)
-
 func _process(delta):
 	if interacting:
 		notice.visible = true
@@ -73,14 +71,14 @@ func _process(delta):
 		ROLL: roll_state()
 		ATTACK: attack_state(delta)
 		ATTACK2: attack2_state(delta)
-		HIT: hit_state()
+		HIT: hit_state(delta)
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
-	stats.stamina += 0.1
+	stats.stamina += 0.5
 	
 	# if player is moving
 	if input_vector != Vector2.ZERO:
@@ -203,8 +201,21 @@ func roll_stop():
 	
 func roll_animation_finished():
 	state = MOVE
+
+# when the player gets hit, the player state is changed to HIT.
+
+func _on_Hurtbox_area_entered(area):
+	damageTaken = area.damage
+	# hurtbox.set_collision_layer_bit(4, false)
+	hurtbox.start_invincibility(1)
+	hurtbox.create_hit_effect()
+	# stats.health -= area.damage
+	state = HIT
 	
-func hit_state():
+func hit_damage():
+	stats.health -= damageTaken
+	
+func hit_state(delta):
 	velocity = -roll_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
 	if attackQueued: attackQueued = false
@@ -212,15 +223,6 @@ func hit_state():
 	
 func hit_animation_finished():
 	state = MOVE
-
-func _on_Hurtbox_area_entered(area):
-	stats.health -= area.damage
-	state = HIT
-	hurtbox.start_invincibility(1)
-	hurtbox.create_hit_effect()
-	
-	#var playerHurtSound = PlayerHurtSound.instance()
-	#get_tree().current_scene.add_child(playerHurtSound)
 
 func _on_Hurtbox_invincibility_started():
 	sprite.modulate = Color(0,1,1,1)

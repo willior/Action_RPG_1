@@ -395,9 +395,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "hit_damage"
+}, {
 "args": [  ],
 "method": "hit_animation_finished"
 } ]
@@ -450,9 +453,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "hit_damage"
+}, {
 "args": [  ],
 "method": "hit_animation_finished"
 } ]
@@ -483,20 +489,6 @@ tracks/3/keys = {
 } ],
 "times": PoolRealArray( 0 )
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "LEFT" ],
-"method": "test"
-} ]
-}
 
 [sub_resource type="Animation" id=10]
 length = 0.2
@@ -519,9 +511,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "hit_damage"
+}, {
 "args": [  ],
 "method": "hit_animation_finished"
 } ]
@@ -574,9 +569,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "hit_damage"
+}, {
 "args": [  ],
 "method": "hit_animation_finished"
 } ]
@@ -1281,7 +1279,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 60
-frame = 84
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
