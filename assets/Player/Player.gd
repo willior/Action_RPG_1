@@ -142,8 +142,6 @@ func attack_animation_finished():
 		state = MOVE
 	
 func enemy_killed(experience_from_kill):
-	timer.start()
-	yield(timer, "timeout")
 	stats.experience += experience_from_kill
 	stats.experience_total += experience_from_kill
 	

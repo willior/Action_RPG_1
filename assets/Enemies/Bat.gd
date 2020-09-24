@@ -132,7 +132,6 @@ func _on_BatStats_no_health():
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
 	hitbox.queue_free()
 	state = DEAD
-	player.enemy_killed(stats.experience_pool)
 	
 	tween.interpolate_property(sprite,
 	"offset:y",
@@ -159,6 +158,8 @@ func _on_BatStats_no_health():
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
+	
+	player.enemy_killed(stats.experience_pool)
 	
 	var expNotice = ExpNotice.instance()
 	expNotice.rect_position = global_position
