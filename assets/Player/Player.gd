@@ -133,7 +133,9 @@ func move_state(delta):
 		
 	if Input.is_action_just_pressed("roll"):
 		if attack_charged:
+			attack_charged = false
 			state = SHADE
+			hurtbox.start_invincibility(0.4)
 		
 		elif stats.stamina > 0:
 			roll_moving = true
@@ -194,11 +196,15 @@ func attack_animation_finished():
 func charge_state(delta):
 	charge_count += 1
 	if charge_count == 60:
+		print('fired up!!')
 		attack_charged = true
 		sprite.modulate = Color(1,0,0,1)
+		shade_drain(delta)
+		
+func shade_drain(delta):
+	stats.stamina -= 0.2
 		
 func shade_state(delta):
-	print('shade state')
 	animationState.travel("Shade")
 	
 func shade_animation_finished():
@@ -261,6 +267,10 @@ func roll_stop():
 	
 func roll_animation_finished():
 	state = MOVE
+	if Input.is_action_pressed("attack"):
+		attack_charging = true
+		charge_count = 0
+		print('beginning charge')
 	
 func _on_Hurtbox_area_entered(area):
 	damageTaken = area.damage
@@ -279,6 +289,10 @@ func hit_state(delta):
 	
 func hit_animation_finished():
 	state = MOVE
+	if Input.is_action_pressed("attack"):
+		attack_charging = true
+		charge_count = 0
+		print('beginning charge')
 
 func _on_Hurtbox_invincibility_started():
 	sprite.modulate = Color(0,1,1,1)
