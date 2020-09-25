@@ -111,7 +111,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	hurtbox.create_hit_effect()
 	hurtbox.start_invincibility(0.4)
-	print(area.damage)
+	# prints(str(area.damage)+" damage")
 	
 	sprite.modulate = Color(1,1,0)
 	if stats.health > 0:

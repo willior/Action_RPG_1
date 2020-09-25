@@ -39,6 +39,7 @@ var attack2_queued = false
 var attack1_queued = false
 var attack_charging = false
 var attack_charged = false
+var charge_count = 0
 
 var interacting = false
 var talking = false
@@ -58,6 +59,9 @@ onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var attackTimer = $AttackTimer
 onready var notice = $Notice
+
+onready var start_time = OS.get_ticks_msec()
+var elapsed_time
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
@@ -117,6 +121,10 @@ func move_state(delta):
 	if Input.is_action_just_pressed("attack"):
 		if !talking:
 			state = ATTACK1
+			
+	if Input.is_action_just_released("attack"):
+		attack_charging = false
+		print('no longer charging')
 			
 	if Input.is_action_just_released("attack"):
 		sprite.modulate = Color(1,1,1,1)
@@ -182,15 +190,27 @@ func attack_animation_finished():
 	else: state = MOVE
 
 	if Input.is_action_pressed("attack"):
-		attack_charge()
+		attack_charging = true
+		print('beginning charge')
+	
+	
+	#	start_time = OS.get_ticks_msec()
+	#	print('attack held')
+	#	attack_charging = true
+	#
+	#	elapsed_time = OS.get_ticks_msec() - start_time
+	#	attackTimer.start()
 		
-func attack_charge():
-	print('attack held')
-	attack_charging = true
-	attackTimer.start()
+# when an attack animation finishes, checks to see if the button is still held
+# if it is, changes the player state to "charging"
+# if the player releases the attack button, charging state ends
+# if the player holds the button for enough time,  changes the player state to "charged"
+# if the player presses the roll button while "charged", unleashes special attack
+# removes charged state
+
+func attack_charge(delta):
 	if Input.is_action_just_released("attack"):
 		print('attack released early')
-		attackTimer.stop()
 	
 func _on_AttackTimer_timeout():
 	attack_charging = false
