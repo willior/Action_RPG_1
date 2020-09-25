@@ -31,14 +31,18 @@ var roll_vector = Vector2.DOWN
 var roll_moving = false
 var damageTaken = 0
 var stats = PlayerStats
+var levelStats = [0, 1, 2, 3]
+var levelResult = 0
+
 var attackIndex = 0
 var attack2_queued = false
 var attack1_queued = false
+var attack_charging = false
+var attack_charged = false
+
 var interacting = false
 var talking = false
 var dying = false
-var levelStats = [0, 1, 2, 3]
-var levelResult = 0
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -52,6 +56,7 @@ onready var collision = $Hurtbox/CollisionShape2D
 onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
+onready var attackTimer = $AttackTimer
 onready var notice = $Notice
 
 func _ready():
@@ -108,13 +113,32 @@ func move_state(delta):
 			]
 			get_node("/root/World/GUI").add_child(dialogBox)
 			talkTimer.start()
-	
+
 	if Input.is_action_just_pressed("attack"):
 		if !talking:
 			state = ATTACK1
+			
+	if Input.is_action_just_released("attack"):
+		sprite.modulate = Color(1,1,1,1)
+		if attack_charging:
+			print('attack released early')
+			attack_charging = false
+			attackTimer.stop()
+		if attack_charged:
+			print('charge released')
+			attack_charged = false
 		
 	if Input.is_action_just_pressed("roll"):
-		if stats.stamina > 0:
+		if attack_charged:
+			print('shadow blade')
+			stats.strength += 4
+			state = ATTACK1
+			attack_charged = false
+			attack_charging = false
+			sprite.modulate = Color(1,1,1,1)
+			stats.strength -= 4
+		
+		elif stats.stamina > 0:
 			roll_moving = true
 			state = ROLL
 		else:
@@ -124,20 +148,16 @@ func move_state(delta):
 func move():
 	velocity = move_and_slide(velocity)
 	
-	# 1st attack pressed: state switches to attack1, plays attack1
-	# 2nd attack pressed: attack2_queued becomes true
-	# on attack1_animation_finished, checks attack2_queued
-	# if true, plays attack2; attack2_queued becomes false
-	# 3rd attack pressed: attack1_queued becomes true
-	# on attack2_animation_finished, checks attack1_queued
-	# if true, plays attack1; attack1_queued becomes false, etc.
-
+# 1st attack pressed: state switches to attack1, plays attack1
+# 2nd attack pressed: attack2_queued becomes true
+# on attack1_animation_finished, checks attack2_queued
+# if true, plays attack2; attack2_queued becomes false
+# 3rd attack pressed: attack1_queued becomes true
+# on attack2_animation_finished, checks attack1_queued
+# if true, plays attack1; attack1_queued becomes false, etc.
 func attack1_state(delta):
-	
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
-	
 	if attack2_queued == false:
-		print('attack1')
 		animationState.travel("Attack1")
 	
 	if Input.is_action_just_pressed("attack"):
@@ -149,7 +169,7 @@ func attack2_state(delta):
 		animationState.travel("Attack2")
 	
 	if Input.is_action_just_pressed("attack"):
-		attack2_queued = true
+		attack1_queued = true
 
 func attack_animation_finished():
 	if attack2_queued:
@@ -158,16 +178,24 @@ func attack_animation_finished():
 	elif attack1_queued:
 		attack1_queued = false
 		state = ATTACK1
-	
-	else:
-		state = MOVE
+
+	else: state = MOVE
+
+	if Input.is_action_pressed("attack"):
+		attack_charge()
 		
-func attack2_animation_finished():
-	if attack2_queued:
-		attack2_queued = false
-		state = ATTACK1
-	else:
-		state = MOVE
+func attack_charge():
+	print('attack held')
+	attack_charging = true
+	attackTimer.start()
+	if Input.is_action_just_released("attack"):
+		print('attack released early')
+		attackTimer.stop()
+	
+func _on_AttackTimer_timeout():
+	attack_charging = false
+	attack_charged = true
+	sprite.modulate = Color(1,0,0,1)
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill

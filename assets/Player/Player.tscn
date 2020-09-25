@@ -316,11 +316,11 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.301 ),
+"times": PoolRealArray( 0.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "attack2_animation_finished"
+"method": "attack_animation_finished"
 } ]
 }
 tracks/2/type = "value"
@@ -1000,7 +1000,7 @@ blend_point_0/pos = Vector2( -1, 0 )
 blend_point_1/node = SubResource( 78 )
 blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 79 )
-blend_point_2/pos = Vector2( 1, -0.1 )
+blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 80 )
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
@@ -1014,10 +1014,10 @@ animation = "Attack2Right"
 animation = "AttackDown"
 
 [sub_resource type="AnimationNodeAnimation" id=32]
-animation = "AttackUp"
+animation = "Attack1Up"
 
 [sub_resource type="AnimationNodeAnimation" id=33]
-animation = "AttackLeft"
+animation = "Attack1Left"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=34]
 blend_point_0/node = SubResource( 30 )
@@ -1236,7 +1236,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 60
-frame = 18
+frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -1288,6 +1288,7 @@ script = ExtResource( 11 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
+rotation = 1.5708
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 
@@ -1333,6 +1334,10 @@ wait_time = 0.5
 [node name="TalkTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
@@ -1341,5 +1346,6 @@ one_shot = true
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Collectbox" to="." method="_on_Collectbox_area_entered"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 
 [editable path="HitboxPivot/SwordHitbox"]
