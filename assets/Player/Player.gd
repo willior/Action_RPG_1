@@ -15,6 +15,7 @@ enum {
 	ROLL,
 	ATTACK1,
 	ATTACK2,
+	SHADE,
 	HIT
 }
 
@@ -78,6 +79,7 @@ func _process(delta):
 		ROLL: roll_state()
 		ATTACK1: attack1_state(delta)
 		ATTACK2: attack2_state(delta)
+		SHADE: shade_state(delta)
 		HIT: hit_state(delta)
 
 func move_state(delta):
@@ -95,6 +97,7 @@ func move_state(delta):
 		animationTree.set("parameters/Run/blend_position", input_vector)
 		animationTree.set("parameters/Attack1/blend_position", input_vector)
 		animationTree.set("parameters/Attack2/blend_position", input_vector)
+		animationTree.set("parameters/Shade/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
@@ -130,13 +133,7 @@ func move_state(delta):
 		
 	if Input.is_action_just_pressed("roll"):
 		if attack_charged:
-			print('shadow blade')
-			stats.strength += 4
-			state = ATTACK1
-			attack_charged = false
-			attack_charging = false
-			sprite.modulate = Color(1,1,1,1)
-			stats.strength -= 4
+			state = SHADE
 		
 		elif stats.stamina > 0:
 			roll_moving = true
@@ -199,6 +196,14 @@ func charge_state(delta):
 	if charge_count == 60:
 		attack_charged = true
 		sprite.modulate = Color(1,0,0,1)
+		
+func shade_state(delta):
+	print('shade state')
+	animationState.travel("Shade")
+	
+func shade_animation_finished():
+	print('shade animation finished')
+	state = MOVE
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
