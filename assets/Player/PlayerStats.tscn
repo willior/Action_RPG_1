@@ -15,6 +15,7 @@ var experience_required = 100 setget set_max_experience
 var experience = 0 setget set_experience
 var level = 1 setget set_level
 var experience_total = 0
+var cash = 0
 
 var continue_count = 0
 
@@ -29,6 +30,7 @@ signal iframes_changed(value)
 signal experience_changed(value)
 signal max_experience_changed(value)
 signal level_changed(value)
+signal cash_changed(value)
 
 func set_max_health(value):
 	max_health = value
@@ -70,6 +72,10 @@ func set_experience(value):
 func set_level(value):
 	level = value
 	emit_signal(\"level_changed\", level)
+	
+func set_cash(value):
+	cash = value
+	emit_signal(\"cash_changed\", cash)
 
 func _ready():
 	self.health = max_health
@@ -77,6 +83,7 @@ func _ready():
 	self.strength = strength
 	self.stamina = max_stamina
 	self.iframes = iframes
+	self.cash = cash
 "
 
 [node name="PlayerStats" type="Node"]
