@@ -28,7 +28,7 @@ func _ready():
 	Tween.EASE_IN
 	)
 	tween.start()
-	timer.wait_time = 7.8
+	timer.wait_time = 7.9
 	timer.start()
 	
 	yield(timer, "timeout")

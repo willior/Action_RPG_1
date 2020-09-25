@@ -201,6 +201,10 @@ func charge_state(delta):
 		sprite.modulate = Color(1,0,0,1)
 	if attack_charged:
 		stats.stamina -= 0.75
+		if stats.stamina <= 0:
+			attack_charged = false
+			sprite.modulate = Color(1,1,1,1)
+			charge_count = 0
 	else:	
 		stats.stamina -= 0.25
 		
@@ -210,6 +214,11 @@ func shade_state(delta):
 func shade_animation_finished():
 	print('shade animation finished')
 	state = MOVE
+	if Input.is_action_pressed("attack"):
+		attack_charging = true
+		charge_count = 0
+		print('beginning charge')
+	
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
