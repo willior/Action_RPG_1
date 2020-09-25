@@ -57,11 +57,7 @@ onready var collision = $Hurtbox/CollisionShape2D
 onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
-onready var attackTimer = $AttackTimer
 onready var notice = $Notice
-
-onready var start_time = OS.get_ticks_msec()
-var elapsed_time
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
@@ -122,19 +118,15 @@ func move_state(delta):
 		if !talking:
 			state = ATTACK1
 			
-	if Input.is_action_just_released("attack"):
-		attack_charging = false
-		print('no longer charging')
+	elif Input.is_action_pressed("attack"):
+		charge_state(delta)
 			
 	if Input.is_action_just_released("attack"):
-		sprite.modulate = Color(1,1,1,1)
-		if attack_charging:
-			print('attack released early')
-			attack_charging = false
-			attackTimer.stop()
+		attack_charging = false
 		if attack_charged:
-			print('charge released')
+			sprite.modulate = Color(1,1,1,1)
 			attack_charged = false
+		print('no longer charging')
 		
 	if Input.is_action_just_pressed("roll"):
 		if attack_charged:
@@ -191,31 +183,22 @@ func attack_animation_finished():
 
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
+		charge_count = 0
 		print('beginning charge')
 	
-	
-	#	start_time = OS.get_ticks_msec()
-	#	print('attack held')
-	#	attack_charging = true
-	#
-	#	elapsed_time = OS.get_ticks_msec() - start_time
-	#	attackTimer.start()
-		
 # when an attack animation finishes, checks to see if the button is still held
 # if it is, changes the player state to "charging"
 # if the player releases the attack button, charging state ends
 # if the player holds the button for enough time,  changes the player state to "charged"
+# player will appear red while charged
 # if the player presses the roll button while "charged", unleashes special attack
 # removes charged state
 
-func attack_charge(delta):
-	if Input.is_action_just_released("attack"):
-		print('attack released early')
-	
-func _on_AttackTimer_timeout():
-	attack_charging = false
-	attack_charged = true
-	sprite.modulate = Color(1,0,0,1)
+func charge_state(delta):
+	charge_count += 1
+	if charge_count == 60:
+		attack_charged = true
+		sprite.modulate = Color(1,0,0,1)
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
