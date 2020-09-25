@@ -13,7 +13,7 @@ const FRICTION = 800
 enum {
 	MOVE,
 	ROLL,
-	ATTACK,
+	ATTACK1,
 	ATTACK2,
 	HIT
 }
@@ -32,7 +32,8 @@ var roll_moving = false
 var damageTaken = 0
 var stats = PlayerStats
 var attackIndex = 0
-var attackQueued = false
+var attack2_queued = false
+var attack1_queued = false
 var interacting = false
 var talking = false
 var dying = false
@@ -40,7 +41,7 @@ var levelStats = [0, 1, 2, 3]
 var levelResult = 0
 
 onready var sprite = $Sprite
-onready var animationPlayer = $AnimationPlayer # declaring animationPlayer to give access to the AnimationPlayer node
+onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
@@ -70,7 +71,7 @@ func _process(delta):
 			attackIndex = 0
 			move_state(delta)
 		ROLL: roll_state()
-		ATTACK: attack_state(delta)
+		ATTACK1: attack1_state(delta)
 		ATTACK2: attack2_state(delta)
 		HIT: hit_state(delta)
 
@@ -87,7 +88,7 @@ func move_state(delta):
 		swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
-		animationTree.set("parameters/Attack/blend_position", input_vector)
+		animationTree.set("parameters/Attack1/blend_position", input_vector)
 		animationTree.set("parameters/Attack2/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
@@ -110,7 +111,7 @@ func move_state(delta):
 	
 	if Input.is_action_just_pressed("attack"):
 		if !talking:
-			state = ATTACK
+			state = ATTACK1
 		
 	if Input.is_action_just_pressed("roll"):
 		if stats.stamina > 0:
@@ -123,44 +124,48 @@ func move_state(delta):
 func move():
 	velocity = move_and_slide(velocity)
 	
-	# 1st attack pressed: state switches to attack, plays attack1
-	# 2nd attack pressed: attackQueued becomes true
-	# on attack_animation_finished, checks attackQueued
-	# if true, plays attack2; attackQueued becomes false
-	# 3rd attack pressed: attackQueued becomes true
-	# on attack_aimation_finished, checks attackQueued
-	# if true, plays attack1; attackQueued becomes false, etc.
+	# 1st attack pressed: state switches to attack1, plays attack1
+	# 2nd attack pressed: attack2_queued becomes true
+	# on attack1_animation_finished, checks attack2_queued
+	# if true, plays attack2; attack2_queued becomes false
+	# 3rd attack pressed: attack1_queued becomes true
+	# on attack2_animation_finished, checks attack1_queued
+	# if true, plays attack1; attack1_queued becomes false, etc.
 
-func attack_state(delta):
+func attack1_state(delta):
+	
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
 	
-	if attackQueued == false:
-		animationState.travel("Attack")
+	if attack2_queued == false:
+		print('attack1')
+		animationState.travel("Attack1")
 	
 	if Input.is_action_just_pressed("attack"):
-		attackQueued = true
+		attack2_queued = true
 	move()
 	
 func attack2_state(delta):
-	if attackQueued == false:
+	if attack2_queued == false:
 		animationState.travel("Attack2")
 	
 	if Input.is_action_just_pressed("attack"):
-		attackQueued = true
+		attack2_queued = true
 
 func attack_animation_finished():
-	if attackQueued:
-		attackQueued = false
+	if attack2_queued:
+		attack2_queued = false
 		state = ATTACK2
-			
+	elif attack1_queued:
+		attack1_queued = false
+		state = ATTACK1
+	
 	else:
 		state = MOVE
 		
 func attack2_animation_finished():
-	print(attackQueued)
-	if attackQueued:
-		attackQueued = false
-		state = ATTACK
+	if attack2_queued:
+		attack2_queued = false
+		state = ATTACK1
 	else:
 		state = MOVE
 	
@@ -233,7 +238,7 @@ func hit_damage():
 func hit_state(delta):
 	velocity = -roll_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
-	if attackQueued: attackQueued = false
+	if attack2_queued: attack2_queued = false
 	move()
 	
 func hit_animation_finished():
