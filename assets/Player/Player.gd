@@ -199,10 +199,10 @@ func charge_state(delta):
 		print('fired up!!')
 		attack_charged = true
 		sprite.modulate = Color(1,0,0,1)
-		shade_drain(delta)
-		
-func shade_drain(delta):
-	stats.stamina -= 0.2
+	if attack_charged:
+		stats.stamina -= 0.75
+	else:	
+		stats.stamina -= 0.25
 		
 func shade_state(delta):
 	animationState.travel("Shade")
