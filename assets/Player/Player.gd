@@ -311,9 +311,6 @@ func _on_Hurtbox_invincibility_ended():
 	sprite.modulate = Color(1,1,1,1)
 	blinkAnimationPlayer.play("Stop")
 	
-func _on_Collectbox_area_entered(area):
-	stats.health += area.recovery
-	
 func game_over():
 	dying = true
 	get_node("/root/World/Music").stream_paused = true

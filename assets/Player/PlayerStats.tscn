@@ -14,8 +14,8 @@ onready var strength = 1 setget set_strength
 var experience_required = 100 setget set_max_experience
 var experience = 0 setget set_experience
 var level = 1 setget set_level
+var cash = 0 setget set_cash
 var experience_total = 0
-var cash = 0
 
 var continue_count = 0
 

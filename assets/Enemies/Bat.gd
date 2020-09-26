@@ -4,6 +4,7 @@ const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const HeartPickup = preload("res://assets/Items/HeartPickup.tscn")
+const PennyPickup = preload("res://assets/Items/PennyPickup.tscn")
 
 export var ACCELERATION = 300
 export var MAX_SPEED = 40
@@ -172,6 +173,11 @@ func _on_BatStats_no_health():
 		var heartPickup = HeartPickup.instance()
 		heartPickup.global_position = global_position
 		get_node("/root/World/YSort").add_child(heartPickup)
+		
+	if randi() % 2 == 1:
+		var pennyPickup = PennyPickup.instance()
+		pennyPickup.global_position = global_position
+		get_node("/root/World/YSort").add_child(pennyPickup)
 	
 	queue_free()
 

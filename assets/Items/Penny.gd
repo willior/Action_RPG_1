@@ -5,7 +5,6 @@ const DialogBox = preload("res://assets/UI/Dialog.tscn")
 onready var player = get_parent().get_node("Player")
 
 var interactable = false
-var recovery = 1
 
 func _ready():
 	pass # Replace with function body.
@@ -15,21 +14,22 @@ func _process(delta):
 		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
-			"A heart-shaped box. It's full of chocolate!",
-			"Actually, there's only one left."
+			"A copper coin.",
+			"You wouldn't normally pick these up."
 		]
 		get_node("/root/World/GUI").add_child(dialogBox)
 		player.talkTimer.start()
 
-func _on_HeartTalkBox_area_entered(area):
+func _on_PennyTalkBox_area_entered(area):
 	player.interacting = true
 	interactable = true
 	$AudioCursHi.play()
 
-func _on_HeartTalkBox_area_exited(area):
+func _on_PennyTalkBox_area_exited(area):
 	player.interacting = false
 	interactable = false
 
-func _on_HeartCollectBox_area_entered(area):
-	PlayerStats.health += 1
+func _on_PennyCollectBox_area_entered(area):
+	print('cash collected')
+	PlayerStats.cash += 0.01
 	queue_free()
