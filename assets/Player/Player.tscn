@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -295,6 +295,148 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id=7]
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+resource_name = "Attack2Down"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 96, 97, 98, 99 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Attack2Left"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 92, 93, 94, 95 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 180.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
+
+[sub_resource type="Animation" id=9]
+=======
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -361,7 +503,83 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=8]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=10]
+resource_name = "Attack2Up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 88, 89, 90, 91 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -90.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0.1 )
+}
+
+[sub_resource type="Animation" id=11]
+=======
+[sub_resource type="Animation" id=8]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 resource_name = "AttackShadeDown"
 length = 0.4
 tracks/0/type = "value"
@@ -446,7 +664,15 @@ tracks/5/keys = {
 } ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=9]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=12]
+=======
+[sub_resource type="Animation" id=9]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 resource_name = "AttackShadeLeft"
 length = 0.4
 tracks/0/type = "value"
@@ -531,7 +757,15 @@ tracks/5/keys = {
 } ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=10]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=13]
+=======
+[sub_resource type="Animation" id=10]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 resource_name = "AttackShadeRight"
 length = 0.4
 tracks/0/type = "value"
@@ -616,7 +850,15 @@ tracks/5/keys = {
 } ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=11]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=14]
+=======
+[sub_resource type="Animation" id=11]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 resource_name = "AttackShadeUp"
 length = 0.4
 tracks/0/type = "value"
@@ -701,7 +943,15 @@ tracks/5/keys = {
 } ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=12]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=15]
+=======
+[sub_resource type="Animation" id=12]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:flip_v")
@@ -716,7 +966,15 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=13]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=16]
+=======
+[sub_resource type="Animation" id=13]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -774,7 +1032,15 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=14]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=17]
+=======
+[sub_resource type="Animation" id=14]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -832,7 +1098,15 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=15]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=18]
+=======
+[sub_resource type="Animation" id=15]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -890,7 +1164,15 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=16]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=19]
+=======
+[sub_resource type="Animation" id=16]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -948,7 +1230,15 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=17]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=20]
+=======
+[sub_resource type="Animation" id=17]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -964,7 +1254,15 @@ tracks/0/keys = {
 "values": [ 18 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=18]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=21]
+=======
+[sub_resource type="Animation" id=18]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -980,7 +1278,15 @@ tracks/0/keys = {
 "values": [ 12 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=19]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=22]
+=======
+[sub_resource type="Animation" id=19]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -996,7 +1302,15 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=20]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=23]
+=======
+[sub_resource type="Animation" id=20]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -1012,7 +1326,15 @@ tracks/0/keys = {
 "values": [ 6 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=21]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=24]
+=======
+[sub_resource type="Animation" id=21]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -1061,7 +1383,15 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=22]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=25]
+=======
+[sub_resource type="Animation" id=22]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -1110,7 +1440,15 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=23]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=26]
+=======
+[sub_resource type="Animation" id=23]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -1159,7 +1497,15 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=24]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=27]
+=======
+[sub_resource type="Animation" id=24]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -1208,7 +1554,15 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=25]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=28]
+=======
+[sub_resource type="Animation" id=25]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -1236,7 +1590,15 @@ tracks/1/keys = {
 "values": [ 90.0 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=26]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=29]
+=======
+[sub_resource type="Animation" id=26]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -1264,7 +1626,15 @@ tracks/1/keys = {
 "values": [ 180.0 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=27]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=30]
+=======
+[sub_resource type="Animation" id=27]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -1292,7 +1662,15 @@ tracks/1/keys = {
 "values": [ 0.0 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=28]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=31]
+=======
+[sub_resource type="Animation" id=28]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -1320,6 +1698,7 @@ tracks/1/keys = {
 "values": [ 270.0 ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="AnimationNodeAnimation" id=29]
 animation = "Attack1Left"
 
@@ -1340,14 +1719,87 @@ blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 31 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 32 )
+=======
+<<<<<<< HEAD
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "Attack1Left"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "Attack1Down"
+
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "Attack1Right"
+
+[sub_resource type="AnimationNodeAnimation" id=35]
+animation = "Attack1Up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=36]
+blend_point_0/node = SubResource( 32 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 33 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 34 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 35 )
+=======
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "Attack1Left"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "Attack1Down"
+
+[sub_resource type="AnimationNodeAnimation" id=31]
+animation = "Attack1Right"
+
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "Attack1Up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=33]
+blend_point_0/node = SubResource( 29 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 30 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 31 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 32 )
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+<<<<<<< Updated upstream
 [sub_resource type="AnimationNodeAnimation" id=34]
 animation = "Attack2Right"
 
+=======
+<<<<<<< HEAD
+[sub_resource type="AnimationNodeAnimation" id=37]
+animation = "Attack2Right"
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "Attack2Down"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "Attack2Up"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "Attack2Left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=41]
+blend_point_0/node = SubResource( 37 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 38 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 39 )
+blend_point_2/pos = Vector2( 0, -1.1 )
+blend_point_3/node = SubResource( 40 )
+=======
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "Attack2Right"
+
+>>>>>>> Stashed changes
 [sub_resource type="AnimationNodeAnimation" id=35]
 animation = "AttackDown"
 
@@ -1365,11 +1817,16 @@ blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 36 )
 blend_point_2/pos = Vector2( 0, -1.1 )
 blend_point_3/node = SubResource( 37 )
+<<<<<<< Updated upstream
+=======
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 blend_point_3/pos = Vector2( -1, 0 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+<<<<<<< Updated upstream
 [sub_resource type="AnimationNodeAnimation" id=39]
 animation = "HitLeft"
 
@@ -1379,6 +1836,39 @@ animation = "HitDown"
 [sub_resource type="AnimationNodeAnimation" id=41]
 animation = "HitRight"
 
+=======
+<<<<<<< HEAD
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "HitLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "HitDown"
+
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "HitRight"
+
+[sub_resource type="AnimationNodeAnimation" id=45]
+animation = "HitUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=46]
+blend_point_0/node = SubResource( 42 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 43 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 44 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 45 )
+=======
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "HitLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "HitDown"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "HitRight"
+
+>>>>>>> Stashed changes
 [sub_resource type="AnimationNodeAnimation" id=42]
 animation = "HitUp"
 
@@ -1390,11 +1880,16 @@ blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 41 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 42 )
+<<<<<<< Updated upstream
+=======
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+<<<<<<< Updated upstream
 [sub_resource type="AnimationNodeAnimation" id=44]
 animation = "IdleLeft"
 
@@ -1415,11 +1910,57 @@ blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 46 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 47 )
+=======
+<<<<<<< HEAD
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "IdleLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "IdleDown"
+
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "IdleRight"
+
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "IdleUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=51]
+blend_point_0/node = SubResource( 47 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 48 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 49 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 50 )
+=======
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "IdleLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=45]
+animation = "IdleDown"
+
+[sub_resource type="AnimationNodeAnimation" id=46]
+animation = "IdleRight"
+
+[sub_resource type="AnimationNodeAnimation" id=47]
+animation = "IdleUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=48]
+blend_point_0/node = SubResource( 44 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 45 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 46 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 47 )
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+<<<<<<< Updated upstream
 [sub_resource type="AnimationNodeAnimation" id=49]
 animation = "RollLeft"
 
@@ -1440,11 +1981,57 @@ blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 51 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 52 )
+=======
+<<<<<<< HEAD
+[sub_resource type="AnimationNodeAnimation" id=52]
+animation = "RollLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "RollDown"
+
+[sub_resource type="AnimationNodeAnimation" id=54]
+animation = "RollRight"
+
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "RollUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=56]
+blend_point_0/node = SubResource( 52 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 53 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 54 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 55 )
+=======
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "RollLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "RollDown"
+
+[sub_resource type="AnimationNodeAnimation" id=51]
+animation = "RollRight"
+
+[sub_resource type="AnimationNodeAnimation" id=52]
+animation = "RollUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=53]
+blend_point_0/node = SubResource( 49 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 50 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 51 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 52 )
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+<<<<<<< Updated upstream
 [sub_resource type="AnimationNodeAnimation" id=54]
 animation = "RunLeft"
 
@@ -1454,6 +2041,39 @@ animation = "RunDown"
 [sub_resource type="AnimationNodeAnimation" id=56]
 animation = "RunRight"
 
+=======
+<<<<<<< HEAD
+[sub_resource type="AnimationNodeAnimation" id=57]
+animation = "RunLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "RunDown"
+
+[sub_resource type="AnimationNodeAnimation" id=59]
+animation = "RunRight"
+
+[sub_resource type="AnimationNodeAnimation" id=60]
+animation = "RunUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=61]
+blend_point_0/node = SubResource( 57 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 58 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 59 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 60 )
+=======
+[sub_resource type="AnimationNodeAnimation" id=54]
+animation = "RunLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "RunDown"
+
+[sub_resource type="AnimationNodeAnimation" id=56]
+animation = "RunRight"
+
+>>>>>>> Stashed changes
 [sub_resource type="AnimationNodeAnimation" id=57]
 animation = "RunUp"
 
@@ -1465,11 +2085,40 @@ blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 56 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 57 )
+<<<<<<< Updated upstream
+=======
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+[sub_resource type="AnimationNodeAnimation" id=62]
+animation = "AttackShadeLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=63]
+animation = "AttackShadeDown"
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "AttackShadeRight"
+
+[sub_resource type="AnimationNodeAnimation" id=65]
+animation = "AttackShadeUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=66]
+blend_point_0/node = SubResource( 62 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 63 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 64 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 65 )
+=======
+>>>>>>> Stashed changes
 [sub_resource type="AnimationNodeAnimation" id=59]
 animation = "AttackShadeLeft"
 
@@ -1490,17 +2139,37 @@ blend_point_1/pos = Vector2( 0, 1.1 )
 blend_point_2/node = SubResource( 61 )
 blend_point_2/pos = Vector2( 1, 0 )
 blend_point_3/node = SubResource( 62 )
+<<<<<<< Updated upstream
+=======
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+<<<<<<< Updated upstream
 [sub_resource type="AnimationNodeStateMachineTransition" id=64]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=65]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=66]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+=======
+<<<<<<< HEAD
 [sub_resource type="AnimationNodeStateMachineTransition" id=67]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=68]
@@ -1531,6 +2200,93 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=81]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+
+[sub_resource type="AnimationNodeStateMachine" id=85]
+states/Attack1/node = SubResource( 36 )
+states/Attack1/position = Vector2( -191.75, 203.5 )
+states/Attack2/node = SubResource( 41 )
+states/Attack2/position = Vector2( 3.5, 202 )
+states/Hit/node = SubResource( 46 )
+states/Hit/position = Vector2( -191.5, 84 )
+states/Idle/node = SubResource( 51 )
+states/Idle/position = Vector2( 88, -6 )
+states/Roll/node = SubResource( 56 )
+states/Roll/position = Vector2( 380.5, 78 )
+states/Run/node = SubResource( 61 )
+states/Run/position = Vector2( -193.5, -4.75 )
+states/Shade/node = SubResource( 66 )
+states/Shade/position = Vector2( 212.53, 202.75 )
+transitions = [ "Idle", "Run", SubResource( 67 ), "Run", "Idle", SubResource( 68 ), "Idle", "Attack1", SubResource( 69 ), "Attack1", "Idle", SubResource( 70 ), "Idle", "Roll", SubResource( 71 ), "Roll", "Idle", SubResource( 72 ), "Idle", "Hit", SubResource( 73 ), "Hit", "Idle", SubResource( 74 ), "Attack1", "Attack2", SubResource( 75 ), "Attack2", "Idle", SubResource( 76 ), "Attack1", "Hit", SubResource( 77 ), "Attack2", "Hit", SubResource( 78 ), "Roll", "Hit", SubResource( 79 ), "Run", "Hit", SubResource( 80 ), "Attack2", "Attack1", SubResource( 81 ), "Idle", "Shade", SubResource( 82 ), "Shade", "Idle", SubResource( 83 ), "Shade", "Hit", SubResource( 84 ) ]
+start_node = "Idle"
+graph_offset = Vector2( -380.97, 28.8692 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=86]
+
+[sub_resource type="CapsuleShape2D" id=87]
+radius = 9.0
+height = 14.0
+
+[sub_resource type="CircleShape2D" id=88]
+radius = 5.0
+
+[sub_resource type="CapsuleShape2D" id=89]
+height = 5.43185
+
+[sub_resource type="Animation" id=90]
+=======
+[sub_resource type="AnimationNodeStateMachineTransition" id=64]
+>>>>>>> Stashed changes
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
+<<<<<<< Updated upstream
+[sub_resource type="AnimationNodeStateMachineTransition" id=78]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=79]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=80]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+
+=======
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=78]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=79]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=80]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+
+>>>>>>> Stashed changes
 [sub_resource type="AnimationNodeStateMachine" id=82]
 states/Attack1/node = SubResource( 33 )
 states/Attack1/position = Vector2( -191.75, 203.5 )
@@ -1563,6 +2319,10 @@ radius = 5.0
 height = 5.43185
 
 [sub_resource type="Animation" id=87]
+<<<<<<< Updated upstream
+=======
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -1578,7 +2338,15 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
+<<<<<<< Updated upstream
 [sub_resource type="Animation" id=88]
+=======
+<<<<<<< HEAD
+[sub_resource type="Animation" id=91]
+=======
+[sub_resource type="Animation" id=88]
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -1607,7 +2375,15 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 60
+<<<<<<< Updated upstream
 frame = 18
+=======
+<<<<<<< HEAD
+frame = 96
+=======
+frame = 18
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -1621,6 +2397,7 @@ anims/Attack1Down = SubResource( 3 )
 anims/Attack1Left = SubResource( 4 )
 anims/Attack1Right = SubResource( 5 )
 anims/Attack1Up = SubResource( 6 )
+<<<<<<< Updated upstream
 anims/Attack2Right = SubResource( 7 )
 anims/AttackShadeDown = SubResource( 8 )
 anims/AttackShadeLeft = SubResource( 9 )
@@ -1648,6 +2425,68 @@ anims/RunUp = SubResource( 28 )
 tree_root = SubResource( 82 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 83 )
+=======
+<<<<<<< HEAD
+anims/Attack2Down = SubResource( 7 )
+anims/Attack2Left = SubResource( 8 )
+anims/Attack2Right = SubResource( 9 )
+anims/Attack2Up = SubResource( 10 )
+anims/AttackShadeDown = SubResource( 11 )
+anims/AttackShadeLeft = SubResource( 12 )
+anims/AttackShadeRight = SubResource( 13 )
+anims/AttackShadeUp = SubResource( 14 )
+anims/Death = SubResource( 15 )
+anims/HitDown = SubResource( 16 )
+anims/HitLeft = SubResource( 17 )
+anims/HitRight = SubResource( 18 )
+anims/HitUp = SubResource( 19 )
+anims/IdleDown = SubResource( 20 )
+anims/IdleLeft = SubResource( 21 )
+anims/IdleRight = SubResource( 22 )
+anims/IdleUp = SubResource( 23 )
+anims/RollDown = SubResource( 24 )
+anims/RollLeft = SubResource( 25 )
+anims/RollRight = SubResource( 26 )
+anims/RollUp = SubResource( 27 )
+anims/RunDown = SubResource( 28 )
+anims/RunLeft = SubResource( 29 )
+anims/RunRight = SubResource( 30 )
+anims/RunUp = SubResource( 31 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 85 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 86 )
+=======
+anims/Attack2Right = SubResource( 7 )
+anims/AttackShadeDown = SubResource( 8 )
+anims/AttackShadeLeft = SubResource( 9 )
+anims/AttackShadeRight = SubResource( 10 )
+anims/AttackShadeUp = SubResource( 11 )
+anims/Death = SubResource( 12 )
+anims/HitDown = SubResource( 13 )
+anims/HitLeft = SubResource( 14 )
+anims/HitRight = SubResource( 15 )
+anims/HitUp = SubResource( 16 )
+anims/IdleDown = SubResource( 17 )
+anims/IdleLeft = SubResource( 18 )
+anims/IdleRight = SubResource( 19 )
+anims/IdleUp = SubResource( 20 )
+anims/RollDown = SubResource( 21 )
+anims/RollLeft = SubResource( 22 )
+anims/RollRight = SubResource( 23 )
+anims/RollUp = SubResource( 24 )
+anims/RunDown = SubResource( 25 )
+anims/RunLeft = SubResource( 26 )
+anims/RunRight = SubResource( 27 )
+anims/RunUp = SubResource( 28 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 82 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 83 )
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 parameters/Attack1/blend_position = Vector2( -1.00485, -0.0314287 )
 parameters/Attack2/blend_position = Vector2( 0.70017, -0.0187501 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
@@ -1668,6 +2507,9 @@ rotation = 3.14159
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 
+[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
+disabled = false
+
 [node name="ActionHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
 collision_layer = 0
@@ -1675,35 +2517,71 @@ collision_mask = 128
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/ActionHitbox"]
+<<<<<<< Updated upstream
 shape = SubResource( 84 )
+=======
+<<<<<<< HEAD
+shape = SubResource( 87 )
+=======
+shape = SubResource( 84 )
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 
 [node name="Hurtbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -4 )
+<<<<<<< Updated upstream
 shape = SubResource( 85 )
+=======
+<<<<<<< HEAD
+shape = SubResource( 88 )
+=======
+shape = SubResource( 85 )
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 
 [node name="Timer" type="Timer" parent="Hurtbox"]
 one_shot = true
 
 [node name="Collectbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collectbox"]
 position = Vector2( -0.488346, -7.73805 )
+<<<<<<< Updated upstream
 shape = SubResource( 86 )
+=======
+<<<<<<< HEAD
+shape = SubResource( 89 )
+=======
+shape = SubResource( 86 )
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 volume_db = -13.7264
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+<<<<<<< Updated upstream
 anims/Start = SubResource( 87 )
 anims/Stop = SubResource( 88 )
+=======
+<<<<<<< HEAD
+anims/Start = SubResource( 90 )
+anims/Stop = SubResource( 91 )
+=======
+anims/Start = SubResource( 87 )
+anims/Stop = SubResource( 88 )
+>>>>>>> 2741757fbfd353ee4ee0fd9cac3f9b7dfb54acc0
+>>>>>>> Stashed changes
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
