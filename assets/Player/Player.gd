@@ -4,6 +4,7 @@ const Notice = preload("res://assets/UI/Notice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const ChargeUI = preload("res://assets/UI/ChargeUI.tscn")
 
 const ACCELERATION = 1600
 const MAX_SPEED = 100
@@ -62,6 +63,7 @@ onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
+onready var charge = $ChargeUI/TextureProgress
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
@@ -125,6 +127,8 @@ func move_state(delta):
 			state = ATTACK1
 			
 	elif Input.is_action_pressed("attack"):
+		var chargeUI = ChargeUI.instance()
+		add_child(chargeUI)
 		charge_state(delta)
 			
 	if Input.is_action_just_released("attack"):
@@ -200,16 +204,18 @@ func attack_animation_finished():
 
 func charge_state(delta):
 	charge_count += 1
-	if charge_count == 60:
+	stats.charge = charge_count
+	if charge_count == 50:
 		print('fired up!!')
 		attack_charged = true
-		sprite.modulate = Color(1,0,0,1)
+		# sprite.modulate = Color(1,0,0,1)
 	if attack_charged:
 		stats.stamina -= 0.75
 		if stats.stamina <= 0:
 			attack_charged = false
-			sprite.modulate = Color(1,1,1,1)
+			# sprite.modulate = Color(1,1,1,1)
 			charge_count = 0
+			stats.charge = charge_count
 	else:	
 		stats.stamina -= 0.25
 		
