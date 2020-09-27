@@ -8,6 +8,7 @@ const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const ACCELERATION = 1600
 const MAX_SPEED = 100
 const ROLL_SPEED = 200
+const SHADE_SPEED = 400
 const FRICTION = 800
 
 enum {
@@ -28,7 +29,7 @@ enum {
 
 var state = MOVE
 var velocity = Vector2.ZERO
-var roll_vector = Vector2.DOWN
+var dir_vector = Vector2.DOWN
 var roll_moving = false
 var damageTaken = 0
 var stats = PlayerStats
@@ -40,6 +41,7 @@ var attack2_queued = false
 var attack1_queued = false
 var attack_charging = false
 var attack_charged = false
+var shade_moving = false
 var charge_count = 0
 
 var interacting = false
@@ -63,7 +65,7 @@ onready var notice = $Notice
 func _ready():
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
-	swordHitbox.knockback_vector = roll_vector / 4
+	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
 
 func _process(delta):
@@ -91,7 +93,7 @@ func move_state(delta):
 	
 	# if player is moving
 	if input_vector != Vector2.ZERO:
-		roll_vector = input_vector
+		dir_vector = input_vector
 		swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
@@ -134,8 +136,8 @@ func move_state(delta):
 	if Input.is_action_just_pressed("roll"):
 		if attack_charged:
 			attack_charged = false
+			roll_moving = true
 			state = SHADE
-			hurtbox.start_invincibility(0.4)
 		
 		elif stats.stamina > 0:
 			roll_moving = true
@@ -209,7 +211,18 @@ func charge_state(delta):
 		stats.stamina -= 0.25
 		
 func shade_state(delta):
+	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/3) * delta)
 	animationState.travel("Shade")
+	move()
+	
+func shade_start():
+	swordHitbox.shade_begin()
+	velocity = dir_vector * SHADE_SPEED
+	
+func shade_stop():
+	swordHitbox.shade_end()
+	velocity = Vector2.ZERO
+	shade_moving = false
 	
 func shade_animation_finished():
 	print('shade animation finished')
@@ -265,9 +278,9 @@ func roll_stamina_drain():
 		
 func roll_state():
 	if roll_moving:
-			velocity = roll_vector * ROLL_SPEED
+			velocity = dir_vector * ROLL_SPEED
 	else:
-		velocity = roll_vector * (ROLL_SPEED/4)
+		velocity = dir_vector * (ROLL_SPEED/4)
 	animationState.travel("Roll")
 	move()
 
@@ -282,6 +295,10 @@ func roll_animation_finished():
 		print('beginning charge')
 	
 func _on_Hurtbox_area_entered(area):
+	if attack2_queued: attack2_queued = false
+	if attack_charged:
+		sprite.modulate = Color(0,1,1,1)
+		attack_charged = false
 	damageTaken = area.damage
 	state = HIT
 	
@@ -291,12 +308,12 @@ func hit_damage():
 	hurtbox.create_hit_effect()
 	
 func hit_state(delta):
-	velocity = -roll_vector * (ROLL_SPEED/2)
+	velocity = -dir_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
-	if attack2_queued: attack2_queued = false
 	move()
 	
 func hit_animation_finished():
+
 	state = MOVE
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
@@ -304,18 +321,16 @@ func hit_animation_finished():
 		print('beginning charge')
 
 func _on_Hurtbox_invincibility_started():
-	sprite.modulate = Color(0,1,1,1)
+	# sprite.modulate = Color(0,1,1,1)
 	blinkAnimationPlayer.play("Start")
 
 func _on_Hurtbox_invincibility_ended():
-	sprite.modulate = Color(1,1,1,1)
+	# sprite.modulate = Color(1,1,1,1)
 	blinkAnimationPlayer.play("Stop")
 	
 func game_over():
 	dying = true
 	get_node("/root/World/Music").stream_paused = true
-	#timer.start()
-	#yield(timer, "timeout")
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
 	get_node("/root/World/GUI/HealthUI").visible = false
