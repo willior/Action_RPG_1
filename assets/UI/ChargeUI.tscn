@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/UI/ChargeUIFull.png" type="Texture" id=1]
+[ext_resource path="res://assets/UI/ChargeUIEmpty.png" type="Texture" id=2]
+
+[node name="ChargeUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_right = 16.0
+margin_bottom = 16.0
+value = 10.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
+fill_mode = 4
