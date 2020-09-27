@@ -10,6 +10,7 @@ const MAX_SPEED = 100
 const ROLL_SPEED = 200
 const SHADE_SPEED = 400
 const FRICTION = 800
+const SHADE_FRICTION = 1600
 
 enum {
 	MOVE,
@@ -136,7 +137,7 @@ func move_state(delta):
 	if Input.is_action_just_pressed("roll"):
 		if attack_charged:
 			attack_charged = false
-			roll_moving = true
+			shade_moving = true
 			state = SHADE
 		
 		elif stats.stamina > 0:
@@ -211,7 +212,11 @@ func charge_state(delta):
 		stats.stamina -= 0.25
 		
 func shade_state(delta):
-	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/3) * delta)
+	if shade_moving:
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION/3 * delta)
+	else:
+		if Input.is_action_just_pressed("attack"):
+			attack2_queued = true
 	animationState.travel("Shade")
 	move()
 	
@@ -225,8 +230,11 @@ func shade_stop():
 	shade_moving = false
 	
 func shade_animation_finished():
+	
 	print('shade animation finished')
+	
 	state = MOVE
+	
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_count = 0
@@ -297,7 +305,7 @@ func roll_animation_finished():
 func _on_Hurtbox_area_entered(area):
 	if attack2_queued: attack2_queued = false
 	if attack_charged:
-		sprite.modulate = Color(0,1,1,1)
+		sprite.modulate = Color(1,1,1,1)
 		attack_charged = false
 	damageTaken = area.damage
 	state = HIT

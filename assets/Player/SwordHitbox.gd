@@ -1,7 +1,7 @@
 extends Area2D
 
 onready var damage = PlayerStats.strength setget set_strength
-onready var hurtbox = $Hurtbox
+
 var knockback_vector = Vector2.ZERO
 var orig
 
@@ -12,7 +12,7 @@ func set_strength(strength):
 	damage = PlayerStats.strength
 	
 func shade_begin():
-	# get_node("/root/World/YSort/Player/Hurtbox").start_invincibility(0.4)
+	get_node("/root/World/YSort/Player/Sprite").modulate = Color(1,1,1,1)
 	knockback_vector = Vector2.ZERO
 	orig = damage
 	damage += 4
