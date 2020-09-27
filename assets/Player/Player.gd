@@ -136,6 +136,8 @@ func move_state(delta):
 		
 	if Input.is_action_just_pressed("roll"):
 		if attack_charged:
+			sprite.modulate = Color(1,1,1,1)
+			attack_charged = false
 			attack_charged = false
 			shade_moving = true
 			state = SHADE
@@ -229,18 +231,6 @@ func shade_stop():
 	velocity = Vector2.ZERO
 	shade_moving = false
 	
-func shade_animation_finished():
-	
-	print('shade animation finished')
-	
-	state = MOVE
-	
-	if Input.is_action_pressed("attack"):
-		attack_charging = true
-		charge_count = 0
-		print('beginning charge')
-	
-	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
 	stats.experience_total += experience_from_kill
@@ -316,12 +306,12 @@ func hit_damage():
 	hurtbox.create_hit_effect()
 	
 func hit_state(delta):
+	sprite.modulate = Color(1,1,1,1)
 	velocity = -dir_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
 	move()
 	
 func hit_animation_finished():
-
 	state = MOVE
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
