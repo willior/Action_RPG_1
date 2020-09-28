@@ -62,8 +62,8 @@ onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
-onready var charge = get_parent().get_parent().get_node("ChargeUI")
-onready var chargeVis = get_parent().get_parent().get_node("ChargeUI/TextureProgress")
+onready var charge = get_parent().get_parent().get_node("GUI/ChargeUI")
+onready var chargeVis = get_parent().get_parent().get_node("GUI/ChargeUI/TextureProgress")
 
 func _ready():
 	stats.connect("no_health", self, "game_over")

@@ -971,6 +971,18 @@ margin_right = 320.0
 margin_bottom = 180.0
 color = Color( 0, 0, 0, 1 )
 
+[node name="ChargeUI" parent="GUI" instance=ExtResource( 22 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 16.0
+margin_bottom = 16.0
+
+[node name="TextureProgress" parent="GUI/ChargeUI" index="0"]
+margin_top = 0.0
+margin_bottom = 16.0
+
 [node name="BatSpawner" type="Node2D" parent="."]
 pause_mode = 1
 position = Vector2( -175.406, -85.759 )
@@ -982,6 +994,4 @@ wait_time = 2.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 
-[node name="ChargeUI" parent="." instance=ExtResource( 22 )]
-margin_right = 0.0
-margin_bottom = 0.0
+[editable path="GUI/ChargeUI"]
