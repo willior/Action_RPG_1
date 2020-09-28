@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=106 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/Notice.gd" type="Script" id=11]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -1884,8 +1883,6 @@ margin_right = 0.0
 margin_bottom = 0.0
 script = ExtResource( 11 )
 
-[node name="ChargeUI" parent="." instance=ExtResource( 13 )]
-
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
 rotation = -1.5708
@@ -1944,7 +1941,5 @@ one_shot = true
 [connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
-
-[editable path="ChargeUI"]
 
 [editable path="HitboxPivot/SwordHitbox"]
