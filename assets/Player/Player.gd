@@ -4,7 +4,6 @@ const Notice = preload("res://assets/UI/Notice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
-const ChargeUI = preload("res://assets/UI/ChargeUI.tscn")
 
 const ACCELERATION = 1600
 const MAX_SPEED = 100
@@ -63,13 +62,14 @@ onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
-onready var charge = $ChargeUI/TextureProgress
+onready var charge = $ChargeUI
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
+	charge.visible = false
 
 func _process(delta):
 	if interacting:
@@ -127,22 +127,21 @@ func move_state(delta):
 			state = ATTACK1
 			
 	elif Input.is_action_pressed("attack"):
-		var chargeUI = ChargeUI.instance()
-		add_child(chargeUI)
+		charge.visible = true
 		charge_state(delta)
 			
 	if Input.is_action_just_released("attack"):
+		charge.visible = false
 		attack_charging = false
 		if attack_charged:
-			sprite.modulate = Color(1,1,1,1)
 			attack_charged = false
 		print('no longer charging')
 		
 	if Input.is_action_just_pressed("roll"):
+		charge.visible = false
 		if attack_charged:
-			sprite.modulate = Color(1,1,1,1)
 			attack_charged = false
-			attack_charged = false
+
 			shade_moving = true
 			state = SHADE
 		
@@ -203,19 +202,21 @@ func attack_animation_finished():
 # removes charged state
 
 func charge_state(delta):
-	charge_count += 1
-	stats.charge = charge_count
-	if charge_count == 50:
-		print('fired up!!')
-		attack_charged = true
-		# sprite.modulate = Color(1,0,0,1)
 	if attack_charged:
 		stats.stamina -= 0.75
 		if stats.stamina <= 0:
 			attack_charged = false
-			# sprite.modulate = Color(1,1,1,1)
+			charge.visible = false
 			charge_count = 0
 			stats.charge = charge_count
+			
+	elif charge_count < PlayerStats.max_charge:
+		charge_count += 1
+		stats.charge = charge_count
+		
+	elif charge_count == PlayerStats.max_charge:
+		attack_charged = true
+		
 	else:	
 		stats.stamina -= 0.25
 		
@@ -229,6 +230,7 @@ func shade_state(delta):
 	move()
 	
 func shade_start():
+	charge.visible = false
 	swordHitbox.shade_begin()
 	velocity = dir_vector * SHADE_SPEED
 	
@@ -301,7 +303,6 @@ func roll_animation_finished():
 func _on_Hurtbox_area_entered(area):
 	if attack2_queued: attack2_queued = false
 	if attack_charged:
-		sprite.modulate = Color(1,1,1,1)
 		attack_charged = false
 	damageTaken = area.damage
 	state = HIT
