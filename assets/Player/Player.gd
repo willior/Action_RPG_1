@@ -63,13 +63,14 @@ onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
 onready var charge = $ChargeUI
+onready var chargeVis = $ChargeUI/TextureProgress
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
-	charge.visible = false
+	chargeVis.visible = false
 
 func _process(delta):
 	if interacting:
@@ -127,24 +128,22 @@ func move_state(delta):
 			state = ATTACK1
 			
 	elif Input.is_action_pressed("attack"):
-		charge.visible = true
+		if charge_count == 0: charge.begin_charge()
 		charge_state(delta)
 			
 	if Input.is_action_just_released("attack"):
-		charge.visible = false
+		charge.stop_charge()
 		attack_charging = false
 		if attack_charged:
 			attack_charged = false
 		print('no longer charging')
 		
 	if Input.is_action_just_pressed("roll"):
-		charge.visible = false
+		charge.stop_charge()
 		if attack_charged:
 			attack_charged = false
-
 			shade_moving = true
 			state = SHADE
-		
 		elif stats.stamina > 0:
 			roll_moving = true
 			state = ROLL
@@ -163,18 +162,18 @@ func move():
 # on attack2_animation_finished, checks attack1_queued
 # if true, plays attack1; attack1_queued becomes false, etc.
 func attack1_state(delta):
+# warning-ignore:integer_division
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
 	if attack2_queued == false:
 		animationState.travel("Attack1")
-	
 	if Input.is_action_just_pressed("attack"):
 		attack2_queued = true
 	move()
 	
+# warning-ignore:unused_argument
 func attack2_state(delta):
 	if attack2_queued == false:
 		animationState.travel("Attack2")
-	
 	if Input.is_action_just_pressed("attack"):
 		attack1_queued = true
 
@@ -185,7 +184,6 @@ func attack_animation_finished():
 	elif attack1_queued:
 		attack1_queued = false
 		state = ATTACK1
-
 	else: state = MOVE
 
 	if Input.is_action_pressed("attack"):
@@ -201,12 +199,13 @@ func attack_animation_finished():
 # if the player presses the roll button while "charged", unleashes special attack
 # removes charged state
 
+# warning-ignore:unused_argument
 func charge_state(delta):
 	if attack_charged:
 		stats.stamina -= 0.75
 		if stats.stamina <= 0:
 			attack_charged = false
-			charge.visible = false
+			charge.stop_charge()
 			charge_count = 0
 			stats.charge = charge_count
 			
@@ -222,6 +221,7 @@ func charge_state(delta):
 		
 func shade_state(delta):
 	if shade_moving:
+# warning-ignore:integer_division
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION/3 * delta)
 	else:
 		if Input.is_action_just_pressed("attack"):
@@ -230,7 +230,7 @@ func shade_state(delta):
 	move()
 	
 func shade_start():
-	charge.visible = false
+	charge.stop_charge()
 	swordHitbox.shade_begin()
 	velocity = dir_vector * SHADE_SPEED
 	
@@ -286,6 +286,7 @@ func roll_state():
 	if roll_moving:
 			velocity = dir_vector * ROLL_SPEED
 	else:
+# warning-ignore:integer_division
 		velocity = dir_vector * (ROLL_SPEED/4)
 	animationState.travel("Roll")
 	move()
