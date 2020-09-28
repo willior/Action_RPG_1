@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=73 format=2]
 
 [ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://assets/Items/HeartPickup.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/Enemies/Spawner.gd" type="Script" id=20]
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=22]
+[ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=23]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -981,4 +983,8 @@ wait_time = 2.0
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 
-[node name="Sounds" type="AudioStreamPlayer" parent="."]
+[node name="HeartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 23 )
