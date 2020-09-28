@@ -22,19 +22,15 @@ tracks/0/keys = {
 [node name="ChargeUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -24.0
-margin_top = -24.0
-margin_right = -344.0
-margin_bottom = -204.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
-margin_top = 24.0
-margin_right = 16.0
-margin_bottom = 40.0
+margin_left = -24.0
+margin_right = -8.0
+margin_bottom = 16.0
 max_value = 50.0
 value = 25.0
 texture_under = ExtResource( 2 )

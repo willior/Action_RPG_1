@@ -62,15 +62,20 @@ onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
+<<<<<<< HEAD
 onready var charge = get_parent().get_parent().get_node("GUI/ChargeUI")
 onready var chargeVis = get_parent().get_parent().get_node("GUI/ChargeUI/TextureProgress")
+=======
+onready var charge = $ChargeUI
+onready var chargeVis = $ChargeUI/TextureProgress
+>>>>>>> parent of 94b81f8... issues
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
-	# chargeVis.visible = false
+	chargeVis.visible = false
 
 func _process(delta):
 	if interacting:
