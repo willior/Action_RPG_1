@@ -62,15 +62,15 @@ onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
-onready var charge = $ChargeUI
-onready var chargeVis = $ChargeUI/TextureProgress
+onready var charge = get_parent().get_parent().get_node("ChargeUI")
+onready var chargeVis = get_parent().get_parent().get_node("ChargeUI/TextureProgress")
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
-	chargeVis.visible = false
+	# chargeVis.visible = false
 
 func _process(delta):
 	if interacting:

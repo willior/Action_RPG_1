@@ -28,9 +28,9 @@ func _process(delta):
 			get_node("/root/World/GUI/GameOver").queue_free()
 			get_node("/root/World/GUI/HealthUI").visible = true
 			get_node("/root/World/GUI/ExpBar").visible = true
+			get_node("/root/World/GUI/ChargeUI").visible = true
 			get_node("/root/World/GUI/StaminaBar").visible = true
 			get_node("/root/World/YSort/Player").visible = true
-			# get_node("/root/World/YSort/Player/Sprite").flip_v = false
 			PlayerStats.health += PlayerStats.max_health
 			PlayerStats.continue_count += 1
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)

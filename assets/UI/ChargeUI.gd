@@ -2,11 +2,15 @@ extends Control
 
 onready var progress = $TextureProgress
 onready var animation = $TextureProgress/AnimationPlayer
-# onready var player = $root/World/YSort/Player
+onready var player = get_parent().get_node("YSort/Player")
 
 var currentCharge = 0 setget set_charge
 
+func _process(delta):
+	rect_position = player.position
+
 func begin_charge():
+	print(player.position)
 	print('begin_charge func')
 	animation.seek(0, true)
 	progress.visible = true
