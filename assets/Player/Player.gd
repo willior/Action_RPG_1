@@ -62,9 +62,8 @@ onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
-
-onready var charge = $CanvasLayer/ChargeUI
-onready var chargeVis = $CanvasLayer/ChargeUI/TextureProgress
+onready var charge = $ChargeUI
+onready var chargeVis = $ChargeUI/TextureProgress
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
