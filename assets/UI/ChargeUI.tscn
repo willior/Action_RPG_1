@@ -20,8 +20,6 @@ tracks/0/keys = {
 }
 
 [node name="ChargeUI" type="Control"]
-margin_left = -8.0
-margin_top = -8.0
 margin_right = 8.0
 margin_bottom = 8.0
 script = ExtResource( 3 )
@@ -32,8 +30,10 @@ __meta__ = {
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 process_priority = 1
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = -3.0
+anchor_top = 1.0
+anchor_right = -1.0
+anchor_bottom = 3.0
 margin_top = -32.0
 margin_bottom = -32.0
 max_value = 50.0
