@@ -2,11 +2,10 @@ extends Control
 
 onready var progress = $TextureProgress
 onready var animation = $TextureProgress/AnimationPlayer
-<<<<<<< HEAD
-onready var player = get_parent().get_parent().get_node("YSort/Player")
-=======
+
+# onready var player = get_parent().get_parent().get_node("YSort/Player")
+
 # onready var player = $root/World/YSort/Player
->>>>>>> parent of 94b81f8... issues
 
 var currentCharge = 0 setget set_charge
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=107 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/Notice.gd" type="Script" id=11]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -1934,6 +1935,14 @@ wait_time = 0.5
 [node name="TalkTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ChargeUI" parent="CanvasLayer" instance=ExtResource( 13 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = -320.0
+margin_bottom = -180.0
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
@@ -1943,3 +1952,5 @@ one_shot = true
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
 
 [editable path="HitboxPivot/SwordHitbox"]
+
+[editable path="CanvasLayer/ChargeUI"]
