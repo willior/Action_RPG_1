@@ -8,7 +8,7 @@ onready var animation = $TextureProgress/AnimationPlayer
 var currentCharge = 0 setget set_charge
 
 func _ready():
-	set('z_index', 99)
+	set('z_index', -99)
 	self.currentCharge = PlayerStats.charge
 	PlayerStats.connect("charge_changed", self, "set_charge")
 
