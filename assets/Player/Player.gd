@@ -248,6 +248,7 @@ func shade_state(delta):
 	move()
 	
 func shade_start():
+	stats.stamina -= 30
 	charge.stop_charge()
 	swordHitbox.shade_begin()
 	PlayerStats.strength_mod = 4
@@ -264,6 +265,7 @@ func flash_state(delta):
 	animationState.travel("Flash")
 	
 func flash_start():
+	stats.stamina -= 20
 	charge.stop_charge()
 	swordHitbox.flash_begin()
 	PlayerStats.strength_mod = 2
