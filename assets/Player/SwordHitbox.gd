@@ -1,21 +1,33 @@
 extends Area2D
 
 onready var damage = PlayerStats.strength setget set_strength
+onready var damage_mod = PlayerStats.strength_mod setget set_strength_mod
 
 var knockback_vector = Vector2.ZERO
 var orig
 
 func _ready():
 	PlayerStats.connect("strength_changed", self, "set_strength")
+	PlayerStats.connect("strength_mod_changed", self, "set_strength_mod")
 
 func set_strength(strength):
 	damage = PlayerStats.strength
 	
+func set_strength_mod(strength_mod):
+	damage_mod = PlayerStats.strength_mod
+	damage += damage_mod
+	
 func shade_begin():
-	get_node("/root/World/YSort/Player/Sprite").modulate = Color(1,1,1,1)
 	knockback_vector = Vector2.ZERO
 	orig = damage
-	damage += 4
 	
 func shade_end():
 	damage = orig
+	damage_mod = 0
+	
+func flash_begin():
+	orig = damage
+	
+func flash_end():
+	damage = orig
+	damage_mod = 0

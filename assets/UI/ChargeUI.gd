@@ -14,14 +14,12 @@ func _ready():
 
 func begin_charge():
 	chargeSound.play()
-	print('begin_charge func')
 	progress.visible = true
 
 func set_charge(value):
 	currentCharge = value
 	progress.value = currentCharge
 	if currentCharge == PlayerStats.max_charge:
-		print('playing charge animation')
 		animation.play("ChargeFlash")
 
 func stop_charge():
@@ -29,4 +27,3 @@ func stop_charge():
 	progress.visible = false
 	animation.stop(true)
 	animation.seek(0, true)
-	print('stopping charge & animation')

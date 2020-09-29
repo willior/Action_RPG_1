@@ -7,11 +7,12 @@ var max_health = 4 setget set_max_health
 var health = max_health setget set_health
 var max_stamina = (max_health * 15) setget set_max_stamina
 var stamina = max_stamina setget set_stamina
+var strength = 1 setget set_strength
+var strength_mod = 0 setget set_strength_mod
 var iframes = 0.1 setget set_iframes
 var max_charge = 50 setget set_max_charge
 var charge = 0 setget set_charge
-
-onready var strength = 1 setget set_strength
+var charge_level = 0 setget set_charge_level
 
 var experience_required = 100 setget set_max_experience
 var experience = 0 setget set_experience
@@ -27,8 +28,10 @@ signal max_health_changed(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
 signal strength_changed(value)
+signal strength_mod_changed(value)
 signal iframes_changed(value)
 signal charge_changed(value)
+signal charge_level_changed(value)
 
 signal experience_changed(value)
 signal max_experience_changed(value)
@@ -60,6 +63,10 @@ func set_strength(value):
 	strength = value
 	emit_signal(\"strength_changed\", strength)
 	
+func set_strength_mod(value):
+	strength_mod = value
+	emit_signal(\"strength_mod_changed\", strength_mod)
+	
 func set_iframes(value):
 	iframes = value
 	emit_signal(\"iframes_changed\", iframes)
@@ -71,6 +78,10 @@ func set_charge(value):
 func set_max_charge(value):
 	max_charge = value
 	emit_signal(\"max_charge_changed\", max_charge)
+	
+func set_charge_level(value):
+	charge_level = value
+	emit_signal(\"charge_level_changed\", charge_level)
 		
 func set_max_experience(value):
 	experience_required = value

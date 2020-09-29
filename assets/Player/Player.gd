@@ -17,6 +17,7 @@ enum {
 	ROLL,
 	ATTACK1,
 	ATTACK2,
+	FLASH,
 	SHADE,
 	HIT
 }
@@ -44,7 +45,6 @@ var attack_charging = false
 var attack_charged = false
 var shade_moving = false
 var charge_count = 0
-var charge_sound = false
 
 var interacting = false
 var talking = false
@@ -65,7 +65,6 @@ onready var talkTimer = $TalkTimer
 onready var notice = $Notice
 onready var charge = $ChargeUI
 onready var chargeVis = $ChargeUI/TextureProgress
-onready var chargeSound = $ChargeSound
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
@@ -88,6 +87,7 @@ func _process(delta):
 		ATTACK1: attack1_state(delta)
 		ATTACK2: attack2_state(delta)
 		SHADE: shade_state(delta)
+		FLASH: flash_state(delta)
 		HIT: hit_state(delta)
 
 func move_state(delta):
@@ -106,6 +106,7 @@ func move_state(delta):
 		animationTree.set("parameters/Attack1/blend_position", input_vector)
 		animationTree.set("parameters/Attack2/blend_position", input_vector)
 		animationTree.set("parameters/Shade/blend_position", input_vector)
+		animationTree.set("parameters/Flash/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
@@ -138,7 +139,7 @@ func move_state(delta):
 		attack_charging = false
 		if attack_charged:
 			attack_charged = false
-		print('no longer charging')
+			state = FLASH
 		
 	if Input.is_action_just_pressed("roll"):
 		charge.stop_charge()
@@ -193,7 +194,6 @@ func attack_animation_finished():
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_count = 0
-		print('beginning charge')
 	
 # when an attack animation finishes, checks to see if the button is still held
 # if it is, changes the player state to "charging"
@@ -205,8 +205,8 @@ func attack_animation_finished():
 
 # warning-ignore:unused_argument
 func charge_state(delta):
+	stats.stamina -= 0.5
 	if attack_charged:
-		stats.stamina -= 0.75
 		if stats.stamina <= 0:
 			attack_charged = false
 			charge.stop_charge()
@@ -219,9 +219,6 @@ func charge_state(delta):
 		
 	elif charge_count == PlayerStats.max_charge:
 		attack_charged = true
-		
-	else:	
-		stats.stamina -= 0.25
 		
 func shade_state(delta):
 	if shade_moving:
@@ -236,12 +233,27 @@ func shade_state(delta):
 func shade_start():
 	charge.stop_charge()
 	swordHitbox.shade_begin()
+	PlayerStats.strength_mod = 4
 	velocity = dir_vector * SHADE_SPEED
 	
 func shade_stop():
 	swordHitbox.shade_end()
+	PlayerStats.strength_mod = 0
 	velocity = Vector2.ZERO
 	shade_moving = false
+	
+func flash_state(delta):
+	velocity = velocity.move_toward(Vector2.ZERO, FRICTION/3 * delta)
+	animationState.travel("Flash")
+	
+func flash_start():
+	charge.stop_charge()
+	swordHitbox.flash_begin()
+	PlayerStats.strength_mod = 2
+	
+func flash_stop():
+	swordHitbox.flash_end()
+	PlayerStats.strength_mod = 0
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
@@ -303,7 +315,6 @@ func roll_animation_finished():
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_count = 0
-		print('beginning charge')
 	
 func _on_Hurtbox_area_entered(area):
 	if attack2_queued: attack2_queued = false
@@ -313,12 +324,12 @@ func _on_Hurtbox_area_entered(area):
 	state = HIT
 	
 func hit_damage():
+	PlayerStats.strength_mod = 0
 	stats.health -= damageTaken
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
 	
 func hit_state(delta):
-	sprite.modulate = Color(1,1,1,1)
 	velocity = -dir_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
 	move()
@@ -328,7 +339,6 @@ func hit_animation_finished():
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_count = 0
-		print('beginning charge')
 
 func _on_Hurtbox_invincibility_started():
 	# sprite.modulate = Color(0,1,1,1)
