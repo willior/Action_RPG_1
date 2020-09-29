@@ -165,6 +165,7 @@ func move():
 # if true, plays attack1; attack1_queued becomes false, etc.
 func attack1_state(delta):
 # warning-ignore:integer_division
+	stats.stamina -= 0.66
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
 	if attack2_queued == false:
 		animationState.travel("Attack1")
@@ -174,6 +175,7 @@ func attack1_state(delta):
 	
 # warning-ignore:unused_argument
 func attack2_state(delta):
+	stats.stamina -= 0.33
 	if attack2_queued == false:
 		animationState.travel("Attack2")
 	if Input.is_action_just_pressed("attack"):
