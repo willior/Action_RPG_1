@@ -26,6 +26,7 @@ func shade_end():
 	damage_mod = 0
 	
 func flash_begin():
+	knockback_vector *= 1.5
 	orig = damage
 	
 func flash_end():

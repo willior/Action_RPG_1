@@ -305,7 +305,11 @@ func level_up():
 			stats.iframes += 0.1
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
-	
+	prints('LEVEL ' + str(stats.level) + ":")
+	prints("max_health = " + str(stats.max_health))
+	prints("max_stamina = " + str(stats.max_stamina))
+	prints("max_strength = " + str(stats.strength))
+	prints("max_speed = " + str(stats.iframes))
 	get_node("/root").add_child(levelNotice)
 	
 func roll_stamina_drain():
