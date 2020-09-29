@@ -127,8 +127,10 @@ func move_state(delta):
 			talkTimer.start()
 
 	if Input.is_action_just_pressed("attack"):
-		if !talking:
+		if !talking && stats.stamina > 0:
 			state = ATTACK1
+		elif stats.stamina <= 0:
+			noStamina()
 			
 	elif Input.is_action_pressed("attack"):
 		if charge_count == 0: charge.begin_charge()
@@ -151,11 +153,16 @@ func move_state(delta):
 			roll_moving = true
 			state = ROLL
 		else:
-			$AudioStreamPlayer.stream = load("res://assets/Audio/Bamboo.wav")
-			$AudioStreamPlayer.play()
+			#$AudioStreamPlayer.stream = load("res://assets/Audio/Bamboo.wav")
+			#$AudioStreamPlayer.play()
+			noStamina()
 		
 func move():
 	velocity = move_and_slide(velocity)
+	
+func noStamina():
+	$AudioStreamPlayer.stream = load("res://assets/Audio/Bamboo.wav")
+	$AudioStreamPlayer.play()
 	
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
@@ -166,21 +173,31 @@ func move():
 # if true, plays attack1; attack1_queued becomes false, etc.
 func attack1_state(delta):
 # warning-ignore:integer_division
-	stats.stamina -= 0.66
 	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
 	if attack2_queued == false:
 		animationState.travel("Attack1")
 	if Input.is_action_just_pressed("attack"):
-		attack2_queued = true
+		if stats.stamina <= 0:
+			noStamina()
+		else:
+			attack2_queued = true
 	move()
 	
 # warning-ignore:unused_argument
 func attack2_state(delta):
-	stats.stamina -= 0.33
 	if attack2_queued == false:
 		animationState.travel("Attack2")
 	if Input.is_action_just_pressed("attack"):
-		attack1_queued = true
+		if stats.stamina <= 0:
+			noStamina()
+		else:
+			attack1_queued = true
+		
+func attack1_stamina_drain():
+	stats.stamina -= 10
+	
+func attack2_stamina_drain():
+	stats.stamina -= 5
 
 func attack_animation_finished():
 	if attack2_queued:
