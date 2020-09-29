@@ -26,9 +26,11 @@ func shade_end():
 	damage_mod = 0
 	
 func flash_begin():
+	$CollisionShape2D.scale.x = 3
 	knockback_vector *= 1.5
 	orig = damage
 	
 func flash_end():
+	$CollisionShape2D.scale.x = 1
 	damage = orig
 	damage_mod = 0

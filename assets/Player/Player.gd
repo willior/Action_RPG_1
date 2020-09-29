@@ -150,8 +150,11 @@ func move_state(delta):
 			shade_moving = true
 			state = SHADE
 		elif stats.stamina > 0:
-			roll_moving = true
-			state = ROLL
+			if input_vector != Vector2.ZERO:
+				roll_moving = true
+				state = ROLL
+			else:
+				print('backstep')
 		else:
 			#$AudioStreamPlayer.stream = load("res://assets/Audio/Bamboo.wav")
 			#$AudioStreamPlayer.play()
