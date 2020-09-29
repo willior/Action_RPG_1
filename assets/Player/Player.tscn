@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=108 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/Audio/Charge.wav" type="AudioStream" id=15]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -1897,7 +1898,6 @@ script = ExtResource( 4 )
 shape = SubResource( 88 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 5 )
@@ -1936,6 +1936,9 @@ one_shot = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ChargeUI" parent="." instance=ExtResource( 13 )]
+
+[node name="ChargeSound" type="AudioStreamPlayer" parent="ChargeUI"]
+stream = ExtResource( 15 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]

@@ -44,6 +44,7 @@ var attack_charging = false
 var attack_charged = false
 var shade_moving = false
 var charge_count = 0
+var charge_sound = false
 
 var interacting = false
 var talking = false
@@ -64,6 +65,7 @@ onready var talkTimer = $TalkTimer
 onready var notice = $Notice
 onready var charge = $ChargeUI
 onready var chargeVis = $ChargeUI/TextureProgress
+onready var chargeSound = $ChargeSound
 
 func _ready():
 	stats.connect("no_health", self, "game_over")

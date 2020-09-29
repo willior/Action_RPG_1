@@ -2,9 +2,9 @@ extends Control
 
 onready var progress = $TextureProgress
 onready var animation = $TextureProgress/AnimationPlayer
+onready var chargeSound = $ChargeSound
 
 # onready var player = get_parent().get_parent().get_node("YSort/Player")
-# onready var player = $root/World/YSort/Player
 var currentCharge = 0 setget set_charge
 
 func _ready():
@@ -13,6 +13,7 @@ func _ready():
 	PlayerStats.connect("charge_changed", self, "set_charge")
 
 func begin_charge():
+	chargeSound.play()
 	print('begin_charge func')
 	progress.visible = true
 
@@ -22,8 +23,9 @@ func set_charge(value):
 	if currentCharge == PlayerStats.max_charge:
 		print('playing charge animation')
 		animation.play("ChargeFlash")
-		
+
 func stop_charge():
+	chargeSound.stop()
 	progress.visible = false
 	animation.stop(true)
 	animation.seek(0, true)

@@ -105,7 +105,7 @@ script = ExtResource( 10 )
 material = SubResource( 1 )
 frames = SubResource( 7 )
 animation = "fly"
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -138,7 +138,6 @@ wait_time = 0.5
 [node name="Tween" type="Tween" parent="."]
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
-visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 modulate = Color( 1, 0, 0, 0.196078 )
@@ -151,7 +150,6 @@ collision_mask = 4
 shape = SubResource( 12 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 7 )]
-visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource( 13 )
