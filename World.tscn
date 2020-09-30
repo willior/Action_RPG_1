@@ -1,8 +1,8 @@
-[gd_scene load_steps=73 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/World/GrassBackground.png" type="Texture" id=3]
+[ext_resource path="res://assets/World/GrassBackground-export2.png" type="Texture" id=3]
 [ext_resource path="res://assets/World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://assets/World/Grass.tscn" type="PackedScene" id=6]
@@ -23,6 +23,7 @@
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/World/GrassBackground-export.png" type="Texture" id=24]
 
 [sub_resource type="TileSet" id=1]
 resource_local_to_scene = true
@@ -503,11 +504,27 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 pause_mode = 2
 script = ExtResource( 12 )
 
-[node name="Background" type="Sprite" parent="."]
-position = Vector2( -96, 184 )
+[node name="Background" type="TextureRect" parent="."]
+margin_left = -470.0
+margin_top = -401.0
+margin_right = 904.0
+margin_bottom = 456.0
 texture = ExtResource( 3 )
-region_enabled = true
-region_rect = Rect2( -249, -35, 1466, 886 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background2" type="TextureRect" parent="."]
+margin_left = -298.0
+margin_top = -146.0
+margin_right = -207.0
+margin_bottom = 203.0
+texture = ExtResource( 24 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DirtPathTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
@@ -895,7 +912,9 @@ position = Vector2( 192, 176 )
 [node name="Tree4" parent="YSort/Trees" instance=ExtResource( 8 )]
 position = Vector2( 144, 104 )
 
-[node name="Bat" parent="YSort" instance=ExtResource( 7 )]
+[node name="Bat" parent="YSort" groups=[
+"enemies",
+] instance=ExtResource( 7 )]
 position = Vector2( 80, 80 )
 
 [node name="Bat6" parent="YSort" instance=ExtResource( 7 )]
@@ -927,6 +946,14 @@ position = Vector2( -248, 296 )
 
 [node name="HeartPickup3" parent="YSort" instance=ExtResource( 19 )]
 position = Vector2( -232, 296 )
+
+[node name="BatSpawner" type="Node2D" parent="YSort"]
+pause_mode = 1
+position = Vector2( -175.406, -85.759 )
+script = ExtResource( 20 )
+
+[node name="Timer" type="Timer" parent="YSort/BatSpawner"]
+wait_time = 2.0
 
 [node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2
@@ -975,14 +1002,6 @@ margin_right = 320.0
 margin_bottom = 180.0
 color = Color( 0, 0, 0, 1 )
 
-[node name="BatSpawner" type="Node2D" parent="."]
-pause_mode = 1
-position = Vector2( -175.406, -85.759 )
-script = ExtResource( 20 )
-
-[node name="Timer" type="Timer" parent="BatSpawner"]
-wait_time = 2.0
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 
@@ -991,3 +1010,6 @@ stream = ExtResource( 22 )
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 23 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.890196, 1, 0.603922, 1 )

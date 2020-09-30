@@ -40,6 +40,7 @@ onready var talkBox = $BatTalkBox/CollisionShape2D
 onready var player = get_parent().get_node("Player")
 
 func _ready():
+	add_to_group("enemies")
 	rng.randomize()
 	sprite.frame = rng.randi_range(0, 4)
 	sprite.speed_scale = 1
