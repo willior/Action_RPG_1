@@ -11,8 +11,11 @@ var strength = 1 setget set_strength
 var strength_mod = 0 setget set_strength_mod
 var iframes = 0.1 setget set_iframes
 var speed = 1.0 setget set_speed
+
 var max_charge = 50 setget set_max_charge
 var charge = 0 setget set_charge
+
+var max_charge_level = 2 setget set_max_charge_level
 var charge_level = 0 setget set_charge_level
 
 var experience_required = 100 setget set_max_experience
@@ -32,7 +35,11 @@ signal strength_changed(value)
 signal strength_mod_changed(value)
 signal iframes_changed(value)
 signal speed_changed(value)
+
+signal max_charge_changed(value)
 signal charge_changed(value)
+
+signal max_charge_level_changed(value)
 signal charge_level_changed(value)
 
 signal experience_changed(value)
@@ -77,13 +84,17 @@ func set_speed(value):
 	speed = value
 	emit_signal(\"speed_changed\", speed)
 	
+func set_max_charge(value):
+	max_charge = value
+	emit_signal(\"max_charge_changed\", max_charge)
+	
 func set_charge(value):
 	charge = value
 	emit_signal(\"charge_changed\", charge)
 	
-func set_max_charge(value):
-	max_charge = value
-	emit_signal(\"max_charge_changed\", max_charge)
+func set_max_charge_level(value):
+	max_charge_level = value
+	emit_signal(\"max_charge_level_changed\", max_charge_level)
 	
 func set_charge_level(value):
 	charge_level = value

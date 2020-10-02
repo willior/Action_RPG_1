@@ -11,8 +11,6 @@ enum {
 func playSound(itemCollected):
 	match(itemCollected):
 		heart:
-			print('playing heart')
 			HeartSoundPlayer.play()
 		coin:
-			print('playing coin')
 			CoinSoundPlayer.play()

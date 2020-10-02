@@ -1,13 +1,11 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=78 format=2]
 
-[ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/World/grass1.png" type="Texture" id=3]
 [ext_resource path="res://assets/Tilesets/grass2_fade_grass_wang/tileset_grass2_fade_grass_wang.tres" type="TileSet" id=4]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://assets/World/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/World/Tree.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=11]
@@ -23,17 +21,14 @@
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=23]
-[ext_resource path="res://assets/World/Doodads/Rock1.tscn" type="PackedScene" id=24]
 [ext_resource path="res://assets/Tilesets/darkGreenPath/tileset_darkGreenPath.tres" type="TileSet" id=25]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=26]
-[ext_resource path="res://assets/World/Trees/Tree3.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/Tilesets/grass_large/tileset_grass_large.tres" type="TileSet" id=28]
 [ext_resource path="res://assets/Tilesets/dirt_orange_large/tileset_dirt_orange_large.tres" type="TileSet" id=29]
 [ext_resource path="res://assets/Tilesets/grassBasic_lightInner/tileset_grassBasic_lightInner.tres" type="TileSet" id=30]
 [ext_resource path="res://assets/Tilesets/dirtGrass_wang/tileset_dirtGrass_wang.tres" type="TileSet" id=31]
 [ext_resource path="res://assets/Tilesets/grassDirt_wang/tileset_grassDirt_wang.tres" type="TileSet" id=32]
 [ext_resource path="res://assets/Items/PennyPickup.tscn" type="PackedScene" id=33]
-[ext_resource path="res://assets/World/Trees/Tree1.tscn" type="PackedScene" id=34]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -491,7 +486,6 @@ script = ExtResource( 12 )
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Background" type="TextureRect" parent="Map"]
-visible = false
 margin_left = -528.0
 margin_top = -432.0
 margin_right = 846.0
@@ -536,7 +530,7 @@ tile_data = PoolIntArray( -65533, 47, 3, 3, 47, 65539, 14, 47, 0, 15, 47, 1, 16,
 tile_set = ExtResource( 31 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -65529, 0, 0, 65529, 1, 65536, 7, 0, 0, 65543, 1, 4, 65544, 1, 5, 131079, 1, 65539, 131080, 1, 65537, 196613, 1, 4, 196614, 1, 131074, 196615, 1, 131075, 196616, 1, 65537, 327673, 1, 65536, 262148, 1, 4, 262149, 1, 131075, 262150, 1, 65536, 262151, 1, 1, 262152, 1, 65541, 327682, 1, 4, 327683, 1, 131074, 327684, 1, 131075, 327685, 1, 65536, 327686, 1, 65536, 327687, 1, 65537, 458750, 1, 131074, 393217, 1, 4, 393218, 1, 131075, 393219, 1, 65536, 393220, 1, 65536, 393221, 1, 65536, 393222, 1, 65536, 393223, 1, 65537, 524279, 1, 4, 524280, 1, 131074, 524281, 1, 5, 524285, 1, 4, 524286, 1, 5, 458753, 1, 65540, 458754, 1, 2, 458755, 1, 2, 458756, 1, 2, 458757, 1, 2, 458758, 1, 2, 458759, 1, 65541, 589815, 1, 65539, 589816, 1, 65536, 589817, 1, 131073, 589818, 1, 131074, 589819, 1, 131074, 589820, 1, 131074, 589821, 1, 131075, 589822, 1, 65537, 655351, 1, 65539, 655352, 1, 65536, 655353, 1, 1, 655354, 1, 2, 655355, 1, 2, 655356, 1, 2, 655357, 1, 2, 655358, 1, 65541, 720887, 1, 65540, 720888, 1, 2, 720889, 1, 65541 )
+tile_data = PoolIntArray( -65529, 0, 0, 7, 0, 0, 65543, 1, 4, 65544, 1, 5, 131079, 1, 65539, 131080, 1, 65537, 196613, 1, 4, 196614, 1, 131074, 196615, 1, 131075, 196616, 1, 65537, 327673, 1, 65536, 262148, 1, 4, 262149, 1, 131075, 262150, 1, 65536, 262151, 1, 1, 262152, 1, 65541, 327682, 1, 4, 327683, 1, 131074, 327684, 1, 131075, 327685, 1, 65536, 327686, 1, 65536, 327687, 1, 65537, 458750, 1, 131074, 393217, 1, 4, 393218, 1, 131075, 393219, 1, 65536, 393220, 1, 65536, 393221, 1, 65536, 393222, 1, 65536, 393223, 1, 65537, 524279, 1, 4, 524280, 1, 131074, 524281, 1, 5, 524285, 1, 4, 524286, 1, 5, 458753, 1, 65540, 458754, 1, 2, 458755, 1, 2, 458756, 1, 2, 458757, 1, 2, 458758, 1, 2, 458759, 1, 65541, 589815, 1, 65539, 589816, 1, 65536, 589817, 1, 131073, 589818, 1, 131074, 589819, 1, 131074, 589820, 1, 131074, 589821, 1, 131075, 589822, 1, 65537, 655351, 1, 65539, 655352, 1, 65536, 655353, 1, 1, 655354, 1, 2, 655355, 1, 2, 655356, 1, 2, 655357, 1, 2, 655358, 1, 65541, 720887, 1, 65540, 720888, 1, 2, 720889, 1, 65541 )
 
 [node name="GrassDirt" type="TileMap" parent="Map"]
 tile_set = ExtResource( 32 )
@@ -578,121 +572,7 @@ position = Vector2( 528, -88 )
 
 [node name="Doodads" type="YSort" parent="YSort"]
 
-[node name="Rock1" parent="YSort/Doodads" instance=ExtResource( 24 )]
-position = Vector2( -296, -56 )
-
-[node name="Rock2" parent="YSort/Doodads" instance=ExtResource( 24 )]
-position = Vector2( -176, -136 )
-
-[node name="Rock3" parent="YSort/Doodads" instance=ExtResource( 24 )]
-position = Vector2( 24, 232 )
-
-[node name="Rock4" parent="YSort/Doodads" instance=ExtResource( 24 )]
-position = Vector2( 216, 312 )
-
-[node name="Rock5" parent="YSort/Doodads" instance=ExtResource( 24 )]
-position = Vector2( 464, 120 )
-
-[node name="Rock7" parent="YSort/Doodads" instance=ExtResource( 24 )]
-position = Vector2( 528, -8 )
-
-[node name="Rock8" parent="YSort/Doodads" instance=ExtResource( 24 )]
-position = Vector2( 232, 184 )
-
-[node name="Rock6" parent="YSort/Doodads" instance=ExtResource( 24 )]
-position = Vector2( 584, 264 )
-
-[node name="Bushes" type="YSort" parent="YSort"]
-
-[node name="Bush" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 16, 40 )
-
-[node name="Bush15" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -304, -72 )
-
-[node name="Bush21" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -272, -152 )
-
-[node name="Bush16" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -296, -24 )
-
-[node name="Bush2" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 112, 104 )
-
-[node name="Bush3" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 160, 40 )
-
-[node name="Bush29" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 126, -89 )
-
-[node name="Bush4" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 152, 72 )
-
-[node name="Bush5" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 96, 136 )
-
-[node name="Bush6" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 176, 104 )
-
-[node name="Bush7" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 208, 96 )
-
-[node name="Bush8" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 144, 136 )
-
-[node name="Bush30" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -196, 260 )
-
-[node name="Bush24" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 48, 304 )
-
-[node name="Bush25" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 312, 248 )
-
-[node name="Bush26" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 448, 328 )
-
-[node name="Bush27" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 544, 176 )
-
-[node name="Bush28" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 480, 56 )
-
-[node name="Bush9" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 216, 176 )
-
-[node name="Bush10" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 240, 168 )
-
-[node name="Bush11" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 272, 40 )
-
-[node name="Bush12" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 200, 56 )
-
-[node name="Bush13" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -48, -144 )
-
-[node name="Bush14" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 48, 136 )
-
-[node name="Bush17" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -176, 152 )
-
-[node name="Bush18" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -192, 136 )
-
-[node name="Bush19" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -208, 112 )
-
-[node name="Bush22" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 136, -120 )
-
-[node name="Bush23" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 344, -120 )
-
-[node name="Bush20" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( -144, 120 )
+[node name="Plants" type="YSort" parent="YSort"]
 
 [node name="Grass" type="YSort" parent="YSort"]
 
@@ -1042,87 +922,6 @@ position = Vector2( 272, -112 )
 position = Vector2( 200, 152 )
 
 [node name="Trees" type="YSort" parent="YSort"]
-
-[node name="Tree" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 72, 136 )
-
-[node name="Tree6" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -176, -56 )
-
-[node name="Tree7" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -304, -112 )
-
-[node name="Tree8" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -304, 16 )
-
-[node name="Tree9" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -272, 56 )
-
-[node name="Tree11" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -240, 88 )
-
-[node name="Tree13" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -208, 152 )
-
-[node name="Tree14" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -144, 104 )
-
-[node name="Tree12" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -176, 72 )
-
-[node name="Tree10" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -208, 56 )
-
-[node name="Tree2" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 16, 152 )
-
-[node name="Tree5" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 288, 168 )
-
-[node name="Tree3" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 192, 176 )
-
-[node name="Tree4" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 272, 80 )
-
-[node name="Tree19" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 368, -88 )
-
-[node name="Tree23" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( 432, -56 )
-
-[node name="Tree20" parent="YSort/Trees" instance=ExtResource( 8 )]
-position = Vector2( -120, 152 )
-
-[node name="Tree15" parent="YSort/Trees" instance=ExtResource( 27 )]
-position = Vector2( -160, 96 )
-
-[node name="Tree16" parent="YSort/Trees" instance=ExtResource( 27 )]
-position = Vector2( -192, 72 )
-
-[node name="Tree17" parent="YSort/Trees" instance=ExtResource( 27 )]
-position = Vector2( -248, 80 )
-
-[node name="Tree18" parent="YSort/Trees" instance=ExtResource( 27 )]
-position = Vector2( -280, 32 )
-
-[node name="Tree22" parent="YSort/Trees" instance=ExtResource( 27 )]
-position = Vector2( 384, -40 )
-
-[node name="BigTree" parent="YSort/Trees" instance=ExtResource( 34 )]
-position = Vector2( 175, -4 )
-
-[node name="Tree21" parent="YSort/Trees" instance=ExtResource( 27 )]
-position = Vector2( -8, 184 )
-
-[node name="BigTree3" parent="YSort/Trees" instance=ExtResource( 34 )]
-position = Vector2( -238, 360 )
-
-[node name="BigTree2" parent="YSort" instance=ExtResource( 34 )]
-position = Vector2( -108, 154 )
-
-[node name="BigTree3" parent="YSort" instance=ExtResource( 34 )]
-position = Vector2( 303, 82 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 

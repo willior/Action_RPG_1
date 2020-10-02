@@ -22,7 +22,6 @@ func _process(delta):
 		player.talkTimer.start()
 
 func _on_HeartTalkBox_area_entered(area):
-	# $AudioCursHi.play()
 	player.interacting = true
 	interactable = true
 
