@@ -1,7 +1,7 @@
 extends Node2D
 
-onready var HeartSoundPlayer = get_parent().get_parent().get_node("HeartSound")
-onready var CoinSoundPlayer = get_parent().get_parent().get_node("CoinSound")
+onready var HeartSoundPlayer = get_parent().get_parent().get_parent().get_node("HeartSound")
+onready var CoinSoundPlayer = get_parent().get_parent().get_parent().get_node("CoinSound")
 
 enum {
 	heart,

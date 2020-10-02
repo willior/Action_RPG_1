@@ -37,7 +37,7 @@ onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
 onready var talkBox = $BatTalkBox/CollisionShape2D
-onready var player = get_parent().get_node("Player")
+onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
 	add_to_group("enemies")
@@ -158,11 +158,13 @@ func _on_BatStats_no_health():
 	timer.start()
 	yield(timer, "timeout")
 	
+	print(player)
+	print(stats.experience_pool)
+	player.enemy_killed(stats.experience_pool)
+	
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
-	
-	player.enemy_killed(stats.experience_pool)
 	
 	var expNotice = ExpNotice.instance()
 	expNotice.rect_position = global_position
@@ -173,12 +175,12 @@ func _on_BatStats_no_health():
 	if player.stats.health < player.stats.max_health && randi() % 2 == 1:
 		var heartPickup = HeartPickup.instance()
 		heartPickup.global_position = global_position
-		get_node("/root/World/YSort").add_child(heartPickup)
+		get_node("/root/World/YSort/Items").add_child(heartPickup)
 		
 	if randi() % 2 == 1:
 		var pennyPickup = PennyPickup.instance()
 		pennyPickup.global_position = global_position
-		get_node("/root/World/YSort").add_child(pennyPickup)
+		get_node("/root/World/YSort/Items").add_child(pennyPickup)
 	
 	queue_free()
 

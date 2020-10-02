@@ -3,7 +3,7 @@ extends Node2D
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 
-onready var player = get_parent().get_node("Player")
+onready var player = get_node("/root/World/YSort/Player")
 
 var interactable = false
 
