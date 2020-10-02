@@ -308,6 +308,9 @@ func level_up():
 			levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
 		LEVELSPEED:
 			stats.iframes += 0.1
+			stats.speed += 1
+			var totalSpeed = animationPlayer.get_playing_speed() + stats.speed
+
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
 	prints('LEVEL ' + str(stats.level) + ":")

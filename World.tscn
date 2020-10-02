@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://assets/World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://assets/Tilesets/dirtGrass_wang/tileset_dirtGrass_wang.tres" type="TileSet" id=31]
 [ext_resource path="res://assets/Tilesets/grassDirt_wang/tileset_grassDirt_wang.tres" type="TileSet" id=32]
 [ext_resource path="res://assets/Items/PennyPickup.tscn" type="PackedScene" id=33]
+[ext_resource path="res://assets/World/Trees/Tree1.tscn" type="PackedScene" id=34]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -621,6 +622,9 @@ position = Vector2( 112, 104 )
 [node name="Bush3" parent="YSort/Bushes" instance=ExtResource( 1 )]
 position = Vector2( 160, 40 )
 
+[node name="Bush29" parent="YSort/Bushes" instance=ExtResource( 1 )]
+position = Vector2( 126, -89 )
+
 [node name="Bush4" parent="YSort/Bushes" instance=ExtResource( 1 )]
 position = Vector2( 152, 72 )
 
@@ -635,6 +639,9 @@ position = Vector2( 208, 96 )
 
 [node name="Bush8" parent="YSort/Bushes" instance=ExtResource( 1 )]
 position = Vector2( 144, 136 )
+
+[node name="Bush30" parent="YSort/Bushes" instance=ExtResource( 1 )]
+position = Vector2( -196, 260 )
 
 [node name="Bush24" parent="YSort/Bushes" instance=ExtResource( 1 )]
 position = Vector2( 48, 304 )
@@ -1102,12 +1109,27 @@ position = Vector2( -280, 32 )
 [node name="Tree22" parent="YSort/Trees" instance=ExtResource( 27 )]
 position = Vector2( 384, -40 )
 
+[node name="BigTree" parent="YSort/Trees" instance=ExtResource( 34 )]
+position = Vector2( 175, -4 )
+
 [node name="Tree21" parent="YSort/Trees" instance=ExtResource( 27 )]
 position = Vector2( -8, 184 )
+
+[node name="BigTree3" parent="YSort/Trees" instance=ExtResource( 34 )]
+position = Vector2( -238, 360 )
+
+[node name="BigTree2" parent="YSort" instance=ExtResource( 34 )]
+position = Vector2( -108, 154 )
+
+[node name="BigTree3" parent="YSort" instance=ExtResource( 34 )]
+position = Vector2( 303, 82 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Bat" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 72, 128 )
+
+[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 72, 128 )
 
 [node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 7 )]
@@ -1493,6 +1515,7 @@ script = ExtResource( 13 )
 [node name="StaminaBarTexture" type="TextureProgress" parent="GUI/StaminaBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -5.0
 value = 100.0
 allow_lesser = true
 texture_under = ExtResource( 16 )

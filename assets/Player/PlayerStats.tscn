@@ -10,6 +10,7 @@ var stamina = max_stamina setget set_stamina
 var strength = 1 setget set_strength
 var strength_mod = 0 setget set_strength_mod
 var iframes = 0.1 setget set_iframes
+var speed = 1.0 setget set_speed
 var max_charge = 50 setget set_max_charge
 var charge = 0 setget set_charge
 var charge_level = 0 setget set_charge_level
@@ -30,6 +31,7 @@ signal max_stamina_changed(value)
 signal strength_changed(value)
 signal strength_mod_changed(value)
 signal iframes_changed(value)
+signal speed_changed(value)
 signal charge_changed(value)
 signal charge_level_changed(value)
 
@@ -71,6 +73,10 @@ func set_iframes(value):
 	iframes = value
 	emit_signal(\"iframes_changed\", iframes)
 	
+func set_speed(value):
+	speed = value
+	emit_signal(\"speed_changed\", speed)
+	
 func set_charge(value):
 	charge = value
 	emit_signal(\"charge_changed\", charge)
@@ -105,6 +111,7 @@ func _ready():
 	self.strength = strength
 	self.stamina = max_stamina
 	self.iframes = iframes
+	self.speed = speed
 	self.cash = cash
 "
 
