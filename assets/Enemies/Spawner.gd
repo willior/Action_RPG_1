@@ -12,7 +12,7 @@ func _ready():
 
 func spawner():
 	enemies = get_tree().get_nodes_in_group("enemies")
-	if enemies.size() > 50:
+	if enemies.size() > 40:
 		print('max bat!')
 		return
 	
@@ -20,7 +20,7 @@ func spawner():
 		return
 	
 	else:
-		timer.start(0.1)
+		timer.start(0.5)
 		yield(timer, "timeout")
 		var batSpawn = BAT.instance()
 		batSpawn.position = position
