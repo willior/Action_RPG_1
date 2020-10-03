@@ -1569,3 +1569,5 @@ stream = ExtResource( 22 )
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 23 )
+[connection signal="noticeOff" from="YSort/Skeleton" to="YSort/Player" method="_on_noticeOff"]
+[connection signal="noticeOn" from="YSort/Skeleton" to="YSort/Player" method="_on_noticeOn"]

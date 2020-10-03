@@ -38,7 +38,6 @@ var stats = PlayerStats
 var levelStats = [0, 1, 2, 3]
 var levelResult = 0
 
-var attackIndex = 0
 var attack2_queued = false
 var attack1_queued = false
 var attack_charging = false
@@ -79,15 +78,13 @@ func _ready():
 	charge2Vis.visible = false
 
 func _process(delta):
-	if interacting:
-		notice.visible = true
-	else:
-		notice.visible = false
+	#if interacting:
+	#	notice.visible = true
+	#else:
+	#	notice.visible = false
 	
 	match state:
-		MOVE:
-			attackIndex = 0
-			move_state(delta)
+		MOVE: move_state(delta)
 		ROLL: roll_state()
 		ATTACK1: attack1_state(delta)
 		ATTACK2: attack2_state(delta)
@@ -364,7 +361,7 @@ func roll_stamina_drain():
 		
 func roll_state():
 	if roll_moving:
-			velocity = dir_vector * ROLL_SPEED
+		velocity = dir_vector * ROLL_SPEED
 	else:
 # warning-ignore:integer_division
 		velocity = dir_vector * (ROLL_SPEED/4)
@@ -441,3 +438,12 @@ func game_over():
 
 func _on_TalkTimer_timeout():
 	actionHitbox.disabled = false
+
+
+func _on_noticeOn():
+	print('notice!!')
+	notice.visible = true
+
+func _on_noticeOff():
+	print('notice off.')
+	notice.visible = false
