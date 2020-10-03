@@ -33,6 +33,7 @@ func _on_HeartCollectBox_area_entered(_area):
 	
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
+	# argument determines sound effect; 0 = heartCollect
 	itemCollectEffect.playSound(0)
 	
 	PlayerStats.health += 1
