@@ -8,9 +8,12 @@ var interactable = false
 var talkable = false
 var speaker = "Skeleton: "
 
-func _process(delta):
+signal noticeOn
+signal noticeOff
+
+func _input(event):
 	# skeleton talk
-	if (talkable && Input.is_action_just_pressed("attack") && player.talkTimer.is_stopped()):
+	if(talkable && event.is_action_pressed("attack") && player.talkTimer.is_stopped()):
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
 			"Hello.",
@@ -26,7 +29,7 @@ func _process(delta):
 		player.talkTimer.start()
 		
 	# skeleton examine
-	if (interactable && Input.is_action_pressed("examine") && player.talkTimer.is_stopped()):
+	if (interactable && event.is_action_pressed("examine") && player.talkTimer.is_stopped()):
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
 			"A friendly looking skeleton.",
@@ -35,14 +38,16 @@ func _process(delta):
 		get_node("/root/World/GUI").add_child(dialogBox)
 		player.talkTimer.start()
 
-func _on_SkeletonTalkBox_area_entered(area):
+func _on_SkeletonTalkBox_area_entered(_area):
+	emit_signal("noticeOn")
 	player.talking = true
 	player.interacting = true
 	talkable = true
 	interactable = true
 	$AudioCursHi.play()
 
-func _on_SkeletonTalkBox_area_exited(area):
+func _on_SkeletonTalkBox_area_exited(_area):
+	emit_signal("noticeOff")
 	player.talking = false
 	player.interacting = false
 	talkable = false

@@ -26,8 +26,11 @@ func set_speed(value):
 func _ready():
 	
 	self.currentEndurance = PlayerStats.endurance
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("endurance_changed", self, "set_endurance")
 	self.currentStrength = PlayerStats.strength
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("strength_changed", self, "set_strength")
 	self.currentSpeed = PlayerStats.speed
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("speed_changed", self, "set_speed")

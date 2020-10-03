@@ -300,6 +300,7 @@ func shade_stop():
 	shade_moving = false
 	
 func flash_state(delta):
+# warning-ignore:integer_division
 	velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
 	animationState.travel("Flash")
 	move()
@@ -347,7 +348,7 @@ func level_up():
 		LEVELSPEED:
 			stats.iframes += 0.1
 			stats.speed += 1
-			var totalSpeed = animationPlayer.get_playing_speed() + stats.speed
+			# var totalSpeed = animationPlayer.get_playing_speed() + stats.speed
 
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
@@ -408,7 +409,8 @@ func hit_damage():
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
 	
-func hit_state(delta):
+func hit_state(_delta):
+# warning-ignore:integer_division
 	velocity = -dir_vector * (ROLL_SPEED/2)
 	animationState.travel("Hit")
 	move()

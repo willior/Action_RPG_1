@@ -7,13 +7,15 @@ var knockback_vector = Vector2.ZERO
 var orig
 
 func _ready():
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("strength_changed", self, "set_strength")
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("strength_mod_changed", self, "set_strength_mod")
 
-func set_strength(strength):
+func set_strength(_strength):
 	damage = PlayerStats.strength
 	
-func set_strength_mod(strength_mod):
+func set_strength_mod(_strength_mod):
 	damage_mod = PlayerStats.strength_mod
 	damage += damage_mod
 	

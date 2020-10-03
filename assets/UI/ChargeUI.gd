@@ -14,8 +14,10 @@ var currentChargeLevel = 0 setget set_charge_level
 
 func _ready():
 	self.currentCharge = PlayerStats.charge
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("charge_changed", self, "set_charge")
 	self.currentChargeLevel = PlayerStats.charge_level
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("charge_level_changed", self, "set_charge_level")
 
 func begin_charge_1():

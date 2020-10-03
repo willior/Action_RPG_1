@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/Shadows/HugeShadow.png" type="Texture" id=1]
-[ext_resource path="res://assets/World/Trees/tree1.png" type="Texture" id=2]
+[ext_resource path="res://assets/World/Trees/Tree_1_yellow.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 19.9998

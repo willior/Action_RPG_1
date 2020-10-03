@@ -10,4 +10,5 @@ func set_cash(value):
 	
 func _ready():
 	self.currentCash = PlayerStats.cash
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("cash_changed", self, "set_cash")

@@ -17,5 +17,7 @@ func set_max_stamina(value):
 func _ready():
 	self.max_stamina = PlayerStats.max_stamina
 	self.stamina = PlayerStats.stamina
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("stamina_changed", self, "set_stamina")
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("max_stamina_changed", self, "set_max_stamina")

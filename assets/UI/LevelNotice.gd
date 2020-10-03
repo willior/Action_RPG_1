@@ -18,5 +18,5 @@ func _ready():
 	yield(timer, "timeout")
 	queue_free()
 
-func _process(delta):
+func _process(_delta):
 	rect_position.y += 0.4

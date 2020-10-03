@@ -23,7 +23,7 @@ func _ready():
 	get_node("/root/World/YSort/Player").talking = true
 	get_tree().paused = true
 	
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine"):
 		# if at the end of the dialog
 		if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog.size()-1):

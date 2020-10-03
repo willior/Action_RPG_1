@@ -24,6 +24,9 @@ func _ready():
 	self.experienceProgress = PlayerStats.experience
 	self.level = PlayerStats.level
 	
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("experience_changed", self, "set_experience")
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("max_experience_changed", self, "set_max_experience")
+# warning-ignore:return_value_discarded
 	PlayerStats.connect("level_changed", self, "set_level")

@@ -82,7 +82,8 @@ func _physics_process(delta):
 		
 	velocity = move_and_slide(velocity)
 	
-	if (interactable && Input.is_action_pressed("examine") && player.talkTimer.is_stopped()):
+func _input(event):
+	if (interactable && event.is_action_pressed("examine") && player.talkTimer.is_stopped()):
 		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
@@ -188,10 +189,10 @@ func _on_Hurtbox_invincibility_started():
 func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("Stop")
 
-func _on_BatTalkBox_area_entered(area):
+func _on_BatTalkBox_area_entered(_area):
 	interactable = true
 	# player.interacting = true
 
-func _on_BatTalkBox_area_exited(area):
+func _on_BatTalkBox_area_exited(_area):
 	interactable = false
 	# player.interacting = false
