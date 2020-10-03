@@ -137,28 +137,28 @@ func move_state(delta):
 			noStamina()
 			
 	elif Input.is_action_pressed("attack"):
-		if charge_count == 0:
-			if charge_level_count == 0:
-				charge.begin_charge_1()
-				
-			elif charge_level_count == 1:
-				charge.begin_charge_2()
-				
+		if charge_count == 0 && charge_level_count == 0:
+			charge.begin_charge_1()
+		elif charge_count == stats.max_charge/2 && charge_level_count == 1:
+			charge.begin_charge_2()
 		charge_state(delta)
 			
 	if Input.is_action_just_released("attack"):
-		charge.stop_charge()
-		attack_charging = false
 		if attack_1_charged:
 			attack_1_charged = false
 			state = FLASH
 		if attack_2_charged:
 			attack_2_charged = false
 			state = SHADE
+		stats.charge = 0
+		stats.charge_level = 0
+		
+		charge.stop_charge()
+		attack_charging = false
 		
 	if Input.is_action_just_pressed("roll"):
 		charge.stop_charge()
-		#if attack_2_charged:
+		# if attack_2_charged:
 		#	attack_2_charged = false
 		#	shade_moving = true
 		#	state = SHADE
@@ -227,7 +227,9 @@ func attack_animation_finished():
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_count = 0
+		stats.charge = charge_count
 		charge_level_count = 0
+		stats.charge_level = charge_level_count
 	
 # when an attack animation finishes, checks to see if the button is still held
 # if it is, changes the player state to "charging"
@@ -238,60 +240,21 @@ func attack_animation_finished():
 # warning-ignore:unused_argument
 func charge_state(delta):
 	stats.stamina -= 0.5
-	if attack_1_charged && stats.stamina <= 0:
-		attack_1_charged = false
-		charge.stop_charge()
-		charge_count = 0
-		stats.charge = charge_count
-			
-	if charge_count < PlayerStats.max_charge:
-		charge_count += 1
-		stats.charge = charge_count
-		
-	elif charge_count == PlayerStats.max_charge:
-		attack_1_charged = true
-		
-
-# charge stage
-# drains stamina
-# checks if either attack 1 or 2 is charged
-func charge_state_new(delta):
-	stats.stamina -= 0.5
 	if (attack_1_charged || attack_2_charged) && stats.stamina <= 0:
-		attack_charging = false
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()
 		charge_count = 0
-		charge_level_count = 0
 		stats.charge = charge_count
-		stats.charge_level = charge_level_count
-			
-	elif charge_count < PlayerStats.max_charge:
+		
+	if charge_count < PlayerStats.max_charge:
 		charge_count += 1
 		stats.charge = charge_count
 		
+	if charge_count == PlayerStats.max_charge/2:
+		attack_1_charged = true
 	elif charge_count == PlayerStats.max_charge:
-		if charge_level_count == 0:
-			attack_1_charged = true
-			charge_level_count = 1
-			stats.charge_level = charge_level_count
-			
-			charge_count = 0
-			stats.charge = charge_count
-			print('attack 1 charged!')
-			
-		elif charge_level_count == 1:
-			attack_2_charged = true
-			charge_level_count = 2
-			stats.charge_level = charge_level_count
-			
-			charge_count = 0
-			stats.charge = charge_count
-			print('attack 2 charged!')
-		
-	elif charge_level_count == PlayerStats.max_charge_level:
-		print('max charge')
+		attack_2_charged = true
 		
 func shade_state(delta):
 	if shade_moving:
@@ -398,14 +361,22 @@ func roll_animation_finished():
 		attack_charging = true
 		charge_count = 0
 		stats.charge = charge_count
+		charge_level_count = 0
+		stats.charge_level = charge_level_count
 	
 func _on_Hurtbox_area_entered(area):
 	if attack2_queued: attack2_queued = false
-	if attack_charging: attack_charging = false
-	if attack_1_charged: attack_1_charged = false
-	if attack_2_charged: attack_2_charged = false
-	if charge_count > 0: charge_count = 0
-	if charge_level_count > 0: charge_level_count = 0
+	if charge_count > 0:
+		charge_count = 0
+		stats.charge = charge_count
+		charge.stop_charge()
+		if attack_charging: attack_charging = false
+		if attack_1_charged: attack_1_charged = false
+		if attack_2_charged: attack_2_charged = false
+		if charge_level_count > 0:
+			charge_level_count = 0
+			stats.charge_level = charge_level_count
+	
 	damageTaken = area.damage
 	state = HIT
 	
@@ -426,6 +397,8 @@ func hit_animation_finished():
 		attack_charging = true
 		charge_count = 0
 		stats.charge = charge_count
+		charge_level_count = 0
+		stats.charge_level = charge_level_count
 
 func _on_Hurtbox_invincibility_started():
 	# sprite.modulate = Color(0,1,1,1)
