@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Fox.png-d322c48af15421b6eb63874403e89861.stex"
+path="res://.import/water.png-dbb18baa0e0fad55b118cc21dbf1b159.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/Fox.png"
-dest_files=[ "res://.import/Fox.png-d322c48af15421b6eb63874403e89861.stex" ]
+source_file="res://assets/World/water.png"
+dest_files=[ "res://.import/water.png-dbb18baa0e0fad55b118cc21dbf1b159.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
