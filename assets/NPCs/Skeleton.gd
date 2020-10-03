@@ -10,7 +10,7 @@ var speaker = "Skeleton: "
 
 func _process(delta):
 	# skeleton talk
-	if (talkable && Input.is_action_pressed("attack") && player.talkTimer.is_stopped()):
+	if (talkable && Input.is_action_just_pressed("attack") && player.talkTimer.is_stopped()):
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
 			"Hello.",

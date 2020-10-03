@@ -335,6 +335,7 @@ func level_up():
 			levelNotice.statDisplay = "WILLPOWER"
 			levelNotice.statColor = Color(1, 0.272549, 0.315686)
 		LEVELSTAMINA:
+			stats.endurance += 1
 			stats.max_stamina += 15
 			levelNotice.statDisplay = "PERSEVERENCE"
 			levelNotice.statColor = Color(0.372549, 1, 0.415686)

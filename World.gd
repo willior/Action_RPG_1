@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var stats = $GUI/StatsDisplay
 onready var dim = $GUI/Dim
 # onready var timer = $Timer
 onready var music = $Music
@@ -13,9 +14,11 @@ func _process(delta):
 		if get_tree().paused == false:
 			get_tree().paused = true
 			dim.visible = true
+			stats.visible = true
 		else:
 			get_tree().paused = false
 			dim.visible = false
+			stats.visible = false
 			
 	if Input.is_action_just_pressed("start"):
 		if player.talking:
@@ -39,7 +42,9 @@ func _process(delta):
 			music.stream_paused = true
 			get_tree().paused = true
 			dim.visible = true
+			stats.visible = true
 		else:
 			music.stream_paused = false
 			get_tree().paused = false
 			dim.visible = false
+			stats.visible = false
