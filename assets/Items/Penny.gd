@@ -34,6 +34,7 @@ func _on_PennyCollectBox_area_entered(_area):
 	
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
+	# argument determines sound effect; 1 = pennyCollect
 	itemCollectEffect.playSound(1)
 
 	PlayerStats.cash += 0.01

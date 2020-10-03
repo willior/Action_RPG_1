@@ -94,13 +94,12 @@ func move_state(delta):
 	input_vector = input_vector.normalized()
 	if sweating:
 		stats.stamina += 0.4
+		if stats.stamina > 15:
+			sweating = false
+			$Sweat.visible = false
 	else:
 		stats.stamina += 0.5
-	
-	if stats.stamina > 15 && sweating:
-		sweating = false
-		$Sweat.visible = false
-	
+
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		dir_vector = input_vector

@@ -583,12 +583,6 @@ remote_path = NodePath("../../../Camera2D")
 [node name="Skeleton" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( -64, -88 )
 
-[node name="HeartPickup" parent="YSort/Skeleton" instance=ExtResource( 19 )]
-position = Vector2( 16, -40 )
-
-[node name="PennyPickup" parent="YSort/Skeleton" instance=ExtResource( 33 )]
-position = Vector2( -8, -24 )
-
 [node name="Doodads" type="YSort" parent="YSort"]
 
 [node name="Rock_3_" parent="YSort/Doodads" instance=ExtResource( 27 )]
@@ -1466,6 +1460,12 @@ position = Vector2( -248, 296 )
 
 [node name="HeartPickup3" parent="YSort/Items" instance=ExtResource( 19 )]
 position = Vector2( -232, 296 )
+
+[node name="HeartPickup5" parent="YSort/Items" instance=ExtResource( 19 )]
+position = Vector2( -48, -128 )
+
+[node name="PennyPickup13" parent="YSort/Items" instance=ExtResource( 33 )]
+position = Vector2( -72, -112 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2

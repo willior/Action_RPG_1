@@ -5,7 +5,7 @@ var currentCash setget set_cash
 onready var cashBox = $HBoxContainer/Label
 
 func set_cash(value):
-	currentCash = str(value)
+	currentCash = str("%.2f" %value)
 	cashBox.set_text("$ " + currentCash)
 	
 func _ready():
