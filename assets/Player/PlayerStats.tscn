@@ -65,7 +65,7 @@ func set_max_stamina(value):
 	
 func set_stamina(value):
 	stamina = value
-	stamina = clamp(value, -15, max_stamina)
+	stamina = clamp(value, -30, max_stamina)
 	emit_signal(\"stamina_changed\", stamina)
 	
 func set_strength(value):

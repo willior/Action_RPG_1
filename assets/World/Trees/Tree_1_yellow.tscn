@@ -9,6 +9,7 @@ height = 46.0003
 
 [node name="Tree_1_yellow" type="StaticBody2D"]
 position = Vector2( 0, 85 )
+z_index = 1
 
 [node name="ShadowSprite" type="Sprite" parent="."]
 process_priority = 1

@@ -50,6 +50,7 @@ var charge_level_count = 0
 
 var interacting = false
 var talking = false
+var sweating = false
 var dying = false
 
 onready var sprite = $Sprite
@@ -99,7 +100,16 @@ func move_state(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
-	stats.stamina += 0.5
+	if sweating:
+		stats.stamina += 0.4
+	else:
+		stats.stamina += 0.5
+	
+	if stats.stamina == stats.max_stamina && sweating:
+		sweating = false
+		$Sweat.visible = false
+		print("not sweating anymore")
+		
 	
 	# if player is moving
 	if input_vector != Vector2.ZERO:
@@ -242,12 +252,16 @@ func charge_state(delta):
 	# stamina drain
 	stats.stamina -= 0.5
 	# if either attack is charged and the player runs out of stamina
-	if (attack_1_charged || attack_2_charged) && stats.stamina <= 0:
+	if stats.stamina <= 0:
+		$Sweat.visible = true
+		sweating = true
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()
 		charge_count = 0
 		stats.charge = charge_count
+		# if (attack_1_charged || attack_2_charged):
+		
 	# if the current charge is less than the max charge
 	if charge_count < PlayerStats.max_charge:
 		charge_count += 1
