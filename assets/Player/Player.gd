@@ -239,22 +239,28 @@ func attack_animation_finished():
 
 # warning-ignore:unused_argument
 func charge_state(delta):
+	# stamina drain
 	stats.stamina -= 0.5
+	# if either attack is charged and the player runs out of stamina
 	if (attack_1_charged || attack_2_charged) && stats.stamina <= 0:
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()
 		charge_count = 0
 		stats.charge = charge_count
-		
+	# if the current charge is less than the max charge
 	if charge_count < PlayerStats.max_charge:
 		charge_count += 1
 		stats.charge = charge_count
-		
+	# if the charge count reaches 50%
 	if charge_count == PlayerStats.max_charge/2:
 		attack_1_charged = true
-	elif charge_count == PlayerStats.max_charge:
+		print("attack 1 charged!!")
+	# if the charge count reaches 100%
+	elif charge_count == PlayerStats.max_charge && attack_charging:
 		attack_2_charged = true
+		attack_charging = false
+		print("attack 2 charged!!")
 		
 func shade_state(delta):
 	if shade_moving:
