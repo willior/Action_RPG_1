@@ -108,8 +108,6 @@ func move_state(delta):
 	if stats.stamina > 15 && sweating:
 		sweating = false
 		$Sweat.visible = false
-		print("not sweating anymore")
-		
 	
 	# if player is moving
 	if input_vector != Vector2.ZERO:
@@ -160,8 +158,8 @@ func move_state(delta):
 		if attack_2_charged:
 			attack_2_charged = false
 			state = SHADE
-		stats.charge = 0
-		stats.charge_level = 0
+		# stats.charge = 0
+		# stats.charge_level = 0
 		
 		charge.stop_charge()
 		attack_charging = false
@@ -233,7 +231,7 @@ func attack_animation_finished():
 		attack1_queued = false
 		state = ATTACK1
 	else: state = MOVE
-
+	# if attack button is held when an attack animation finishes
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_count = 0
@@ -269,12 +267,10 @@ func charge_state(delta):
 	# if the charge count reaches 50%
 	if charge_count == PlayerStats.max_charge/2:
 		attack_1_charged = true
-		print("attack 1 charged!!")
 	# if the charge count reaches 100%
 	elif charge_count == PlayerStats.max_charge && attack_charging:
 		attack_2_charged = true
 		attack_charging = false
-		print("attack 2 charged!!")
 		
 func shade_state(delta):
 	if shade_moving:

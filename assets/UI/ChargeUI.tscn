@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/UI/Charge_1_UI.png" type="Texture" id=2]
 [ext_resource path="res://assets/UI/ChargeUI.gd" type="Script" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "ChargeFlash"
 loop = true
 tracks/0/type = "value"
@@ -20,8 +20,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "ChargeFlash"
+[sub_resource type="Animation" id=2]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -65,7 +64,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureProgress1"]
-anims/ChargeFlash = SubResource( 2 )
+anims/ChargeFlash = SubResource( 1 )
 
 [node name="TextureProgress2" type="TextureProgress" parent="."]
 process_priority = 1
@@ -78,7 +77,6 @@ margin_top = -26.0
 margin_right = -6.0
 margin_bottom = -38.0
 min_value = 50.0
-max_value = 100.0
 value = 50.0
 texture_under = ExtResource( 1 )
 texture_progress = ExtResource( 2 )
@@ -92,4 +90,4 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureProgress2"]
-anims/ChargeFlash = SubResource( 1 )
+anims/ChargeFlash = SubResource( 2 )
