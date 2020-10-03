@@ -158,11 +158,11 @@ func move_state(delta):
 		
 	if Input.is_action_just_pressed("roll"):
 		charge.stop_charge()
-		if attack_2_charged:
-			attack_2_charged = false
-			shade_moving = true
-			state = SHADE
-		elif stats.stamina > 0:
+		#if attack_2_charged:
+		#	attack_2_charged = false
+		#	shade_moving = true
+		#	state = SHADE
+		if stats.stamina > 0:
 			if input_vector != Vector2.ZERO:
 				roll_moving = true
 				state = ROLL
@@ -232,20 +232,18 @@ func attack_animation_finished():
 # when an attack animation finishes, checks to see if the button is still held
 # if it is, changes the player state to "charging"
 # if the player releases the attack button, charging state ends
-# if the player holds the button for enough time,  changes the player state to "charged"
-# player will appear red while charged
-# if the player presses the roll button while "charged", unleashes special attack
-# removes charged state
+# if the player holds the button for enough time, charge_level_1 is achieved
+# if the player continues to hold the button, charge_level_2 is achieved
 
 # warning-ignore:unused_argument
-func charge_state_orig(delta):
+func charge_state(delta):
 	stats.stamina -= 0.5
-	#if attack_1_charged:
-	#	if stats.stamina <= 0:
-	#		attack_1_charged = false
-	#		charge.stop_charge()
-	#		charge_count = 0
-	#		stats.charge = charge_count
+	if attack_1_charged:
+		if stats.stamina <= 0:
+			attack_1_charged = false
+			charge.stop_charge()
+			charge_count = 0
+			stats.charge = charge_count
 			
 	if charge_count < PlayerStats.max_charge:
 		charge_count += 1
@@ -254,15 +252,21 @@ func charge_state_orig(delta):
 	elif charge_count == PlayerStats.max_charge:
 		attack_1_charged = true
 		
-func charge_state(delta):
+
+# charge stage
+# drains stamina
+# checks if either attack 1 or 2 is charged
+func charge_state_new(delta):
 	stats.stamina -= 0.5
-	if attack_2_charged:
-		if stats.stamina <= 0:
-			attack_1_charged = false
-			attack_2_charged = false
-			charge.stop_charge()
-			charge_count = 0
-			stats.charge = charge_count
+	if (attack_1_charged || attack_2_charged) && stats.stamina <= 0:
+		attack_charging = false
+		attack_1_charged = false
+		attack_2_charged = false
+		charge.stop_charge()
+		charge_count = 0
+		charge_level_count = 0
+		stats.charge = charge_count
+		stats.charge_level = charge_level_count
 			
 	elif charge_count < PlayerStats.max_charge:
 		charge_count += 1
@@ -393,13 +397,16 @@ func roll_animation_finished():
 	state = MOVE
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
-		charge_count = 0
-		stats.charge = charge_count
+		# charge_count = 0
+		# stats.charge = charge_count
 	
 func _on_Hurtbox_area_entered(area):
 	if attack2_queued: attack2_queued = false
-	if attack_1_charged:
-		attack_1_charged = false
+	if attack_charging: attack_charging = false
+	if attack_1_charged: attack_1_charged = false
+	if attack_2_charged: attack_2_charged = false
+	if charge_count > 0: charge_count = 0
+	if charge_level_count > 0: charge_level_count = 0
 	damageTaken = area.damage
 	state = HIT
 	

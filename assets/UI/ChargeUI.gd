@@ -52,7 +52,7 @@ func stop_charge():
 	progress1.visible = false
 	progress2.visible = false
 	currentCharge = 0
-	currentChargeLevel = 0
+	# currentChargeLevel = 0
 	animation1.stop(true)
 	animation1.seek(0, true)
 	animation2.stop(true)
