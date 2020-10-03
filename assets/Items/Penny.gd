@@ -6,9 +6,6 @@ const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 onready var player = get_node("/root/World/YSort/Player")
 
 var interactable = false
-
-func _ready():
-	pass # Replace with function body.
 	
 func _input(event):
 	if (interactable && event.is_action_pressed("examine") && player.talkTimer.is_stopped()):

@@ -583,6 +583,12 @@ remote_path = NodePath("../../../Camera2D")
 [node name="Skeleton" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( -64, -88 )
 
+[node name="HeartPickup" parent="YSort/Skeleton" instance=ExtResource( 19 )]
+position = Vector2( 16, -40 )
+
+[node name="PennyPickup" parent="YSort/Skeleton" instance=ExtResource( 33 )]
+position = Vector2( -8, -24 )
+
 [node name="Doodads" type="YSort" parent="YSort"]
 
 [node name="Rock_3_" parent="YSort/Doodads" instance=ExtResource( 27 )]
@@ -1569,5 +1575,3 @@ stream = ExtResource( 22 )
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 23 )
-[connection signal="noticeOff" from="YSort/Skeleton" to="YSort/Player" method="_on_noticeOff"]
-[connection signal="noticeOn" from="YSort/Skeleton" to="YSort/Player" method="_on_noticeOn"]

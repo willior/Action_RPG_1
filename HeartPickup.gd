@@ -37,3 +37,4 @@ func _on_HeartCollectBox_area_entered(_area):
 	
 	PlayerStats.health += 1
 	queue_free()
+

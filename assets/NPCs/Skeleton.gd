@@ -8,9 +8,6 @@ var interactable = false
 var talkable = false
 var speaker = "Skeleton: "
 
-signal noticeOn
-signal noticeOff
-
 func _input(event):
 	# skeleton talk
 	if(talkable && event.is_action_pressed("attack") && player.talkTimer.is_stopped()):
@@ -39,7 +36,6 @@ func _input(event):
 		player.talkTimer.start()
 
 func _on_SkeletonTalkBox_area_entered(_area):
-	emit_signal("noticeOn")
 	player.talking = true
 	player.interacting = true
 	talkable = true
@@ -47,7 +43,6 @@ func _on_SkeletonTalkBox_area_entered(_area):
 	$AudioCursHi.play()
 
 func _on_SkeletonTalkBox_area_exited(_area):
-	emit_signal("noticeOff")
 	player.talking = false
 	player.interacting = false
 	talkable = false

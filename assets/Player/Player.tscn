@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=2]
+[gd_scene load_steps=119 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://assets/Audio/Evade.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 [ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/UI/Notice.gd" type="Script" id=11]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
@@ -2161,7 +2160,19 @@ parameters/Shade/blend_position = Vector2( 0.0241064, -0.406441 )
 visible = false
 margin_right = 0.0
 margin_bottom = 0.0
-script = ExtResource( 11 )
+
+[node name="ChargeUI" parent="." instance=ExtResource( 13 )]
+
+[node name="ChargeSound" type="AudioStreamPlayer" parent="ChargeUI"]
+stream = ExtResource( 15 )
+pitch_scale = 0.75
+
+[node name="Sweat" parent="." instance=ExtResource( 16 )]
+visible = false
+margin_left = -5.0
+margin_top = -7.0
+margin_right = -5.0
+margin_bottom = -7.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
@@ -2215,19 +2226,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ChargeUI" parent="." instance=ExtResource( 13 )]
-
-[node name="ChargeSound" type="AudioStreamPlayer" parent="ChargeUI"]
-stream = ExtResource( 15 )
-pitch_scale = 0.75
-
-[node name="Sweat" parent="." instance=ExtResource( 16 )]
-visible = false
-margin_left = -5.0
-margin_top = -7.0
-margin_right = -5.0
-margin_bottom = -7.0
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

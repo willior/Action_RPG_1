@@ -47,7 +47,7 @@ var shade_moving = false
 var charge_count = 0
 var charge_level_count = 0
 
-var interacting = false
+var interacting = false setget set_notice
 var talking = false
 var sweating = false
 var dying = false
@@ -78,11 +78,6 @@ func _ready():
 	charge2Vis.visible = false
 
 func _process(delta):
-	#if interacting:
-	#	notice.visible = true
-	#else:
-	#	notice.visible = false
-	
 	match state:
 		MOVE: move_state(delta)
 		ROLL: roll_state()
@@ -438,12 +433,9 @@ func game_over():
 
 func _on_TalkTimer_timeout():
 	actionHitbox.disabled = false
-
-
-func _on_noticeOn():
-	print('notice!!')
-	notice.visible = true
-
-func _on_noticeOff():
-	print('notice off.')
-	notice.visible = false
+	
+func set_notice(value):
+	if value:
+		notice.visible = true
+	elif !value:
+		notice.visible = false
