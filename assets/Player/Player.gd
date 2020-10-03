@@ -121,6 +121,7 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("examine"):
+		
 		if !interacting && talkTimer.is_stopped():
 			var dialogBox = DialogBox.instance()
 			dialogBox.dialog = [

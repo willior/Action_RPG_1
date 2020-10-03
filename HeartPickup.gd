@@ -27,10 +27,6 @@ func _on_HeartTalkBox_area_exited(_area):
 	interactable = false
 
 func _on_HeartCollectBox_area_entered(_area):
-	$Sprite.queue_free()
-	$HeartTalkBox.queue_free()
-	$HeartCollectBox.queue_free()
-	
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	# argument determines sound effect; 0 = heartCollect
