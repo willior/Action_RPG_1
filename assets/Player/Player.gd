@@ -238,12 +238,11 @@ func attack_animation_finished():
 # warning-ignore:unused_argument
 func charge_state(delta):
 	stats.stamina -= 0.5
-	if attack_1_charged:
-		if stats.stamina <= 0:
-			attack_1_charged = false
-			charge.stop_charge()
-			charge_count = 0
-			stats.charge = charge_count
+	if attack_1_charged && stats.stamina <= 0:
+		attack_1_charged = false
+		charge.stop_charge()
+		charge_count = 0
+		stats.charge = charge_count
 			
 	if charge_count < PlayerStats.max_charge:
 		charge_count += 1
@@ -397,8 +396,8 @@ func roll_animation_finished():
 	state = MOVE
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
-		# charge_count = 0
-		# stats.charge = charge_count
+		charge_count = 0
+		stats.charge = charge_count
 	
 func _on_Hurtbox_area_entered(area):
 	if attack2_queued: attack2_queued = false

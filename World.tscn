@@ -1,7 +1,6 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/World/grass1.png" type="Texture" id=3]
 [ext_resource path="res://assets/Tilesets/grass2_fade_grass_wang/tileset_grass2_fade_grass_wang.tres" type="TileSet" id=4]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://assets/World/Grass.tscn" type="PackedScene" id=6]
@@ -491,7 +490,6 @@ margin_left = -528.0
 margin_top = -432.0
 margin_right = 846.0
 margin_bottom = 425.0
-texture = ExtResource( 3 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
