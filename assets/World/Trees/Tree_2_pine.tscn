@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/Shadows/LargeShadow.png" type="Texture" id=1]
-[ext_resource path="res://assets/World/Trees/Tree_2_pine.png" type="Texture" id=2]
+[ext_resource path="res://assets/World/Trees/Tree2_pineLarge.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.99996
@@ -13,7 +13,7 @@ height = 10.0
 texture = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -16 )
+position = Vector2( 0, -27 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

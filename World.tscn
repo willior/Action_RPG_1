@@ -486,6 +486,7 @@ script = ExtResource( 12 )
 [node name="Map" type="Node2D" parent="."]
 
 [node name="Background" type="TextureRect" parent="Map"]
+visible = false
 margin_left = -528.0
 margin_top = -432.0
 margin_right = 846.0
