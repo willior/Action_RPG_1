@@ -1104,7 +1104,7 @@ position = Vector2( 72, 128 )
 position = Vector2( 136, 160 )
 
 [node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( -208, -160 )
+position = Vector2( -192, -136 )
 
 [node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( -208, 40 )

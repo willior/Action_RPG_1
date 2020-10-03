@@ -105,7 +105,7 @@ func move_state(delta):
 	else:
 		stats.stamina += 0.5
 	
-	if stats.stamina == stats.max_stamina && sweating:
+	if stats.stamina > 15 && sweating:
 		sweating = false
 		$Sweat.visible = false
 		print("not sweating anymore")
@@ -279,7 +279,7 @@ func charge_state(delta):
 func shade_state(delta):
 	if shade_moving:
 # warning-ignore:integer_division
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION/3 * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
 	else:
 		if Input.is_action_just_pressed("attack"):
 			attack2_queued = true
@@ -300,8 +300,9 @@ func shade_stop():
 	shade_moving = false
 	
 func flash_state(delta):
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION/3 * delta)
+	velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
 	animationState.travel("Flash")
+	move()
 	
 func flash_start():
 	stats.stamina -= 20
