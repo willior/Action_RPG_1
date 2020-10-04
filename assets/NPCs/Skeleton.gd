@@ -6,6 +6,7 @@ onready var player = get_node("/root/World/YSort/Player")
 
 var interactable = true
 var talkable = true
+var examined = false
 
 var speaker = "Skeleton: "
 
@@ -32,6 +33,8 @@ func examine():
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	player.talkTimer.start()
+	
+	if !examined: examined = true
 
 func _on_SkeletonTalkBox_area_entered(_area):
 	player.talking = true

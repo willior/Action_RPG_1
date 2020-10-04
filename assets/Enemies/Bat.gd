@@ -26,6 +26,7 @@ var knockback = Vector2.ZERO
 var state = IDLE
 var interactable = false
 var talkable = false
+var examined = false
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -83,15 +84,15 @@ func _physics_process(delta):
 		
 	velocity = move_and_slide(velocity)
 	
-func _input(event):
-	if (interactable && event.is_action_pressed("examine") && player.talkTimer.is_stopped()):
-		var dialogBox = DialogBox.instance()
-		dialogBox.dialog = [
-			"Bats are mammals of the Chiroptera order.",
-			"They are the only mammals capable of true and sustained flight."
-		]
-		get_node("/root/World/GUI").add_child(dialogBox)
-		player.talkTimer.start()
+func examine():
+	var dialogBox = DialogBox.instance()
+	dialogBox.dialog = [
+		"Bats are mammals of the Chiroptera order.",
+		"They are the only mammals capable of true and sustained flight."
+	]
+	get_node("/root/World/GUI").add_child(dialogBox)
+	player.talkTimer.start()
+	if !examined: examined = true
 			
 func accelerate_towards_point(point, speed, delta):
 	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position in the WanderController

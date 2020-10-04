@@ -7,6 +7,7 @@ onready var player = get_node("/root/World/YSort/Player")
 
 var interactable = false
 var talkable = false
+var examined = false
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -16,6 +17,7 @@ func examine():
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	player.talkTimer.start()
+	if !examined: examined = true
 
 func _on_HeartTalkBox_area_entered(_area):
 	player.interacting = true

@@ -49,8 +49,10 @@ var charge_level_count = 0
 
 var examineObject
 var talkObject
-var interacting = false setget set_notice
+var interacting = false
 var talking = false 
+var noticeDisplay = false setget set_notice
+
 var sweating = false
 var dying = false
 
@@ -451,8 +453,13 @@ func _on_ExamineHitbox_area_entered(area):
 	self.interacting = true
 	interacting = true
 	examineObject = area.get_owner()
+	if examineObject.examined:
+		return
+	else:
+		self.noticeDisplay = true
 
 func _on_ExamineHitbox_area_exited(area):
+	self.noticeDisplay = false
 	self.interacting = false
 	interacting = false
 	examineObject = null
