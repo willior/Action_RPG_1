@@ -180,7 +180,6 @@ func move_state(delta):
 				roll_moving = true
 				state = ROLL
 			else:
-				print('backstep')
 				state = BACKSTEP
 		else:
 			noStamina()

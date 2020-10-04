@@ -16,6 +16,7 @@ enum {
 	IDLE,
 	WANDER,
 	CHASE,
+	ATTACK,
 	DEAD
 }
 
@@ -73,6 +74,9 @@ func _physics_process(delta):
 			else:
 				sprite.speed_scale = 1
 				state = IDLE
+				
+		ATTACK:
+			print('attack state entered')
 				
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)

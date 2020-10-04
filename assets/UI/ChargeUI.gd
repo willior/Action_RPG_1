@@ -37,13 +37,11 @@ func set_max_stamina(value):
 	staminaProgress.max_value = currentMaxStamina
 
 func begin_charge_1():
-	print('beginning charge 1')
 	chargeSound.play()
 	progress1.visible = true
 	staminaProgress.visible = true
 	
 func begin_charge_2():
-	print('beginning charge 2')
 	chargeSound.play()
 	progress2.visible = true
 
@@ -70,7 +68,6 @@ func set_charge(value):
 			# animation2.play("ChargeFlash")
 		
 func set_charge_level(value):
-	prints("charge level set: " + str(value))
 	currentChargeLevel = value
 
 func stop_charge():

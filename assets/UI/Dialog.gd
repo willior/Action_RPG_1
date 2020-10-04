@@ -17,7 +17,6 @@ func _ready():
 	# sets the text to that contained in the matching dialog_index array container
 	label.set_bbcode(dialog[dialog_index])
 	label.set_visible_characters(speakerName.length())
-	print(speakerName.length())
 	label.set_process_input(true)
 	# get_node("/root/World/YSort/Player").talking = true
 	get_tree().paused = true
