@@ -110,7 +110,7 @@ script = ExtResource( 10 )
 material = SubResource( 1 )
 frames = SubResource( 7 )
 animation = "fly"
-frame = 1
+frame = 2
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -157,6 +157,10 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
 shape = SubResource( 17 )
+
+[node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
+wait_time = 2.0
+one_shot = true
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false

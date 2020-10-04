@@ -28,6 +28,7 @@ var state = IDLE
 var interactable = false
 var talkable = false
 var examined = false
+var target
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -36,6 +37,8 @@ onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
 onready var playerDetectionZone = $PlayerDetectionZone
+onready var attackPlayerZone = $AttackPlayerZone
+onready var attackTimer = $AttackPlayerZone/AttackTimer
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
@@ -68,16 +71,17 @@ func _physics_process(delta):
 				update_wander_state()
 				
 		CHASE:
-			var player = playerDetectionZone.player
-			if player != null:
-				accelerate_towards_point(player.global_position, MAX_SPEED, delta) # gets the direction by comparing the enemy position with the player's
+			if playerDetectionZone.player != null:
+				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
+				attack_player() # gets the direction by comparing the enemy position with the player's
 			else:
 				sprite.speed_scale = 1
 				state = IDLE
-				
+
 		ATTACK:
-			print('attack state entered')
-				
+			if playerDetectionZone.player != null:
+				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED*2, delta)
+				attack_start()
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 				
@@ -107,9 +111,26 @@ func seek_player():
 		sprite.speed_scale = 2
 		state = CHASE
 		
+func attack_player():
+	if attackPlayerZone.can_attack_player():
+		sprite.speed_scale = 4
+		state = ATTACK
+		
+func attack_start():
+	hitbox.set_deferred("monitoring", true)
+	print('hitbox on')
+	attackTimer.start(0.5)
+	yield(attackTimer, "timeout")
+		
+func attack_finished():
+	hitbox.set_deferred("monitoring", false)
+	print('hitbox off')
+	sprite.speed_scale = 1
+	state = IDLE
+		
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
-	wanderController.start_wander_timer(rand_range(1, 3))
+	wanderController.start_wander_timer(rand_range(1, 3)) # starts wander timer between 1s & 3s
 		
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved
@@ -139,7 +160,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 func _on_BatStats_no_health():
 	sprite.playing = false # stop animation
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
-	hitbox.queue_free()
+	hitbox.set_deferred("monitoring", false)
 	state = DEAD
 	
 	tween.interpolate_property(sprite,
