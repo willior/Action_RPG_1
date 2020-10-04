@@ -119,6 +119,7 @@ func move_state(delta):
 		animationTree.set("parameters/Shade/blend_position", input_vector)
 		animationTree.set("parameters/Flash/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
+		animationTree.set("parameters/Backstep/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
@@ -168,17 +169,18 @@ func move_state(delta):
 		attack_charging = false
 		
 	if Input.is_action_just_pressed("roll"):
-		charge.stop_charge()
 		# if attack_2_charged:
 		#	attack_2_charged = false
 		#	shade_moving = true
 		#	state = SHADE
 		if stats.stamina > 0:
 			if input_vector != Vector2.ZERO:
+				charge.stop_charge()
 				roll_moving = true
 				state = ROLL
 			else:
 				print('backstep')
+				state = BACKSTEP
 		else:
 			noStamina()
 		
@@ -383,13 +385,22 @@ func roll_animation_finished():
 		charge_reset()
 
 func backstep_stamina_drain():
-	pass
+	stats.stamina -= 5
+	if hurtbox.timer.is_stopped(): 
+		hurtbox.start_invincibility(stats.iframes)
+	else:
+		pass
 
 func backstep_state(delta):
-	pass
+	velocity = -dir_vector * (ROLL_SPEED/2)
+	animationState.travel("Backstep")
+	move()
 	
 func backstep_animation_finished():
-	pass
+	state = MOVE
+	if Input.is_action_pressed("attack"):
+		attack_charging = true
+		# charge_reset()
 	
 func _on_Hurtbox_area_entered(area):
 	if attack2_queued: attack2_queued = false
