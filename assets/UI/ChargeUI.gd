@@ -4,13 +4,23 @@ onready var progress1 = $TextureProgress1
 onready var animation1 = $TextureProgress1/AnimationPlayer
 onready var progress2 = $TextureProgress2
 onready var animation2 = $TextureProgress2/AnimationPlayer
+onready var staminaProgress = $StaminaProgress
 
 onready var chargeSound = $ChargeSound
 
 var currentCharge = 0 setget set_charge
 var currentChargeLevel = 0 setget set_charge_level
 
+var currentStamina = PlayerStats.stamina setget set_stamina
+var currentMaxStamina = PlayerStats.max_stamina setget set_max_stamina
+
 func _ready():
+	self.currentMaxStamina = PlayerStats.max_stamina
+# warning-ignore:return_value_discarded
+	PlayerStats.connect("max_stamina_changed", self, "set_max_stamina")
+	self.currentStamina = PlayerStats.stamina
+# warning-ignore:return_value_discarded
+	PlayerStats.connect("stamina_changed", self, "set_stamina")
 	self.currentCharge = PlayerStats.charge
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("charge_changed", self, "set_charge")
@@ -18,10 +28,19 @@ func _ready():
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("charge_level_changed", self, "set_charge_level")
 
+func set_stamina(value):
+	currentStamina = value
+	staminaProgress.value = currentStamina
+	
+func set_max_stamina(value):
+	currentMaxStamina = value
+	staminaProgress.max_value = currentMaxStamina
+
 func begin_charge_1():
 	print('beginning charge 1')
 	chargeSound.play()
 	progress1.visible = true
+	staminaProgress.visible = true
 	
 func begin_charge_2():
 	print('beginning charge 2')
@@ -56,6 +75,7 @@ func set_charge_level(value):
 
 func stop_charge():
 	chargeSound.stop()
+	staminaProgress.visible = false
 	progress1.visible = false
 	progress2.visible = false
 	currentCharge = 0

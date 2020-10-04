@@ -39,6 +39,7 @@ var stats = PlayerStats
 var levelStats = [0, 1, 2, 3]
 var levelResult = 0
 
+var backstep_queued = false
 var attack2_queued = false
 var attack1_queued = false
 var attack_charging = false
@@ -391,9 +392,31 @@ func backstep_stamina_drain():
 	else:
 		pass
 
+# warning-ignore:unused_argument
 func backstep_state(delta):
+# warning-ignore:integer_division
 	velocity = -dir_vector * (ROLL_SPEED/2)
 	animationState.travel("Backstep")
+	
+	if Input.is_action_just_released("attack"):
+		if stats.stamina <= 0:
+			noStamina()
+		else:
+			charge.stop_charge()
+			if attack_1_charged:
+				print('backstep flash attack!!!')
+				attack_1_charged = false
+				state = FLASH
+			if attack_2_charged:
+				print('backstep shade attack!!!')
+				attack_2_charged = false
+				state = SHADE
+	
+	elif Input.is_action_just_pressed("attack"):
+		if stats.stamina <= 0:
+			noStamina()
+		else:
+			state = ATTACK1
 	move()
 	
 func backstep_animation_finished():

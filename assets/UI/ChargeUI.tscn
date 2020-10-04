@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/UI/Charge_1_transparent_UI.png" type="Texture" id=1]
 [ext_resource path="res://assets/UI/Charge_1_UI.png" type="Texture" id=2]
 [ext_resource path="res://assets/UI/ChargeUI.gd" type="Script" id=3]
+[ext_resource path="res://assets/UI/Charge_2_UI.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=3]
 resource_name = "ChargeFlash"
@@ -41,6 +42,23 @@ margin_bottom = 8.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ],
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaProgress" type="TextureProgress" parent="."]
+visible = false
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 8.0
+margin_bottom = 8.0
+max_value = 90.0
+value = 15.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 4 )
+fill_mode = 4
+tint_under = Color( 0, 0, 0, 0.501961 )
+tint_progress = Color( 0.231373, 0.737255, 0.211765, 0.501961 )
+__meta__ = {
 "_edit_use_anchors_": false
 }
 
