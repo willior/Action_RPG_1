@@ -28,7 +28,6 @@ var state = IDLE
 var interactable = false
 var talkable = false
 var examined = false
-var target
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -41,6 +40,7 @@ onready var attackPlayerZone = $AttackPlayerZone
 onready var attackTimer = $AttackPlayerZone/AttackTimer
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
+onready var attackController = $AttackController
 onready var animationPlayer = $AnimationPlayer
 onready var talkBox = $BatTalkBox/CollisionShape2D
 onready var player = get_parent().get_parent().get_node("Player")
@@ -73,15 +73,17 @@ func _physics_process(delta):
 		CHASE:
 			if playerDetectionZone.player != null:
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
-				attack_player() # gets the direction by comparing the enemy position with the player's
+				# attack_player() # gets the direction by comparing the enemy position with the player's
 			else:
 				sprite.speed_scale = 1
 				state = IDLE
 
 		ATTACK:
-			if playerDetectionZone.player != null:
-				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED*2, delta)
-				attack_start()
+			# if playerDetectionZone.player != null:
+			#	accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED*2, delta)
+			#	attack_start()
+			print('attack state')
+				
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 				
@@ -117,14 +119,9 @@ func attack_player():
 		state = ATTACK
 		
 func attack_start():
-	hitbox.set_deferred("monitoring", true)
-	print('hitbox on')
-	attackTimer.start(0.5)
-	yield(attackTimer, "timeout")
+	attack_finished()
 		
 func attack_finished():
-	hitbox.set_deferred("monitoring", false)
-	print('hitbox off')
 	sprite.speed_scale = 1
 	state = IDLE
 		
