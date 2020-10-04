@@ -7,8 +7,6 @@ onready var animation2 = $TextureProgress2/AnimationPlayer
 
 onready var chargeSound = $ChargeSound
 
-# onready var player = get_parent().get_parent().get_node("YSort/Player")
-
 var currentCharge = 0 setget set_charge
 var currentChargeLevel = 0 setget set_charge_level
 

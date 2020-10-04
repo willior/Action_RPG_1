@@ -1478,10 +1478,6 @@ margin_top = 4.0
 margin_right = 64.0
 margin_bottom = 16.0
 
-[node name="ExpBar" parent="GUI" instance=ExtResource( 10 )]
-margin_left = 0.0
-margin_right = 160.0
-
 [node name="StaminaBar" parent="GUI" instance=ExtResource( 14 )]
 margin_left = 4.0
 margin_top = 16.0
@@ -1507,6 +1503,10 @@ stretch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ExpBar" parent="GUI" instance=ExtResource( 10 )]
+margin_left = 4.0
+margin_right = 164.0
 
 [node name="CashUI" parent="GUI" instance=ExtResource( 21 )]
 
