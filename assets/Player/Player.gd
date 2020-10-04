@@ -52,6 +52,7 @@ var talkObject
 var interacting = false
 var talking = false 
 var noticeDisplay = false setget set_notice
+var talkNoticeDisplay = false setget set_talk_notice
 
 var sweating = false
 var dying = false
@@ -69,6 +70,7 @@ onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $Notice
+onready var talkNotice = $TalkNotice
 onready var charge = $ChargeUI
 onready var charge1Vis = $ChargeUI/TextureProgress1
 onready var charge2Vis = $ChargeUI/TextureProgress2
@@ -439,9 +441,12 @@ func game_over():
 func _on_TalkTimer_timeout():
 	interactHitbox.disabled = false
 	if interactObject != null:
-		if self.talking:
-			set_notice(true)
-		elif interactObject.examined || self.talking == false:
+		if !talking:
+			return
+		else:
+			set_talk_notice(true)
+
+		if interactObject.examined:
 			return
 		else:
 			set_notice(true)
@@ -453,18 +458,31 @@ func set_notice(value):
 		notice.visible = true
 	elif !value:
 		notice.visible = false
+		
+func set_talk_notice(value):
+	if value:
+		$AudioStreamPlayer.stream = load("res://assets/Audio/cursLo.wav")
+		$AudioStreamPlayer.play()
+		talkNotice.visible = true
+	elif !value:
+		talkNotice.visible = false
 
 func _on_InteractHitbox_area_entered(area):
-	self.interacting = true
 	interacting = true
+	# gets the object interacting with the interact bounding box
 	interactObject = area.get_owner()
-	if interactObject.examined:
-		return
-	else:
-		self.noticeDisplay = true
+	# displays talk notice if the object is talkable
+	if interactObject.talkable:
+		self.talkNoticeDisplay = true
+		talking = true
+	# does nothing object already examined
+	if interactObject.examined: return
+	# displays notice if not
+	else: self.noticeDisplay = true
 
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false
-	self.interacting = false
+	self.talkNoticeDisplay = false
 	interacting = false
+	talking = false
 	interactObject = null

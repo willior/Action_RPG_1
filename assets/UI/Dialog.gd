@@ -29,6 +29,7 @@ func _input(_event):
 			# get_node("/root/World/YSort/Player").talking = false
 			get_tree().paused = false
 			get_node("/root/World/YSort/Player").noticeDisplay = false
+			get_node("/root/World/YSort/Player").talkNoticeDisplay = false
 			queue_free()
 		# if the amount of visible characters is above the total amount of characters in the current index:
 		elif label.get_visible_characters() > label.get_total_character_count():
