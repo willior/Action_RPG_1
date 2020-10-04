@@ -47,7 +47,7 @@ var shade_moving = false
 var charge_count = 0
 var charge_level_count = 0
 
-var examineObject
+var interactObject
 var talkObject
 var interacting = false
 var talking = false 
@@ -62,7 +62,7 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
-onready var examineHitbox = $HitboxPivot/ExamineHitbox/CollisionShape2D
+onready var interactHitbox = $HitboxPivot/InteractHitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var collect = $Collectbox
@@ -134,7 +134,7 @@ func move_state(delta):
 			talkTimer.start()
 		elif interacting && talkTimer.is_stopped():
 			print('examining')
-			examineObject.examine()
+			interactObject.examine()
 
 	if Input.is_action_just_pressed("attack"):
 		if !talking && stats.stamina > 0:
@@ -143,7 +143,7 @@ func move_state(delta):
 			noStamina()
 		elif talking && talkTimer.is_stopped():
 			print('talking')
-			examineObject.talk()
+			interactObject.talk()
 			
 	elif Input.is_action_pressed("attack"):
 		if charge_count == 0 && charge_level_count == 0:
@@ -439,9 +439,12 @@ func game_over():
 	get_tree().paused = true
 
 func _on_TalkTimer_timeout():
-	examineHitbox.disabled = false
+	interactHitbox.disabled = false
+	if interactObject != null:
+		print('object still there')
 	
 func set_notice(value):
+	print('setting notice')
 	if value:
 		$AudioStreamPlayer.stream = load("res://assets/Audio/cursHi.wav")
 		$AudioStreamPlayer.play()
@@ -449,17 +452,17 @@ func set_notice(value):
 	elif !value:
 		notice.visible = false
 
-func _on_ExamineHitbox_area_entered(area):
+func _on_InteractHitbox_area_entered(area):
 	self.interacting = true
 	interacting = true
-	examineObject = area.get_owner()
-	if examineObject.examined:
+	interactObject = area.get_owner()
+	if interactObject.examined:
 		return
 	else:
 		self.noticeDisplay = true
 
-func _on_ExamineHitbox_area_exited(area):
+func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false
 	self.interacting = false
 	interacting = false
-	examineObject = null
+	interactObject = null

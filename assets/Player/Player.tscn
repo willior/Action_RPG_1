@@ -2179,12 +2179,12 @@ rotation = 1.5708
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 
-[node name="ExamineHitbox" type="Area2D" parent="HitboxPivot"]
+[node name="InteractHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
 collision_layer = 0
 collision_mask = 128
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/ExamineHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/InteractHitbox"]
 shape = SubResource( 99 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -2224,8 +2224,8 @@ wait_time = 0.5
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-[connection signal="area_entered" from="HitboxPivot/ExamineHitbox" to="." method="_on_ExamineHitbox_area_entered"]
-[connection signal="area_exited" from="HitboxPivot/ExamineHitbox" to="." method="_on_ExamineHitbox_area_exited"]
+[connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
+[connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
