@@ -15,6 +15,7 @@ const SHADE_FRICTION = 1600
 enum {
 	MOVE,
 	ROLL,
+	BACKSTEP,
 	ATTACK1,
 	ATTACK2,
 	FLASH,
@@ -87,6 +88,7 @@ func _process(delta):
 	match state:
 		MOVE: move_state(delta)
 		ROLL: roll_state()
+		BACKSTEP: backstep_state(delta)
 		ATTACK1: attack1_state(delta)
 		ATTACK2: attack2_state(delta)
 		SHADE: shade_state(delta)
@@ -233,10 +235,7 @@ func attack_animation_finished():
 	# if attack button is held when an attack animation finishes
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
-		charge_count = 0
-		stats.charge = charge_count
-		charge_level_count = 0
-		stats.charge_level = charge_level_count
+		charge_reset()
 	
 # when an attack animation finishes, checks to see if the button is still held
 # if it is, changes the player state to "charging"
@@ -255,9 +254,7 @@ func charge_state(delta):
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()
-		charge_count = 0
-		stats.charge = charge_count
-		# if (attack_1_charged || attack_2_charged):
+		charge_reset()
 		
 	# if the current charge is less than the max charge
 	if charge_count < PlayerStats.max_charge:
@@ -270,6 +267,12 @@ func charge_state(delta):
 	elif charge_count == PlayerStats.max_charge && attack_charging:
 		attack_2_charged = true
 		attack_charging = false
+		
+func charge_reset():
+	charge_level_count = 0
+	stats.charge_level = charge_level_count
+	charge_count = 0
+	stats.charge = charge_count
 		
 func shade_state(delta):
 	if shade_moving:
@@ -377,23 +380,25 @@ func roll_animation_finished():
 	state = MOVE
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
-		charge_count = 0
-		stats.charge = charge_count
-		charge_level_count = 0
-		stats.charge_level = charge_level_count
+		charge_reset()
+
+func backstep_stamina_drain():
+	pass
+
+func backstep_state(delta):
+	pass
+	
+func backstep_animation_finished():
+	pass
 	
 func _on_Hurtbox_area_entered(area):
 	if attack2_queued: attack2_queued = false
 	if charge_count > 0:
-		charge_count = 0
-		stats.charge = charge_count
 		charge.stop_charge()
 		if attack_charging: attack_charging = false
 		if attack_1_charged: attack_1_charged = false
 		if attack_2_charged: attack_2_charged = false
-		if charge_level_count > 0:
-			charge_level_count = 0
-			stats.charge_level = charge_level_count
+		charge_reset()
 	
 	damageTaken = area.damage
 	state = HIT
@@ -414,10 +419,7 @@ func hit_animation_finished():
 	state = MOVE
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
-		charge_count = 0
-		stats.charge = charge_count
-		charge_level_count = 0
-		stats.charge_level = charge_level_count
+		charge_reset()
 
 func _on_Hurtbox_invincibility_started():
 	# sprite.modulate = Color(0,1,1,1)
