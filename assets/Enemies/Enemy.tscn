@@ -14,6 +14,5 @@ shader_param/active = false
 
 [node name="AnimatedSprite" parent="Bat" index="0"]
 material = SubResource( 1 )
-frame = 4
 
 [editable path="Bat"]

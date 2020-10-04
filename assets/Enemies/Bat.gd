@@ -25,6 +25,7 @@ var knockback = Vector2.ZERO
 
 var state = IDLE
 var interactable = false
+var talkable = false
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -84,7 +85,6 @@ func _physics_process(delta):
 	
 func _input(event):
 	if (interactable && event.is_action_pressed("examine") && player.talkTimer.is_stopped()):
-		# talkBox.disabled = true
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog = [
 			"Bats are mammals of the Chiroptera order.",

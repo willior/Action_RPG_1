@@ -2,7 +2,6 @@ extends Node2D
 
 onready var stats = $GUI/StatsDisplay
 onready var dim = $GUI/Dim
-# onready var timer = $Timer
 onready var music = $Music
 onready var player = $YSort/Player
 
@@ -33,7 +32,6 @@ func _process(_delta):
 			get_node("/root/World/GUI/ExpBar").visible = true
 			get_node("/root/World/GUI/StaminaBar").visible = true
 			get_node("/root/World/YSort/Player").visible = true
-			# get_node("/root/World/YSort/Player/Sprite").flip_v = false
 			PlayerStats.health += PlayerStats.max_health
 			PlayerStats.continue_count += 1
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)

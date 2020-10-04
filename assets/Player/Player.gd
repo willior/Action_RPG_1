@@ -47,8 +47,10 @@ var shade_moving = false
 var charge_count = 0
 var charge_level_count = 0
 
+var examineObject
+var talkObject
 var interacting = false setget set_notice
-var talking = false
+var talking = false 
 var sweating = false
 var dying = false
 
@@ -58,7 +60,7 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
-onready var actionHitbox = $HitboxPivot/ActionHitbox/CollisionShape2D
+onready var examineHitbox = $HitboxPivot/ExamineHitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var collect = $Collectbox
@@ -121,7 +123,6 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("examine"):
-		
 		if !interacting && talkTimer.is_stopped():
 			var dialogBox = DialogBox.instance()
 			dialogBox.dialog = [
@@ -129,12 +130,18 @@ func move_state(delta):
 			]
 			get_node("/root/World/GUI").add_child(dialogBox)
 			talkTimer.start()
+		elif interacting && talkTimer.is_stopped():
+			print('examining')
+			examineObject.examine()
 
 	if Input.is_action_just_pressed("attack"):
 		if !talking && stats.stamina > 0:
 			state = ATTACK1
 		elif stats.stamina <= 0:
 			noStamina()
+		elif talking && talkTimer.is_stopped():
+			print('talking')
+			examineObject.talk()
 			
 	elif Input.is_action_pressed("attack"):
 		if charge_count == 0 && charge_level_count == 0:
@@ -169,8 +176,6 @@ func move_state(delta):
 			else:
 				print('backstep')
 		else:
-			#$AudioStreamPlayer.stream = load("res://assets/Audio/Bamboo.wav")
-			#$AudioStreamPlayer.play()
 			noStamina()
 		
 func move():
@@ -432,10 +437,22 @@ func game_over():
 	get_tree().paused = true
 
 func _on_TalkTimer_timeout():
-	actionHitbox.disabled = false
+	examineHitbox.disabled = false
 	
 func set_notice(value):
 	if value:
+		$AudioStreamPlayer.stream = load("res://assets/Audio/cursHi.wav")
+		$AudioStreamPlayer.play()
 		notice.visible = true
 	elif !value:
 		notice.visible = false
+
+func _on_ExamineHitbox_area_entered(area):
+	self.interacting = true
+	interacting = true
+	examineObject = area.get_owner()
+
+func _on_ExamineHitbox_area_exited(area):
+	self.interacting = false
+	interacting = false
+	examineObject = null

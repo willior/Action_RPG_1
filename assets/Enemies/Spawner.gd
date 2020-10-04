@@ -12,7 +12,7 @@ func _ready():
 
 func spawner():
 	enemies = get_tree().get_nodes_in_group("enemies")
-	if enemies.size() > 40:
+	if enemies.size() > 20:
 		print('max bat!')
 		return
 	
