@@ -146,7 +146,7 @@ func move_state(delta):
 			interactObject.talk()
 			
 	elif Input.is_action_pressed("attack"):
-		if charge_count == 0 && charge_level_count == 0:
+		if charge_count == 0 && charge_level_count == 0 && stats.stamina > 0:
 			charge.begin_charge_1()
 		elif charge_count == stats.max_charge/2 && charge_level_count == 1:
 			charge.begin_charge_2()
