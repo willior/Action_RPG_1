@@ -11,6 +11,7 @@ export var MAX_SPEED = 40
 export var WANDER_SPEED = 20
 export var FRICTION = 240
 export var WANDER_TARGET_RANGE = 4
+export var ATTACK_TARGET_RANGE = 4
 
 enum {
 	IDLE,
@@ -28,12 +29,13 @@ var state = IDLE
 var interactable = false
 var talkable = false
 var examined = false
+var attacking = false
 
 onready var stats = $BatStats
 onready var timer = $Timer
 onready var sprite = $AnimatedSprite
 onready var tween = $Tween
-onready var hitbox = $Hitbox
+onready var hitbox = $Hitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var attackPlayerZone = $AttackPlayerZone
@@ -73,17 +75,20 @@ func _physics_process(delta):
 		CHASE:
 			if playerDetectionZone.player != null:
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
-				# attack_player() # gets the direction by comparing the enemy position with the player's
+				attack_player() # gets the direction by comparing the enemy position with the player's
 			else:
 				sprite.speed_scale = 1
 				state = IDLE
 
 		ATTACK:
-			# if playerDetectionZone.player != null:
-			#	accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED*2, delta)
-			#	attack_start()
-			print('attack state')
-				
+			if attacking:
+				accelerate_towards_point(player.global_position, MAX_SPEED*2, delta)
+				attacking = false
+			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
+				print('attack state: arrived at position, reverting to IDLE')
+				sprite.speed_scale = 1
+				attacking = false
+				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 				
@@ -115,15 +120,25 @@ func seek_player():
 		
 func attack_player():
 	if attackPlayerZone.can_attack_player():
+		hitbox.disabled = false
+		$AttackPlayerZone/CollisionShape2D.disabled = true
+		attacking = true
+		attackTimer.start()
 		sprite.speed_scale = 4
 		state = ATTACK
 		
-func attack_start():
-	attack_finished()
-		
-func attack_finished():
+func _on_AttackTimer_timeout():
 	sprite.speed_scale = 1
 	state = IDLE
+	hitbox.disabled = false
+	$AttackPlayerZone/CollisionShape2D.disabled = false
+	$PlayerDetectionZone/CollisionShape2D.disabled = false
+		
+func attack_start():
+	pass
+		
+func attack_finished():
+	pass
 		
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
@@ -157,7 +172,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 func _on_BatStats_no_health():
 	sprite.playing = false # stop animation
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
-	hitbox.set_deferred("monitoring", false)
+	hitbox.disabled = true
 	state = DEAD
 	
 	tween.interpolate_property(sprite,
@@ -219,3 +234,4 @@ func _on_BatTalkBox_area_entered(_area):
 func _on_BatTalkBox_area_exited(_area):
 	interactable = false
 	# player.interacting = false
+

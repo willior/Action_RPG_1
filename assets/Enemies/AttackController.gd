@@ -1,20 +1,16 @@
 extends Node2D
 
+onready var start_position = global_position # start position for enemy
+onready var target_position = global_position # where the enemy will travel to
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var timer = $Timer
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-func _on_Timer_timeout():
-	pass # Replace with function body.
+func update_target_position(vector):
+	var target_vector = vector
+	target_position = start_position + target_vector
+	
+func get_time_left():
+	return timer.time_left # returns the time left on the timer
+	
+func start_attack_timer(duration):
+	timer.start(duration)
