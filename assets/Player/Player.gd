@@ -455,11 +455,9 @@ func hit_animation_finished():
 		charge_reset()
 
 func _on_Hurtbox_invincibility_started():
-	# sprite.modulate = Color(0,1,1,1)
 	blinkAnimationPlayer.play("Start")
 
 func _on_Hurtbox_invincibility_ended():
-	# sprite.modulate = Color(1,1,1,1)
 	blinkAnimationPlayer.play("Stop")
 	
 func game_over():

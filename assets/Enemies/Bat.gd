@@ -38,7 +38,7 @@ onready var stats = $BatStats
 onready var timer = $Timer
 onready var sprite = $AnimatedSprite
 onready var tween = $Tween
-onready var hitbox = $Hitbox/CollisionShape2D
+onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
 onready var playerDetectionZone = $PlayerDetectionZone
 onready var attackPlayerZone = $AttackPlayerZone
@@ -55,6 +55,13 @@ func _ready():
 	rng.randomize()
 	sprite.frame = rng.randi_range(0, 4)
 	sprite.speed_scale = 1
+	
+	# turn off playerDetectionZone and attackPlayerZone:
+	# attackPlayerZone.set_deferred("monitoring", false)
+	# playerDetectionZone.set_deferred("monitoring", false)
+	
+	# turn off hitbox:
+	# hitbox.set_deferred("monitorable", false)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -91,8 +98,8 @@ func _physics_process(delta):
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
 				print('attack state: arrived at position, reverting to IDLE')
-				sprite.speed_scale = 1
-				state = IDLE
+				# sprite.speed_scale = 1
+				# state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 				
@@ -128,7 +135,7 @@ func seek_player():
 # 1. detection is disabled;
 # 2. attacking is set to true;
 # 3. enables the enemy's hitbox and quadruples the sprite animation speed
-# 4. changes the state to ATTACK and starts the attackTimer (1 second)
+# 4. changes the state to ATTACK and starts the attackTimer (0.8s)
 # 5. ATTACK state: gets the player's position point before setting attacking to false
 # 6. accelerates the enemy to the player's position point
 # 7A. if the enemy arrives at the point, resets the sprite animation speed and state to IDLE
@@ -143,13 +150,13 @@ func attack_player():
 		disable_detection()
 		attackTimer.start()
 		attacking = true
-		hitbox.disabled = false
+		hitbox.set_deferred("monitorable", true)
 		sprite.speed_scale = 4
 		state = ATTACK
 		
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
-	hitbox.disabled = true
+	hitbox.set_deferred("monitorable", false)
 	sprite.speed_scale = 1
 	state = IDLE
 	timer.start(1)
@@ -162,12 +169,12 @@ func _on_AttackTimer_timeout():
 	else: print("cooldown already interrupted by player attack")
 	
 func disable_detection():
-	$AttackPlayerZone/CollisionShape2D.disabled = true
-	$PlayerDetectionZone/CollisionShape2D.disabled = true
+	attackPlayerZone.set_deferred("monitoring", false)
+	playerDetectionZone.set_deferred("monitoring", false)
 	
 func enable_detection():
-	$AttackPlayerZone/CollisionShape2D.disabled = false
-	$PlayerDetectionZone/CollisionShape2D.disabled = false
+	attackPlayerZone.set_deferred("monitoring", true)
+	playerDetectionZone.set_deferred("monitoring", true)
 		
 func attack_start():
 	pass
@@ -211,7 +218,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 func _on_BatStats_no_health():
 	sprite.playing = false # stop animation
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
-	hitbox.disabled = true
+	hitbox.set_deferred("monitorable", false)
 	state = DEAD
 	
 	tween.interpolate_property(sprite,
