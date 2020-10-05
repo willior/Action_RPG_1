@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dirt_border_32.png-d0793dcdbdb20740ef561af30bdab572.stex"
+path="res://.import/Bat_eye.png-55d5f66082f764a642ce72337e1bf917.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Will/dirt_border_32.png"
-dest_files=[ "res://.import/dirt_border_32.png-d0793dcdbdb20740ef561af30bdab572.stex" ]
+source_file="res://assets/Enemies/Bat_eye.png"
+dest_files=[ "res://.import/Bat_eye.png-55d5f66082f764a642ce72337e1bf917.stex" ]
 
 [params]
 

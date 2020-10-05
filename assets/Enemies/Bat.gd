@@ -22,9 +22,10 @@ enum {
 	DEAD
 }
 
-var rng = RandomNumberGenerator.new()
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
+var rng = RandomNumberGenerator.new()
+var random_number
 
 var state = IDLE
 var interactable = false
@@ -37,6 +38,7 @@ var target
 onready var stats = $BatStats
 onready var timer = $Timer
 onready var sprite = $AnimatedSprite
+onready var eye = $AnimatedSprite/AnimatedSpriteEye
 onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
@@ -53,8 +55,12 @@ onready var player = get_parent().get_parent().get_node("Player")
 func _ready():
 	add_to_group("enemies")
 	rng.randomize()
-	sprite.frame = rng.randi_range(0, 4)
-	sprite.speed_scale = 1
+	random_number = rng.randi_range(0, 4)
+	sprite.frame = random_number
+	eye.frame = random_number
+	# set_speed_scale(1)
+	sprite.playing = true
+	eye.playing = true
 	
 	# turn off playerDetectionZone and attackPlayerZone:
 	# attackPlayerZone.set_deferred("monitoring", false)
@@ -62,6 +68,10 @@ func _ready():
 	
 	# turn off hitbox:
 	# hitbox.set_deferred("monitorable", false)
+	
+func set_speed_scale(value):
+	sprite.speed_scale = value
+	eye.speed_scale = value
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -87,7 +97,8 @@ func _physics_process(delta):
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
 			else:
-				sprite.speed_scale = 1
+				set_speed_scale(1)
+				eye.modulate = Color(0,0,0)
 				state = IDLE
 
 		ATTACK:
@@ -104,6 +115,7 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 				
 	sprite.flip_h = velocity.x < 0
+	eye.flip_h = velocity.x < 0
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
@@ -126,7 +138,8 @@ func accelerate_towards_point(point, speed, delta):
 
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
-		sprite.speed_scale = 2
+		set_speed_scale(2)
+		eye.modulate = Color(1,0.8,0)
 		state = CHASE
 		
 # attacking
@@ -151,13 +164,15 @@ func attack_player():
 		attackTimer.start()
 		attacking = true
 		hitbox.set_deferred("monitorable", true)
-		sprite.speed_scale = 4
+		set_speed_scale(4)
+		eye.modulate = Color(1,0,0)
 		state = ATTACK
 		
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
 	hitbox.set_deferred("monitorable", false)
-	sprite.speed_scale = 1
+	set_speed_scale(1)
+	eye.modulate = Color(0,0,0)
 	state = IDLE
 	timer.start(1)
 	yield(timer, "timeout")
@@ -194,6 +209,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 	if attack_on_cooldown:
 		print('attack cooldown interrupted: re-enabling detection')
 		attack_on_cooldown = false
+		timer.stop()
 		enable_detection()
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	hurtbox.create_hit_effect()
@@ -229,6 +245,14 @@ func _on_BatStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
+	tween.interpolate_property(eye,
+	"offset:y",
+	-12,
+	0,
+	0.5,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
 	
 	tween.interpolate_property(sprite,
 	"modulate",
@@ -240,7 +264,7 @@ func _on_BatStats_no_health():
 	)
 	tween.start()
 	
-	timer.start()
+	timer.start(0.5)
 	yield(timer, "timeout")
 	
 	player.enemy_killed(stats.experience_pool)
