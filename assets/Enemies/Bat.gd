@@ -9,6 +9,7 @@ const PennyPickup = preload("res://assets/Items/PennyPickup.tscn")
 export var ACCELERATION = 300
 export var MAX_SPEED = 40
 export var WANDER_SPEED = 20
+export var ATTACK_SPEED = 200
 export var FRICTION = 240
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
@@ -30,6 +31,8 @@ var interactable = false
 var talkable = false
 var examined = false
 var attacking = false
+var attack_on_cooldown = false
+var target
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -75,19 +78,20 @@ func _physics_process(delta):
 		CHASE:
 			if playerDetectionZone.player != null:
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
-				attack_player() # gets the direction by comparing the enemy position with the player's
+				attack_player()
 			else:
 				sprite.speed_scale = 1
 				state = IDLE
 
 		ATTACK:
 			if attacking:
-				accelerate_towards_point(player.global_position, MAX_SPEED*2, delta)
+				target = player.global_position
+				print('attacking')
 				attacking = false
+			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
 				print('attack state: arrived at position, reverting to IDLE')
 				sprite.speed_scale = 1
-				attacking = false
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -110,27 +114,58 @@ func examine():
 	if !examined: examined = true
 			
 func accelerate_towards_point(point, speed, delta):
-	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position in the WanderController
-	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the WANDER_SPEED value
+	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
+	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
 
 func seek_player():
-	if playerDetectionZone.can_see_player():
+	if playerDetectionZone.can_see_player() && !attacking:
 		sprite.speed_scale = 2
 		state = CHASE
 		
+# attacking
+# the attack_player() function is run when the enemy is in the CHASE state
+# if that player enters the enemy's attackPlayerZone AND the attack is NOT on cooldown:
+# 1. detection is disabled;
+# 2. attacking is set to true;
+# 3. enables the enemy's hitbox and quadruples the sprite animation speed
+# 4. changes the state to ATTACK and starts the attackTimer (1 second)
+# 5. ATTACK state: gets the player's position point before setting attacking to false
+# 6. accelerates the enemy to the player's position point
+# 7A. if the enemy arrives at the point, resets the sprite animation speed and state to IDLE
+# 7B. on attackTimer_timeout, attack_on_cooldown becomes true
+#     disables hitbox
+#     resets sprite animation speed and state to IDLE
+#     starts a 1s timer, after which attack_on_cooldown becomes false
+#     enemy detection is re-enabled
+
 func attack_player():
-	if attackPlayerZone.can_attack_player():
-		hitbox.disabled = false
-		$AttackPlayerZone/CollisionShape2D.disabled = true
-		attacking = true
+	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
+		disable_detection()
 		attackTimer.start()
+		attacking = true
+		hitbox.disabled = false
 		sprite.speed_scale = 4
 		state = ATTACK
 		
 func _on_AttackTimer_timeout():
+	attack_on_cooldown = true
+	hitbox.disabled = true
 	sprite.speed_scale = 1
 	state = IDLE
-	hitbox.disabled = false
+	timer.start(1)
+	yield(timer, "timeout")
+	print('timeout:')
+	if attack_on_cooldown:
+		print("attack was on cooldown. re-enabling detection")
+		attack_on_cooldown = false
+		enable_detection()
+	else: print("cooldown already interrupted by player attack")
+	
+func disable_detection():
+	$AttackPlayerZone/CollisionShape2D.disabled = true
+	$PlayerDetectionZone/CollisionShape2D.disabled = true
+	
+func enable_detection():
 	$AttackPlayerZone/CollisionShape2D.disabled = false
 	$PlayerDetectionZone/CollisionShape2D.disabled = false
 		
@@ -149,6 +184,10 @@ func pick_random_state(state_list):
 	return state_list.pop_front() # spits one out
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
+	if attack_on_cooldown:
+		print('attack cooldown interrupted: re-enabling detection')
+		attack_on_cooldown = false
+		enable_detection()
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	hurtbox.create_hit_effect()
 	hurtbox.start_invincibility(0.4)
@@ -234,4 +273,3 @@ func _on_BatTalkBox_area_entered(_area):
 func _on_BatTalkBox_area_exited(_area):
 	interactable = false
 	# player.interacting = false
-
