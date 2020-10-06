@@ -10,9 +10,7 @@ func can_see_player():
 func _on_PlayerDetectionZone_body_entered(body):
 	player = body
 	# detectionZone.scale *= 2
-	print('detection zone entered')
 
 func _on_PlayerDetectionZone_body_exited(_body):
 	player = null
 	# detectionZone.scale /= 2
-	print('detection zone exited')

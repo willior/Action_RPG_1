@@ -48,43 +48,42 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 14 )
 region = Rect2( 0, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 14 )
 region = Rect2( 16, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 14 )
 region = Rect2( 32, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=20]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 14 )
 region = Rect2( 48, 0, 16, 24 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 14 )
 region = Rect2( 64, 0, 16, 24 )
 
-[sub_resource type="SpriteFrames" id=22]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=14]
 radius = 4.0
 
-[sub_resource type="Animation" id=9]
-resource_name = "StartFlashing"
+[sub_resource type="Animation" id=15]
 length = 0.2
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -96,8 +95,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "StopFlashing"
+[sub_resource type="Animation" id=16]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
@@ -112,19 +110,19 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=17]
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=18]
 radius = 9.0
 
-[sub_resource type="CircleShape2D" id=13]
+[sub_resource type="CircleShape2D" id=19]
 
-[sub_resource type="CircleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=20]
 
-[sub_resource type="CircleShape2D" id=15]
+[sub_resource type="CircleShape2D" id=21]
 radius = 3.16228
 
-[sub_resource type="CircleShape2D" id=16]
+[sub_resource type="CircleShape2D" id=22]
 radius = 5.0
 
 [node name="Bat" type="KinematicBody2D"]
@@ -140,7 +138,7 @@ offset = Vector2( 0, -12 )
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="AnimatedSprite"]
 modulate = Color( 0, 0, 0, 1 )
-frames = SubResource( 22 )
+frames = SubResource( 13 )
 frame = 1
 offset = Vector2( 0, -12 )
 
@@ -148,14 +146,14 @@ offset = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 8 )
+shape = SubResource( 14 )
 
 [node name="BatStats" parent="." instance=ExtResource( 4 )]
 script = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/StartFlashing = SubResource( 9 )
-anims/StopFlashing = SubResource( 10 )
+anims/StartFlashing = SubResource( 15 )
+anims/StopFlashing = SubResource( 16 )
 
 [node name="BatTalkBox" type="Area2D" parent="."]
 visible = false
@@ -164,7 +162,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BatTalkBox"]
 position = Vector2( 0, -14 )
-shape = SubResource( 11 )
+shape = SubResource( 17 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -172,7 +170,7 @@ collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -14 )
-shape = SubResource( 12 )
+shape = SubResource( 18 )
 
 [node name="WanderController" parent="." instance=ExtResource( 8 )]
 
@@ -181,7 +179,7 @@ visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 scale = Vector2( 4, 4 )
-shape = SubResource( 13 )
+shape = SubResource( 19 )
 
 [node name="AttackController" parent="." instance=ExtResource( 13 )]
 
@@ -192,7 +190,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 14 )
+shape = SubResource( 20 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8
@@ -203,13 +201,13 @@ position = Vector2( 0, -3 )
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 15 )
+shape = SubResource( 21 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 7 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 16 )
+shape = SubResource( 22 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

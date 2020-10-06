@@ -34,6 +34,7 @@ var examined = false
 var attacking = false
 var attack_on_cooldown = false
 var target
+var facingLeft = false
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -104,13 +105,11 @@ func _physics_process(delta):
 		ATTACK:
 			if attacking:
 				target = player.global_position
-				print('attacking')
 				attacking = false
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
-				print('attack state: arrived at position, reverting to IDLE')
-				# sprite.speed_scale = 1
-				# state = IDLE
+				sprite.speed_scale = 1
+				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 				
@@ -176,12 +175,9 @@ func _on_AttackTimer_timeout():
 	state = IDLE
 	timer.start(1)
 	yield(timer, "timeout")
-	print('timeout:')
 	if attack_on_cooldown:
-		print("attack was on cooldown. re-enabling detection")
 		attack_on_cooldown = false
 		enable_detection()
-	else: print("cooldown already interrupted by player attack")
 	
 func disable_detection():
 	attackPlayerZone.set_deferred("monitoring", false)
@@ -207,14 +203,12 @@ func pick_random_state(state_list):
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
 	if attack_on_cooldown:
-		print('attack cooldown interrupted: re-enabling detection')
 		attack_on_cooldown = false
 		timer.stop()
 		enable_detection()
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	hurtbox.create_hit_effect()
 	hurtbox.start_invincibility(0.4)
-	# prints(str(area.damage)+" damage")
 	
 	sprite.modulate = Color(1,1,0)
 	if stats.health > 0:
