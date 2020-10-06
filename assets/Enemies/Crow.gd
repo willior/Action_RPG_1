@@ -70,12 +70,6 @@ func _ready():
 	
 	# turn off hitbox:
 	# hitbox.set_deferred("monitorable", false)
-	
-# warning-ignore:unused_argument
-func set_speed_scale(value):
-	# sprite.speed_scale = value
-	# eye.speed_scale = value
-	pass
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -103,7 +97,6 @@ func _physics_process(delta):
 				attack_player()
 			else:
 				h_flip_handler()
-				set_speed_scale(1)
 				eye.modulate = Color(0,0,0)
 				state = IDLE
 
@@ -118,9 +111,6 @@ func _physics_process(delta):
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-				
-	#sprite.flip_h = velocity.x < 0
-	#eye.flip_h = velocity.x < 0
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
@@ -150,7 +140,6 @@ func accelerate_towards_point(point, speed, delta):
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
 		animationState.travel("Fly")
-		set_speed_scale(2)
 		eye.modulate = Color(1,0.8,0)
 		state = CHASE
 
@@ -160,24 +149,19 @@ func attack_player():
 		attackTimer.start()
 		attacking = true
 		hitbox.set_deferred("monitorable", true)
-		set_speed_scale(4)
 		eye.modulate = Color(1,0,0)
 		state = ATTACK
 		
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
 	hitbox.set_deferred("monitorable", false)
-	set_speed_scale(1)
 	eye.modulate = Color(0,0,0)
 	state = IDLE
 	timer.start(1)
 	yield(timer, "timeout")
-	print('timeout:')
 	if attack_on_cooldown:
-		print("attack was on cooldown. re-enabling detection")
 		attack_on_cooldown = false
 		enable_detection()
-	else: print("cooldown already interrupted by player attack")
 	
 func disable_detection():
 	attackPlayerZone.set_deferred("monitoring", false)
@@ -193,23 +177,16 @@ func attack_start():
 func attack_finished():
 	pass
 
-# Animation
-# The wander state is updated 
-
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
-	prints('updating wander state:' + str(state))
 	var state_rng = rand_range(2, 4)
 	if state == 0:
 		if state_rng > 3:
-			print('peck')
 			animationState.travel("Peck")
 		else:
 			animationState.travel("Idle")	
-			print('idle')
 	elif state == 1:
 		animationState.travel("Fly")
-		print('fly')
 	
 	h_flip_handler()
 	wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
@@ -220,14 +197,12 @@ func pick_random_state(state_list):
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
 	if attack_on_cooldown:
-		print('attack cooldown interrupted: re-enabling detection')
 		attack_on_cooldown = false
 		timer.stop()
 		enable_detection()
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	hurtbox.create_hit_effect()
 	hurtbox.start_invincibility(0.4)
-	# prints(str(area.damage)+" damage")
 	
 	sprite.modulate = Color(1,1,0)
 	if stats.health > 0:

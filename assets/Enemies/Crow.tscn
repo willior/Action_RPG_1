@@ -318,6 +318,7 @@ position = Vector2( 0, -14 )
 shape = SubResource( 17 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+visible = false
 position = Vector2( 0, 4 )
 collision_layer = 8
 
@@ -326,16 +327,20 @@ position = Vector2( 0, -16 )
 shape = SubResource( 18 )
 
 [node name="WanderController" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 3 )]
+visible = false
 scale = Vector2( 4, 4 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 shape = SubResource( 19 )
 
 [node name="AttackController" parent="." instance=ExtResource( 13 )]
+visible = false
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 10 )]
+visible = false
 scale = Vector2( 2, 2 )
 collision_layer = 0
 collision_mask = 2
