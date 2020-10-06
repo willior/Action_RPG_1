@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://assets/World/water_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -41,6 +41,8 @@
 [ext_resource path="res://assets/World/Trees/Tree_1_green.tscn" type="PackedScene" id=39]
 [ext_resource path="res://assets/Shadows/Clouds_background.png" type="Texture" id=40]
 [ext_resource path="res://ParallaxBackgroundOverlay.gd" type="Script" id=41]
+[ext_resource path="res://assets/World/Trees/Tree_3_tall_green.tscn" type="PackedScene" id=42]
+[ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=43]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -663,14 +665,20 @@ position = Vector2( 240, 176 )
 [node name="Plant_4_6" parent="YSort/Plants" instance=ExtResource( 36 )]
 position = Vector2( 216, 184 )
 
-[node name="Plant_4_" parent="YSort/Plants/Plant_4_6" instance=ExtResource( 36 )]
-position = Vector2( -24, 8 )
+[node name="Plant_4_7" parent="YSort/Plants" instance=ExtResource( 36 )]
+position = Vector2( 192, 192 )
 
 [node name="Plant_16_8" parent="YSort/Plants" instance=ExtResource( 3 )]
 position = Vector2( 184, 152 )
 
 [node name="Plant_16_9" parent="YSort/Plants" instance=ExtResource( 3 )]
 position = Vector2( 256, 64 )
+
+[node name="Plant_16_14" parent="YSort/Plants" instance=ExtResource( 3 )]
+position = Vector2( -280, 248 )
+
+[node name="Plant_16_13" parent="YSort/Plants" instance=ExtResource( 3 )]
+position = Vector2( -200, 248 )
 
 [node name="Trees" type="YSort" parent="YSort"]
 
@@ -758,12 +766,6 @@ position = Vector2( 272, -40 )
 [node name="Tree_8_circle6" parent="YSort/Trees" instance=ExtResource( 8 )]
 position = Vector2( 272, 168 )
 
-[node name="Plant_16_" parent="YSort/Trees" instance=ExtResource( 3 )]
-position = Vector2( -200, 248 )
-
-[node name="Plant_16_" parent="YSort/Trees/Plant_16_" instance=ExtResource( 3 )]
-position = Vector2( -80, 0 )
-
 [node name="Tree_3_tall9" parent="YSort/Trees" instance=ExtResource( 24 )]
 position = Vector2( 240, 216 )
 
@@ -784,6 +786,21 @@ position = Vector2( 41, 73 )
 
 [node name="Tree_1_green3" parent="YSort/Trees" instance=ExtResource( 39 )]
 position = Vector2( -16, 200 )
+
+[node name="Tree_2_pine10" parent="YSort/Trees" instance=ExtResource( 42 )]
+position = Vector2( -208, -56 )
+
+[node name="Tree_2_pine11" parent="YSort/Trees" instance=ExtResource( 42 )]
+position = Vector2( -288, 8 )
+
+[node name="Tree_2_pine12" parent="YSort/Trees" instance=ExtResource( 42 )]
+position = Vector2( -144, 168 )
+
+[node name="Tree_2_pine14" parent="YSort/Trees" instance=ExtResource( 42 )]
+position = Vector2( -248, -152 )
+
+[node name="Tree_2_pine13" parent="YSort/Trees" instance=ExtResource( 42 )]
+position = Vector2( 80, 40 )
 
 [node name="Grass" type="YSort" parent="YSort"]
 
@@ -1171,6 +1188,18 @@ script = ExtResource( 20 )
 
 [node name="Timer" type="Timer" parent="YSort/Enemies/BatSpawner"]
 wait_time = 2.0
+
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 43 )]
+position = Vector2( -64, -56 )
+
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 43 )]
+position = Vector2( -168, -96 )
+
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 43 )]
+position = Vector2( -304, -88 )
+
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 43 )]
+position = Vector2( -240, 40 )
 
 [node name="Items" type="YSort" parent="YSort"]
 
