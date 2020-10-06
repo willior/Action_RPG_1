@@ -54,6 +54,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var talkBox = $TalkBox/CollisionShape2D
+onready var audio = $AudioStreamPlayer
 onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
@@ -107,7 +108,7 @@ func _physics_process(delta):
 			if attacking:
 				target = player.global_position
 				attacking = false
-				# animationState.travel("Fly")
+				audio_cawcawcaw()
 				fly_animation()
 				
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
@@ -309,3 +310,11 @@ func fly_animation():
 	
 func set_flying(value):
 	flying = value
+	
+func audio_caw():
+	audio.stream = load("res://assets/Audio/Crow_caw.wav")
+	audio.play()
+	
+func audio_cawcawcaw():
+	audio.stream = load("res://assets/Audio/Crow_cawcawcaw.wav")
+	audio.play()

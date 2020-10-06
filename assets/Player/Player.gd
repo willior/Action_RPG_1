@@ -146,7 +146,7 @@ func move_state(delta):
 			state = ATTACK1
 		elif stats.stamina <= 0:
 			noStamina()
-		elif talking && talkTimer.is_stopped():
+		elif talking && interactObject.talkable && talkTimer.is_stopped():
 			interactObject.talk()
 			
 	elif Input.is_action_pressed("attack"):
