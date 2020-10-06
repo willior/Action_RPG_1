@@ -120,8 +120,10 @@ func _physics_process(delta):
 func h_flip_handler():
 	if velocity.x < 0:
 		sprite.flip_h = true
+		eye.flip_h = true
 	else:
 		sprite.flip_h = false
+		eye.flip_h = false
 	
 func examine():
 	var dialogBox = DialogBox.instance()
