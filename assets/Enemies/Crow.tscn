@@ -401,7 +401,7 @@ texture = ExtResource( 12 )
 offset = Vector2( 0, -12 )
 vframes = 2
 hframes = 12
-frame = 12
+frame = 13
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
