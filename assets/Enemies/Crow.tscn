@@ -440,7 +440,7 @@ frame = 12
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
 frames = SubResource( 26 )
-frame = 12
+frame = 13
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]

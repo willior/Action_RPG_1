@@ -7,9 +7,9 @@ const HeartPickup = preload("res://assets/Items/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/Items/PennyPickup.tscn")
 
 export var ACCELERATION = 200
-export var MAX_SPEED = 200
+export var MAX_SPEED = 400
 export var WANDER_SPEED = 80
-export var ATTACK_SPEED = 5000
+export var ATTACK_SPEED = 6000
 export var FRICTION = 240
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
@@ -100,7 +100,6 @@ func _physics_process(delta):
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
 			else:
-				h_flip_handler()
 				eye.modulate = Color(0,0,0)
 				state = IDLE
 
@@ -108,7 +107,6 @@ func _physics_process(delta):
 			if attacking:
 				target = player.global_position
 				attacking = false
-				h_flip_handler()
 				# animationState.travel("Fly")
 				fly_animation()
 				
@@ -145,8 +143,7 @@ func accelerate_towards_point(point, speed, delta):
 	if flying:
 		var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
 		velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
-	else:
-		print('overriding movement. not in flight yet.')
+		h_flip_handler()
 
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
@@ -201,7 +198,7 @@ func update_wander_state():
 		# animationState.travel("Fly")
 		fly_animation()
 	
-	h_flip_handler()
+	# h_flip_handler()
 	wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
 		
 func pick_random_state(state_list): 
