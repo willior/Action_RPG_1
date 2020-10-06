@@ -35,6 +35,7 @@ var attacking = false
 var attack_on_cooldown = false
 var target
 var flying
+var currentAnim
 
 onready var stats = $CrowStats
 onready var timer = $Timer
@@ -86,7 +87,10 @@ func _physics_process(delta):
 			seek_player()
 			if wanderController.get_time_left() == 0:
 				update_wander_state()
+			
+			fly_animation()
 			accelerate_towards_point(wanderController.target_position, WANDER_SPEED, delta)
+			
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
 
@@ -105,7 +109,9 @@ func _physics_process(delta):
 				target = player.global_position
 				attacking = false
 				h_flip_handler()
-				animationState.travel("Fly")
+				# animationState.travel("Fly")
+				fly_animation()
+				
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
 				state = IDLE
@@ -136,12 +142,16 @@ func examine():
 	if !examined: examined = true
 			
 func accelerate_towards_point(point, speed, delta):
-	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
-	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
+	if flying:
+		var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
+		velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
+	else:
+		print('overriding movement. not in flight yet.')
 
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
-		animationState.travel("Fly")
+		# animationState.travel("Fly")
+		fly_animation()
 		eye.modulate = Color(1,0.8,0)
 		state = CHASE
 
@@ -182,13 +192,14 @@ func attack_finished():
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 	var state_rng = rand_range(2, 4)
-	if state == 0:
-		if state_rng > 3:
+	if state == 0: # IDLE STATE
+		if state_rng > 3: # plays the "Peck" animation 25% of the time
 			animationState.travel("Peck")
 		else:
-			animationState.travel("Idle")	
-	elif state == 1:
-		animationState.travel("Fly")
+			animationState.travel("Idle") # otherwise plays the idle animation
+	elif state == 1: # WANDER STATE
+		# animationState.travel("Fly")
+		fly_animation()
 	
 	h_flip_handler()
 	wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
@@ -295,3 +306,9 @@ func _on_TalkBox_area_exited(_area):
 
 func idle_animation():
 	animationState.travel("Idle")
+	
+func fly_animation():
+	animationState.travel("Fly")
+	
+func set_flying(value):
+	flying = value

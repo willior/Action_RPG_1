@@ -59,7 +59,7 @@ func _ready():
 	random_number = rng.randi_range(0, 4)
 	sprite.frame = random_number
 	eye.frame = random_number
-	# set_speed_scale(1)
+	set_speed_scale(1)
 	sprite.playing = true
 	eye.playing = true
 	
