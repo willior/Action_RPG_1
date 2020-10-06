@@ -1,8 +1,7 @@
-[gd_scene load_steps=90 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://assets/World/water_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/World/Plants/Plant_16_.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Tilesets/grass2_fade_grass_wang/tileset_grass2_fade_grass_wang.tres" type="TileSet" id=4]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://assets/World/Grass.tscn" type="PackedScene" id=6]
@@ -33,7 +32,7 @@
 [ext_resource path="res://assets/Items/PennyPickup.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/World/Trees/Tree_2_pine.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/World/Trees/Tree_1_yellow.tscn" type="PackedScene" id=35]
-[ext_resource path="res://assets/World/Plants/Plant_4_.tscn" type="PackedScene" id=36]
+[ext_resource path="res://assets/World/Plants/Plant_4_green.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=37]
 [ext_resource path="res://StatsDisplay.gd" type="Script" id=38]
 [ext_resource path="res://assets/World/Trees/Tree_1_green.tscn" type="PackedScene" id=39]
@@ -614,69 +613,6 @@ position = Vector2( 64, 280 )
 position = Vector2( 160, 184 )
 
 [node name="Plants" type="YSort" parent="YSort"]
-
-[node name="Plant_16_" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -312, -136 )
-
-[node name="Plant_16_11" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -312, -120 )
-
-[node name="Plant_16_3" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -312, -48 )
-
-[node name="Plant_16_4" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -312, -32 )
-
-[node name="Plant_16_5" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -312, -16 )
-
-[node name="Plant_16_10" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -312, 0 )
-
-[node name="Plant_16_2" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -296, -152 )
-
-[node name="Plant_16_12" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -272, -152 )
-
-[node name="Plant_4_" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 176, 112 )
-
-[node name="Plant_4_2" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 248, 232 )
-
-[node name="Plant_4_3" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 16, 104 )
-
-[node name="Plant_4_4" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 112, 88 )
-
-[node name="Plant_16_6" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( 376, -64 )
-
-[node name="Plant_16_7" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( 216, -40 )
-
-[node name="Plant_4_5" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 240, 176 )
-
-[node name="Plant_4_6" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 216, 184 )
-
-[node name="Plant_4_7" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 192, 192 )
-
-[node name="Plant_16_8" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( 184, 152 )
-
-[node name="Plant_16_9" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( 256, 64 )
-
-[node name="Plant_16_14" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -280, 248 )
-
-[node name="Plant_16_13" parent="YSort/Plants" instance=ExtResource( 3 )]
-position = Vector2( -200, 248 )
 
 [node name="Trees" type="YSort" parent="YSort"]
 
