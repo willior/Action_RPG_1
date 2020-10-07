@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=2]
+[gd_scene load_steps=132 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -783,6 +783,80 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.35, 0.55 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("AudioStreamPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 7 )
+} ],
+"times": PoolRealArray( 0.35 )
+}
+
+[sub_resource type="Animation" id=116]
+resource_name = "AttackFlashUp"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.35, 0.45, 0.55, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 170, 171, 172, 173, 174, 175, 176, 177, 178, 179 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.35, 0.55, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "flash_start"
+}, {
+"args": [  ],
+"method": "flash_stop"
+}, {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HitboxPivot:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 90.0 ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
@@ -1896,7 +1970,7 @@ animation = "AttackFlashRight"
 animation = "AttackFlashDown"
 
 [sub_resource type="AnimationNodeAnimation" id=54]
-animation = "Attack1Up"
+animation = "AttackFlashUp"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id=55]
 blend_point_0/node = SubResource( 51 )
@@ -2113,7 +2187,7 @@ states/Shade/node = SubResource( 80 )
 states/Shade/position = Vector2( 215.03, 202.75 )
 transitions = [ "Idle", "Run", SubResource( 81 ), "Run", "Idle", SubResource( 82 ), "Idle", "Attack1", SubResource( 83 ), "Attack1", "Idle", SubResource( 84 ), "Idle", "Roll", SubResource( 85 ), "Roll", "Idle", SubResource( 86 ), "Idle", "Hit", SubResource( 87 ), "Hit", "Idle", SubResource( 88 ), "Attack1", "Attack2", SubResource( 89 ), "Attack2", "Idle", SubResource( 90 ), "Attack1", "Hit", SubResource( 91 ), "Attack2", "Hit", SubResource( 92 ), "Roll", "Hit", SubResource( 93 ), "Run", "Hit", SubResource( 94 ), "Attack2", "Attack1", SubResource( 95 ), "Idle", "Shade", SubResource( 96 ), "Shade", "Idle", SubResource( 97 ), "Shade", "Hit", SubResource( 98 ), "Shade", "Attack2", SubResource( 99 ), "Idle", "Flash", SubResource( 100 ), "Flash", "Idle", SubResource( 101 ), "Flash", "Hit", SubResource( 102 ), "Idle", "Backstep", SubResource( 103 ), "Backstep", "Idle", SubResource( 104 ), "Backstep", "Hit", SubResource( 105 ), "Backstep", "Shade", SubResource( 106 ), "Backstep", "Flash", SubResource( 107 ), "Backstep", "Attack1", SubResource( 108 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -380.97, -65.3473 )
+graph_offset = Vector2( -380.97, 98.7566 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=110]
 
@@ -2172,7 +2246,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 36
+frame = 179
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -2193,6 +2267,7 @@ anims/Attack2Up = SubResource( 10 )
 anims/AttackFlashDown = SubResource( 11 )
 anims/AttackFlashLeft = SubResource( 12 )
 anims/AttackFlashRight = SubResource( 13 )
+anims/AttackFlashUp = SubResource( 116 )
 anims/AttackShadeDown = SubResource( 14 )
 anims/AttackShadeLeft = SubResource( 15 )
 anims/AttackShadeRight = SubResource( 16 )
@@ -2223,7 +2298,7 @@ parameters/playback = SubResource( 110 )
 parameters/Attack1/blend_position = Vector2( -1.00485, -0.0314287 )
 parameters/Attack2/blend_position = Vector2( 0.70017, -0.0187501 )
 parameters/Backstep/blend_position = Vector2( 0, 0 )
-parameters/Flash/blend_position = Vector2( 0.0019933, 1.08909 )
+parameters/Flash/blend_position = Vector2( -0.00122851, 1.09371 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
 parameters/Idle/blend_position = Vector2( 0, 1 )
 parameters/Roll/blend_position = Vector2( -0.000606418, -0.00604391 )
