@@ -1405,7 +1405,6 @@ position = Vector2( -232, 296 )
 
 [node name="HeartPickup5" parent="YSort/Items" instance=ExtResource( 19 )]
 position = Vector2( -48, -128 )
-script = null
 
 [node name="PennyPickup13" parent="YSort/Items" instance=ExtResource( 33 )]
 position = Vector2( -72, -112 )
