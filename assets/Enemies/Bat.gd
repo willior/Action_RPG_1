@@ -51,6 +51,7 @@ onready var wanderController = $WanderController
 onready var attackController = $AttackController
 onready var animationPlayer = $AnimationPlayer
 onready var talkBox = $BatTalkBox/CollisionShape2D
+onready var audio = $AudioStreamPlayer
 onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
@@ -104,6 +105,7 @@ func _physics_process(delta):
 
 		ATTACK:
 			if attacking:
+				audio.play()
 				target = player.global_position
 				attacking = false
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
