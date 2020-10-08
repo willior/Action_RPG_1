@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://assets/World/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Spawners/CrowSpawner.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=8]
+[ext_resource path="res://assets/World/Flowers/Flowers_sheet1.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=11]
@@ -53,6 +53,7 @@
 [ext_resource path="res://assets/World/Doodads/Rock_VerySmall_sheet.tscn" type="PackedScene" id=53]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_PurpleLight.tscn" type="PackedScene" id=54]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_PurpleDark.tscn" type="PackedScene" id=55]
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "Flowers_sheet1.png 0"
