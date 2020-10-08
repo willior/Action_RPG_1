@@ -63,7 +63,7 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "Uncut",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
@@ -86,7 +86,7 @@ script = ExtResource( 3 )
 position = Vector2( -16, -16 )
 frames = SubResource( 7 )
 animation = "Uncut"
-frame = 4
+frame = 2
 playing = true
 centered = false
 

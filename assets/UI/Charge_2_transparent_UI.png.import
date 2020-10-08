@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ChargeUIEmpty.png-4c73e430986b1f10d8d9c31934fb1541.stex"
+path="res://.import/Charge_2_transparent_UI.png-2db025b629ef3ba6f7004f7a6f7db6dd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/ChargeUIEmpty.png"
-dest_files=[ "res://.import/ChargeUIEmpty.png-4c73e430986b1f10d8d9c31934fb1541.stex" ]
+source_file="res://assets/UI/Charge_2_transparent_UI.png"
+dest_files=[ "res://.import/Charge_2_transparent_UI.png-2db025b629ef3ba6f7004f7a6f7db6dd.stex" ]
 
 [params]
 
