@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
-const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
+const EnemyDeathEffect = preload("res://assets/Effects/Crow_DeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const HeartPickup = preload("res://assets/Items/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/Items/PennyPickup.tscn")
 
+const ENEMY_NAME = "Crow"
 export var ACCELERATION = 200
 export var MAX_SPEED = 400
 export var WANDER_SPEED = 80
@@ -276,6 +277,7 @@ func _on_CrowStats_no_health():
 	
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
+	# enemyDeathEffect.enemy = ENEMY_NAME
 	enemyDeathEffect.global_position = global_position
 	
 	var expNotice = ExpNotice.instance()

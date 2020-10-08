@@ -419,7 +419,7 @@ states/Takeoff/node = SubResource( 40 )
 states/Takeoff/position = Vector2( 440, 31 )
 transitions = [ "Landing", "Idle", SubResource( 41 ), "Idle", "Takeoff", SubResource( 42 ), "Takeoff", "Fly", SubResource( 43 ), "Fly", "Landing", SubResource( 44 ), "Idle", "Peck", SubResource( 45 ), "Peck", "Takeoff", SubResource( 46 ), "Landing", "Peck", SubResource( 47 ), "Peck", "Idle", SubResource( 48 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 0, -12.0502 )
+graph_offset = Vector2( 31.9396, 14.194 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=50]
 
@@ -450,12 +450,12 @@ texture = ExtResource( 12 )
 offset = Vector2( 0, -12 )
 vframes = 2
 hframes = 12
-frame = 6
+frame = 21
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
 frames = SubResource( 26 )
-frame = 6
+frame = 21
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]

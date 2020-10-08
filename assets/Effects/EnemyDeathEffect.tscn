@@ -50,11 +50,16 @@ animations = [ {
 "loop": false,
 "name": "Animate",
 "speed": 15.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "Crow",
+"speed": 10.0
 } ]
 
 [node name="EnemyDeathEffect" type="AnimatedSprite"]
 frames = SubResource( 11 )
-animation = "Animate"
+animation = "Crow"
 offset = Vector2( 0, -12 )
 script = ExtResource( 1 )
 
