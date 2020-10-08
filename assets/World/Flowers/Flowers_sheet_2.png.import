@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bush2.png-959700be91e3cea8be71051b97537b37.stex"
+path="res://.import/Flowers_sheet_2.png-6d359bc8954e22226880635d5cf7d0a7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/World/bush2.png"
-dest_files=[ "res://.import/bush2.png-959700be91e3cea8be71051b97537b37.stex" ]
+source_file="res://assets/World/Flowers/Flowers_sheet_2.png"
+dest_files=[ "res://.import/Flowers_sheet_2.png-6d359bc8954e22226880635d5cf7d0a7.stex" ]
 
 [params]
 
