@@ -59,7 +59,7 @@ animations = [ {
 
 [node name="EnemyDeathEffect" type="AnimatedSprite"]
 frames = SubResource( 11 )
-animation = "Crow"
+animation = "Animate"
 offset = Vector2( 0, -12 )
 script = ExtResource( 1 )
 

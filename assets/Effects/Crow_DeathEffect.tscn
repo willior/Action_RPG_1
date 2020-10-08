@@ -1,8 +1,7 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Effects/Crow_DeathEffect_10frames.png" type="Texture" id=1]
 [ext_resource path="res://assets/Audio/EnemyDie.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/Effects/Crow_DeathEffect.gd" type="Script" id=3]
 [ext_resource path="res://assets/Effects/EnemyDeathEffect.png" type="Texture" id=4]
 [ext_resource path="res://assets/Effects/Effect.gd" type="Script" id=5]
 
@@ -49,9 +48,9 @@ region = Rect2( 432, 0, 48, 48 )
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
 "frames": [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 35 ) ],
-"loop": true,
-"name": "default",
-"speed": 15.0
+"loop": false,
+"name": "Animate",
+"speed": 10.0
 } ]
 
 [sub_resource type="AtlasTexture" id=15]
@@ -98,21 +97,23 @@ region = Rect2( 288, 0, 32, 32 )
 animations = [ {
 "frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": false,
-"name": "default",
+"name": "Animate",
 "speed": 15.0
 } ]
 
 [node name="Crow_DeathEffect" type="AnimatedSprite"]
 position = Vector2( 0, -24 )
 frames = SubResource( 14 )
-script = ExtResource( 3 )
+animation = "Animate"
+script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 8 )
 frames = SubResource( 25 )
+animation = "Animate"
 script = ExtResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimatedSprite"]
 stream = ExtResource( 2 )
 
-[node name="AudioCrow_DeathSound" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

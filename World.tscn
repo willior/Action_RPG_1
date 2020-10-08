@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://assets/Background/water_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/Tilesets/grass2_fade_grass_wang/tileset_grass2_fade_grass_wang.tres" type="TileSet" id=4]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://assets/World/Grass.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Spawners/CrowSpawner.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet1.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
@@ -19,7 +19,6 @@
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=17]
 [ext_resource path="res://assets/Audio/fieldSong1.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/Items/HeartPickup.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/Enemies/BatSpawner.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=22]
 [ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=23]
@@ -42,7 +41,6 @@
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_green.tscn" type="PackedScene" id=40]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_pink.tscn" type="PackedScene" id=41]
 [ext_resource path="res://assets/World/Plants/Plant_16_green_alt.tscn" type="PackedScene" id=42]
-[ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=43]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_yellow.tscn" type="PackedScene" id=44]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_orange.tscn" type="PackedScene" id=45]
 [ext_resource path="res://assets/World/Trees/Tree_1_pink.tscn" type="PackedScene" id=46]
@@ -1560,382 +1558,361 @@ position = Vector2( 272, -96 )
 position = Vector2( 200, 152 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
+position = Vector2( -360, -200 )
 
-[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 136, 160 )
+[node name="CrowSpawner" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 88, 64 )
 
-[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( -192, -136 )
+[node name="CrowSpawner2" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 296, 144 )
 
-[node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( -208, 40 )
+[node name="CrowSpawner3" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 120, 240 )
 
-[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( -208, 40 )
+[node name="CrowSpawner4" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 336, 368 )
 
-[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 16, 144 )
+[node name="CrowSpawner5" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 168, 752 )
 
-[node name="Bat8" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 16, 144 )
-
-[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 248, 208 )
-
-[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 272, 72 )
-
-[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 272, 152 )
-
-[node name="BatSpawner" parent="YSort/Enemies" instance=ExtResource( 20 )]
-
-[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 43 )]
-position = Vector2( -120, -32 )
-
-[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 43 )]
-position = Vector2( -240, 72 )
-
-[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 43 )]
-position = Vector2( -16, 184 )
-
-[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 43 )]
-position = Vector2( -56, 280 )
+[node name="CrowSpawner6" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 336, 752 )
 
 [node name="Items" type="YSort" parent="YSort"]
+position = Vector2( -360, -200 )
 
 [node name="PennyPickup" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 472, -104 )
+position = Vector2( 832, 96 )
 
 [node name="PennyPickup2" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 480, -104 )
+position = Vector2( 840, 96 )
 
 [node name="PennyPickup3" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 488, -104 )
+position = Vector2( 848, 96 )
 
 [node name="PennyPickup4" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 496, -104 )
+position = Vector2( 856, 96 )
 
 [node name="PennyPickup8" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 504, -104 )
+position = Vector2( 864, 96 )
 
 [node name="PennyPickup7" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 512, -104 )
+position = Vector2( 872, 96 )
 
 [node name="PennyPickup6" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 520, -104 )
+position = Vector2( 880, 96 )
 
 [node name="PennyPickup5" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 528, -104 )
+position = Vector2( 888, 96 )
 
 [node name="PennyPickup12" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 536, -104 )
+position = Vector2( 896, 96 )
 
 [node name="PennyPickup11" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 544, -104 )
+position = Vector2( 904, 96 )
 
 [node name="PennyPickup10" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 552, -104 )
+position = Vector2( 912, 96 )
 
 [node name="PennyPickup9" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 560, -104 )
+position = Vector2( 920, 96 )
 
 [node name="PennyPickup16" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 568, -104 )
+position = Vector2( 928, 96 )
 
 [node name="PennyPickup15" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 576, -104 )
+position = Vector2( 936, 96 )
 
 [node name="PennyPickup14" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 584, -104 )
+position = Vector2( 944, 96 )
 
 [node name="PennyPickup31" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 472, -96 )
+position = Vector2( 832, 104 )
 
 [node name="PennyPickup30" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 480, -96 )
+position = Vector2( 840, 104 )
 
 [node name="PennyPickup29" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 488, -96 )
+position = Vector2( 848, 104 )
 
 [node name="PennyPickup28" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 496, -96 )
+position = Vector2( 856, 104 )
 
 [node name="PennyPickup27" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 504, -96 )
+position = Vector2( 864, 104 )
 
 [node name="PennyPickup26" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 512, -96 )
+position = Vector2( 872, 104 )
 
 [node name="PennyPickup25" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 520, -96 )
+position = Vector2( 880, 104 )
 
 [node name="PennyPickup24" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 528, -96 )
+position = Vector2( 888, 104 )
 
 [node name="PennyPickup23" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 536, -96 )
+position = Vector2( 896, 104 )
 
 [node name="PennyPickup22" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 544, -96 )
+position = Vector2( 904, 104 )
 
 [node name="PennyPickup21" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 552, -96 )
+position = Vector2( 912, 104 )
 
 [node name="PennyPickup20" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 560, -96 )
+position = Vector2( 920, 104 )
 
 [node name="PennyPickup19" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 568, -96 )
+position = Vector2( 928, 104 )
 
 [node name="PennyPickup18" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 576, -96 )
+position = Vector2( 936, 104 )
 
 [node name="PennyPickup17" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 584, -96 )
+position = Vector2( 944, 104 )
 
 [node name="PennyPickup46" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 472, -88 )
+position = Vector2( 832, 112 )
 
 [node name="PennyPickup45" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 480, -88 )
+position = Vector2( 840, 112 )
 
 [node name="PennyPickup44" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 488, -88 )
+position = Vector2( 848, 112 )
 
 [node name="PennyPickup43" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 496, -88 )
+position = Vector2( 856, 112 )
 
 [node name="PennyPickup42" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 504, -88 )
+position = Vector2( 864, 112 )
 
 [node name="PennyPickup41" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 512, -88 )
+position = Vector2( 872, 112 )
 
 [node name="PennyPickup40" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 520, -88 )
+position = Vector2( 880, 112 )
 
 [node name="PennyPickup39" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 528, -88 )
+position = Vector2( 888, 112 )
 
 [node name="PennyPickup38" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 536, -88 )
+position = Vector2( 896, 112 )
 
 [node name="PennyPickup37" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 544, -88 )
+position = Vector2( 904, 112 )
 
 [node name="PennyPickup36" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 552, -88 )
+position = Vector2( 912, 112 )
 
 [node name="PennyPickup35" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 560, -88 )
+position = Vector2( 920, 112 )
 
 [node name="PennyPickup34" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 568, -88 )
+position = Vector2( 928, 112 )
 
 [node name="PennyPickup33" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 576, -88 )
+position = Vector2( 936, 112 )
 
 [node name="PennyPickup32" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 584, -88 )
+position = Vector2( 944, 112 )
 
 [node name="PennyPickup61" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 472, -80 )
+position = Vector2( 832, 120 )
 
 [node name="PennyPickup60" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 480, -80 )
+position = Vector2( 840, 120 )
 
 [node name="PennyPickup59" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 488, -80 )
+position = Vector2( 848, 120 )
 
 [node name="PennyPickup58" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 496, -80 )
+position = Vector2( 856, 120 )
 
 [node name="PennyPickup57" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 504, -80 )
+position = Vector2( 864, 120 )
 
 [node name="PennyPickup56" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 512, -80 )
+position = Vector2( 872, 120 )
 
 [node name="PennyPickup55" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 520, -80 )
+position = Vector2( 880, 120 )
 
 [node name="PennyPickup54" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 528, -80 )
+position = Vector2( 888, 120 )
 
 [node name="PennyPickup53" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 536, -80 )
+position = Vector2( 896, 120 )
 
 [node name="PennyPickup52" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 544, -80 )
+position = Vector2( 904, 120 )
 
 [node name="PennyPickup51" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 552, -80 )
+position = Vector2( 912, 120 )
 
 [node name="PennyPickup50" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 560, -80 )
+position = Vector2( 920, 120 )
 
 [node name="PennyPickup49" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 568, -80 )
+position = Vector2( 928, 120 )
 
 [node name="PennyPickup48" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 576, -80 )
+position = Vector2( 936, 120 )
 
 [node name="PennyPickup47" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 584, -80 )
+position = Vector2( 944, 120 )
 
 [node name="PennyPickup76" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 472, -72 )
+position = Vector2( 832, 128 )
 
 [node name="PennyPickup75" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 480, -72 )
+position = Vector2( 840, 128 )
 
 [node name="PennyPickup74" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 488, -72 )
+position = Vector2( 848, 128 )
 
 [node name="PennyPickup73" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 496, -72 )
+position = Vector2( 856, 128 )
 
 [node name="PennyPickup72" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 504, -72 )
+position = Vector2( 864, 128 )
 
 [node name="PennyPickup71" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 512, -72 )
+position = Vector2( 872, 128 )
 
 [node name="PennyPickup70" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 520, -72 )
+position = Vector2( 880, 128 )
 
 [node name="PennyPickup69" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 528, -72 )
+position = Vector2( 888, 128 )
 
 [node name="PennyPickup68" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 536, -72 )
+position = Vector2( 896, 128 )
 
 [node name="PennyPickup67" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 544, -72 )
+position = Vector2( 904, 128 )
 
 [node name="PennyPickup66" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 552, -72 )
+position = Vector2( 912, 128 )
 
 [node name="PennyPickup65" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 560, -72 )
+position = Vector2( 920, 128 )
 
 [node name="PennyPickup64" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 568, -72 )
+position = Vector2( 928, 128 )
 
 [node name="PennyPickup63" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 576, -72 )
+position = Vector2( 936, 128 )
 
 [node name="PennyPickup62" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 584, -72 )
+position = Vector2( 944, 128 )
 
 [node name="PennyPickup91" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 472, -64 )
+position = Vector2( 832, 136 )
 
 [node name="PennyPickup90" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 480, -64 )
+position = Vector2( 840, 136 )
 
 [node name="PennyPickup89" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 488, -64 )
+position = Vector2( 848, 136 )
 
 [node name="PennyPickup88" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 496, -64 )
+position = Vector2( 856, 136 )
 
 [node name="PennyPickup87" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 504, -64 )
+position = Vector2( 864, 136 )
 
 [node name="PennyPickup86" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 512, -64 )
+position = Vector2( 872, 136 )
 
 [node name="PennyPickup85" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 520, -64 )
+position = Vector2( 880, 136 )
 
 [node name="PennyPickup84" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 528, -64 )
+position = Vector2( 888, 136 )
 
 [node name="PennyPickup83" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 536, -64 )
+position = Vector2( 896, 136 )
 
 [node name="PennyPickup82" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 544, -64 )
+position = Vector2( 904, 136 )
 
 [node name="PennyPickup81" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 552, -64 )
+position = Vector2( 912, 136 )
 
 [node name="PennyPickup80" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 560, -64 )
+position = Vector2( 920, 136 )
 
 [node name="PennyPickup79" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 568, -64 )
+position = Vector2( 928, 136 )
 
 [node name="PennyPickup78" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 576, -64 )
+position = Vector2( 936, 136 )
 
 [node name="PennyPickup77" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 584, -64 )
+position = Vector2( 944, 136 )
 
 [node name="PennyPickup106" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 472, -56 )
+position = Vector2( 832, 144 )
 
 [node name="PennyPickup105" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 480, -56 )
+position = Vector2( 840, 144 )
 
 [node name="PennyPickup104" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 488, -56 )
+position = Vector2( 848, 144 )
 
 [node name="PennyPickup103" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 496, -56 )
+position = Vector2( 856, 144 )
 
 [node name="PennyPickup102" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 504, -56 )
+position = Vector2( 864, 144 )
 
 [node name="PennyPickup101" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 512, -56 )
+position = Vector2( 872, 144 )
 
 [node name="PennyPickup100" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 520, -56 )
+position = Vector2( 880, 144 )
 
 [node name="PennyPickup99" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 528, -56 )
+position = Vector2( 888, 144 )
 
 [node name="PennyPickup98" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 536, -56 )
+position = Vector2( 896, 144 )
 
 [node name="PennyPickup97" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 544, -56 )
+position = Vector2( 904, 144 )
 
 [node name="PennyPickup96" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 552, -56 )
+position = Vector2( 912, 144 )
 
 [node name="PennyPickup95" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 560, -56 )
+position = Vector2( 920, 144 )
 
 [node name="PennyPickup94" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 568, -56 )
+position = Vector2( 928, 144 )
 
 [node name="PennyPickup93" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 576, -56 )
+position = Vector2( 936, 144 )
 
 [node name="PennyPickup92" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( 584, -56 )
+position = Vector2( 944, 144 )
 
 [node name="HeartPickup" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( -248, 280 )
+position = Vector2( 112, 480 )
 
 [node name="HeartPickup2" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( -232, 280 )
+position = Vector2( 128, 480 )
 
 [node name="HeartPickup4" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( -248, 296 )
+position = Vector2( 112, 496 )
 
 [node name="HeartPickup3" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( -232, 296 )
+position = Vector2( 128, 496 )
 
 [node name="HeartPickup5" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( -48, -128 )
+position = Vector2( 312, 72 )
 
 [node name="PennyPickup13" parent="YSort/Items" instance=ExtResource( 33 )]
-position = Vector2( -72, -112 )
+position = Vector2( 288, 88 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2
