@@ -1660,8 +1660,16 @@ position = Vector2( -240, 48 )
 [node name="TallGrass19" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -224, 48 )
 
+[node name="TallGrass22" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -232, -72 )
+
+[node name="TallGrass23" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -264, -80 )
+
+[node name="TallGrass24" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -240, -104 )
+
 [node name="Enemies" type="YSort" parent="YSort"]
-visible = false
 position = Vector2( -360, -200 )
 
 [node name="CrowSpawner" parent="YSort/Enemies" instance=ExtResource( 7 )]

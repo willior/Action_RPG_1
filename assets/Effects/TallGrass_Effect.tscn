@@ -33,7 +33,7 @@ animations = [ {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
 "name": "Animate",
-"speed": 10.0
+"speed": 15.0
 } ]
 
 [node name="TallGrassEffect" type="AnimatedSprite"]
