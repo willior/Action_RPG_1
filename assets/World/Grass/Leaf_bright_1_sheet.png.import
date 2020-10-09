@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rock_3_.png-43af38de4c9d931b34995a1cd595a6f3.stex"
+path="res://.import/Leaf_bright_1_sheet.png-f842d436bc9387848c223bffdcef3495.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/World/Doodads/Rock_3_.png"
-dest_files=[ "res://.import/Rock_3_.png-43af38de4c9d931b34995a1cd595a6f3.stex" ]
+source_file="res://assets/World/Grass/Leaf_bright_1_sheet.png"
+dest_files=[ "res://.import/Leaf_bright_1_sheet.png-f842d436bc9387848c223bffdcef3495.stex" ]
 
 [params]
 
