@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Leaf_bright_1_sheet.png-f842d436bc9387848c223bffdcef3495.stex"
+path="res://.import/Leaf_dark_green_1_sheet.png-22c441ce10e84d5ad1e1a6c5630f767d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/World/Grass/Leaf_bright_1_sheet.png"
-dest_files=[ "res://.import/Leaf_bright_1_sheet.png-f842d436bc9387848c223bffdcef3495.stex" ]
+source_file="res://assets/World/Grass/Leaf_dark_green_1_sheet.png"
+dest_files=[ "res://.import/Leaf_dark_green_1_sheet.png-22c441ce10e84d5ad1e1a6c5630f767d.stex" ]
 
 [params]
 
