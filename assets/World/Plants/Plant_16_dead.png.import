@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/VinesBackground.png-4e6679da9f43e9521056fcdfc3628870.stex"
+path="res://.import/Plant_16_dead.png-3939d994c82f95bf99f570d73f7e6d58.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/World/VinesBackground.png"
-dest_files=[ "res://.import/VinesBackground.png-4e6679da9f43e9521056fcdfc3628870.stex" ]
+source_file="res://assets/World/Plants/Plant_16_dead.png"
+dest_files=[ "res://.import/Plant_16_dead.png-3939d994c82f95bf99f570d73f7e6d58.stex" ]
 
 [params]
 

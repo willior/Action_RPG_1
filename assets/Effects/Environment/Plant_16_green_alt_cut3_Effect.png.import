@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TallGrass_1_CutComplete6.png-b03aa9de7ab89a36090b292e6308774d.stex"
+path="res://.import/Plant_16_green_alt_cut3_Effect.png-20de9c33d3ca3545ce703d6cd12fb476.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Will/TallGrass_1_CutComplete6.png"
-dest_files=[ "res://.import/TallGrass_1_CutComplete6.png-b03aa9de7ab89a36090b292e6308774d.stex" ]
+source_file="res://assets/Effects/Environment/Plant_16_green_alt_cut3_Effect.png"
+dest_files=[ "res://.import/Plant_16_green_alt_cut3_Effect.png-20de9c33d3ca3545ce703d6cd12fb476.stex" ]
 
 [params]
 

@@ -1,13 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/World/Plants/Plant_16_green_alt.png" type="Texture" id=1]
+[ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=2]
+[ext_resource path="res://assets/World/Plants/Plant_16_green_alt_sheet.png" type="Texture" id=3]
+[ext_resource path="res://assets/World/Plants/Plant_16_green_alt.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
 height = 8.0
 
-[node name="Plant_16_" type="StaticBody2D"]
+[sub_resource type="CircleShape2D" id=2]
+radius = 8.56549
+
+[node name="Plant_16_green_alt" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource( 4 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
 position = Vector2( 0, 2 )
@@ -15,8 +22,19 @@ texture = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -4 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
+hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
 shape = SubResource( 1 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -4.50227 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
+[editable path="Hurtbox"]

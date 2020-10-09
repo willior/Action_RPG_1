@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tree_Andrew_1.png-c77a0f8cccf1952d8934137d384a172d.stex"
+path="res://.import/Plant_16_green_alt_cut3.png-3afb3191c8f88394888f4ff1aefbb39a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/World/Tree_Andrew_1.png"
-dest_files=[ "res://.import/Tree_Andrew_1.png-c77a0f8cccf1952d8934137d384a172d.stex" ]
+source_file="res://assets/World/Plants/Plant_16_green_alt_cut3.png"
+dest_files=[ "res://.import/Plant_16_green_alt_cut3.png-3afb3191c8f88394888f4ff1aefbb39a.stex" ]
 
 [params]
 
