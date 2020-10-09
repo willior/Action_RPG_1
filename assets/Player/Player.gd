@@ -76,6 +76,8 @@ onready var talkNotice = $TalkNotice
 onready var charge = $ChargeUI
 onready var charge1Vis = $ChargeUI/TextureProgress1
 onready var charge2Vis = $ChargeUI/TextureProgress2
+onready var audio = $AudioStreamPlayer
+onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
 func _ready():
 	stats.connect("no_health", self, "game_over")
@@ -188,8 +190,8 @@ func move():
 	velocity = move_and_slide(velocity)
 	
 func noStamina():
-	$AudioStreamPlayer.stream = load("res://assets/Audio/Bamboo.wav")
-	$AudioStreamPlayer.play()
+	audio.stream = load("res://assets/Audio/Bamboo.wav")
+	audio.play()
 	
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
@@ -222,11 +224,18 @@ func attack2_state(delta):
 		
 func attack1_stamina_drain():
 	stats.stamina -= 10
+	audio.stream = sword_swipe
+	audio.play()
+	swordHitbox.set_deferred("monitorable", true)
 	
 func attack2_stamina_drain():
 	stats.stamina -= 5
+	audio.stream = sword_swipe
+	audio.play()
+	swordHitbox.set_deferred("monitorable", true)
 
 func attack_animation_finished():
+	swordHitbox.set_deferred("monitorable", false)
 	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
@@ -307,13 +316,13 @@ func flash_state(delta):
 	
 func flash_start():
 	stats.stamina -= 20
+	stats.strength_mod = 2
 	charge.stop_charge()
 	swordHitbox.flash_begin()
-	PlayerStats.strength_mod = 2
 	
 func flash_stop():
 	swordHitbox.flash_end()
-	PlayerStats.strength_mod = 0
+	stats.strength_mod = 0
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
@@ -486,16 +495,16 @@ func _on_TalkTimer_timeout():
 	
 func set_notice(value):
 	if value:
-		$AudioStreamPlayer.stream = load("res://assets/Audio/cursHi.wav")
-		$AudioStreamPlayer.play()
+		audio.stream = load("res://assets/Audio/cursHi.wav")
+		audio.play()
 		notice.visible = true
 	elif !value:
 		notice.visible = false
 		
 func set_talk_notice(value):
 	if value:
-		$AudioStreamPlayer.stream = load("res://assets/Audio/cursLo.wav")
-		$AudioStreamPlayer.play()
+		audio.stream = load("res://assets/Audio/cursLo.wav")
+		audio.play()
 		talkNotice.visible = true
 	elif !value:
 		talkNotice.visible = false

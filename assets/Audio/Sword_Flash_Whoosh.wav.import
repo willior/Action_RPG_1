@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Sword_Flash_Whoosh.wav-f99c1a9e3efa1edf8f2d2e0f5e595e62.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Sword_Flash_Whoosh.wav"
+dest_files=[ "res://.import/Sword_Flash_Whoosh.wav-f99c1a9e3efa1edf8f2d2e0f5e595e62.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

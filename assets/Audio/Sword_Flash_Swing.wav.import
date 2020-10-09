@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Sword_Flash_Swing.wav-8cb3ae8aecddfee46b20a55d24545db9.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Sword_Flash_Swing.wav"
+dest_files=[ "res://.import/Sword_Flash_Swing.wav-8cb3ae8aecddfee46b20a55d24545db9.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

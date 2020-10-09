@@ -3,8 +3,12 @@ extends Area2D
 onready var damage = PlayerStats.strength setget set_strength
 onready var damage_mod = PlayerStats.strength_mod setget set_strength_mod
 
+onready var flash_whoosh = preload("res://assets/Audio/Sword_Flash_Whoosh.wav")
+onready var flash_swing = preload("res://assets/Audio/Sword_Flash_Swing.wav")
+onready var audio = $AudioStreamPlayer
+
 var knockback_vector = Vector2.ZERO
-var orig
+var orig_damage
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -20,19 +24,29 @@ func set_strength_mod(_strength_mod):
 	damage += damage_mod
 	
 func shade_begin():
+	set_deferred("monitorable", true)
 	knockback_vector = Vector2.ZERO
-	orig = damage
+	orig_damage = damage
 	
 func shade_end():
-	damage = orig
+	set_deferred("monitorable", false)
+	damage = orig_damage
 	damage_mod = 0
 	
+func flash_whoosh_audio():
+	audio.stream = flash_whoosh
+	audio.play()
+	
 func flash_begin():
-	$CollisionShape2D.scale.x = 3
+	audio.stream = flash_swing
+	audio.play()
+	$CollisionShape2D.scale.x = 1.5
+	set_deferred("monitorable", true)
 	knockback_vector *= 1.5
-	orig = damage
+	orig_damage = damage
 	
 func flash_end():
 	$CollisionShape2D.scale.x = 1
-	damage = orig
+	set_deferred("monitorable", false)
+	damage = orig_damage
 	damage_mod = 0
