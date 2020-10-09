@@ -260,7 +260,7 @@ func charge_state(delta):
 		
 	# if the current charge is less than the max charge
 	if charge_count < PlayerStats.max_charge:
-		charge_count += 1
+		charge_count += 0.5
 		stats.charge = charge_count
 	# if the charge count reaches 50%
 	if charge_count == PlayerStats.max_charge/2:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=2]
+[gd_scene load_steps=131 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/Audio/Charge.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/UI/Sweat.tscn" type="PackedScene" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
@@ -2316,10 +2315,6 @@ margin_bottom = 0.0
 
 [node name="ChargeUI" parent="." instance=ExtResource( 13 )]
 
-[node name="ChargeSound" type="AudioStreamPlayer" parent="ChargeUI"]
-stream = ExtResource( 15 )
-pitch_scale = 0.75
-
 [node name="Sweat" parent="." instance=ExtResource( 16 )]
 visible = false
 margin_left = -5.0
@@ -2381,10 +2376,10 @@ one_shot = true
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
 

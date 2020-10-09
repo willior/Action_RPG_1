@@ -5,8 +5,11 @@ onready var animation1 = $TextureProgress1/AnimationPlayer
 onready var progress2 = $TextureProgress2
 onready var animation2 = $TextureProgress2/AnimationPlayer
 onready var staminaProgress = $StaminaProgress
+onready var c = $C
+onready var d = $D
 
-onready var chargeSound = $ChargeSound
+onready var chargeSound1 = $ChargeSound1
+onready var chargeSound2 = $ChargeSound2
 
 var currentCharge = 0 setget set_charge
 var currentChargeLevel = 0 setget set_charge_level
@@ -37,12 +40,12 @@ func set_max_stamina(value):
 	staminaProgress.max_value = currentMaxStamina
 
 func begin_charge_1():
-	chargeSound.play()
+	chargeSound2.play()
 	progress1.visible = true
 	staminaProgress.visible = true
 	
 func begin_charge_2():
-	chargeSound.play()
+	chargeSound2.play()
 	progress2.visible = true
 
 func set_charge(value):
@@ -69,9 +72,14 @@ func set_charge(value):
 		
 func set_charge_level(value):
 	currentChargeLevel = value
+	if currentChargeLevel == 1:
+		c.play()
+	elif currentChargeLevel == 2:
+		d.play()
 
 func stop_charge():
-	chargeSound.stop()
+	#chargeSound1.stop()
+	chargeSound2.stop()
 	staminaProgress.visible = false
 	progress1.visible = false
 	progress2.visible = false
