@@ -20,7 +20,7 @@ func create_effect():
 	if sprite.flip_h:
 		effect.flip_h = true
 	if cutCount == 1:
-		sprite.play("Cut2")
+		sprite.play("Cut")
 	elif cutCount == 2:
 		sprite.play("CutComplete")
 		sprite.playing = false
