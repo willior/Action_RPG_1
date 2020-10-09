@@ -638,10 +638,16 @@ tile_data = PoolIntArray( 131107, 0, 4, 131117, 0, 0, 131119, 0, 4, 131121, 0, 1
 [node name="ParallaxLayerBackground" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 motion_scale = Vector2( 0.7, 0.7 )
 motion_mirroring = Vector2( 320, 180 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayerBackground"]
 position = Vector2( 160, 88 )
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 280, 40 )
@@ -1593,76 +1599,76 @@ position = Vector2( 272, -96 )
 position = Vector2( 200, 152 )
 
 [node name="TallGrass" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -256, -48 )
+position = Vector2( -266, -70 )
 
 [node name="TallGrass2" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -240, -48 )
+position = Vector2( -248, -52 )
 
 [node name="TallGrass3" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -224, -48 )
+position = Vector2( -203, 62 )
 
 [node name="TallGrass6" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -256, -32 )
+position = Vector2( -256, 30 )
 
 [node name="TallGrass5" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -240, -32 )
+position = Vector2( -225, -12 )
 
 [node name="TallGrass4" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -224, -32 )
+position = Vector2( -239, -30 )
 
 [node name="TallGrass9" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -256, -16 )
+position = Vector2( -224, 11 )
 
 [node name="TallGrass8" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -240, -16 )
+position = Vector2( -253, 14 )
 
 [node name="TallGrass7" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -224, -16 )
+position = Vector2( -224, -28 )
 
 [node name="TallGrass12" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -256, 0 )
+position = Vector2( -225, 44 )
 
 [node name="TallGrass11" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -240, 0 )
+position = Vector2( -254, -20 )
 
 [node name="TallGrass10" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -224, 0 )
+position = Vector2( -229, -11 )
 
 [node name="TallGrass15" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -256, 16 )
+position = Vector2( -261, -36 )
 
 [node name="TallGrass14" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -240, 16 )
+position = Vector2( -218, 59 )
 
 [node name="TallGrass13" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -224, 16 )
+position = Vector2( -240, -4 )
 
 [node name="TallGrass18" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -256, 32 )
+position = Vector2( -247, -13 )
 
 [node name="TallGrass17" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -240, 32 )
+position = Vector2( -255, 0 )
 
 [node name="TallGrass16" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -224, 32 )
+position = Vector2( -231, 5 )
 
 [node name="TallGrass21" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -256, 48 )
+position = Vector2( -239, 15 )
 
 [node name="TallGrass20" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -240, 48 )
+position = Vector2( -249, 26 )
 
 [node name="TallGrass19" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -224, 48 )
+position = Vector2( -228, 29 )
 
 [node name="TallGrass22" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -232, -72 )
+position = Vector2( -226, -48 )
 
 [node name="TallGrass23" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -264, -80 )
+position = Vector2( -234, -74 )
 
 [node name="TallGrass24" parent="YSort/Grass" instance=ExtResource( 56 )]
-position = Vector2( -240, -104 )
+position = Vector2( -245, -156 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 position = Vector2( -360, -200 )
@@ -2071,6 +2077,8 @@ margin_right = 320.0
 margin_bottom = 180.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -2080,6 +2088,8 @@ margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 3 )
 __meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
