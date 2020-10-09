@@ -80,7 +80,6 @@ texture_progress = ExtResource( 2 )
 fill_mode = 4
 tint_under = Color( 0, 0, 0, 1 )
 tint_progress = Color( 1, 1, 0, 1 )
-radial_fill_degrees = 120.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -105,8 +104,6 @@ texture_progress = ExtResource( 2 )
 fill_mode = 4
 tint_under = Color( 0, 0, 0, 1 )
 tint_progress = Color( 1, 0.72549, 0, 1 )
-radial_initial_angle = 120.0
-radial_fill_degrees = 120.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
