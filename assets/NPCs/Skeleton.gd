@@ -3,12 +3,16 @@ extends Node2D
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 
 onready var player = get_node("/root/World/YSort/Player")
+onready var sprite = $KinematicBody2D/Sprite
 
 var interactable = true
 var talkable = true
 var examined = false
 
 var speaker = "Skeleton: "
+
+func ready():
+	sprite.frame = 1
 
 func talk():
 	var dialogBox = DialogBox.instance()
