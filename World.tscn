@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://assets/Background/water_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -59,6 +59,7 @@
 [ext_resource path="res://assets/World/Grass/Leaf_dark_yellow_1_sheet.png" type="Texture" id=57]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_pink_1_sheet.png" type="Texture" id=58]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_green_1_sheet.png" type="Texture" id=59]
+[ext_resource path="res://assets/Enemies/BatSpawner.tscn" type="PackedScene" id=60]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Leaf_bright_green_1_sheet.png 0"
@@ -1783,6 +1784,12 @@ position = Vector2( -266, -70 )
 [node name="TallGrass2" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -248, -52 )
 
+[node name="TallGrass44" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 370, -127 )
+
+[node name="TallGrass43" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -12, 46 )
+
 [node name="TallGrass3" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -203, 62 )
 
@@ -1804,6 +1811,24 @@ position = Vector2( -253, 14 )
 [node name="TallGrass7" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -224, -28 )
 
+[node name="TallGrass42" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -29, 138 )
+
+[node name="TallGrass41" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 11, 86 )
+
+[node name="TallGrass40" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 0, 65 )
+
+[node name="TallGrass39" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 12, 109 )
+
+[node name="TallGrass38" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -17, 112 )
+
+[node name="TallGrass37" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 38, 77 )
+
 [node name="TallGrass12" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -225, 44 )
 
@@ -1815,6 +1840,15 @@ position = Vector2( -229, -11 )
 
 [node name="TallGrass15" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -261, -36 )
+
+[node name="TallGrass36" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -18, 78 )
+
+[node name="TallGrass35" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 28, 53 )
+
+[node name="TallGrass34" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -25, 62 )
 
 [node name="TallGrass14" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -218, 59 )
@@ -1846,6 +1880,33 @@ position = Vector2( -226, -48 )
 [node name="TallGrass23" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -234, -74 )
 
+[node name="TallGrass33" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -22, 92 )
+
+[node name="TallGrass32" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -5, 93 )
+
+[node name="TallGrass31" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 29, 117 )
+
+[node name="TallGrass30" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 26, 147 )
+
+[node name="TallGrass29" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -42, 95 )
+
+[node name="TallGrass28" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( -51, 120 )
+
+[node name="TallGrass27" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 8, 127 )
+
+[node name="TallGrass26" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 10, 50 )
+
+[node name="TallGrass25" parent="YSort/Grass" instance=ExtResource( 56 )]
+position = Vector2( 2, 24 )
+
 [node name="TallGrass24" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -245, -156 )
 
@@ -1869,6 +1930,9 @@ position = Vector2( 168, 752 )
 
 [node name="CrowSpawner6" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 336, 752 )
+
+[node name="BatSpawner" parent="YSort/Enemies" instance=ExtResource( 60 )]
+position = Vector2( 610, 321 )
 
 [node name="Items" type="YSort" parent="YSort"]
 position = Vector2( -360, -200 )

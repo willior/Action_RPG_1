@@ -451,12 +451,12 @@ texture = ExtResource( 12 )
 offset = Vector2( 0, -12 )
 vframes = 2
 hframes = 12
-frame = 21
+frame = 12
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
 frames = SubResource( 26 )
-frame = 21
+frame = 13
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -481,6 +481,7 @@ anims/Takeoff = SubResource( 35 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 49 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 50 )
 
 [node name="TalkBox" type="Area2D" parent="."]

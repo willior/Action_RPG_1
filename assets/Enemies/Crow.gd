@@ -135,7 +135,7 @@ func examine():
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog = [
 		"A common crow.",
-		"Except that it's over-sized. And more aggressive than usual, to say the least."
+		"Except that it's over-sized."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	player.talkTimer.start()
