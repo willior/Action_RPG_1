@@ -846,6 +846,7 @@ pause_mode = 1
 position = Vector2( 360, 200 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
+process_priority = 1
 position = Vector2( -80, -160 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
