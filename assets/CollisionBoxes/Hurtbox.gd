@@ -32,7 +32,7 @@ func start_invincibility(duration):
 
 func create_hit_effect():
 	var effect = HitEffect.instance()
-	var main = get_tree().current_scene
+	var main = get_tree().get_root().get_node("World")
 	main.add_child(effect)
 	effect.global_position = global_position
 

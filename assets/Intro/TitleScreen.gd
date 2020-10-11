@@ -285,7 +285,7 @@ func _on_NewGame_pressed():
 	menuTimer.wait_time = transTime / 8
 	menuTimer.start()
 	yield(menuTimer, "timeout")
-	get_tree().change_scene("res://World.tscn")
+	get_tree().change_scene("res://Main.tscn")
 
 func _on_QuitGame_pressed():
 	$AudioSelect.play()
