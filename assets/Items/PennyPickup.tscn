@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/Items/Penny.gd" type="Script" id=1]
 [ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Items/Penny.png" type="Texture" id=4]
 [ext_resource path="res://assets/CollisionBoxes/CollectBox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -37,6 +36,7 @@ script = ExtResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
 animation = "Animate"
+frame = 3
 playing = true
 
 [node name="PennyTalkBox" parent="." instance=ExtResource( 3 )]
@@ -47,7 +47,4 @@ scale = Vector2( 2, 2 )
 
 [node name="AudioCursHi" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
-
-[node name="AudioCoinCollect" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
 [connection signal="area_entered" from="PennyCollectBox" to="." method="_on_PennyCollectBox_area_entered"]
