@@ -116,6 +116,7 @@ script = ExtResource( 5 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimatedSprite"]
 stream = ExtResource( 3 )
+volume_db = 6.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
