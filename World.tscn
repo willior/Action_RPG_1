@@ -60,6 +60,10 @@
 [ext_resource path="res://assets/World/Grass/Leaf_dark_pink_1_sheet.png" type="Texture" id=58]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_green_1_sheet.png" type="Texture" id=59]
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+[ext_resource path="res://assets/Enemies/BatSpawner.tscn" type="PackedScene" id=60]
+>>>>>>> parent of c9215a1... problems spawning player
 =======
 [ext_resource path="res://assets/Enemies/BatSpawner.tscn" type="PackedScene" id=60]
 >>>>>>> parent of c9215a1... problems spawning player
@@ -1012,6 +1016,12 @@ position = Vector2( -16, 360 )
 [node name="Plant_16_16" parent="YSort/Plants" instance=ExtResource( 42 )]
 position = Vector2( 8, 256 )
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+[node name="Plant_16_17" parent="YSort/Plants" instance=ExtResource( 50 )]
+position = Vector2( 40, 216 )
+>>>>>>> parent of c9215a1... problems spawning player
 =======
 
 [node name="Plant_16_17" parent="YSort/Plants" instance=ExtResource( 50 )]
@@ -1027,13 +1037,19 @@ position = Vector2( 32, 248 )
 [node name="Plant_16_18" parent="YSort/Plants" instance=ExtResource( 42 )]
 position = Vector2( 48, 232 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of c9215a1... problems spawning player
 
 [node name="Plant_16_19" parent="YSort/Plants" instance=ExtResource( 50 )]
 position = Vector2( 112, 160 )
 
 [node name="Plant_16_20" parent="YSort/Plants" instance=ExtResource( 50 )]
 position = Vector2( 160, 160 )
+<<<<<<< HEAD
+>>>>>>> parent of c9215a1... problems spawning player
+=======
 >>>>>>> parent of c9215a1... problems spawning player
 
 [node name="Plant_16_21" parent="YSort/Plants" instance=ExtResource( 50 )]
@@ -1042,13 +1058,19 @@ position = Vector2( 240, 176 )
 [node name="Plant_16_22" parent="YSort/Plants" instance=ExtResource( 50 )]
 position = Vector2( 112, 112 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of c9215a1... problems spawning player
 
 [node name="Plant_16_23" parent="YSort/Plants" instance=ExtResource( 50 )]
 position = Vector2( 128, 208 )
 
 [node name="Plant_16_24" parent="YSort/Plants" instance=ExtResource( 50 )]
 position = Vector2( 160, 64 )
+<<<<<<< HEAD
+>>>>>>> parent of c9215a1... problems spawning player
+=======
 >>>>>>> parent of c9215a1... problems spawning player
 
 [node name="Plant_4_green17" parent="YSort/Plants" instance=ExtResource( 52 )]
@@ -1059,6 +1081,7 @@ position = Vector2( 8, 584 )
 
 [node name="Plant_4_green19" parent="YSort/Plants" instance=ExtResource( 52 )]
 position = Vector2( 16, 568 )
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 [node name="Plant_16_green_alt" parent="YSort/Plants" instance=ExtResource( 42 )]
@@ -1078,6 +1101,8 @@ position = Vector2( -177, -60 )
 
 [node name="Plant_16_green_alt6" parent="YSort/Plants" instance=ExtResource( 42 )]
 position = Vector2( -186, -100 )
+=======
+>>>>>>> parent of c9215a1... problems spawning player
 =======
 >>>>>>> parent of c9215a1... problems spawning player
 
@@ -1817,13 +1842,19 @@ position = Vector2( -266, -70 )
 [node name="TallGrass2" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -248, -52 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of c9215a1... problems spawning player
 
 [node name="TallGrass44" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( 370, -127 )
 
 [node name="TallGrass43" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -12, 46 )
+<<<<<<< HEAD
+>>>>>>> parent of c9215a1... problems spawning player
+=======
 >>>>>>> parent of c9215a1... problems spawning player
 
 [node name="TallGrass3" parent="YSort/Grass" instance=ExtResource( 56 )]
@@ -1847,7 +1878,10 @@ position = Vector2( -253, 14 )
 [node name="TallGrass7" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -224, -28 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of c9215a1... problems spawning player
 
 [node name="TallGrass42" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -29, 138 )
@@ -1866,6 +1900,9 @@ position = Vector2( -17, 112 )
 
 [node name="TallGrass37" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( 38, 77 )
+<<<<<<< HEAD
+>>>>>>> parent of c9215a1... problems spawning player
+=======
 >>>>>>> parent of c9215a1... problems spawning player
 
 [node name="TallGrass12" parent="YSort/Grass" instance=ExtResource( 56 )]
@@ -1880,7 +1917,10 @@ position = Vector2( -229, -11 )
 [node name="TallGrass15" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -261, -36 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of c9215a1... problems spawning player
 
 [node name="TallGrass36" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -18, 78 )
@@ -1890,6 +1930,9 @@ position = Vector2( 28, 53 )
 
 [node name="TallGrass34" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -25, 62 )
+<<<<<<< HEAD
+>>>>>>> parent of c9215a1... problems spawning player
+=======
 >>>>>>> parent of c9215a1... problems spawning player
 
 [node name="TallGrass14" parent="YSort/Grass" instance=ExtResource( 56 )]
@@ -1922,7 +1965,10 @@ position = Vector2( -226, -48 )
 [node name="TallGrass23" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -234, -74 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of c9215a1... problems spawning player
 
 [node name="TallGrass33" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( -22, 92 )
@@ -1950,6 +1996,9 @@ position = Vector2( 10, 50 )
 
 [node name="TallGrass25" parent="YSort/Grass" instance=ExtResource( 56 )]
 position = Vector2( 2, 24 )
+<<<<<<< HEAD
+>>>>>>> parent of c9215a1... problems spawning player
+=======
 >>>>>>> parent of c9215a1... problems spawning player
 
 [node name="TallGrass24" parent="YSort/Grass" instance=ExtResource( 56 )]
@@ -2316,7 +2365,10 @@ position = Vector2( 296, 120 )
 position = Vector2( 288, 88 )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of c9215a1... problems spawning player
 [node name="Plant_16_green_alt" parent="YSort" instance=ExtResource( 42 )]
 position = Vector2( -174, -111 )
 
@@ -2335,6 +2387,9 @@ position = Vector2( -177, -60 )
 [node name="Plant_16_green_alt6" parent="YSort" instance=ExtResource( 42 )]
 position = Vector2( -186, -100 )
 
+<<<<<<< HEAD
+>>>>>>> parent of c9215a1... problems spawning player
+=======
 >>>>>>> parent of c9215a1... problems spawning player
 [node name="Skeleton" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( 352, -120 )
