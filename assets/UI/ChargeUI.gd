@@ -5,11 +5,11 @@ onready var animation1 = $TextureProgress1/AnimationPlayer
 onready var progress2 = $TextureProgress2
 onready var animation2 = $TextureProgress2/AnimationPlayer
 onready var staminaProgress = $StaminaProgress
+onready var c = $C
+onready var d = $D
 
 onready var chargeSound1 = $ChargeSound1
 onready var chargeSound2 = $ChargeSound2
-onready var chargeLv1 = $ChargeLv1
-onready var chargeLv2 = $ChargeLv2
 
 var currentCharge = 0 setget set_charge
 var currentChargeLevel = 0 setget set_charge_level
@@ -73,9 +73,9 @@ func set_charge(value):
 func set_charge_level(value):
 	currentChargeLevel = value
 	if currentChargeLevel == 1:
-		chargeLv1.play()
+		c.play()
 	elif currentChargeLevel == 2:
-		chargeLv2.play()
+		d.play()
 
 func stop_charge():
 	#chargeSound1.stop()
