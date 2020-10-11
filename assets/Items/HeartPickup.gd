@@ -20,11 +20,11 @@ func examine():
 	if !examined: examined = true
 
 func _on_HeartTalkBox_area_entered(_area):
-	# player.interacting = true
+	player.interacting = true
 	interactable = true
 
 func _on_HeartTalkBox_area_exited(_area):
-	# player.interacting = false
+	player.interacting = false
 	interactable = false
 
 func _on_HeartCollectBox_area_entered(_area):
@@ -32,6 +32,7 @@ func _on_HeartCollectBox_area_entered(_area):
 	get_parent().add_child(itemCollectEffect)
 	# argument determines sound effect; 0 = heartCollect
 	itemCollectEffect.playSound(0)
+	
 	PlayerStats.health += 1
 	queue_free()
 
