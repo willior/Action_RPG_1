@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Enemies/Spawner.gd" type="Script" id=1]
 
-[node name="BatSpawner" type="Node2D"]
+[node name="BatRepeatSpawner" type="Node2D"]
 pause_mode = 1
 position = Vector2( -175.406, -85.759 )
 script = ExtResource( 1 )

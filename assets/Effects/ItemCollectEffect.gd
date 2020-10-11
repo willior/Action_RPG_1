@@ -1,7 +1,6 @@
 extends Node2D
 
-onready var HeartSoundPlayer = get_parent().get_parent().get_parent().get_node("HeartSound")
-onready var CoinSoundPlayer = get_parent().get_parent().get_parent().get_node("CoinSound")
+onready var collectSound = $AudioStreamPlayer
 
 enum {
 	heart,
@@ -11,6 +10,11 @@ enum {
 func playSound(itemCollected):
 	match(itemCollected):
 		heart:
-			HeartSoundPlayer.play()
+			collectSound.stream = load("res://assets/Audio/HeartCollect.wav")
+			collectSound.play()
 		coin:
-			CoinSoundPlayer.play()
+			collectSound.stream = load("res://assets/Audio/CoinCollect.wav")
+			collectSound.play()
+		
+func _on_AudioStreamPlayer_finished():
+	queue_free()

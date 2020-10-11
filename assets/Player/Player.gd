@@ -78,9 +78,11 @@ onready var charge = $ChargeUI
 onready var charge1Vis = $ChargeUI/TextureProgress1
 onready var charge2Vis = $ChargeUI/TextureProgress2
 onready var audio = $AudioStreamPlayer
+# onready var remoteTransform = $RemoteTransform2D
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
 func _ready():
+	# remoteTransform.remote_path = ("root/World/Camera2D")
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
