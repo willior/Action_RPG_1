@@ -56,7 +56,7 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var talkBox = $TalkBox/CollisionShape2D
 onready var audio = $AudioStreamPlayer
-onready var player = get_parent().get_parent().get_node("Player")
+onready var player = get_node("/root/World/YSort/Player")
 
 func _ready():
 	add_to_group("enemies")
@@ -288,9 +288,6 @@ func _on_CrowStats_no_health():
 	
 	if player.stats.health < player.stats.max_health && randi() % 2 == 1:
 		var heartPickup = HeartPickup.instance()
-		
-		# get_parent().get_parent().get_node("Items").call_deferred("add_child", heartPickup)
-		
 		get_node("/root/World/YSort/Items").call_deferred("add_child", heartPickup)
 		heartPickup.global_position = global_position
 		

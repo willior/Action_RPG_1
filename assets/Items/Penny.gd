@@ -23,5 +23,6 @@ func _on_PennyCollectBox_area_entered(_area):
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	itemCollectEffect.playSound(1)
+	
 	PlayerStats.cash += 0.01
 	queue_free()
