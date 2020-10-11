@@ -25,6 +25,6 @@ func spawner():
 		yield(timer, "timeout")
 		var batSpawn = BAT.instance()
 		batSpawn.position = position
-		get_parent().add_child(batSpawn)
+		get_node("/root/World/YSort/Enemies").add_child(batSpawn)
 		spawner()
 		count += 1
