@@ -1008,9 +1008,6 @@ position = Vector2( -16, 360 )
 [node name="Plant_16_16" parent="YSort/Plants" instance=ExtResource( 42 )]
 position = Vector2( 8, 256 )
 
-[node name="Plant_16_17" parent="YSort/Plants" instance=ExtResource( 50 )]
-position = Vector2( 40, 216 )
-
 [node name="Plant_4_green15" parent="YSort/Plants" instance=ExtResource( 52 )]
 position = Vector2( -80, 296 )
 
@@ -1020,23 +1017,11 @@ position = Vector2( 32, 248 )
 [node name="Plant_16_18" parent="YSort/Plants" instance=ExtResource( 42 )]
 position = Vector2( 48, 232 )
 
-[node name="Plant_16_19" parent="YSort/Plants" instance=ExtResource( 50 )]
-position = Vector2( 112, 160 )
-
-[node name="Plant_16_20" parent="YSort/Plants" instance=ExtResource( 50 )]
-position = Vector2( 160, 160 )
-
 [node name="Plant_16_21" parent="YSort/Plants" instance=ExtResource( 50 )]
 position = Vector2( 240, 176 )
 
 [node name="Plant_16_22" parent="YSort/Plants" instance=ExtResource( 50 )]
 position = Vector2( 112, 112 )
-
-[node name="Plant_16_23" parent="YSort/Plants" instance=ExtResource( 50 )]
-position = Vector2( 128, 208 )
-
-[node name="Plant_16_24" parent="YSort/Plants" instance=ExtResource( 50 )]
-position = Vector2( 160, 64 )
 
 [node name="Plant_4_green17" parent="YSort/Plants" instance=ExtResource( 52 )]
 position = Vector2( -8, 600 )
@@ -2219,7 +2204,7 @@ position = Vector2( 112, 496 )
 position = Vector2( 128, 496 )
 
 [node name="HeartPickup5" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( 312, 72 )
+position = Vector2( 296, 120 )
 
 [node name="PennyPickup13" parent="YSort/Items" instance=ExtResource( 33 )]
 position = Vector2( 288, 88 )
