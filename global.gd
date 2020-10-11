@@ -1,13 +1,19 @@
 extends Node
 
+var dialogOpen = false
+
+var _attributes = null
+
 var current_scene = null
 
 func _ready():
 		var root = get_tree().get_root()
 		current_scene = root.get_child( root.get_child_count() -1 )
 		
-func goto_scene(path):
-
+func goto_scene(path, attributes=null):
+	
+	_attributes = attributes
+	
 	# This function will usually be called from a signal callback,
 	# or some other function from the running scene.
 	# Deleting the current scene at this point might be
@@ -19,6 +25,10 @@ func goto_scene(path):
 
 	call_deferred("_deferred_goto_scene",path)
 
+func get_attribute(name):
+	if _attributes != null and _attributes.has(name):
+		return _attributes[name]
+	return null
 
 func _deferred_goto_scene(path):
 

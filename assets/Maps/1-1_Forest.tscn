@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://assets/World/Plants/Plant_16_green.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://assets/Background/water_background.png" type="Texture" id=9]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_green_1_sheet.png" type="Texture" id=10]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=11]
+[ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/CollisionBoxes/Exits/1/Exit_Forest1-Home.gd" type="Script" id=13]
 [ext_resource path="res://assets/Audio/fieldSong1.ogg" type="AudioStream" id=14]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_pink_1_sheet.png" type="Texture" id=15]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_red_1_sheet.png" type="Texture" id=16]
@@ -818,6 +820,13 @@ texture = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Exit" parent="Map" instance=ExtResource( 12 )]
+position = Vector2( 272, -8 )
+script = ExtResource( 13 )
+
+[node name="CollisionShape2D" parent="Map/Exit" index="0"]
+position = Vector2( 8, 8 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 280, 40 )
@@ -2286,3 +2295,5 @@ stream = ExtResource( 4 )
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[editable path="Map/Exit"]

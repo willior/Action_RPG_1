@@ -20,6 +20,7 @@ func _ready():
 	label.set_process_input(true)
 	# get_node("/root/World/YSort/Player").talking = true
 	get_tree().paused = true
+	Global.dialogOpen = true
 	
 func _input(_event):
 	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine"):
@@ -29,6 +30,7 @@ func _input(_event):
 			get_tree().paused = false
 			get_node("/root/World/YSort/Player").noticeDisplay = false
 			get_node("/root/World/YSort/Player").talkNoticeDisplay = false
+			Global.dialogOpen = false
 			queue_free()
 		# if the amount of visible characters is above the total amount of characters in the current index:
 		elif label.get_visible_characters() > label.get_total_character_count():

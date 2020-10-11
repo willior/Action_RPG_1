@@ -20,7 +20,7 @@ func _process(_delta):
 			stats.visible = false
 			
 	if Input.is_action_just_pressed("start"):
-		if player.talking:
+		if Global.dialogOpen:
 			return
 		if PlayerStats.health <= 0:
 			player.dying = false

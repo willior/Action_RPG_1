@@ -82,6 +82,10 @@ onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
 func _ready():
 	# remoteTransform.remote_path = ("root/World/Camera2D")
+	
+	if Global.get_attribute("location") != null:
+		position = Global.get_attribute("location")
+	
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
@@ -443,7 +447,7 @@ func _on_Hurtbox_area_entered(area):
 		if attack_1_charged: attack_1_charged = false
 		if attack_2_charged: attack_2_charged = false
 		charge_reset()
-	
+	swordHitbox.set_deferred("monitorable", false)
 	damageTaken = area.damage
 	state = HIT
 	
