@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=2]
+[gd_scene load_steps=111 format=2]
 
 [ext_resource path="res://assets/Background/water_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
@@ -59,7 +59,6 @@
 [ext_resource path="res://assets/World/Grass/Leaf_dark_yellow_1_sheet.png" type="Texture" id=57]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_pink_1_sheet.png" type="Texture" id=58]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_green_1_sheet.png" type="Texture" id=59]
-[ext_resource path="res://assets/Enemies/BatSpawner.tscn" type="PackedScene" id=60]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Leaf_bright_green_1_sheet.png 0"
@@ -1048,6 +1047,24 @@ position = Vector2( 8, 584 )
 [node name="Plant_4_green19" parent="YSort/Plants" instance=ExtResource( 52 )]
 position = Vector2( 16, 568 )
 
+[node name="Plant_16_green_alt" parent="YSort/Plants" instance=ExtResource( 42 )]
+position = Vector2( -174, -111 )
+
+[node name="Plant_16_green_alt2" parent="YSort/Plants" instance=ExtResource( 42 )]
+position = Vector2( -166, -99 )
+
+[node name="Plant_16_green_alt3" parent="YSort/Plants" instance=ExtResource( 42 )]
+position = Vector2( -175, -86 )
+
+[node name="Plant_16_green_alt4" parent="YSort/Plants" instance=ExtResource( 42 )]
+position = Vector2( -188, -72 )
+
+[node name="Plant_16_green_alt5" parent="YSort/Plants" instance=ExtResource( 42 )]
+position = Vector2( -177, -60 )
+
+[node name="Plant_16_green_alt6" parent="YSort/Plants" instance=ExtResource( 42 )]
+position = Vector2( -186, -100 )
+
 [node name="Trees" type="YSort" parent="YSort"]
 
 [node name="Tree_2_pine" parent="YSort/Trees" instance=ExtResource( 34 )]
@@ -1931,9 +1948,6 @@ position = Vector2( 168, 752 )
 [node name="CrowSpawner6" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 336, 752 )
 
-[node name="BatSpawner" parent="YSort/Enemies" instance=ExtResource( 60 )]
-position = Vector2( 610, 321 )
-
 [node name="Items" type="YSort" parent="YSort"]
 position = Vector2( -360, -200 )
 
@@ -2269,24 +2283,6 @@ position = Vector2( 312, 72 )
 
 [node name="PennyPickup13" parent="YSort/Items" instance=ExtResource( 33 )]
 position = Vector2( 288, 88 )
-
-[node name="Plant_16_green_alt" parent="YSort" instance=ExtResource( 42 )]
-position = Vector2( -174, -111 )
-
-[node name="Plant_16_green_alt2" parent="YSort" instance=ExtResource( 42 )]
-position = Vector2( -166, -99 )
-
-[node name="Plant_16_green_alt3" parent="YSort" instance=ExtResource( 42 )]
-position = Vector2( -175, -86 )
-
-[node name="Plant_16_green_alt4" parent="YSort" instance=ExtResource( 42 )]
-position = Vector2( -188, -72 )
-
-[node name="Plant_16_green_alt5" parent="YSort" instance=ExtResource( 42 )]
-position = Vector2( -177, -60 )
-
-[node name="Plant_16_green_alt6" parent="YSort" instance=ExtResource( 42 )]
-position = Vector2( -186, -100 )
 
 [node name="Skeleton" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( 352, -120 )

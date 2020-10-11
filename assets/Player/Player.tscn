@@ -1946,7 +1946,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 110
+frame = 87
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -2026,7 +2026,6 @@ margin_bottom = -7.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 1.5708
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 monitorable = false
