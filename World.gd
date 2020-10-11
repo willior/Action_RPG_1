@@ -35,7 +35,7 @@ func _process(_delta):
 			PlayerStats.health += PlayerStats.max_health
 			PlayerStats.continue_count += 1
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
-
+			
 		elif get_tree().paused == false:
 			music.stream_paused = true
 			get_tree().paused = true

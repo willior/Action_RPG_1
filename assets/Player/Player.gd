@@ -26,9 +26,8 @@ enum {
 enum {
 	LEVELHEALTH,
 	LEVELSTAMINA,
-	# LEVELSTRENGTH,
-	LEVELSPEED,
-	LEVELPOWER
+	LEVELSTRENGTH,
+	LEVELSPEED
 }
 
 var state = MOVE
@@ -279,7 +278,7 @@ func charge_state(delta):
 	elif charge_count == PlayerStats.max_charge && attack_charging:
 		attack_2_charged = true
 		attack_charging = false
-
+		
 func charge_reset():
 	charge_level_count = 0
 	stats.charge_level = charge_level_count
@@ -344,32 +343,24 @@ func level_up():
 		LEVELHEALTH:
 			stats.max_health += 1
 			stats.health += 1
-			levelNotice.statDisplay = "RESOLVE"
+			levelNotice.statDisplay = "WILLPOWER"
 			levelNotice.statColor = Color(1, 0.272549, 0.315686)
 		LEVELSTAMINA:
 			stats.endurance += 1
 			stats.max_stamina += 15
 			levelNotice.statDisplay = "PERSEVERENCE"
 			levelNotice.statColor = Color(0.372549, 1, 0.415686)
-		# LEVELSTRENGTH:
-			# stats.strength += 1
-			# levelNotice.statDisplay = "VIOLENT NATURE"
-			# levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
+		LEVELSTRENGTH:
+			stats.strength += 1
+			levelNotice.statDisplay = "VIOLENT NATURE"
+			levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
 		LEVELSPEED:
 			stats.iframes += 0.1
 			stats.speed += 1
 			# var totalSpeed = animationPlayer.get_playing_speed() + stats.speed
+
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
-		LEVELPOWER:
-			stats.max_health += 0.25
-			stats.endurance += 0.25
-			stats.max_stamina += 3
-			stats.iframes += 0.025
-			levelNotice.statDisplay = "POWER"
-			levelNotice.statColor = Color(0, 0, 1)
-
-			
 	# prints('LEVEL ' + str(stats.level) + ":")
 	# prints("max_health = " + str(stats.max_health))
 	# prints("max_stamina = " + str(stats.max_stamina))
@@ -443,7 +434,6 @@ func backstep_animation_finished():
 		# charge_reset()
 	
 func _on_Hurtbox_area_entered(area):
-	if attack1_queued: attack1_queued = false
 	if attack2_queued: attack2_queued = false
 	if charge_count > 0:
 		charge.stop_charge()
