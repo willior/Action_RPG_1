@@ -106,20 +106,20 @@ tile_data = PoolIntArray( 3, 0, 0, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 
 [node name="Window_Rain1" type="AnimatedSprite" parent="Map"]
 position = Vector2( 492, 49 )
 frames = SubResource( 14 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="Window_Rain2" type="AnimatedSprite" parent="Map"]
 position = Vector2( 272, 16 )
 frames = SubResource( 14 )
-frame = 3
+frame = 4
 playing = true
 flip_h = true
 
 [node name="Window_Rain3" type="AnimatedSprite" parent="Map"]
 position = Vector2( 144, 16 )
 frames = SubResource( 14 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="Exit" parent="Map" instance=ExtResource( 2 )]
