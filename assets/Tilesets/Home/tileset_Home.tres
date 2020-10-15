@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=76 format=2]
+[gd_resource type="TileSet" load_steps=77 format=2]
 
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.png" type="Texture" id=1]
 
@@ -221,8 +221,11 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 24, 32, 24 )
 [sub_resource type="ConvexPolygonShape2D" id=73]
 points = PoolVector2Array( 32, 24, 24, 24, 24, 0, 32, 0 )
 
-[sub_resource type="ConcavePolygonShape2D" id=74]
-segments = PoolVector2Array( 8, 24, 32, 24, 32, 24, 32, 32, 32, 32, 32, 32, 32, 32, 0, 32, 0, 32, 0, 32, 0, 32, 0, 0, 0, 0, 8, 0, 8, 0, 8, 24 )
+[sub_resource type="ConvexPolygonShape2D" id=74]
+points = PoolVector2Array( 0, 0, 8, 0, 8, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=75]
+points = PoolVector2Array( 32, 32, 8, 32, 8, 24, 32, 24 )
 
 [resource]
 0/name = "tileset_Home.png 0"
@@ -690,6 +693,12 @@ segments = PoolVector2Array( 8, 24, 32, 24, 32, 24, 32, 32, 32, 32, 32, 32, 32, 
 "one_way": false,
 "one_way_margin": 1.0,
 "shape": SubResource( 74 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+}, {
+"autotile_coord": Vector2( 0, 2 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 75 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0

@@ -144,7 +144,7 @@ func move_state(delta):
 			dialogBox.dialog = [
 			"You find nothing of interest."
 			]
-			get_node("/root/World/GUI").add_child(dialogBox)
+			get_node("/root/Main/World/GUI").add_child(dialogBox)
 			talkTimer.start()
 		elif interacting && talkTimer.is_stopped():
 			interactObject.examine()
