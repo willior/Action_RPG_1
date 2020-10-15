@@ -18,6 +18,7 @@ var currentStamina = PlayerStats.stamina setget set_stamina
 var currentMaxStamina = PlayerStats.max_stamina setget set_max_stamina
 
 func _ready():
+	PlayerStats.charge_level = 0
 	self.currentMaxStamina = PlayerStats.max_stamina
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("max_stamina_changed", self, "set_max_stamina")
@@ -73,13 +74,13 @@ func set_charge(value):
 		
 func set_charge_level(value):
 	currentChargeLevel = value
-	if currentChargeLevel == 1:
+	if currentChargeLevel == 1 && currentCharge > 49:
 		c.play()
-	elif currentChargeLevel == 2:
+	elif currentChargeLevel == 2 && currentCharge > 99:
 		d.play()
 
 func stop_charge():
-	#chargeSound1.stop()
+	chargeSound1.stop()
 	chargeSound2.stop()
 	staminaProgress.visible = false
 	progress1.visible = false
@@ -87,6 +88,7 @@ func stop_charge():
 	currentCharge = 0
 	progress1.value = currentCharge
 	progress2.value = currentCharge
+	
 	# currentChargeLevel = 0
 	# animation1.stop(true)
 	# animation1.seek(0, true)

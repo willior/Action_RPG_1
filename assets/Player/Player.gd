@@ -83,6 +83,7 @@ onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 func _ready():
 	# remoteTransform.remote_path = ("root/World/Camera2D")
 	
+	# gets the spawn location from the previous exit's attribute
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
 	
@@ -92,6 +93,7 @@ func _ready():
 	collision.disabled = false
 	charge1Vis.visible = false
 	charge2Vis.visible = false
+	charge_reset()
 
 func _process(delta):
 	match state:
@@ -144,7 +146,7 @@ func move_state(delta):
 			dialogBox.dialog = [
 			"You find nothing of interest."
 			]
-			get_node("/root/Main/World/GUI").add_child(dialogBox)
+			get_node("/root/World/GUI").add_child(dialogBox)
 			talkTimer.start()
 		elif interacting && talkTimer.is_stopped():
 			interactObject.examine()
@@ -171,10 +173,8 @@ func move_state(delta):
 		if attack_2_charged:
 			attack_2_charged = false
 			state = SHADE
-		# stats.charge = 0
-		# stats.charge_level = 0
-		
 		charge.stop_charge()
+		charge_reset()
 		attack_charging = false
 		
 	if Input.is_action_just_pressed("roll"):

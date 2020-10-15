@@ -11,7 +11,6 @@ feedback/level_db = -9.0
 feedback/lowpass = 12000.0
 
 [resource]
-bus/0/volume_db = -11.952
 bus/1/name = "Delay"
 bus/1/solo = false
 bus/1/mute = false

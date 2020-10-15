@@ -28,8 +28,8 @@ func _input(_event):
 		if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog.size()-1):
 			# get_node("/root/World/YSort/Player").talking = false
 			get_tree().paused = false
-			get_node("/root/Main/World/YSort/Player").noticeDisplay = false
-			get_node("/root/Main/World/YSort/Player").talkNoticeDisplay = false
+			get_node("/root/World/YSort/Player").noticeDisplay = false
+			get_node("/root/World/YSort/Player").talkNoticeDisplay = false
 			Global.dialogOpen = false
 			queue_free()
 		# if the amount of visible characters is above the total amount of characters in the current index:

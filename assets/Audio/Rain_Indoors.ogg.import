@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rain_Indoors.ogg-b9badf9b0d1a03bf578062ffef7118fd.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/Rain_Indoors.ogg"
+dest_files=[ "res://.import/Rain_Indoors.ogg-b9badf9b0d1a03bf578062ffef7118fd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

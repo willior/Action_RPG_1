@@ -49,6 +49,18 @@ signal max_experience_changed(value)
 signal level_changed(value)
 signal cash_changed(value)
 
+func _ready():
+	self.health = max_health
+	self.experience = experience_total
+	self.strength = strength
+	self.stamina = max_stamina
+	self.iframes = iframes
+	self.endurance = endurance
+	self.speed = speed
+	self.cash = cash
+	self.charge = charge
+	self.charge_level = charge_level
+
 func set_max_health(value):
 	max_health = value
 	self.health = min(health, max_health)
@@ -121,16 +133,6 @@ func set_level(value):
 func set_cash(value):
 	cash = value
 	emit_signal(\"cash_changed\", cash)
-
-func _ready():
-	self.health = max_health
-	self.experience = experience_total
-	self.strength = strength
-	self.stamina = max_stamina
-	self.iframes = iframes
-	self.endurance = endurance
-	self.speed = speed
-	self.cash = cash
 "
 
 [node name="PlayerStats" type="Node"]
