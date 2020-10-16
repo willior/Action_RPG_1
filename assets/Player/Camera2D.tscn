@@ -1,6 +1,7 @@
 [gd_scene format=2]
 
 [node name="Camera2D" type="Camera2D"]
+pause_mode = 1
 position = Vector2( 280, 40 )
 current = true
 limit_left = 0

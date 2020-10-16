@@ -515,6 +515,7 @@ func set_talk_notice(value):
 	elif !value:
 		talkNotice.visible = false
 
+# function that runs when the player's InteractHitbox detects an area entererd
 func _on_InteractHitbox_area_entered(area):
 	interacting = true
 	# gets the object interacting with the interact bounding box
