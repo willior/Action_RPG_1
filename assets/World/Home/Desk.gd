@@ -26,7 +26,10 @@ func examine():
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
 func interact():
+	print('interacting')
 	if !$Light2D.visible:
 		$Light2D.visible = true
+		print('light on')
 	elif $Light2D.visible:
 		$Light2D.visible = false
+		print('light off')

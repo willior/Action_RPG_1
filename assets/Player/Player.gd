@@ -158,16 +158,22 @@ func move_state(delta):
 			
 
 	if Input.is_action_just_pressed("attack"):
-		if !talking && stats.stamina > 0:
+		if !talking && !interacting && stats.stamina > 0:
 			state = ATTACK1
 		elif stats.stamina <= 0:
 			noStamina()
+		elif interacting && interactObject.interactable:
+			talkTimer.start()
+			interactObject.interact()
 		elif talking && interactObject.talkable && talkTimer.is_stopped():
 			talkTimer.start()
 			interactObject.talk()
 			
 	elif Input.is_action_pressed("attack"):
-		if charge_count == 0 && charge_level_count == 0 && stats.stamina > 0:
+		if !talkTimer.is_stopped():
+			print('talk timer not stopped; no charge')
+			return
+		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 0:
 			charge.begin_charge_1()
 		elif charge_count == stats.max_charge/2 && charge_level_count == 1:
 			charge.begin_charge_2()
@@ -542,6 +548,7 @@ func _on_InteractHitbox_area_entered(area):
 		self.talkNoticeDisplay = true
 		talking = true
 	elif interactObject.interactable:
+		print('interact object is interactable')
 		self.interactNoticeDisplay = true
 		interacting = true
 	# does nothing object already examined

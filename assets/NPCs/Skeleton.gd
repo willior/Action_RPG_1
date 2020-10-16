@@ -5,7 +5,7 @@ const DialogBox = preload("res://assets/UI/Dialog.tscn")
 onready var player = get_node("/root/World/YSort/Player")
 onready var sprite = $KinematicBody2D/Sprite
 
-var interactable = true
+var interactable = false
 var talkable = true
 var examined = false
 
