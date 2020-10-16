@@ -1,7 +1,6 @@
 extends StaticBody2D
 
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
-
 onready var player = get_node("/root/World/YSort/Player")
 
 var interactable = false
@@ -15,11 +14,12 @@ func examine():
 		0:
 			index += 1
 			dialogBox.dialog = [
-			"It's the bed that you sleep in every night."
+			"It's your old office chair.",
+			"Not the most comfortable, but it's an antique."
 			]
 		1:
 			dialogBox.dialog = [
-			"Except tonight, of course."
+			"This is where you'd sit if you wanted to get any work done."
 			]
 			index = 0
 			if !examined: examined = true
