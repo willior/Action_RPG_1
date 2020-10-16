@@ -12,7 +12,7 @@
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/World/Home/Home_Rug_Small.png" type="Texture" id=11]
 [ext_resource path="res://assets/World/Home/Home_OfficeChair.png" type="Texture" id=12]
-[ext_resource path="res://assets/World/Home/Home_Bed.png" type="Texture" id=13]
+[ext_resource path="res://assets/World/Home/Bed.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/World/Home/Home_Desk.png" type="Texture" id=14]
 [ext_resource path="res://assets/World/Home/Home_Rug_Large.png" type="Texture" id=15]
 [ext_resource path="res://assets/World/Home/Home_Bookshelf.png" type="Texture" id=16]
@@ -22,6 +22,7 @@
 [ext_resource path="res://assets/Misc/BlackScreen.png" type="Texture" id=20]
 [ext_resource path="res://assets/Audio/Rain_Indoors.ogg" type="AudioStream" id=21]
 [ext_resource path="res://World.gd" type="Script" id=22]
+[ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=23]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 1, 41 )
@@ -34,9 +35,6 @@ extents = Vector2( 11, 5 )
 
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 10, 20 )
-
-[sub_resource type="RectangleShape2D" id=14]
-extents = Vector2( 26, 22 )
 
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 6, 17 )
@@ -124,14 +122,15 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 5
+frame = 2
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 3
+frame = 0
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
+frame = 7
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
@@ -168,15 +167,10 @@ texture = ExtResource( 14 )
 position = Vector2( 0, 7 )
 shape = SubResource( 13 )
 
-[node name="Bed" type="StaticBody2D" parent="YSort/Doodads"]
-position = Vector2( 544, 90 )
+[node name="Bed" parent="YSort/Doodads" instance=ExtResource( 13 )]
 
-[node name="Sprite" type="Sprite" parent="YSort/Doodads/Bed"]
-texture = ExtResource( 13 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Doodads/Bed"]
-position = Vector2( 0, 5 )
-shape = SubResource( 14 )
+[node name="Skeleton" parent="YSort/Doodads/Bed" instance=ExtResource( 23 )]
+position = Vector2( -68, -8 )
 
 [node name="Fireplace" type="StaticBody2D" parent="YSort/Doodads"]
 position = Vector2( 307, 75 )

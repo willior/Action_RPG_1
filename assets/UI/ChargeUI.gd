@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 onready var progress1 = $TextureProgress1
 onready var animation1 = $TextureProgress1/AnimationPlayer

@@ -42,18 +42,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Notice" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -12.0
-margin_right = -320.0
-margin_bottom = -192.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Notice" type="Node2D"]
+z_index = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -8 )
 frames = SubResource( 9 )
-frame = 3
+frame = 7
 speed_scale = 2.0
 playing = true

@@ -39,21 +39,14 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="ChargeUI" type="Control"]
-margin_right = 8.0
-margin_bottom = 8.0
+[node name="ChargeUI" type="Node2D"]
+z_index = 2
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_horizontal_guides_": [  ],
-"_edit_use_anchors_": false
-}
 
 [node name="StaminaProgress" type="TextureProgress" parent="."]
 visible = false
 margin_left = -32.0
 margin_top = -32.0
-margin_right = 8.0
-margin_bottom = 8.0
 max_value = 90.0
 value = 15.0
 texture_under = ExtResource( 4 )
@@ -69,10 +62,11 @@ __meta__ = {
 process_priority = 1
 anchor_left = -3.0
 anchor_top = 1.0
-anchor_right = -1.0
 anchor_bottom = 3.0
-margin_top = -32.0
-margin_bottom = -32.0
+margin_left = -24.0
+margin_top = -24.0
+margin_right = -8.0
+margin_bottom = -8.0
 max_value = 50.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 2 )
@@ -92,10 +86,10 @@ anchor_left = -3.75
 anchor_top = 0.25
 anchor_right = -0.25
 anchor_bottom = 3.75
-margin_left = 6.0
-margin_top = -26.0
-margin_right = -6.0
-margin_bottom = -38.0
+margin_left = -24.0
+margin_top = -24.0
+margin_right = -8.0
+margin_bottom = -8.0
 min_value = 50.0
 value = 50.0
 texture_under = ExtResource( 1 )

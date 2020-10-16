@@ -2007,14 +2007,8 @@ parameters/Run/blend_position = Vector2( 0.000606418, -0.0181319 )
 parameters/Shade/blend_position = Vector2( 0.0241064, -0.406441 )
 
 [node name="TalkNotice" parent="." instance=ExtResource( 4 )]
-visible = false
-margin_top = -4.0
-margin_bottom = -4.0
 
 [node name="Notice" parent="." instance=ExtResource( 12 )]
-visible = false
-margin_right = 0.0
-margin_bottom = 0.0
 
 [node name="ChargeUI" parent="." instance=ExtResource( 13 )]
 
@@ -2090,10 +2084,10 @@ one_shot = true
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
 
