@@ -562,4 +562,5 @@ func _on_InteractHitbox_area_exited(_area):
 	self.interactNoticeDisplay = false
 	examining = false
 	talking = false
+	interacting = false
 	interactObject = null

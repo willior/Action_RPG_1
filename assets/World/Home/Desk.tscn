@@ -30,6 +30,7 @@ position = Vector2( 0, 7 )
 shape = SubResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 position = Vector2( 23, 5 )
 texture = ExtResource( 4 )
 energy = 0.8
