@@ -25,4 +25,3 @@ func examine():
 			if !examined: examined = true
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
-	player.talkTimer.start()

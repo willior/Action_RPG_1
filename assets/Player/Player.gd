@@ -51,7 +51,7 @@ var charge_level_count = 0
 
 var interactObject
 var talkObject
-var interacting = false
+var examining = false
 var talking = false 
 var noticeDisplay = false setget set_notice
 var talkNoticeDisplay = false setget set_talk_notice
@@ -71,7 +71,7 @@ onready var collision = $Hurtbox/CollisionShape2D
 onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
-onready var notice = $Notice
+onready var notice = $ExamineNotice
 onready var talkNotice = $TalkNotice
 onready var charge = $ChargeUI
 onready var charge1Vis = $ChargeUI/TextureProgress1
@@ -141,14 +141,14 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("examine"):
-		if !interacting && talkTimer.is_stopped():
+		if !examining && talkTimer.is_stopped():
 			var dialogBox = DialogBox.instance()
 			dialogBox.dialog = [
 			"You find nothing of interest."
 			]
 			get_node("/root/World/GUI").add_child(dialogBox)
 			talkTimer.start()
-		elif interacting && talkTimer.is_stopped():
+		elif examining && talkTimer.is_stopped():
 			talkTimer.start()
 			interactObject.examine()
 			
@@ -489,18 +489,19 @@ func game_over():
 	self.visible = false
 	get_tree().paused = true
 
+# when the Player interacts with something, their interactHitbox is disabled
+# the TalkTimer is started lasting for 0.5 seconds (default)
 func _on_TalkTimer_timeout():
+	# on timeout, the interactHitbox is re-enabled
 	interactHitbox.disabled = false
+	# checks if an interactable Object is in range
 	if interactObject != null:
+		# if the Player is talking (ie. the object is talkable), sets the talk notice
 		if talking:
 			set_talk_notice(true)
-			
+		# if the Object is not fully examined, sets the notice
 		if !interactObject.examined:
-			print('talk timeout: not examined. setting notice')
 			set_notice(true)
-		else:
-			print('talk timeout: examined')
-			return
 			
 func set_notice(value):
 	if value:
@@ -520,8 +521,8 @@ func set_talk_notice(value):
 
 # function that runs when the player's InteractHitbox detects an area entererd
 func _on_InteractHitbox_area_entered(area):
-	interacting = true
-	# gets the object interacting with the interact bounding box
+	examining = true
+	# gets the object in the interact bounding box
 	interactObject = area.get_owner()
 	# displays talk notice if the object is talkable
 	if interactObject.talkable:
@@ -535,6 +536,6 @@ func _on_InteractHitbox_area_entered(area):
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false
 	self.talkNoticeDisplay = false
-	interacting = false
+	examining = false
 	talking = false
 	interactObject = null

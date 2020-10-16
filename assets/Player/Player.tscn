@@ -1887,9 +1887,8 @@ graph_offset = Vector2( -380.97, 98.7566 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=111]
 
-[sub_resource type="CapsuleShape2D" id=112]
-radius = 9.0
-height = 14.0
+[sub_resource type="CircleShape2D" id=118]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id=113]
 radius = 4.12311
@@ -2009,7 +2008,7 @@ parameters/Shade/blend_position = Vector2( 0.0241064, -0.406441 )
 [node name="TalkNotice" parent="." instance=ExtResource( 4 )]
 visible = false
 
-[node name="Notice" parent="." instance=ExtResource( 12 )]
+[node name="ExamineNotice" parent="." instance=ExtResource( 12 )]
 visible = false
 
 [node name="ChargeUI" parent="." instance=ExtResource( 13 )]
@@ -2037,7 +2036,7 @@ collision_layer = 0
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/InteractHitbox"]
-shape = SubResource( 112 )
+shape = SubResource( 118 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4
@@ -2086,10 +2085,10 @@ one_shot = true
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
 
