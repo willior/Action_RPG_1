@@ -2,7 +2,7 @@ extends StaticBody2D
 
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 
-var interactable = false
+var interactable = true
 var talkable = false
 var examined = false
 var index = 0
@@ -24,3 +24,9 @@ func examine():
 			if !examined: examined = true
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
+	
+func interact():
+	if !$Light2D.visible:
+		$Light2D.visible = true
+	elif $Light2D.visible:
+		$Light2D.visible = false

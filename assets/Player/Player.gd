@@ -53,8 +53,11 @@ var interactObject
 var talkObject
 var examining = false
 var talking = false 
+var interacting = false
+
 var noticeDisplay = false setget set_notice
 var talkNoticeDisplay = false setget set_talk_notice
+var interactNoticeDisplay = false setget set_interact_notice
 
 var sweating = false
 var dying = false
@@ -73,6 +76,7 @@ onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $ExamineNotice
 onready var talkNotice = $TalkNotice
+onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
 onready var charge1Vis = $ChargeUI/TextureProgress1
 onready var charge2Vis = $ChargeUI/TextureProgress2
@@ -518,6 +522,15 @@ func set_talk_notice(value):
 		talkNotice.visible = true
 	elif !value:
 		talkNotice.visible = false
+		
+func set_interact_notice(value):
+	if value:
+		audio.stream = load("res://assets/Audio/cursLo.wav")
+		audio.play()
+		interactNotice.visible = true
+	elif !value:
+		interactNotice.visible = false
+		
 
 # function that runs when the player's InteractHitbox detects an area entererd
 func _on_InteractHitbox_area_entered(area):
@@ -528,6 +541,9 @@ func _on_InteractHitbox_area_entered(area):
 	if interactObject.talkable:
 		self.talkNoticeDisplay = true
 		talking = true
+	elif interactObject.interactable:
+		self.interactNoticeDisplay = true
+		interacting = true
 	# does nothing object already examined
 	if interactObject.examined: return
 	# displays notice if not
@@ -536,6 +552,7 @@ func _on_InteractHitbox_area_entered(area):
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false
 	self.talkNoticeDisplay = false
+	self.interactNoticeDisplay = false
 	examining = false
 	talking = false
 	interactObject = null

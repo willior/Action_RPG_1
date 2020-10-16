@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=2]
+[gd_scene load_steps=133 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/Audio/Evade.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 [ext_resource path="res://assets/Player/PlayerStats.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/UI/InteractNotice.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
@@ -2004,6 +2005,9 @@ parameters/Idle/blend_position = Vector2( 0, 1 )
 parameters/Roll/blend_position = Vector2( -0.000606418, -0.00604391 )
 parameters/Run/blend_position = Vector2( 0.000606418, -0.0181319 )
 parameters/Shade/blend_position = Vector2( 0.0241064, -0.406441 )
+
+[node name="InteractNotice" parent="." instance=ExtResource( 11 )]
+visible = false
 
 [node name="TalkNotice" parent="." instance=ExtResource( 4 )]
 visible = false

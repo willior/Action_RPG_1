@@ -40,7 +40,9 @@ func examine():
 	if !examined: examined = true
 
 func _on_SkeletonTalkBox_area_entered(_area):
-	player.talking = true
+	# player.talking = true
+	pass
 
 func _on_SkeletonTalkBox_area_exited(_area):
-	player.talking = false
+	# player.talking = false
+	pass
