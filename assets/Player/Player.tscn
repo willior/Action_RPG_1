@@ -2007,8 +2007,10 @@ parameters/Run/blend_position = Vector2( 0.000606418, -0.0181319 )
 parameters/Shade/blend_position = Vector2( 0.0241064, -0.406441 )
 
 [node name="TalkNotice" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="Notice" parent="." instance=ExtResource( 12 )]
+visible = false
 
 [node name="ChargeUI" parent="." instance=ExtResource( 13 )]
 

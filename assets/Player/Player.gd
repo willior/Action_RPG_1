@@ -149,7 +149,9 @@ func move_state(delta):
 			get_node("/root/World/GUI").add_child(dialogBox)
 			talkTimer.start()
 		elif interacting && talkTimer.is_stopped():
+			talkTimer.start()
 			interactObject.examine()
+			
 
 	if Input.is_action_just_pressed("attack"):
 		if !talking && stats.stamina > 0:
@@ -157,6 +159,7 @@ func move_state(delta):
 		elif stats.stamina <= 0:
 			noStamina()
 		elif talking && interactObject.talkable && talkTimer.is_stopped():
+			talkTimer.start()
 			interactObject.talk()
 			
 	elif Input.is_action_pressed("attack"):
@@ -489,16 +492,16 @@ func game_over():
 func _on_TalkTimer_timeout():
 	interactHitbox.disabled = false
 	if interactObject != null:
-		if !talking:
-			return
-		else:
+		if talking:
 			set_talk_notice(true)
-
-		if interactObject.examined:
-			return
-		else:
+			
+		if !interactObject.examined:
+			print('talk timeout: not examined. setting notice')
 			set_notice(true)
-	
+		else:
+			print('talk timeout: examined')
+			return
+			
 func set_notice(value):
 	if value:
 		audio.stream = load("res://assets/Audio/cursHi.wav")

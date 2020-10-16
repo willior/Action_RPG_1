@@ -122,15 +122,15 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 2
+frame = 7
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 0
+frame = 5
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 7
+frame = 4
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
@@ -142,6 +142,11 @@ position = Vector2( 513, 88 )
 remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="NPCs" type="YSort" parent="YSort"]
+
+[node name="Skeleton" parent="YSort/NPCs" instance=ExtResource( 23 )]
+position = Vector2( 476, 82 )
 
 [node name="Items" type="YSort" parent="YSort"]
 
@@ -168,9 +173,6 @@ position = Vector2( 0, 7 )
 shape = SubResource( 13 )
 
 [node name="Bed" parent="YSort/Doodads" instance=ExtResource( 13 )]
-
-[node name="Skeleton" parent="YSort/Doodads/Bed" instance=ExtResource( 23 )]
-position = Vector2( -68, -8 )
 
 [node name="Fireplace" type="StaticBody2D" parent="YSort/Doodads"]
 position = Vector2( 307, 75 )

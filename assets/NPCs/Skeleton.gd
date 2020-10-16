@@ -27,7 +27,7 @@ func talk():
 	for x in range(0, dialogBox.dialog.size()):
 		dialogBox.dialog[x] = str(speaker + dialogBox.dialog[x])
 	get_node("/root/World/GUI").add_child(dialogBox)
-	player.talkTimer.start()
+	# player.talkTimer.start()
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -36,7 +36,7 @@ func examine():
 		"Actually, you can't tell the difference between rude and friendly skeletons, so you can't be sure."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
-	player.talkTimer.start()
+	# player.talkTimer.start()
 	if !examined: examined = true
 
 func _on_SkeletonTalkBox_area_entered(_area):

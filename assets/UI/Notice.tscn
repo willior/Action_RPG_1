@@ -48,6 +48,6 @@ z_index = 2
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -8 )
 frames = SubResource( 9 )
-frame = 7
+frame = 2
 speed_scale = 2.0
 playing = true
