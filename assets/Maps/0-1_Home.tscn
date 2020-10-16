@@ -24,22 +24,22 @@
 [ext_resource path="res://World.gd" type="Script" id=22]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=23]
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 41 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 26, 20 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 11, 5 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 10, 20 )
 
-[sub_resource type="RectangleShape2D" id=15]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 6, 17 )
 
-[sub_resource type="RectangleShape2D" id=16]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 32, 15 )
 
 [node name="World" type="Node2D"]
@@ -104,7 +104,7 @@ texture = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Kitchen_Counter"]
 position = Vector2( 4, 18 )
-shape = SubResource( 10 )
+shape = SubResource( 1 )
 
 [node name="Kitchen_Appliances" type="StaticBody2D" parent="Map"]
 position = Vector2( 74, 58 )
@@ -113,7 +113,7 @@ position = Vector2( 74, 58 )
 texture = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Kitchen_Appliances"]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="Kitchen_Cupboard" type="Sprite" parent="Map"]
 position = Vector2( 67, 150 )
@@ -122,15 +122,14 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 7
+frame = 5
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 5
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 4
+frame = 2
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
@@ -160,7 +159,7 @@ texture = ExtResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Doodads/OfficeChair"]
 position = Vector2( 0, 8 )
-shape = SubResource( 12 )
+shape = SubResource( 3 )
 
 [node name="Desk" type="StaticBody2D" parent="YSort/Doodads"]
 position = Vector2( 430, 87 )
@@ -170,7 +169,7 @@ texture = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Doodads/Desk"]
 position = Vector2( 0, 7 )
-shape = SubResource( 13 )
+shape = SubResource( 4 )
 
 [node name="Bed" parent="YSort/Doodads" instance=ExtResource( 13 )]
 
@@ -182,7 +181,7 @@ texture = ExtResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="YSort/Doodads/Fireplace"]
 position = Vector2( 2, 4 )
-shape = SubResource( 15 )
+shape = SubResource( 5 )
 
 [node name="Bookshelf" type="StaticBody2D" parent="YSort/Doodads"]
 position = Vector2( 208, 17 )
@@ -192,7 +191,7 @@ texture = ExtResource( 16 )
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="YSort/Doodads/Bookshelf"]
 position = Vector2( 0, 9 )
-shape = SubResource( 16 )
+shape = SubResource( 6 )
 
 [node name="GUI" parent="." instance=ExtResource( 10 )]
 
