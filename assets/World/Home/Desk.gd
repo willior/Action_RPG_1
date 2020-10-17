@@ -12,10 +12,16 @@ func examine():
 	match index:
 		0:
 			index += 1
-			dialogBox.dialog = [
-			"It's your desk.",
-			"There's a library lamp sitting on top of it."
-			]
+			if !$Light2D.visible:
+				dialogBox.dialog = [
+				"It's your desk.",
+				"There's a library lamp sitting on top of it."
+				]
+			elif $Light2D.visible:
+				dialogBox.dialog = [
+				"It's your desk.",
+				"The warm glow of the lamp relaxes you."
+				]
 		1:
 			dialogBox.dialog = [
 			"Tidy and organized, as usual."

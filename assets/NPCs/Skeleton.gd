@@ -2,7 +2,6 @@ extends Node2D
 
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 
-onready var player = get_node("/root/World/YSort/Player")
 onready var sprite = $KinematicBody2D/Sprite
 
 var interactable = false
@@ -27,7 +26,6 @@ func talk():
 	for x in range(0, dialogBox.dialog.size()):
 		dialogBox.dialog[x] = str(speaker + dialogBox.dialog[x])
 	get_node("/root/World/GUI").add_child(dialogBox)
-	# player.talkTimer.start()
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -36,13 +34,4 @@ func examine():
 		"Actually, you can't tell the difference between rude and friendly skeletons, so you can't be sure."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
-	# player.talkTimer.start()
 	if !examined: examined = true
-
-func _on_SkeletonTalkBox_area_entered(_area):
-	# player.talking = true
-	pass
-
-func _on_SkeletonTalkBox_area_exited(_area):
-	# player.talking = false
-	pass

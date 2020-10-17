@@ -171,7 +171,6 @@ func move_state(delta):
 			
 	elif Input.is_action_pressed("attack"):
 		if !talkTimer.is_stopped():
-			print('talk timer not stopped; no charge')
 			return
 		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 0:
 			charge.begin_charge_1()
@@ -272,6 +271,7 @@ func attack_animation_finished():
 # if the player releases the attack button, charging state ends
 # if the player holds the button for enough time, charge_level_1 is achieved
 # if the player continues to hold the button, charge_level_2 is achieved
+# releasing the attack button after achieving a charge level unleashes a special attack
 
 # warning-ignore:unused_argument
 func charge_state(delta):
@@ -536,25 +536,24 @@ func set_interact_notice(value):
 		interactNotice.visible = true
 	elif !value:
 		interactNotice.visible = false
-		
 
 # function that runs when the player's InteractHitbox detects an area entererd
 func _on_InteractHitbox_area_entered(area):
-	examining = true
 	# gets the object in the interact bounding box
 	interactObject = area.get_owner()
+	examining = true
+	# displays notice is object not examined
+	if !interactObject.examined:
+		self.noticeDisplay = true
 	# displays talk notice if the object is talkable
 	if interactObject.talkable:
 		self.talkNoticeDisplay = true
 		talking = true
-	elif interactObject.interactable:
+	# else displays interact notice if the object is interactable
+	if interactObject.interactable:
 		print('interact object is interactable')
 		self.interactNoticeDisplay = true
 		interacting = true
-	# does nothing object already examined
-	if interactObject.examined: return
-	# displays notice if not
-	else: self.noticeDisplay = true
 
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false

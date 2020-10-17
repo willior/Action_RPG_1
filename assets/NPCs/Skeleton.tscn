@@ -77,5 +77,3 @@ stream = ExtResource( 4 )
 
 [node name="AudioCursLo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-[connection signal="area_entered" from="KinematicBody2D/SkeletonTalkBox" to="." method="_on_SkeletonTalkBox_area_entered"]
-[connection signal="area_exited" from="KinematicBody2D/SkeletonTalkBox" to="." method="_on_SkeletonTalkBox_area_exited"]
