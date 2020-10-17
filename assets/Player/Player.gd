@@ -165,6 +165,9 @@ func move_state(delta):
 		elif interacting && interactObject.interactable:
 			talkTimer.start()
 			interactObject.interact()
+			if examining:
+				print('notice display false')
+				self.noticeDisplay = false
 		elif talking && interactObject.talkable && talkTimer.is_stopped():
 			talkTimer.start()
 			interactObject.talk()
@@ -503,15 +506,15 @@ func game_over():
 # the TalkTimer is started lasting for 0.5 seconds (default)
 func _on_TalkTimer_timeout():
 	# on timeout, the interactHitbox is re-enabled
-	interactHitbox.disabled = false
+	# interactHitbox.disabled = false
 	# checks if an interactable Object is in range
 	if interactObject != null:
 		# if the Player is talking (ie. the object is talkable), sets the talk notice
 		if talking:
-			set_talk_notice(true)
+			self.talkNoticeDisplay = true
 		# if the Object is not fully examined, sets the notice
-		if !interactObject.examined:
-			set_notice(true)
+		if examining && !interactObject.examined:
+			self.noticeDisplay = true
 			
 func set_notice(value):
 	if value:
@@ -551,7 +554,6 @@ func _on_InteractHitbox_area_entered(area):
 		talking = true
 	# else displays interact notice if the object is interactable
 	if interactObject.interactable:
-		print('interact object is interactable')
 		self.interactNoticeDisplay = true
 		interacting = true
 
