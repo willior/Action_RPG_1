@@ -53,12 +53,16 @@ func examine():
 # if not, sets examined to false, which displays the "?!" notice
 func interact():
 	if !$Light2D.visible:
+		$AudioStreamPlayer.stream = load("res://assets/Audio/Lightswitch_On.wav")
+		$AudioStreamPlayer.play()
 		$Light2D.show()
 		index = 1
 		if examined && !examined_while_on: examined = false
 		frame = 1
 		
 	elif $Light2D.visible:
+		$AudioStreamPlayer.stream = load("res://assets/Audio/Lightswitch_Off.wav")
+		$AudioStreamPlayer.play()
 		$Light2D.hide()
 		index = 1
 		if !examined_while_off: examined = false

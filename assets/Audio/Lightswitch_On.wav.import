@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Lightswitch_On.wav-369d7c7d500d7d8d2aed4395876d1298.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Lightswitch_On.wav"
+dest_files=[ "res://.import/Lightswitch_On.wav-369d7c7d500d7d8d2aed4395876d1298.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

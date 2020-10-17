@@ -43,4 +43,6 @@ texture = ExtResource( 4 )
 energy = 0.8
 shadow_enabled = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [editable path="TalkBox"]

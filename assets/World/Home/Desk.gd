@@ -37,11 +37,15 @@ func examine():
 	
 func interact():
 	if !$Light2D.visible:
+		$AudioStreamPlayer.stream = load("res://assets/Audio/Lampswitch_On.wav")
+		$AudioStreamPlayer.play()
 		$Light2D.visible = true
 		index = 1
 		if examined && !lampExamined: examined = false
 		
 	elif $Light2D.visible:
+		$AudioStreamPlayer.stream = load("res://assets/Audio/Lampswitch_Off.wav")
+		$AudioStreamPlayer.play()
 		$Light2D.visible = false
 		index = 0
 		if !unlitExamined: examined = false

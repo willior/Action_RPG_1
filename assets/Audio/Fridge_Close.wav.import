@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Fridge_Close.wav-a3b48d0b4aa7570dbb6434c5deab9e08.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Fridge_Close.wav"
+dest_files=[ "res://.import/Fridge_Close.wav-a3b48d0b4aa7570dbb6434c5deab9e08.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
