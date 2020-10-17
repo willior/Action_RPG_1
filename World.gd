@@ -3,9 +3,11 @@ extends Node2D
 onready var stats = $GUI/StatsDisplay
 onready var dim = $GUI/Dim
 onready var music = $Music
+onready var sfx = $SFX
 onready var player = $YSort/Player
 
 func _ready():
+	sfx.play()
 	music.play()
 
 func _process(_delta):
