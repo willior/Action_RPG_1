@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
@@ -22,13 +22,17 @@
 [ext_resource path="res://assets/Misc/BlackScreen.png" type="Texture" id=20]
 [ext_resource path="res://assets/Audio/Rain_Indoors.ogg" type="AudioStream" id=21]
 [ext_resource path="res://World.gd" type="Script" id=22]
-[ext_resource path="res://assets/World/Home/OfficeChair.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/World/Home/Lightswitch.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/World/Home/OfficeChair.tscn" type="PackedScene" id=26]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 1, 41 )
 
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 26, 20 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 2, 3 )
 
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 6, 17 )
@@ -56,10 +60,11 @@ texture = ExtResource( 20 )
 centered = false
 
 [node name="Overlay" type="CanvasModulate" parent="Map"]
-modulate = Color( 0.18308, 0.1012, 0.92, 0.831373 )
+modulate = Color( 1, 1, 1, 0.831373 )
+light_mask = 0
 scale = Vector2( 2.2, 1.5 )
 z_index = 3
-color = Color( 0.501961, 0.501961, 0.501961, 1 )
+color = Color( 0.2, 0.2, 0.2, 1 )
 
 [node name="Home" type="TileMap" parent="Map"]
 tile_set = ExtResource( 1 )
@@ -114,13 +119,24 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
+frame = 5
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
+frame = 5
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 6
+frame = 1
+
+[node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
+
+[node name="CollisionShape2D" parent="Map/Lightswitch_Bedroom/TalkBox" index="0"]
+position = Vector2( 0, 0 )
+shape = SubResource( 17 )
+
+[node name="Light2D" parent="Map/Lightswitch_Bedroom" index="1"]
+visible = false
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
@@ -142,7 +158,7 @@ position = Vector2( 494, 142 )
 
 [node name="Doodads" type="YSort" parent="YSort"]
 
-[node name="OfficeChair" parent="YSort/Doodads" instance=ExtResource( 23 )]
+[node name="OfficeChair" parent="YSort/Doodads" instance=ExtResource( 26 )]
 
 [node name="Desk" parent="YSort/Doodads" instance=ExtResource( 12 )]
 
@@ -172,3 +188,7 @@ shape = SubResource( 16 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
+
+[editable path="Map/Lightswitch_Bedroom"]
+
+[editable path="Map/Lightswitch_Bedroom/TalkBox"]

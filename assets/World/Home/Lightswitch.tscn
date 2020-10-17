@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=2]
+[ext_resource path="res://assets/World/Home/Home_Lightswitch_sheet.png" type="Texture" id=3]
+[ext_resource path="res://assets/World/Home/Lightswitch_Bedroom.gd" type="Script" id=4]
+
+[node name="Lightswitch_Bedroom" type="Sprite"]
+position = Vector2( 413, 113 )
+texture = ExtResource( 3 )
+hframes = 2
+script = ExtResource( 4 )
+
+[node name="TalkBox" type="Area2D" parent="." instance=ExtResource( 1 )]
+collision_layer = 128
+collision_mask = 0
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 83, -17.5 )
+scale = Vector2( 162, 131 )
+texture = ExtResource( 2 )
+energy = 0.8
