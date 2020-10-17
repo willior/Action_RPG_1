@@ -39,7 +39,7 @@ animations = [ {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
 "name": "default",
-"speed": 20.0
+"speed": 10.0
 } ]
 
 [node name="InteractNotice" type="Node2D"]
@@ -48,5 +48,5 @@ z_index = 2
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -5 )
 frames = SubResource( 5 )
-frame = 4
+frame = 2
 playing = true
