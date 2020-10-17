@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=2]
+[gd_scene load_steps=106 format=2]
 
 [ext_resource path="res://assets/World/Plants/Plant_16_green.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://World.gd" type="Script" id=18]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=19]
 [ext_resource path="res://assets/Audio/Rain_Outside_01.ogg" type="AudioStream" id=20]
+[ext_resource path="res://assets/Weather/Lightning.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_orange_1_sheet.png" type="Texture" id=23]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_yellow_1_sheet.png" type="Texture" id=24]
 [ext_resource path="res://assets/Tilesets/grassBasic_lightInner/tileset_grassBasic_lightInner.tres" type="TileSet" id=25]
@@ -871,6 +872,12 @@ position = Vector2( -80, -160 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
+
+[node name="Lightning" parent="YSort/Player" instance=ExtResource( 21 )]
+position = Vector2( -160, -90 )
+
+[node name="Light2D" parent="YSort/Player/Lightning" index="1"]
+scale = Vector2( 496, 260 )
 
 [node name="Doodads" type="YSort" parent="YSort"]
 
@@ -1952,22 +1959,22 @@ position = Vector2( -245, -156 )
 position = Vector2( -360, -200 )
 
 [node name="CrowSpawner" parent="YSort/Enemies" instance=ExtResource( 46 )]
-position = Vector2( 88, 64 )
+position = Vector2( 456, 320 )
 
 [node name="CrowSpawner2" parent="YSort/Enemies" instance=ExtResource( 46 )]
-position = Vector2( 296, 144 )
+position = Vector2( 664, 400 )
 
 [node name="CrowSpawner3" parent="YSort/Enemies" instance=ExtResource( 46 )]
-position = Vector2( 120, 240 )
+position = Vector2( 488, 496 )
 
 [node name="CrowSpawner4" parent="YSort/Enemies" instance=ExtResource( 46 )]
-position = Vector2( 336, 368 )
+position = Vector2( 704, 624 )
 
 [node name="CrowSpawner5" parent="YSort/Enemies" instance=ExtResource( 46 )]
-position = Vector2( 168, 752 )
+position = Vector2( 536, 1008 )
 
 [node name="CrowSpawner6" parent="YSort/Enemies" instance=ExtResource( 46 )]
-position = Vector2( 336, 752 )
+position = Vector2( 704, 1008 )
 
 [node name="Items" type="YSort" parent="YSort"]
 position = Vector2( -360, -200 )
@@ -2325,3 +2332,5 @@ stream = ExtResource( 4 )
 stream = ExtResource( 3 )
 
 [editable path="Map/Exit"]
+
+[editable path="YSort/Player/Lightning"]
