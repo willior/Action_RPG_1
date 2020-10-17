@@ -17,9 +17,3 @@ func lightning_strike():
 	$Timer.start(lightningTimer)
 	prints(str(lightningTimer) + " second til next lightning")
 	$AnimationPlayer.play("Lightning1")
-	
-func set_light_energy(value):
-	print('setting light energy')
-	$Light2D.energy = value
-	$Light2D2.energy = value
-	$Light2D3.energy = value
