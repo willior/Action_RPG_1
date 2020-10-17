@@ -3,8 +3,6 @@ extends Node2D
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 
-onready var player = get_node("/root/World/YSort/Player")
-
 var interactable = false
 var talkable = false
 var examined = false
@@ -16,16 +14,7 @@ func examine():
 		"Actually, there's only one left."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
-	player.talkTimer.start()
 	if !examined: examined = true
-
-func _on_HeartTalkBox_area_entered(_area):
-	# player.interacting = true
-	interactable = true
-
-func _on_HeartTalkBox_area_exited(_area):
-	# player.interacting = false
-	interactable = false
 
 func _on_HeartCollectBox_area_entered(_area):
 	var itemCollectEffect = ItemCollectEffect.instance()
@@ -34,4 +23,3 @@ func _on_HeartCollectBox_area_entered(_area):
 	itemCollectEffect.playSound(0)
 	PlayerStats.health += 1
 	queue_free()
-

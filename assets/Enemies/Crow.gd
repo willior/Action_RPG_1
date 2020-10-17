@@ -302,10 +302,10 @@ func _on_CrowStats_no_health():
 	queue_free()
 
 func _on_TalkBox_area_entered(_area):
-	interactable = true
+	pass
 
 func _on_TalkBox_area_exited(_area):
-	interactable = false
+	pass
 
 func idle_animation():
 	animationState.travel("Idle")

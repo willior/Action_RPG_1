@@ -158,7 +158,7 @@ func move_state(delta):
 			
 
 	if Input.is_action_just_pressed("attack"):
-		if !talking && !interacting && stats.stamina > 0:
+		if (!talking && !interacting) && stats.stamina > 0:
 			state = ATTACK1
 		elif stats.stamina <= 0:
 			noStamina()
@@ -556,6 +556,7 @@ func _on_InteractHitbox_area_entered(area):
 	if interactObject.interactable:
 		self.interactNoticeDisplay = true
 		interacting = true
+		
 
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false

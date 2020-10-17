@@ -1888,7 +1888,7 @@ graph_offset = Vector2( -380.97, 98.7566 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=111]
 
-[sub_resource type="RectangleShape2D" id=118]
+[sub_resource type="RectangleShape2D" id=112]
 extents = Vector2( 5, 7.99995 )
 
 [sub_resource type="CircleShape2D" id=113]
@@ -2041,7 +2041,7 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/InteractHitbox"]
 position = Vector2( -2, -4.69685e-05 )
-shape = SubResource( 118 )
+shape = SubResource( 112 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4

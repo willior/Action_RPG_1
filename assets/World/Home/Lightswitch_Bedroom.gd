@@ -5,8 +5,8 @@ const DialogBox = preload("res://assets/UI/Dialog.tscn")
 var interactable = true
 var talkable = false
 var examined = false
-var unlitExamined = false
-var litExamined = false
+var examined_while_off = false
+var examined_while_on = false
 var fullyExamined = false
 var index = 0
 
@@ -21,7 +21,7 @@ func examine():
 			"A switch of some kind."
 			]
 			if !examined: examined = true
-			if !unlitExamined: unlitExamined = true
+			if !examined_while_off: examined_while_off = true
 		1: # default dialog after the player turns the light on
 			dialogBox.dialog = [
 			"A lightswitch."
@@ -36,14 +36,14 @@ func examine():
 			]
 			index -= 1
 			if !examined: examined = true
-			if !litExamined: litExamined = true
+			if !examined_while_on: examined_while_on = true
 		3: # dialog for 2nd examination while off
 			dialogBox.dialog = [
 			"It's in the 'OFF' position."
 			]
 			index -= 2
 			if !examined: examined = true
-			if !litExamined: litExamined = true
+			if !examined_while_on: examined_while_on = true
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
@@ -53,13 +53,13 @@ func examine():
 # if not, sets examined to false, which displays the "?!" notice
 func interact():
 	if !$Light2D.visible:
-		$Light2D.visible = true
+		$Light2D.show()
 		index = 1
-		if examined && !litExamined: examined = false
+		if examined && !examined_while_on: examined = false
 		frame = 1
 		
 	elif $Light2D.visible:
-		$Light2D.visible = false
+		$Light2D.hide()
 		index = 1
-		if !unlitExamined: examined = false
+		if !examined_while_off: examined = false
 		frame = 0

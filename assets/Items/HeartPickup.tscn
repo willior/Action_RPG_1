@@ -27,8 +27,6 @@ scale = Vector2( 3, 3 )
 
 [node name="AudioCursHi" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-[connection signal="area_entered" from="HeartTalkBox" to="." method="_on_HeartTalkBox_area_entered"]
-[connection signal="area_exited" from="HeartTalkBox" to="." method="_on_HeartTalkBox_area_exited"]
 [connection signal="area_entered" from="HeartCollectBox" to="." method="_on_HeartCollectBox_area_entered"]
 
 [editable path="HeartTalkBox"]
