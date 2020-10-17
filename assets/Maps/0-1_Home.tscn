@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
@@ -32,7 +32,10 @@ extents = Vector2( 1, 41 )
 extents = Vector2( 26, 20 )
 
 [sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 2, 3 )
+extents = Vector2( 2, 6 )
+
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 2, 6 )
 
 [sub_resource type="RectangleShape2D" id=15]
 extents = Vector2( 6, 17 )
@@ -119,24 +122,36 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 5
+frame = 1
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 5
+frame = 1
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 1
+frame = 5
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
 [node name="CollisionShape2D" parent="Map/Lightswitch_Bedroom/TalkBox" index="0"]
-position = Vector2( 0, 0 )
+position = Vector2( 0, 3 )
 shape = SubResource( 17 )
 
 [node name="Light2D" parent="Map/Lightswitch_Bedroom" index="1"]
-visible = false
+position = Vector2( 80.5, -17.5 )
+scale = Vector2( 167, 131 )
+
+[node name="Lightswitch_Main" parent="Map" instance=ExtResource( 23 )]
+position = Vector2( 323, 113 )
+
+[node name="CollisionShape2D" parent="Map/Lightswitch_Main/TalkBox" index="0"]
+position = Vector2( 0, 3 )
+shape = SubResource( 18 )
+
+[node name="Light2D" parent="Map/Lightswitch_Main" index="1"]
+position = Vector2( -144.5, -17.5 )
+scale = Vector2( 295, 195 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
@@ -192,3 +207,7 @@ stream = ExtResource( 21 )
 [editable path="Map/Lightswitch_Bedroom"]
 
 [editable path="Map/Lightswitch_Bedroom/TalkBox"]
+
+[editable path="Map/Lightswitch_Main"]
+
+[editable path="Map/Lightswitch_Main/TalkBox"]
