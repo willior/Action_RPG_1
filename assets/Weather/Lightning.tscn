@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Weather/Lightning.gd" type="Script" id=1]
-[ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=2]
+[ext_resource path="res://assets/Misc/WhiteScreen.png" type="Texture" id=2]
 [ext_resource path="res://assets/Audio/Thunder_1.wav" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]
@@ -40,8 +40,7 @@ script = ExtResource( 1 )
 anims/Lightning1 = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 192, 112 )
-scale = Vector2( 384, 216 )
+position = Vector2( 160, 90 )
 texture = ExtResource( 2 )
 energy = 0.0
 

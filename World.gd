@@ -40,11 +40,13 @@ func _process(_delta):
 			
 		elif get_tree().paused == false:
 			music.stream_paused = true
+			sfx.stream_paused = true
 			get_tree().paused = true
 			dim.visible = true
 			stats.visible = true
 		else:
 			music.stream_paused = false
+			sfx.stream_paused = false
 			get_tree().paused = false
 			dim.visible = false
 			stats.visible = false

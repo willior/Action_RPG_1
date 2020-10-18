@@ -16,6 +16,7 @@ predelay_msec = 30.0
 wet = 0.1
 
 [resource]
+bus/0/volume_db = -22.9623
 bus/1/name = "Delay"
 bus/1/solo = false
 bus/1/mute = false
