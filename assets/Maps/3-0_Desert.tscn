@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/Tilesets/Desert/Sand_Light_Tileset/tileset_Sand_Light_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -12,6 +12,20 @@
 [ext_resource path="res://assets/World/Desert/Desert_Parallax2.png" type="Texture" id=10]
 [ext_resource path="res://assets/Audio/Desert_SFX_hicut.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/Audio/Desert_Music.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/Misc/WhiteScreen.png" type="Texture" id=13]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 160, 90, 0 )
+flag_disable_z = true
+gravity = Vector3( 20, 0, 0 )
+initial_velocity = 143.91
+initial_velocity_random = 0.48
+angular_velocity = 31.88
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 52.4
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -23,8 +37,7 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 160, 88 )
 current = true
-limit_left = -160
-limit_top = -90
+limit_left = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 drag_margin_top = 0.1
@@ -56,11 +69,12 @@ texture = ExtResource( 9 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 motion_scale = Vector2( 0.3, 0.3 )
-motion_mirroring = Vector2( 320, 180 )
+motion_mirroring = Vector2( 320, 0 )
 
 [node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer2"]
 position = Vector2( 160, 90 )
 texture = ExtResource( 8 )
+offset = Vector2( 0, -180 )
 
 [node name="ParallaxLayer1" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 motion_scale = Vector2( 0.6, 0.6 )
@@ -69,6 +83,28 @@ motion_mirroring = Vector2( 320, 180 )
 [node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer1"]
 position = Vector2( 160, 90 )
 texture = ExtResource( 10 )
+offset = Vector2( 0, -180 )
+
+[node name="ParallaxOverlay" type="ParallaxBackground" parent="Map"]
+layer = 0
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Map/ParallaxOverlay"]
+motion_mirroring = Vector2( 320, 180 )
+
+[node name="Sprite" type="Sprite" parent="Map/ParallaxOverlay/ParallaxLayer"]
+modulate = Color( 0.835294, 0.756863, 0.52549, 0.25098 )
+texture = ExtResource( 13 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Map/ParallaxOverlay"]
+motion_mirroring = Vector2( 320, 180 )
+
+[node name="Particles2D" type="Particles2D" parent="Map/ParallaxOverlay/ParallaxLayer2"]
+modulate = Color( 0.835294, 0.807843, 0.717647, 0.784314 )
+position = Vector2( 159, 97 )
+amount = 6000
+lifetime = 5.0
+process_material = SubResource( 1 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
