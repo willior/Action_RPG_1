@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Desert_SFX_hicut.ogg-3cfd518772a9d9c3c7580240961edeac.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/Desert_SFX_hicut.ogg"
+dest_files=[ "res://.import/Desert_SFX_hicut.ogg-3cfd518772a9d9c3c7580240961edeac.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

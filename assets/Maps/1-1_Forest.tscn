@@ -2283,7 +2283,6 @@ bus = "Reverb"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 20 )
-pitch_scale = 0.8
 
 [node name="HeartSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
