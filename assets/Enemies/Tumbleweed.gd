@@ -6,8 +6,8 @@ const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const HeartPickup = preload("res://assets/Items/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/Items/PennyPickup.tscn")
 
-export var ACCELERATION = 400
-export var MAX_SPEED = 160
+export var ACCELERATION = 200
+export var MAX_SPEED = 100
 export var FRICTION = 240
 
 enum {
@@ -28,25 +28,26 @@ var examined = false
 var facingLeft = false
 
 onready var timer = $Timer
-onready var sprite = $AnimatedSprite
+onready var sprite = $Sprite
 onready var tween = $Tween
 onready var hitbox = $Hitbox
-onready var hurtbox = $Hurtbox
-onready var talkBox = $BatTalkBox/CollisionShape2D
+onready var talkBox = $Talkbox/CollisionShape2D
+onready var animationPlayer = $AnimationPlayer
 onready var audio = $AudioStreamPlayer
 onready var player = get_parent().get_parent().get_node("Player")
+onready var target_vector = Vector2(-1, 0)
 
 func _ready():
 	add_to_group("enemies")
-	sprite.playing = true
+	animationPlayer.play("Animate")
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
+	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
 	knockback = move_and_slide(knockback)
 	
 	match state:
 		IDLE:
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			velocity = velocity.move_toward(Vector2(target_vector) * MAX_SPEED, ACCELERATION * delta)
 				
 		WANDER:
 			pass
@@ -56,10 +57,12 @@ func _physics_process(delta):
 
 		ATTACK:
 			pass
+			
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	sprite.flip_h = velocity.x < 0
+	
 	velocity = move_and_slide(velocity)
 
 func examine():

@@ -20,9 +20,8 @@
 shader = ExtResource( 9 )
 shader_param/active = false
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=118]
 radius = 4.0
-height = 4.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "Attack1Down"
@@ -1892,7 +1891,7 @@ graph_offset = Vector2( -380.97, 98.7566 )
 extents = Vector2( 5, 7.99995 )
 
 [sub_resource type="CircleShape2D" id=113]
-radius = 4.12311
+radius = 5.0
 
 [sub_resource type="CapsuleShape2D" id=114]
 height = 5.43185
@@ -1950,9 +1949,8 @@ hframes = 60
 frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -1 )
-rotation = -1.5708
-shape = SubResource( 2 )
+position = Vector2( 0, -2 )
+shape = SubResource( 118 )
 
 [node name="PlayerStats" parent="." instance=ExtResource( 10 )]
 
@@ -2049,7 +2047,7 @@ collision_mask = 0
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( 0, -3 )
+position = Vector2( 0, -2 )
 shape = SubResource( 113 )
 
 [node name="Timer" type="Timer" parent="Hurtbox"]

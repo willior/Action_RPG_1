@@ -121,7 +121,7 @@ radius = 9.0
 [sub_resource type="CircleShape2D" id=20]
 
 [sub_resource type="CircleShape2D" id=21]
-radius = 4.0
+radius = 5.0
 
 [sub_resource type="CircleShape2D" id=22]
 radius = 5.0
@@ -147,6 +147,7 @@ offset = Vector2( 0, -12 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -3 )
 shape = SubResource( 14 )
 
 [node name="BatStats" parent="." instance=ExtResource( 4 )]
