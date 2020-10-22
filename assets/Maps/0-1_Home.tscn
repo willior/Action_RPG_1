@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
@@ -27,6 +27,9 @@
 [ext_resource path="res://assets/Weather/Lightning.gd" type="Script" id=25]
 [ext_resource path="res://assets/World/Home/OfficeChair.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/Audio/Thunder_1.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=28]
+[ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=29]
+[ext_resource path="res://assets/Enemies/Tumbleweed.tscn" type="PackedScene" id=30]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 41 )
@@ -158,13 +161,15 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
+frame = 2
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
+frame = 2
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 3
+frame = 6
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
@@ -228,6 +233,15 @@ position = Vector2( 160, 85 )
 remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 29 )]
+position = Vector2( 248, 143 )
+
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 28 )]
+position = Vector2( 284, 133 )
+
+[node name="Tumbleweed" parent="YSort/Enemies" instance=ExtResource( 30 )]
+position = Vector2( 257, 86 )
 
 [node name="NPCs" type="YSort" parent="YSort"]
 

@@ -21,13 +21,14 @@ enum {
 	ATTACK,
 	DEAD
 }
+var state = IDLE
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var random_number
 
-var state = IDLE
+
 var interactable = false
 var talkable = false
 var examined = false
@@ -50,7 +51,6 @@ onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var attackController = $AttackController
 onready var animationPlayer = $AnimationPlayer
-onready var talkBox = $BatTalkBox/CollisionShape2D
 onready var audio = $AudioStreamPlayer
 onready var player = get_parent().get_parent().get_node("Player")
 
@@ -130,7 +130,6 @@ func examine():
 		"They are the only mammals capable of true and sustained flight."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
-	player.talkTimer.start()
 	if !examined: examined = true
 			
 func accelerate_towards_point(point, speed, delta):
@@ -292,11 +291,3 @@ func _on_Hurtbox_invincibility_started():
 
 func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
-
-func _on_BatTalkBox_area_entered(_area):
-	interactable = true
-	# player.interacting = true
-
-func _on_BatTalkBox_area_exited(_area):
-	interactable = false
-	# player.interacting = false

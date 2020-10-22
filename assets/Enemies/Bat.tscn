@@ -121,7 +121,7 @@ radius = 9.0
 [sub_resource type="CircleShape2D" id=20]
 
 [sub_resource type="CircleShape2D" id=21]
-radius = 3.16228
+radius = 4.0
 
 [sub_resource type="CircleShape2D" id=22]
 radius = 5.0
@@ -156,12 +156,11 @@ script = ExtResource( 11 )
 anims/StartFlashing = SubResource( 15 )
 anims/StopFlashing = SubResource( 16 )
 
-[node name="BatTalkBox" type="Area2D" parent="."]
-visible = false
+[node name="Talkbox" type="Area2D" parent="."]
 collision_layer = 128
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BatTalkBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
 position = Vector2( 0, -14 )
 shape = SubResource( 17 )
 
@@ -219,8 +218,6 @@ one_shot = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 15 )
 [connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
-[connection signal="area_entered" from="BatTalkBox" to="." method="_on_BatTalkBox_area_entered"]
-[connection signal="area_exited" from="BatTalkBox" to="." method="_on_BatTalkBox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

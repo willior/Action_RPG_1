@@ -22,13 +22,13 @@ enum {
 	ATTACK,
 	DEAD
 }
+var state = IDLE
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var random_number
 
-var state = IDLE
 var interactable = false
 var talkable = false
 var examined = false
@@ -54,7 +54,6 @@ onready var attackController = $AttackController
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
-onready var talkBox = $TalkBox/CollisionShape2D
 onready var audio = $AudioStreamPlayer
 onready var player = get_parent().get_parent().get_node("Player")
 
@@ -63,16 +62,6 @@ func _ready():
 	# rng.randomize()
 	# random_number = rng.randi_range(0, 4)
 	animationTree.active = true
-	# set_speed_scale(1)
-	# sprite.playing = true
-	# eye.playing = true
-	
-	# turn off playerDetectionZone and attackPlayerZone:
-	# attackPlayerZone.set_deferred("monitoring", false)
-	# playerDetectionZone.set_deferred("monitoring", false)
-	
-	# turn off hitbox:
-	# hitbox.set_deferred("monitorable", false)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -138,7 +127,6 @@ func examine():
 		"Except that it's over-sized. And more aggressive than usual, to say the least."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
-	player.talkTimer.start()
 	if !examined: examined = true
 			
 func accelerate_towards_point(point, speed, delta):
@@ -300,12 +288,6 @@ func _on_CrowStats_no_health():
 		pennyPickup.global_position = global_position
 	
 	queue_free()
-
-func _on_TalkBox_area_entered(_area):
-	pass
-
-func _on_TalkBox_area_exited(_area):
-	pass
 
 func idle_animation():
 	animationState.travel("Idle")
