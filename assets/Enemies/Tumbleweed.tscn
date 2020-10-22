@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/Enemies/Tumbleweed_spritesheet.png" type="Texture" id=3]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/Audio/Enemies/Tumbleweed_Sound.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/Audio/Enemies/Tumbleweed_Sound_1.wav" type="AudioStream" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
@@ -27,19 +27,19 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6 ]
 }
-tracks/1/type = "audio"
-tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"clips": [ {
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource( 6 )
-} ],
-"times": PoolRealArray( 0.25 )
+"times": PoolRealArray( 0.25 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_sound"
+} ]
 }
 
 [sub_resource type="CircleShape2D" id=3]
@@ -62,6 +62,7 @@ texture = ExtResource( 1 )
 position = Vector2( 0, -3 )
 texture = ExtResource( 3 )
 hframes = 7
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

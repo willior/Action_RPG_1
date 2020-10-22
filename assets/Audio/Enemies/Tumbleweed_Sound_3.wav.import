@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Tumbleweed_Sound_3.wav-54f62b1cd5911e3b12ff4a33b456b272.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Enemies/Tumbleweed_Sound_3.wav"
+dest_files=[ "res://.import/Tumbleweed_Sound_3.wav-54f62b1cd5911e3b12ff4a33b456b272.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

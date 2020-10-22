@@ -90,8 +90,20 @@ func examine():
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true
-
-
+	
+func play_sound():
+	var sound_choice = randi() % 3
+	print(sound_choice)
+	match sound_choice:
+		0:
+			$AudioStreamPlayer.stream = load("res://assets/Audio/Enemies/Tumbleweed_Sound_1.wav")
+		1:
+			$AudioStreamPlayer.stream = load("res://assets/Audio/Enemies/Tumbleweed_Sound_2.wav")
+		2:
+			$AudioStreamPlayer.stream = load("res://assets/Audio/Enemies/Tumbleweed_Sound_3.wav")
+			
+	$AudioStreamPlayer.play()
+		
 func _on_Area2D_area_exited(_area):
 	print('deleting tumbleweed')
 	queue_free()
