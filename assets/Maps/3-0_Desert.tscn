@@ -15,21 +15,7 @@
 [ext_resource path="res://assets/Misc/WhiteScreen.png" type="Texture" id=13]
 [ext_resource path="res://assets/Maps/Desert.gd" type="Script" id=14]
 [ext_resource path="res://assets/Enemies/TumbleweedNest.tscn" type="PackedScene" id=15]
-
-[sub_resource type="ParticlesMaterial" id=1]
-lifetime_randomness = 1.0
-emission_shape = 2
-emission_box_extents = Vector3( 320, 180, 0 )
-flag_disable_z = true
-direction = Vector3( -1, 0, 0 )
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 128.0
-angular_velocity = 128.0
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = 128.0
-color = Color( 0.721569, 0.65098, 0.596078, 1 )
+[ext_resource path="res://assets/Effects/Environment/Particles_Sandstorm.tres" type="Material" id=16]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -110,7 +96,7 @@ modulate = Color( 0.835294, 0.807843, 0.717647, 0.784314 )
 position = Vector2( 160, 90 )
 amount = 8000
 visibility_rect = Rect2( -100, -100, 320, 180 )
-process_material = SubResource( 1 )
+process_material = ExtResource( 16 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
