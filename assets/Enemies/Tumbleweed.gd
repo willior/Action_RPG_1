@@ -6,8 +6,8 @@ const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const HeartPickup = preload("res://assets/Items/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/Items/PennyPickup.tscn")
 
-export var ACCELERATION = 200
-export var MAX_SPEED = 100
+export var ACCELERATION = 1600
+export var MAX_SPEED = 96
 export var FRICTION = 240
 
 enum {
@@ -26,6 +26,9 @@ var interactable = false
 var talkable = false
 var examined = false
 var facingLeft = false
+var x_velocity
+var y_velocity
+var speed_mod = 0
 
 onready var timer = $Timer
 onready var sprite = $Sprite
@@ -35,19 +38,33 @@ onready var talkBox = $Talkbox/CollisionShape2D
 onready var animationPlayer = $AnimationPlayer
 onready var audio = $AudioStreamPlayer
 onready var player = get_parent().get_parent().get_node("Player")
-onready var target_vector = Vector2(-1, 0)
+onready var map = get_parent().get_parent().get_parent().get_node("Map")
+
+# Y axis speed will vary within a small range
+# spawns on player's x.position + 320 or, exactly 1 screen to the right
+# spawns on player's y.position randi_range(-90,90)
 
 func _ready():
 	add_to_group("enemies")
 	animationPlayer.play("Animate")
+	speed_mod = rand_range(0,32)
+	x_velocity = MAX_SPEED + speed_mod
+	if map.wind_direction == "left":
+		x_velocity = -MAX_SPEED - speed_mod
+	elif map.wind_direction == "right":
+		x_velocity = MAX_SPEED + speed_mod
+	if player.velocity.y != 0:
+		y_velocity = clamp(rand_range(player.velocity.y/8, player.velocity.y), -80, 80)
+		prints("player moving; tumbleweed y_velocity = " + str(y_velocity))
+	else:
+		y_velocity = rand_range(-16,16)
+		prints("randomizing tumbleweed y_velocity: " + str(y_velocity))
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
-	knockback = move_and_slide(knockback)
-	
+
 	match state:
 		IDLE:
-			velocity = velocity.move_toward(Vector2(target_vector) * MAX_SPEED, ACCELERATION * delta)
+			velocity = velocity.move_toward(Vector2(x_velocity, y_velocity), ACCELERATION * delta)
 				
 		WANDER:
 			pass
@@ -73,3 +90,8 @@ func examine():
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true
+
+
+func _on_Area2D_area_exited(_area):
+	print('deleting tumbleweed')
+	queue_free()

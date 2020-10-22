@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=1]
 [ext_resource path="res://assets/Enemies/Tumbleweed.gd" type="Script" id=2]
@@ -7,10 +7,10 @@
 [ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Audio/Enemies/Tumbleweed_Sound.wav" type="AudioStream" id=6]
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=2]
 resource_name = "Animate"
 length = 0.7
 loop = true
@@ -42,13 +42,17 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.25 )
 }
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=3]
 radius = 11.0
 
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id=4]
 radius = 7.0
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4, 4 )
+
 [node name="Tumbleweed" type="KinematicBody2D"]
+collision_layer = 16
 script = ExtResource( 2 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -60,17 +64,17 @@ texture = ExtResource( 3 )
 hframes = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 10 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Animate = SubResource( 13 )
+anims/Animate = SubResource( 2 )
 
 [node name="Talkbox" parent="." instance=ExtResource( 4 )]
 visible = false
 
 [node name="CollisionShape2D" parent="Talkbox" index="0"]
 position = Vector2( 0, -5 )
-shape = SubResource( 11 )
+shape = SubResource( 3 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -2 )
@@ -78,7 +82,14 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 2 )
-shape = SubResource( 12 )
+shape = SubResource( 4 )
+
+[node name="Despawner" type="Area2D" parent="."]
+collision_layer = 1024
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Despawner"]
+shape = SubResource( 5 )
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -87,6 +98,7 @@ wait_time = 0.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+[connection signal="area_exited" from="Despawner" to="." method="_on_Area2D_area_exited"]
 
 [editable path="Talkbox"]
 

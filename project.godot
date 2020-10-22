@@ -125,6 +125,7 @@ start={
 2d_physics/layer_8="NPCTalkbox"
 2d_physics/layer_9="Items"
 2d_physics/layer_10="Spawners"
+2d_physics/layer_11="Despawners"
 
 [rendering]
 
