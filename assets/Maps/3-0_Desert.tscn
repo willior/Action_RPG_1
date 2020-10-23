@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/Tilesets/Desert/Sand_Light_Tileset/tileset_Sand_Light_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -15,7 +15,296 @@
 [ext_resource path="res://assets/Misc/WhiteScreen.png" type="Texture" id=13]
 [ext_resource path="res://assets/Maps/Desert.gd" type="Script" id=14]
 [ext_resource path="res://assets/Enemies/TumbleweedNest.tscn" type="PackedScene" id=15]
-[ext_resource path="res://assets/Effects/Environment/Particles_Sandstorm.tres" type="Material" id=16]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type particles;
+
+/*
+ * Copyright (c) 2018 Ilaria Cislahi, Thomas Herzog.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the \"Software\"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+uniform float spread;
+uniform float flatness;
+uniform float initial_linear_velocity;
+uniform float initial_angle;
+uniform float angular_velocity;
+uniform float orbit_velocity;
+uniform float linear_accel;
+uniform float radial_accel;
+uniform float tangent_accel;
+uniform float damping;
+uniform float scale;
+uniform float hue_variation;
+uniform float anim_speed;
+uniform float anim_offset;
+uniform float initial_linear_velocity_random;
+uniform float initial_angle_random;
+uniform float angular_velocity_random;
+uniform float orbit_velocity_random;
+uniform float linear_accel_random;
+uniform float radial_accel_random;
+uniform float tangent_accel_random;
+uniform float damping_random;
+uniform float scale_random;
+uniform float hue_variation_random;
+uniform float anim_speed_random;
+uniform float anim_offset_random;
+uniform vec3 emission_box_extents;
+uniform vec4 color_value : hint_color;
+uniform int trail_divisor;
+uniform vec3 gravity;
+uniform sampler2D color_ramp;
+
+
+uniform int number_particles_shown;
+uniform int max_number_particles;
+
+
+float rand_from_seed(inout uint seed) {
+	int k;
+	int s = int(seed);
+	if (s == 0)
+	s = 305420679;
+	k = s / 127773;
+	s = 16807 * (s - k * 127773) - 2836 * k;
+	if (s < 0)
+		s += 2147483647;
+	seed = uint(s);
+	return float(seed % uint(65536))/65535.0;
+}
+
+float rand_from_seed_m1_p1(inout uint seed) {
+	return rand_from_seed(seed)*2.0-1.0;
+}
+
+uint hash(uint x) {
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = ((x >> uint(16)) ^ x) * uint(73244475);
+	x = (x >> uint(16)) ^ x;
+	return x;
+}
+
+uniform int number_batches = 10;
+
+void vertex() {
+	uint base_number = NUMBER/uint(trail_divisor);
+	uint alt_seed = hash(base_number+uint(1)+RANDOM_SEED);
+	float angle_rand = rand_from_seed(alt_seed);
+	float scale_rand = rand_from_seed(alt_seed);
+	float hue_rot_rand = rand_from_seed(alt_seed);
+	float anim_offset_rand = rand_from_seed(alt_seed);
+	float pi = 3.14159;
+	float degree_to_rad = pi / 180.0;
+	
+	int batch_size = (max_number_particles / number_batches);
+	
+	int index_in_batch = INDEX % batch_size;
+	int batch_index = INDEX / batch_size;
+	
+	int how_much_can_I_surely_allocate = number_particles_shown / number_batches;
+	
+	int remaining = number_particles_shown % number_batches;
+	
+	bool should_keep = index_in_batch < how_much_can_I_surely_allocate;
+	
+	if (index_in_batch == how_much_can_I_surely_allocate) {
+		if (batch_index < remaining) {
+			should_keep = true;
+		} else {
+			should_keep = false;
+		}
+	}
+
+	if (RESTART) {
+		float tex_linear_velocity = 0.0;
+		float tex_angle = 0.0;
+		float tex_anim_offset = 0.0;
+		float spread_rad = spread*degree_to_rad;
+		float angle1_rad = rand_from_seed_m1_p1(alt_seed)*spread_rad;
+		vec3 rot = vec3( cos(angle1_rad), sin(angle1_rad),0.0 );
+		VELOCITY = rot*initial_linear_velocity*mix(1.0, rand_from_seed(alt_seed), initial_linear_velocity_random);
+		float base_angle = (initial_angle+tex_angle)*mix(1.0,angle_rand,initial_angle_random);
+		CUSTOM.x = base_angle*degree_to_rad;
+		CUSTOM.y = 0.0;
+		CUSTOM.z = (anim_offset+tex_anim_offset)*mix(1.0,anim_offset_rand,anim_offset_random);
+		TRANSFORM[3].xyz = vec3(rand_from_seed(alt_seed) * 2.0 - 1.0, rand_from_seed(alt_seed) * 2.0-1.0, rand_from_seed(alt_seed) * 2.0-1.0)*emission_box_extents;
+		VELOCITY = (EMISSION_TRANSFORM * vec4(VELOCITY,0.0)).xyz;
+		TRANSFORM = EMISSION_TRANSFORM * TRANSFORM;
+		VELOCITY.z = 0.0;
+		TRANSFORM[3].z = 0.0;
+	} else {
+		CUSTOM.y += DELTA/LIFETIME;
+		float tex_linear_velocity = 0.0;
+		float tex_orbit_velocity = 0.0;
+		float tex_angular_velocity = 0.0;
+		float tex_linear_accel = 0.0;
+		float tex_radial_accel = 0.0;
+		float tex_tangent_accel = 0.0;
+		float tex_damping = 0.0;
+		float tex_angle = 0.0;
+		float tex_anim_speed = 0.0;
+		float tex_anim_offset = 0.0;
+		vec3 force = gravity; 
+		vec3 pos = TRANSFORM[3].xyz; 
+		pos.z = 0.0; 
+		//apply linear acceleration
+		force += length(VELOCITY) > 0.0 ? normalize(VELOCITY) * (linear_accel+tex_linear_accel)*mix(1.0,rand_from_seed(alt_seed),linear_accel_random) : vec3(0.0);
+		//apply radial acceleration
+		vec3 org = EMISSION_TRANSFORM[3].xyz;
+		vec3 diff = pos-org;
+		force += length(diff) > 0.0 ? normalize(diff) * (radial_accel+tex_radial_accel)*mix(1.0,rand_from_seed(alt_seed),radial_accel_random) : vec3(0.0);
+		//apply tangential acceleration;
+		force += length(diff.yx) > 0.0 ? vec3(normalize(diff.yx * vec2(-1.0,1.0)),0.0) * ((tangent_accel+tex_tangent_accel)*mix(1.0,rand_from_seed(alt_seed),tangent_accel_random)) : vec3(0.0);
+		//apply attractor forces
+		VELOCITY += force * DELTA;
+		//orbit velocity
+		float orbit_amount = (orbit_velocity+tex_orbit_velocity)*mix(1.0,rand_from_seed(alt_seed),orbit_velocity_random);
+		if (orbit_amount!=0.0) {
+		     float ang = orbit_amount * DELTA * pi * 2.0;
+		     mat2 rot = mat2(vec2(cos(ang),-sin(ang)),vec2(sin(ang),cos(ang)));
+		     TRANSFORM[3].xy-=diff.xy;
+		     TRANSFORM[3].xy+=rot * diff.xy;
+		}
+		if (damping + tex_damping > 0.0) {
+		
+			float v = length(VELOCITY);
+			float damp = (damping+tex_damping)*mix(1.0,rand_from_seed(alt_seed),damping_random);
+			v -= damp * DELTA;
+			if (v < 0.0) {
+				VELOCITY = vec3(0.0);
+			} else {
+				VELOCITY = normalize(VELOCITY) * v;
+			}
+		}
+		float base_angle = (initial_angle+tex_angle)*mix(1.0,angle_rand,initial_angle_random);
+		base_angle += CUSTOM.y*LIFETIME*(angular_velocity+tex_angular_velocity)*mix(1.0,rand_from_seed(alt_seed)*2.0-1.0,angular_velocity_random);
+		CUSTOM.x = base_angle*degree_to_rad;
+		CUSTOM.z = (anim_offset+tex_anim_offset)*mix(1.0,anim_offset_rand,anim_offset_random)+CUSTOM.y*(anim_speed+tex_anim_speed)*mix(1.0,rand_from_seed(alt_seed),anim_speed_random);
+		CUSTOM.z = clamp(CUSTOM.z,0.0,1.0);
+	}
+	float tex_scale = 1.0;
+	float tex_hue_variation = 0.0;
+	float hue_rot_angle = (hue_variation+tex_hue_variation)*pi*2.0*mix(1.0,hue_rot_rand*2.0-1.0,hue_variation_random);
+	float hue_rot_c = cos(hue_rot_angle);
+	float hue_rot_s = sin(hue_rot_angle);
+	mat4 hue_rot_mat = mat4( vec4(0.299,  0.587,  0.114, 0.0),
+			vec4(0.299,  0.587,  0.114, 0.0),
+			vec4(0.299,  0.587,  0.114, 0.0),
+			vec4(0.000,  0.000,  0.000, 1.0)) +
+		mat4( vec4(0.701, -0.587, -0.114, 0.0),
+			vec4(-0.299,  0.413, -0.114, 0.0),
+			vec4(-0.300, -0.588,  0.886, 0.0),
+			vec4(0.000,  0.000,  0.000, 0.0)) * hue_rot_c +
+		mat4( vec4(0.168,  0.330, -0.497, 0.0),
+			vec4(-0.328,  0.035,  0.292, 0.0),
+			vec4(1.250, -1.050, -0.203, 0.0),
+			vec4(0.000,  0.000,  0.000, 0.0)) * hue_rot_s;
+	COLOR = textureLod(color_ramp,vec2(CUSTOM.y,0.0),0.0) * hue_rot_mat;
+
+	TRANSFORM[0] = vec4(cos(CUSTOM.x),-sin(CUSTOM.x),0.0,0.0);
+	TRANSFORM[1] = vec4(sin(CUSTOM.x),cos(CUSTOM.x),0.0,0.0);
+	TRANSFORM[2] = vec4(0.0,0.0,1.0,0.0);
+	float base_scale = mix(scale*tex_scale,1.0,scale_random*scale_rand);
+	if (base_scale==0.0) base_scale=0.000001;
+	TRANSFORM[0].xyz *= base_scale;
+	TRANSFORM[1].xyz *= base_scale;
+	TRANSFORM[2].xyz *= base_scale;
+	VELOCITY.z = 0.0;
+	TRANSFORM[3].z = 0.0;
+	
+	if (!should_keep) {
+		TRANSFORM[0].xyz = vec3(0.0);
+		TRANSFORM[1].xyz = vec3(0.0);
+		TRANSFORM[2].xyz = vec3(0.0);
+	}
+}
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/spread = 45.0
+shader_param/flatness = 0.0
+shader_param/initial_linear_velocity = 128.0
+shader_param/initial_angle = 0.0
+shader_param/angular_velocity = 128.0
+shader_param/orbit_velocity = 0.0
+shader_param/linear_accel = 128.0
+shader_param/radial_accel = 0.0
+shader_param/tangent_accel = 0.0
+shader_param/damping = 0.0
+shader_param/scale = 1.0
+shader_param/hue_variation = 0.0
+shader_param/anim_speed = 0.0
+shader_param/anim_offset = 0.0
+shader_param/initial_linear_velocity_random = 0.0
+shader_param/initial_angle_random = 0.0
+shader_param/angular_velocity_random = 1.0
+shader_param/orbit_velocity_random = 0.0
+shader_param/linear_accel_random = 0.0
+shader_param/radial_accel_random = 0.0
+shader_param/tangent_accel_random = 0.0
+shader_param/damping_random = 0.0
+shader_param/scale_random = 0.0
+shader_param/hue_variation_random = 0.0
+shader_param/anim_speed_random = 0.0
+shader_param/anim_offset_random = 0.0
+shader_param/emission_box_extents = Vector3( 320, 180, 0 )
+shader_param/color_value = Color( 0.721569, 0.65098, 0.6, 1 )
+shader_param/trail_divisor = 1
+shader_param/gravity = Vector3( 0, 20, 0 )
+shader_param/number_particles_shown = 100
+shader_param/max_number_particles = 6000
+shader_param/number_batches = 10
+
+[sub_resource type="Animation" id=3]
+resource_name = "Calm"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ParallaxOverlay/ParallaxLayer/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.776471, 0.705882, 0.478431, 0.501961 ), Color( 0.776471, 0.705882, 0.478431, 0.25098 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Storm"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ParallaxOverlay/ParallaxLayer/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.776471, 0.705882, 0.478431, 0.25098 ), Color( 0.776471, 0.705882, 0.478431, 0.501961 ) ]
+}
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -25,7 +314,7 @@ __meta__ = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 160, 88 )
+position = Vector2( 340, 91 )
 current = true
 limit_left = 0
 drag_margin_h_enabled = true
@@ -83,7 +372,7 @@ layer = 0
 motion_mirroring = Vector2( 320, 180 )
 
 [node name="Sprite" type="Sprite" parent="Map/ParallaxOverlay/ParallaxLayer"]
-modulate = Color( 0.835294, 0.756863, 0.52549, 0.25098 )
+modulate = Color( 0.776471, 0.705882, 0.478431, 0.25098 )
 texture = ExtResource( 13 )
 centered = false
 
@@ -92,18 +381,28 @@ position = Vector2( 104, 96 )
 motion_mirroring = Vector2( 320, 180 )
 
 [node name="Particles2D" type="Particles2D" parent="Map/ParallaxOverlay/ParallaxLayer2"]
-modulate = Color( 0.835294, 0.807843, 0.717647, 0.784314 )
+modulate = Color( 0.615686, 0.54902, 0.368627, 1 )
 position = Vector2( 160, 90 )
-amount = 8000
+amount = 6000
 visibility_rect = Rect2( -100, -100, 320, 180 )
-process_material = ExtResource( 16 )
+process_material = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="Map"]
+one_shot = true
+autostart = true
+
+[node name="Tween" type="Tween" parent="Map"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Map"]
+anims/Calm = SubResource( 3 )
+anims/Storm = SubResource( 4 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
 [node name="Player" parent="YSort" instance=ExtResource( 6 )]
 process_priority = 0
-position = Vector2( 160, 88 )
+position = Vector2( 340, 91 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
@@ -135,3 +434,4 @@ stream = ExtResource( 3 )
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+[connection signal="timeout" from="Map/Timer" to="Map" method="_on_Timer_timeout"]

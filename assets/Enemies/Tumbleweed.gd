@@ -55,10 +55,10 @@ func _ready():
 		x_velocity = MAX_SPEED + speed_mod
 	if player.velocity.y != 0:
 		y_velocity = clamp(rand_range(player.velocity.y/8, player.velocity.y), -80, 80)
-		prints("player moving; tumbleweed y_velocity = " + str(y_velocity))
+		# prints("player moving; tumbleweed y_velocity = " + str(y_velocity))
 	else:
 		y_velocity = rand_range(-16,16)
-		prints("randomizing tumbleweed y_velocity: " + str(y_velocity))
+		# prints("randomizing tumbleweed y_velocity: " + str(y_velocity))
 
 func _physics_process(delta):
 
@@ -93,7 +93,6 @@ func examine():
 	
 func play_sound():
 	var sound_choice = randi() % 3
-	print(sound_choice)
 	match sound_choice:
 		0:
 			$AudioStreamPlayer.stream = load("res://assets/Audio/Enemies/Tumbleweed_Sound_1.wav")
@@ -105,5 +104,5 @@ func play_sound():
 	$AudioStreamPlayer.play()
 		
 func _on_Area2D_area_exited(_area):
-	print('deleting tumbleweed')
+	# print('deleting tumbleweed')
 	queue_free()
