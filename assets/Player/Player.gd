@@ -89,6 +89,9 @@ func _ready():
 	charge1Vis.visible = false
 	charge2Vis.visible = false
 	charge_reset()
+	
+# warning-ignore:return_value_discarded
+	PlayerStats.connect("status_changed", self, "apply_status")
 
 func _process(delta):
 	match state:
@@ -119,7 +122,7 @@ func move_state(delta):
 		dir_vector = input_vector
 		swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
-		animationTree.set("parameters/Run/blend_position", input_vector)
+		animationTree.set("parameters/Run/BlendSpace2D/blend_position", input_vector)
 		animationTree.set("parameters/Attack1/blend_position", input_vector)
 		animationTree.set("parameters/Attack2/blend_position", input_vector)
 		animationTree.set("parameters/Shade/blend_position", input_vector)
@@ -196,6 +199,13 @@ func move_state(delta):
 				state = BACKSTEP
 		else:
 			noStamina()
+			
+func apply_status(status):
+	match status:
+		"slow":
+			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
+		"not_slow":
+			animationTree.set("parameters/Run/TimeScale/scale", 1)
 	
 func move():
 	velocity = move_and_slide(velocity)
