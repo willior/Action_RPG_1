@@ -145,6 +145,9 @@ func move_state(delta):
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+	
+	if PlayerStats.status == "slow":
+		velocity = velocity/1.5
 		
 	move()
 	
