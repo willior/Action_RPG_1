@@ -3,6 +3,14 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
 
+var acceleration = 1600
+var max_speed = 100
+var speed_mod = 0 setget set_speed_mod
+var roll_speed = 200
+var shade_speed = 400
+var friction = 800
+var shade_friction = 1600
+
 var max_health = 6 setget set_max_health
 var health = max_health setget set_health
 var endurance = 1 setget set_endurance
@@ -53,6 +61,14 @@ signal level_changed(value)
 signal cash_changed(value)
 
 func _ready():
+	self.acceleration = acceleration
+	self.max_speed = max_speed
+	self.speed_mod = speed_mod
+	self.roll_speed = roll_speed
+	self.shade_speed = shade_speed
+	self.friction = friction
+	self.shade_friction = shade_friction
+	
 	self.status = status
 	self.health = max_health
 	self.experience = experience_total
@@ -65,8 +81,16 @@ func _ready():
 	self.charge = charge
 	self.charge_level = charge_level
 	
+func set_speed_mod(value):
+	speed_mod = value
+	
 func set_status(value):
 	status = value
+	match status:
+		\"slow\":
+			set_speed_mod(-max_speed/2)
+		\"not_slow\":
+			set_speed_mod(0)
 	emit_signal(\"status_changed\", status)
 
 func set_max_health(value):

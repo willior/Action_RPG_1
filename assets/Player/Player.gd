@@ -5,13 +5,6 @@ const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 
-var acceleration = 1600
-const MAX_SPEED = 100
-const ROLL_SPEED = 200
-const SHADE_SPEED = 400
-const FRICTION = 800
-const SHADE_FRICTION = 1600
-
 enum {
 	MOVE,
 	ROLL,
@@ -81,12 +74,10 @@ onready var charge = $ChargeUI
 onready var charge1Vis = $ChargeUI/TextureProgress1
 onready var charge2Vis = $ChargeUI/TextureProgress2
 onready var audio = $AudioStreamPlayer
-# onready var remoteTransform = $RemoteTransform2D
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
 func _ready():
-	# remoteTransform.remote_path = ("root/World/Camera2D")
-	
+
 	# gets the spawn location from the previous exit's attribute
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
@@ -98,9 +89,6 @@ func _ready():
 	charge1Vis.visible = false
 	charge2Vis.visible = false
 	charge_reset()
-	
-# warning-ignore:return_value_discarded
-	PlayerStats.connect("status_changed", self, "set_status")
 
 func _process(delta):
 	match state:
@@ -126,7 +114,6 @@ func move_state(delta):
 	else:
 		stats.stamina += 0.5
 
-
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		dir_vector = input_vector
@@ -141,13 +128,10 @@ func move_state(delta):
 		animationTree.set("parameters/Backstep/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
-		velocity = velocity.move_toward(input_vector * MAX_SPEED, acceleration * delta)
+		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.speed_mod), stats.acceleration * delta)
 	else:
 		animationState.travel("Idle")
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	
-	if PlayerStats.status == "slow":
-		velocity = velocity/1.5
+		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
 		
 	move()
 	
@@ -162,7 +146,6 @@ func move_state(delta):
 		elif examining && talkTimer.is_stopped():
 			talkTimer.start()
 			interactObject.examine()
-			
 
 	if Input.is_action_just_pressed("attack"):
 		if (!talking && !interacting) && stats.stamina > 0:
@@ -213,14 +196,6 @@ func move_state(delta):
 				state = BACKSTEP
 		else:
 			noStamina()
-		
-func set_status(status):
-	prints('player status = ' + str(status))
-	match status:
-		"fine":
-			pass
-		"slow":
-			velocity = velocity / 16
 	
 func move():
 	velocity = move_and_slide(velocity)
@@ -238,7 +213,7 @@ func noStamina():
 # if true, plays attack1; attack1_queued becomes false, etc.
 func attack1_state(delta):
 # warning-ignore:integer_division
-	velocity = velocity.move_toward(Vector2.ZERO, (FRICTION/2) * delta)
+	velocity = velocity.move_toward(Vector2.ZERO, (stats.friction/2) * delta)
 	if attack2_queued == false:
 		animationState.travel("Attack1")
 	if Input.is_action_just_pressed("attack"):
@@ -305,14 +280,14 @@ func charge_state(delta):
 		charge_reset()
 		
 	# if the current charge is less than the max charge
-	if charge_count < PlayerStats.max_charge:
+	if charge_count < stats.max_charge:
 		charge_count += 0.5
 		stats.charge = charge_count
 	# if the charge count reaches 50%
-	if charge_count == PlayerStats.max_charge/2:
+	if charge_count == stats.max_charge/2:
 		attack_1_charged = true
 	# if the charge count reaches 100%
-	elif charge_count == PlayerStats.max_charge && attack_charging:
+	elif charge_count == stats.max_charge && attack_charging:
 		attack_2_charged = true
 		attack_charging = false
 		
@@ -325,7 +300,7 @@ func charge_reset():
 func shade_state(delta):
 	if shade_moving:
 # warning-ignore:integer_division
-		velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	else:
 		if Input.is_action_just_pressed("attack"):
 			attack2_queued = true
@@ -336,18 +311,18 @@ func shade_start():
 	stats.stamina -= 30
 	charge.stop_charge()
 	swordHitbox.shade_begin()
-	PlayerStats.strength_mod = 4
-	velocity = dir_vector * SHADE_SPEED
+	stats.strength_mod = 4
+	velocity = dir_vector * stats.shade_speed
 	
 func shade_stop():
 	swordHitbox.shade_end()
-	PlayerStats.strength_mod = 0
+	stats.strength_mod = 0
 	velocity = Vector2.ZERO
 	shade_moving = false
 	
 func flash_state(delta):
 # warning-ignore:integer_division
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
+	velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	animationState.travel("Flash")
 	move()
 	
@@ -414,10 +389,10 @@ func roll_stamina_drain():
 		
 func roll_state():
 	if roll_moving:
-		velocity = dir_vector * ROLL_SPEED
+		velocity = dir_vector * stats.roll_speed
 	else:
 # warning-ignore:integer_division
-		velocity = dir_vector * (ROLL_SPEED/4)
+		velocity = dir_vector * (stats.roll_speed/4)
 	animationState.travel("Roll")
 	move()
 
@@ -440,7 +415,7 @@ func backstep_stamina_drain():
 # warning-ignore:unused_argument
 func backstep_state(delta):
 # warning-ignore:integer_division
-	velocity = -dir_vector * (ROLL_SPEED/2)
+	velocity = -dir_vector * (stats.roll_speed/2)
 	animationState.travel("Backstep")
 	
 	if Input.is_action_just_released("attack"):
@@ -483,14 +458,14 @@ func _on_Hurtbox_area_entered(area):
 	state = HIT
 	
 func hit_damage():
-	PlayerStats.strength_mod = 0
+	stats.strength_mod = 0
 	stats.health -= damageTaken
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
 	
 func hit_state(_delta):
 # warning-ignore:integer_division
-	velocity = -dir_vector * (ROLL_SPEED/2)
+	velocity = -dir_vector * (stats.roll_speed/2)
 	animationState.travel("Hit")
 	move()
 	
