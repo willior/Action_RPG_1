@@ -5,7 +5,7 @@ const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 
-const ACCELERATION = 1600
+var acceleration = 1600
 const MAX_SPEED = 100
 const ROLL_SPEED = 200
 const SHADE_SPEED = 400
@@ -98,6 +98,9 @@ func _ready():
 	charge1Vis.visible = false
 	charge2Vis.visible = false
 	charge_reset()
+	
+# warning-ignore:return_value_discarded
+	PlayerStats.connect("status_changed", self, "set_status")
 
 func _process(delta):
 	match state:
@@ -123,6 +126,7 @@ func move_state(delta):
 	else:
 		stats.stamina += 0.5
 
+
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		dir_vector = input_vector
@@ -137,11 +141,11 @@ func move_state(delta):
 		animationTree.set("parameters/Backstep/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
-		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
+		velocity = velocity.move_toward(input_vector * MAX_SPEED, acceleration * delta)
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-	
+		
 	move()
 	
 	if Input.is_action_just_pressed("examine"):
@@ -207,6 +211,14 @@ func move_state(delta):
 		else:
 			noStamina()
 		
+func set_status(status):
+	prints('player status = ' + str(status))
+	match status:
+		"fine":
+			pass
+		"slow":
+			velocity = velocity / 16
+	
 func move():
 	velocity = move_and_slide(velocity)
 	

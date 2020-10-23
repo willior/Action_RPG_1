@@ -25,9 +25,12 @@ var level = 1 setget set_level
 var experience_total = 0
 var cash = 0 setget set_cash
 
+var status = \"fine\" setget set_status
+
 var continue_count = 0
 
 signal no_health
+signal status_changed(value)
 signal health_changed(value)
 signal max_health_changed(value)
 signal endurance_changed(value)
@@ -50,6 +53,7 @@ signal level_changed(value)
 signal cash_changed(value)
 
 func _ready():
+	self.status = status
 	self.health = max_health
 	self.experience = experience_total
 	self.strength = strength
@@ -60,6 +64,10 @@ func _ready():
 	self.cash = cash
 	self.charge = charge
 	self.charge_level = charge_level
+	
+func set_status(value):
+	status = value
+	emit_signal(\"status_changed\", status)
 
 func set_max_health(value):
 	max_health = value

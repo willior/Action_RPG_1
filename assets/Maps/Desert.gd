@@ -23,10 +23,6 @@ func set_wind_direction(value):
 func set_wind_strength(value):
 	wind_strength = value
 	
-	#particles.process_material.initial_velocity = wind_strength
-	#particles.process_material.angular_velocity = wind_strength
-	#particles.process_material.linear_accel = wind_strength
-	
 	particles.process_material.set_shader_param("initial_linear_velocity", wind_strength)
 	particles.process_material.set_shader_param("angular_velocity", wind_strength)
 	particles.process_material.set_shader_param("linear_accel", wind_strength)
@@ -53,6 +49,8 @@ func modulate_wind(start_value_wind, start_value_particles):
 		start_value_particles, end_value_particles, 4,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Calm")
+		PlayerStats.status = "fine"
+		
 	elif (end_value_wind > 64 || end_value_wind < -64) && start_value_particles != 6000:
 		end_value_particles = 6000
 		print("strong wind; more sand")
@@ -60,13 +58,14 @@ func modulate_wind(start_value_wind, start_value_particles):
 		start_value_particles, end_value_particles, 8,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Storm")
+		PlayerStats.status = "slow"
+		
 	else: # pass
 		print('not changing sand amount')
 		
 	tween.interpolate_property(self, "wind_strength",
 		start_value_wind, end_value_wind, 4,
 		Tween.TRANS_LINEAR, Tween.EASE_OUT)
-		
 	tween.start()
 	
 func _on_Timer_timeout():
