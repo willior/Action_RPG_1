@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/Status/Poison.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Status/Poison.gd" type="Script" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -91,6 +94,15 @@ func set_status(value):
 			set_speed_mod(-max_speed/2)
 		\"not_slow\":
 			set_speed_mod(0)
+		\"poison\":
+			if $Poison/Timer.is_stopped():
+				$Poison.count = 1
+				$Poison/Timer.start()
+			else:
+				$Poison.count = 0
+		\"not_poison\":
+			print('not poisoned.')
+			
 	emit_signal(\"status_changed\", status)
 
 func set_max_health(value):
@@ -169,3 +181,6 @@ func set_cash(value):
 
 [node name="PlayerStats" type="Node"]
 script = SubResource( 1 )
+
+[node name="Poison" type="Node" parent="." instance=ExtResource( 1 )]
+script = ExtResource( 2 )

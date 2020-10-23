@@ -60,6 +60,7 @@ onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
+onready var poisonAnimation = $PoisonAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var interactHitbox = $HitboxPivot/InteractHitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
@@ -206,6 +207,10 @@ func apply_status(status):
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"not_slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 1)
+		"poison":
+			poisonAnimation.play("Poison_Start")
+		"not_poison":
+			poisonAnimation.play("Poison_Stop")
 	
 func move():
 	velocity = move_and_slide(velocity)

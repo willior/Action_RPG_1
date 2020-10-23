@@ -32,7 +32,7 @@ func set_particle_amount(value):
 	particles.process_material.set_shader_param("number_particles_shown", particle_amount)
 		
 func modulate_wind(start_value_wind, start_value_particles):
-	var end_value_wind = rand_range(-128, 128)
+	var end_value_wind = rand_range(-160, 160)
 	prints("end_value_wind: " + str(end_value_wind))
 	
 	if end_value_wind < 0:
@@ -50,6 +50,7 @@ func modulate_wind(start_value_wind, start_value_particles):
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Calm")
 		PlayerStats.status = "not_slow"
+		# PlayerStats.status = "not_poison"
 		
 	elif (end_value_wind > 64 || end_value_wind < -64) && start_value_particles != 6000:
 		end_value_particles = 6000
@@ -59,6 +60,7 @@ func modulate_wind(start_value_wind, start_value_particles):
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Storm")
 		PlayerStats.status = "slow"
+		# PlayerStats.status = "poison"
 		
 	else: # pass
 		print('not changing sand amount')

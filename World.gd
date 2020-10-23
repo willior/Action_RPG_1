@@ -11,6 +11,9 @@ func _ready():
 	music.play()
 
 func _process(_delta):
+	if Input.is_action_just_pressed("test"):
+		PlayerStats.status = "poison"
+		print('testing poison')
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused == false:
 			get_tree().paused = true
