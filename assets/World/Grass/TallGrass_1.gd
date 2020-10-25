@@ -1,6 +1,6 @@
 extends Node2D
 
-const EFFECT = preload("res://assets/Effects/TallGrass_Effect.tscn")
+const EFFECT = preload("res://assets/Effects/TallGrass_1_Effect.tscn")
 
 onready var sprite = $AnimatedSprite
 

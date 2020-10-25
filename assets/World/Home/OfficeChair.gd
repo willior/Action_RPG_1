@@ -1,12 +1,15 @@
 extends StaticBody2D
 
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
-onready var player = get_node("/root/World/YSort/Player")
 
 var interactable = false
 var talkable = false
 var examined = false
 var index = 0
+
+func _ready():
+	if PlayerLog.home_chair_examined:
+		examined = true
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -22,6 +25,8 @@ func examine():
 			"This is where you'd sit if you wanted to get any work done."
 			]
 			index = 0
-			if !examined: examined = true
+			if !PlayerLog.home_chair_examined:
+				examined = true
+				PlayerLog.home_chair_examined = true
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
