@@ -10,6 +10,7 @@ var examined_while_on = false
 var index = 0
 
 func _ready():
+	$Light2D.visible = PlayerLog.home_desk_on
 	if PlayerLog.home_desk_examined:
 		examined = true
 		examined_while_off = true
@@ -49,6 +50,7 @@ func interact():
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Lampswitch_On.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.visible = true
+		PlayerLog.home_desk_on = true
 		index = 1
 		if examined && !examined_while_on: examined = false
 		
@@ -56,5 +58,6 @@ func interact():
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Lampswitch_Off.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.visible = false
+		PlayerLog.home_desk_on = false
 		index = 0
 		if !examined_while_off: examined = false

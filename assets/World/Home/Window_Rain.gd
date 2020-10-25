@@ -16,13 +16,12 @@ func _ready():
 	PlayerLog.connect("home_window_advance", self, "advance_dialog_index")
 	
 	if PlayerLog.home_window_examined:
-		examine_complete()
+		examine_complete(true)
 	
 func examine():
 	var dialogBox = DialogBox.instance()
 	match index:
 		0:
-			#index += 1
 			dialogBox.dialog = [
 			"It's really coming down."
 			]
@@ -31,17 +30,16 @@ func examine():
 			dialogBox.dialog = [
 			"Doesn't look like it's going to stop any time soon."
 			]
-			#index = 0
 			PlayerLog.set_dialog_index("home_window", 0)
 
 			if !PlayerLog.home_window_examined:
-				PlayerLog.set_examined("home_window")
+				PlayerLog.set_examined("home_window", true)
 				PlayerLog.home_window_examined = true
 				
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
-func examine_complete():
-	examined = true
-	
+func examine_complete(value):
+	examined = value
+
 func advance_dialog_index(value):
 	index = value
