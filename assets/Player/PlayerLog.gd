@@ -29,16 +29,26 @@ var home_stove_examined = false
 # NPCs
 var skeleton_1_examined = false
 
-#signals
+# warning-ignore:unused_signal
 signal heart_complete()
+# warning-ignore:unused_signal
 signal penny_complete()
+# warning-ignore:unused_signal
 signal bat_complete()
+# warning-ignore:unused_signal
 signal crow_complete()
+# warning-ignore:unused_signal
 signal tumbleweed_complete()
-
+# warning-ignore:unused_signal
 signal home_lightswitch_complete()
+# warning-ignore:unused_signal
+signal home_window_advance(value)
+# warning-ignore:unused_signal
 signal home_window_complete()
 
 func set_examined(name):
 	print('examined ' + name)
 	emit_signal(str(name)+"_complete")
+
+func set_dialog_index(name, value):
+	emit_signal(str(name)+"_advance", value)
