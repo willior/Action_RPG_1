@@ -49,6 +49,7 @@ extents = Vector2( 23, 4 )
 
 [node name="Window_Rain" type="AnimatedSprite"]
 frames = SubResource( 9 )
+frame = 6
 playing = true
 script = ExtResource( 3 )
 

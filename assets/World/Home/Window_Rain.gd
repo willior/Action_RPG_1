@@ -31,9 +31,10 @@ func examine():
 			index = 0
 
 			if !PlayerLog.home_window_examined:
-				PlayerLog.set_home_window_examined()
+				PlayerLog.set_examined("home_window")
 				
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
 func examine_complete():
 	examined = true
+	PlayerLog.home_window_examined = true

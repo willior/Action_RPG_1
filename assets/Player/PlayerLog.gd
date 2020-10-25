@@ -1,5 +1,11 @@
 extends Node
 
+# when examining an object for the final time, runs a function in the
+# PlayerLog corresponding to the examined object that both sets the global
+# examined variable to true, and emits a signal that all objects of the same
+# type listen for. this signal runs a function local to the objects that sets
+# the local examined variables to true.
+
 # Items
 var heart_examined = false
 var penny_examined = false
@@ -24,15 +30,15 @@ var home_stove_examined = false
 var skeleton_1_examined = false
 
 #signals
+signal heart_complete()
+signal penny_complete()
+signal bat_complete()
+signal crow_complete()
+signal tumbleweed_complete()
+
+signal home_lightswitch_complete()
 signal home_window_complete()
 
-# functions
-func set_heart_examined(): pass
-func set_penny_examined(): pass
-func set_bat_examined(): pass
-func set_crow_examined(): pass
-func set_tumbleweed_examined(): pass
-func set_home_window_examined():
-	home_window_examined = true
-	emit_signal("home_window_complete")
-func set_home_lightswitch_examined(): pass
+func set_examined(name):
+	print('examined ' + name)
+	emit_signal(str(name)+"_complete")
