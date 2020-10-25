@@ -30,6 +30,12 @@ func examine():
 			dialogBox.dialog = [
 			"Doesn't look like it's going to stop any time soon."
 			]
+			PlayerLog.set_dialog_index("home_window", 2)
+		2:
+			dialogBox.dialog = [
+			"The rain isn't usually this tumultuous.",
+			"Strange."
+			]
 			PlayerLog.set_dialog_index("home_window", 0)
 
 			if !PlayerLog.home_window_examined:

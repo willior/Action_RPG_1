@@ -26,7 +26,7 @@ var examined_while_on = false
 var index = 0
 
 func _ready():
-	if PlayerLog.home_lightswitch_bedroom_on:
+	if PlayerLog.home_lightswitch_main_on:
 		$Light2D.visible = true
 		index = 1
 	else:
@@ -95,7 +95,7 @@ func interact():
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Lightswitch_On.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.show()
-		PlayerLog.home_lightswitch_bedroom_on = true
+		PlayerLog.home_lightswitch_main_on = true
 		PlayerLog.set_dialog_index("home_lightswitch", 1)
 		if examined && !get_parent().lightswitch_examined_while_on:
 			examined = false
@@ -107,7 +107,7 @@ func interact():
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Lightswitch_Off.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.hide()
-		PlayerLog.home_lightswitch_bedroom_on = false
+		PlayerLog.home_lightswitch_main_on = false
 		index = 1
 		if examined && !get_parent().lightswitch_examined_while_off && !PlayerLog.home_lightswitch_examined:
 			examined = false

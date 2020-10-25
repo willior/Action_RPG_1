@@ -21,8 +21,8 @@ var home_fridge_examined = false
 var home_stove_examined = false
 
 var home_desk_on = false
-var home_lightswitch_1_on = false
-var home_lightswitch_2_on = false
+var home_lightswitch_bedroom_on = false
+var home_lightswitch_main_on = false
 var home_fridge_open = false
 
 # NPCs

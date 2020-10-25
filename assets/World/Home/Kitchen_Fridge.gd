@@ -11,7 +11,13 @@ var fullyExamined = false
 var index = 0
 
 func _ready():
-	$Light2D.visible = false
+	if PlayerLog.home_fridge_open:
+		$Light2D.visible = true
+		$Sprite.frame = 1
+		index = 1
+	elif !PlayerLog.home_fridge_open:
+		$Light2D.visible = false
+		$Sprite.frame = 0
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -43,7 +49,7 @@ func examine():
 			]
 			index -= 2
 			if !examined: examined = true
-			if !examined_while_on: examined_while_on = true
+			if !examined_while_off: examined_while_off = true
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
@@ -56,6 +62,7 @@ func interact():
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Open.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.show()
+		PlayerLog.home_fridge_open = true
 		index = 1
 		if examined && !examined_while_on: examined = false
 		$Sprite.frame = 1
@@ -64,6 +71,7 @@ func interact():
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Close.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.hide()
+		PlayerLog.home_fridge_open = false
 		index = 1
 		if !examined_while_off: examined = false
 		$Sprite.frame = 0

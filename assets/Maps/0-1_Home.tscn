@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assets/World/Home/OfficeChair.tscn" type="PackedScene" id=26]
 [ext_resource path="res://assets/Audio/Thunder_1.wav" type="AudioStream" id=27]
 [ext_resource path="res://assets/Maps/Home.gd" type="Script" id=28]
+[ext_resource path="res://assets/World/Home/Lightswitch_Main.gd" type="Script" id=29]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 41 )
@@ -160,15 +161,15 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 0
+frame = 3
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 0
+frame = 3
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 0
+frame = 3
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
@@ -182,6 +183,7 @@ scale = Vector2( 167, 131 )
 
 [node name="Lightswitch_Main" parent="Map" instance=ExtResource( 23 )]
 position = Vector2( 323, 113 )
+script = ExtResource( 29 )
 
 [node name="CollisionShape2D" parent="Map/Lightswitch_Main/TalkBox" index="0"]
 position = Vector2( 0, 3 )
