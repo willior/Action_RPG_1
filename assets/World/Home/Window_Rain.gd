@@ -10,8 +10,11 @@ var examined = false
 var index = 0
 
 func _ready():
+# warning-ignore:return_value_discarded
+	PlayerLog.connect("home_window_complete", self, "examine_complete")
+	
 	if PlayerLog.home_window_examined:
-		examined = true
+		examine_complete(true)
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -26,8 +29,12 @@ func examine():
 			"Doesn't look like it's going to stop any time soon."
 			]
 			index = 0
+			print(PlayerLog.home_window_examined)
 			if !PlayerLog.home_window_examined:
 				PlayerLog.home_window_examined = true
-				examined = true
-			
+				
 	get_node("/root/World/GUI").add_child(dialogBox)
+	
+func examine_complete(value):
+	prints('home_window: examine_complete = ' + str(value))
+	examined = value
