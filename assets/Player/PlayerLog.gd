@@ -22,7 +22,3 @@ var home_stove_examined = false
 
 # NPCs
 var skeleton_1_examined = false
-
-func _ready():
-	print('player log ready')
-	print(home_chair_examined)
