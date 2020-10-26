@@ -10,11 +10,15 @@ var examined_while_on = false
 var index = 0
 
 func _ready():
-	$Light2D.visible = PlayerLog.home_desk_on
 	if PlayerLog.home_desk_examined:
 		examined = true
 		examined_while_off = true
 		examined_while_on = true
+	if PlayerLog.home_desk_on:
+		$Light2D.visible = true
+		index = 4
+	else:
+		$Light2D.visible = false
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -24,22 +28,33 @@ func examine():
 			"It's your desk.",
 			"There's a library lamp sitting on top of it."
 			]
-			if !examined: examined = true
-			if !examined_while_off: examined_while_off = true
+			index = 1
 		1:
 			dialogBox.dialog = [
-			"The warm glow of the lamp relaxes you."
+			"It's too dark to see anything else."
 			]
-			index = 2
+			index = 0
+			if !examined: examined = true
+			if !examined_while_off: examined_while_off = true
 		2:
 			dialogBox.dialog = [
 			"There's nothing on the desk.",
 			"Tidy and organized, as usual."
 			]
-			index -= 1
+			index = 3
+		3:
+			dialogBox.dialog = [
+			"The warm glow of the lamp relaxes you."
+			]
+			index = 2
 			if !examined: examined = true
 			if !examined_while_on: examined_while_on = true
-			
+		4:
+			dialogBox.dialog = [
+			"Please try and remember to switch off the lights before leaving the house."
+			]
+			index = 3
+	
 	if examined_while_off && examined_while_on && !PlayerLog.home_desk_examined:
 		PlayerLog.home_desk_examined = true
 			
@@ -51,7 +66,7 @@ func interact():
 		$AudioStreamPlayer.play()
 		$Light2D.visible = true
 		PlayerLog.home_desk_on = true
-		index = 1
+		index = 2
 		if examined && !examined_while_on: examined = false
 		
 	elif $Light2D.visible:

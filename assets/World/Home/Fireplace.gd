@@ -8,7 +8,11 @@ var interactable = false
 var talkable = false
 var examined = false
 var index = 0
-	
+
+func _ready():
+	if PlayerLog.home_fireplace_examined:
+		examined = true
+
 func examine():
 	var dialogBox = DialogBox.instance()
 	match index:
@@ -22,6 +26,8 @@ func examine():
 			"There is no fire."
 			]
 			index = 0
-			if !examined: examined = true
+			if !PlayerLog.home_fireplace_examined:
+				PlayerLog.home_fireplace_examined = true
+				examined = true
 			
 	get_node("/root/World/GUI").add_child(dialogBox)

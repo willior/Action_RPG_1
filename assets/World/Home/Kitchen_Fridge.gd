@@ -7,14 +7,18 @@ var talkable = false
 var examined = false
 var examined_while_off = false
 var examined_while_on = false
-var fullyExamined = false
 var index = 0
 
 func _ready():
+	if PlayerLog.home_fridge_examined:
+		examined = true
+		examined_while_off = true
+		examined_while_on = true
 	if PlayerLog.home_fridge_open:
 		$Light2D.visible = true
 		$Sprite.frame = 1
-		index = 1
+		index = 4
+		examined = false
 	elif !PlayerLog.home_fridge_open:
 		$Light2D.visible = false
 		$Sprite.frame = 0
@@ -50,7 +54,18 @@ func examine():
 			index -= 2
 			if !examined: examined = true
 			if !examined_while_off: examined_while_off = true
+		4:
+			dialogBox.dialog = [
+			"Looks like you forgot to close it.",
+			"It's alright if these things slip your mind once in a while, but try not to make a habit of it."
+			]
+			index -= 3
+			if !examined: examined = true
+			if !examined_while_on: examined_while_on = true
 			
+	if examined_while_on && examined_while_off && !PlayerLog.home_fridge_examined:
+		PlayerLog.home_fridge_examined = true
+		
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
 # function for switching the lights on and off

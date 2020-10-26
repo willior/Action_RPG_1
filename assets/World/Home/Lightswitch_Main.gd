@@ -25,14 +25,18 @@ var examined_while_off = false
 var examined_while_on = false
 var index = 0
 
-func _ready():
+func _ready():	
+	if PlayerLog.home_lightswitch_examined:
+		index = 1
+		examined = true
+		examined_while_off = true
+		examined_while_on = true
+		
 	if PlayerLog.home_lightswitch_main_on:
 		$Light2D.visible = true
-		index = 1
+		index = 4
 	else:
 		$Light2D.visible = false
-		if PlayerLog.home_lightswitch_examined:
-			index = 1
 		
 # warning-ignore:return_value_discarded
 	PlayerLog.connect("home_lightswitch_complete", self, "examine_complete")
@@ -60,7 +64,8 @@ func examine():
 		
 		2: # dialog for 2nd examination while on
 			dialogBox.dialog = [
-			"It's in the 'ON' position."
+			"It's in the 'ON' position.",
+			"Remember to switch the lights off before you leave."
 			]
 			index = 1
 			if !examined:
@@ -71,7 +76,8 @@ func examine():
 		
 		3: # dialog for 2nd examination while off
 			dialogBox.dialog = [
-			"It's in the 'OFF' position."
+			"It's in the 'OFF' position.",
+			"Thank you for saving energy."
 			]
 			index = 1
 			if !examined:
@@ -79,6 +85,11 @@ func examine():
 				# PlayerLog.set_examined("home_lightswitch", true)
 			if !examined_while_off:	
 				get_parent().lightswitch_examined_while_off = true
+		4:
+			dialogBox.dialog = [
+			"Please try and remember to switch off the lights before leaving the house."
+			]
+			index = 1
 	
 	if get_parent().lightswitch_examined_while_off && get_parent().lightswitch_examined_while_on && !PlayerLog.home_lightswitch_examined:
 		PlayerLog.home_lightswitch_examined = true
