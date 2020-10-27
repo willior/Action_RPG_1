@@ -34,8 +34,8 @@ config/icon="res://icon.png"
 
 PlayerStats="*res://assets/Player/PlayerStats.tscn"
 PlayerLog="*res://assets/Player/PlayerLog.tscn"
-Global="*res://Managers/global.gd"
 ItemDatabase="*res://Managers/ItemDatabase.gd"
+Global="*res://Managers/global.gd"
 
 [display]
 

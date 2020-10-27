@@ -5,6 +5,9 @@ const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 
+var inventory_resource = load("res://assets/Player/Inventory.gd")
+var inventory = inventory_resource.new()
+
 enum {
 	MOVE,
 	ROLL,
