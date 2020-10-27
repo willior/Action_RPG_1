@@ -1,4 +1,5 @@
 extends Node
+# ItemDatabase
 
 # ItemDatabase class loops through Items folder
 # loading every resource into an array called items
@@ -9,7 +10,7 @@ var items = Array()
 
 func _ready():
 	var directory = Directory.new()
-	directory.open("res://assets/Items/")
+	directory.open("res://assets/Items")
 	directory.list_dir_begin()
 	
 	var filename = directory.get_next()
@@ -23,4 +24,5 @@ func get_item(item_name):
 	for i in items:
 		if i.name == item_name:
 			return i
+	
 	return null

@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ItemResource",
 "language": "GDScript",
-"path": "res://assets/Items/Item.gd"
+"path": "res://assets/Scripts/Item.gd"
 } ]
 _global_script_class_icons={
 "Inventory": "",
@@ -32,10 +32,11 @@ config/icon="res://icon.png"
 
 [autoload]
 
+ItemDatabase="*res://Managers/ItemDatabase.gd"
 PlayerStats="*res://assets/Player/PlayerStats.tscn"
 PlayerLog="*res://assets/Player/PlayerLog.tscn"
-ItemDatabase="*res://Managers/ItemDatabase.gd"
 Global="*res://Managers/global.gd"
+GameManager="*res://Managers/GameManager.gd"
 
 [display]
 

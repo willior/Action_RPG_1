@@ -4,6 +4,7 @@ signal player_initialized
 
 var player
 
+# warning-ignore:unused_argument
 func _process(delta):
 	if not player:
 		initialize_player()
@@ -21,8 +22,12 @@ func initialize_player():
 	var existing_inventory = load("user://inventory.tres")
 	if existing_inventory:
 		player.inventory.set_items(existing_inventory.get_items())
+		print('getting inventory')
 	else:
 		player.inventory.add_item("Potion", 2)
+		print('giving 2 potions')
 	
 func _on_player_inventory_changed(inventory):
+# warning-ignore:return_value_discarded
+	print(OS.get_user_data_dir())
 	ResourceSaver.save("user://inventory.tres", inventory)

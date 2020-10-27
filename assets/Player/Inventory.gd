@@ -1,5 +1,6 @@
 extends Resource
 class_name Inventory
+# Inventory
 
 signal inventory_changed
 
