@@ -3,8 +3,8 @@ extends KinematicBody2D
 const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
-const HeartPickup = preload("res://assets/Items/HeartPickup.tscn")
-const PennyPickup = preload("res://assets/Items/PennyPickup.tscn")
+const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
+const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 
 export var ACCELERATION = 300
 export var MAX_SPEED = 40

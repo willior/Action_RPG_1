@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/ItemDrops/Heart.png" type="Texture" id=2]
+[ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/CollisionBoxes/CollectBox.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+const DialogBox = preload(\"res://assets/UI/Dialog.tscn\")
+const ItemCollectEffect = preload(\"res://assets/Effects/ItemCollectEffect.tscn\")
+
+var interactable = false
+var talkable = false
+var examined = false
+	
+func examine():
+	var dialogBox = DialogBox.instance()
+	dialogBox.dialog = [
+		\"A heart-shaped box. It's full of chocolate!\",
+		\"Actually, there's only one left.\"
+	]
+	get_node(\"/root/World/GUI\").add_child(dialogBox)
+	if !examined: examined = true
+
+func _on_HeartCollectBox_area_entered(_area):
+	var itemCollectEffect = ItemCollectEffect.instance()
+	get_parent().add_child(itemCollectEffect)
+	# argument determines sound effect; 0 = heartCollect
+	itemCollectEffect.playSound(0)
+	PlayerStats.health += 1
+	queue_free()
+"
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 5.0
+
+[node name="HeartPickup" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="HeartTalkBox" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" parent="HeartTalkBox" index="0"]
+position = Vector2( 0, 0 )
+shape = SubResource( 2 )
+
+[node name="HeartCollectBox" parent="." instance=ExtResource( 5 )]
+scale = Vector2( 3, 3 )
+
+[node name="AudioCursHi" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+[connection signal="area_entered" from="HeartCollectBox" to="." method="_on_HeartCollectBox_area_entered"]
+
+[editable path="HeartTalkBox"]

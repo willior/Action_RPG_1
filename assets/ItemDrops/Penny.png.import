@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Penny.png-2284d93ced1c63a75ba59c7b78145c5b.stex"
+path="res://.import/Penny.png-78ea384e2faa828fa19a320d5f3bf5af.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Items/Penny.png"
-dest_files=[ "res://.import/Penny.png-2284d93ced1c63a75ba59c7b78145c5b.stex" ]
+source_file="res://assets/ItemDrops/Penny.png"
+dest_files=[ "res://.import/Penny.png-78ea384e2faa828fa19a320d5f3bf5af.stex" ]
 
 [params]
 

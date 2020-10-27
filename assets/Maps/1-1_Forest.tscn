@@ -4,10 +4,10 @@
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/Items/HeartPickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/ItemDrops/HeartPickup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=6]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=7]
-[ext_resource path="res://assets/Items/PennyPickup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/ItemDrops/PennyPickup.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/Weather/Rain.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_green_1_sheet.png" type="Texture" id=10]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=11]
@@ -54,6 +54,8 @@
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=58]
 [ext_resource path="res://assets/World/Trees/Tree_1_green.tscn" type="PackedScene" id=60]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_orange.tscn" type="PackedScene" id=61]
+
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "Leaf_bright_green_1_sheet.png 0"
