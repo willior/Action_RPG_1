@@ -25,4 +25,4 @@ func initialize_player():
 		player.inventory.add_item("Potion", 2)
 	
 func _on_player_inventory_changed(inventory):
-	pass
+	ResourceSaver.save("user://inventory.tres", inventory)
