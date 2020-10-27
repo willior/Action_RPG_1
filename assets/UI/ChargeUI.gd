@@ -47,7 +47,6 @@ func begin_charge_1():
 	staminaProgress.visible = true
 	
 func begin_charge_2():
-	print('charge2')
 	chargeSound2.play()
 	progress2.visible = true
 
