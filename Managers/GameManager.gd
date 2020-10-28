@@ -14,9 +14,10 @@ func _process(delta):
 		return
 		
 func reinitialize_player(inventory):
-	print('2. reinitializing player')
+	print('2B. reinitializing player')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
-	
+	if not player:
+		return
 	# THIS SIGNAL DOES NOT GET HEARD:
 	emit_signal("player_reinitialized", player) 
 	#
@@ -24,7 +25,7 @@ func reinitialize_player(inventory):
 	player.inventory.set_items(inventory.get_items())
 	
 func initialize_player():
-	print('2. initializing player')
+	print('2A. initializing player')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	if not player:
 		return

@@ -1,13 +1,14 @@
 extends GridContainer
 
-func _ready():
-# warning-ignore:return_value_discarded
+func _init():
+	# warning-ignore:return_value_discarded
 	GameManager.connect("player_initialized", self, "_on_player_initialized")
 # warning-ignore:return_value_discarded
 	GameManager.connect("player_reinitialized", self, "_on_player_initialized")
 	
 func _on_player_initialized(player):
 	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
+	print("UI: player initialized")
 	
 func _on_player_inventory_changed(inventory):
 	print("4. inventory UI updated")
