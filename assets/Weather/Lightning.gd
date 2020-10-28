@@ -15,7 +15,6 @@ func _on_Timer_timeout():
 
 func lightning_strike():
 	$Timer.start(lightningTimer)
-	prints(str(lightningTimer) + " second til next lightning")
 	$AnimationPlayer.play("Lightning1")
 	
 func set_light_energy(value):

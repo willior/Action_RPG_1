@@ -7,6 +7,8 @@ signal inventory_changed
 export var _items = Array() setget set_items, get_items
 
 func set_items(new_items):
+	print('3. setting items')
+	print(_items)
 	_items = new_items
 	emit_signal("inventory_changed", self)
 	

@@ -12,8 +12,13 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("test"):
-		PlayerStats.status = "poison"
-		print('testing poison')
+		# PlayerStats.status = "poison"
+		# print('testing poison')
+		player.inventory.add_item("Potion", 1)
+		
+	if Input.is_action_just_pressed("item"):
+		GameManager.reinitialize_player(player.inventory)
+		
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused == false:
 			get_tree().paused = true

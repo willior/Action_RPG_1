@@ -25,6 +25,8 @@ var home_lightswitch_bedroom_on = false
 var home_lightswitch_main_on = false
 var home_fridge_open = false
 
+var potion_1_collected = false
+
 # NPCs
 var skeleton_1_examined = false
 

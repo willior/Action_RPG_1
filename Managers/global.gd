@@ -31,19 +31,13 @@ func get_attribute(name):
 	return null
 
 func _deferred_goto_scene(path):
-
-	# Immediately free the current scene,
-	# there is no risk here.
+	# Immediately free the current scene
 	current_scene.free()
-
 	# Load new scene
 	var s = ResourceLoader.load(path)
-
 	# Instance the new scene
 	current_scene = s.instance()
-
 	# Add it to the active scene, as child of root
 	get_tree().get_root().add_child(current_scene)
-
 	# optional, to make it compatible with the SceneTree.change_scene() API
 	get_tree().set_current_scene( current_scene )

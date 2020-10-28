@@ -81,10 +81,13 @@ onready var audio = $AudioStreamPlayer
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
 func _ready():
-
+	print('1. player created')
 	# gets the spawn location from the previous exit's attribute
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
+	if Global.get_attribute("inventory") != null:
+		inventory.set_items(Global.get_attribute("inventory").get_items())
+		GameManager.reinitialize_player(inventory)
 	
 	stats.connect("no_health", self, "game_over")
 	animationTree.active = true # animation not active until game starts
