@@ -8,10 +8,8 @@ func _init():
 	
 func _on_player_initialized(player):
 	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
-	print("UI: player initialized")
 	
 func _on_player_inventory_changed(inventory):
-	print("4. inventory UI updated")
 	for n in get_children():
 		n.queue_free()
 	for item in inventory.get_items():
@@ -19,5 +17,3 @@ func _on_player_inventory_changed(inventory):
 
 		item_label.text = "%s x%d" % [item.item_reference.name, item.quantity]
 		add_child(item_label)
-
-	prints("inventoryUI: " + str(inventory))

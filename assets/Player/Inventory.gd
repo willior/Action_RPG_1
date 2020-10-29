@@ -54,7 +54,11 @@ func add_item(item_name, quantity):
 				var original_quantity = inventory_item.quantity
 				inventory_item.quantity = min(original_quantity + remaining_quantity, max_stack_size)
 				remaining_quantity -= inventory_item.quantity - original_quantity
-	
+				
+				
+	if remaining_quantity > 0:if remaining_quantity > 0:
+		prints("max stack size reached. discarding " + item_name + " x" + str(remaining_quantity))
+		remaining_quantity = 0
 	# while there are items remaining, create a new stack
 	# chooses the lowest value between remaining_quanity & max_stack_size
 	# applies this value to the new_item and appends it to the _items Array
