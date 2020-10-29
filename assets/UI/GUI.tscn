@@ -146,3 +146,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="InventoryUI/Panel/GridContainer"]
+
+[node name="Label" type="Label" parent="InventoryUI/Panel/GridContainer"]
+margin_bottom = 14.0

@@ -81,7 +81,6 @@ onready var audio = $AudioStreamPlayer
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
 func _ready():
-	print('1. player created')
 	# gets the spawn location from the previous exit's attribute
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")

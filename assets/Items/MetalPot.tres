@@ -8,3 +8,4 @@ name = "Metal Pot"
 stackable = false
 max_stack_size = 1
 type = 1
+healing = 2

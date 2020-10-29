@@ -3,12 +3,14 @@ class_name Inventory
 # Inventory
 
 signal inventory_changed
+signal current_selected_item_changed
+signal selected_item_updated
 
 export var _items = Array() setget set_items, get_items
 
+var current_selected_item = 0
+
 func set_items(new_items):
-	print('3. setting items')
-	print(_items)
 	_items = new_items
 	emit_signal("inventory_changed", self)
 	
@@ -18,7 +20,14 @@ func get_items():
 func get_item(index):
 	return _items[index]
 	
-func add_item(item_name, quantity):
+func advance_selected_item():
+	current_selected_item += 1
+	if current_selected_item >= _items.size():
+		current_selected_item = 0
+	var new_selected_item = get_item(current_selected_item)
+	emit_signal("current_selected_item_changed", new_selected_item)
+	
+func check_item(item_name, quantity):
 	if quantity <= 0:
 		print("can't add negative number of items")
 		return
@@ -27,6 +36,40 @@ func add_item(item_name, quantity):
 	if not item:
 		print("could not find item")
 		return
+		
+	return item
+	
+func use_item():
+	print('using item')
+	var item = check_item(_items[current_selected_item].item_reference.name, _items[current_selected_item].quantity)
+	if item == null:
+		print('no item to use')
+	else:
+		remove_item(item.name, 1)
+	
+func remove_item(item_name, quantity):
+	print('removing item')
+	var item = check_item(item_name, quantity)
+	var remaining_quantity = quantity
+	if item.stackable:
+		for i in range(_items.size()):
+			if remaining_quantity == 0:
+				break
+			var inventory_item = _items[i]
+			if inventory_item.item_reference.name != item.name:
+				continue
+			
+			if inventory_item.quantity < remaining_quantity:
+				print('no items left. breaking')
+				break
+			else:
+				inventory_item.quantity -= remaining_quantity
+	
+	var updated_selected_item = get_item(current_selected_item)
+	emit_signal("selected_item_updated", updated_selected_item)
+	
+func add_item(item_name, quantity):
+	var item = check_item(item_name, quantity)
 		
 	var remaining_quantity = quantity
 	var max_stack_size = item.max_stack_size if item.stackable else 1
@@ -44,6 +87,10 @@ func add_item(item_name, quantity):
 			if inventory_item.item_reference.name != item.name:
 				continue
 			
+			if i == current_selected_item:
+				var updated_selected_item = get_item(current_selected_item)
+				emit_signal("selected_item_updated", updated_selected_item)
+				
 			# create a reference to the inventory_item's current quantity, original_quantity
 			# sets the quantity of the inventory_item to whichever is smaller:
 			# the original_quantity + remaining_quantity...
@@ -53,12 +100,10 @@ func add_item(item_name, quantity):
 			if inventory_item.quantity < max_stack_size:
 				var original_quantity = inventory_item.quantity
 				inventory_item.quantity = min(original_quantity + remaining_quantity, max_stack_size)
-				remaining_quantity -= inventory_item.quantity - original_quantity
+				# remaining_quantity -= inventory_item.quantity - original_quantity
+				remaining_quantity = 0
+				prints("max stack size reached. discarding " + item_name + " x" + str(remaining_quantity))
 				
-				
-	if remaining_quantity > 0:if remaining_quantity > 0:
-		prints("max stack size reached. discarding " + item_name + " x" + str(remaining_quantity))
-		remaining_quantity = 0
 	# while there are items remaining, create a new stack
 	# chooses the lowest value between remaining_quanity & max_stack_size
 	# applies this value to the new_item and appends it to the _items Array
@@ -70,5 +115,5 @@ func add_item(item_name, quantity):
 		}
 		_items.append(new_item)
 		remaining_quantity -= new_item.quantity
-		
+	
 	emit_signal("inventory_changed", self)

@@ -11,15 +11,19 @@ func _ready():
 	music.play()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("test"):
+	if Input.is_action_just_pressed("next_item"): # R
+		player.inventory.advance_selected_item()
+	
+	if Input.is_action_just_pressed("test"): # T
 		# PlayerStats.status = "poison"
 		# print('testing poison')
-		player.inventory.add_item("Potion", 1)
+		# player.inventory.add_item("Metal Pot", 1)
+		print(player.inventory._items.size())
 		
-	if Input.is_action_just_pressed("item"):
-		print('use item')
+	if Input.is_action_just_pressed("item"): # G
+		player.inventory.use_item()
 		
-	if Input.is_action_just_pressed("pause"):
+	if Input.is_action_just_pressed("pause"): # P
 		if get_tree().paused == false:
 			get_tree().paused = true
 			dim.visible = true
@@ -29,7 +33,7 @@ func _process(_delta):
 			dim.visible = false
 			stats.visible = false
 			
-	if Input.is_action_just_pressed("start"):
+	if Input.is_action_just_pressed("start"): # SPACEBAR
 		if Global.dialogOpen:
 			return
 		if PlayerStats.health <= 0:

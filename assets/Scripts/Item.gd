@@ -9,3 +9,5 @@ export var max_stack_size : int = 1
 enum itemType { CONSUMABLE, TOOL, EQUIPMENT, QUEST }
 export(itemType) var type
 export var texture : Texture
+
+export var healing : int = 2
