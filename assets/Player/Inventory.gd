@@ -15,14 +15,11 @@ var items_set = false
 func set_items(new_items):
 	_items = new_items
 	emit_signal("inventory_changed", self)
-	print(items_set)
 	if !items_set:
 		var new_selected_item = get_item(current_selected_item)
 		emit_signal("current_selected_item_changed", new_selected_item)
 		items_set = true
-		print(items_set)
-		
-	
+
 func get_items():
 	return _items
 	
@@ -73,6 +70,7 @@ func remove_item(item_name, quantity):
 				emit_signal("item_quantity_zero")
 				prints(str(inventory_item.item_reference.name) + " cleared from inventory")
 				_items.erase(get_item(current_selected_item))
+				current_selected_item = 0
 			else:
 				var updated_selected_item = get_item(current_selected_item)
 				emit_signal("selected_item_quantity_updated", updated_selected_item)
