@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/World/Home/Home_Kitchen_Floor.png" type="Texture" id=6]
 [ext_resource path="res://assets/World/Home/Kitchen_Stove.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/World/Home/Home_Kitchen_Cupboard_Bottom.png" type="Texture" id=8]
-[ext_resource path="res://assets/World/Home/Home_Kitchen_Counter_Side.png" type="Texture" id=9]
+[ext_resource path="res://assets/World/Home/Kitchen_Counter.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/World/Home/Home_Rug_Small.png" type="Texture" id=11]
 [ext_resource path="res://assets/World/Home/Desk.tscn" type="PackedScene" id=12]
@@ -33,15 +33,12 @@
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=31]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 1, 41 )
+extents = Vector2( 2, 6 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2, 6 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 2, 6 )
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Lightning1"
 length = 10.0
 step = 0.02
@@ -144,15 +141,7 @@ texture = ExtResource( 6 )
 [node name="Kitchen_Fridge" parent="Map" instance=ExtResource( 14 )]
 position = Vector2( 100, 62 )
 
-[node name="Kitchen_Counter" type="StaticBody2D" parent="Map"]
-position = Vector2( 43, 96 )
-
-[node name="Sprite" type="Sprite" parent="Map/Kitchen_Counter"]
-texture = ExtResource( 9 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Kitchen_Counter"]
-position = Vector2( 4, 18 )
-shape = SubResource( 1 )
+[node name="Kitchen_Counter" parent="Map" instance=ExtResource( 9 )]
 
 [node name="Kitchen_Stove" parent="Map" instance=ExtResource( 7 )]
 
@@ -163,21 +152,18 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 1
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 1
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 1
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
 [node name="CollisionShape2D" parent="Map/Lightswitch_Bedroom/TalkBox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Light2D" parent="Map/Lightswitch_Bedroom" index="1"]
 position = Vector2( 80.5, -17.5 )
@@ -189,7 +175,7 @@ script = ExtResource( 29 )
 
 [node name="CollisionShape2D" parent="Map/Lightswitch_Main/TalkBox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="Light2D" parent="Map/Lightswitch_Main" index="1"]
 position = Vector2( -144.5, -17.5 )
@@ -199,7 +185,7 @@ scale = Vector2( 295, 195 )
 script = ExtResource( 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lightning"]
-anims/Lightning1 = SubResource( 4 )
+anims/Lightning1 = SubResource( 3 )
 
 [node name="Light2D" type="Light2D" parent="Lightning"]
 position = Vector2( 139, 23.5 )

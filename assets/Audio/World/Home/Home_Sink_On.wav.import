@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Home_Sink_On.wav-deb565ff2359e103ed2518f06bc47d0a.sample"
+
+[deps]
+
+source_file="res://assets/Audio/World/Home/Home_Sink_On.wav"
+dest_files=[ "res://.import/Home_Sink_On.wav-deb565ff2359e103ed2518f06bc47d0a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

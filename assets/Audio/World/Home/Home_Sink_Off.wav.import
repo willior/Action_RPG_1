@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Home_Sink_Off.wav-c0b3fef9339c02b5e73ee9a1db936a82.sample"
+
+[deps]
+
+source_file="res://assets/Audio/World/Home/Home_Sink_Off.wav"
+dest_files=[ "res://.import/Home_Sink_Off.wav-c0b3fef9339c02b5e73ee9a1db936a82.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

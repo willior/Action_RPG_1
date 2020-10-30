@@ -19,13 +19,16 @@ var home_fireplace_examined = false
 var home_bookshelf_examined = false
 var home_fridge_examined = false
 var home_stove_examined = false
+var home_sink_examined = false
 
 var home_desk_on = false
 var home_lightswitch_bedroom_on = false
 var home_lightswitch_main_on = false
 var home_fridge_open = false
+var home_sink_on = false
+var home_music_on = false
 
-var potion_1_collected = false
+var metal_pot_collected = false
 
 # NPCs
 var skeleton_1_examined = false
@@ -48,19 +51,16 @@ signal home_lightswitch_complete()
 signal home_window_advance(value)
 # warning-ignore:unused_signal
 signal home_window_complete()
-
-
+# warning-ignore:unused_signal
+signal home_sink_complete()
 
 # when examining an object for the final time, the object sets the
 # global examined variable to true as well as runs a function that
 # tells the PlayerLog which signal to emit. this signal then sets
 # the object's local examined variable to true.
-
 func set_examined(name, value):
 	print('examined ' + name)
 	emit_signal(str(name)+"_complete", value)
-	
-	
 
 # the PlayerLog is now responsible for advancing the dialog index in the
 # function set_dialog_index(name, value) where 'name' is the name of the
@@ -68,6 +68,5 @@ func set_examined(name, value):
 # emits a signal which the object listens for. when that occurs, the
 # object's advance_dialog_index(value) function is called, with 'value'
 # corresponding to the dialog index to which the object should advance.
-
 func set_dialog_index(name, value):
 	emit_signal(str(name)+"_advance", value)
