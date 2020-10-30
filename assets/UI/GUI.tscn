@@ -1,19 +1,25 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/InventoryUI.gd" type="Script" id=2]
+[ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=4]
 [ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/StaminaBar.gd" type="Script" id=6]
+[ext_resource path="res://assets/UI/24x24_Container.png" type="Texture" id=7]
 [ext_resource path="res://assets/UI/StatsDisplay.gd" type="Script" id=8]
 [ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=9]
 [ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/ItemsInventory/Healing_Potion.png" type="Texture" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
 
 [node name="GUI" type="CanvasLayer"]
 pause_mode = 2
@@ -120,29 +126,50 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
 [node name="InventoryUI" type="Control" parent="."]
-margin_left = 224.0
+margin_left = 288.0
 margin_top = 8.0
-margin_right = 264.0
-margin_bottom = 48.0
+margin_right = 312.0
+margin_bottom = 32.0
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="InventoryUI"]
+[node name="Panel" type="TextureRect" parent="InventoryUI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 7 )
+script = ExtResource( 2 )
 
-[node name="GridContainer" type="GridContainer" parent="InventoryUI/Panel"]
+[node name="Container" type="VBoxContainer" parent="InventoryUI/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
-script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="InventoryUI/Panel"]
+margin_left = 1.0
+margin_top = 11.0
+margin_right = 23.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 2 )
+text = "?"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="TextureRect" parent="InventoryUI/Panel"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 20.0
+margin_bottom = 16.0
+texture = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

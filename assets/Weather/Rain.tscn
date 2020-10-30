@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=2]
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=3]
-curve = SubResource( 2 )
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=3]
 lifetime_randomness = 1.0
 trail_divisor = 4
-trail_size_modifier = SubResource( 3 )
+trail_size_modifier = SubResource( 2 )
 emission_shape = 2
 emission_box_extents = Vector3( 160, 90, 0 )
 flag_disable_z = true
@@ -30,9 +30,9 @@ color = Color( 0.239216, 0.301961, 0.47451, 1 )
 
 [node name="Particle2D" type="Particles2D" parent="."]
 position = Vector2( 160, 0 )
-amount = 8000
+amount = 4000
 preprocess = 1.0
 explosiveness = 0.1
 randomness = 1.0
 visibility_rect = Rect2( -160, -90, 320, 180 )
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )

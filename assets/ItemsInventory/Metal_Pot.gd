@@ -6,6 +6,10 @@ const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 var interactable = true
 var talkable = false
 var examined = false
+
+func _ready():
+	if PlayerLog.metal_pot_collected:
+		queue_free()
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -17,6 +21,7 @@ func examine():
 	
 func interact():
 	GameManager.player.inventory.add_item("Metal_Pot", 1)
+	PlayerLog.metal_pot_collected = true
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	itemCollectEffect.playSound(1)

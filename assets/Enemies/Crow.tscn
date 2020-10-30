@@ -430,7 +430,7 @@ radius = 14.0
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id=53]
-radius = 19.5016
+radius = 24.0832
 
 [sub_resource type="CircleShape2D" id=54]
 
@@ -506,7 +506,6 @@ shape = SubResource( 52 )
 visible = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 3 )]
-visible = false
 scale = Vector2( 4, 4 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]

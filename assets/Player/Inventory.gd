@@ -26,14 +26,23 @@ func get_item(index):
 	return _items[index]
 	
 func advance_selected_item():
-	current_selected_item += 1
-	if current_selected_item >= _items.size():
-		current_selected_item = 0
-	var new_selected_item = get_item(current_selected_item)
-	emit_signal("current_selected_item_changed", new_selected_item)
+	if _items.size() == 1:
+		GameManager.player.audio.stream = load("res://assets/Audio/Bamboo.wav")
+		GameManager.player.audio.play()
+
+	else:
+		GameManager.player.audio.stream = load("res://assets/Audio/Player/Item_Next.wav")
+		GameManager.player.audio.play()
+		current_selected_item += 1
+		if current_selected_item >= _items.size():
+			current_selected_item = 0
+		var new_selected_item = get_item(current_selected_item)
+		emit_signal("current_selected_item_changed", new_selected_item)
 	
 func check_item(item_name, quantity):
 	if quantity <= 0:
+		GameManager.player.audio.stream = load("res://assets/Audio/Bamboo.wav")
+		GameManager.player.audio.play()
 		print("quantity is 0 or less; returning")
 		return
 	

@@ -13,8 +13,8 @@ var shade_speed = 400
 var friction = 800
 var shade_friction = 1600
 
-var max_health = 12 setget set_max_health
-var health = 2 setget set_health
+var max_health = 4 setget set_max_health
+var health = 4 setget set_health
 var endurance = 1 setget set_endurance
 var max_stamina = 60 setget set_max_stamina
 var stamina = max_stamina setget set_stamina

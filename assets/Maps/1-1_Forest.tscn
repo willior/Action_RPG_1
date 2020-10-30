@@ -1,10 +1,9 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://assets/World/Plants/Plant_16_green.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/ItemDrops/HeartPickup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=6]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=7]
 [ext_resource path="res://assets/ItemDrops/PennyPickup.tscn" type="PackedScene" id=8]
@@ -1930,13 +1929,43 @@ position = Vector2( 488, 496 )
 position = Vector2( 704, 624 )
 
 [node name="CrowSpawner5" parent="YSort/Enemies" instance=ExtResource( 46 )]
-position = Vector2( 536, 1008 )
+position = Vector2( 368, 712 )
 
 [node name="CrowSpawner6" parent="YSort/Enemies" instance=ExtResource( 46 )]
-position = Vector2( 704, 1008 )
+position = Vector2( 280, 552 )
 
-[node name="BatSpawner" parent="YSort/Enemies" instance=ExtResource( 22 )]
-position = Vector2( 232, 96 )
+[node name="BatSpawner2" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 304, 128 )
+
+[node name="BatSpawner3" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 184, 40 )
+
+[node name="BatSpawner4" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 160, 152 )
+
+[node name="BatSpawner5" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 120, 240 )
+
+[node name="BatSpawner6" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 80, 144 )
+
+[node name="BatSpawner7" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 344, 360 )
+
+[node name="BatSpawner8" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 312, 456 )
+
+[node name="BatSpawner9" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 496, 320 )
+
+[node name="BatSpawner10" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 560, 232 )
+
+[node name="BatSpawner11" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 672, 232 )
+
+[node name="BatSpawner12" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 648, 368 )
 
 [node name="Items" type="YSort" parent="YSort"]
 position = Vector2( -360, -200 )
@@ -2255,24 +2284,6 @@ position = Vector2( 936, 144 )
 
 [node name="PennyPickup92" parent="YSort/Items" instance=ExtResource( 8 )]
 position = Vector2( 944, 144 )
-
-[node name="HeartPickup" parent="YSort/Items" instance=ExtResource( 5 )]
-position = Vector2( 112, 480 )
-
-[node name="HeartPickup2" parent="YSort/Items" instance=ExtResource( 5 )]
-position = Vector2( 128, 480 )
-
-[node name="HeartPickup4" parent="YSort/Items" instance=ExtResource( 5 )]
-position = Vector2( 112, 496 )
-
-[node name="HeartPickup3" parent="YSort/Items" instance=ExtResource( 5 )]
-position = Vector2( 128, 496 )
-
-[node name="HeartPickup5" parent="YSort/Items" instance=ExtResource( 5 )]
-position = Vector2( 312, 72 )
-
-[node name="PennyPickup13" parent="YSort/Items" instance=ExtResource( 8 )]
-position = Vector2( 288, 88 )
 
 [node name="Skeleton" parent="YSort" instance=ExtResource( 58 )]
 position = Vector2( 352, -120 )
