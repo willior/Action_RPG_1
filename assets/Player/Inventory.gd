@@ -5,14 +5,23 @@ class_name Inventory
 signal inventory_changed
 signal current_selected_item_changed
 signal selected_item_quantity_updated
+signal item_quantity_zero
 
 export var _items = Array() setget set_items, get_items
 
 var current_selected_item = 0
+var items_set = false
 
 func set_items(new_items):
 	_items = new_items
 	emit_signal("inventory_changed", self)
+	print(items_set)
+	if !items_set:
+		var new_selected_item = get_item(current_selected_item)
+		emit_signal("current_selected_item_changed", new_selected_item)
+		items_set = true
+		print(items_set)
+		
 	
 func get_items():
 	return _items
@@ -25,12 +34,11 @@ func advance_selected_item():
 	if current_selected_item >= _items.size():
 		current_selected_item = 0
 	var new_selected_item = get_item(current_selected_item)
-	print(current_selected_item)
 	emit_signal("current_selected_item_changed", new_selected_item)
 	
 func check_item(item_name, quantity):
 	if quantity <= 0:
-		print("can't add negative number of items")
+		print("quantity is 0 or less; returning")
 		return
 	
 	var item = ItemDatabase.get_item(item_name)
@@ -43,16 +51,31 @@ func check_item(item_name, quantity):
 func use_item():
 	print('using item')
 	var used_item = check_item(_items[current_selected_item].item_reference.name, _items[current_selected_item].quantity)
-	if used_item == null:
-		print('no item to use')
-	else:
+	if used_item:
 		remove_item(used_item.name, 1)
-		var new_used_item = get_item(current_selected_item)
-		emit_signal("selected_item_quantity_updated", new_used_item)
 	
 func remove_item(item_name, quantity):
 	prints("removing " + str(quantity) + " " + str(item_name))
-	var item = get_item(current_selected_item)
+	
+	for i in range(_items.size()):
+		var inventory_item = _items[i]
+		
+		if inventory_item.item_reference.name != item_name:
+			print('next loop')
+			continue
+			
+		if inventory_item.quantity <= 0:
+			print("none left")
+			return
+		else: 
+			inventory_item.quantity -= quantity
+			if inventory_item.quantity <= 0 && inventory_item.item_reference.name != "Potion":
+				emit_signal("item_quantity_zero")
+				prints(str(inventory_item.item_reference.name) + " cleared from inventory")
+				_items.erase(get_item(current_selected_item))
+			else:
+				var updated_selected_item = get_item(current_selected_item)
+				emit_signal("selected_item_quantity_updated", updated_selected_item)
 	
 func add_item(item_name, quantity):
 	prints("adding " + str(quantity) + " " + str(item_name))
@@ -68,16 +91,16 @@ func add_item(item_name, quantity):
 			
 		if inventory_item.quantity + quantity > item.max_stack_size:
 			print("max stack reached; discarding")
-			break
 			return
 		else: 
 			inventory_item.quantity += quantity
+			quantity = 0
 			
 		if i == current_selected_item:
 			var updated_selected_item = get_item(current_selected_item)
 			emit_signal("selected_item_quantity_updated", updated_selected_item)
 	
-	while quantity > 0:
+	if quantity > 0:
 		var new_item = {
 			item_reference = item,
 			quantity = 1

@@ -120,9 +120,9 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
 [node name="InventoryUI" type="Control" parent="."]
-margin_left = 240.0
+margin_left = 224.0
 margin_top = 8.0
-margin_right = 280.0
+margin_right = 264.0
 margin_bottom = 48.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -146,8 +146,3 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Sprite" type="Sprite" parent="InventoryUI/Panel/GridContainer"]
-
-[node name="Label" type="Label" parent="InventoryUI/Panel/GridContainer"]
-margin_bottom = 14.0

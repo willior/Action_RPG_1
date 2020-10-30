@@ -18,7 +18,8 @@ func _process(_delta):
 		# PlayerStats.status = "poison"
 		# print('testing poison')
 		# player.inventory.add_item("Metal Pot", 1)
-		print(player.inventory._items.size())
+		# print(player.inventory._items.size())
+		print(player.inventory.current_selected_item)
 		
 	if Input.is_action_just_pressed("item"): # G
 		player.inventory.use_item()

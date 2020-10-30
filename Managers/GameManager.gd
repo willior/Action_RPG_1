@@ -22,13 +22,14 @@ func _process(delta):
 		initialize_player()
 		return
 		
+# warning-ignore:unused_argument
 func reinitialize_player(inventory):
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	if not player:
 		return
 
 	emit_signal("player_reinitialized", player) 
-	player.inventory.set_items(inventory.get_items())
+	# player.inventory.set_items(inventory.get_items())
 	
 func initialize_player():
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
@@ -37,6 +38,7 @@ func initialize_player():
 	
 	emit_signal("player_initialized", player)
 	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
+	
 	if !ResourceLoader.exists("user://inventory.tres"):
 		player.inventory.add_item("Potion", 2)
 	else:

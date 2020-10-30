@@ -86,9 +86,9 @@ func _ready():
 		position = Global.get_attribute("location")
 	if Global.get_attribute("inventory") != null:
 		inventory.set_items(Global.get_attribute("inventory").get_items())
+		inventory.items_set = false
 		GameManager.reinitialize_player(inventory)
-	
-	stats.connect("no_health", self, "game_over")
+
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
@@ -97,7 +97,8 @@ func _ready():
 	charge_reset()
 	
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("status_changed", self, "apply_status")
+	stats.connect("status_changed", self, "apply_status")
+	stats.connect("no_health", self, "game_over")
 
 func _process(delta):
 	match state:
