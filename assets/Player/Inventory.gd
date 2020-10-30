@@ -15,10 +15,9 @@ var items_set = false
 func set_items(new_items):
 	_items = new_items
 	emit_signal("inventory_changed", self)
-	if !items_set:
-		var new_selected_item = get_item(current_selected_item)
-		emit_signal("current_selected_item_changed", new_selected_item)
-		items_set = true
+	var new_selected_item = get_item(current_selected_item)
+	
+	emit_signal("current_selected_item_changed", new_selected_item)
 
 func get_items():
 	return _items
@@ -46,10 +45,17 @@ func check_item(item_name, quantity):
 	return item
 	
 func use_item():
-	print('using item')
 	var used_item = check_item(_items[current_selected_item].item_reference.name, _items[current_selected_item].quantity)
+	
 	if used_item:
-		remove_item(used_item.name, 1)
+		match used_item.name:
+				"Potion":
+					remove_item(used_item.name, 1)
+					PlayerStats.health += used_item.healing
+					GameManager.player.audio.stream = load("res://assets/Audio/Slither_02.wav")
+					GameManager.player.audio.play()
+				"Metal_Pot":
+					ItemHandler.item_handler(used_item)
 	
 func remove_item(item_name, quantity):
 	prints("removing " + str(quantity) + " " + str(item_name))

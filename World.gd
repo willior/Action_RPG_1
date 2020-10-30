@@ -21,9 +21,6 @@ func _process(_delta):
 		# print(player.inventory._items.size())
 		print(player.inventory.current_selected_item)
 		
-	if Input.is_action_just_pressed("item"): # G
-		player.inventory.use_item()
-		
 	if Input.is_action_just_pressed("pause"): # P
 		if get_tree().paused == false:
 			get_tree().paused = true

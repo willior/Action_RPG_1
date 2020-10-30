@@ -18,4 +18,7 @@ func examine():
 	
 func interact():
 	GameManager.player.inventory.add_item("Potion", 1)
+	var itemCollectEffect = ItemCollectEffect.instance()
+	get_parent().add_child(itemCollectEffect)
+	itemCollectEffect.playSound(0)
 	queue_free()

@@ -17,4 +17,7 @@ func examine():
 	
 func interact():
 	GameManager.player.inventory.add_item("Metal_Pot", 1)
+	var itemCollectEffect = ItemCollectEffect.instance()
+	get_parent().add_child(itemCollectEffect)
+	itemCollectEffect.playSound(1)
 	queue_free()

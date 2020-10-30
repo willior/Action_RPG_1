@@ -145,7 +145,7 @@ func move_state(delta):
 		
 	move()
 	
-	if Input.is_action_just_pressed("examine"):
+	if Input.is_action_just_pressed("examine"): # F
 		if !examining && talkTimer.is_stopped():
 			var dialogBox = DialogBox.instance()
 			dialogBox.dialog = [
@@ -156,6 +156,17 @@ func move_state(delta):
 		elif examining && talkTimer.is_stopped():
 			talkTimer.start()
 			interactObject.examine()
+			
+	if Input.is_action_just_pressed("item"): # G
+		inventory.use_item()
+#		if inventory.DialogBox:
+#			var dialogBox = DialogBox.instance()
+#			dialogBox.dialog = [
+#				"Nope.",
+#				"Not here."
+#			]
+#			get_node("/root/World/GUI").add_child(dialogBox)
+#			talkTimer.start()
 
 	if Input.is_action_just_pressed("attack"):
 		if (!talking && !interacting) && stats.stamina > 0:
@@ -181,7 +192,7 @@ func move_state(delta):
 			charge.begin_charge_2()
 		charge_state(delta)
 			
-	if Input.is_action_just_released("attack"):
+	if Input.is_action_just_released("attack"): # V
 		if attack_1_charged:
 			attack_1_charged = false
 			state = FLASH
@@ -192,7 +203,7 @@ func move_state(delta):
 		charge_reset()
 		attack_charging = false
 		
-	if Input.is_action_just_pressed("roll"):
+	if Input.is_action_just_pressed("roll"): # B
 		# if attack_2_charged:
 		#	attack_2_charged = false
 		#	shade_moving = true

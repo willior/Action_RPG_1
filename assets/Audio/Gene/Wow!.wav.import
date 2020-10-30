@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Wow!.wav-5a94b178f6f28a0a06f2c437bd602178.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Gene/Wow!.wav"
+dest_files=[ "res://.import/Wow!.wav-5a94b178f6f28a0a06f2c437bd602178.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

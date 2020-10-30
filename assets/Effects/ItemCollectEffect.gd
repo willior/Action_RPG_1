@@ -8,6 +8,7 @@ enum {
 	}
 	
 func playSound(itemCollected):
+	print(itemCollected)
 	match(itemCollected):
 		heart:
 			collectSound.stream = load("res://assets/Audio/HeartCollect.wav")

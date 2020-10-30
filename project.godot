@@ -37,6 +37,7 @@ PlayerStats="*res://assets/Player/PlayerStats.tscn"
 PlayerLog="*res://assets/Player/PlayerLog.tscn"
 Global="*res://Managers/global.gd"
 GameManager="*res://Managers/GameManager.gd"
+ItemHandler="*res://Managers/ItemHandler.gd"
 
 [display]
 
