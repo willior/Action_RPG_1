@@ -26,10 +26,8 @@ func reinitialize_player(inventory):
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	if not player:
 		return
-	# THIS SIGNAL DOES NOT GET HEARD:
+
 	emit_signal("player_reinitialized", player) 
-	#
-	# player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
 	player.inventory.set_items(inventory.get_items())
 	
 func initialize_player():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/Maps/Home.gd" type="Script" id=28]
 [ext_resource path="res://assets/World/Home/Lightswitch_Main.gd" type="Script" id=29]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.tscn" type="PackedScene" id=30]
+[ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=31]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 41 )
@@ -162,15 +163,15 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 2
+frame = 7
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 2
+frame = 7
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 2
+frame = 7
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
@@ -243,6 +244,12 @@ remote_path = NodePath("../../../Camera2D")
 [node name="Healing_Potion" parent="YSort/Items" instance=ExtResource( 30 )]
 position = Vector2( 256, 80 )
 
+[node name="Healing_Potion2" parent="YSort/Items" instance=ExtResource( 30 )]
+position = Vector2( 225, 62 )
+
+[node name="Metal_Pot" parent="YSort/Items" instance=ExtResource( 31 )]
+position = Vector2( 259, 121 )
+
 [node name="Doodads" type="YSort" parent="YSort"]
 
 [node name="OfficeChair" parent="YSort/Doodads" instance=ExtResource( 26 )]
@@ -261,9 +268,6 @@ position = Vector2( 256, 80 )
 stream = ExtResource( 21 )
 
 [node name="GUI" parent="." instance=ExtResource( 10 )]
-
-[node name="Healing_Potion" parent="." instance=ExtResource( 30 )]
-position = Vector2( 225, 62 )
 [connection signal="timeout" from="Lightning/Timer" to="Lightning" method="_on_Timer_timeout"]
 
 [editable path="Map/Lightswitch_Bedroom"]

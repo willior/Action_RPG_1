@@ -10,12 +10,11 @@ var examined = false
 func examine():
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog = [
-		"A Potion of Healing.",
-		"Or Healing Potion, for short."
+		"A metal pot."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true
 	
 func interact():
-	GameManager.player.inventory.add_item("Potion", 1)
+	GameManager.player.inventory.add_item("Metal_Pot", 1)
 	queue_free()
