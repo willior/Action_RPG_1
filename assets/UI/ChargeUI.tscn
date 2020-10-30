@@ -4,9 +4,9 @@
 [ext_resource path="res://assets/UI/Charge_1_UI.png" type="Texture" id=2]
 [ext_resource path="res://assets/UI/ChargeUI.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/Charge_2_UI.png" type="Texture" id=4]
+[ext_resource path="res://assets/Audio/Player/Charge_Beep_1.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/Audio/Charge_stepped.wav" type="AudioStream" id=6]
-[ext_resource path="res://assets/Audio/Orchestra Hit (D Sharp).wav" type="AudioStream" id=7]
-[ext_resource path="res://assets/Audio/Orchestra Hit (C Sharp).wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/Audio/Player/Charge_Beep_2.wav" type="AudioStream" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "ChargeFlash"
@@ -110,8 +110,8 @@ anims/ChargeFlash = SubResource( 2 )
 [node name="ChargeSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 
-[node name="C" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+[node name="ChargeBeep1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 
-[node name="D" type="AudioStreamPlayer" parent="."]
+[node name="ChargeBeep2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )

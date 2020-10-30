@@ -163,14 +163,14 @@ func attack_player():
 		disable_detection()
 		attackTimer.start()
 		attacking = true
-		hitbox.set_deferred("monitorable", true)
+		# hitbox.set_deferred("monitorable", true)
 		set_speed_scale(4)
 		eye.modulate = Color(1,0,0)
 		state = ATTACK
 		
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
-	hitbox.set_deferred("monitorable", false)
+	# hitbox.set_deferred("monitorable", false)
 	set_speed_scale(1)
 	eye.modulate = Color(0,0,0)
 	state = IDLE

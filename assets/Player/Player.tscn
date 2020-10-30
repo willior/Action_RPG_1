@@ -1026,7 +1026,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=21]
-length = 0.2
+length = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1202,7 +1202,7 @@ tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
 "clips": [ {
-"end_offset": 0.183848,
+"end_offset": 1.00649,
 "start_offset": 0.0,
 "stream": ExtResource( 14 )
 } ],
@@ -1990,7 +1990,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 67
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2069,7 +2069,7 @@ margin_bottom = -7.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 3.14159
+rotation = -1.5708
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 monitorable = false

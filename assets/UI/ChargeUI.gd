@@ -5,8 +5,8 @@ onready var animation1 = $TextureProgress1/AnimationPlayer
 onready var progress2 = $TextureProgress2
 onready var animation2 = $TextureProgress2/AnimationPlayer
 onready var staminaProgress = $StaminaProgress
-onready var c = $C
-onready var d = $D
+onready var chargeBeep1 = $ChargeBeep1
+onready var chargeBeep2 = $ChargeBeep2
 
 onready var chargeSound1 = $ChargeSound1
 onready var chargeSound2 = $ChargeSound2
@@ -75,9 +75,9 @@ func set_charge(value):
 func set_charge_level(value):
 	currentChargeLevel = value
 	if currentChargeLevel == 1:
-		c.play()	
+		chargeBeep1.play()	
 	elif currentChargeLevel == 2:
-		d.play()
+		chargeBeep2.play()
 
 func stop_charge():
 	chargeSound1.stop()

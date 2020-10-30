@@ -177,7 +177,6 @@ func move_state(delta):
 			talkTimer.start()
 			interactObject.interact()
 			if examining:
-				print('notice display false')
 				self.noticeDisplay = false
 		elif talking && interactObject.talkable && talkTimer.is_stopped():
 			talkTimer.start()
@@ -485,7 +484,6 @@ func _on_Hurtbox_area_entered(area):
 		if attack_1_charged: attack_1_charged = false
 		if attack_2_charged: attack_2_charged = false
 		charge_reset()
-	swordHitbox.set_deferred("monitorable", false)
 	damageTaken = area.damage
 	state = HIT
 	
@@ -494,6 +492,7 @@ func hit_damage():
 	stats.health -= damageTaken
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
+	swordHitbox.set_deferred("monitorable", false)
 	
 func hit_state(_delta):
 # warning-ignore:integer_division
@@ -502,10 +501,10 @@ func hit_state(_delta):
 	move()
 	
 func hit_animation_finished():
-	state = MOVE
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_reset()
+	state = MOVE
 
 func _on_Hurtbox_invincibility_started():
 	blinkAnimationPlayer.play("Start")

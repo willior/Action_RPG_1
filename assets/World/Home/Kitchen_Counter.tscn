@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://assets/World/Home/Home_Kitchen_Counter_Side.png" type="Texture" id=1]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://assets/World/Home/Home_Sink_On.png" type="Texture" id=5]
 [ext_resource path="res://assets/World/Home/Home_Sink_Off.png" type="Texture" id=6]
 [ext_resource path="res://assets/World/Home/Home_Sink_OffComplete.png" type="Texture" id=7]
+[ext_resource path="res://assets/Audio/World/Home/Home_Sink_On.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/Audio/World/Home/Home_Sink_Audio.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/Audio/World/Home/Home_Sink_Off.wav" type="AudioStream" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 6 )
@@ -150,7 +153,7 @@ region = Rect2( 0, 0, 8, 16 )
 
 [sub_resource type="SpriteFrames" id=35]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), ExtResource( 7 ) ],
 "loop": false,
 "name": "Off",
 "speed": 20.0
@@ -177,6 +180,146 @@ extents = Vector2( 1, 41 )
 [sub_resource type="RectangleShape2D" id=37]
 extents = Vector2( 2, 10 )
 
+[sub_resource type="Animation" id=39]
+resource_name = "Off"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sprite/AnimatedSprite")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "Off" ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=49]
+resource_name = "OffComplete"
+length = 0.1
+
+[sub_resource type="Animation" id=40]
+resource_name = "On"
+length = 0.5
+tracks/0/type = "audio"
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("Sprite/AnimatedSprite")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "On" ],
+"method": "play"
+} ]
+}
+
+[sub_resource type="Animation" id=41]
+resource_name = "Run"
+length = 6.9
+loop = true
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("Sprite/AnimatedSprite")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "Run" ],
+"method": "play"
+} ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0.05 )
+}
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "Off"
+
+[sub_resource type="AnimationNodeAnimation" id=50]
+animation = "OffComplete"
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "On"
+
+[sub_resource type="AnimationNodeAnimation" id=44]
+animation = "Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+
+[sub_resource type="AnimationNodeStateMachine" id=47]
+states/Off/node = SubResource( 42 )
+states/Off/position = Vector2( 417.062, 14.7743 )
+states/OffComplete/node = SubResource( 50 )
+states/OffComplete/position = Vector2( 243, 15.7987 )
+states/On/node = SubResource( 43 )
+states/On/position = Vector2( 241, 151.5 )
+states/Run/node = SubResource( 44 )
+states/Run/position = Vector2( 417.875, 150.75 )
+transitions = [ "On", "Run", SubResource( 45 ), "Run", "Off", SubResource( 46 ), "Off", "OffComplete", SubResource( 51 ), "OffComplete", "On", SubResource( 52 ) ]
+start_node = "OffComplete"
+graph_offset = Vector2( 0, -54.7013 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=48]
+
 [node name="Kitchen_Counter" type="StaticBody2D"]
 position = Vector2( 43, 96 )
 script = ExtResource( 3 )
@@ -201,6 +344,18 @@ position = Vector2( 0, 14 )
 shape = SubResource( 37 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-[connection signal="animation_finished" from="Sprite/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+stream = ExtResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Off = SubResource( 39 )
+anims/OffComplete = SubResource( 49 )
+anims/On = SubResource( 40 )
+anims/Run = SubResource( 41 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 47 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 48 )
 
 [editable path="TalkBox"]
