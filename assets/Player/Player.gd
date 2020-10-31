@@ -359,9 +359,9 @@ func flash_state(delta):
 	
 func flash_start():
 	stats.stamina -= 20
-	stats.strength_mod = 2
 	charge.stop_charge()
 	swordHitbox.flash_begin()
+	stats.strength_mod = 2
 	
 func flash_stop():
 	swordHitbox.flash_end()
@@ -488,11 +488,10 @@ func _on_Hurtbox_area_entered(area):
 	state = HIT
 	
 func hit_damage():
-	stats.strength_mod = 0
+	player_state_reset()
 	stats.health -= damageTaken
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
-	swordHitbox.set_deferred("monitorable", false)
 	
 func hit_state(_delta):
 # warning-ignore:integer_division
@@ -505,6 +504,11 @@ func hit_animation_finished():
 		attack_charging = true
 		charge_reset()
 	state = MOVE
+	
+func player_state_reset():
+	swordHitbox.set_deferred("monitorable", false)
+	swordHitbox.damage = swordHitbox.orig_damage
+	stats.strength_mod = 0
 
 func _on_Hurtbox_invincibility_started():
 	blinkAnimationPlayer.play("Start")
