@@ -20,6 +20,7 @@ var home_bookshelf_examined = false
 var home_fridge_examined = false
 var home_stove_examined = false
 var home_sink_examined = false
+var metal_pot_use_index = 0
 
 var home_desk_on = false
 var home_lightswitch_bedroom_on = false

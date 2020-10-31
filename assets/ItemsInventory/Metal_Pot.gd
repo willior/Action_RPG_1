@@ -20,9 +20,19 @@ func examine():
 	if !examined: examined = true
 	
 func interact():
-	GameManager.player.inventory.add_item("Metal_Pot", 1)
-	PlayerLog.metal_pot_collected = true
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	itemCollectEffect.playSound(1)
+	GameManager.player.inventory.add_item("Metal_Pot", 1)
+	PlayerLog.metal_pot_collected = true
+	
+	var dialogBox = DialogBox.instance()
+	dialogBox.dialog = [
+		"I am a metal pot. I don't really have much to talk about these days.",
+		"I'm also useless, because the game is unfinished.",
+		"What a terrible fate.",
+		"...",
+		"Press R to change items. Press G to use an item."
+	]
+	get_node("/root/World/GUI").add_child(dialogBox)
 	queue_free()

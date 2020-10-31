@@ -5,6 +5,7 @@ const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
+const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
 
 const ENEMY_NAME = "Crow"
 export var ACCELERATION = 200
@@ -274,19 +275,21 @@ func _on_CrowStats_no_health():
 	
 	get_node("/root/World").add_child(expNotice)
 	
-	if player.stats.health < player.stats.max_health && randi() % 2 == 1:
+	if randi() % 2 == 1:
+		var healingPotion = HealingPotion.instance()
+		get_node("/root/World/YSort/Items").call_deferred("add_child", healingPotion)
+		healingPotion.global_position = global_position
+	
+	elif player.stats.health < player.stats.max_health && randi() % 2 == 1:
 		var heartPickup = HeartPickup.instance()
-		
-		# get_parent().get_parent().get_node("Items").call_deferred("add_child", heartPickup)
-		
 		get_node("/root/World/YSort/Items").call_deferred("add_child", heartPickup)
 		heartPickup.global_position = global_position
 		
-	if randi() % 2 == 1:
+	elif randi() % 2 == 1:
 		var pennyPickup = PennyPickup.instance()
 		get_node("/root/World/YSort/Items").call_deferred("add_child", pennyPickup)
 		pennyPickup.global_position = global_position
-	
+
 	queue_free()
 
 func idle_animation():

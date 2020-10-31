@@ -23,6 +23,9 @@ var menuSkipped = false
 
 func _input(event):
 	if event.is_action_pressed("start") && !menuSkipped:
+		$MarginContainer/VBoxContainer.queue_free()
+		wisteria.queue_free()
+		
 		show_title_menu()
 	if (event.is_action_pressed("ui_up") || event.is_action_pressed("ui_down") || event.is_action_pressed("ui_left") || event.is_action_pressed("ui_right") ) && menuOn:
 		$AudioMenu.play()
@@ -282,14 +285,14 @@ func _on_NewGame_pressed():
 	menuTimer.wait_time = 0.25
 	menuTimer.start()
 	yield(menuTimer, "timeout")
-	Global.goto_scene("res://assets/Intro/ControlsScreen.tscn")
+	Global.goto_scene("res://assets/Misc/ControlsScreen.tscn")
 
 func _on_QuitGame_pressed():
 	$AudioSelect.play()
 	audio.stop()
 	menuOn = false
 	titleMenu.queue_free()
-	menuTimer.wait_time = transTime / 8
+	menuTimer.wait_time = 0.25
 	menuTimer.start()
 	yield(menuTimer, "timeout")
 	get_tree().quit()
