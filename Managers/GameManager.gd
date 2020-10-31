@@ -9,6 +9,8 @@ extends Node
 # and used as the argument to run the "reinitialize_player" function,
 # which sets the current player scene's inventory to that of the argument's.
 
+var on_title_screen = false
+
 signal player_initialized
 signal player_reinitialized
 
@@ -18,7 +20,8 @@ var player
 	
 # warning-ignore:unused_argument
 func _process(delta):
-	if not player:
+	if not player && !on_title_screen:
+		print('init player')
 		initialize_player()
 		return
 		
@@ -41,6 +44,10 @@ func initialize_player():
 	
 	if !ResourceLoader.exists("user://inventory.tres"):
 		player.inventory.add_item("Potion", 2)
+# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://inventory.tres", player.inventory)
+		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
+
 	else:
 		var loaded_inventory = load("user://inventory.tres")
 		if loaded_inventory:

@@ -9,17 +9,15 @@ onready var player = $YSort/Player
 func _ready():
 	sfx.play()
 	music.play()
+	if GameManager.on_title_screen:
+		GameManager.on_title_screen = false
 
 func _process(_delta):
 	if Input.is_action_just_pressed("next_item"): # R
 		player.inventory.advance_selected_item()
 	
 	if Input.is_action_just_pressed("test"): # T
-		# PlayerStats.status = "poison"
-		# print('testing poison')
-		# player.inventory.add_item("Metal Pot", 1)
-		# print(player.inventory._items.size())
-		print(player.inventory.current_selected_item)
+		prints("current selected item index: " + str(player.inventory.current_selected_item))
 		
 	if Input.is_action_just_pressed("pause"): # P
 		if get_tree().paused == false:

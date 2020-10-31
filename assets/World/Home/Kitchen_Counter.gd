@@ -30,12 +30,14 @@ func examine():
 			dialogBox.dialog = [
 			"It's your sink."
 			]
-			examined_while_off = true
+			if !examined: examined = true
+			if !examined_while_off: examined_while_off = true
 		1:
 			dialogBox.dialog = [
 			"The faucet is working properly."
 			]
-			examined_while_on = true
+			if !examined: examined = true
+			if !examined_while_on: examined_while_on = true
 			
 	if examined_while_off && examined_while_on && !PlayerLog.home_sink_examined:
 		PlayerLog.home_sink_examined = true

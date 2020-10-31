@@ -58,13 +58,13 @@ func use_item():
 	
 	if used_item:
 		match used_item.name:
-				"Potion":
-					remove_item(used_item.name, 1)
-					PlayerStats.health += used_item.healing
-					GameManager.player.audio.stream = load("res://assets/Audio/Slither_02.wav")
-					GameManager.player.audio.play()
-				"Metal_Pot":
-					ItemHandler.item_handler(used_item)
+			"Potion":
+				remove_item(used_item.name, 1)
+				PlayerStats.health += used_item.healing
+				GameManager.player.audio.stream = load("res://assets/Audio/Slither_02.wav")
+				GameManager.player.audio.play()
+			"Metal_Pot":
+				ItemHandler.item_handler(used_item)
 	
 func remove_item(item_name, quantity):
 	prints("removing " + str(quantity) + " " + str(item_name))

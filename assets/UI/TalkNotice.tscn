@@ -32,5 +32,4 @@ z_index = 2
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -5 )
 frames = SubResource( 5 )
-frame = 3
 playing = true

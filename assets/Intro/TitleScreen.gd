@@ -23,15 +23,12 @@ var menuSkipped = false
 
 func _input(event):
 	if event.is_action_pressed("start") && !menuSkipped:
-		titleMenu()
+		show_title_menu()
 	if (event.is_action_pressed("ui_up") || event.is_action_pressed("ui_down") || event.is_action_pressed("ui_left") || event.is_action_pressed("ui_right") ) && menuOn:
 		$AudioMenu.play()
-		
-func _process(delta):
-	pass
 
 func _ready():
-	
+	GameManager.on_title_screen = true
 	while !menuOn:
 		label1.visible = false
 		
@@ -235,9 +232,9 @@ func _ready():
 		timer.start()
 		yield(timer, "timeout")
 		
-		titleMenu()
+		show_title_menu()
 	
-func titleMenu():
+func show_title_menu():
 	
 	menuSkipped = true
 	
@@ -282,10 +279,10 @@ func _on_NewGame_pressed():
 	audio.stop()
 	menuOn = false
 	titleMenu.queue_free()
-	menuTimer.wait_time = transTime / 8
+	menuTimer.wait_time = 0.25
 	menuTimer.start()
 	yield(menuTimer, "timeout")
-	get_tree().change_scene("res://Main.tscn")
+	Global.goto_scene("res://assets/Intro/ControlsScreen.tscn")
 
 func _on_QuitGame_pressed():
 	$AudioSelect.play()
