@@ -1,5 +1,13 @@
 extends Node
 
+# Upon contracting poison, the count is set to 1, and the Timer (3s) starts
+# each Timeout (3s), the poison_tick function is run;
+# this function decrements the health by the potency amount,
+# and increments the count by 1.
+# Once the count reaches the duration amount,
+# the Poison is removed following the subsequent tik.
+# If the player contracts Poison while already Poisoned, the count is set to 0
+
 export var count = 0
 export var duration = 3
 export var potency = 1

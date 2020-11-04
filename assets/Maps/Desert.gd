@@ -49,6 +49,7 @@ func modulate_wind(start_value_wind, start_value_particles):
 		start_value_particles, end_value_particles, 4,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Calm")
+		
 		PlayerStats.status = "not_slow"
 		# PlayerStats.status = "not_poison"
 		
@@ -59,6 +60,7 @@ func modulate_wind(start_value_wind, start_value_particles):
 		start_value_particles, end_value_particles, 8,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Storm")
+		
 		PlayerStats.status = "slow"
 		# PlayerStats.status = "poison"
 		

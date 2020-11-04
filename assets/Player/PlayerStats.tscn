@@ -89,10 +89,12 @@ func set_speed_mod(value):
 func set_status(value):
 	status = value
 	match status:
+		\"fine\":
+			speed_mod = 0
 		\"slow\":
-			set_speed_mod(-max_speed/2)
+			speed_mod = -max_speed/2
 		\"not_slow\":
-			set_speed_mod(0)
+			speed_mod = 0
 		\"poison\":
 			if $Poison/Timer.is_stopped():
 				$Poison.count = 1

@@ -17,7 +17,8 @@ func _process(_delta):
 		player.inventory.advance_selected_item()
 	
 	if Input.is_action_just_pressed("test"): # T
-		prints("current selected item index: " + str(player.inventory.current_selected_item))
+		# prints("current selected item index: " + str(player.inventory.current_selected_item))
+		PlayerStats.status = "poison"
 		
 	if Input.is_action_just_pressed("pause"): # P
 		if get_tree().paused == false:

@@ -99,6 +99,8 @@ func _ready():
 # warning-ignore:return_value_discarded
 	stats.connect("status_changed", self, "apply_status")
 	stats.connect("no_health", self, "game_over")
+	
+	PlayerStats.status = "not_slow"
 
 func _process(delta):
 	match state:
