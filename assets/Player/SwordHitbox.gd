@@ -22,7 +22,6 @@ func set_strength(_strength):
 func set_strength_mod(_strength_mod):
 	damage_mod = PlayerStats.strength_mod
 	damage += damage_mod
-	print(damage)
 	
 func shade_begin():
 	set_deferred("monitorable", true)

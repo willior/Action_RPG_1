@@ -13,6 +13,7 @@ func _input(event):
 		$ControlsDisplay.queue_free()
 		var chapterScreen = ChapterScreen.instance()
 		add_child(chapterScreen)
+		ok_to_start = false
 		
 func _on_Timer_timeout():
 	$ControlsDisplay/StartMessage.visible = true

@@ -388,7 +388,6 @@ func hit_animation_finished():
 	state = MOVE
 	
 func player_state_reset():
-	print('resetting player state')
 	swordHitbox.set_deferred("monitorable", false)
 	swordHitbox.damage = swordHitbox.orig_damage
 	stats.strength_mod = 0

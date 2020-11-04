@@ -11,7 +11,6 @@ enum {
 	}
 	
 func playSound(itemCollected):
-	print(itemCollected)
 	match(itemCollected):
 		heart:
 			collectSound.stream = heartCollectSound

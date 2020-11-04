@@ -9,7 +9,7 @@ const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 export var ACCELERATION = 300
 export var MAX_SPEED = 40
 export var WANDER_SPEED = 20
-export var ATTACK_SPEED = 200
+export var ATTACK_SPEED = 160
 export var FRICTION = 240
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
@@ -55,6 +55,10 @@ onready var audio = $AudioStreamPlayer
 onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
+# warning-ignore:return_value_discarded
+	PlayerLog.connect("bat_complete", self, "examine_complete")
+	if PlayerLog.bat_examined:
+		examined = true
 	add_to_group("enemies")
 	rng.randomize()
 	random_number = rng.randi_range(0, 4)
@@ -130,7 +134,13 @@ func examine():
 		"They are the only mammals capable of true and sustained flight."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
-	if !examined: examined = true
+	if !examined:
+		examined = true
+		PlayerLog.bat_examined = true
+		PlayerLog.set_examined("bat", true)
+	
+func examine_complete(value):
+	examined = value
 			
 func accelerate_towards_point(point, speed, delta):
 	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument

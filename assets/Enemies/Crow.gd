@@ -59,6 +59,10 @@ onready var audio = $AudioStreamPlayer
 onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
+# warning-ignore:return_value_discarded
+	PlayerLog.connect("crow_complete", self, "examine_complete")
+	if PlayerLog.crow_examined:
+		examined = true
 	add_to_group("enemies")
 	# rng.randomize()
 	# random_number = rng.randi_range(0, 4)
@@ -128,7 +132,13 @@ func examine():
 		"Except that it's over-sized. And more aggressive than usual, to say the least."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
-	if !examined: examined = true
+	if !examined:
+		examined = true
+		PlayerLog.crow_examined = true
+		PlayerLog.set_examined("crow", true)
+
+func examine_complete(value):
+	examined = value
 			
 func accelerate_towards_point(point, speed, delta):
 	if flying:

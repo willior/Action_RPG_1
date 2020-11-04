@@ -43,6 +43,10 @@ onready var map = get_parent().get_parent().get_parent().get_node("Map")
 # spawns on player's y.position randi_range(-90,90)
 
 func _ready():
+# warning-ignore:return_value_discarded
+	PlayerLog.connect("tumbleweed_complete", self, "examine_complete")
+	if PlayerLog.tumbleweed_examined:
+		examined = true
 	add_to_group("enemies")
 	animationPlayer.play("Animate")
 	speed_mod = rand_range(0,32)
@@ -87,7 +91,13 @@ func examine():
 		"An example of functional death, its structure degrades gradually allowing seeds to be sewn."
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
-	if !examined: examined = true
+	if !examined:
+		examined = true
+		PlayerLog.tumbleweed_examined = true
+		PlayerLog.set_examined("tumbleweed", true)
+
+func examine_complete(value):
+	examined = value
 	
 func play_sound():
 	var sound_choice = randi() % 3
