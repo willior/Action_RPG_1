@@ -31,6 +31,11 @@ func spawner():
 			tumbleweedSpawn.position = player.position + Vector2(320, rand_range(0, player.velocity.y/2))
 		elif map.wind_direction == "right":
 			tumbleweedSpawn.position = player.position + Vector2(-320, rand_range(0, player.velocity.y/2))
+
 		get_parent().add_child(tumbleweedSpawn)
+		if tumbleweedSpawn.global_position.x < -6:
+			tumbleweedSpawn.global_position.x = -6
+		elif tumbleweedSpawn.global_position.x > 4122:
+			tumbleweedSpawn.global_position.x = 4122
 		spawner()
 		count += 1

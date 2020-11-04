@@ -30,17 +30,16 @@
 [ext_resource path="res://assets/World/Home/Lightswitch_Main.gd" type="Script" id=29]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=31]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 24, 8 )
-
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2, 6 )
+extents = Vector2( 24, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 2, 6 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "Lightning1"
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 2, 6 )
+
+[sub_resource type="Animation" id=4]
 length = 10.0
 step = 0.02
 tracks/0/type = "value"
@@ -125,7 +124,7 @@ map_file = "res://assets/Maps/1-1_Forest.tscn"
 selected_location = Vector2( 288, 16 )
 
 [node name="CollisionShape2D" parent="Map/Exit_toForest" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="Fireplace_Floor" type="Sprite" parent="Map"]
 position = Vector2( 307, 75 )
@@ -158,21 +157,21 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 6
+frame = 5
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 6
+frame = 5
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 6
+frame = 5
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
 [node name="CollisionShape2D" parent="Map/Lightswitch_Bedroom/TalkBox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Light2D" parent="Map/Lightswitch_Bedroom" index="1"]
 position = Vector2( 80.5, -17.5 )
@@ -184,7 +183,7 @@ script = ExtResource( 29 )
 
 [node name="CollisionShape2D" parent="Map/Lightswitch_Main/TalkBox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Light2D" parent="Map/Lightswitch_Main" index="1"]
 position = Vector2( -144.5, -17.5 )
@@ -194,7 +193,7 @@ scale = Vector2( 295, 195 )
 script = ExtResource( 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Lightning"]
-anims/Lightning1 = SubResource( 3 )
+anims/Lightning1 = SubResource( 4 )
 
 [node name="Light2D" type="Light2D" parent="Lightning"]
 position = Vector2( 139, 23.5 )
