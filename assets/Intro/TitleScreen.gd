@@ -29,6 +29,9 @@ func _input(event):
 		show_title_menu()
 	if (event.is_action_pressed("ui_up") || event.is_action_pressed("ui_down") || event.is_action_pressed("ui_left") || event.is_action_pressed("ui_right") ) && menuOn:
 		$AudioMenu.play()
+		
+	if event.is_action_pressed("quit_game"):
+		get_tree().quit()
 
 func _ready():
 	GameManager.on_title_screen = true

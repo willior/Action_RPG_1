@@ -15,6 +15,9 @@ func _input(event):
 		add_child(chapterScreen)
 		ok_to_start = false
 		
+	if event.is_action_pressed("quit_game"):
+		get_tree().quit()
+		
 func _on_Timer_timeout():
 	$ControlsDisplay/StartMessage.visible = true
 	$AudioStreamPlayer.play()

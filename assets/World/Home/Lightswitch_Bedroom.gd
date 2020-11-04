@@ -118,10 +118,8 @@ func interact():
 		PlayerLog.set_dialog_index("home_lightswitch", 1)
 		if !PlayerLog.home_lightswitch_checked:
 			PlayerLog.home_lightswitch_checked = true
-		if examined && !get_parent().lightswitch_examined_while_on:
+		if (examined && !get_parent().lightswitch_examined_while_on) || !PlayerLog.home_lightswitch_examined:
 			examined = false
-		if !PlayerLog.home_lightswitch_examined:
-			PlayerLog.set_examined("home_lightswitch", false)
 		frame = 1
 		
 	elif $Light2D.visible: # turn off light
