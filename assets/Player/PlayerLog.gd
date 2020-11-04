@@ -23,6 +23,7 @@ var home_sink_examined = false
 var metal_pot_use_index = 0
 
 var home_desk_on = false
+var home_lightswitch_checked = false
 var home_lightswitch_bedroom_on = false
 var home_lightswitch_main_on = false
 var home_fridge_open = false

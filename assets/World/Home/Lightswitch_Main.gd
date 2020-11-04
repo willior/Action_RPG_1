@@ -25,9 +25,11 @@ var examined_while_off = false
 var examined_while_on = false
 var index = 0
 
-func _ready():	
-	if PlayerLog.home_lightswitch_examined:
+func _ready():
+	if PlayerLog.home_lightswitch_checked:
 		index = 1
+	if PlayerLog.home_lightswitch_examined:
+		# index = 1
 		examined = true
 		examined_while_off = true
 		examined_while_on = true
@@ -72,7 +74,7 @@ func examine():
 				examined = true
 				# PlayerLog.set_examined("home_lightswitch", true)
 			if !examined_while_on:
-					get_parent().lightswitch_examined_while_on = true
+				get_parent().lightswitch_examined_while_on = true
 		
 		3: # dialog for 2nd examination while off
 			dialogBox.dialog = [
@@ -108,6 +110,8 @@ func interact():
 		$Light2D.show()
 		PlayerLog.home_lightswitch_main_on = true
 		PlayerLog.set_dialog_index("home_lightswitch", 1)
+		if !PlayerLog.home_lightswitch_checked:
+			PlayerLog.home_lightswitch_checked = true
 		if examined && !get_parent().lightswitch_examined_while_on:
 			examined = false
 		if !PlayerLog.home_lightswitch_examined:

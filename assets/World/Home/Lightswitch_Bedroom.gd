@@ -26,8 +26,9 @@ var examined_while_on = false
 var index = 0
 
 func _ready():
-	if PlayerLog.home_lightswitch_examined:
+	if PlayerLog.home_lightswitch_checked:
 		index = 1
+	if PlayerLog.home_lightswitch_examined:
 		examined = true
 		examined_while_off = true
 		examined_while_on = true
@@ -54,17 +55,24 @@ func examine():
 				PlayerLog.set_examined("home_lightswitch", true)
 		
 		1: # default dialog after the player turns the light on
-			dialogBox.dialog = [
-			"A lightswitch."
-			]
+			
 			# if the light is on, next dialog instanced index 2
-			if $Light2D.visible: index = 2
+			if $Light2D.visible:
+				index = 2
+				dialogBox.dialog = [
+					"A lightswitch.",
+					"It's in the 'ON' position."
+				]
 			# if the light is off, next dialog instanced index 3
-			elif !$Light2D.visible: index = 3
+			elif !$Light2D.visible:
+				index = 3
+				dialogBox.dialog = [
+					"A lightswitch.",
+					"It's in the 'OFF' position."
+				]
 		
 		2: # dialog for 2nd examination while on
 			dialogBox.dialog = [
-			"It's in the 'ON' position.",
 			"Remember to switch the lights off before you leave."
 			]
 			index = 1
@@ -72,11 +80,10 @@ func examine():
 				examined = true
 				# PlayerLog.set_examined("home_lightswitch", true)
 			if !examined_while_on:
-					get_parent().lightswitch_examined_while_on = true
+				get_parent().lightswitch_examined_while_on = true
 		
 		3: # dialog for 2nd examination while off
 			dialogBox.dialog = [
-			"It's in the 'OFF' position.",
 			"Thank you for saving energy."
 			]
 			index = 1
@@ -109,6 +116,8 @@ func interact():
 		$Light2D.show()
 		PlayerLog.home_lightswitch_bedroom_on = true
 		PlayerLog.set_dialog_index("home_lightswitch", 1)
+		if !PlayerLog.home_lightswitch_checked:
+			PlayerLog.home_lightswitch_checked = true
 		if examined && !get_parent().lightswitch_examined_while_on:
 			examined = false
 		if !PlayerLog.home_lightswitch_examined:

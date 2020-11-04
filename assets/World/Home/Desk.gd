@@ -16,6 +16,7 @@ func _ready():
 		examined_while_on = true
 	if PlayerLog.home_desk_on:
 		$Light2D.visible = true
+		examined = false
 		index = 4
 	else:
 		$Light2D.visible = false
@@ -30,9 +31,14 @@ func examine():
 			]
 			index = 1
 		1:
-			dialogBox.dialog = [
-			"It's too dark to see anything else."
-			]
+			if PlayerLog.home_lightswitch_bedroom_on:
+				dialogBox.dialog = [
+				"The lamp is off."
+				]
+			else:
+				dialogBox.dialog = [
+				"It's too dark to see anything else."
+				]
 			index = 0
 			if !examined: examined = true
 			if !examined_while_off: examined_while_off = true
@@ -49,14 +55,14 @@ func examine():
 			index = 2
 			if !examined: examined = true
 			if !examined_while_on: examined_while_on = true
+			if !examined_while_off: examined_while_off = true
+			if !PlayerLog.home_desk_examined:
+				PlayerLog.home_desk_examined = true
 		4:
 			dialogBox.dialog = [
 			"Please try and remember to switch off the lights before leaving the house."
 			]
-			index = 3
-	
-	if examined_while_off && examined_while_on && !PlayerLog.home_desk_examined:
-		PlayerLog.home_desk_examined = true
+			index = 2
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
 	

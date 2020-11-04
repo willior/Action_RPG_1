@@ -47,6 +47,9 @@ func examine():
 			index -= 1
 			if !examined: examined = true
 			if !examined_while_on: examined_while_on = true
+			if !examined_while_off: examined_while_off = true
+			if !PlayerLog.home_fridge_examined:
+				PlayerLog.home_fridge_examined = true
 		3: # dialog for 2nd examination while off
 			dialogBox.dialog = [
 			"It's running."
@@ -61,10 +64,6 @@ func examine():
 			]
 			index -= 3
 			if !examined: examined = true
-			if !examined_while_on: examined_while_on = true
-			
-	if examined_while_on && examined_while_off && !PlayerLog.home_fridge_examined:
-		PlayerLog.home_fridge_examined = true
 		
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
