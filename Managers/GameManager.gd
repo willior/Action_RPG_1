@@ -43,7 +43,9 @@ func initialize_player():
 	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
 	
 	if !ResourceLoader.exists("user://inventory.tres"):
+		player.inventory.add_item("Potion", 1)
 		player.inventory.add_item("Potion", 2)
+		# player.inventory.add_item("Potion", 1)
 # warning-ignore:return_value_discarded
 		ResourceSaver.save("user://inventory.tres", player.inventory)
 		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
@@ -52,6 +54,7 @@ func initialize_player():
 		var loaded_inventory = load("user://inventory.tres")
 		if loaded_inventory:
 			player.inventory.set_items(loaded_inventory.get_items())
+		prints("inventory loaded: " + str(loaded_inventory))
 		
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):

@@ -16,9 +16,6 @@ func _input(event):
 	if event.is_action_pressed("quit_game"):
 		get_tree().quit()
 	
-	if event.is_action_pressed("next_item"): # R
-		player.inventory.advance_selected_item()
-	
 	if event.is_action_pressed("test"): # T
 		prints("current selected item index: " + str(player.inventory.current_selected_item))
 		# PlayerStats.status = "poison"

@@ -159,6 +159,9 @@ func move_state(delta):
 			talkTimer.start()
 			interactObject.examine()
 			
+	if Input.is_action_just_pressed("next_item"): # R
+		inventory.advance_selected_item()
+			
 	if Input.is_action_just_pressed("item"): # G
 		inventory.use_item()
 #		if inventory.DialogBox:
