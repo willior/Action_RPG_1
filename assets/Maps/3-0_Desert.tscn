@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/Tilesets/Desert/Sand_Light_Tileset/tileset_Sand_Light_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/Misc/WhiteScreen.png" type="Texture" id=13]
 [ext_resource path="res://assets/Maps/Desert.gd" type="Script" id=14]
 [ext_resource path="res://assets/Enemies/TumbleweedNest.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=16]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type particles;
@@ -306,6 +307,9 @@ tracks/0/keys = {
 "values": [ Color( 0.776471, 0.705882, 0.478431, 0.25098 ), Color( 0.776471, 0.705882, 0.478431, 0.501961 ) ]
 }
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 8, 752 )
+
 [node name="World" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 2 )
@@ -397,6 +401,14 @@ autostart = true
 anims/Calm = SubResource( 3 )
 anims/Storm = SubResource( 4 )
 
+[node name="Exit_toForest" parent="Map" instance=ExtResource( 16 )]
+position = Vector2( 0, 752 )
+map_file = "res://assets/Maps/1-1_Forest.tscn"
+selected_location = Vector2( 880, 120 )
+
+[node name="CollisionShape2D" parent="Map/Exit_toForest" index="0"]
+shape = SubResource( 5 )
+
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
@@ -435,3 +447,5 @@ stream = ExtResource( 3 )
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 [connection signal="timeout" from="Map/Timer" to="Map" method="_on_Timer_timeout"]
+
+[editable path="Map/Exit_toForest"]

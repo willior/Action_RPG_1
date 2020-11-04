@@ -367,6 +367,30 @@ func flash_stop():
 	swordHitbox.flash_end()
 	stats.strength_mod = 0
 	
+func hit_damage():
+	stats.health -= damageTaken
+	hurtbox.start_invincibility(1)
+	hurtbox.create_hit_effect()
+	
+func hit_state(_delta):
+# warning-ignore:integer_division
+	velocity = -dir_vector * (stats.roll_speed/2)
+	animationState.travel("Hit")
+	move()
+	
+func hit_animation_finished():
+	player_state_reset()
+	if Input.is_action_pressed("attack"):
+		attack_charging = true
+		charge_reset()
+	state = MOVE
+	
+func player_state_reset():
+	print('resetting player state')
+	swordHitbox.set_deferred("monitorable", false)
+	swordHitbox.damage = swordHitbox.orig_damage
+	stats.strength_mod = 0
+	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
 	stats.experience_total += experience_from_kill
@@ -486,29 +510,6 @@ func _on_Hurtbox_area_entered(area):
 		charge_reset()
 	damageTaken = area.damage
 	state = HIT
-	
-func hit_damage():
-	player_state_reset()
-	stats.health -= damageTaken
-	hurtbox.start_invincibility(1)
-	hurtbox.create_hit_effect()
-	
-func hit_state(_delta):
-# warning-ignore:integer_division
-	velocity = -dir_vector * (stats.roll_speed/2)
-	animationState.travel("Hit")
-	move()
-	
-func hit_animation_finished():
-	if Input.is_action_pressed("attack"):
-		attack_charging = true
-		charge_reset()
-	state = MOVE
-	
-func player_state_reset():
-	swordHitbox.set_deferred("monitorable", false)
-	swordHitbox.damage = swordHitbox.orig_damage
-	stats.strength_mod = 0
 
 func _on_Hurtbox_invincibility_started():
 	blinkAnimationPlayer.play("Start")

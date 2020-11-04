@@ -4,7 +4,6 @@
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Player/Camera2D.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/CollisionBoxes/Exits/1/Exit_Home.gd" type="Script" id=5]
 [ext_resource path="res://assets/World/Home/Home_Kitchen_Floor.png" type="Texture" id=6]
 [ext_resource path="res://assets/World/Home/Kitchen_Stove.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/World/Home/Home_Kitchen_Cupboard_Bottom.png" type="Texture" id=8]
@@ -30,6 +29,9 @@
 [ext_resource path="res://assets/Maps/Home.gd" type="Script" id=28]
 [ext_resource path="res://assets/World/Home/Lightswitch_Main.gd" type="Script" id=29]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=31]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 24, 8 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 6 )
@@ -116,9 +118,14 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 3, 0, 0, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 9, 0, 2, 65537, 0, 0, 65538, 0, 1, 65539, 0, 131078, 65540, 0, 65537, 65541, 0, 65537, 65542, 0, 65537, 65543, 0, 65537, 65544, 0, 65537, 65545, 0, 65538, 65549, 0, 0, 65550, 0, 1, 65551, 0, 1, 65552, 0, 1, 65553, 0, 2, 131073, 0, 65536, 131074, 0, 65537, 131075, 0, 65537, 131076, 0, 65537, 131077, 0, 65537, 131078, 0, 65537, 131079, 0, 65537, 131080, 0, 65537, 131081, 0, 65538, 131085, 0, 65536, 131086, 0, 65537, 131087, 0, 65537, 131088, 0, 65537, 131089, 0, 65538, 196609, 0, 65536, 196610, 0, 65537, 196611, 0, 65537, 196612, 0, 65537, 196613, 0, 65537, 196614, 0, 65537, 196615, 0, 65537, 196616, 0, 65537, 196617, 0, 131077, 196618, 0, 1, 196619, 0, 1, 196620, 0, 1, 196621, 0, 131078, 196622, 0, 65537, 196623, 0, 65537, 196624, 0, 65537, 196625, 0, 65538, 262145, 0, 131072, 262146, 0, 131073, 262147, 0, 131073, 262148, 0, 65542, 262149, 0, 65541, 262150, 0, 131073, 262151, 0, 131073, 262152, 0, 131073, 262153, 0, 131073, 262154, 0, 131073, 262155, 0, 131073, 262156, 0, 131073, 262157, 0, 131073, 262158, 0, 131073, 262159, 0, 131073, 262160, 0, 131073, 262161, 0, 131074, 327684, 0, 131072, 327685, 0, 131074 )
 
-[node name="Exit" parent="Map" instance=ExtResource( 2 )]
+[node name="Exit_toForest" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 160, 184 )
-script = ExtResource( 5 )
+collision_layer = 2048
+map_file = "res://assets/Maps/1-1_Forest.tscn"
+selected_location = Vector2( 288, 16 )
+
+[node name="CollisionShape2D" parent="Map/Exit_toForest" index="0"]
+shape = SubResource( 4 )
 
 [node name="Fireplace_Floor" type="Sprite" parent="Map"]
 position = Vector2( 307, 75 )
@@ -151,12 +158,15 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
+frame = 6
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
+frame = 6
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
+frame = 6
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
@@ -248,6 +258,8 @@ stream = ExtResource( 21 )
 
 [node name="GUI" parent="." instance=ExtResource( 10 )]
 [connection signal="timeout" from="Lightning/Timer" to="Lightning" method="_on_Timer_timeout"]
+
+[editable path="Map/Exit_toForest"]
 
 [editable path="Map/Lightswitch_Bedroom"]
 
