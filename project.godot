@@ -30,6 +30,7 @@ config/name="Action_RPG_1"
 config/description="unfinished action rpg by will graham-simpkins"
 run/main_scene="res://assets/Intro/TitleScreen.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://game_icon.ico"
 
 [autoload]
 
