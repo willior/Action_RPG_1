@@ -206,10 +206,10 @@ func attack_finished():
 		
 func update_wander_state():
 	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
-		var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
-		var newCrowSpawner = CrowSpawner.instance()
-		get_parent().call_deferred("add_child", newCrowSpawner)
-		newCrowSpawner.global_position = global_position
+		var BatSpawner = load("res://assets/Spawners/BatSpawner.tscn")
+		var newBatSpawner = BatSpawner.instance()
+		get_parent().call_deferred("add_child", newBatSpawner)
+		newBatSpawner.global_position = global_position
 		print("creating spawner, deleting bat")
 		queue_free()
 	else:

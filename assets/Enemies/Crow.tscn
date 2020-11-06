@@ -551,8 +551,10 @@ one_shot = true
 wait_time = 0.4
 one_shot = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 15 )
+max_distance = 320.0
+attenuation = 0.659754
 [connection signal="no_health" from="CrowStats" to="." method="_on_CrowStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
