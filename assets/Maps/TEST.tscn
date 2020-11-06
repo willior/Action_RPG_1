@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=1]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_pink_1_sheet.png" type="Texture" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://assets/World/Grass/Leaf_bright_green_1_sheet.png" type="Texture" id=8]
 [ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/Weather/Rain.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/Background/water_background.png" type="Texture" id=11]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_pink_1_sheet.png" type="Texture" id=12]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_orange_1_sheet.png" type="Texture" id=13]
 [ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=14]
@@ -744,18 +743,15 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 344, 240 )
 current = true
-limit_left = 0
-limit_top = 0
+limit_left = -200
+limit_top = -200
+limit_right = 1024
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 drag_margin_top = 0.1
 
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
-
-[node name="CanvasModulate" type="CanvasModulate" parent="Map"]
-z_index = 2
-color = Color( 0.294118, 0.305882, 0.501961, 1 )
 
 [node name="GrassBasicDark" type="TileMap" parent="Map"]
 tile_set = ExtResource( 4 )
@@ -795,17 +791,15 @@ cell_size = Vector2( 16, 16 )
 centered_textures = true
 tile_data = PoolIntArray( 131107, 0, 4, 131117, 0, 0, 131119, 0, 4, 131121, 0, 1, 131132, 0, 4, 131133, 0, 3, 131134, 0, 1, 131135, 0, 2, 196635, 0, 2, 196647, 0, 3, 196668, 0, 3, 196669, 0, 2, 196670, 0, 3, 196671, 0, 4, 262176, 0, 4, 262193, 0, 3, 262194, 0, 2, 262195, 0, 4, 262198, 0, 0, 262199, 0, 2, 262200, 0, 4, 262204, 0, 1, 262205, 0, 4, 262206, 0, 4, 262207, 0, 1, 327702, 0, 3, 327729, 0, 4, 327740, 0, 4, 327741, 0, 3, 327743, 0, 0, 393265, 0, 1, 393277, 0, 2, 393279, 0, 3, 458784, 0, 2, 458811, 0, 2, 458812, 0, 1, 458813, 0, 3, 524337, 0, 2, 524349, 0, 2, 589852, 0, 1, 589873, 0, 0, 589874, 0, 4, 589884, 0, 1, 589885, 0, 3, 655409, 0, 4, 655410, 0, 0, 655411, 0, 3, 655412, 0, 2, 655416, 0, 2, 655420, 0, 4, 655421, 0, 4, 720921, 0, 4, 786473, 536870912, 1, 852006, 536870912, 0, 852014, 0, 0, 917528, 0, 3, 983071, 536870912, 2, 983090, 0, 4, 983093, 0, 1, 983103, 0, 2, 1048621, 536870912, 0, 1114135, 536870912, 3, 1245230, 536870912, 1, 1310723, 0, 0, 1310725, 0, 1, 1310741, 536870912, 4, 1310752, 536870912, 2, 1376258, 0, 3, 1376260, 0, 2, 1441795, 0, 1, 1441797, 0, 0, 1441837, 536870912, 0, 1507330, 0, 3, 1507351, 536870912, 4, 1572871, 0, 1, 1572873, 0, 2, 1638405, 0, 2, 1638426, 536870912, 3, 1638442, 536870912, 3, 1703944, 0, 3, 1769475, 0, 2, 1769498, 536870912, 2, 1835032, 536870912, 4, 1835036, 536870912, 1, 1835047, 536870912, 2, 1900546, 0, 1, 1900567, 536870912, 2, 1900579, 536870912, 3, 1966085, 0, 0, 1966111, 536870912, 4, 2031642, 536870912, 0, 2097176, 536870912, 0, 2097187, 0, 4, 2162692, 0, 2, 2228257, 0, 4, 2424861, 0, 4, 2555930, 0, 3, 2687000, 0, 2, 2752534, 0, 2 )
 
+[node name="CanvasModulate" type="CanvasModulate" parent="Map"]
+z_index = 2
+color = Color( 0.294118, 0.305882, 0.501961, 1 )
+
 [node name="ParallaxOverlay" type="ParallaxBackground" parent="Map"]
 layer = 0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Map/ParallaxOverlay"]
 motion_mirroring = Vector2( 320, 90 )
-
-[node name="Sprite" type="Sprite" parent="Map/ParallaxOverlay/ParallaxLayer"]
-visible = false
-modulate = Color( 1, 1, 1, 0.141176 )
-texture = ExtResource( 11 )
-centered = false
 
 [node name="Rain" parent="Map/ParallaxOverlay/ParallaxLayer" instance=ExtResource( 10 )]
 
@@ -843,7 +837,6 @@ position = Vector2( -360, -200 )
 position = Vector2( 352, -120 )
 
 [node name="GUI" parent="." instance=ExtResource( 19 )]
-layer = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )

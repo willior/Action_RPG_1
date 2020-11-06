@@ -6,6 +6,7 @@ const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
+var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
 
 const ENEMY_NAME = "Crow"
 export var ACCELERATION = 200
@@ -190,7 +191,6 @@ func attack_finished():
 func update_wander_state():
 	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
 		queue_free()
-		var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
 		var newCrowSpawner = CrowSpawner.instance()
 		get_parent().call_deferred("add_child", newCrowSpawner)
 		newCrowSpawner.global_position = global_position

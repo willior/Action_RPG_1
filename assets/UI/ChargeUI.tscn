@@ -44,8 +44,20 @@ light_mask = 0
 z_index = 2
 script = ExtResource( 3 )
 
+[node name="ChargeSound1" type="AudioStreamPlayer" parent="."]
+
+[node name="ChargeSound2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="ChargeBeep1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="ChargeBeep2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
 [node name="StaminaProgress" type="TextureProgress" parent="."]
 visible = false
+light_mask = 0
 margin_left = -32.0
 margin_top = -32.0
 max_value = 90.0
@@ -61,6 +73,8 @@ __meta__ = {
 
 [node name="TextureProgress1" type="TextureProgress" parent="."]
 process_priority = 1
+visible = false
+light_mask = 0
 anchor_left = -3.0
 anchor_top = 1.0
 anchor_bottom = 3.0
@@ -83,6 +97,8 @@ anims/ChargeFlash = SubResource( 1 )
 
 [node name="TextureProgress2" type="TextureProgress" parent="."]
 process_priority = 1
+visible = false
+light_mask = 0
 anchor_left = -3.75
 anchor_top = 0.25
 anchor_right = -0.25
@@ -104,14 +120,3 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureProgress2"]
 anims/ChargeFlash = SubResource( 2 )
-
-[node name="ChargeSound1" type="AudioStreamPlayer" parent="."]
-
-[node name="ChargeSound2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 6 )
-
-[node name="ChargeBeep1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-
-[node name="ChargeBeep2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )

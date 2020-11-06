@@ -75,8 +75,6 @@ onready var notice = $ExamineNotice
 onready var talkNotice = $TalkNotice
 onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
-onready var charge1Vis = $ChargeUI/TextureProgress1
-onready var charge2Vis = $ChargeUI/TextureProgress2
 onready var audio = $AudioStreamPlayer
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
@@ -92,8 +90,6 @@ func _ready():
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
-	charge1Vis.visible = false
-	charge2Vis.visible = false
 	charge_reset()
 	
 # warning-ignore:return_value_discarded

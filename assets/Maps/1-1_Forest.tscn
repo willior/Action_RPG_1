@@ -1985,7 +1985,6 @@ position = Vector2( 648, 368 )
 position = Vector2( 712, 80 )
 
 [node name="GUI" parent="." instance=ExtResource( 2 )]
-layer = 2
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )

@@ -24,6 +24,7 @@ font_data = ExtResource( 3 )
 
 [node name="GUI" type="CanvasLayer"]
 pause_mode = 2
+layer = 2
 
 [node name="HealthUI" parent="." instance=ExtResource( 11 )]
 pause_mode = 2
@@ -49,7 +50,7 @@ allow_lesser = true
 texture_under = ExtResource( 5 )
 texture_over = ExtResource( 4 )
 texture_progress = ExtResource( 9 )
-tint_progress = Color( 0.0246666, 0.74, 0, 0.784314 )
+tint_progress = Color( 0.231373, 0.737255, 0.211765, 0.784314 )
 nine_patch_stretch = true
 stretch_margin_left = 2
 stretch_margin_top = 1
