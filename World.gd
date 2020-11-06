@@ -59,7 +59,6 @@ func _input(event):
 			get_tree().paused = false
 			dim.visible = false
 			stats.visible = false
-	
 
 func _process(_delta): pass
 #	if event.is_action_pressed("quit_game"):

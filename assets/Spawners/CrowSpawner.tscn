@@ -3,6 +3,7 @@
 [ext_resource path="res://assets/Spawners/CrowSpawner.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1, 1 )
 
 [node name="CrowSpawner" type="Node2D"]
 script = ExtResource( 1 )

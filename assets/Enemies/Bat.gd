@@ -6,10 +6,10 @@ const DialogBox = preload("res://assets/UI/Dialog.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 
-export var ACCELERATION = 300
+export var ACCELERATION = 240
 export var MAX_SPEED = 40
 export var WANDER_SPEED = 20
-export var ATTACK_SPEED = 160
+export var ATTACK_SPEED = 120
 export var FRICTION = 240
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
@@ -205,8 +205,16 @@ func attack_finished():
 	pass
 		
 func update_wander_state():
-	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
-	wanderController.start_wander_timer(rand_range(1, 3)) # starts wander timer between 1s & 3s
+	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
+		var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
+		var newCrowSpawner = CrowSpawner.instance()
+		get_parent().call_deferred("add_child", newCrowSpawner)
+		newCrowSpawner.global_position = global_position
+		print("creating spawner, deleting bat")
+		queue_free()
+	else:
+		state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
+		wanderController.start_wander_timer(rand_range(1, 3)) # starts wander timer between 1s & 3s
 		
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved

@@ -188,19 +188,27 @@ func attack_finished():
 	pass
 
 func update_wander_state():
-	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
-	var state_rng = rand_range(2, 4)
-	if state == 0: # IDLE STATE
-		if state_rng > 3: # plays the "Peck" animation 25% of the time
-			animationState.travel("Peck")
-		else:
-			animationState.travel("Idle") # otherwise plays the idle animation
-	elif state == 1: # WANDER STATE
-		# animationState.travel("Fly")
-		fly_animation()
-	
-	# h_flip_handler()
-	wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
+	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
+		var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
+		var newCrowSpawner = CrowSpawner.instance()
+		get_parent().call_deferred("add_child", newCrowSpawner)
+		newCrowSpawner.global_position = global_position
+		print("creating spawner, deleting crow")
+		queue_free()
+	else:
+		state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
+		var state_rng = rand_range(2, 4)
+		if state == 0: # IDLE STATE
+			if state_rng > 3: # plays the "Peck" animation 25% of the time
+				animationState.travel("Peck")
+			else:
+				animationState.travel("Idle") # otherwise plays the idle animation
+		elif state == 1: # WANDER STATE
+			# animationState.travel("Fly")
+			fly_animation()
+		
+		# h_flip_handler()
+		wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
 		
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved
