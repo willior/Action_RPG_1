@@ -1,9 +1,8 @@
 extends Node
 
+var custom_variables = {}
 var dialogOpen = false
-
 var _attributes = null
-
 var current_scene = null
 
 func _ready():
