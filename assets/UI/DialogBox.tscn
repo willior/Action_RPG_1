@@ -64,6 +64,6 @@ position = Vector2( 280, 42 )
 texture = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="DialogBox"]
-wait_time = 0.3
+wait_time = 0.08
 autostart = true
 [connection signal="timeout" from="DialogBox/Timer" to="DialogBox" method="_on_Timer_timeout"]
