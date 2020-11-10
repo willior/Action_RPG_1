@@ -9,13 +9,8 @@ var waiting_for_input = false
 export(String, FILE, "*.json") var extenal_file = ''
 var dialog_script = [
 	{
-		'fade-in': 2
-	},
-	{
-		'background': "res://addons/dialogs/Images/background/placeholder-2.png"
-	},
-	{
-		'text': 'Welcome to the dialog node! You can pick options'
+		'text': 'Welcome to the dialog node! You can pick options',
+		'name': 'Name'
 	},
 	{
 		'question': 'Choose your favourite color',

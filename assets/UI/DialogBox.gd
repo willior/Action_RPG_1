@@ -1,5 +1,7 @@
 extends Control
 
+export(String, FILE, "*.json") var extenal_file = ''
+
 var dialog = [
 	'Hello.',
 	'This is the second line of dialog. Number two.',
@@ -7,14 +9,14 @@ var dialog = [
 ]
 
 var dialog_index = 0
-var speakerName = "DefaultName"
+var speakerName = ""
 var next_icon_modulator
 
 onready var label = $RichTextLabel
 
 func _ready():
 	for x in range(0, dialog.size()):
-		dialog[x] = str(speakerName + ": " + dialog[x])
+		dialog[x] = str(speakerName + dialog[x])
 	label.set_bbcode(dialog[dialog_index])
 	label.set_visible_characters(speakerName.length())
 	label.set_process_input(true)
@@ -40,13 +42,20 @@ func load_dialog():
 				dialog_index += 1
 				# setting the dialog
 				label.set_bbcode(dialog[dialog_index])
-				label.set_visible_characters(speakerName.length() + 2)
+				label.set_visible_characters(speakerName.length())
 				$TimerText.start()
 				$Sprite.hide()
 		# if the amount of visible characters is less than the total amount of characters:
 		else:
 			# displays all the characters in the current dialog_index
 			label.set_visible_characters(label.get_total_character_count())
+			
+func event_handler(event):
+	match event:
+		{'text'}:
+			pass
+		{'question', ..}:
+			pass
 
 func _on_TimerNext_timeout():
 	if $Sprite.position.x == 283:
