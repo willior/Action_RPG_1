@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 var BatSpawner = load("res://assets/Spawners/BatSpawner.tscn")
@@ -130,9 +130,9 @@ func _physics_process(delta):
 	
 func examine():
 	var dialogBox = DialogBox.instance()
-	dialogBox.dialog = [
-		"Bats are mammals of the Chiroptera order.",
-		"They are the only mammals capable of true and sustained flight."
+	dialogBox.dialog_script = [
+		{'text': "Bats are mammals of the Chiroptera order."},
+		{'text': "They are the only mammals capable of true and sustained flight."}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined:

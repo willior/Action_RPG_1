@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
 var interactable = true
 var talkable = false
@@ -25,32 +25,32 @@ func examine():
 	var dialogBox = DialogBox.instance()
 	match index:
 		0:
-			dialogBox.dialog = [
-			"It's your desk.",
-			"There's a library lamp sitting on top of it."
+			dialogBox.dialog_script = [
+				{'text': "It's your desk."},
+				{'text': "There's a library lamp sitting on top of it."}
 			]
 			index = 1
 		1:
 			if PlayerLog.home_lightswitch_bedroom_on:
-				dialogBox.dialog = [
-				"The lamp is off."
+				dialogBox.dialog_script = [
+					{'text': "The lamp is off."}
 				]
 			else:
-				dialogBox.dialog = [
-				"It's too dark to see anything else."
+				dialogBox.dialog_script = [
+					{'text': "It's too dark to see anything else."}
 				]
 			index = 0
 			if !examined: examined = true
 			if !examined_while_off: examined_while_off = true
 		2:
-			dialogBox.dialog = [
-			"There's nothing on the desk.",
-			"Tidy and organized, as usual."
+			dialogBox.dialog_script = [
+				{'text': "There's nothing on the desk."},
+				{'text': "Tidy and organized, as usual."}
 			]
 			index = 3
 		3:
-			dialogBox.dialog = [
-			"The warm glow of the lamp relaxes you."
+			dialogBox.dialog_script = [
+				{'text': "The warm glow of the lamp relaxes you."}
 			]
 			index = 2
 			if !examined: examined = true
@@ -59,8 +59,8 @@ func examine():
 			if !PlayerLog.home_desk_examined:
 				PlayerLog.home_desk_examined = true
 		4:
-			dialogBox.dialog = [
-			"Please try and remember to switch off the lights before leaving the house."
+			dialogBox.dialog_script = [
+				{'text': "Please try and remember to switch off the lights before leaving the house."}
 			]
 			index = 2
 			

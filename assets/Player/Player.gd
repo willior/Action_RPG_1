@@ -3,7 +3,7 @@ extends KinematicBody2D
 const Notice = preload("res://assets/UI/Notice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
 var inventory_resource = load("res://assets/Player/Inventory.gd")
 var inventory = inventory_resource.new()
@@ -146,9 +146,7 @@ func move_state(delta):
 	if Input.is_action_just_pressed("examine"): # F
 		if !examining && talkTimer.is_stopped():
 			var dialogBox = DialogBox.instance()
-			dialogBox.dialog = [
-			"You find nothing of interest."
-			]
+			dialogBox.dialog_script = [{'text': "You find nothing of interest."}]
 			get_node("/root/World/GUI").add_child(dialogBox)
 			talkTimer.start()
 		elif examining && talkTimer.is_stopped():

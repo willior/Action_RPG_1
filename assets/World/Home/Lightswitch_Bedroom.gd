@@ -16,7 +16,7 @@ extends Sprite
 # notice for both switches. seeing both 'ON' and 'OFF' dialog for either
 # switch will turn off the examine permanently notice for both.
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
 var interactable = true
 var talkable = false
@@ -48,8 +48,8 @@ func examine():
 	var dialogBox = DialogBox.instance()
 	match index:
 		0: # default dialog before the player turns the light on
-			dialogBox.dialog = [
-			"A switch of some kind."
+			dialogBox.dialog_script = [
+				{'text': "A switch of some kind."}
 			]
 			if !examined:
 				PlayerLog.set_examined("home_lightswitch", true)
@@ -59,21 +59,21 @@ func examine():
 			# if the light is on, next dialog instanced index 2
 			if $Light2D.visible:
 				index = 2
-				dialogBox.dialog = [
-					"A lightswitch.",
-					"It's in the 'ON' position."
+				dialogBox.dialog_script = [
+					{'text': "A lightswitch."},
+					{'text': "It's in the 'ON' position."}
 				]
 			# if the light is off, next dialog instanced index 3
 			elif !$Light2D.visible:
 				index = 3
-				dialogBox.dialog = [
-					"A lightswitch.",
-					"It's in the 'OFF' position."
+				dialogBox.dialog_script = [
+					{'text': "A lightswitch."},
+					{'text': "It's in the 'OFF' position."}
 				]
 		
 		2: # dialog for 2nd examination while on
-			dialogBox.dialog = [
-			"Remember to switch the lights off before you leave."
+			dialogBox.dialog_script = [
+				{'text': "Remember to switch the lights off before you leave."}
 			]
 			index = 1
 			if !examined:
@@ -83,8 +83,8 @@ func examine():
 				get_parent().lightswitch_examined_while_on = true
 		
 		3: # dialog for 2nd examination while off
-			dialogBox.dialog = [
-			"Thank you for saving energy."
+			dialogBox.dialog_script = [
+				{'text': "Thank you for saving energy."}
 			]
 			index = 1
 			if !examined:
@@ -94,8 +94,8 @@ func examine():
 				get_parent().lightswitch_examined_while_off = true
 
 		4:
-			dialogBox.dialog = [
-			"Please try and remember to switch off the lights before leaving the house."
+			dialogBox.dialog_script = [
+				{'text': "Please try and remember to switch off the lights before leaving the house."}
 			]
 			index = 1
 	

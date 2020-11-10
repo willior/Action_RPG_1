@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
 onready var player = get_node("/root/World/YSort/Player")
 
@@ -18,12 +18,12 @@ func examine():
 	match index:
 		0:
 			index += 1
-			dialogBox.dialog = [
-			"It's your stove."
+			dialogBox.dialog_script = [
+				{'text': "It's your stove."}
 			]
 		1:
-			dialogBox.dialog = [
-			"And oven!"
+			dialogBox.dialog_script = [
+				{'text': "And oven!"}
 			]
 			index = 0
 			if !PlayerLog.home_stove_examined:

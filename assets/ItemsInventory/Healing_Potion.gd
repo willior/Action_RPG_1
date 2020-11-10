@@ -1,6 +1,6 @@
 extends Node2D
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 
 var interactable = true
@@ -9,9 +9,9 @@ var examined = false
 	
 func examine():
 	var dialogBox = DialogBox.instance()
-	dialogBox.dialog = [
-		"A Potion of Healing.",
-		"Or Healing Potion, for short."
+	dialogBox.dialog_script = [
+		{'text': "A Potion of Healing."},
+		{'text': "Or Healing Potion, for short."}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true

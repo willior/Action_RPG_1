@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
 var interactable = false
 var talkable = false
@@ -16,13 +16,13 @@ func examine():
 	match index:
 		0:
 			index += 1
-			dialogBox.dialog = [
-			"It's your old office chair.",
-			"Not the most comfortable, but it's an antique."
+			dialogBox.dialog_script = [
+				{'text': "It's your old office chair."},
+				{'text': "Not the most comfortable, but it's an antique."}
 			]
 		1:
-			dialogBox.dialog = [
-			"This is where you'd sit if you wanted to get any work done."
+			dialogBox.dialog_script = [
+				{'text': "This is where you'd sit if you wanted to get any work done."}
 			]
 			index = 0
 			if !PlayerLog.home_chair_examined:

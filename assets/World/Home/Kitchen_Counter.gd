@@ -1,13 +1,9 @@
 extends StaticBody2D
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
-
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 onready var player = get_node("/root/World/YSort/Player")
 onready var sinkSprite = $Sprite/AnimatedSprite
 onready var sinkAnim = $AnimationTree.get("parameters/playback")
-onready var sinkAudio = $AudioStreamPlayer
-
-var runAudio = preload("res://assets/Audio/World/Home/Home_Sink_Audio.wav")
 
 var interactable = true
 var talkable = false
@@ -27,14 +23,14 @@ func examine():
 	var dialogBox = DialogBox.instance()
 	match index:
 		0:
-			dialogBox.dialog = [
-			"It's your sink."
+			dialogBox.dialog_script = [
+				{'text': "It's your sink."}
 			]
 			if !examined: examined = true
 			if !examined_while_off: examined_while_off = true
 		1:
-			dialogBox.dialog = [
-			"The faucet is working properly."
+			dialogBox.dialog_script = [
+				{'text': "The faucet is working properly."}
 			]
 			if !examined: examined = true
 			if !examined_while_on: examined_while_on = true

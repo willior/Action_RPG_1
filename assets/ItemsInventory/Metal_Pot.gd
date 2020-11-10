@@ -1,6 +1,6 @@
 extends Node2D
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 
 var interactable = true
@@ -13,8 +13,8 @@ func _ready():
 	
 func examine():
 	var dialogBox = DialogBox.instance()
-	dialogBox.dialog = [
-		"A metal pot."
+	dialogBox.dialog_script = [
+		{'text': "A metal pot, for cooking."}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true
@@ -27,12 +27,9 @@ func interact():
 	PlayerLog.metal_pot_collected = true
 	
 	var dialogBox = DialogBox.instance()
-	dialogBox.dialog = [
-		"I am a metal pot. I don't really have much to talk about these days.",
-		"I'm also useless, because the game is unfinished.",
-		"What a terrible fate.",
-		"...",
-		"Press R to change items. Press G to use an item."
+	dialogBox.dialog_script = [
+		{'text': "Got Metal Pot!"}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
+	
 	queue_free()

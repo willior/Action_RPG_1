@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
@@ -29,7 +29,9 @@
 [ext_resource path="res://assets/Audio/Thunder_1.wav" type="AudioStream" id=27]
 [ext_resource path="res://assets/Maps/Home.gd" type="Script" id=28]
 [ext_resource path="res://assets/World/Home/Lightswitch_Main.gd" type="Script" id=29]
+[ext_resource path="res://assets/ItemDrops/HeartPickup.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=31]
+[ext_resource path="res://assets/ItemDrops/PennyPickup.tscn" type="PackedScene" id=32]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
@@ -158,15 +160,15 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 7
+frame = 6
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 7
+frame = 6
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 7
+frame = 6
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
@@ -241,6 +243,12 @@ position = Vector2( 488, 144 )
 
 [node name="Metal_Pot" parent="YSort/Items" instance=ExtResource( 31 )]
 position = Vector2( 45, 87 )
+
+[node name="PennyPickup" parent="YSort/Items" instance=ExtResource( 32 )]
+position = Vector2( 136, 80 )
+
+[node name="HeartPickup" parent="YSort/Items" instance=ExtResource( 30 )]
+position = Vector2( 176, 64 )
 
 [node name="Doodads" type="YSort" parent="YSort"]
 

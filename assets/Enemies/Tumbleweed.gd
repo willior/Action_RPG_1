@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
 export var ACCELERATION = 1600
 export var MAX_SPEED = 96
@@ -86,9 +86,9 @@ func _physics_process(delta):
 
 func examine():
 	var dialogBox = DialogBox.instance()
-	dialogBox.dialog = [
-		"Unsatisfied with sedentary life, the tumbleweed breaks away form its roots and rides the wind.",
-		"An example of functional death, its structure degrades gradually allowing seeds to be sewn."
+	dialogBox.dialog_script = [
+		{'text': "Unsatisfied with sedentary life, the tumbleweed breaks away form its roots and rides the wind."},
+		{'text': "Its structure degrades gradually, allowing seeds to be sewn. An example of functional death."}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined:

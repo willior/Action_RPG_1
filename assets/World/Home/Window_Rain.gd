@@ -1,7 +1,6 @@
 extends AnimatedSprite
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
-
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 onready var player = get_node("/root/World/YSort/Player")
 
 var interactable = false
@@ -22,19 +21,19 @@ func examine():
 	var dialogBox = DialogBox.instance()
 	match index:
 		0:
-			dialogBox.dialog = [
-			"It's really coming down."
+			dialogBox.dialog_script = [
+				{'text': "It's really coming down."}
 			]
 			PlayerLog.set_dialog_index("home_window", 1)
 		1:
-			dialogBox.dialog = [
-			"Doesn't look like it's going to stop any time soon."
+			dialogBox.dialog_script = [
+				{'text': "Doesn't look like it's going to stop any time soon."}
 			]
 			PlayerLog.set_dialog_index("home_window", 2)
 		2:
-			dialogBox.dialog = [
-			"The rain isn't usually this tumultuous.",
-			"Strange."
+			dialogBox.dialog_script = [
+				{'text': "The rain isn't usually this tumultuous."},
+				{'text': "Strange."}
 			]
 			PlayerLog.set_dialog_index("home_window", 0)
 

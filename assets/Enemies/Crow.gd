@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://assets/Effects/Crow_DeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
@@ -128,9 +128,9 @@ func h_flip_handler():
 	
 func examine():
 	var dialogBox = DialogBox.instance()
-	dialogBox.dialog = [
-		"A common crow.",
-		"Except that it's over-sized. And more aggressive than usual, to say the least."
+	dialogBox.dialog_script = [
+		{'text': "A common crow."},
+		{'text': "Except that it's grossly over-sized."}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined:
