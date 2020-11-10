@@ -19,7 +19,7 @@ func _ready():
 	label.set_visible_characters(speakerName.length())
 	label.set_process_input(true)
 	# get_node("/root/World/YSort/Player").talking = true
-	get_tree().paused = true
+	# get_tree().paused = true
 	Global.dialogOpen = true
 	
 func _input(_event):
@@ -41,6 +41,7 @@ func _input(_event):
 				# setting the dialog
 				label.set_bbcode(dialog[dialog_index])
 				label.set_visible_characters(speakerName.length())
+				$Timer.start()
 		# if the amount of visible characters is less than the total amount of characters:
 		else:
 			# displays all the characters in the current dialog_index
@@ -52,3 +53,4 @@ func _on_Timer_timeout():
 		label.set_visible_characters(label.get_visible_characters()+1)
 	else:
 		$AudioStreamPlayer.stop()
+		$Timer.stop()

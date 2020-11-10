@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/UI/DialogBox.png" type="Texture" id=1]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/UI/DialogNext.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/DialogBox.gd" type="Script" id=4]
+[ext_resource path="res://assets/Audio/dialogue.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
@@ -58,13 +59,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="DialogBox"]
-
 [node name="Sprite" type="Sprite" parent="DialogBox"]
+visible = false
 position = Vector2( 280, 42 )
 texture = ExtResource( 3 )
 
-[node name="Timer" type="Timer" parent="DialogBox"]
+[node name="TimerNext" type="Timer" parent="DialogBox"]
 wait_time = 0.08
 autostart = true
-[connection signal="timeout" from="DialogBox/Timer" to="DialogBox" method="_on_Timer_timeout"]
+
+[node name="TimerText" type="Timer" parent="DialogBox"]
+wait_time = 0.05
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogBox"]
+stream = ExtResource( 5 )
+[connection signal="timeout" from="DialogBox/TimerNext" to="DialogBox" method="_on_TimerNext_timeout"]
+[connection signal="timeout" from="DialogBox/TimerText" to="DialogBox" method="_on_TimerText_timeout"]
