@@ -1,6 +1,6 @@
 extends Node
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
 func item_handler(item_used):
 	# 0 Consumable
@@ -23,15 +23,15 @@ func item_handler(item_used):
 					
 func use_metal_pot():
 	var dialogBox = DialogBox.instance()
-	if PlayerLog.metal_pot_use_index == 0:
-		dialogBox.dialog = [
-			"I guess I'm not so useless after all. I play a sound effect."
+	if PlayerLog.metal_pot_use_index == 2:
+		dialogBox.dialog_script = [
+			{'text': "I guess I'm not so useless after all. I play a sound effect."}
 		]
 		get_node("/root/World/GUI").add_child(dialogBox)
 		
-	if PlayerLog.metal_pot_use_index == 4:
-		dialogBox.dialog = [
-			"Pretty neat!!"
+	if PlayerLog.metal_pot_use_index == 6:
+		dialogBox.dialog_script = [
+			{'text': "Pretty neat!!"}
 		]
 		get_node("/root/World/GUI").add_child(dialogBox)
 		

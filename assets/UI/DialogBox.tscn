@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/UI/DialogBox.png" type="Texture" id=1]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/UI/DialogNext.png" type="Texture" id=3]
-[ext_resource path="res://assets/UI/DialogBox_2.gd" type="Script" id=4]
+[ext_resource path="res://assets/UI/DialogBox.gd" type="Script" id=4]
 [ext_resource path="res://assets/Audio/dialogue.wav" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
