@@ -12,28 +12,21 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 2 )
 
-[node name="Control" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="DialogBox" type="Control" parent="."]
+[node name="DialogBox" type="Control"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -144.0
+margin_left = -136.0
 margin_top = -60.0
-margin_right = 144.0
+margin_right = 136.0
 margin_bottom = -12.0
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="DialogBox"]
+[node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
@@ -43,7 +36,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="DialogBox"]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -58,7 +51,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameLabel" type="RichTextLabel" parent="DialogBox"]
+[node name="NameLabel" type="RichTextLabel" parent="."]
 margin_left = 8.0
 margin_top = -15.0
 margin_right = 281.0
@@ -69,20 +62,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="DialogBox"]
+[node name="Sprite" type="Sprite" parent="."]
 visible = false
 position = Vector2( 280, 42 )
 texture = ExtResource( 3 )
 
-[node name="TimerNext" type="Timer" parent="DialogBox"]
+[node name="TimerNext" type="Timer" parent="."]
 wait_time = 0.08
 autostart = true
 
-[node name="TimerText" type="Timer" parent="DialogBox"]
+[node name="TimerText" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogBox"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-[connection signal="timeout" from="DialogBox/TimerNext" to="DialogBox" method="_on_TimerNext_timeout"]
-[connection signal="timeout" from="DialogBox/TimerText" to="DialogBox" method="_on_TimerText_timeout"]
+[connection signal="timeout" from="TimerNext" to="." method="_on_TimerNext_timeout"]
+[connection signal="timeout" from="TimerText" to="." method="_on_TimerText_timeout"]

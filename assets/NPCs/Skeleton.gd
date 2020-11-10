@@ -1,6 +1,7 @@
 extends Node2D
 
 const DialogBox = preload("res://assets/UI/Dialog.tscn")
+const DialogBox2 = preload("res://assets/UI/DialogBox.tscn")
 
 onready var sprite = $KinematicBody2D/Sprite
 
@@ -46,17 +47,18 @@ func talk():
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
 func examine():
-	var dialogBox = DialogBox.instance()
+	var dialogBox = DialogBox2.instance()
+	print(dialogBox.dialog_script)
 	match examine_index:
 		0:
-			dialogBox.dialog = [
-				"A friendly looking skeleton.",
-				"Actually, you can't tell the difference between rude and friendly skeletons, so you can't be sure."
+			dialogBox.dialog_script = [
+				{
+					'text': "A friendly looking skeleton.",
+				},
+				{
+					'text': "Actually, you can't tell the difference between rude and friendly skeletons, so you can't be sure."
+				}
 			]
-		1:
-			dialogBox.dialog = [
-				"A friendly looking skeleton.",
-				"But it turns out he's pretty rude."
-			]
+
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true

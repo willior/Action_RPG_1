@@ -61,6 +61,8 @@ func _ready():
 	if extenal_file != '':
 		dialog_script = file(extenal_file)
 	event_handler(dialog_script[dialog_index])
+	get_tree().paused = true
+	Global.dialogOpen = true
 	
 func _input(_event):
 	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
@@ -87,9 +89,9 @@ func update_text(text):
 func load_dialog():
 	if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog_script.size()-1):
 			# get_node("/root/World/YSort/Player").talking = false
-#			get_tree().paused = false
-#			get_node("/root/World/YSort/Player").noticeDisplay = false
-#			get_node("/root/World/YSort/Player").talkNoticeDisplay = false
+			get_tree().paused = false
+			get_node("/root/World/YSort/Player").noticeDisplay = false
+			get_node("/root/World/YSort/Player").talkNoticeDisplay = false
 			Global.dialogOpen = false
 			queue_free()
 	 # if the amount of visible characters is above the total amount of characters in the current index:
