@@ -64,7 +64,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
-position = Vector2( 280, 42 )
+position = Vector2( 263, 41 )
 texture = ExtResource( 3 )
 
 [node name="TimerNext" type="Timer" parent="."]

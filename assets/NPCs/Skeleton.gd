@@ -1,7 +1,6 @@
 extends Node2D
 
-const DialogBox = preload("res://assets/UI/Dialog.tscn")
-const DialogBox2 = preload("res://assets/UI/DialogBox.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
 onready var sprite = $KinematicBody2D/Sprite
 
@@ -11,7 +10,7 @@ var examined = false
 var dialog_index = 0
 var examine_index = 0
 
-var speaker = "Skeleton: "
+var speaker = "Skeleton"
 
 func ready():
 	sprite.frame = 1
@@ -20,34 +19,47 @@ func talk():
 	var dialogBox = DialogBox.instance()
 	match dialog_index:
 		0:
-			dialogBox.dialog = [
-				"Hello.",
-				"As you can see, I am a skeleton.",
-				"Unless, of course, you can't see.",
-				"In which case...",
-				"I'm still a skeleton.",
-				"Hahahahahahaha!!"
+			dialogBox.dialog_script = [
+				{'text': "Hello.",
+				'name': speaker},
+				{'text': "As you can see, I am a skeleton.",
+				'name': speaker},
+				{'text': "Unless, of course, you can't see.",
+				'name': speaker},
+				{'text': "In which case...",
+				'name': speaker},
+				{'text': "I'm still a skeleton.",
+				'name': speaker},
+				{'text': "Hahahahahahaha!!",
+				'name': speaker}
 			]
 			dialog_index += 1
 		1:
-			dialogBox.dialog = [
-				"Oh. You again.",
-				"Like you, I do not know why I exist.",
-				"...",
-				"I suppose that was a bit rude of me to assume.",
-				"Don't take it personally!",
-				"Hahahahahahaha!!"
+			dialogBox.dialog_script = [
+				{'text': "Oh. You again.",
+				'name': speaker},
+				{'text': "Like you, I do not know why I exist.",
+				'name': speaker},
+				{'text': "...",
+				'name': speaker},
+				{'text': "I suppose that was a bit rude of me to assume.",
+				'name': speaker},
+				{'text': "Don't take it personally!",
+				'name': speaker},
+				{'text': "Hahahahahahaha!!",
+				'name': speaker}
 			]
 			dialog_index = 0
 			examine_index = 1
 	
-	dialogBox.speakerName = str(speaker)
-	for x in range(0, dialogBox.dialog.size()):
-		dialogBox.dialog[x] = str(speaker + dialogBox.dialog[x])
+#	dialogBox.speakerName = str(speaker)
+#	for x in range(0, dialogBox.dialog.size()):
+#		dialogBox.dialog[x] = str(speaker + dialogBox.dialog[x])
+
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
 func examine():
-	var dialogBox = DialogBox2.instance()
+	var dialogBox = DialogBox.instance()
 	print(dialogBox.dialog_script)
 	match examine_index:
 		0:
@@ -57,6 +69,15 @@ func examine():
 				},
 				{
 					'text': "Actually, you can't tell the difference between rude and friendly skeletons, so you can't be sure."
+				}
+			]
+		1:
+			dialogBox.dialog_script = [
+				{
+					'text': "A friendly looking skeleton.",
+				},
+				{
+					'text': "But it turns out he's actually quite rude."
 				}
 			]
 

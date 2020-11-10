@@ -10,16 +10,8 @@ onready var label = $RichTextLabel
 
 var dialog_script = [
 	{
-		'name': 'Narrator',
-		'text': 'This is the first line of text...',
-	},
-	{
-		'name': 'Narrator',
-		'text': 'And this is the second.'
-	},
-	{
-		'name': 'Person',
-		'text': 'Person here with the third line!'
+		'name': 'default',
+		'text': 'default text',
 	}
 ]
 
@@ -154,9 +146,9 @@ func event_handler(event):
 			pass
 
 func _on_TimerNext_timeout():
-	if $Sprite.position.x == 283:
+	if $Sprite.position.x == 266:
 		next_icon_modulator = -1
-	elif $Sprite.position.x == 280:
+	elif $Sprite.position.x == 263:
 		next_icon_modulator = 1
 	$Sprite.position.x += next_icon_modulator
 
