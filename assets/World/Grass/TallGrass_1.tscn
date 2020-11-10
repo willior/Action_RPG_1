@@ -6,73 +6,73 @@
 [ext_resource path="res://assets/World/Grass/TallGrass_1_Uncut.png" type="Texture" id=4]
 [ext_resource path="res://assets/World/Grass/TallGrass_1_CutComplete.png" type="Texture" id=5]
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 4 )
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 4 )
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 4 )
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
 region = Rect2( 64, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 4 )
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 4 )
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=1]
+[sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 128, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 4 )
 region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=14]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": true,
-"name": "Uncut",
+"name": "Cut",
 "speed": 6.0
 }, {
-"frames": [ SubResource( 1 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": false,
 "name": "CutComplete",
 "speed": 0.0
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
-"name": "Cut",
+"name": "Uncut",
 "speed": 6.0
 } ]
 
@@ -86,7 +86,7 @@ script = ExtResource( 3 )
 position = Vector2( -16, -16 )
 frames = SubResource( 14 )
 animation = "Uncut"
-frame = 2
+frame = 5
 playing = true
 centered = false
 

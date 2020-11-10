@@ -1790,7 +1790,7 @@ nodes/BlendSpace2D/position = Vector2( -70, 140 )
 nodes/TimeScale/node = SubResource( 77 )
 nodes/TimeScale/position = Vector2( 160, 140 )
 nodes/output/position = Vector2( 400, 150 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
+node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=79]
 animation = "AttackShadeLeft"
@@ -1907,7 +1907,7 @@ radius = 5.0
 [sub_resource type="CapsuleShape2D" id=116]
 height = 5.43185
 
-[sub_resource type="CapsuleShape2D" id=122]
+[sub_resource type="CapsuleShape2D" id=117]
 radius = 180.0
 height = 260.0
 
@@ -2113,12 +2113,13 @@ position = Vector2( -0.488346, -7.73805 )
 shape = SubResource( 116 )
 
 [node name="SpawnBox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 1536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnBox"]
 rotation = 1.5708
-shape = SubResource( 122 )
+shape = SubResource( 117 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
@@ -2140,10 +2141,10 @@ one_shot = true
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
 
