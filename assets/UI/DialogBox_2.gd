@@ -11,13 +11,16 @@ onready var label = $RichTextLabel
 var dialog_script = [
 	{
 		'name': 'Narrator',
-		'text': 'This is the first line of text........................................',
+		'text': 'This is the first line of text...',
 	},
 	{
 		'name': 'Narrator',
 		'text': 'And this is the second.'
+	},
+	{
+		'name': 'Person',
+		'text': 'Person here with the third line!'
 	}
-	
 ]
 
 func file(file_path):
@@ -57,8 +60,7 @@ func parse_text(text):
 func _ready():
 	if extenal_file != '':
 		dialog_script = file(extenal_file)
-	load_dialog()
-	label.set_process_input(true)
+	event_handler(dialog_script[dialog_index])
 	
 func _input(_event):
 	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
@@ -83,13 +85,38 @@ func update_text(text):
 	return true
 		
 func load_dialog():
-	if dialog_index < dialog_script.size():
-		event_handler(dialog_script[dialog_index])
-		$TimerText.start()
-		$Sprite.hide()
+	if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog_script.size()-1):
+			# get_node("/root/World/YSort/Player").talking = false
+#			get_tree().paused = false
+#			get_node("/root/World/YSort/Player").noticeDisplay = false
+#			get_node("/root/World/YSort/Player").talkNoticeDisplay = false
+			Global.dialogOpen = false
+			queue_free()
+	 # if the amount of visible characters is above the total amount of characters in the current index:
+	elif label.get_visible_characters() > label.get_total_character_count():
+		# if the number of dialog_indexes in the array is less than the total amount in the array
+		if dialog_index < dialog_script.size()-1:
+			# advancing the dialog_index
+			dialog_index += 1
+			# setting the dialog
+			event_handler(dialog_script[dialog_index])
+			# label.set_visible_characters(speakerName.length())
+			$TimerText.start()
+			$Sprite.hide()
+			print('advancing to next dialog index')
+	# if the amount of visible characters is less than the total amount of characters:
 	else:
-		queue_free()
-	dialog_index += 1
+		# displays all the characters in the current dialog_index
+		label.set_visible_characters(label.get_total_character_count())
+		print('displaying all characters')
+
+#	if dialog_index < dialog_script.size():
+#		event_handler(dialog_script[dialog_index])
+#		$TimerText.start()
+#		$Sprite.hide()
+#	else:
+#		queue_free()
+#	dialog_index += 1
 	
 #func load_dialog_orig():
 #	# if at the end of the dialog
@@ -135,7 +162,9 @@ func _on_TimerText_timeout():
 	if label.get_visible_characters() <= label.get_total_character_count():
 		$AudioStreamPlayer.play()
 		label.set_visible_characters(label.get_visible_characters()+1)
+		print('text timout')
 	else:
 		$AudioStreamPlayer.stop()
 		$TimerText.stop()
 		$Sprite.show()
+		print('text stopping')

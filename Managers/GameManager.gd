@@ -21,7 +21,6 @@ var player
 # warning-ignore:unused_argument
 func _process(delta):
 	if not player && !on_title_screen:
-		print('init player')
 		initialize_player()
 		return
 		
