@@ -3,8 +3,6 @@ extends Control
 var health setget set_health
 var max_health setget set_max_health
 
-onready var heartUIFull = $HeartUIFull
-onready var heartUIEmpty = $HeartUIEmpty
 onready var healthBar = $HealthTexture
 	
 func set_health(value):

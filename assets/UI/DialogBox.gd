@@ -73,7 +73,6 @@ func update_name(event):
 		# $CloseUp.visible = false
 
 func update_text(text):
-	# Updating the text and starting the animation from 0
 	label.bbcode_text = parse_text(text)
 	label.set_visible_characters(0)
 	return true
@@ -104,39 +103,6 @@ func load_dialog():
 		label.set_visible_characters(label.get_total_character_count())
 		print('displaying all characters')
 
-#	if dialog_index < dialog_script.size():
-#		event_handler(dialog_script[dialog_index])
-#		$TimerText.start()
-#		$Sprite.hide()
-#	else:
-#		queue_free()
-#	dialog_index += 1
-	
-#func load_dialog_orig():
-#	# if at the end of the dialog
-#		if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog.size()-1):
-#			# get_node("/root/World/YSort/Player").talking = false
-#			get_tree().paused = false
-#			get_node("/root/World/YSort/Player").noticeDisplay = false
-#			get_node("/root/World/YSort/Player").talkNoticeDisplay = false
-#			Global.dialogOpen = false
-#			queue_free()
-#		# if the amount of visible characters is above the total amount of characters in the current index:
-#		elif label.get_visible_characters() > label.get_total_character_count():
-#			# if the number of dialog_indexes in the array is less than the total amount in the array
-#			if dialog_index < dialog.size()-1:
-#				# advancing the dialog_index
-#				dialog_index += 1
-#				# setting the dialog
-#				label.set_bbcode(dialog[dialog_index])
-#				label.set_visible_characters(speakerName.length())
-#				$TimerText.start()
-#				$Sprite.hide()
-#		# if the amount of visible characters is less than the total amount of characters:
-#		else:
-#			# displays all the characters in the current dialog_index
-#			label.set_visible_characters(label.get_total_character_count())
-			
 func event_handler(event):
 	match event:
 		{'text'}, {'name', 'text'}:
