@@ -17,6 +17,9 @@ signal player_reinitialized
 var existing_inventory
 
 var player
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 # warning-ignore:unused_argument
 func _process(delta):
