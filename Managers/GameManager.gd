@@ -19,16 +19,19 @@ var existing_inventory
 var player
 
 func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	print('ready')
+#	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 # warning-ignore:unused_argument
 func _process(delta):
 	if not player && !on_title_screen:
+		print('initializing player')
 		initialize_player()
 		return
 		
 # warning-ignore:unused_argument
 func reinitialize_player(inventory):
+	print('reinit')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	if not player:
 		return

@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/World/Doodads/Rock_VerySmall_sheet_ShadeRight.png" type="Texture" id=2]
 [ext_resource path="res://assets/World/Doodads/Rock_VerySmall_sheet_ShadeLeft.png" type="Texture" id=3]
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=1]
 0/name = "Rock_VerySmall_sheet_ShadeLeft.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -48,6 +48,6 @@
 1/z_index = 0
 
 [node name="Rock_VerySmall_sheet" type="TileMap"]
-tile_set = SubResource( 2 )
+tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1

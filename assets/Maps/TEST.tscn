@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=1]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_pink_1_sheet.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://assets/World/Grass/Leaf_bright_green_1_sheet.png" type="Texture" id=8]
 [ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/Weather/Rain.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/World/Doodads/Rock_Large_2.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_pink_1_sheet.png" type="Texture" id=12]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_orange_1_sheet.png" type="Texture" id=13]
 [ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=14]
@@ -819,6 +820,9 @@ position = Vector2( -16, 40 )
 remote_path = NodePath("../../../Camera2D")
 
 [node name="Doodads" type="YSort" parent="YSort"]
+
+[node name="Rock_Large_2" parent="YSort/Doodads" instance=ExtResource( 11 )]
+position = Vector2( -64, 48 )
 
 [node name="Plants" type="YSort" parent="YSort"]
 
