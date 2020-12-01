@@ -160,11 +160,24 @@ func move_state(delta):
 		interactHitbox.disabled = false
 
 	if Input.is_action_just_pressed("item"): # G
-		if using_item:
-			print('item success')
-		
-		inventory.use_item()
-
+		var item_used = inventory._items[inventory.current_selected_item]
+		match item_used.item_reference.type:
+			0: # CONSUMABLE
+				inventory.use_item()
+			1: # TOOL
+				pass
+			2: # QUEST
+				if talkTimer.is_stopped():
+					if !using_item:
+						var dialogBox = DialogBox.instance()
+						dialogBox.dialog_script = [{'text': "Can't use that here."}]
+						get_node("/root/World/GUI").add_child(dialogBox)
+						talkTimer.start()
+						return
+					else:
+						interactObject.use_item_on_object()
+						talkTimer.start()
+				
 	if Input.is_action_just_pressed("attack"):
 		if (!talking && !interacting) && stats.stamina > 0:
 			state = ATTACK1
@@ -582,7 +595,7 @@ func _on_InteractHitbox_area_entered(area):
 		var item_to_use = inventory._items[inventory.current_selected_item]
 		if item_to_use.item_reference.name == interactObject.item_needed:
 			using_item = true
-			print('yooo')
+			print('using_item = true')
 
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false

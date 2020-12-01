@@ -109,7 +109,8 @@ func event_handler(event):
 			update_name(event)
 			update_text(event['text'])
 		{'question', ..}:
-			pass
+			update_name(event)
+			update_text(event['question'])
 
 func _on_TimerNext_timeout():
 	if $Sprite.position.x == 266:

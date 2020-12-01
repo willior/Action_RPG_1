@@ -57,4 +57,15 @@ func interact():
 		if !examined_while_off: examined = false
 
 func use_item_on_object():
-	print('using item on sink')
+	var dialogBox = DialogBox.instance()
+	if !sink_on:
+		dialogBox.dialog_script = [
+				{'text': "You hold the Metal Pot under the faucet."},
+				{'text': "Nothing happens."}
+			]
+	else:
+		dialogBox.dialog_script = [
+				{'text': "You hold the Metal Pot under the faucet."},
+				{'text': "It fills with water!"}
+			]
+	get_node("/root/World/GUI").add_child(dialogBox)
