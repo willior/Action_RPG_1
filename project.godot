@@ -28,7 +28,7 @@ _global_script_class_icons={
 
 config/name="Action_RPG_1"
 config/description="unfinished action rpg by will graham-simpkins"
-run/main_scene="res://assets/Intro/TitleScreen.tscn"
+run/main_scene="res://assets/Maps/0-1_Home.tscn"
 config/icon="res://icon.png"
 config/windows_native_icon="res://game_icon.ico"
 

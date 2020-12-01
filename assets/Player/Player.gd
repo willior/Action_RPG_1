@@ -48,8 +48,9 @@ var charge_level_count = 0
 var interactObject
 var talkObject
 var examining = false
-var talking = false 
+var talking = false
 var interacting = false
+var using_item = false
 
 var noticeDisplay = false setget set_notice
 var talkNoticeDisplay = false setget set_talk_notice
@@ -157,7 +158,11 @@ func move_state(delta):
 		inventory.advance_selected_item()
 			
 	if Input.is_action_just_pressed("item"): # G
+		if !using_item:
+			pass
 		inventory.use_item()
+		
+		
 #		if inventory.DialogBox:
 #			var dialogBox = DialogBox.instance()
 #			dialogBox.dialog = [
@@ -580,7 +585,8 @@ func _on_InteractHitbox_area_entered(area):
 	if interactObject.interactable:
 		self.interactNoticeDisplay = true
 		interacting = true
-		
+	if "item_usable" in interactObject:
+		using_item = true
 
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false
@@ -589,4 +595,5 @@ func _on_InteractHitbox_area_exited(_area):
 	examining = false
 	talking = false
 	interacting = false
+	using_item = false
 	interactObject = null

@@ -8,6 +8,6 @@ script = ExtResource( 2 )
 name = "Metal_Pot"
 stackable = false
 max_stack_size = 1
-type = 1
+type = 2
 texture = ExtResource( 1 )
 healing = 0

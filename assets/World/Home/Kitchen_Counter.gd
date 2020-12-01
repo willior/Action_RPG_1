@@ -7,6 +7,7 @@ onready var sinkAnim = $AnimationTree.get("parameters/playback")
 
 var interactable = true
 var talkable = false
+var item_usable = true
 var examined = false
 var examined_while_off = false
 var examined_while_on = false
@@ -53,3 +54,6 @@ func interact():
 		index = 0
 		sink_on = false
 		if !examined_while_off: examined = false
+
+func use_item():
+	print('using item on sink')
