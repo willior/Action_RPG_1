@@ -122,7 +122,6 @@ func _on_TimerText_timeout():
 	if label.get_visible_characters() <= label.get_total_character_count():
 		$AudioStreamPlayer.play()
 		label.set_visible_characters(label.get_visible_characters()+1)
-		print('text timout')
 	else:
 		$AudioStreamPlayer.stop()
 		$TimerText.stop()
