@@ -184,7 +184,6 @@ func move_state(delta):
 		elif stats.stamina <= 0:
 			noStamina()
 		elif interacting && interactObject.interactable:
-			talkTimer.start()
 			interactObject.interact()
 			if examining:
 				self.noticeDisplay = false

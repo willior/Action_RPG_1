@@ -58,8 +58,11 @@ func _ready():
 	get_tree().paused = true
 	Global.dialogOpen = true
 	
-func _unhandled_input(_event):
-	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
+func _input(event):
+#	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
+#		get_tree().set_input_as_handled()
+#		load_dialog()
+	if event.is_action_pressed("attack") || event.is_action_pressed("examine") || event.is_action_pressed("item"):
 		get_tree().set_input_as_handled()
 		load_dialog()
 		
