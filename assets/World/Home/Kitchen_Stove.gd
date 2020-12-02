@@ -49,6 +49,7 @@ func interact():
 	if !is_on:
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Open.wav")
 		$AudioStreamPlayer.play()
+		$Light2D.visible = true
 		is_on = true
 		PlayerLog.home_stove_on = true
 		if examined && !examined_while_on: examined = false
@@ -57,6 +58,7 @@ func interact():
 	else:
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Close.wav")
 		$AudioStreamPlayer.play()
+		$Light2D.visible = false
 		is_on = false
 		PlayerLog.home_stove_on = false
 		if !examined_while_off: examined = false

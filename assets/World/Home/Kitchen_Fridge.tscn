@@ -35,7 +35,7 @@ shape = SubResource( 2 )
 visible = false
 position = Vector2( -13, 14 )
 texture = ExtResource( 4 )
-energy = 0.5
+energy = 0.7
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

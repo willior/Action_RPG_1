@@ -109,6 +109,59 @@ func _process(delta):
 		SHADE: shade_state(delta)
 		FLASH: flash_state(delta)
 		HIT: hit_state(delta)
+		
+func _input(event):
+	match state:
+		MOVE:
+			if event.is_action_pressed("attack") && !event.is_echo():
+				print('just pressed')
+				if (!talking && !interacting) && stats.stamina > 0:
+					print('state = ATTACK1')
+					state = ATTACK1
+				elif stats.stamina <= 0:
+					noStamina()
+				elif interacting && interactObject.interactable:
+					talkTimer.start()
+					interactObject.interact()
+					if examining:
+						self.noticeDisplay = false
+				elif talking && interactObject.talkable && talkTimer.is_stopped():
+					talkTimer.start()
+					interactObject.talk()
+					
+			if event.is_action_pressed("item"): # G
+				var item_used = inventory._items[inventory.current_selected_item]
+				match item_used.item_reference.type:
+					0: # CONSUMABLE
+						inventory.use_item()
+					1: # TOOL
+						pass
+					2: # QUEST
+						if talkTimer.is_stopped():
+							if !using_item:
+								talkTimer.start()
+								var dialogBox = DialogBox.instance()
+								dialogBox.dialog_script = [{'text': "Can't use that here."}]
+								get_node("/root/World/GUI").add_child(dialogBox)
+								return
+							else:
+								talkTimer.start()
+								interactObject.use_item_on_object()
+		
+		ATTACK1:
+			if event.is_action_pressed("attack") && !event.is_echo():
+				print('attack pressed during attack1')
+				if stats.stamina <= 0:
+					noStamina()
+				else:
+					print('attack2 queued')
+					attack2_queued = true
+		ATTACK2:
+			if event.is_action_pressed("attack") && !event.is_echo():
+				if stats.stamina <= 0:
+					noStamina()
+				else:
+					attack1_queued = true
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -159,39 +212,8 @@ func move_state(delta):
 		interactHitbox.disabled = true
 		interactHitbox.disabled = false
 
-	if Input.is_action_just_pressed("item"): # G
-		var item_used = inventory._items[inventory.current_selected_item]
-		match item_used.item_reference.type:
-			0: # CONSUMABLE
-				inventory.use_item()
-			1: # TOOL
-				pass
-			2: # QUEST
-				if talkTimer.is_stopped():
-					if !using_item:
-						talkTimer.start()
-						var dialogBox = DialogBox.instance()
-						dialogBox.dialog_script = [{'text': "Can't use that here."}]
-						get_node("/root/World/GUI").add_child(dialogBox)
-						return
-					else:
-						talkTimer.start()
-						interactObject.use_item_on_object()
-				
-	if Input.is_action_just_pressed("attack"):
-		if (!talking && !interacting) && stats.stamina > 0:
-			state = ATTACK1
-		elif stats.stamina <= 0:
-			noStamina()
-		elif interacting && interactObject.interactable:
-			interactObject.interact()
-			if examining:
-				self.noticeDisplay = false
-		elif talking && interactObject.talkable && talkTimer.is_stopped():
-			talkTimer.start()
-			interactObject.talk()
-			
-	elif Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack"):
+		print('pressed')
 		if !talkTimer.is_stopped():
 			return
 		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 0:
@@ -254,24 +276,22 @@ func noStamina():
 func attack1_state(delta):
 # warning-ignore:integer_division
 	velocity = velocity.move_toward(Vector2.ZERO, (stats.friction/2) * delta)
-	if attack2_queued == false:
-		animationState.travel("Attack1")
-	if Input.is_action_just_pressed("attack"):
-		if stats.stamina <= 0:
-			noStamina()
-		else:
-			attack2_queued = true
+	animationState.travel("Attack1")
+#	if Input.is_action_just_pressed("attack"):
+#		if stats.stamina <= 0:
+#			noStamina()
+#		else:
+#			attack2_queued = true
 	move()
 	
 # warning-ignore:unused_argument
 func attack2_state(delta):
-	if attack2_queued == false:
-		animationState.travel("Attack2")
-	if Input.is_action_just_pressed("attack"):
-		if stats.stamina <= 0:
-			noStamina()
-		else:
-			attack1_queued = true
+	animationState.travel("Attack2")
+#	if Input.is_action_just_pressed("attack"):
+#		if stats.stamina <= 0:
+#			noStamina()
+#		else:
+#			attack1_queued = true
 		
 func attack1_stamina_drain():
 	stats.stamina -= 10
@@ -286,7 +306,9 @@ func attack2_stamina_drain():
 	swordHitbox.set_deferred("monitorable", true)
 
 func attack_animation_finished():
+	print('attack animation finished')
 	swordHitbox.set_deferred("monitorable", false)
+	state = MOVE
 	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
@@ -605,3 +627,7 @@ func _on_InteractHitbox_area_exited(_area):
 	interacting = false
 	using_item = false
 	interactObject = null
+
+func default_move_state():
+	print('default move state')
+	state = MOVE

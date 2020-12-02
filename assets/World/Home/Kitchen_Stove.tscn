@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/World/Home/Home_Kitchen_Appliances.png" type="Texture" id=1]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/World/Home/Kitchen_Stove.gd" type="Script" id=3]
+[ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 10 )
@@ -28,6 +29,12 @@ position = Vector2( -16, 12 )
 
 [node name="CollisionShape2D" parent="TalkBox" index="0"]
 shape = SubResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+position = Vector2( -12, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
