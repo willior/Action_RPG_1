@@ -11,3 +11,4 @@ export(itemType) var type
 export var texture : Texture
 
 export var healing : int = 2
+export var ready_to_use : bool = false

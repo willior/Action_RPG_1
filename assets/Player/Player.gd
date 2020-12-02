@@ -146,10 +146,10 @@ func move_state(delta):
 	
 	if Input.is_action_just_pressed("examine"): # F
 		if !examining && talkTimer.is_stopped():
+			talkTimer.start()
 			var dialogBox = DialogBox.instance()
 			dialogBox.dialog_script = [{'text': "You find nothing of interest."}]
 			get_node("/root/World/GUI").add_child(dialogBox)
-			talkTimer.start()
 		elif examining && talkTimer.is_stopped():
 			talkTimer.start()
 			interactObject.examine()
@@ -169,14 +169,14 @@ func move_state(delta):
 			2: # QUEST
 				if talkTimer.is_stopped():
 					if !using_item:
+						talkTimer.start()
 						var dialogBox = DialogBox.instance()
 						dialogBox.dialog_script = [{'text': "Can't use that here."}]
 						get_node("/root/World/GUI").add_child(dialogBox)
-						talkTimer.start()
 						return
 					else:
-						interactObject.use_item_on_object()
 						talkTimer.start()
+						interactObject.use_item_on_object()
 				
 	if Input.is_action_just_pressed("attack"):
 		if (!talking && !interacting) && stats.stamina > 0:

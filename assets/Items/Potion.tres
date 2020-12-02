@@ -11,3 +11,4 @@ max_stack_size = 4
 type = 0
 texture = ExtResource( 2 )
 healing = 2
+ready_to_use = false

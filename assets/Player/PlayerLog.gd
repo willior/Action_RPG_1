@@ -28,6 +28,7 @@ var home_lightswitch_bedroom_on = false
 var home_lightswitch_main_on = false
 var home_fridge_open = false
 var home_sink_on = false
+var home_stove_on = false
 var home_music_on = false
 
 var metal_pot_collected = false

@@ -2,6 +2,8 @@ extends Control
 
 export(String, FILE, "*.json") var extenal_file = ''
 
+onready var player = get_node("/root/World/YSort/Player")
+
 var dialog_index = 0
 var speakerName = ""
 var next_icon_modulator
@@ -56,8 +58,9 @@ func _ready():
 	get_tree().paused = true
 	Global.dialogOpen = true
 	
-func _input(_event):
+func _unhandled_input(_event):
 	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
+		get_tree().set_input_as_handled()
 		load_dialog()
 		
 func update_name(event):

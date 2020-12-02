@@ -17,6 +17,7 @@ script = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -10, 0 )
 texture = ExtResource( 1 )
+hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -10, 9 )
@@ -27,5 +28,7 @@ position = Vector2( -16, 12 )
 
 [node name="CollisionShape2D" parent="TalkBox" index="0"]
 shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [editable path="TalkBox"]
