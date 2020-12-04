@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=15]
 [ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=16]
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=17]
-[ext_resource path="res://assets/Audio/fieldSong1.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/ItemDrops/HeartPickup.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=20]
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=21]
@@ -32,7 +32,7 @@
 [ext_resource path="res://assets/Tilesets/grassBasic_lightInner/tileset_grassBasic_lightInner.tres" type="TileSet" id=30]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_orange_1_sheet.png" type="Texture" id=31]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_red_1_sheet.png" type="Texture" id=32]
-[ext_resource path="res://assets/Items/PennyPickup.tscn" type="PackedScene" id=33]
+[ext_resource path="res://assets/ItemDrops/PennyPickup.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/World/Trees/Tree_2_pine.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/World/Trees/Tree_1_yellow.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/World/Plants/Plant_4_green.tscn" type="PackedScene" id=36]
@@ -59,6 +59,8 @@
 [ext_resource path="res://assets/World/Grass/Leaf_dark_yellow_1_sheet.png" type="Texture" id=57]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_pink_1_sheet.png" type="Texture" id=58]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_green_1_sheet.png" type="Texture" id=59]
+
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "Leaf_bright_green_1_sheet.png 0"

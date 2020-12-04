@@ -18,8 +18,8 @@ func _input(event):
 	
 	if event.is_action_pressed("test"): # T
 		prints("current selected item index: " + str(player.inventory.current_selected_item))
-		# PlayerStats.status = "poison"
-		
+		PlayerStats.status = "poison"
+	
 	if event.is_action_pressed("pause"): # P
 		if get_tree().paused == false:
 			get_tree().paused = true
