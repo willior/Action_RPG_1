@@ -89,7 +89,7 @@ pause_mode = 2
 script = ExtResource( 22 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
-position = Vector2( 128, 96 )
+position = Vector2( 512, 88 )
 limit_right = 600
 limit_bottom = 0
 smoothing_enabled = true
@@ -157,15 +157,12 @@ texture = ExtResource( 8 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 496, 49 )
-frame = 3
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 139, 17 )
-frame = 3
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 278, 17 )
-frame = 3
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 23 )]
 
@@ -224,7 +221,7 @@ autostart = true
 pause_mode = 1
 
 [node name="Player" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 128, 96 )
+position = Vector2( 512, 88 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")

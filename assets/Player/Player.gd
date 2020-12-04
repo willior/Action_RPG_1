@@ -114,9 +114,7 @@ func _input(event):
 	match state:
 		MOVE:
 			if event.is_action_pressed("attack") && !event.is_echo():
-				print('just pressed')
 				if (!talking && !interacting) && stats.stamina > 0:
-					print('state = ATTACK1')
 					state = ATTACK1
 				elif stats.stamina <= 0:
 					noStamina()
@@ -150,11 +148,9 @@ func _input(event):
 		
 		ATTACK1:
 			if event.is_action_pressed("attack") && !event.is_echo():
-				print('attack pressed during attack1')
 				if stats.stamina <= 0:
 					noStamina()
 				else:
-					print('attack2 queued')
 					attack2_queued = true
 		ATTACK2:
 			if event.is_action_pressed("attack") && !event.is_echo():
@@ -213,7 +209,6 @@ func move_state(delta):
 		interactHitbox.disabled = false
 
 	if Input.is_action_pressed("attack"):
-		print('pressed')
 		if !talkTimer.is_stopped():
 			return
 		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 0:
@@ -306,7 +301,6 @@ func attack2_stamina_drain():
 	swordHitbox.set_deferred("monitorable", true)
 
 func attack_animation_finished():
-	print('attack animation finished')
 	swordHitbox.set_deferred("monitorable", false)
 	state = MOVE
 	if attack2_queued:
@@ -627,7 +621,3 @@ func _on_InteractHitbox_area_exited(_area):
 	interacting = false
 	using_item = false
 	interactObject = null
-
-func default_move_state():
-	print('default move state')
-	state = MOVE
