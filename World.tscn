@@ -60,8 +60,6 @@
 [ext_resource path="res://assets/World/Grass/Leaf_dark_pink_1_sheet.png" type="Texture" id=58]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_green_1_sheet.png" type="Texture" id=59]
 
-
-
 [sub_resource type="TileSet" id=1]
 0/name = "Leaf_bright_green_1_sheet.png 0"
 0/texture = ExtResource( 4 )
