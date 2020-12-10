@@ -49,14 +49,14 @@ texture = ExtResource( 8 )
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
-[node name="Doodads" type="YSort" parent="YSort"]
-
 [node name="Player" parent="YSort" instance=ExtResource( 3 )]
 process_priority = 0
 position = Vector2( 48, 48 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
+
+[node name="Doodads" type="YSort" parent="YSort"]
 
 [node name="Plants" type="YSort" parent="YSort"]
 
