@@ -1,0 +1,1351 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://World.gd" type="Script" id=1]
+[ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/World/Trees/Tree_1_green.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=7]
+[ext_resource path="res://assets/Andrew/Walkways/Walkway_1_1.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/World/Plants/Plant_16_green_alt.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/World/Rivers/River_1.tscn" type="PackedScene" id=12]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 115.849, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 65.4806 )
+
+[node name="World" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [ 128.0 ]
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 320.319, 73.7661 )
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 960
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_top = 0.1
+
+[node name="Map" type="Node2D" parent="."]
+pause_mode = 1
+
+[node name="GrassBasicDark" type="TileMap" parent="Map"]
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 65553, 0, 0, 65554, 0, 0, 65555, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 131087, 0, 0, 131088, 0, 0, 131089, 0, 0, 131090, 0, 0, 131091, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 196625, 0, 0, 196626, 0, 0, 196627, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 262163, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 393231, 0, 0, 393232, 0, 0, 393233, 0, 0, 393234, 0, 0, 393235, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 458771, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0, 524303, 0, 0, 524304, 0, 0, 524305, 0, 0, 524306, 0, 0, 524307, 0, 0, 589824, 0, 0, 589825, 0, 0, 589826, 0, 0, 589827, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589833, 0, 0, 589834, 0, 0, 589835, 0, 0, 589836, 0, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 589842, 0, 0, 589843, 0, 0, 655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0, 655364, 0, 0, 655365, 0, 0, 655366, 0, 0, 655367, 0, 0, 655368, 0, 0, 655369, 0, 0, 655370, 0, 0, 655371, 0, 0, 655372, 0, 0, 655373, 0, 0, 655374, 0, 0, 655375, 0, 0, 655376, 0, 0, 655377, 0, 0, 655378, 0, 0, 655379, 0, 0, 720896, 0, 0, 720897, 0, 0, 720898, 0, 0, 720899, 0, 0, 720900, 0, 0, 720901, 0, 0, 720902, 0, 0, 720903, 0, 0, 720904, 0, 0, 720905, 0, 0, 720906, 0, 0, 720907, 0, 0, 720908, 0, 0, 720909, 0, 0, 720910, 0, 0, 720911, 0, 0, 720912, 0, 0, 720913, 0, 0, 720914, 0, 0, 720915, 0, 0, 786432, 0, 0, 786433, 0, 0, 786434, 0, 0, 786435, 0, 0, 786436, 0, 0, 786437, 0, 0, 786438, 0, 0, 786439, 0, 0, 786440, 0, 0, 786441, 0, 0, 786442, 0, 0, 786443, 0, 0, 786444, 0, 0, 786445, 0, 0, 786446, 0, 0, 786447, 0, 0, 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786451, 0, 0, 851968, 0, 0, 851969, 0, 0, 851970, 0, 0, 851971, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 851982, 0, 0, 851983, 0, 0, 851984, 0, 0, 851985, 0, 0, 851986, 0, 0, 851987, 0, 0, 917504, 0, 0, 917505, 0, 0, 917506, 0, 0, 917507, 0, 0, 917508, 0, 0, 917509, 0, 0, 917510, 0, 0, 917511, 0, 0, 917512, 0, 0, 917513, 0, 0, 917514, 0, 0, 917515, 0, 0, 917516, 0, 0, 917517, 0, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 917522, 0, 0, 917523, 0, 0, 983040, 0, 0, 983041, 0, 0, 983042, 0, 0, 983043, 0, 0, 983044, 0, 0, 983045, 0, 0, 983046, 0, 0, 983047, 0, 0, 983048, 0, 0, 983049, 0, 0, 983050, 0, 0, 983051, 0, 0, 983052, 0, 0, 983053, 0, 0, 983054, 0, 0, 983055, 0, 0, 983056, 0, 0, 983057, 0, 0, 983058, 0, 0, 983059, 0, 0, 1048576, 0, 0, 1048577, 0, 0, 1048578, 0, 0, 1048579, 0, 0, 1048580, 0, 0, 1048581, 0, 0, 1048582, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 0, 1048589, 0, 0, 1048590, 0, 0, 1048591, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1114112, 0, 0, 1114113, 0, 0, 1114114, 0, 0, 1114115, 0, 0, 1114116, 0, 0, 1114117, 0, 0, 1114118, 0, 0, 1114119, 0, 0, 1114120, 0, 0, 1114121, 0, 0, 1114122, 0, 0, 1114123, 0, 0, 1114124, 0, 0, 1114125, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1114130, 0, 0, 1114131, 0, 0, 1179648, 0, 0, 1179649, 0, 0, 1179650, 0, 0, 1179651, 0, 0, 1179652, 0, 0, 1179653, 0, 0, 1179654, 0, 0, 1179655, 0, 0, 1179656, 0, 0, 1179657, 0, 0, 1179658, 0, 0, 1179659, 0, 0, 1179660, 0, 0, 1179661, 0, 0, 1179662, 0, 0, 1179663, 0, 0, 1179664, 0, 0, 1179665, 0, 0, 1179666, 0, 0, 1179667, 0, 0, 1245184, 0, 0, 1245185, 0, 0, 1245186, 0, 0, 1245187, 0, 0, 1245188, 0, 0, 1245189, 0, 0, 1245190, 0, 0, 1245191, 0, 0, 1245192, 0, 0, 1245193, 0, 0, 1245194, 0, 0, 1245195, 0, 0, 1245196, 0, 0, 1245197, 0, 0, 1245198, 0, 0, 1245199, 0, 0, 1245200, 0, 0, 1245201, 0, 0, 1245202, 0, 0, 1245203, 0, 0, 1310720, 0, 0, 1310721, 0, 0, 1310722, 0, 0, 1310723, 0, 0, 1310724, 0, 0, 1310725, 0, 0, 1310726, 0, 0, 1310727, 0, 0, 1310728, 0, 0, 1310729, 0, 0, 1310730, 0, 0, 1310731, 0, 0, 1310732, 0, 0, 1310733, 0, 0, 1310734, 0, 0, 1310735, 0, 0, 1310736, 0, 0, 1310737, 0, 0, 1310738, 0, 0, 1310739, 0, 0, 1376256, 0, 0, 1376257, 0, 0, 1376258, 0, 0, 1376259, 0, 0, 1376260, 0, 0, 1376261, 0, 0, 1376262, 0, 0, 1376263, 0, 0, 1376264, 0, 0, 1376265, 0, 0, 1376266, 0, 0, 1376267, 0, 0, 1376268, 0, 0, 1376269, 0, 0, 1376270, 0, 0, 1376271, 0, 0, 1376272, 0, 0, 1376273, 0, 0, 1376274, 0, 0, 1376275, 0, 0, 1441792, 0, 0, 1441793, 0, 0, 1441794, 0, 0, 1441795, 0, 0, 1441796, 0, 0, 1441797, 0, 0, 1441798, 0, 0, 1441799, 0, 0, 1441800, 0, 0, 1441801, 0, 0, 1441802, 0, 0, 1441803, 0, 0, 1441804, 0, 0, 1441805, 0, 0, 1441806, 0, 0, 1441807, 0, 0, 1441808, 0, 0, 1441809, 0, 0, 1441810, 0, 0, 1441811, 0, 0, 1507328, 0, 0, 1507329, 0, 0, 1507330, 0, 0, 1507331, 0, 0, 1507332, 0, 0, 1507333, 0, 0, 1507334, 0, 0, 1507335, 0, 0, 1507336, 0, 0, 1507337, 0, 0, 1507338, 0, 0, 1507339, 0, 0, 1507340, 0, 0, 1507341, 0, 0, 1507342, 0, 0, 1507343, 0, 0, 1507344, 0, 0, 1507345, 0, 0, 1507346, 0, 0, 1507347, 0, 0, 1572864, 0, 0, 1572865, 0, 0, 1572866, 0, 0, 1572867, 0, 0, 1572868, 0, 0, 1572869, 0, 0, 1572870, 0, 0, 1572871, 0, 0, 1572872, 0, 0, 1572873, 0, 0, 1572874, 0, 0, 1572875, 0, 0, 1572876, 0, 0, 1572877, 0, 0, 1572878, 0, 0, 1572879, 0, 0, 1572880, 0, 0, 1572881, 0, 0, 1572882, 0, 0, 1572883, 0, 0, 1638400, 0, 0, 1638401, 0, 0, 1638402, 0, 0, 1638403, 0, 0, 1638404, 0, 0, 1638405, 0, 0, 1638406, 0, 0, 1638407, 0, 0, 1638408, 0, 0, 1638409, 0, 0, 1638410, 0, 0, 1638411, 0, 0, 1638412, 0, 0, 1638413, 0, 0, 1638414, 0, 0, 1638415, 0, 0, 1638416, 0, 0, 1638417, 0, 0, 1638418, 0, 0, 1638419, 0, 0, 1703936, 0, 0, 1703937, 0, 0, 1703938, 0, 0, 1703939, 0, 0, 1703940, 0, 0, 1703941, 0, 0, 1703942, 0, 0, 1703943, 0, 0, 1703944, 0, 0, 1703945, 0, 0, 1703946, 0, 0, 1703947, 0, 0, 1703948, 0, 0, 1703949, 0, 0, 1703950, 0, 0, 1703951, 0, 0, 1703952, 0, 0, 1703953, 0, 0, 1703954, 0, 0, 1703955, 0, 0, 1769472, 0, 0, 1769473, 0, 0, 1769474, 0, 0, 1769475, 0, 0, 1769476, 0, 0, 1769477, 0, 0, 1769478, 0, 0, 1769479, 0, 0, 1769480, 0, 0, 1769481, 0, 0, 1769482, 0, 0, 1769483, 0, 0, 1769484, 0, 0, 1769485, 0, 0, 1769486, 0, 0, 1769487, 0, 0, 1769488, 0, 0, 1769489, 0, 0, 1769490, 0, 0, 1769491, 0, 0, 1835008, 0, 0, 1835009, 0, 0, 1835010, 0, 0, 1835011, 0, 0, 1835012, 0, 0, 1835013, 0, 0, 1835014, 0, 0, 1835015, 0, 0, 1835016, 0, 0, 1835017, 0, 0, 1835018, 0, 0, 1835019, 0, 0, 1835020, 0, 0, 1835021, 0, 0, 1835022, 0, 0, 1835023, 0, 0, 1835024, 0, 0, 1835025, 0, 0, 1835026, 0, 0, 1835027, 0, 0, 1900544, 0, 0, 1900545, 0, 0, 1900546, 0, 0, 1900547, 0, 0, 1900548, 0, 0, 1900549, 0, 0, 1900550, 0, 0, 1900551, 0, 0, 1900552, 0, 0, 1900553, 0, 0, 1900554, 0, 0, 1900555, 0, 0, 1900556, 0, 0, 1900557, 0, 0, 1900558, 0, 0, 1900559, 0, 0, 1900560, 0, 0, 1900561, 0, 0, 1900562, 0, 0, 1900563, 0, 0 )
+
+[node name="Walkway_1_1" parent="Map" instance=ExtResource( 8 )]
+position = Vector2( 340, 584 )
+
+[node name="Exit_toHome" parent="Map" instance=ExtResource( 10 )]
+position = Vector2( 350, 0 )
+map_file = "res://assets/Maps/0-1_Home.tscn"
+selected_location = Vector2( 160, 168 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Exit_toHome"]
+shape = SubResource( 1 )
+
+[node name="Exit_toTutorial_1_2" parent="Map" instance=ExtResource( 10 )]
+position = Vector2( 640, 460 )
+collision_layer = 2048
+map_file = "res://assets/Maps/Tutorial_1_2.tscn"
+selected_location = Vector2( 32, 290 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Exit_toTutorial_1_2"]
+shape = SubResource( 2 )
+
+[node name="YSort" type="YSort" parent="."]
+pause_mode = 1
+
+[node name="Doodads" type="YSort" parent="YSort"]
+
+[node name="Player" parent="YSort" instance=ExtResource( 5 )]
+process_priority = 0
+position = Vector2( 320.319, 73.7661 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="Plants" type="YSort" parent="YSort"]
+
+[node name="Plant_16_green_alt" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 149.898, 405.898 )
+
+[node name="Plant_16_green_alt2" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 135, 390.574 )
+
+[node name="Plant_16_green_alt7" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 205, 360 )
+
+[node name="Plant_16_green_alt3" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 175, 379 )
+
+[node name="Plant_16_green_alt4" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 191, 384 )
+
+[node name="Plant_16_green_alt9" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 153, 381 )
+
+[node name="Plant_16_green_alt10" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 187, 417 )
+
+[node name="Plant_16_green_alt13" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 200.199, 406.242 )
+
+[node name="Plant_16_green_alt14" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 176.409, 406.318 )
+
+[node name="Plant_16_green_alt15" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 188, 368 )
+
+[node name="Plant_16_green_alt16" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 317, 135 )
+
+[node name="Plant_16_green_alt17" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 308, 124 )
+
+[node name="Plant_16_green_alt18" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 302, 144 )
+
+[node name="Plant_16_green_alt19" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 498.001, 471.996 )
+
+[node name="Plant_16_green_alt21" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 481.001, 461.162 )
+
+[node name="Plant_16_green_alt22" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 461.282, 466.173 )
+
+[node name="Plant_16_green_alt24" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 455.662, 488.998 )
+
+[node name="Plant_16_green_alt23" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 464.819, 505.381 )
+
+[node name="Plant_16_green_alt25" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 471.448, 478.263 )
+
+[node name="Plant_16_green_alt20" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 290, 161 )
+
+[node name="Plant_16_green_alt26" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 458.635, 897.579 )
+
+[node name="Plant_16_green_alt27" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 432.486, 905.17 )
+
+[node name="Plant_16_green_alt28" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 439.966, 889.782 )
+
+[node name="Plant_16_green_alt29" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 99.6619, 807.999 )
+
+[node name="Plant_16_green_alt30" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 122.57, 795.027 )
+
+[node name="Plant_16_green_alt31" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 145.107, 802.174 )
+
+[node name="Plant_16_green_alt32" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 128.536, 812.696 )
+
+[node name="Plant_16_green_alt33" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 164.347, 815.328 )
+
+[node name="Plant_16_green_alt34" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 167.958, 792.568 )
+
+[node name="Plant_16_green_alt35" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 190.458, 782.831 )
+
+[node name="Plant_16_green_alt37" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 207.676, 796.732 )
+
+[node name="Plant_16_green_alt36" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 182.994, 803.167 )
+
+[node name="Plant_16_green_alt11" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 164.514, 393.919 )
+
+[node name="Plant_16_green_alt12" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 207, 427 )
+
+[node name="Plant_16_green_alt5" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 210, 374 )
+
+[node name="Plant_16_green_alt6" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 186, 396 )
+
+[node name="Trees" type="YSort" parent="YSort"]
+
+[node name="Tree_1_green128" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 261.243, 7.47027 )
+
+[node name="Tree_1_green140" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 232, 24 )
+
+[node name="Tree_1_green149" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 64 )
+
+[node name="Tree_1_green150" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 216, 40 )
+
+[node name="Tree_1_green151" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 184, 48 )
+
+[node name="Tree_1_green154" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 184, 80 )
+
+[node name="Tree_1_green156" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 184, 104 )
+
+[node name="Tree_1_green16" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 184 )
+
+[node name="Tree_1_green22" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 168, 120 )
+
+[node name="Tree_1_green21" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 176, 264 )
+
+[node name="Tree_1_green23" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 264 )
+
+[node name="Tree_1_green113" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 104, 240 )
+
+[node name="Tree_1_green114" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 256 )
+
+[node name="Tree_1_green116" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 184, 344 )
+
+[node name="Tree_1_green226" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 648, 424 )
+
+[node name="Tree_1_green227" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 416 )
+
+[node name="Tree_1_green228" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 408 )
+
+[node name="Tree_1_green235" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 576, 400 )
+
+[node name="Tree_1_green229" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 568, 416 )
+
+[node name="Tree_1_green230" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 408 )
+
+[node name="Tree_1_green236" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 400 )
+
+[node name="Tree_1_green231" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 392 )
+
+[node name="Tree_1_green238" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 536, 376 )
+
+[node name="Tree_1_green237" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 392 )
+
+[node name="Tree_1_green232" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 504, 376 )
+
+[node name="Tree_1_green233" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 480, 352 )
+
+[node name="Tree_1_green240" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 504, 320 )
+
+[node name="Tree_1_green241" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 480, 288 )
+
+[node name="Tree_1_green246" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 288 )
+
+[node name="Tree_1_green245" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 304 )
+
+[node name="Tree_1_green242" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 464, 240 )
+
+[node name="Tree_1_green249" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 480, 208 )
+
+[node name="Tree_1_green255" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 144 )
+
+[node name="Tree_1_green256" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 128 )
+
+[node name="Tree_1_green257" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 104 )
+
+[node name="Tree_1_green258" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 488, 40 )
+
+[node name="Tree_1_green260" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 32 )
+
+[node name="Tree_1_green261" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 536, 24 )
+
+[node name="Tree_1_green262" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 16 )
+
+[node name="Tree_1_green263" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 16 )
+
+[node name="Tree_1_green264" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 16 )
+
+[node name="Tree_1_green265" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 608, 32 )
+
+[node name="Tree_1_green266" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 576, 40 )
+
+[node name="Tree_1_green267" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 48 )
+
+[node name="Tree_1_green268" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 56 )
+
+[node name="Tree_1_green269" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 56 )
+
+[node name="Tree_1_green270" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 568, 72 )
+
+[node name="Tree_1_green275" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 88 )
+
+[node name="Tree_1_green276" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 88 )
+
+[node name="Tree_1_green277" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 104 )
+
+[node name="Tree_1_green278" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 552, 104 )
+
+[node name="Tree_1_green279" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 104 )
+
+[node name="Tree_1_green280" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 576, 120 )
+
+[node name="Tree_1_green282" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 128 )
+
+[node name="Tree_1_green283" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 568, 144 )
+
+[node name="Tree_1_green284" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 608, 144 )
+
+[node name="Tree_1_green285" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 640, 152 )
+
+[node name="Tree_1_green286" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 168 )
+
+[node name="Tree_1_green287" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 168 )
+
+[node name="Tree_1_green288" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 552, 192 )
+
+[node name="Tree_1_green289" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 192 )
+
+[node name="Tree_1_green290" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 176 )
+
+[node name="Tree_1_green291" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 208 )
+
+[node name="Tree_1_green292" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 216 )
+
+[node name="Tree_1_green293" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 208 )
+
+[node name="Tree_1_green294" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 528, 224 )
+
+[node name="Tree_1_green295" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 232 )
+
+[node name="Tree_1_green296" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 240 )
+
+[node name="Tree_1_green297" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 224 )
+
+[node name="Tree_1_green298" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 256 )
+
+[node name="Tree_1_green299" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 584, 256 )
+
+[node name="Tree_1_green300" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 552, 248 )
+
+[node name="Tree_1_green301" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 536, 272 )
+
+[node name="Tree_1_green302" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 272 )
+
+[node name="Tree_1_green303" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 280 )
+
+[node name="Tree_1_green304" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 616, 272 )
+
+[node name="Tree_1_green305" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 288 )
+
+[node name="Tree_1_green306" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 296 )
+
+[node name="Tree_1_green307" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 296 )
+
+[node name="Tree_1_green308" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 320 )
+
+[node name="Tree_1_green309" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 576, 312 )
+
+[node name="Tree_1_green310" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 568, 336 )
+
+[node name="Tree_1_green311" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 584, 352 )
+
+[node name="Tree_1_green312" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 568, 368 )
+
+[node name="Tree_1_green313" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 536, 352 )
+
+[node name="Tree_1_green314" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 608, 368 )
+
+[node name="Tree_1_green315" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 384 )
+
+[node name="Tree_1_green317" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 352 )
+
+[node name="Tree_1_green318" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 616, 328 )
+
+[node name="Tree_1_green319" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 640, 312 )
+
+[node name="Tree_1_green316" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 584, 392 )
+
+[node name="Tree_1_green281" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 128 )
+
+[node name="Tree_1_green272" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 64 )
+
+[node name="Tree_1_green274" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 88 )
+
+[node name="Tree_1_green273" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 488, 72 )
+
+[node name="Tree_1_green271" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 80 )
+
+[node name="Tree_1_green259" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 472, 56 )
+
+[node name="Tree_1_green421" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 495.609, 19.4732 )
+
+[node name="Tree_1_green422" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520.999, 0.318832 )
+
+[node name="Tree_1_green250" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 488, 144 )
+
+[node name="Tree_1_green251" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 192 )
+
+[node name="Tree_1_green252" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 176 )
+
+[node name="Tree_1_green253" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 528, 160 )
+
+[node name="Tree_1_green254" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 208 )
+
+[node name="Tree_1_green248" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 480, 232 )
+
+[node name="Tree_1_green247" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 240 )
+
+[node name="Tree_1_green243" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 256 )
+
+[node name="Tree_1_green244" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 504, 272 )
+
+[node name="Tree_1_green239" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 504, 344 )
+
+[node name="Tree_1_green234" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 504, 360 )
+
+[node name="Tree_1_green28" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 256 )
+
+[node name="Tree_1_green29" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 104, 224 )
+
+[node name="Tree_1_green30" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 104, 208 )
+
+[node name="Tree_1_green31" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 136, 168 )
+
+[node name="Tree_1_green120" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 320 )
+
+[node name="Tree_1_green121" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 312 )
+
+[node name="Tree_1_green125" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 168, 328 )
+
+[node name="Tree_1_green123" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 296 )
+
+[node name="Tree_1_green124" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 136, 280 )
+
+[node name="Tree_1_green122" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 160, 352 )
+
+[node name="Tree_1_green126" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 368 )
+
+[node name="Tree_1_green127" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 128, 352 )
+
+[node name="Tree_1_green41" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 96, 392 )
+
+[node name="Tree_1_green42" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 80, 416 )
+
+[node name="Tree_1_green43" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 96, 440 )
+
+[node name="Tree_1_green56" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 536 )
+
+[node name="Tree_1_green57" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 472, 736 )
+
+[node name="Tree_1_green58" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 448, 720 )
+
+[node name="Tree_1_green225" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 472, 696 )
+
+[node name="Tree_1_green176" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 528 )
+
+[node name="Tree_1_green177" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 568, 512 )
+
+[node name="Tree_1_green179" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 536, 520 )
+
+[node name="Tree_1_green187" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 536 )
+
+[node name="Tree_1_green188" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 608, 544 )
+
+[node name="Tree_1_green189" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 640, 544 )
+
+[node name="Tree_1_green190" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 576, 552 )
+
+[node name="Tree_1_green191" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 536, 552 )
+
+[node name="Tree_1_green192" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 560 )
+
+[node name="Tree_1_green193" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 568 )
+
+[node name="Tree_1_green194" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 552, 568 )
+
+[node name="Tree_1_green195" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 576 )
+
+[node name="Tree_1_green196" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 584 )
+
+[node name="Tree_1_green197" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 584 )
+
+[node name="Tree_1_green198" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 584 )
+
+[node name="Tree_1_green200" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 576, 600 )
+
+[node name="Tree_1_green201" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 616, 600 )
+
+[node name="Tree_1_green202" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 664 )
+
+[node name="Tree_1_green203" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 640 )
+
+[node name="Tree_1_green204" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 616 )
+
+[node name="Tree_1_green205" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 616 )
+
+[node name="Tree_1_green206" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 640 )
+
+[node name="Tree_1_green207" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 576, 664 )
+
+[node name="Tree_1_green208" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 688 )
+
+[node name="Tree_1_green209" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 552, 712 )
+
+[node name="Tree_1_green210" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 720 )
+
+[node name="Tree_1_green211" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 696 )
+
+[node name="Tree_1_green212" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 480, 712 )
+
+[node name="Tree_1_green213" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 680 )
+
+[node name="Tree_1_green214" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 616 )
+
+[node name="Tree_1_green215" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 616 )
+
+[node name="Tree_1_green199" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 648 )
+
+[node name="Tree_1_green216" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 632 )
+
+[node name="Tree_1_green217" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 608 )
+
+[node name="Tree_1_green186" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 520, 536 )
+
+[node name="Tree_1_green180" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 536 )
+
+[node name="Tree_1_green181" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 488, 568 )
+
+[node name="Tree_1_green182" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 456, 616 )
+
+[node name="Tree_1_green218" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 488, 616 )
+
+[node name="Tree_1_green219" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 488, 632 )
+
+[node name="Tree_1_green220" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 480, 648 )
+
+[node name="Tree_1_green221" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 440, 640 )
+
+[node name="Tree_1_green320" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 568, 632 )
+
+[node name="Tree_1_green222" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 456, 648 )
+
+[node name="Tree_1_green223" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 664 )
+
+[node name="Tree_1_green224" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 488, 680 )
+
+[node name="Tree_1_green185" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 552 )
+
+[node name="Tree_1_green183" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 584 )
+
+[node name="Tree_1_green184" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 480, 600 )
+
+[node name="Tree_1_green178" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 528 )
+
+[node name="Tree_1_green59" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 528, 744 )
+
+[node name="Tree_1_green60" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 728 )
+
+[node name="Tree_1_green61" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 584, 712 )
+
+[node name="Tree_1_green62" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 696 )
+
+[node name="Tree_1_green64" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 640, 840 )
+
+[node name="Tree_1_green93" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 640, 840 )
+
+[node name="Tree_1_green94" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 656, 848 )
+
+[node name="Tree_1_green91" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 880 )
+
+[node name="Tree_1_green65" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 864 )
+
+[node name="Tree_1_green90" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 896 )
+
+[node name="Tree_1_green66" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 608, 888 )
+
+[node name="Tree_1_green67" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 616, 912 )
+
+[node name="Tree_1_green68" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 592, 936 )
+
+[node name="Tree_1_green69" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 576, 960 )
+
+[node name="Tree_1_green70" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 968 )
+
+[node name="Tree_1_green71" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 968 )
+
+[node name="Tree_1_green72" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 456, 960 )
+
+[node name="Tree_1_green73" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 432, 984 )
+
+[node name="Tree_1_green74" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 440, 968 )
+
+[node name="Tree_1_green159" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 240, 992 )
+
+[node name="Tree_1_green160" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 208, 976 )
+
+[node name="Tree_1_green161" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 168, 968 )
+
+[node name="Tree_1_green162" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 984 )
+
+[node name="Tree_1_green175" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 160, 1000 )
+
+[node name="Tree_1_green169" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( -16, 968 )
+
+[node name="Tree_1_green163" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 88, 976 )
+
+[node name="Tree_1_green172" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 104, 992 )
+
+[node name="Tree_1_green173" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 40, 1000 )
+
+[node name="Tree_1_green174" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 208, 992 )
+
+[node name="Tree_1_green164" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 48, 968 )
+
+[node name="Tree_1_green165" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 16, 984 )
+
+[node name="Tree_1_green171" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 16, 968 )
+
+[node name="Tree_1_green166" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( -16, 952 )
+
+[node name="Tree_1_green167" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 984 )
+
+[node name="Tree_1_green168" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 976 )
+
+[node name="Tree_1_green170" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 184, 984 )
+
+[node name="Tree_1_green75" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 464, 976 )
+
+[node name="Tree_1_green76" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 512, 984 )
+
+[node name="Tree_1_green77" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 480, 992 )
+
+[node name="Tree_1_green78" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 544, 1000 )
+
+[node name="Tree_1_green80" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 560, 984 )
+
+[node name="Tree_1_green81" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 920 )
+
+[node name="Tree_1_green82" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 624, 944 )
+
+[node name="Tree_1_green83" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 648, 952 )
+
+[node name="Tree_1_green84" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 608, 960 )
+
+[node name="Tree_1_green85" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 640, 976 )
+
+[node name="Tree_1_green86" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 976 )
+
+[node name="Tree_1_green87" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 600, 984 )
+
+[node name="Tree_1_green88" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 632, 984 )
+
+[node name="Tree_1_green89" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 664, 984 )
+
+[node name="Tree_1_green63" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 616, 680 )
+
+[node name="Tree_1_green79" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 496, 752 )
+
+[node name="Tree_1_green96" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 64, 408 )
+
+[node name="Tree_1_green100" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 88, 376 )
+
+[node name="Tree_1_green97" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 72, 432 )
+
+[node name="Tree_1_green98" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 464 )
+
+[node name="Tree_1_green101" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 456 )
+
+[node name="Tree_1_green102" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 176, 480 )
+
+[node name="Tree_1_green103" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 480 )
+
+[node name="Tree_1_green105" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 496 )
+
+[node name="Tree_1_green106" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 240, 592 )
+
+[node name="Tree_1_green99" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 232, 616 )
+
+[node name="Tree_1_green108" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 672 )
+
+[node name="Tree_1_green110" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 648 )
+
+[node name="Tree_1_green111" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 632 )
+
+[node name="Tree_1_green104" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 184, 512 )
+
+[node name="Tree_1_green107" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 504 )
+
+[node name="Tree_1_green109" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 160, 528 )
+
+[node name="Tree_1_green115" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 168, 544 )
+
+[node name="Tree_1_green117" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 552 )
+
+[node name="Tree_1_green118" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 216, 568 )
+
+[node name="Tree_1_green119" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 584 )
+
+[node name="Tree_1_green129" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 168, 688 )
+
+[node name="Tree_1_green130" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 696 )
+
+[node name="Tree_1_green131" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 168, 664 )
+
+[node name="Tree_1_green132" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 136, 680 )
+
+[node name="Tree_1_green133" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 176, 648 )
+
+[node name="Tree_1_green134" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 720 )
+
+[node name="Tree_1_green135" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 704 )
+
+[node name="Tree_1_green136" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 752 )
+
+[node name="Tree_1_green137" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 752 )
+
+[node name="Tree_1_green138" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 736 )
+
+[node name="Tree_1_green139" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 176, 768 )
+
+[node name="Tree_1_green141" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 768 )
+
+[node name="Tree_1_green142" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 784 )
+
+[node name="Tree_1_green143" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 776 )
+
+[node name="Tree_1_green144" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 96, 784 )
+
+[node name="Tree_1_green145" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 64, 776 )
+
+[node name="Tree_1_green146" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 48, 792 )
+
+[node name="Tree_1_green147" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 16, 776 )
+
+[node name="Tree_1_green148" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 0, 793.768 )
+
+[node name="Tree_1_green152" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 72, 728 )
+
+[node name="Tree_1_green153" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 72, 752 )
+
+[node name="Tree_1_green155" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 24, 752 )
+
+[node name="Tree_1_green157" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 24, 728 )
+
+[node name="Tree_1_green321" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 72, 712 )
+
+[node name="Tree_1_green322" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 88, 688 )
+
+[node name="Tree_1_green323" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 160, 576 )
+
+[node name="Tree_1_green325" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 128, 560 )
+
+[node name="Tree_1_green326" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 32 )
+
+[node name="Tree_1_green327" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 48, 16 )
+
+[node name="Tree_1_green328" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 80, 32 )
+
+[node name="Tree_1_green329" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 24 )
+
+[node name="Tree_1_green330" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 16 )
+
+[node name="Tree_1_green331" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 184, 24 )
+
+[node name="Tree_1_green332" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 200, 8 )
+
+[node name="Tree_1_green333" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 40 )
+
+[node name="Tree_1_green334" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 48 )
+
+[node name="Tree_1_green335" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 144, 64 )
+
+[node name="Tree_1_green336" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 96 )
+
+[node name="Tree_1_green337" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 88 )
+
+[node name="Tree_1_green338" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 80, 64 )
+
+[node name="Tree_1_green339" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 40, 48 )
+
+[node name="Tree_1_green340" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 64 )
+
+[node name="Tree_1_green351" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 64 )
+
+[node name="Tree_1_green341" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 80 )
+
+[node name="Tree_1_green342" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 104 )
+
+[node name="Tree_1_green352" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 152 )
+
+[node name="Tree_1_green353" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 152 )
+
+[node name="Tree_1_green350" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 96, 160 )
+
+[node name="Tree_1_green347" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 40, 120 )
+
+[node name="Tree_1_green343" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 96 )
+
+[node name="Tree_1_green348" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 64, 200 )
+
+[node name="Tree_1_green354" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 176 )
+
+[node name="Tree_1_green355" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 64, 136 )
+
+[node name="Tree_1_green356" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 136 )
+
+[node name="Tree_1_green357" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 16, 160 )
+
+[node name="Tree_1_green358" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 176 )
+
+[node name="Tree_1_green359" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 24, 200 )
+
+[node name="Tree_1_green360" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 40, 216 )
+
+[node name="Tree_1_green361" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 64, 232 )
+
+[node name="Tree_1_green362" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 72, 256 )
+
+[node name="Tree_1_green363" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 0, 224 )
+
+[node name="Tree_1_green364" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 24, 240 )
+
+[node name="Tree_1_green365" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 264 )
+
+[node name="Tree_1_green366" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 96, 280 )
+
+[node name="Tree_1_green367" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 64, 272 )
+
+[node name="Tree_1_green368" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 104, 304 )
+
+[node name="Tree_1_green369" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 88, 320 )
+
+[node name="Tree_1_green370" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 72, 296 )
+
+[node name="Tree_1_green371" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 288 )
+
+[node name="Tree_1_green372" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 0, 272 )
+
+[node name="Tree_1_green373" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 0, 304 )
+
+[node name="Tree_1_green374" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 312 )
+
+[node name="Tree_1_green375" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 320 )
+
+[node name="Tree_1_green376" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 344 )
+
+[node name="Tree_1_green377" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 88, 336 )
+
+[node name="Tree_1_green378" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 328 )
+
+[node name="Tree_1_green379" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 24, 344 )
+
+[node name="Tree_1_green380" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 328 )
+
+[node name="Tree_1_green381" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 360 )
+
+[node name="Tree_1_green382" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 16, 368 )
+
+[node name="Tree_1_green383" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 384 )
+
+[node name="Tree_1_green384" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 400 )
+
+[node name="Tree_1_green385" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 432 )
+
+[node name="Tree_1_green387" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 48, 448 )
+
+[node name="Tree_1_green388" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 80, 472 )
+
+[node name="Tree_1_green389" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 456 )
+
+[node name="Tree_1_green390" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 472 )
+
+[node name="Tree_1_green391" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 496 )
+
+[node name="Tree_1_green392" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 496 )
+
+[node name="Tree_1_green393" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 496 )
+
+[node name="Tree_1_green394" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 520 )
+
+[node name="Tree_1_green395" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 80, 512 )
+
+[node name="Tree_1_green396" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 512 )
+
+[node name="Tree_1_green401" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 40, 536 )
+
+[node name="Tree_1_green402" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 64, 560 )
+
+[node name="Tree_1_green403" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 24, 560 )
+
+[node name="Tree_1_green404" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 0, 536 )
+
+[node name="Tree_1_green420" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 128, 536 )
+
+[node name="Tree_1_green419" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 104, 552 )
+
+[node name="Tree_1_green405" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 72, 584 )
+
+[node name="Tree_1_green406" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 584 )
+
+[node name="Tree_1_green407" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 608 )
+
+[node name="Tree_1_green408" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 48, 608 )
+
+[node name="Tree_1_green412" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 72, 632 )
+
+[node name="Tree_1_green413" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 32, 640 )
+
+[node name="Tree_1_green414" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 56, 664 )
+
+[node name="Tree_1_green415" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 40, 688 )
+
+[node name="Tree_1_green416" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 16, 712 )
+
+[node name="Tree_1_green417" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 8, 672 )
+
+[node name="Tree_1_green418" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 88, 656 )
+
+[node name="Tree_1_green410" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 632 )
+
+[node name="Tree_1_green409" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 104, 608 )
+
+[node name="Tree_1_green411" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 120, 656 )
+
+[node name="Tree_1_green397" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 80, 536 )
+
+[node name="Tree_1_green398" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 112, 584 )
+
+[node name="Tree_1_green399" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 136, 608 )
+
+[node name="Tree_1_green400" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 624 )
+
+[node name="Tree_1_green386" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 40, 416 )
+
+[node name="Tree_1_green349" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 96, 184 )
+
+[node name="Tree_1_green344" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 96, 112 )
+
+[node name="Tree_1_green345" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 128, 120 )
+
+[node name="Tree_1_green346" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 104, 144 )
+
+[node name="Tree_1_green324" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 168, 600 )
+
+[node name="Tree_1_green112" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 208, 616 )
+
+[node name="Tree_1_green17" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 136 )
+
+[node name="Tree_1_green18" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 136, 200 )
+
+[node name="Tree_1_green158" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 152, 152 )
+
+[node name="Grass" type="YSort" parent="YSort"]
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Items" type="YSort" parent="YSort"]
+
+[node name="Rivers" type="YSort" parent="YSort"]
+
+[node name="River_1" parent="YSort/Rivers" instance=ExtResource( 12 )]
+position = Vector2( 0, 805 )
+
+[node name="GUI" parent="." instance=ExtResource( 4 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "Reverb"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+pitch_scale = 0.8
+
+[node name="HeartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
