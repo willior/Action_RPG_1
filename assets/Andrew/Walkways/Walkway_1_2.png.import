@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Walkway_1_1.png-70664fcf828652de75664fced65ecd0f.stex"
+path="res://.import/Walkway_1_2.png-5d24f71627ae4f1e9d4fd0502ef30a51.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Andrew/Walkways/Walkway_1_1.png"
-dest_files=[ "res://.import/Walkway_1_1.png-70664fcf828652de75664fced65ecd0f.stex" ]
+source_file="res://assets/Andrew/Walkways/Walkway_1_2.png"
+dest_files=[ "res://.import/Walkway_1_2.png-5d24f71627ae4f1e9d4fd0502ef30a51.stex" ]
 
 [params]
 
