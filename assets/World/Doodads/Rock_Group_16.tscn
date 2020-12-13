@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/Andrew/Desert assets/rocks/rock_group_16.png" type="Texture" id=1]
+[ext_resource path="res://assets/Shadows/ExtraLargeShadow.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.3593
+height = 76.1639
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 3.30425
+height = 13.2538
+
+[node name="Rock_Group_16" type="StaticBody2D"]
+
+[node name="ShadowSprite" type="Sprite" parent="."]
+position = Vector2( 3.59627, 0.90833 )
+rotation = -0.0698132
+scale = Vector2( 1.56349, 0.919902 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.5636, -3.57628e-07 )
+rotation = 1.43117
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 38.7541, -2.22724 )
+rotation = 1.5708
+shape = SubResource( 2 )
