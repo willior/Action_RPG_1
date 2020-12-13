@@ -155,7 +155,7 @@ position = Vector2( 207.071, 534.98 )
 position = Vector2( 261.004, 524.12 )
 
 [node name="Rock_Group_12" parent="YSort/Doodads" instance=ExtResource( 14 )]
-position = Vector2( 72, 272 )
+position = Vector2( 71.3701, 272 )
 
 [node name="Rock_Group_4" parent="YSort/Doodads" instance=ExtResource( 18 )]
 position = Vector2( 833, 199 )
