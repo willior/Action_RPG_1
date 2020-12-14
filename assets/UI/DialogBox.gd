@@ -2,11 +2,14 @@ extends Control
 
 export(String, FILE, "*.json") var extenal_file = ''
 
+const BUTTON = preload("Dialog/Dialog_Button.tscn")
+
 onready var player = get_node("/root/World/YSort/Player")
 
 var dialog_index = 0
 var speakerName = ""
 var next_icon_modulator = 1
+var waiting_for_answer = false
 
 onready var label = $Text/RichTextLabel
 
@@ -116,8 +119,9 @@ func event_handler(event):
 			update_name(event)
 			update_text(event['question'])
 			for o in event['options']:
-				var button = Button.new()
-				button.text = o['label']
+				var button = BUTTON.instance()
+				button.get_node("Label").bbcode_text = o['label']
+				# button.bbcode_text = o['label']
 				if event.has('variable'):
 					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
 				else:
@@ -127,7 +131,7 @@ func event_handler(event):
 					else:
 						# Continue
 						button.connect("pressed", self, "change_position", [button, 0])
-				# $Options.add_child(button)
+				$OptionsRect/Options.add_child(button)
 
 func _on_TimerNext_timeout():
 	if $Text/Sprite.position.x == 268:

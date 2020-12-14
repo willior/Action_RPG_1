@@ -19,6 +19,7 @@ anchor_bottom = 1.0
 margin_bottom = 1.52588e-05
 script = ExtResource( 4 )
 __meta__ = {
+"_edit_horizontal_guides_": [ -59.0 ],
 "_edit_use_anchors_": false
 }
 
@@ -76,63 +77,30 @@ visible = false
 position = Vector2( 265, 43 )
 texture = ExtResource( 3 )
 
-[node name="AnswerRect" type="TextureRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="OptionsRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" type="VBoxContainer" parent="AnswerRect"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 268.0
-margin_bottom = 48.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button1" type="Button" parent="AnswerRect/Options"]
-margin_right = 264.0
-margin_bottom = 20.0
-button_mask = 0
-flat = true
-
-[node name="Label" type="RichTextLabel" parent="AnswerRect/Options/Button1"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-bbcode_text = "option1"
-text = "option1"
-scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button2" type="Button" parent="AnswerRect/Options"]
-margin_top = 24.0
-margin_right = 264.0
-margin_bottom = 44.0
-button_mask = 0
-flat = true
-
-[node name="Label" type="RichTextLabel" parent="AnswerRect/Options/Button2"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = -4.0
-margin_bottom = 8.0
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-bbcode_text = "option1"
-text = "option1"
-scroll_active = false
+[node name="Options" type="VBoxContainer" parent="OptionsRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -60.0
+margin_top = -20.0
+margin_right = 60.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
