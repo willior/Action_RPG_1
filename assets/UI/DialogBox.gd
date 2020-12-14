@@ -21,7 +21,7 @@ var dialog_script = [
 	}
 ]
 
-func _process(delta):
+func _process(_delta):
 	if waiting_for_answer:
 		$OptionsRect.visible = finished
 	else:
@@ -45,7 +45,6 @@ func file(file_path):
 func parse_text(text):
 	# This will parse the text and automatically format some of your available variables
 	var end_text = text
-	
 	var c_variable
 	for g in Global.custom_variables:
 		if Global.custom_variables.has(g):
@@ -72,9 +71,12 @@ func _input(event):
 #	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
 #		get_tree().set_input_as_handled()
 #		load_dialog()
-	if event.is_action_pressed("attack") || event.is_action_pressed("examine") || event.is_action_pressed("item"):
-		get_tree().set_input_as_handled()
-		load_dialog()
+	if event.is_action_pressed("ui_accept"):
+		if waiting_for_answer:
+			return
+		else:
+			get_tree().set_input_as_handled()
+			load_dialog()
 		
 func update_name(event):
 	# This function will search for the name key and try to parse it into the NameLabel node of the dialog
@@ -119,6 +121,7 @@ func load_dialog():
 		finished = true
 
 func event_handler(event):
+	print(event)
 	match event:
 		{'text'}, {'name', 'text'}:
 			finished = false
@@ -135,6 +138,9 @@ func event_handler(event):
 				# button.bbcode_text = o['label']
 				if event.has('variable'):
 					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
+					print(button)
+					print(event['variable'])
+					print(o)
 				else:
 					# Checking for checkpoints
 					if o['value'] == '0':
@@ -143,6 +149,29 @@ func event_handler(event):
 						# Continue
 						button.connect("pressed", self, "change_position", [button, 0])
 				$OptionsRect/Options.add_child(button)
+				$OptionsRect/Options.get_child(0).grab_focus()
+				
+func reset_options():
+	# Clearing out the options after one was selected.
+	for option in $OptionsRect/Options.get_children():
+		option.queue_free()
+		
+func change_position(i, checkpoint):
+	print('[!] Going back ', checkpoint, i)
+	print('    From ', dialog_index, ' to ', dialog_index - checkpoint)
+	waiting_for_answer = false
+	dialog_index += checkpoint
+	print('    dialog_index = ', dialog_index)
+	reset_options()
+	load_dialog()
+
+func _on_option_selected(option, variable, value):
+	Global.custom_variables[variable] = value
+	waiting_for_answer = false
+	reset_options()
+	load_dialog()
+	print('[!] Option selected: ', option.text, ' value= ' , value)
+	print(Global.custom_variables)
 
 func _on_TimerNext_timeout():
 	if $Text/Sprite.position.x == 268:

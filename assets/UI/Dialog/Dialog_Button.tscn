@@ -10,6 +10,9 @@ margin_right = 120.0
 margin_bottom = 20.0
 button_mask = 0
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="RichTextLabel" parent="."]
 anchor_right = 1.0

@@ -122,6 +122,7 @@ focus_neighbour_right = NodePath("../NewGame")
 focus_neighbour_bottom = NodePath("../NewGame")
 focus_next = NodePath("../NewGame")
 focus_previous = NodePath("../NewGame")
+button_mask = 0
 texture_normal = ExtResource( 11 )
 texture_focused = ExtResource( 12 )
 
