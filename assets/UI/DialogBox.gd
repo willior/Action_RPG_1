@@ -6,9 +6,9 @@ onready var player = get_node("/root/World/YSort/Player")
 
 var dialog_index = 0
 var speakerName = ""
-var next_icon_modulator
+var next_icon_modulator = 1
 
-onready var label = $RichTextLabel
+onready var label = $Text/RichTextLabel
 
 var dialog_script = [
 	{
@@ -69,13 +69,13 @@ func _input(event):
 func update_name(event):
 	# This function will search for the name key and try to parse it into the NameLabel node of the dialog
 	if event.has('name'):
-		$NameLabel.bbcode_text = parse_text(event['name'])
+		$Text/NameLabel.bbcode_text = parse_text(event['name'])
 #		if '[name]' in event['name']:
 #			$CloseUp.visible = true
 #		else:
 #			$CloseUp.visible = false
 	else:
-		$NameLabel.bbcode_text = ''
+		$Text/NameLabel.bbcode_text = ''
 		# $CloseUp.visible = false
 
 func update_text(text):
@@ -101,7 +101,7 @@ func load_dialog():
 			event_handler(dialog_script[dialog_index])
 			# label.set_visible_characters(speakerName.length())
 			$TimerText.start()
-			$Sprite.hide()
+			$Text/Sprite.hide()
 	# if the amount of visible characters is less than the total amount of characters:
 	else:
 		# displays all the characters in the current dialog_index
@@ -127,14 +127,14 @@ func event_handler(event):
 					else:
 						# Continue
 						button.connect("pressed", self, "change_position", [button, 0])
-				$Options.add_child(button)
+				# $Options.add_child(button)
 
 func _on_TimerNext_timeout():
-	if $Sprite.position.x == 266:
+	if $Text/Sprite.position.x == 268:
 		next_icon_modulator = -1
-	elif $Sprite.position.x == 263:
+	elif $Text/Sprite.position.x == 265:
 		next_icon_modulator = 1
-	$Sprite.position.x += next_icon_modulator
+	$Text/Sprite.position.x += next_icon_modulator
 
 func _on_TimerText_timeout():
 	if label.get_visible_characters() <= label.get_total_character_count():
@@ -143,4 +143,4 @@ func _on_TimerText_timeout():
 	else:
 		$AudioStreamPlayer.stop()
 		$TimerText.stop()
-		$Sprite.show()
+		$Text/Sprite.show()

@@ -54,13 +54,16 @@ func talk():
 
 		0:
 			dialogBox.dialog_script = [
+				{'text': "Hello.",
+				'name': speaker},
 				{
-					'question': 'Choose your favourite color',
+					'name': speaker,
+					'question': 'Yes or no?',
 					'options': [
-						{ 'label': 'Red', 'value': '#f7411d'},
-						{ 'label': 'Blue', 'value': '#1da0f7'}
+						{ 'label': 'Yes', 'value': 'true'},
+						{ 'label': 'No', 'value': 'false'}
 					],
-					'variable': 'fav_color'
+					'variable': 'answer'
 				}
 			]
 
