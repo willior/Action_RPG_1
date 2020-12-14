@@ -18,43 +18,51 @@ func ready():
 func talk():
 	var dialogBox = DialogBox.instance()
 	match dialog_index:
+#		0:
+#			dialogBox.dialog_script = [
+#				{'text': "Hello.",
+#				'name': speaker},
+#				{'text': "As you can see, I am a skeleton.",
+#				'name': speaker},
+#				{'text': "Unless, of course, you can't see.",
+#				'name': speaker},
+#				{'text': "In which case...",
+#				'name': speaker},
+#				{'text': "I'm still a skeleton.",
+#				'name': speaker},
+#				{'text': "Hahahahahahaha!!",
+#				'name': speaker}
+#			]
+#			dialog_index += 1
+#		1:
+#			dialogBox.dialog_script = [
+#				{'text': "Oh. You again.",
+#				'name': speaker},
+#				{'text': "Like you, I do not know why I exist.",
+#				'name': speaker},
+#				{'text': "...",
+#				'name': speaker},
+#				{'text': "I suppose that was a bit rude of me to assume.",
+#				'name': speaker},
+#				{'text': "Don't take it personally!",
+#				'name': speaker},
+#				{'text': "Hahahahahahaha!!",
+#				'name': speaker}
+#			]
+#			dialog_index = 0
+#			examine_index = 1
+
 		0:
 			dialogBox.dialog_script = [
-				{'text': "Hello.",
-				'name': speaker},
-				{'text': "As you can see, I am a skeleton.",
-				'name': speaker},
-				{'text': "Unless, of course, you can't see.",
-				'name': speaker},
-				{'text': "In which case...",
-				'name': speaker},
-				{'text': "I'm still a skeleton.",
-				'name': speaker},
-				{'text': "Hahahahahahaha!!",
-				'name': speaker}
+				{
+					'question': 'Choose your favourite color',
+					'options': [
+						{ 'label': 'Red', 'value': '#f7411d'},
+						{ 'label': 'Blue', 'value': '#1da0f7'}
+					],
+					'variable': 'fav_color'
+				}
 			]
-			dialog_index += 1
-		1:
-			dialogBox.dialog_script = [
-				{'text': "Oh. You again.",
-				'name': speaker},
-				{'text': "Like you, I do not know why I exist.",
-				'name': speaker},
-				{'text': "...",
-				'name': speaker},
-				{'text': "I suppose that was a bit rude of me to assume.",
-				'name': speaker},
-				{'text': "Don't take it personally!",
-				'name': speaker},
-				{'text': "Hahahahahahaha!!",
-				'name': speaker}
-			]
-			dialog_index = 0
-			examine_index = 1
-	
-#	dialogBox.speakerName = str(speaker)
-#	for x in range(0, dialogBox.dialog.size()):
-#		dialogBox.dialog[x] = str(speaker + dialogBox.dialog[x])
 
 	get_node("/root/World/GUI").add_child(dialogBox)
 	

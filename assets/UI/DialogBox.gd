@@ -102,12 +102,10 @@ func load_dialog():
 			# label.set_visible_characters(speakerName.length())
 			$TimerText.start()
 			$Sprite.hide()
-			print('advancing to next dialog index')
 	# if the amount of visible characters is less than the total amount of characters:
 	else:
 		# displays all the characters in the current dialog_index
 		label.set_visible_characters(label.get_total_character_count())
-		print('displaying all characters')
 
 func event_handler(event):
 	match event:
@@ -117,6 +115,19 @@ func event_handler(event):
 		{'question', ..}:
 			update_name(event)
 			update_text(event['question'])
+			for o in event['options']:
+				var button = Button.new()
+				button.text = o['label']
+				if event.has('variable'):
+					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
+				else:
+					# Checking for checkpoints
+					if o['value'] == '0':
+						button.connect("pressed", self, "change_position", [button, int(event['checkpoint'])])
+					else:
+						# Continue
+						button.connect("pressed", self, "change_position", [button, 0])
+				$Options.add_child(button)
 
 func _on_TimerNext_timeout():
 	if $Sprite.position.x == 266:
@@ -133,4 +144,3 @@ func _on_TimerText_timeout():
 		$AudioStreamPlayer.stop()
 		$TimerText.stop()
 		$Sprite.show()
-		print('text stopping')

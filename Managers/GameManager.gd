@@ -20,7 +20,7 @@ var player
 
 func _ready():
 	print('ready')
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 # warning-ignore:unused_argument
 func _process(delta):

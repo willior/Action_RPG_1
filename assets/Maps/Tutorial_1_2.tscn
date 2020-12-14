@@ -442,7 +442,7 @@ position = Vector2( 372, 468 )
 position = Vector2( 401.809, 453.54 )
 
 [node name="Tree_1_green_alt187" parent="YSort/Trees" instance=ExtResource( 20 )]
-position = Vector2( 433.557, 465.446 )
+position = Vector2( 432, 464 )
 
 [node name="Tree_1_green_alt188" parent="YSort/Trees" instance=ExtResource( 20 )]
 position = Vector2( 472.846, 453.937 )
@@ -868,7 +868,7 @@ position = Vector2( 305.323, 82.9291 )
 position = Vector2( 326.554, 97.0173 )
 
 [node name="Tree_1_green_alt19" parent="YSort/Trees" instance=ExtResource( 20 )]
-position = Vector2( 348.579, 119.042 )
+position = Vector2( 349.853, 119.085 )
 
 [node name="Tree_1_green_alt20" parent="YSort/Trees" instance=ExtResource( 20 )]
 position = Vector2( 363.858, 101.184 )
