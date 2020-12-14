@@ -60,8 +60,8 @@ func talk():
 					'name': speaker,
 					'question': 'Yes or no?',
 					'options': [
-						{ 'label': 'Yes', 'value': 'true'},
-						{ 'label': 'No', 'value': 'false'}
+						{ 'label': 'Yes!', 'value': 'true'},
+						{ 'label': 'No.', 'value': 'false'}
 					],
 					'variable': 'answer'
 				}

@@ -9,6 +9,7 @@ onready var player = get_node("/root/World/YSort/Player")
 var dialog_index = 0
 var speakerName = ""
 var next_icon_modulator = 1
+var finished = false
 var waiting_for_answer = false
 
 onready var label = $Text/RichTextLabel
@@ -19,6 +20,12 @@ var dialog_script = [
 		'text': 'default text',
 	}
 ]
+
+func _process(delta):
+	if waiting_for_answer:
+		$OptionsRect.visible = finished
+	else:
+		$OptionsRect.visible = false
 
 func file(file_path):
 	# Reading a json file to use as a dialog.
@@ -109,13 +116,17 @@ func load_dialog():
 	else:
 		# displays all the characters in the current dialog_index
 		label.set_visible_characters(label.get_total_character_count())
+		finished = true
 
 func event_handler(event):
 	match event:
 		{'text'}, {'name', 'text'}:
+			finished = false
 			update_name(event)
 			update_text(event['text'])
 		{'question', ..}:
+			finished = false
+			waiting_for_answer = true
 			update_name(event)
 			update_text(event['question'])
 			for o in event['options']:
@@ -148,3 +159,4 @@ func _on_TimerText_timeout():
 		$AudioStreamPlayer.stop()
 		$TimerText.stop()
 		$Text/Sprite.show()
+		finished = true
