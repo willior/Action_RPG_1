@@ -14,12 +14,7 @@ var waiting_for_answer = false
 
 onready var label = $Text/RichTextLabel
 
-var dialog_script = [
-	{
-		'name': 'default',
-		'text': 'default text',
-	}
-]
+var dialog_script
 
 func _process(_delta):
 	if waiting_for_answer:
@@ -71,6 +66,7 @@ func _input(event):
 #	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
 #		get_tree().set_input_as_handled()
 #		load_dialog()
+		
 	if event.is_action_pressed("ui_accept"):
 		if waiting_for_answer:
 			return
@@ -133,8 +129,8 @@ func event_handler(event):
 			update_text(event['question'])
 			for o in event['options']:
 				var button = BUTTON.instance()
-				button.get_node("Label").bbcode_text = o['label']
-				# button.bbcode_text = o['label']
+				# button.get_node("Label").bbcode_text = o['label']
+				button.text = o['label']
 				if event.has('variable'):
 					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
 				else:
@@ -147,13 +143,12 @@ func event_handler(event):
 						
 				$OptionsRect/Options.add_child(button)
 				print($OptionsRect/Options.get_child(0).get_path())
-				$OptionsRect/Options.get_child(0).grab_focus()
-				
+
 func reset_options():
 	# Clearing out the options after one was selected.
 	for option in $OptionsRect/Options.get_children():
 		option.queue_free()
-		
+
 func change_position(i, checkpoint):
 	print('[!] Going back ', checkpoint, i)
 	print('    From ', dialog_index, ' to ', dialog_index - checkpoint)
@@ -187,3 +182,7 @@ func _on_TimerText_timeout():
 		$TimerText.stop()
 		$Text/Sprite.show()
 		finished = true
+		if waiting_for_answer:
+			$TimerDelaySelect.start()
+			yield($TimerDelaySelect, "timeout")
+			get_node("/root/World/GUI/DialogBox/OptionsRect/Options/Button").grab_focus()

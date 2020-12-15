@@ -78,7 +78,6 @@ position = Vector2( 265, 43 )
 texture = ExtResource( 3 )
 
 [node name="OptionsRect" type="TextureRect" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -91,14 +90,12 @@ __meta__ = {
 }
 
 [node name="Options" type="VBoxContainer" parent="OptionsRect"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -60.0
-margin_top = -20.0
-margin_right = 60.0
-margin_bottom = 24.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -113,6 +110,10 @@ autostart = true
 [node name="TimerText" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
+
+[node name="TimerDelaySelect" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
