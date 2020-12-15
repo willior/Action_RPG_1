@@ -1,0 +1,121 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/Audio/Thunder_1.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/Misc/WhiteScreen.png" type="Texture" id=2]
+[ext_resource path="res://assets/Maps/1-1_Forest.gd" type="Script" id=3]
+[ext_resource path="res://assets/Weather/Lightning.gd" type="Script" id=4]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 1.0
+trail_divisor = 4
+trail_size_modifier = SubResource( 2 )
+emission_shape = 2
+emission_box_extents = Vector3( 160, 90, 0 )
+flag_disable_z = true
+direction = Vector3( 0.1, 1, 0 )
+spread = 5.0
+gravity = Vector3( 5, 220, 0 )
+initial_velocity = 320.0
+initial_velocity_random = 0.2
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 1.0
+linear_accel_random = 0.5
+angle = 5.0
+angle_random = 1.0
+color = Color( 0.239216, 0.301961, 0.47451, 1 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Lightning1"
+length = 10.0
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("Light2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.02, 0.04, 0.08, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0, 1.0, 2.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.44 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Weather" type="Node2D"]
+pause_mode = 1
+script = ExtResource( 3 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+z_index = 2
+color = Color( 0.333333, 0.34902, 0.639216, 1 )
+
+[node name="RainParallaxOverlay" type="ParallaxBackground" parent="."]
+layer = 0
+
+[node name="ParallaxLayerBackground" type="ParallaxLayer" parent="RainParallaxOverlay"]
+motion_scale = Vector2( 0.7, 0.7 )
+motion_mirroring = Vector2( 320, 180 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Rain" type="Node2D" parent="RainParallaxOverlay/ParallaxLayerBackground"]
+
+[node name="Particle2D" type="Particles2D" parent="RainParallaxOverlay/ParallaxLayerBackground/Rain"]
+position = Vector2( 160, 0 )
+amount = 4000
+preprocess = 1.0
+explosiveness = 0.1
+randomness = 1.0
+visibility_rect = Rect2( -160, -90, 320, 180 )
+process_material = SubResource( 3 )
+
+[node name="WeatherCanvas" type="CanvasLayer" parent="."]
+
+[node name="Lightning" type="Node2D" parent="WeatherCanvas"]
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherCanvas/Lightning"]
+anims/Lightning1 = SubResource( 4 )
+
+[node name="Light2D" type="Light2D" parent="WeatherCanvas/Lightning"]
+position = Vector2( 160, 90 )
+texture = ExtResource( 2 )
+energy = 0.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WeatherCanvas/Lightning"]
+stream = ExtResource( 1 )
+bus = "Reverb"
+
+[node name="Timer" type="Timer" parent="WeatherCanvas/Lightning"]
+one_shot = true
+autostart = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="timeout" from="WeatherCanvas/Lightning/Timer" to="WeatherCanvas/Lightning" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

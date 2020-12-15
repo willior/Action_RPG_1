@@ -3,7 +3,7 @@ extends Node2D
 onready var timer = $Timer
 onready var tween = $Tween
 onready var shade = $CanvasModulate
-onready var rain = $ParallaxOverlay/ParallaxLayerBackground/Rain/Particle2D
+onready var rain = $RainParallaxOverlay/ParallaxLayerBackground/Rain/Particle2D
 onready var lightning = $WeatherCanvas
 onready var SFX = get_parent().get_node("SFX")
 
