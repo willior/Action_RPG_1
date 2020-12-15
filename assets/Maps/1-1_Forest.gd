@@ -37,14 +37,15 @@ func rain_stop():
 		"volume_db",
 		0,
 		-80,
-		weather_tween_time * 4,
+		weather_tween_time * 3,
 		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT
+		Tween.EASE_IN_OUT
 		)
 		
 	tween.start()
 
 func _on_Tween_tween_all_completed():
+	print('rain gone')
 	shade.queue_free()
 	rain.queue_free()
 	lightning.queue_free()

@@ -210,7 +210,6 @@ func update_wander_state():
 		var newBatSpawner = BatSpawner.instance()
 		get_parent().call_deferred("add_child", newBatSpawner)
 		newBatSpawner.global_position = global_position
-		print("creating spawner, deleting bat")
 		queue_free()
 	else:
 		state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument

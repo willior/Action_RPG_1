@@ -19,19 +19,11 @@ var existing_inventory
 var player
 
 func _ready():
-	print('ready')
 	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	pass
 	
 # warning-ignore:unused_argument
-func _process(delta):
-	if not player && !on_title_screen:
-		print('initializing player')
-		initialize_player()
-		return
-		
-# warning-ignore:unused_argument
 func reinitialize_player(inventory):
-	print('reinit')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	if not player:
 		return
@@ -40,12 +32,16 @@ func reinitialize_player(inventory):
 	player.inventory.set_items(inventory.get_items())
 	
 func initialize_player():
+	print('attempting to initialize player...')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
+	
 	if not player:
+		print('player not created; cannot initialize.')
 		return
 	
 	emit_signal("player_initialized", player)
 	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
+	print('player successfully initialized.')
 	
 	if !ResourceLoader.exists("user://inventory.tres"):
 		player.inventory.add_item("Potion", 1)

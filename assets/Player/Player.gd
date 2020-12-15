@@ -87,6 +87,7 @@ func _ready():
 		inventory.set_items(Global.get_attribute("inventory").get_items())
 		inventory.items_set = false
 		GameManager.reinitialize_player(inventory)
+	else: GameManager.initialize_player()
 
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4

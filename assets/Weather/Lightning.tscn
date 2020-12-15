@@ -46,6 +46,7 @@ energy = 0.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "Reverb"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

@@ -2015,3 +2015,5 @@ stream = ExtResource( 3 )
 [editable path="Map/Exit_toDesert"]
 
 [editable path="Map/ParallaxOverlay/ParallaxLayerBackground/Rain"]
+
+[editable path="Map/WeatherCanvas/Lightning"]

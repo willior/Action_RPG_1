@@ -121,7 +121,6 @@ func load_dialog():
 		finished = true
 
 func event_handler(event):
-	print(event)
 	match event:
 		{'text'}, {'name', 'text'}:
 			finished = false
@@ -138,9 +137,6 @@ func event_handler(event):
 				# button.bbcode_text = o['label']
 				if event.has('variable'):
 					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
-					print(button)
-					print(event['variable'])
-					print(o)
 				else:
 					# Checking for checkpoints
 					if o['value'] == '0':
@@ -148,7 +144,9 @@ func event_handler(event):
 					else:
 						# Continue
 						button.connect("pressed", self, "change_position", [button, 0])
+						
 				$OptionsRect/Options.add_child(button)
+				print($OptionsRect/Options.get_child(0).get_path())
 				$OptionsRect/Options.get_child(0).grab_focus()
 				
 func reset_options():

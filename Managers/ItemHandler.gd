@@ -1,7 +1,6 @@
 extends Node
 
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-onready var player = get_node("/root/World/YSort/Player")
 
 func item_handler(item_used):
 	# 0 Consumable
