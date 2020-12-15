@@ -10,7 +10,7 @@
 [ext_resource path="res://World.gd" type="Script" id=8]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=9]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=10]
-[ext_resource path="res://assets/Andrew/Walkways/Walkway_1_4.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/Andrew/Walkways/Pathway_1_4.png" type="Texture" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Flowers_sheet_1.png 0"
@@ -93,8 +93,9 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 tile_set = SubResource( 1 )
 format = 1
 
-[node name="Walkway_1_4" parent="Map" instance=ExtResource( 11 )]
+[node name="Walkway_1_4" type="Sprite" parent="Map"]
 position = Vector2( 427, 303 )
+texture = ExtResource( 11 )
 
 [node name="River_4" parent="Map" instance=ExtResource( 4 )]
 position = Vector2( 136, 320 )
