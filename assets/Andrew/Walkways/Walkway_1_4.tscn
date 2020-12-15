@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/Andrew/Walkways/Pathway_1_4.png" type="Texture" id=1]
+
+[node name="Walkway_1_4" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.50457, 0.585007 )
+texture = ExtResource( 1 )

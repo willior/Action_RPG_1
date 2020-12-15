@@ -128,7 +128,7 @@ map_file = "res://assets/Maps/Tutorial_1_3.tscn"
 selected_location = Vector2( 35, 160 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Exit_ToTutorial_1_3"]
-position = Vector2( 127.494, 55.3928 )
+position = Vector2( 127, 55 )
 shape = SubResource( 3 )
 
 [node name="Exit_ToTutorial_1_6" parent="Map" instance=ExtResource( 8 )]

@@ -4,64 +4,64 @@
 [ext_resource path="res://assets/World/Rivers/river_edge_2.png" type="Texture" id=2]
 
 [sub_resource type="SegmentShape2D" id=1]
-a = Vector2( -252.052, -9.60794 )
-b = Vector2( -131.348, 18.933 )
+a = Vector2( -248.803, -13.0817 )
+b = Vector2( -130.178, 14.2933 )
 
 [sub_resource type="SegmentShape2D" id=2]
-a = Vector2( -3.01306, -33.872 )
-b = Vector2( 69.4602, -59.5257 )
+a = Vector2( -0.683014, -42.2241 )
+b = Vector2( 72.817, -63.0991 )
 
 [sub_resource type="SegmentShape2D" id=3]
-a = Vector2( -2.41464, -34.3127 )
-b = Vector2( -35.4087, -0.41861 )
+a = Vector2( -0.433014, -39.9741 )
+b = Vector2( -41.558, 0.150902 )
 
 [sub_resource type="SegmentShape2D" id=4]
-a = Vector2( -34.9633, -0.864059 )
-b = Vector2( -104.453, 4.92679 )
+a = Vector2( -28.183, -3.2241 )
+b = Vector2( -102.933, 2.7759 )
 
 [sub_resource type="SegmentShape2D" id=5]
-a = Vector2( -103.852, 4.82165 )
-b = Vector2( -153.898, 22.2993 )
+a = Vector2( -101.808, 2.6509 )
+b = Vector2( -165.933, 21.0259 )
 
 [sub_resource type="SegmentShape2D" id=6]
-a = Vector2( -149.438, 22.3476 )
-b = Vector2( -216.261, 21.8539 )
+a = Vector2( -141.759, 17.4709 )
+b = Vector2( -221.808, 18.2759 )
 
 [sub_resource type="SegmentShape2D" id=7]
-a = Vector2( -213.207, 22.9338 )
-b = Vector2( -307.578, -11.5548 )
+a = Vector2( -207.683, 21.0259 )
+b = Vector2( -307.808, -13.5991 )
 
 [sub_resource type="SegmentShape2D" id=8]
-a = Vector2( -300.648, -5.5254 )
-b = Vector2( -328.367, -35.4915 )
+a = Vector2( -296.333, -5.2453 )
+b = Vector2( -325.458, -39.3703 )
 
 [sub_resource type="SegmentShape2D" id=9]
-a = Vector2( -324.996, -31.7458 )
-b = Vector2( -399.893, -68.6949 )
+a = Vector2( -321.183, -35.0991 )
+b = Vector2( -399.279, -72.3058 )
 
 [sub_resource type="SegmentShape2D" id=10]
-a = Vector2( -398.895, -68.5724 )
-b = Vector2( -478.211, -55.5895 )
+a = Vector2( -398.317, -72.1218 )
+b = Vector2( -482.497, -59.9268 )
 
 [sub_resource type="SegmentShape2D" id=11]
-a = Vector2( 188.813, -31 )
-b = Vector2( 273.288, -24.0274 )
+a = Vector2( 187.942, -36.0991 )
+b = Vector2( 282.817, -26.7241 )
 
 [sub_resource type="SegmentShape2D" id=12]
-a = Vector2( 273.03, -24.0041 )
-b = Vector2( 385.157, -46.7798 )
+a = Vector2( 268.067, -25.5991 )
+b = Vector2( 389.317, -50.5991 )
 
 [sub_resource type="SegmentShape2D" id=13]
-a = Vector2( 384.823, -46.6129 )
-b = Vector2( 440.779, -49.7642 )
+a = Vector2( 389.192, -50.5157 )
+b = Vector2( 440.811, -54.725 )
 
 [sub_resource type="SegmentShape2D" id=14]
-a = Vector2( 439.571, -49.936 )
-b = Vector2( 483.323, -34.1145 )
+a = Vector2( 439.196, -54.7356 )
+b = Vector2( 485.317, -35.3491 )
 
 [sub_resource type="SegmentShape2D" id=15]
-a = Vector2( 482.649, -34.7182 )
-b = Vector2( 499.131, -11.5549 )
+a = Vector2( 484.442, -36.2241 )
+b = Vector2( 502.067, -16.3491 )
 
 [node name="River_2" type="StaticBody2D"]
 
@@ -81,7 +81,7 @@ position = Vector2( 477.433, 59.4741 )
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2( 477.433, 59.4741 )
+position = Vector2( 478.058, 56.8491 )
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
@@ -93,7 +93,7 @@ position = Vector2( 477.433, 59.4741 )
 shape = SubResource( 5 )
 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
-position = Vector2( 477.433, 59.4741 )
+position = Vector2( 474.129, 59.4741 )
 shape = SubResource( 6 )
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
@@ -113,7 +113,7 @@ position = Vector2( 477.433, 59.4741 )
 shape = SubResource( 10 )
 
 [node name="CollisionShape2D11" type="CollisionShape2D" parent="."]
-position = Vector2( 477.433, 59.4741 )
+position = Vector2( 477.308, 59.4741 )
 shape = SubResource( 11 )
 
 [node name="CollisionShape2D12" type="CollisionShape2D" parent="."]
