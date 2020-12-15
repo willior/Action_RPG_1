@@ -1790,7 +1790,7 @@ nodes/BlendSpace2D/position = Vector2( -70, 140 )
 nodes/TimeScale/node = SubResource( 77 )
 nodes/TimeScale/position = Vector2( 160, 140 )
 nodes/output/position = Vector2( 400, 150 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
+node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=79]
 animation = "AttackShadeLeft"

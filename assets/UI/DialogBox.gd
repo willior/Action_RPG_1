@@ -11,6 +11,7 @@ var speakerName = ""
 var next_icon_modulator = 1
 var finished = false
 var waiting_for_answer = false
+var waiting_for_input = false
 
 onready var label = $Text/RichTextLabel
 
@@ -68,7 +69,11 @@ func _input(event):
 #		load_dialog()
 		
 	if event.is_action_pressed("ui_accept"):
-		if waiting_for_answer:
+		if !$TimerDelaySelect.is_stopped():
+			return
+		elif waiting_for_input:
+			$AudioSelect.play()
+			waiting_for_input = false
 			return
 		else:
 			get_tree().set_input_as_handled()
@@ -142,7 +147,6 @@ func event_handler(event):
 						button.connect("pressed", self, "change_position", [button, 0])
 						
 				$OptionsRect/Options.add_child(button)
-				print($OptionsRect/Options.get_child(0).get_path())
 
 func reset_options():
 	# Clearing out the options after one was selected.
@@ -186,3 +190,4 @@ func _on_TimerText_timeout():
 			$TimerDelaySelect.start()
 			yield($TimerDelaySelect, "timeout")
 			get_node("/root/World/GUI/DialogBox/OptionsRect/Options/Button").grab_focus()
+			waiting_for_input = true

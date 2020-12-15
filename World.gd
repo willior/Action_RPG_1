@@ -59,7 +59,3 @@ func _input(event):
 			get_tree().paused = false
 			dim.visible = false
 			stats.visible = false
-
-
-func _on_Timer_timeout():
-	pass # Replace with function body.
