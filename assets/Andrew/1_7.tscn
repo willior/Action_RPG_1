@@ -1,0 +1,86 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/Andrew/1_7.png" type="Texture" id=1]
+[ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World.gd" type="Script" id=4]
+[ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/Misc/RedPixel.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="World" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_vertical_guides_": [ 128.0 ]
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 521.287, 660.964 )
+current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_top = 0.1
+
+[node name="Map" type="Node2D" parent="."]
+pause_mode = 1
+
+[node name="Sprite" type="Sprite" parent="Map"]
+position = Vector2( 2.00226, 2.00226 )
+texture = ExtResource( 1 )
+normal_map = ExtResource( 1 )
+centered = false
+
+[node name="Exit" parent="Map" instance=ExtResource( 2 )]
+position = Vector2( 144, 80 )
+map_file = "res://assets/Maps/Test/Template_2.tscn"
+selected_location = Vector2( 250, 64 )
+
+[node name="CollisionShape2D" parent="Map/Exit" index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Map/Exit"]
+position = Vector2( 7.25, 7.25 )
+scale = Vector2( 15.5, 15.5 )
+texture = ExtResource( 7 )
+
+[node name="YSort" type="YSort" parent="."]
+pause_mode = 1
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+process_priority = 0
+position = Vector2( 521.287, 660.964 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="Doodads" type="YSort" parent="YSort"]
+
+[node name="Plants" type="YSort" parent="YSort"]
+
+[node name="Grass" type="YSort" parent="YSort"]
+
+[node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Items" type="YSort" parent="YSort"]
+
+[node name="GUI" parent="." instance=ExtResource( 8 )]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pitch_scale = 0.8
+bus = "Reverb"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+pitch_scale = 0.8
+
+[node name="HeartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="CoinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[editable path="Map/Exit"]
