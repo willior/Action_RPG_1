@@ -168,7 +168,7 @@ func _on_option_selected(option, variable, value):
 	reset_options()
 	load_dialog()
 	print('[!] Option selected: ', option.text, ' value= ' , value)
-	print(Global.custom_variables)
+	print(Global.custom_variables[variable])
 
 func _on_TimerNext_timeout():
 	if $Text/Sprite.position.x == 268:

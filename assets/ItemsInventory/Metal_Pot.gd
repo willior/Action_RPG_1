@@ -6,6 +6,7 @@ const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 var interactable = true
 var talkable = false
 var examined = false
+var answer
 
 func _ready():
 	if PlayerLog.metal_pot_collected:
@@ -20,16 +21,29 @@ func examine():
 	if !examined: examined = true
 	
 func interact():
+	var dialogBox = DialogBox.instance()
+	dialogBox.dialog_script = [
+		{
+			'question': 'Take the Metal Pot?',
+			'options': [
+				{ 'label': 'Yes', 'value': 'yes'},
+				{ 'label': 'No', 'value': 'no'},
+				{ 'label': 'Touch it first', 'value': 'maybe'}
+			],
+			'variable': 'answer'
+		},
+		{
+			'text': 'You said [answer].'
+		}
+	]
+	get_node("/root/World/GUI").add_child(dialogBox)
+	
+	prints("metal pot: " + str(Global.custom_variables))
+	
+func acquire_item():
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	itemCollectEffect.playSound(1)
 	GameManager.player.inventory.add_item("Metal_Pot", 1)
 	PlayerLog.metal_pot_collected = true
-	
-	var dialogBox = DialogBox.instance()
-	dialogBox.dialog_script = [
-		{'text': "Got Metal Pot!"}
-	]
-	get_node("/root/World/GUI").add_child(dialogBox)
-	
 	queue_free()
