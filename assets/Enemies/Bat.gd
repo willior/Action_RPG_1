@@ -29,7 +29,6 @@ var knockback = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var random_number
 
-
 var interactable = false
 var talkable = false
 var examined = false

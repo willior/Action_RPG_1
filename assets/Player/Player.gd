@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const Notice = preload("res://assets/UI/Notice.tscn")
+const Poison = preload("res://assets/UI/Status/PoisonNotice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
@@ -64,7 +65,6 @@ onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
-onready var poisonAnimation = $PoisonAnimationPlayer
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var interactHitbox = $HitboxPivot/InteractHitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
@@ -98,7 +98,10 @@ func _ready():
 	stats.connect("status_changed", self, "apply_status")
 	stats.connect("no_health", self, "game_over")
 	
-	PlayerStats.status = "not_slow"
+	if PlayerStats.is_poisoned:
+		apply_status("poison")
+		
+	PlayerStats.status = "default_speed"
 
 func _process(delta):
 	match state:
@@ -179,8 +182,8 @@ func move_state(delta):
 		swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/BlendSpace2D/blend_position", input_vector)
-		animationTree.set("parameters/Attack1/blend_position", input_vector)
-		animationTree.set("parameters/Attack2/blend_position", input_vector)
+		animationTree.set("parameters/Attack1/BlendSpace2D/blend_position", input_vector)
+		animationTree.set("parameters/Attack2/BlendSpace2D/blend_position", input_vector)
 		animationTree.set("parameters/Shade/blend_position", input_vector)
 		animationTree.set("parameters/Flash/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
@@ -246,14 +249,27 @@ func move_state(delta):
 			
 func apply_status(status):
 	match status:
+		"default_speed":
+			animationTree.set("parameters/Run/TimeScale/scale", 1)
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
-		"not_slow":
-			animationTree.set("parameters/Run/TimeScale/scale", 1)
 		"poison":
-			poisonAnimation.play("Poison_Start")
-		"not_poison":
-			poisonAnimation.play("Poison_Stop")
+			if !get_node_or_null("/root/World/YSort/Player/PoisonNotice"):
+				var poison = Poison.instance()
+				add_child(poison)
+			else:
+				return
+		"poison_end":
+			print('deleting poison notice')
+			get_node("/root/World/YSort/Player/PoisonNotice").queue_free()
+		"frenzy":
+			$FrenzyAnimationPlayer.play("Start")
+			animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
+			animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
+		"frenzy_end":
+			$FrenzyAnimationPlayer.play("Stop")
+			animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
+			animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
 	
 func move():
 	velocity = move_and_slide(velocity)

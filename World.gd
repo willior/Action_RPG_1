@@ -16,9 +16,16 @@ func _input(event):
 	if event.is_action_pressed("quit_game"):
 		get_tree().quit()
 	
-	if event.is_action_pressed("test"): # T
-		prints("current selected item index: " + str(player.inventory.current_selected_item))
+	if event.is_action_pressed("test1"): # T
+		print('test2: applying frenzy')
+		PlayerStats.status = "frenzy"
+		
+	if event.is_action_pressed("test2"): # Y
+		print("test1: applying poison")
 		PlayerStats.status = "poison"
+		
+	if event.is_action_pressed("test3"): # U
+		prints('text3: PlayerStats.is_poisoned = ' + str(PlayerStats.is_poisoned))
 	
 	if event.is_action_pressed("pause"): # P
 		if get_tree().paused == false:

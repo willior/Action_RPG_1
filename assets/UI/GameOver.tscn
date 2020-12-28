@@ -3,18 +3,10 @@
 [ext_resource path="res://assets/Audio/death.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/UI/GameOver.gd" type="Script" id=2]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=3]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-void fragment() {
-    COLOR = texture(SCREEN_TEXTURE, SCREEN_UV);
-    float avg = (COLOR.r + COLOR.g + COLOR.b) / 3.0;
-    COLOR.rgb = vec3(avg);
-}"
+[ext_resource path="res://assets/Shaders/Monochrome.shader" type="Shader" id=4]
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+shader = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32

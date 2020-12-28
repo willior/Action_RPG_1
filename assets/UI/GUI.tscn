@@ -24,7 +24,6 @@ font_data = ExtResource( 3 )
 
 [node name="GUI" type="CanvasLayer"]
 pause_mode = 2
-layer = 2
 
 [node name="HealthUI" parent="." instance=ExtResource( 11 )]
 pause_mode = 2
@@ -155,6 +154,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 7 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Container" type="VBoxContainer" parent="InventoryUI/Panel"]
 anchor_right = 1.0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/Status/Poison.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Status/Poison.gd" type="Script" id=1]
+[ext_resource path="res://assets/Status/Frenzy.gd" type="Script" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -8,13 +9,14 @@ script/source = "extends Node
 var acceleration = 1600
 var max_speed = 100
 var speed_mod = 0 setget set_speed_mod
+var attack_speed = 1.0 setget set_attack_speed
 var roll_speed = 200
 var shade_speed = 400
 var friction = 800
 var shade_friction = 1600
 
-var max_health = 4 setget set_max_health
-var health = 4 setget set_health
+var max_health = 60 setget set_max_health
+var health = 60 setget set_health
 var endurance = 1 setget set_endurance
 var max_stamina = 60 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
@@ -37,6 +39,8 @@ var cash = 0 setget set_cash
 
 var status = \"fine\" setget set_status
 
+var is_poisoned = false
+
 var continue_count = 0
 
 signal no_health
@@ -50,6 +54,7 @@ signal strength_changed(value)
 signal strength_mod_changed(value)
 signal iframes_changed(value)
 signal speed_changed(value)
+signal attack_speed_changed(value)
 
 signal max_charge_changed(value)
 signal charge_changed(value)
@@ -79,6 +84,7 @@ func _ready():
 	self.iframes = iframes
 	self.endurance = endurance
 	self.speed = speed
+	self.attack_speed = attack_speed
 	self.cash = cash
 	self.charge = charge
 	self.charge_level = charge_level
@@ -91,18 +97,21 @@ func set_status(value):
 	match status:
 		\"fine\":
 			speed_mod = 0
+			$Poison.count = 0
 		\"slow\":
 			speed_mod = -max_speed/2
-		\"not_slow\":
+		\"default_speed\":
 			speed_mod = 0
+			
 		\"poison\":
-			if $Poison/Timer.is_stopped():
-				$Poison.count = 1
-				$Poison/Timer.start()
-			else:
-				$Poison.count = 0
-		\"not_poison\":
-			print('not poisoned.')
+			$Poison.activate()
+		\"poison_end\":
+			print('poison ended.')
+			
+		\"frenzy\":
+			$Frenzy.activate()
+		\"frenzy_end\":
+			print('frenzy ended.')
 			
 	emit_signal(\"status_changed\", status)
 
@@ -147,6 +156,10 @@ func set_speed(value):
 	speed = value
 	emit_signal(\"speed_changed\", speed)
 	
+func set_attack_speed(value):
+	attack_speed = value
+	emit_signal(\"attack_speed_changed\", attack_speed)
+	
 func set_max_charge(value):
 	max_charge = value
 	emit_signal(\"max_charge_changed\", max_charge)
@@ -183,4 +196,17 @@ func set_cash(value):
 [node name="PlayerStats" type="Node"]
 script = SubResource( 1 )
 
-[node name="Poison" parent="." instance=ExtResource( 1 )]
+[node name="Poison" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="Timer" type="Timer" parent="Poison"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Frenzy" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="Frenzy"]
+one_shot = true
+[connection signal="timeout" from="Poison/Timer" to="Poison" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Frenzy/Timer" to="Frenzy" method="_on_Timer_timeout"]

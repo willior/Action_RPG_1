@@ -7,11 +7,11 @@ onready var healthBar = $HealthTexture
 	
 func set_health(value):
 	health = value
-	healthBar.value = health * 15
+	healthBar.value = health
 func set_max_health(value):
 	max_health = value
-	healthBar.max_value = max_health * 15
-	healthBar.rect_size.x = max_health * 15
+	healthBar.max_value = max_health
+	healthBar.rect_size.x = max_health
 	
 func _ready():
 	self.max_health = PlayerStats.max_health
