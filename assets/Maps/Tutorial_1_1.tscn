@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=2]
@@ -74,6 +74,9 @@ extents = Vector2( 115.849, 10 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 65.4806 )
 
+[sub_resource type="RayShape2D" id=4]
+length = 135.678
+
 [node name="World" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 1 )
@@ -127,6 +130,9 @@ selected_location = Vector2( 32, 290 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Exit_toTutorial_1_2"]
 shape = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map"]
+shape = SubResource( 4 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
