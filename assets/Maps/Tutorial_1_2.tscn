@@ -1,8 +1,6 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
-[ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=2]
-[ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=6]
@@ -1158,9 +1156,3 @@ bus = "Reverb"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 pitch_scale = 0.8
-
-[node name="HeartSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-
-[node name="CoinSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
