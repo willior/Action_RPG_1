@@ -23,17 +23,20 @@ func examine():
 func interact():
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog_script = [
-		{
+		{ # 0
 			'question': 'Take the Metal Pot?',
 			'options': [
-				{ 'label': 'Yes', 'value': 'yes'},
-				{ 'label': 'No', 'value': 'no'},
+				{ 'label': 'Yes', 'value': 'take_item'},
+				{ 'label': 'No', 'value': 'leave_item'},
 				{ 'label': 'Touch it first', 'value': 'maybe'}
 			],
 			'variable': 'answer'
 		},
-		{
+		{ # 1
 			'text': 'You said [answer].'
+		},
+		{ # 2
+			'action': 'take_item'
 		}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)

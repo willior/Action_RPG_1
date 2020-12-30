@@ -138,6 +138,11 @@ func event_handler(event):
 				button.text = o['label']
 				if event.has('variable'):
 					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
+					# connects the button's "pressed" signal to the _on_option_selected function
+					# 3 arguments:
+					# 1. reference variable to the button itself  // button
+					# 2. the index named 'variable' of the event being handled // event['variable']
+					# 3. the 'options' array that follows the 'question' // o
 				else:
 					# Checking for checkpoints
 					if o['value'] == '0':
@@ -147,6 +152,13 @@ func event_handler(event):
 						button.connect("pressed", self, "change_position", [button, 0])
 						
 				$OptionsRect/Options.add_child(button)
+				
+		
+		{'action'}:
+			if event['action'] == 'game_end':
+				get_tree().quit()
+			if event['action'] == 'take_item':
+				print('take_item')
 
 func reset_options():
 	# Clearing out the options after one was selected.
@@ -189,5 +201,5 @@ func _on_TimerText_timeout():
 		if waiting_for_answer:
 			$TimerDelaySelect.start()
 			yield($TimerDelaySelect, "timeout")
-			get_node("/root/World/GUI/DialogBox/OptionsRect/Options/Button").grab_focus()
+			get_node("/root/World/GUI/DialogBox/OptionsRect/Options").get_child(0).grab_focus()
 			waiting_for_input = true
