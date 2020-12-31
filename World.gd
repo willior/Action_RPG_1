@@ -25,7 +25,8 @@ func _input(event):
 		PlayerStats.status = "poison"
 		
 	if event.is_action_pressed("test3"): # U
-		prints('text3: PlayerStats.is_poisoned = ' + str(PlayerStats.is_poisoned))
+		# prints('text3: PlayerStats.is_poisoned = ' + str(PlayerStats.is_poisoned))
+		print(Global.custom_variables)
 	
 	if event.is_action_pressed("pause"): # P
 		if get_tree().paused == false:

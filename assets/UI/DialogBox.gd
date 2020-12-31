@@ -136,6 +136,7 @@ func event_handler(event):
 				var button = BUTTON.instance()
 				# button.get_node("Label").bbcode_text = o['label']
 				button.text = o['label']
+				
 				if event.has('variable'):
 					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
 					# connects the button's "pressed" signal to the _on_option_selected function
@@ -147,9 +148,15 @@ func event_handler(event):
 					# Checking for checkpoints
 					if o['value'] == '0':
 						button.connect("pressed", self, "change_position", [button, int(event['checkpoint'])])
+					elif o['value'] == '1':
+						button.connect("pressed", self, "change_position", [button, 1])
+					elif o['value'] == '2':
+						button.connect("pressed", self, "change_position", [button, 2])
+					elif o['value'] == '3':
+						button.connect("pressed", self, "change_position", [button, 3])
 					else:
-						# Continue
 						button.connect("pressed", self, "change_position", [button, 0])
+					
 						
 				$OptionsRect/Options.add_child(button)
 				
@@ -159,6 +166,9 @@ func event_handler(event):
 				get_tree().quit()
 			if event['action'] == 'take_item':
 				print('take_item')
+				
+			if event.has('take_item'):
+				print('has take_item')
 
 func reset_options():
 	# Clearing out the options after one was selected.
@@ -175,12 +185,15 @@ func change_position(i, checkpoint):
 	load_dialog()
 
 func _on_option_selected(option, variable, value):
+	print(option) # [Button:1894]
+	print(variable) # 'answer'
+	print(value) # {label:Yes, value:option1}
+	
 	Global.custom_variables[variable] = value
 	waiting_for_answer = false
 	reset_options()
 	load_dialog()
-	print('[!] Option selected: ', option.text, ' value= ' , value)
-	print(Global.custom_variables[variable])
+	print('[!] Option selected: ', option.text, ' // value= ' , value)
 
 func _on_TimerNext_timeout():
 	if $Text/Sprite.position.x == 268:

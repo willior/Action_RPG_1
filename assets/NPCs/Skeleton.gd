@@ -9,6 +9,7 @@ var talkable = true
 var examined = false
 var dialog_index = 0
 var examine_index = 0
+var answer
 
 var speaker = "Skeleton"
 
@@ -54,41 +55,44 @@ func talk():
 
 		0:
 			dialogBox.dialog_script = [
-				{ # 0
+				{
 					'text': "Hello.",
 					'name': speaker
 				},
-				{ # 1
+				{
 					'name': speaker,
 					'question': 'Yes or no?',
 					'options': [
-						{ 'label': 'Yes', 'value': 'true'},
-						{ 'label': 'No', 'value': 'false'},
-						{ 'label': 'Maybe', 'value': 'unsure'}
+						{ 'label': 'Yes', 'value': 'option1'},
+						{ 'label': 'No', 'value': 'option2'},
+						{ 'label': 'Maybe', 'value': 'option3'}
 
 					],
 					'variable': 'answer'
 				},
-				{ # 2
+				{
 					'name': speaker,
 					'text': 'You said [answer].'
 				},
-				{ # 3
+				{
 					'name': speaker,
 					'question': '[answer], eh? You... sure about that?',
 					'options': [
 						{ 'label': 'No, let me pick again', 'value': '0'},
 						{ 'label': 'Yes, I love it', 'value': 'confirm'}
 					],
-					'checkpoint': '-3'
+					'checkpoint': '-3',
 				},
 				{
 					'name': speaker,
-					'text': 'Well! Carry on, then.'
+					'text': 'Answer 1: index 4'
+				},
+				{
+					'name': speaker,
+					'text': 'Answer 2: index 5'
 				}
 				
 			]
-
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
 func examine():
