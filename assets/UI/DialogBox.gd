@@ -1,6 +1,6 @@
 extends Control
 
-export(String, FILE, "*.json") var extenal_file = ''
+# export(String, FILE, "*.json") var extenal_file = ''
 
 const BUTTON = preload("Dialog/Dialog_Button.tscn")
 
@@ -23,20 +23,20 @@ func _process(_delta):
 	else:
 		$OptionsRect.visible = false
 
-func file(file_path):
-	# Reading a json file to use as a dialog.
-	var file = File.new()
-	var fileExists = file.file_exists(file_path)
-	var dict = []
-	if fileExists:
-		file.open(file_path, File.READ)
-		var content = file.get_as_text()
-		dict = parse_json(content)
-		file.close()
-		return dict
-	else:
-		push_error("File " + file_path  + " doesn't exist. ")
-	return dict
+#func file(file_path):
+#	# Reading a json file to use as a dialog.
+#	var file = File.new()
+#	var fileExists = file.file_exists(file_path)
+#	var dict = []
+#	if fileExists:
+#		file.open(file_path, File.READ)
+#		var content = file.get_as_text()
+#		dict = parse_json(content)
+#		file.close()
+#		return dict
+#	else:
+#		push_error("File " + file_path  + " doesn't exist. ")
+#	return dict
 	
 func parse_text(text):
 	# This will parse the text and automatically format some of your available variables
@@ -57,8 +57,8 @@ func parse_text(text):
 	return end_text
 
 func _ready():
-	if extenal_file != '':
-		dialog_script = file(extenal_file)
+#	if extenal_file != '':
+#		dialog_script = file(extenal_file)
 	event_handler(dialog_script[dialog_index])
 	get_tree().paused = true
 	Global.dialogOpen = true
@@ -144,16 +144,11 @@ func event_handler(event):
 					# 1. reference variable to the button itself  // button
 					# 2. the index named 'variable' of the event being handled // event['variable']
 					# 3. the 'options' array that follows the 'question' // o
+						
 				else:
 					# Checking for checkpoints
 					if o['value'] == '0':
 						button.connect("pressed", self, "change_position", [button, int(event['checkpoint'])])
-					elif o['value'] == '1':
-						button.connect("pressed", self, "change_position", [button, 1])
-					elif o['value'] == '2':
-						button.connect("pressed", self, "change_position", [button, 2])
-					elif o['value'] == '3':
-						button.connect("pressed", self, "change_position", [button, 3])
 					else:
 						button.connect("pressed", self, "change_position", [button, 0])
 					
@@ -176,18 +171,15 @@ func reset_options():
 		option.queue_free()
 
 func change_position(i, checkpoint):
-	print('[!] Going back ', checkpoint, i)
-	print('    From ', dialog_index, ' to ', dialog_index - checkpoint)
 	waiting_for_answer = false
 	dialog_index += checkpoint
-	print('    dialog_index = ', dialog_index)
 	reset_options()
 	load_dialog()
 
 func _on_option_selected(option, variable, value):
-	print(option) # [Button:1894]
-	print(variable) # 'answer'
-	print(value) # {label:Yes, value:option1}
+	print('OPTION: ', option) # [Button:1894]
+	print('VARIABLE: ', variable) # 'answer'
+	print('VALUE:' , value) # {label:Yes/No/Maybe, value:1/2/3}
 	
 	Global.custom_variables[variable] = value
 	waiting_for_answer = false
