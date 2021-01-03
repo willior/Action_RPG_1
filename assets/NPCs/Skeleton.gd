@@ -64,11 +64,23 @@ func talk():
 					'name': speaker,
 					'question': 'Yes or no?',
 					'options': [
-						{ 'label': 'Yes', 'value': '1'},
-						{ 'label': 'No', 'value': '2'},
-						{ 'label': 'Maybe', 'value': '3'}
+						{ 'label': 'Yes', 'skip': '0'},
+						{ 'label': 'No', 'skip': '1'},
+						{ 'label': 'Maybe', 'skip': '2'}
 					],
 					'variable': 'answer',
+				},
+				{
+					'name': speaker,
+					'text': 'Yes'
+				},
+				{
+					'name': speaker,
+					'text': 'No'
+				},
+				{
+					'name': speaker,
+					'text': 'Maybe'
 				},
 				{
 					'name': speaker,
@@ -77,7 +89,7 @@ func talk():
 						{ 'label': 'No, let me pick again', 'value': '0'},
 						{ 'label': 'Yes, I love it', 'value': 'confirm'}
 					],
-					'checkpoint': '-2',
+					'checkpoint': '-5',
 				},
 				{
 					'name': speaker,

@@ -28,16 +28,22 @@ func interact():
 		{ # 0
 			'question': 'Take the Metal Pot?',
 			'options': [
-				{ 'label': 'Yes', 'value': '1'},
-				{ 'label': 'No', 'value': '2'},
-				{ 'label': 'Touch it first', 'value': '3'}
+				{ 'label': 'Yes', 'skip': '0'},
+				{ 'label': 'No', 'skip': '1'},
+				{ 'label': 'Touch it first', 'skip': '2'}
 			],
 			'variable': 'answer'
 		},
 		{ # 1
-			'text': 'You said [answer].'
+			'text': 'Yes.'
 		},
 		{ # 2
+			'text': 'No'
+		},
+		{ # 3
+			'text': 'Touch.'
+		},
+		{ # 4
 			'action': 'take_item'
 		}
 	]

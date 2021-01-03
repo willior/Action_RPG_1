@@ -43,7 +43,6 @@ func parse_text(text):
 	var end_text = text
 	var c_variable
 	for g in Global.custom_variables:
-		print(Global.custom_variables)
 		if Global.custom_variables.has(g):
 			c_variable = Global.custom_variables[g]
 			# If it is a dictionary, get the label key
@@ -124,7 +123,7 @@ func load_dialog():
 
 func event_handler(event):
 	match event:
-		{'text'}, {'name', 'text'}:
+		{'text'}, {'name', 'text'}, {'name', 'text', 'skip'}:
 			finished = false
 			update_name(event)
 			update_text(event['text'])
@@ -134,7 +133,6 @@ func event_handler(event):
 			update_name(event)
 			update_text(event['question'])
 			for o in event['options']:
-				print("for ", o, " in event ['options']")
 				var button = BUTTON.instance()
 				# button.get_node("Label").bbcode_text = o['label']
 				button.text = o['label']
@@ -177,9 +175,13 @@ func change_position(i, checkpoint):
 func _on_option_selected(option, variable, value):
 	Global.custom_variables[variable] = value
 	waiting_for_answer = false
+	advance_dialog(int(value['skip']))
 	reset_options()
 	load_dialog()
-	print('[!] Option selected: ', option.text, ' // value= ' , value)
+	print('[!] Option selected: ', option.text, ' \\//\\ value = ' , value)
+	
+func advance_dialog(skip_index):
+	dialog_index += skip_index
 
 func _on_TimerNext_timeout():
 	if $Text/Sprite.position.x == 268:
