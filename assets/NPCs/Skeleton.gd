@@ -72,15 +72,18 @@ func talk():
 				},
 				{
 					'name': speaker,
-					'text': 'Yes'
+					'text': 'Yes',
+					'skip': '2'
 				},
 				{
 					'name': speaker,
-					'text': 'No'
+					'text': 'No',
+					'skip': '1'
 				},
 				{
 					'name': speaker,
-					'text': 'Maybe'
+					'text': 'Maybe',
+					'skip': '0'
 				},
 				{
 					'name': speaker,

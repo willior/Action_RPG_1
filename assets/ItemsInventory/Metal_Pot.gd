@@ -15,7 +15,9 @@ func _ready():
 func examine():
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog_script = [
-		{'text': "A metal pot, for cooking."}
+		{
+			'text': "A metal pot, for cooking."
+		}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true

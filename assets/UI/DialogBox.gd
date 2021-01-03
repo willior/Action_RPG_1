@@ -123,8 +123,13 @@ func load_dialog():
 
 func event_handler(event):
 	match event:
-		{'text'}, {'name', 'text'}, {'name', 'text', 'skip'}:
+		{'text'}, {'name', 'text'}:
 			finished = false
+			update_name(event)
+			update_text(event['text'])
+		{'name', 'text', 'skip'}:
+			finished = false
+			advance_dialog(int(event['skip']))
 			update_name(event)
 			update_text(event['text'])
 		{'question', ..}:
@@ -144,7 +149,7 @@ func event_handler(event):
 					# 1. reference variable to the button itself  // button
 					# 2. the index named 'variable' of the event being handled // event['variable']
 					# 3. the 'options' array that follows the 'question' // o
-						
+				
 				else:
 					# Checking for checkpoints
 					if o['value'] == '0':
@@ -181,6 +186,7 @@ func _on_option_selected(option, variable, value):
 	print('[!] Option selected: ', option.text, ' \\//\\ value = ' , value)
 	
 func advance_dialog(skip_index):
+	print('advancing dialog by ', skip_index)
 	dialog_index += skip_index
 
 func _on_TimerNext_timeout():
