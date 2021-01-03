@@ -54,6 +54,7 @@ func talk():
 #			examine_index = 1
 
 		0:
+			dialogBox.dialog_object_path = get_path()
 			dialogBox.dialog_script = [
 				{
 					'text': "Hello.",

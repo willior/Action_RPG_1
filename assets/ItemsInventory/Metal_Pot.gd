@@ -22,6 +22,8 @@ func examine():
 	
 func interact():
 	var dialogBox = DialogBox.instance()
+	dialogBox.dialog_object_path = get_path()
+	print(get_path())
 	dialogBox.dialog_script = [
 		{ # 0
 			'question': 'Take the Metal Pot?',

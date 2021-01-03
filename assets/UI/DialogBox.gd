@@ -5,6 +5,7 @@ extends Control
 const BUTTON = preload("Dialog/Dialog_Button.tscn")
 
 onready var player = get_node("/root/World/YSort/Player")
+onready var label = $Text/RichTextLabel
 
 var dialog_index = 0
 var speakerName = ""
@@ -13,8 +14,7 @@ var finished = false
 var waiting_for_answer = false
 var waiting_for_input = false
 
-onready var label = $Text/RichTextLabel
-
+var dialog_object_path
 var dialog_script
 
 func _process(_delta):
@@ -43,6 +43,7 @@ func parse_text(text):
 	var end_text = text
 	var c_variable
 	for g in Global.custom_variables:
+		print(Global.custom_variables)
 		if Global.custom_variables.has(g):
 			c_variable = Global.custom_variables[g]
 			# If it is a dictionary, get the label key
@@ -133,6 +134,7 @@ func event_handler(event):
 			update_name(event)
 			update_text(event['question'])
 			for o in event['options']:
+				print("for ", o, " in event ['options']")
 				var button = BUTTON.instance()
 				# button.get_node("Label").bbcode_text = o['label']
 				button.text = o['label']
@@ -155,15 +157,11 @@ func event_handler(event):
 						
 				$OptionsRect/Options.add_child(button)
 				
-		
 		{'action'}:
 			if event['action'] == 'game_end':
 				get_tree().quit()
 			if event['action'] == 'take_item':
-				print('take_item')
-				
-			if event.has('take_item'):
-				print('has take_item')
+				get_node(dialog_object_path).acquire_item()
 
 func reset_options():
 	# Clearing out the options after one was selected.
@@ -177,10 +175,6 @@ func change_position(i, checkpoint):
 	load_dialog()
 
 func _on_option_selected(option, variable, value):
-	print('OPTION: ', option) # [Button:1894]
-	print('VARIABLE: ', variable) # 'answer'
-	print('VALUE:' , value) # {label:Yes/No/Maybe, value:1/2/3}
-	
 	Global.custom_variables[variable] = value
 	waiting_for_answer = false
 	reset_options()

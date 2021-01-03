@@ -11,5 +11,10 @@ var dialog_script = [
 	}
 ]
 
+var empty_dictionary = {}
+
 func _ready():
-	print(dialog_script)
+	for g in Global.custom_variables:
+		print('hi')
+		if Global.custom_variables.has(g):
+			print(g)
