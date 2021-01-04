@@ -80,7 +80,7 @@ func _input(event):
 			load_dialog()
 		
 func update_name(event):
-	# This function will search for the name key and try to parse it into the NameLabel node of the dialog
+	# search for the name key and parse it into the NameLabel
 	if event.has('name'):
 		$Text/NameLabel.bbcode_text = parse_text(event['name'])
 #		if '[name]' in event['name']:
@@ -98,21 +98,14 @@ func update_text(text):
 		
 func load_dialog():
 	if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog_script.size()-1):
-			# get_node("/root/World/YSort/Player").talking = false
-			get_tree().paused = false
-			get_node("/root/World/YSort/Player").noticeDisplay = false
-			get_node("/root/World/YSort/Player").talkNoticeDisplay = false
-			Global.dialogOpen = false
-			queue_free()
+		end_dialog()
 	 # if the amount of visible characters is above the total amount of characters in the current index:
 	elif label.get_visible_characters() > label.get_total_character_count():
 		# if the number of dialog_indexes in the array is less than the total amount in the array
 		if dialog_index < dialog_script.size()-1:
-			# advancing the dialog_index
 			dialog_index += 1
 			# setting the dialog
 			event_handler(dialog_script[dialog_index])
-			# label.set_visible_characters(speakerName.length())
 			$TimerText.start()
 			$Text/Sprite.hide()
 	# if the amount of visible characters is less than the total amount of characters:
@@ -120,6 +113,13 @@ func load_dialog():
 		# displays all the characters in the current dialog_index
 		label.set_visible_characters(label.get_total_character_count())
 		finished = true
+		
+func end_dialog():
+	get_tree().paused = false
+	get_node("/root/World/YSort/Player").noticeDisplay = false
+	get_node("/root/World/YSort/Player").talkNoticeDisplay = false
+	Global.dialogOpen = false
+	queue_free()
 
 func event_handler(event):
 	match event:
@@ -127,7 +127,7 @@ func event_handler(event):
 			finished = false
 			update_name(event)
 			update_text(event['text'])
-		{'name', 'text', 'skip'}:
+		{'text', 'skip'}, {'name', 'text', 'skip'}:
 			finished = false
 			advance_dialog(int(event['skip']))
 			update_name(event)
@@ -161,11 +161,15 @@ func event_handler(event):
 				$OptionsRect/Options.add_child(button)
 				$OptionsRect.show()
 				
-		{'action'}:
-			if event['action'] == 'game_end':
-				get_tree().quit()
+		{'action', ..}:
 			if event['action'] == 'take_item':
+				advance_dialog(int(event['skip']))
+				update_name(event)
+				update_text(event['text'])
 				get_node(dialog_object_path).acquire_item()
+			if event['action'] == 'end_dialog':
+				print('ending dialog')
+				end_dialog()
 
 func reset_options():
 	# Clearing out the options after one was selected.
@@ -188,7 +192,6 @@ func _on_option_selected(option, variable, value):
 	print('[!] Option selected: ', option.text, ' \\//\\ value = ' , value)
 	
 func advance_dialog(skip_index):
-	print('advancing dialog by ', skip_index)
 	dialog_index += skip_index
 
 func _on_TimerNext_timeout():

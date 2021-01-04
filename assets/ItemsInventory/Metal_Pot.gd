@@ -37,16 +37,19 @@ func interact():
 			'variable': 'answer'
 		},
 		{ # 1
-			'text': 'Yes.'
+			'text': 'The Metal Pot is now in your possesssions.',
+			'action': 'take_item',
+			'skip': '2'
 		},
 		{ # 2
-			'text': 'No'
+			'text': 'You leave the Metal Pot alone.',
+			'skip': '1'
 		},
 		{ # 3
-			'text': 'Touch.'
+			'text': 'The Metal Pot feels cold. It is otherwise unremarkable.',
 		},
 		{ # 4
-			'action': 'take_item'
+			'action': 'end_dialog'
 		}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)

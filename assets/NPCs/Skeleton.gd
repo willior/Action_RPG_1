@@ -72,37 +72,56 @@ func talk():
 				},
 				{
 					'name': speaker,
-					'text': 'Yes',
+					'text': 'Nice to have some blind positivity around here, for a change.',
 					'skip': '2'
 				},
 				{
 					'name': speaker,
-					'text': 'No',
+					'text': "Oh, great. I was hoping you'd say that.",
 					'skip': '1'
 				},
 				{
 					'name': speaker,
-					'text': 'Maybe',
+					'text': "You didn't seem like the type to commit to anything, anyway.",
 					'skip': '0'
 				},
 				{
 					'name': speaker,
-					'question': '[answer], eh? You... sure about that?',
+					'question': "Unless... you've changed your mind?",
 					'options': [
-						{ 'label': 'No, let me pick again', 'value': '0'},
-						{ 'label': 'Yes, I love it', 'value': 'confirm'}
+						{ 'label': 'Uh...', 'value': '0'},
+						{ 'label': 'Nope.', 'value': 'confirm'}
 					],
 					'checkpoint': '-5',
 				},
 				{
 					'name': speaker,
-					'text': 'Answer 1: index 4'
-				},
-				{
-					'name': speaker,
-					'text': 'Answer 2: index 5'
+					'text': 'Well, alright, then.'
 				}
 				
+			]
+			dialog_index += 1
+		1:
+			dialogBox.dialog_object_path = get_path()
+			dialogBox.dialog_script = [
+				{
+					'text': "Hello, again.",
+					'name': speaker
+				},
+				{
+					'text': "Don't you have anything else to do with your time?",
+					'name': speaker
+				}
+			]
+			dialog_index += 1
+			examine_index = 1
+		2:
+			dialogBox.dialog_object_path = get_path()
+			dialogBox.dialog_script = [
+				{
+					'text': "...",
+					'name': speaker
+				}
 			]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	

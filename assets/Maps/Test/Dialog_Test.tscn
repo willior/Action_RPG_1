@@ -48,6 +48,9 @@ remote_path = NodePath("../../../Camera2D")
 
 [node name="Items" type="YSort" parent="YSort"]
 
+[node name="Metal_Pot" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 88, 88 )
+
 [node name="NPCs" type="YSort" parent="YSort"]
 
 [node name="Skeleton" parent="YSort/NPCs" instance=ExtResource( 7 )]
@@ -61,6 +64,3 @@ bus = "Reverb"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 pitch_scale = 0.8
-
-[node name="Metal_Pot" parent="." instance=ExtResource( 4 )]
-position = Vector2( 88, 88 )
