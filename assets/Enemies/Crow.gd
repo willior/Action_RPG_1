@@ -219,8 +219,12 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		attack_on_cooldown = false
 		timer.stop()
 		enable_detection()
-	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
-	hurtbox.display_damage_popup(area.damage)
+	# stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
+	var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+	print(damage, " dealt to crow.")
+	stats.health -= damage
+	print("crow HP: ", stats.health, "/", stats.max_health)
+	hurtbox.display_damage_popup(damage)
 	hurtbox.create_hit_effect()
 	hurtbox.start_invincibility(0.4)
 	

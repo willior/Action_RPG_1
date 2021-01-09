@@ -46,7 +46,6 @@ func _deferred_goto_scene(path):
 func damage_calculation(attack, defense, random):
 	var base_damage = 2 * (attack*attack / (attack+defense))
 	print("base damage : ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage)
-	print("final damage : ", random_variance(base_damage, random))
 	return random_variance(base_damage, random)
 	
 func random_variance(base_damage, random):
