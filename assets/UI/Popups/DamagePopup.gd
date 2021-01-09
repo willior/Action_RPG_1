@@ -13,7 +13,7 @@ func _ready():
 		"rect_position",
 		Vector2(0,-8),
 		Vector2(0,0),
-		1,
+		0.6,
 		Tween.TRANS_BOUNCE,
 		Tween.EASE_OUT
 		)
@@ -24,10 +24,10 @@ func _ready():
 		text,
 		"modulate",
 		Color(1,1,1,1),
-		Color(1,1,1,0),
+		Color(0.8,0.2,0,0),
 		1,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT
+		Tween.TRANS_QUART,
+		Tween.EASE_IN
 		)
 	tween.interpolate_property(
 		text,
@@ -35,8 +35,8 @@ func _ready():
 		Color(0,0,0,1),
 		Color(0,0,0,0),
 		1,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT
+		Tween.TRANS_QUART,
+		Tween.EASE_IN
 		)
 	tween.start()
 	timer.start()

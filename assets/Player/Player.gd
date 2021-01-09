@@ -169,12 +169,12 @@ func move_state(delta):
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
 	if sweating:
-		stats.stamina += 0.4
-		if stats.stamina > 15:
+		stats.stamina += 0.3
+		if stats.stamina > 30:
 			sweating = false
 			$Sweat.visible = false
 	else:
-		stats.stamina += 0.5
+		stats.stamina += 0.4
 
 	# if player is moving
 	if input_vector != Vector2.ZERO:
