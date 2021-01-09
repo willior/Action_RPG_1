@@ -27,7 +27,6 @@ func _ready():
 func set_sweating(value):
 	match value:
 		"sweating":
-			print('playing animation')
 			$AnimationPlayer.play("Sweating")
 		"sweating_end":
 			$AnimationPlayer.play("Stop")

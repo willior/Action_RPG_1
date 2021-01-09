@@ -30,6 +30,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaminaBarTexture:tint_over")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=4]
 resource_name = "Sweating"

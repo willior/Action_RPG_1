@@ -11,7 +11,7 @@ var max_speed = 100
 var speed_mod = 0 setget set_speed_mod
 var attack_speed = 1.0 setget set_attack_speed
 var roll_speed = 200
-var shade_speed = 440
+var shade_speed = 420
 var friction = 800
 var shade_friction = 1600
 

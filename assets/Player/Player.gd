@@ -58,10 +58,8 @@ var using_item = false
 var noticeDisplay = false setget set_notice
 var talkNoticeDisplay = false setget set_talk_notice
 var interactNoticeDisplay = false setget set_interact_notice
-var sweating = false setget set_sweating
+var sweating = false
 var dying = false
-
-signal sweating_changed(value)
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -284,8 +282,10 @@ func noStamina():
 	audio.stream = load("res://assets/Audio/Bamboo.wav")
 	audio.play()
 	
-func set_sweating(value):
-	emit_signal("sweating_changed", value)
+func set_sweating():
+	$Sweat.visible = true
+	sweating = true
+	stats.status = "sweating"
 	
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
@@ -298,21 +298,11 @@ func attack1_state(delta):
 # warning-ignore:integer_division
 	velocity = velocity.move_toward(Vector2.ZERO, (stats.friction/2) * delta)
 	animationState.travel("Attack1")
-#	if Input.is_action_just_pressed("attack"):
-#		if stats.stamina <= 0:
-#			noStamina()
-#		else:
-#			attack2_queued = true
 	move()
-	
+
 # warning-ignore:unused_argument
 func attack2_state(delta):
 	animationState.travel("Attack2")
-#	if Input.is_action_just_pressed("attack"):
-#		if stats.stamina <= 0:
-#			noStamina()
-#		else:
-#			attack1_queued = true
 		
 func attack1_stamina_drain():
 	stats.stamina -= 10
@@ -349,14 +339,14 @@ func attack_animation_finished():
 # releasing the attack button after achieving a charge level unleashes a special attack
 
 # warning-ignore:unused_argument
+# warning-ignore:unused_argument
 func charge_state(delta):
 	# stamina drain
 	stats.stamina -= 0.5
 	# if either attack is charged and the player runs out of stamina
 	if stats.stamina <= 0:
-		$Sweat.visible = true
-		sweating = true
-		stats.status = "sweating"
+		if !sweating:
+			set_sweating()
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()
@@ -546,12 +536,10 @@ func backstep_state(delta):
 				attack_2_charged = false
 				print('backstep shade attack!!!')
 				shade_queued = true
-				# state = SHADE
 			elif attack_1_charged:
 				attack_1_charged = false
 				print('backstep flash attack!!!')
 				flash_queued = true
-				# state = FLASH
 
 	elif Input.is_action_just_pressed("attack"):
 		if stats.stamina <= 0:
