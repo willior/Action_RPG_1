@@ -2,7 +2,7 @@ extends Node
 
 var max_health = 88 setget set_max_health
 var health = max_health setget set_health
-var defense = 2
+var defense = 2.0
 var experience_pool = 378
 
 signal no_health
