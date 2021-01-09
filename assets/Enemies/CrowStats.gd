@@ -1,6 +1,6 @@
 extends Node
 
-var max_health = 8 setget set_max_health
+var max_health = 88 setget set_max_health
 var health = max_health setget set_health
 var experience_pool = 378
 

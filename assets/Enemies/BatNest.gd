@@ -8,8 +8,7 @@ var enemies
 var count = 0
 
 func _ready():
-	pass
-	# spawner()
+	spawner()
 
 func spawner():
 	enemies = get_tree().get_nodes_in_group("enemies")

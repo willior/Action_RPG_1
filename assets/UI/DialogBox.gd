@@ -176,7 +176,7 @@ func reset_options():
 	for option in $OptionsRect/Options.get_children():
 		option.queue_free()
 
-func change_position(i, checkpoint):
+func change_position(_i, checkpoint):
 	waiting_for_answer = false
 	dialog_index += checkpoint
 	reset_options()

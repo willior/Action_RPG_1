@@ -384,12 +384,12 @@ func shade_start():
 	stats.stamina -= 30
 	charge.stop_charge()
 	swordHitbox.shade_begin()
-	stats.strength_mod = 4
+	# stats.strength_mod = 4
 	velocity = dir_vector * stats.shade_speed
 	
 func shade_stop():
 	swordHitbox.shade_end()
-	stats.strength_mod = 0
+	# stats.strength_mod = 0
 	velocity = Vector2.ZERO
 	shade_moving = false
 	
@@ -403,11 +403,11 @@ func flash_start():
 	stats.stamina -= 20
 	charge.stop_charge()
 	swordHitbox.flash_begin()
-	stats.strength_mod = 2
+	# stats.strength_mod = 2
 	
 func flash_stop():
 	swordHitbox.flash_end()
-	stats.strength_mod = 0
+	# stats.strength_mod = 0
 	
 func hit_damage():
 	stats.health -= damageTaken
@@ -431,7 +431,8 @@ func hit_animation_finished():
 func player_state_reset():
 	swordHitbox.set_deferred("monitorable", false)
 	swordHitbox.damage = swordHitbox.orig_damage
-	stats.strength_mod = 0
+	swordHitbox.reset_damage()
+	# stats.strength_mod = 0
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
