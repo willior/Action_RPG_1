@@ -159,7 +159,7 @@ func event_handler(event):
 					
 						
 				$OptionsRect/Options.add_child(button)
-				$OptionsRect.show()
+				# $OptionsRect.show()
 				
 		{'action', ..}:
 			if event['action'] == 'take_item':
@@ -183,7 +183,7 @@ func change_position(i, checkpoint):
 	load_dialog()
 
 func _on_option_selected(option, variable, value):
-	$OptionsRect.hide()
+	# $OptionsRect.hide()
 	Global.custom_variables[variable] = value
 	waiting_for_answer = false
 	advance_dialog(int(value['skip']))

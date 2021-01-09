@@ -37,7 +37,7 @@ func interact():
 			'variable': 'answer'
 		},
 		{ # 1
-			'text': 'The Metal Pot is now in your possesssions.',
+			'text': 'The Metal Pot is now among your possesssions.',
 			'action': 'take_item',
 			'skip': '2'
 		},

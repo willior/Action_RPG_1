@@ -10,7 +10,7 @@ var BatSpawner = load("res://assets/Spawners/BatSpawner.tscn")
 export var ACCELERATION = 240
 export var MAX_SPEED = 40
 export var WANDER_SPEED = 20
-export var ATTACK_SPEED = 120
+export var ATTACK_SPEED = 90
 export var FRICTION = 240
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
@@ -219,12 +219,16 @@ func pick_random_state(state_list):
 	return state_list.pop_front() # spits one out
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
+	if state == ATTACK:
+		state = IDLE
 	if attack_on_cooldown:
-		attack_on_cooldown = false
-		timer.stop()
-		enable_detection()
+		pass
+#		attack_on_cooldown = false
+#		timer.stop()
+#		enable_detection()
 	stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	hurtbox.create_hit_effect()
+	hurtbox.display_damage_popup(area.damage)
 	hurtbox.start_invincibility(0.4)
 	
 	sprite.modulate = Color(1,1,0)

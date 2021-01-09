@@ -411,6 +411,7 @@ func flash_stop():
 	
 func hit_damage():
 	stats.health -= damageTaken
+	$HurtAudio.play()
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
 	
@@ -550,6 +551,7 @@ func _on_Hurtbox_area_entered(area):
 		if attack_2_charged: attack_2_charged = false
 		charge_reset()
 	damageTaken = area.damage
+	hurtbox.display_damage_popup(damageTaken)
 	state = HIT
 
 func _on_Hurtbox_invincibility_started():
