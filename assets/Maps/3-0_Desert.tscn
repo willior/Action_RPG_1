@@ -266,7 +266,7 @@ shader_param/hue_variation_random = 0.0
 shader_param/anim_speed_random = 0.0
 shader_param/anim_offset_random = 0.0
 shader_param/emission_box_extents = Vector3( 320, 180, 0 )
-shader_param/color_value = Color( 0.721569, 0.65098, 0.6, 1 )
+shader_param/color_value = Color( 0.615686, 0.54902, 0.368627, 1 )
 shader_param/trail_divisor = 1
 shader_param/gravity = Vector3( 0, 20, 0 )
 shader_param/number_particles_shown = 100
@@ -385,7 +385,6 @@ position = Vector2( 104, 96 )
 motion_mirroring = Vector2( 320, 180 )
 
 [node name="Particles2D" type="Particles2D" parent="Map/ParallaxOverlay/ParallaxLayer2"]
-modulate = Color( 0.615686, 0.54902, 0.368627, 1 )
 position = Vector2( 160, 90 )
 amount = 6000
 visibility_rect = Rect2( -100, -100, 320, 180 )

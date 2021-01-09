@@ -5,6 +5,7 @@ onready var animation1 = $TextureProgress1/AnimationPlayer
 onready var progress2 = $TextureProgress2
 onready var animation2 = $TextureProgress2/AnimationPlayer
 onready var staminaProgress = $StaminaProgress
+onready var staminaWarningAnimation = $StaminaProgress/AnimationPlayer
 onready var chargeBeep1 = $ChargeBeep1
 onready var chargeBeep2 = $ChargeBeep2
 
@@ -16,6 +17,8 @@ var currentChargeLevel = 0 setget set_charge_level
 
 var currentStamina = PlayerStats.stamina setget set_stamina
 var currentMaxStamina = PlayerStats.max_stamina setget set_max_stamina
+var staminaPercent = 1
+var staminaWarning = false
 
 func _ready():
 	PlayerStats.charge = 0
@@ -36,10 +39,30 @@ func _ready():
 func set_stamina(value):
 	currentStamina = value
 	staminaProgress.value = currentStamina
+	staminaPercent = currentStamina / currentMaxStamina
+	if staminaPercent < 0.25 && !staminaWarning:
+		toggle_stamina_warning(true)
+	elif staminaPercent > 0.25 && staminaWarning:
+		toggle_stamina_warning(false)
+	elif staminaPercent < 0.25 && staminaWarning:
+		staminaWarningAnimation.playback_speed = 3 - staminaPercent*10
 	
 func set_max_stamina(value):
 	currentMaxStamina = value
 	staminaProgress.max_value = currentMaxStamina
+	
+func toggle_stamina_warning(value):
+	match value:
+		true:
+			print('true')
+			staminaWarning = true
+			staminaWarningAnimation.play("On")
+		false:
+			staminaWarning = false
+			print("staminaWarning is false")
+			staminaWarningAnimation.play("Off")
+	
+	
 
 func begin_charge_1():
 	chargeSound2.play()

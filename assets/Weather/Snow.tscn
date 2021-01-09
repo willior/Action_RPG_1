@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="Curve" id=2]
+min_value = -80.0
+max_value = 80.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0800464, 63.072 ), 0.0, 0.0, 0, 0, Vector2( 0.149652, -66.6577 ), 0.0, 0.0, 0, 0, Vector2( 0.2529, 36.9414 ), 0.0, 0.0, 0, 0, Vector2( 0.417633, -18.4829 ), 0.0, 0.0, 0, 0, Vector2( 0.487239, 67.3964 ), 0.0, 0.0, 0, 0, Vector2( 0.545244, -52.3568 ), 0.0, 0.0, 0, 0, Vector2( 0.740139, 62.9585 ), 0.0, 0.0, 0, 0, Vector2( 0.858469, -66.7712 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 1.0
+trail_divisor = 4
+emission_shape = 2
+emission_box_extents = Vector3( 160, 180, 0 )
+flag_disable_z = true
+direction = Vector3( 0.1, 1, 0 )
+spread = 5.0
+gravity = Vector3( 0, 10, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel_curve = SubResource( 3 )
+angle_random = 0.2
+scale = 2.0
+scale_random = 1.0
+
+[node name="Snow" type="Node2D"]
+position = Vector2( 160, 0 )
+
+[node name="Particle2D" type="Particles2D" parent="."]
+amount = 4000
+lifetime = 8.0
+randomness = 1.0
+visibility_rect = Rect2( -160, -90, 320, 180 )
+draw_order = 1
+process_material = SubResource( 1 )

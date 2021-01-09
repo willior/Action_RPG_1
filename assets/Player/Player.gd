@@ -175,7 +175,7 @@ func move_state(delta):
 			sweating = false
 			$Sweat.visible = false
 			stats.status = "sweating_end"
-	else:
+	elif stats.stamina < stats.max_stamina:
 		stats.stamina += 0.45
 
 	# if player is moving

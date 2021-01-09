@@ -16,7 +16,7 @@ func spawner():
 		print('max bat!')
 		return
 	
-	if count > 100:
+	elif count > 100:
 		return
 	
 	else:
