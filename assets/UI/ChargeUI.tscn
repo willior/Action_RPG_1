@@ -8,24 +8,8 @@
 [ext_resource path="res://assets/Audio/Charge_stepped.wav" type="AudioStream" id=6]
 [ext_resource path="res://assets/Audio/Player/Charge_Beep_2.wav" type="AudioStream" id=7]
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
-
-[sub_resource type="Animation" id=1]
-resource_name = "ChargeFlash"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [sub_resource type="Animation" id=2]
 loop = true
@@ -42,8 +26,23 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=3]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="ChargeUI" type="Node2D"]
-material = SubResource( 3 )
+material = SubResource( 1 )
 z_index = 4
 script = ExtResource( 3 )
 
@@ -98,7 +97,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureProgress1"]
-anims/ChargeFlash = SubResource( 1 )
+anims/ChargeFlash = SubResource( 2 )
 
 [node name="TextureProgress2" type="TextureProgress" parent="."]
 process_priority = 1
@@ -125,4 +124,4 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureProgress2"]
-anims/ChargeFlash = SubResource( 2 )
+anims/ChargeFlash = SubResource( 3 )

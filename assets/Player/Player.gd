@@ -42,6 +42,8 @@ var attack1_queued = false
 var attack_charging = false
 var attack_1_charged = false
 var attack_2_charged = false
+var flash_queued = false
+var shade_queued = false
 var shade_moving = false
 var charge_count = 0
 var charge_level_count = 0
@@ -174,7 +176,7 @@ func move_state(delta):
 			sweating = false
 			$Sweat.visible = false
 	else:
-		stats.stamina += 0.4
+		stats.stamina += 0.45
 
 	# if player is moving
 	if input_vector != Vector2.ZERO:
@@ -239,7 +241,7 @@ func move_state(delta):
 		#	state = SHADE
 		if stats.stamina > 0:
 			if input_vector != Vector2.ZERO:
-				charge.stop_charge()
+				# charge.stop_charge()
 				roll_moving = true
 				state = ROLL
 			else:
@@ -350,6 +352,7 @@ func charge_state(delta):
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()
+		noStamina()
 		charge_reset()
 		
 	# if the current charge is less than the max charge
@@ -388,9 +391,20 @@ func shade_start():
 	velocity = dir_vector * stats.shade_speed
 	
 func shade_stop():
-	swordHitbox.shade_end()
 	# stats.strength_mod = 0
-	velocity = Vector2.ZERO
+	# velocity = Vector2.ZERO
+	$Tween.interpolate_property(
+		self,
+		"velocity",
+		velocity,
+		Vector2.ZERO,
+		0.1,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
+		)
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	swordHitbox.shade_end()
 	shade_moving = false
 	
 func flash_state(delta):
@@ -451,8 +465,8 @@ func level_up():
 	var choice = levelStats[randi() % levelStats.size()]
 	match choice:
 		LEVELHEALTH:
-			stats.max_health += 1
-			stats.health += 1
+			stats.max_health += 15
+			stats.health += 15
 			levelNotice.statDisplay = "WILLPOWER"
 			levelNotice.statColor = Color(1, 0.272549, 0.315686)
 		LEVELSTAMINA:
@@ -468,7 +482,6 @@ func level_up():
 			stats.iframes += 0.1
 			stats.speed += 1
 			# var totalSpeed = animationPlayer.get_playing_speed() + stats.speed
-
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
 	# prints('LEVEL ' + str(stats.level) + ":")
@@ -501,7 +514,7 @@ func roll_animation_finished():
 	state = MOVE
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
-		charge_reset()
+		# charge_reset()
 
 func backstep_stamina_drain():
 	stats.stamina -= 5
@@ -519,26 +532,46 @@ func backstep_state(delta):
 	if Input.is_action_just_released("attack"):
 		if stats.stamina <= 0:
 			noStamina()
-		else:
 			charge.stop_charge()
-			if attack_1_charged:
-				print('backstep flash attack!!!')
-				attack_1_charged = false
-				state = FLASH
+		else:
 			if attack_2_charged:
-				print('backstep shade attack!!!')
 				attack_2_charged = false
-				state = SHADE
-	
+				print('backstep shade attack!!!')
+				shade_queued = true
+				# state = SHADE
+			elif attack_1_charged:
+				attack_1_charged = false
+				print('backstep flash attack!!!')
+				flash_queued = true
+				# state = FLASH
+
 	elif Input.is_action_just_pressed("attack"):
 		if stats.stamina <= 0:
 			noStamina()
 		else:
+			velocity = dir_vector * (stats.roll_speed/2)
 			state = ATTACK1
 	move()
 	
 func backstep_animation_finished():
-	state = MOVE
+	if shade_queued:
+		shade_queued = false
+		velocity = dir_vector * (stats.roll_speed*0.75)
+		attack_2_charged = false
+		charge.stop_charge()
+		charge_reset()
+		attack_charging = false
+		state = SHADE
+	elif flash_queued:
+		flash_queued = false
+		velocity = dir_vector * (stats.roll_speed*0.75)
+		charge.stop_charge()
+		charge_reset()
+		attack_charging = false
+		state = FLASH
+	else:
+		state = MOVE
+		
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		# charge_reset()
