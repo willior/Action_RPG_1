@@ -21,3 +21,14 @@ func _ready():
 	PlayerStats.connect("stamina_changed", self, "set_stamina")
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("max_stamina_changed", self, "set_max_stamina")
+# warning-ignore:return_value_discarded
+	PlayerStats.connect("status_changed", self, "set_sweating")
+
+func set_sweating(value):
+	match value:
+		"sweating":
+			print('playing animation')
+			$AnimationPlayer.play("Sweating")
+		"sweating_end":
+			$AnimationPlayer.play("Stop")
+	

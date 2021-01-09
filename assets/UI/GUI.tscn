@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/InventoryUI.gd" type="Script" id=2]
@@ -15,6 +15,50 @@
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.png" type="Texture" id=14]
 [ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=15]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Stop"
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaminaBarTexture:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Sweating"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaminaBarTexture:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ), Color( 1, 0.737255, 0.211765, 0.784314 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaminaBarTexture:tint_over")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.67451, 0.282353, 0.282353, 1 ) ]
+}
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -58,6 +102,10 @@ stretch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StaminaBar"]
+anims/Stop = SubResource( 3 )
+anims/Sweating = SubResource( 4 )
 
 [node name="ExpBar" parent="." instance=ExtResource( 10 )]
 margin_left = 4.0

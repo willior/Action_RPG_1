@@ -58,9 +58,10 @@ var using_item = false
 var noticeDisplay = false setget set_notice
 var talkNoticeDisplay = false setget set_talk_notice
 var interactNoticeDisplay = false setget set_interact_notice
-
-var sweating = false
+var sweating = false setget set_sweating
 var dying = false
+
+signal sweating_changed(value)
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -175,6 +176,7 @@ func move_state(delta):
 		if stats.stamina > 30:
 			sweating = false
 			$Sweat.visible = false
+			stats.status = "sweating_end"
 	else:
 		stats.stamina += 0.45
 
@@ -253,6 +255,8 @@ func apply_status(status):
 	match status:
 		"default_speed":
 			animationTree.set("parameters/Run/TimeScale/scale", 1)
+		"sweating":
+			print('applying sweating status')
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"poison":
@@ -279,6 +283,9 @@ func move():
 func noStamina():
 	audio.stream = load("res://assets/Audio/Bamboo.wav")
 	audio.play()
+	
+func set_sweating(value):
+	emit_signal("sweating_changed", value)
 	
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
@@ -349,6 +356,7 @@ func charge_state(delta):
 	if stats.stamina <= 0:
 		$Sweat.visible = true
 		sweating = true
+		stats.status = "sweating"
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()

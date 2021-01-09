@@ -40,7 +40,7 @@ var experience_total = 82
 var cash = 0 setget set_cash
 
 var status = \"fine\" setget set_status
-
+var sweating = false
 var is_poisoned = false
 
 var continue_count = 0
@@ -103,16 +103,18 @@ func set_status(value):
 		\"fine\":
 			speed_mod = 0
 			$Poison.count = 0
+		\"sweating\":
+			sweating = true
+		\"sweating_end\":
+			sweating = false
 		\"slow\":
 			speed_mod = -max_speed/2
 		\"default_speed\":
 			speed_mod = 0
-			
 		\"poison\":
 			$Poison.activate()
 		\"poison_end\":
 			print('poison ended.')
-			
 		\"frenzy\":
 			$Frenzy.activate()
 		\"frenzy_end\":
