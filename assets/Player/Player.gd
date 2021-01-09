@@ -551,7 +551,8 @@ func _on_Hurtbox_area_entered(area):
 		if attack_1_charged: attack_1_charged = false
 		if attack_2_charged: attack_2_charged = false
 		charge_reset()
-	damageTaken = area.damage
+	# damageTaken = area.damage
+	damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 	hurtbox.display_damage_popup(damageTaken)
 	state = HIT
 

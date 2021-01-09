@@ -2,6 +2,7 @@ extends Node
 
 var max_health = 36 setget set_max_health
 var health = max_health setget set_health
+var defense = 0 setget set_defense
 var experience_pool = 18
 
 signal no_health
@@ -19,6 +20,9 @@ func set_health(value):
 	emit_signal("health_changed", health) # every time the health is set, emits a signal "health_changed" along with an argument, our new health value
 	if health <= 0:
 		emit_signal("no_health")
+		
+func set_defense(value):
+	defense = value
 
 func _ready():
 	self.health = max_health

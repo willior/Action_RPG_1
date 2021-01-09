@@ -17,11 +17,13 @@ var shade_friction = 1600
 
 var max_health = 60 setget set_max_health
 var health = 60 setget set_health
-var endurance = 1 setget set_endurance
+var endurance = 4 setget set_endurance
 var max_stamina = 60 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
-var strength = 8 setget set_strength
-var strength_mod = 0 setget set_strength_mod
+var strength = 4 setget set_strength
+# var strength_mod = 0 setget set_strength_mod
+var defense = 4 setget set_defense
+var defense_mod = 0 setget set_defense_mod
 var iframes = 0.1 setget set_iframes
 var speed = 1.0 setget set_speed
 
@@ -51,7 +53,9 @@ signal endurance_changed(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
 signal strength_changed(value)
-signal strength_mod_changed(value)
+# signal strength_mod_changed(value)
+signal defense_changed(value)
+signal defense_mod_changed(value)
 signal iframes_changed(value)
 signal speed_changed(value)
 signal attack_speed_changed(value)
@@ -80,6 +84,7 @@ func _ready():
 	self.health = health
 	self.experience = experience_total
 	self.strength = strength
+	self.defense = defense
 	self.stamina = max_stamina
 	self.iframes = iframes
 	self.endurance = endurance
@@ -144,9 +149,17 @@ func set_strength(value):
 	strength = value
 	emit_signal(\"strength_changed\", strength)
 	
-func set_strength_mod(value):
-	strength_mod = value
-	emit_signal(\"strength_mod_changed\", strength_mod)
+#func set_strength_mod(value):
+#	strength_mod = value
+#	emit_signal(\"strength_mod_changed\", strength_mod)
+
+func set_defense(value):
+	defense = value
+	emit_signal(\"defense_changed\", defense)
+	
+func set_defense_mod(value):
+	defense_mod = value
+	emit_signal(\"defense_mod_changed\", defense_mod)
 	
 func set_iframes(value):
 	iframes = value
