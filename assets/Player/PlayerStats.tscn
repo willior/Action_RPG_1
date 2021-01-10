@@ -17,19 +17,22 @@ var shade_friction = 1600
 
 var max_health = 60 setget set_max_health
 var health = 60 setget set_health
+
 var endurance = 4 setget set_endurance
 var max_stamina = 60 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
+
 var strength = 4.0 setget set_strength
 # var strength_mod = 0 setget set_strength_mod
+
 var defense = 4.0 setget set_defense
 var defense_mod = 0 setget set_defense_mod
 
+var base_accuracy = 75
 var dexterity = 4.0 setget set_dexterity
 
-var iframes = 0.1 setget set_iframes
 var speed = 4.0 setget set_speed
-var base_accuracy = 75
+var iframes = 0.1 setget set_iframes
 
 var max_charge = 100 setget set_max_charge
 var charge = 0 setget set_charge

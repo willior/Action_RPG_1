@@ -22,8 +22,10 @@ enum {
 
 enum {
 	LEVELHEALTH,
+	LEVELDEFENSE,
 	LEVELSTAMINA,
 	LEVELSTRENGTH,
+	LEVELDEXTERITY,
 	LEVELSPEED
 }
 
@@ -33,7 +35,7 @@ var dir_vector = Vector2.DOWN
 var roll_moving = false
 var damageTaken = 0
 var stats = PlayerStats
-var levelStats = [0, 1, 2, 3]
+var levelStats = [0, 1, 2, 3, 4, 5]
 var levelResult = 0
 
 var backstep_queued = false
@@ -47,6 +49,7 @@ var shade_queued = false
 var shade_moving = false
 var charge_count = 0
 var charge_level_count = 0
+var base_enemy_accuracy = 66
 
 var interactObject
 var talkObject
@@ -325,7 +328,8 @@ func attack_animation_finished():
 	elif attack1_queued:
 		attack1_queued = false
 		state = ATTACK1
-	else: state = MOVE
+	else:
+		state = MOVE
 	# if attack button is held when an attack animation finishes
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
@@ -406,6 +410,8 @@ func shade_stop():
 	shade_moving = false
 	
 func flash_state(delta):
+	if base_enemy_accuracy > 25:
+		base_enemy_accuracy = 25
 # warning-ignore:integer_division
 	velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	animationState.travel("Flash")
@@ -418,6 +424,7 @@ func flash_start():
 	# stats.strength_mod = 2
 	
 func flash_stop():
+	base_enemy_accuracy = 66
 	swordHitbox.flash_end()
 	# stats.strength_mod = 0
 	
@@ -444,6 +451,7 @@ func player_state_reset():
 	swordHitbox.set_deferred("monitorable", false)
 	swordHitbox.damage = swordHitbox.orig_damage
 	swordHitbox.reset_damage()
+	base_enemy_accuracy = 66
 	# stats.strength_mod = 0
 	
 func enemy_killed(experience_from_kill):
@@ -468,13 +476,21 @@ func level_up():
 			levelNotice.statDisplay = "WILLPOWER"
 			levelNotice.statColor = Color(1, 0.272549, 0.315686)
 		LEVELSTAMINA:
+			stats.defense += 1
+			levelNotice.statDisplay = "HARDINESS"
+			levelNotice.statColor = Color(0.372549, 1, 0.415686)
+		LEVELDEFENSE:
 			stats.endurance += 1
 			stats.max_stamina += 15
-			levelNotice.statDisplay = "PERSEVERENCE"
+			levelNotice.statDisplay = "LUNG CAPACITY"
 			levelNotice.statColor = Color(0.372549, 1, 0.415686)
 		LEVELSTRENGTH:
 			stats.strength += 1
 			levelNotice.statDisplay = "VIOLENT NATURE"
+			levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
+		LEVELDEXTERITY:
+			stats.dexterity += 1
+			levelNotice.statDisplay = "PATIENCE"
 			levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
 		LEVELSPEED:
 			stats.iframes += 0.1
@@ -559,6 +575,7 @@ func backstep_animation_finished():
 		attack_charging = false
 		state = SHADE
 	elif flash_queued:
+		base_enemy_accuracy = 0
 		flash_queued = false
 		velocity = dir_vector * (stats.roll_speed*0.75)
 		charge.stop_charge()
@@ -573,7 +590,7 @@ func backstep_animation_finished():
 		# charge_reset()
 	
 func _on_Hurtbox_area_entered(area):
-	var hit = Global.enemy_hit_calculation(50, area.accuracy, stats.speed)
+	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
 		if attack2_queued:
 			attack2_queued = false

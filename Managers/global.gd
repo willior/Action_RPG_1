@@ -43,10 +43,10 @@ func _deferred_goto_scene(path):
 	# optional, to make it compatible with the SceneTree.change_scene() API
 	get_tree().set_current_scene( current_scene )
 	
-func player_hit_calculation(base_accuracy, speed, modulator, evasion):
+func player_hit_calculation(base_accuracy, dexterity, modulator, evasion):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
-	var base_hit_rate = base_accuracy + (2*(speed+modulator))
+	var base_hit_rate = base_accuracy + (2*(dexterity+modulator))
 	var final_hit_rate = base_hit_rate - evasion
 	print("player final_hit_rate: ", final_hit_rate, "% > ", "random_value: ", random_value)
 	if final_hit_rate >= random_value:
