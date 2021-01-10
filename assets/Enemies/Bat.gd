@@ -171,11 +171,13 @@ func seek_player():
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
 		disable_detection()
-		attackTimer.start()
 		attacking = true
 		# hitbox.set_deferred("monitorable", true)
+		$DelayTimer.start()
+		yield($DelayTimer, "timeout")
 		set_speed_scale(4)
 		eye.modulate = Color(1,0,0)
+		attackTimer.start()
 		state = ATTACK
 		
 func _on_AttackTimer_timeout():

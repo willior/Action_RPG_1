@@ -213,6 +213,10 @@ shape = SubResource( 22 )
 wait_time = 0.5
 one_shot = true
 
+[node name="DelayTimer" type="Timer" parent="."]
+wait_time = 0.33
+one_shot = true
+
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
