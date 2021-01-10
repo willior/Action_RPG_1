@@ -1240,7 +1240,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
+"times": PoolRealArray( 0, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -1290,7 +1290,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
+"times": PoolRealArray( 0, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -1339,7 +1339,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
+"times": PoolRealArray( 0, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -1388,7 +1388,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.5 ),
+"times": PoolRealArray( 0, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -1969,7 +1969,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 184
+frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2053,7 +2053,7 @@ margin_bottom = -7.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 3.14159
+rotation = 1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
@@ -2137,9 +2137,9 @@ one_shot = true
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]

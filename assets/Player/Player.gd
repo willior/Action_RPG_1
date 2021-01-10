@@ -110,7 +110,7 @@ func _ready():
 func _process(delta):
 	match state:
 		MOVE: move_state(delta)
-		ROLL: roll_state()
+		ROLL: roll_state(delta)
 		BACKSTEP: backstep_state(delta)
 		ATTACK1: attack1_state(delta)
 		ATTACK2: attack2_state(delta)
@@ -324,6 +324,7 @@ func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
 	state = MOVE
 	base_enemy_accuracy = 66
+	PlayerStats.dexterity_mod = 0
 	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
@@ -389,6 +390,7 @@ func shade_state(delta):
 	
 func shade_start():
 	stats.stamina -= 30
+	PlayerStats.dexterity_mod = 8
 	charge.stop_charge()
 	swordHitbox.shade_begin()
 	# stats.strength_mod = 4
@@ -421,6 +423,7 @@ func flash_state(delta):
 	
 func flash_start():
 	stats.stamina -= 20
+	PlayerStats.dexterity_mod = 4
 	charge.stop_charge()
 	swordHitbox.flash_begin()
 	# stats.strength_mod = 2
@@ -509,32 +512,70 @@ func level_up():
 	
 func roll_stamina_drain():
 	stats.stamina -= 15
+	base_enemy_accuracy = 32
 	if hurtbox.timer.is_stopped(): 
 		hurtbox.start_invincibility(stats.iframes)
 	else:
 		pass
 		
-func roll_state():
+# warning-ignore:unused_argument
+func roll_state(delta):
 	if roll_moving:
 		velocity = dir_vector * stats.roll_speed
 	else:
-# warning-ignore:integer_division
+		# warning-ignore:integer_division
 		velocity = dir_vector * (stats.roll_speed/4)
 	animationState.travel("Roll")
+	if Input.is_action_just_released("attack"):
+		if stats.stamina <= 0:
+			noStamina()
+			charge.stop_charge()
+		else:
+			if attack_2_charged:
+				attack_2_charged = false
+				print('rolling shade attack!!!')
+				shade_queued = true
+			elif attack_1_charged:
+				attack_1_charged = false
+				print('rolling flash attack!!!')
+				flash_queued = true
+	
+	elif Input.is_action_just_pressed("attack"):
+		if stats.stamina <= 0:
+			noStamina()
+		else:
+			attack1_queued = true
 	move()
 
 func roll_stop():
 	roll_moving = false
 	
 func roll_animation_finished():
-	state = MOVE
-	if Input.is_action_pressed("attack"):
-		attack_charging = true
-		# charge_reset()
+	if shade_queued:
+		shade_queued = false
+		velocity = dir_vector * (stats.roll_speed/2)
+		attack_2_charged = false
+		charge.stop_charge()
+		charge_reset()
+		attack_charging = false
+		state = SHADE
+	elif flash_queued:
+		base_enemy_accuracy = 16
+		flash_queued = false
+		velocity = dir_vector * (stats.roll_speed/2)
+		charge.stop_charge()
+		charge_reset()
+		attack_charging = false
+		state = FLASH
+	elif attack1_queued:
+		velocity = dir_vector * -(stats.roll_speed/2)
+		attack_animation_finished()
+	else:
+		attack_animation_finished()
 
 func backstep_stamina_drain():
 	stats.stamina -= 5
-	base_enemy_accuracy = 15
+	base_enemy_accuracy = 16
 	if hurtbox.timer.is_stopped(): 
 		hurtbox.start_invincibility(stats.iframes)
 	else:
