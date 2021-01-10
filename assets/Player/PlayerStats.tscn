@@ -23,13 +23,14 @@ var max_stamina = 60 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
 
 var strength = 4.0 setget set_strength
-# var strength_mod = 0 setget set_strength_mod
+var strength_mod = 0 setget set_strength_mod
 
 var defense = 4.0 setget set_defense
 var defense_mod = 0 setget set_defense_mod
 
 var base_accuracy = 75
 var dexterity = 4.0 setget set_dexterity
+var dexterity_mod = 0.0 setget set_dexterity_mod
 
 var speed = 4.0 setget set_speed
 var iframes = 0.1 setget set_iframes
@@ -60,8 +61,9 @@ signal endurance_changed(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
 signal strength_changed(value)
-# signal strength_mod_changed(value)
+signal strength_mod_changed(value)
 signal dexterity_changed(value)
+signal dexterity_mod_changed(value)
 signal defense_changed(value)
 signal defense_mod_changed(value)
 signal iframes_changed(value)
@@ -87,7 +89,7 @@ func _ready():
 	self.shade_speed = shade_speed
 	self.friction = friction
 	self.shade_friction = shade_friction
-	
+
 	self.status = status
 	self.health = health
 	self.experience = experience_total
@@ -160,13 +162,17 @@ func set_strength(value):
 	strength = value
 	emit_signal(\"strength_changed\", strength)
 	
-#func set_strength_mod(value):
-#	strength_mod = value
-#	emit_signal(\"strength_mod_changed\", strength_mod)
+func set_strength_mod(value):
+	strength_mod = value
+	emit_signal(\"strength_mod_changed\", strength_mod)
 
 func set_dexterity(value):
 	dexterity = value
 	emit_signal(\"dexterity_changed\", dexterity)
+	
+func set_dexterity_mod(value):
+	dexterity_mod = value
+	emit_signal(\"dexterity_mod_changed\", dexterity_mod)
 
 func set_defense(value):
 	defense = value

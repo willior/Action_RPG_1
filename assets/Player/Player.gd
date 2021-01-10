@@ -534,6 +534,7 @@ func roll_animation_finished():
 
 func backstep_stamina_drain():
 	stats.stamina -= 5
+	base_enemy_accuracy = 15
 	if hurtbox.timer.is_stopped(): 
 		hurtbox.start_invincibility(stats.iframes)
 	else:
@@ -557,13 +558,12 @@ func backstep_state(delta):
 				attack_1_charged = false
 				print('backstep flash attack!!!')
 				flash_queued = true
-
+	
 	elif Input.is_action_just_pressed("attack"):
 		if stats.stamina <= 0:
 			noStamina()
 		else:
-			velocity = dir_vector * (stats.roll_speed/2)
-			state = ATTACK1
+			attack1_queued = true
 	move()
 	
 func backstep_animation_finished():
@@ -583,8 +583,11 @@ func backstep_animation_finished():
 		charge_reset()
 		attack_charging = false
 		state = FLASH
+	elif attack1_queued:
+		velocity = dir_vector * (stats.roll_speed*0.75)
+		attack_animation_finished()
 	else:
-		state = MOVE
+		attack_animation_finished()
 		
 	if Input.is_action_pressed("attack"):
 		pass

@@ -243,7 +243,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ false ],
@@ -330,6 +330,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=35]
 length = 0.4
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -361,7 +362,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.3 ),
+"times": PoolRealArray( 0.35 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [ true ],
@@ -452,12 +453,12 @@ texture = ExtResource( 12 )
 offset = Vector2( 0, -12 )
 vframes = 2
 hframes = 12
-frame = 12
+frame = 4
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
 frames = SubResource( 26 )
-frame = 12
+frame = 4
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -547,6 +548,10 @@ shape = SubResource( 56 )
 wait_time = 0.5
 one_shot = true
 
+[node name="DelayTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="Tween" type="Tween" parent="."]
 
 [node name="TakeoffTimer" type="Timer" parent="."]
@@ -555,6 +560,7 @@ one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 15 )
+volume_db = 6.0
 max_distance = 320.0
 attenuation = 0.659754
 [connection signal="no_health" from="CrowStats" to="." method="_on_CrowStats_no_health"]

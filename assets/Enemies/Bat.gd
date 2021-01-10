@@ -231,27 +231,33 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 
 	# stats.health -= area.damage
 	# var damage_A = area.damage - stats.defense
-	var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-	stats.health -= damage
 	
-	hurtbox.create_hit_effect()
-	hurtbox.display_damage_popup(damage)
-	hurtbox.start_invincibility(0.4)
-	
-	sprite.modulate = Color(1,1,0)
-	if stats.health > 0:
-		knockback = area.knockback_vector * 120 # knockback velocity
-		tween.interpolate_property(sprite,
-		"modulate",
-		Color(1, 1, 0),
-		Color(1, 1, 1),
-		0.2,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN
-		)
-		tween.start()
+	var evasion_mod = 0
+	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
+	if !hit:
+		SoundPlayer.play_sound("miss")
 	else:
-		knockback = area.knockback_vector * 200 # knockback velocity on killing blow
+		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+		stats.health -= damage
+		
+		hurtbox.create_hit_effect()
+		hurtbox.display_damage_popup(damage)
+		hurtbox.start_invincibility(0.4)
+		
+		sprite.modulate = Color(1,1,0)
+		if stats.health > 0:
+			knockback = area.knockback_vector * 120 # knockback velocity
+			tween.interpolate_property(sprite,
+			"modulate",
+			Color(1, 1, 0),
+			Color(1, 1, 1),
+			0.2,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN
+			)
+			tween.start()
+		else:
+			knockback = area.knockback_vector * 200 # knockback velocity on killing blow
 
 func _on_BatStats_no_health():
 	sprite.playing = false # stop animation

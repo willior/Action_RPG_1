@@ -319,7 +319,7 @@ position = Vector2( 168, 112 )
 position = Vector2( 184, 88 )
 
 [node name="Crow" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 208, 128 )
+position = Vector2( -8, 136 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

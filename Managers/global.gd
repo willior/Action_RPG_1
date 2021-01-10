@@ -59,7 +59,7 @@ func enemy_hit_calculation(base_accuracy, accuracy, evasion):
 	var random_value = rng.randf_range(0, 100)
 	var base_hit_rate = base_accuracy + (4*accuracy)
 	var final_hit_rate = base_hit_rate - (2*evasion)
-	print("enemy final_hit_rate: ", final_hit_rate, "% > ", "random_value: ", random_value)
+	print("enemy final_hit_rate: ", final_hit_rate, "% > ", "RNG: ", random_value)
 	if final_hit_rate >= random_value:
 		return true
 	elif final_hit_rate < random_value:

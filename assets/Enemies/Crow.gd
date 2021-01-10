@@ -8,6 +8,7 @@ const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
 var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
 
+
 const ENEMY_NAME = "Crow"
 export var ACCELERATION = 200
 export var MAX_SPEED = 400
@@ -157,10 +158,12 @@ func seek_player():
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
 		disable_detection()
-		attackTimer.start()
 		attacking = true
 		# hitbox.set_deferred("monitorable", true)
+#		$DelayTimer.start()
+#		yield($DelayTimer, "timeout")
 		eye.modulate = Color(1,0,0)
+		attackTimer.start()
 		state = ATTACK
 		
 func _on_AttackTimer_timeout():
@@ -168,7 +171,7 @@ func _on_AttackTimer_timeout():
 	# hitbox.set_deferred("monitorable", false)
 	eye.modulate = Color(0,0,0)
 	state = IDLE
-	timer.start(1)
+	timer.start(1.2)
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
@@ -215,33 +218,45 @@ func pick_random_state(state_list):
 	return state_list.pop_front() # spits one out
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
-	if attack_on_cooldown:
-		attack_on_cooldown = false
-		timer.stop()
-		enable_detection()
+#	if attack_on_cooldown:
+#		attack_on_cooldown = false
+#		timer.stop()
+#		enable_detection()
 	# stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
-	var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-	print(damage, "dmg dealt to crow.")
-	stats.health -= damage
-	print("crow HP: ", stats.health, "/", stats.max_health)
-	hurtbox.display_damage_popup(damage)
-	hurtbox.create_hit_effect()
-	hurtbox.start_invincibility(0.4)
 	
-	sprite.modulate = Color(1,1,0)
-	if stats.health > 0:
-		knockback = area.knockback_vector * 120 # knockback velocity
-		tween.interpolate_property(sprite,
-		"modulate",
-		Color(1, 1, 0),
-		Color(1, 1, 1),
-		0.2,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN
-		)
-		tween.start()
+	# base_accuracy, dexterity, modulator, evasion
+	var evasion_mod = 0
+	if flying:
+		evasion_mod = 48
+	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
+	if !hit:
+		SoundPlayer.play_sound("miss")
 	else:
-		knockback = area.knockback_vector * 200 # knockback velocity on killing blow
+		state = IDLE
+		animationState.travel("Landing")
+		audio_caw()
+		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+		print(damage, "dmg dealt to crow.")
+		stats.health -= damage
+		print("crow HP: ", stats.health, "/", stats.max_health)
+		hurtbox.display_damage_popup(damage)
+		hurtbox.create_hit_effect()
+		hurtbox.start_invincibility(0.4)
+		
+		sprite.modulate = Color(1,1,0)
+		if stats.health > 0:
+			knockback = area.knockback_vector * 120 # knockback velocity
+			tween.interpolate_property(sprite,
+			"modulate",
+			Color(1, 1, 0),
+			Color(1, 1, 1),
+			0.2,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN
+			)
+			tween.start()
+		else:
+			knockback = area.knockback_vector * 200 # knockback velocity on killing blow
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")
@@ -254,10 +269,9 @@ func _on_CrowStats_no_health():
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
 	hitbox.set_deferred("monitorable", false)
 	state = DEAD
-	
 	tween.interpolate_property(sprite,
 	"offset:y",
-	-12,
+	-16,
 	0,
 	0.5,
 	Tween.TRANS_QUART,
@@ -265,7 +279,7 @@ func _on_CrowStats_no_health():
 	)
 	tween.interpolate_property(eye,
 	"offset:y",
-	-12,
+	-16,
 	0,
 	0.5,
 	Tween.TRANS_QUART,
