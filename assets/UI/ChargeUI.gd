@@ -38,13 +38,21 @@ func _ready():
 func set_stamina(value):
 	currentStamina = value
 	staminaProgress.value = currentStamina
+	
 	staminaPercent = currentStamina / currentMaxStamina
-	if staminaPercent < 0.25 && !staminaWarning:
+	# call_deferred("staminaPercent = currentStamina / currentMaxStamina")
+	
+	if !staminaProgress.visible && staminaPercent < 1:
+		staminaProgress.visible = true
+	elif staminaProgress.visible && (staminaPercent == 1 || (staminaPercent <= 0 && PlayerStats.status == "sweating")):
+		staminaProgress.visible = false
+
+	if staminaPercent < 0.25 && staminaPercent != 0 && !staminaWarning:
 		toggle_stamina_warning(true)
 	elif staminaPercent > 0.25 && staminaWarning:
 		toggle_stamina_warning(false)
 	elif staminaPercent < 0.25 && staminaWarning:
-		staminaWarningAnimation.playback_speed = 3 - staminaPercent*10
+		staminaWarningAnimation.playback_speed = 4 - staminaPercent*12
 	
 func set_max_stamina(value):
 	currentMaxStamina = value
@@ -62,7 +70,7 @@ func toggle_stamina_warning(value):
 func begin_charge_1():
 	chargeSound2.play()
 	progress1.visible = true
-	staminaProgress.visible = true
+	# staminaProgress.visible = true
 	
 func begin_charge_2():
 	chargeSound2.play()
@@ -100,7 +108,7 @@ func set_charge_level(value):
 func stop_charge():
 	chargeSound1.stop()
 	chargeSound2.stop()
-	staminaProgress.visible = false
+	# staminaProgress.visible = false
 	progress1.visible = false
 	progress2.visible = false
 	currentCharge = 0

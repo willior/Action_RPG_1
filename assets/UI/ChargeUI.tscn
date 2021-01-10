@@ -75,6 +75,7 @@ tracks/0/keys = {
 }
 
 [node name="ChargeUI" type="Node2D"]
+modulate = Color( 1, 1, 1, 0.752941 )
 material = SubResource( 1 )
 z_index = 4
 script = ExtResource( 3 )

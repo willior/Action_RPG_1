@@ -289,6 +289,7 @@ func set_sweating():
 	$Sweat.visible = true
 	sweating = true
 	stats.status = "sweating"
+	$ChargeUI/StaminaProgress.visible = false
 	
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
@@ -322,6 +323,7 @@ func attack2_stamina_drain():
 func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
 	state = MOVE
+	base_enemy_accuracy = 66
 	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
@@ -354,7 +356,7 @@ func charge_state(delta):
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()
-		noStamina()
+		# noStamina()
 		charge_reset()
 		
 	# if the current charge is less than the max charge
@@ -540,9 +542,8 @@ func backstep_stamina_drain():
 # warning-ignore:unused_argument
 func backstep_state(delta):
 # warning-ignore:integer_division
-	velocity = -dir_vector * (stats.roll_speed/2)
+	velocity = -dir_vector * (stats.roll_speed*0.66)
 	animationState.travel("Backstep")
-	
 	if Input.is_action_just_released("attack"):
 		if stats.stamina <= 0:
 			noStamina()
@@ -577,7 +578,7 @@ func backstep_animation_finished():
 	elif flash_queued:
 		base_enemy_accuracy = 0
 		flash_queued = false
-		velocity = dir_vector * (stats.roll_speed*0.75)
+		velocity = dir_vector * (stats.roll_speed)
 		charge.stop_charge()
 		charge_reset()
 		attack_charging = false
@@ -586,7 +587,8 @@ func backstep_animation_finished():
 		state = MOVE
 		
 	if Input.is_action_pressed("attack"):
-		attack_charging = true
+		pass
+		# attack_charging = true
 		# charge_reset()
 	
 func _on_Hurtbox_area_entered(area):

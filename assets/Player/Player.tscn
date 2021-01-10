@@ -1,8 +1,8 @@
-[gd_scene load_steps=141 format=2]
+[gd_scene load_steps=142 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
-[ext_resource path="res://assets/Player/SwordHitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Player/SwordHitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/TalkNotice.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.gd" type="Script" id=5]
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=6]
@@ -446,6 +446,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=12]
+length = 0.7
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -979,8 +980,8 @@ tracks/5/keys = {
 }
 
 [sub_resource type="Animation" id=19]
-loop = true
-step = 0.05
+length = 0.3
+step = 0.08
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -988,7 +989,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.08, 0.16, 0.24 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 181, 182, 183, 184 ]
@@ -1000,7 +1001,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.25 ),
+"times": PoolRealArray( 0, 0.24 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -1591,7 +1592,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeTimeScale" id=49]
 
 [sub_resource type="AnimationNodeBlendTree" id=50]
-graph_offset = Vector2( -75.69, 66.9938 )
+graph_offset = Vector2( -43.0763, 98.2575 )
 nodes/BlendSpace2D/node = SubResource( 48 )
 nodes/BlendSpace2D/position = Vector2( 140, 120 )
 nodes/TimeScale/node = SubResource( 49 )
@@ -1622,6 +1623,7 @@ blend_point_3/node = SubResource( 54 )
 blend_point_3/pos = Vector2( 1, 0 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=56]
 animation = "AttackFlashLeft"
@@ -1815,6 +1817,7 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id=102]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=103]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=104]
 
@@ -1865,9 +1868,13 @@ states/Shade/node = SubResource( 87 )
 states/Shade/position = Vector2( 218.03, 200.973 )
 transitions = [ "Idle", "Roll", SubResource( 88 ), "Roll", "Idle", SubResource( 89 ), "Idle", "Hit", SubResource( 90 ), "Hit", "Idle", SubResource( 91 ), "Roll", "Hit", SubResource( 92 ), "Idle", "Shade", SubResource( 93 ), "Shade", "Idle", SubResource( 94 ), "Shade", "Hit", SubResource( 95 ), "Idle", "Flash", SubResource( 96 ), "Flash", "Idle", SubResource( 97 ), "Flash", "Hit", SubResource( 98 ), "Idle", "Backstep", SubResource( 99 ), "Backstep", "Idle", SubResource( 100 ), "Backstep", "Hit", SubResource( 101 ), "Backstep", "Shade", SubResource( 102 ), "Backstep", "Flash", SubResource( 103 ), "Idle", "Run", SubResource( 104 ), "Run", "Idle", SubResource( 105 ), "Run", "Hit", SubResource( 106 ), "Attack1", "Hit", SubResource( 107 ), "Idle", "Attack1", SubResource( 108 ), "Backstep", "Attack1", SubResource( 109 ), "Attack2", "Attack1", SubResource( 110 ), "Attack1", "Attack2", SubResource( 111 ), "Shade", "Attack2", SubResource( 112 ), "Attack2", "Idle", SubResource( 113 ), "Attack2", "Hit", SubResource( 114 ), "Attack1", "Idle", SubResource( 115 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -255.039, 71.7425 )
+graph_offset = Vector2( -255.039, -46.2004 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=117]
+
+[sub_resource type="CapsuleShape2D" id=126]
+radius = 11.0
+height = 12.0
 
 [sub_resource type="RectangleShape2D" id=118]
 extents = Vector2( 5, 7.99995 )
@@ -1962,7 +1969,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 18
+frame = 184
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2046,13 +2053,21 @@ margin_bottom = -7.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 1.5708
+rotation = 3.14159
 
-[node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
+[node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
+position = Vector2( 15, 0 )
 monitorable = false
+collision_layer = 0
+collision_mask = 8
+script = ExtResource( 3 )
 
-[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
-disabled = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/SwordHitbox"]
+position = Vector2( -9.53674e-07, 0 )
+shape = SubResource( 126 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitboxPivot/SwordHitbox"]
+stream = ExtResource( 7 )
 
 [node name="InteractHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
@@ -2094,7 +2109,7 @@ rotation = 1.5708
 shape = SubResource( 121 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 14 )
+stream = ExtResource( 7 )
 
 [node name="HurtAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
@@ -2128,5 +2143,3 @@ one_shot = true
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
-
-[editable path="HitboxPivot/SwordHitbox"]

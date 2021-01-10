@@ -34,6 +34,8 @@ func modify_damage(base, modulator):
 	
 func reset_damage():
 	damage = orig_damage
+	$CollisionShape2D.scale.x = 1
+	set_deferred("monitorable", false)
 	
 func shade_begin():
 	set_deferred("monitorable", true)
@@ -52,7 +54,7 @@ func flash_whoosh_audio():
 func flash_begin():
 	audio.stream = flash_swing
 	audio.play()
-	$CollisionShape2D.scale.x = 1.6
+	$CollisionShape2D.scale.x = 3
 	set_deferred("monitorable", true)
 	knockback_vector *= 1.4
 	orig_damage = damage
