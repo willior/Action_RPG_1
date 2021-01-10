@@ -11,7 +11,7 @@
 [sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 resource_name = "Off"
 length = 0.1
 tracks/0/type = "value"
@@ -27,7 +27,7 @@ tracks/0/keys = {
 "values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "On"
 length = 0.8
 loop = true
@@ -44,7 +44,7 @@ tracks/0/keys = {
 "values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ), Color( 1, 0, 0, 0.784314 ), Color( 1, 0.737255, 0.211765, 0.784314 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -59,7 +59,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -108,8 +108,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StaminaProgress"]
-anims/Off = SubResource( 4 )
-anims/On = SubResource( 5 )
+anims/Off = SubResource( 2 )
+anims/On = SubResource( 3 )
 
 [node name="TextureProgress1" type="TextureProgress" parent="."]
 process_priority = 1
@@ -134,7 +134,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureProgress1"]
-anims/ChargeFlash = SubResource( 2 )
+anims/ChargeFlash = SubResource( 4 )
 
 [node name="TextureProgress2" type="TextureProgress" parent="."]
 process_priority = 1
@@ -161,4 +161,4 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureProgress2"]
-anims/ChargeFlash = SubResource( 3 )
+anims/ChargeFlash = SubResource( 5 )

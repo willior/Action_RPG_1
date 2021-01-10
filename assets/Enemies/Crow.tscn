@@ -532,6 +532,7 @@ one_shot = true
 position = Vector2( 0, -3 )
 collision_mask = 4
 damage = 16.0
+accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 55 )

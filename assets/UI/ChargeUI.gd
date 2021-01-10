@@ -8,7 +8,6 @@ onready var staminaProgress = $StaminaProgress
 onready var staminaWarningAnimation = $StaminaProgress/AnimationPlayer
 onready var chargeBeep1 = $ChargeBeep1
 onready var chargeBeep2 = $ChargeBeep2
-
 onready var chargeSound1 = $ChargeSound1
 onready var chargeSound2 = $ChargeSound2
 
@@ -54,15 +53,11 @@ func set_max_stamina(value):
 func toggle_stamina_warning(value):
 	match value:
 		true:
-			print('true')
 			staminaWarning = true
 			staminaWarningAnimation.play("On")
 		false:
 			staminaWarning = false
-			print("staminaWarning is false")
 			staminaWarningAnimation.play("Off")
-	
-	
 
 func begin_charge_1():
 	chargeSound2.play()

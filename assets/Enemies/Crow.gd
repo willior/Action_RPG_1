@@ -221,7 +221,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		enable_detection()
 	# stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
 	var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-	print(damage, " dealt to crow.")
+	print(damage, "dmg dealt to crow.")
 	stats.health -= damage
 	print("crow HP: ", stats.health, "/", stats.max_health)
 	hurtbox.display_damage_popup(damage)

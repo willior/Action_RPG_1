@@ -5,3 +5,4 @@ var player = null
 
 export(float) var damage = 1
 export var randomness = 0.25
+export(float) var accuracy = 1

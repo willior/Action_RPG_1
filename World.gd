@@ -21,12 +21,12 @@ func _input(event):
 		PlayerStats.status = "frenzy"
 		
 	if event.is_action_pressed("test2"): # Y
-		print("test1: applying poison")
-		PlayerStats.status = "poison"
+		# print("test1: applying poison")
+		# PlayerStats.status = "poison"
+		print("player hit = ", Global.player_hit_calculation(75, 4, 1, 2))
 		
 	if event.is_action_pressed("test3"): # U
-		# prints('text3: PlayerStats.is_poisoned = ' + str(PlayerStats.is_poisoned))
-		print(Global.custom_variables)
+		print("enemy hit = ", Global.enemy_hit_calculation(50, 2, 4))
 	
 	if event.is_action_pressed("pause"): # P
 		if get_tree().paused == false:

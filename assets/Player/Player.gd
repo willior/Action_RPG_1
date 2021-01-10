@@ -573,17 +573,24 @@ func backstep_animation_finished():
 		# charge_reset()
 	
 func _on_Hurtbox_area_entered(area):
-	if attack2_queued: attack2_queued = false
-	if charge_count > 0:
-		charge.stop_charge()
-		if attack_charging: attack_charging = false
-		if attack_1_charged: attack_1_charged = false
-		if attack_2_charged: attack_2_charged = false
-		charge_reset()
-	# damageTaken = area.damage
-	damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-	hurtbox.display_damage_popup(damageTaken)
-	state = HIT
+	var hit = Global.enemy_hit_calculation(50, area.accuracy, stats.speed)
+	if hit:
+		if attack2_queued:
+			attack2_queued = false
+		if charge_count > 0:
+			charge.stop_charge()
+			if attack_charging: attack_charging = false
+			if attack_1_charged: attack_1_charged = false
+			if attack_2_charged: attack_2_charged = false
+			charge_reset()
+		# damageTaken = area.damage
+		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+		hurtbox.display_damage_popup(damageTaken)
+		print("player hit for ", damageTaken, "HP!!!")
+		state = HIT
+	else:
+		$DodgeAudio.play()
+		print("dodged!!!")
 
 func _on_Hurtbox_invincibility_started():
 	blinkAnimationPlayer.play("Start")
