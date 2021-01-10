@@ -533,6 +533,7 @@ func roll_state(delta):
 		else:
 			if attack_2_charged:
 				attack_2_charged = false
+				attack_1_charged = false
 				print('rolling shade attack!!!')
 				shade_queued = true
 			elif attack_1_charged:
@@ -592,6 +593,7 @@ func backstep_state(delta):
 			charge.stop_charge()
 		else:
 			if attack_2_charged:
+				attack_1_charged = false # getting rid of this stores the charge for next backstep - mite b cool
 				attack_2_charged = false
 				print('backstep shade attack!!!')
 				shade_queued = true

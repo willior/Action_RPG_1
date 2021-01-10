@@ -130,7 +130,7 @@ fill_mode = 4
 tint_under = Color( 0, 0, 0, 0.501961 )
 tint_progress = Color( 1, 1, 0, 1 )
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextureProgress1"]

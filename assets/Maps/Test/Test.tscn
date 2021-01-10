@@ -253,7 +253,8 @@ pause_mode = 1
 
 [node name="Sprite" type="Sprite" parent="Map"]
 modulate = Color( 0.882353, 0.882353, 0.882353, 1 )
-scale = Vector2( 384, 256 )
+position = Vector2( -320, -180 )
+scale = Vector2( 1280, 720 )
 texture = ExtResource( 3 )
 centered = false
 region_enabled = true
