@@ -342,9 +342,6 @@ func attack_animation_finished():
 		backstep_queued = false
 		backstep_moving = true
 		state = BACKSTEP
-		
-#		velocity = -dir_vector * (stats.roll_speed*0.66)
-#		animationState.travel("Backstep")
 	else:
 		state = MOVE
 	# if attack button is held when an attack animation finishes
