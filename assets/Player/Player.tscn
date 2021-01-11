@@ -981,7 +981,8 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=19]
 length = 0.3
-step = 0.08
+loop = true
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1001,11 +1002,14 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.24 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.16, 0.24 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "backstep_stamina_drain"
+}, {
+"args": [  ],
+"method": "backstep_stop"
 }, {
 "args": [  ],
 "method": "backstep_animation_finished"
@@ -1967,7 +1971,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 36
+frame = 181
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )

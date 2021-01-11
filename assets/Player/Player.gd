@@ -32,12 +32,13 @@ enum {
 var state = MOVE
 var velocity = Vector2.ZERO
 var dir_vector = Vector2.DOWN
-var roll_moving = false
 var damageTaken = 0
 var stats = PlayerStats
 var levelStats = [0, 1, 2, 3, 4, 5]
 var levelResult = 0
 
+var roll_moving = false
+var backstep_moving = false
 var backstep_queued = false
 var attack2_queued = false
 var attack1_queued = false
@@ -248,6 +249,7 @@ func move_state(delta):
 				roll_moving = true
 				state = ROLL
 			else:
+				backstep_moving = true
 				state = BACKSTEP
 		else:
 			noStamina()
@@ -331,12 +333,19 @@ func attack_animation_finished():
 	elif attack1_queued:
 		attack1_queued = false
 		state = ATTACK1
+	elif backstep_queued:
+		backstep_queued = false
+		backstep_moving = true
+		state = BACKSTEP
+		
+#		velocity = -dir_vector * (stats.roll_speed*0.66)
+#		animationState.travel("Backstep")
 	else:
 		state = MOVE
 	# if attack button is held when an attack animation finishes
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
-		charge_reset()
+		# charge_reset()
 	
 # when an attack animation finishes, checks to see if the button is still held
 # if it is, changes the player state to "charging"
@@ -584,8 +593,10 @@ func backstep_stamina_drain():
 
 # warning-ignore:unused_argument
 func backstep_state(delta):
-# warning-ignore:integer_division
-	velocity = -dir_vector * (stats.roll_speed*0.66)
+	if backstep_moving:
+		velocity = -dir_vector * (stats.roll_speed*0.66)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, (stats.friction) * delta)
 	animationState.travel("Backstep")
 	if Input.is_action_just_released("attack"):
 		if stats.stamina <= 0:
@@ -601,13 +612,28 @@ func backstep_state(delta):
 				attack_1_charged = false
 				print('backstep flash attack!!!')
 				flash_queued = true
+			else:
+				attack1_queued = true
 	
-	elif Input.is_action_just_pressed("attack"):
+#	elif Input.is_action_just_pressed("attack"):
+#		if stats.stamina <= 0:
+#			noStamina()
+#		else:
+#			attack1_queued = true
+			
+	elif Input.is_action_just_pressed("roll"):
 		if stats.stamina <= 0:
 			noStamina()
+			charge.stop_charge()
 		else:
-			attack1_queued = true
+			backstep_queued = true
+		
 	move()
+	
+func backstep_stop():
+	base_enemy_accuracy = 50
+	backstep_moving = false
+	print('backstep_stop')
 	
 func backstep_animation_finished():
 	if shade_queued:
@@ -619,24 +645,21 @@ func backstep_animation_finished():
 		attack_charging = false
 		state = SHADE
 	elif flash_queued:
-		base_enemy_accuracy = 0
+		base_enemy_accuracy = 0 # Player becomes very difficult to hit during a queued flash
 		flash_queued = false
 		velocity = dir_vector * (stats.roll_speed)
 		charge.stop_charge()
 		charge_reset()
 		attack_charging = false
 		state = FLASH
+	elif Input.is_action_pressed("attack"):
+		attack_animation_finished()
 	elif attack1_queued:
 		velocity = dir_vector * (stats.roll_speed*0.75)
 		attack_animation_finished()
 	else:
 		attack_animation_finished()
-		
-	if Input.is_action_pressed("attack"):
-		pass
-		# attack_charging = true
-		# charge_reset()
-	
+
 func _on_Hurtbox_area_entered(area):
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
