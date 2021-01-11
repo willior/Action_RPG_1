@@ -38,6 +38,7 @@ var stats = PlayerStats
 var levelStats = [0, 1, 2, 3, 4, 5]
 var levelResult = 0
 
+var attack_next = 1
 var backstep_queued = false
 var attack2_queued = false
 var attack1_queued = false
@@ -321,6 +322,7 @@ func attack2_stamina_drain():
 	swordHitbox.set_deferred("monitorable", true)
 
 func attack_animation_finished():
+	print('attack animation finished')
 	swordHitbox.set_deferred("monitorable", false)
 	state = MOVE
 	base_enemy_accuracy = 66
@@ -331,12 +333,17 @@ func attack_animation_finished():
 	elif attack1_queued:
 		attack1_queued = false
 		state = ATTACK1
+#	elif backstep_queued:
+#		print('backstep queued: applying backstep state')
+#		backstep_queued = false
+#		state = BACKSTEP
 	else:
 		state = MOVE
 	# if attack button is held when an attack animation finishes
 	if Input.is_action_pressed("attack"):
+		print('beginning charge')
 		attack_charging = true
-		charge_reset()
+		# charge_reset()
 	
 # when an attack animation finishes, checks to see if the button is still held
 # if it is, changes the player state to "charging"
@@ -344,8 +351,6 @@ func attack_animation_finished():
 # if the player holds the button for enough time, charge_level_1 is achieved
 # if the player continues to hold the button, charge_level_2 is achieved
 # releasing the attack button after achieving a charge level unleashes a special attack
-
-# warning-ignore:unused_argument
 # warning-ignore:unused_argument
 func charge_state(delta):
 	# stamina drain
@@ -575,6 +580,7 @@ func roll_animation_finished():
 		attack_animation_finished()
 
 func backstep_stamina_drain():
+	print('starting backdash')
 	stats.stamina -= 5
 	base_enemy_accuracy = 16
 	if hurtbox.timer.is_stopped(): 
@@ -607,9 +613,19 @@ func backstep_state(delta):
 			noStamina()
 		else:
 			attack1_queued = true
+			
+#	elif Input.is_action_just_pressed("roll"):
+#		print('roll pressed during backstep')
+#		if stats.stamina <= 0:
+#			noStamina()
+#		else:
+#			print('nothing here')
+#			return
+#			backstep_queued = true
 	move()
 	
 func backstep_animation_finished():
+	print('backstep finished')
 	if shade_queued:
 		shade_queued = false
 		velocity = dir_vector * (stats.roll_speed*0.75)
@@ -627,7 +643,7 @@ func backstep_animation_finished():
 		attack_charging = false
 		state = FLASH
 	elif attack1_queued:
-		velocity = dir_vector * (stats.roll_speed*0.75)
+		velocity = dir_vector * (stats.roll_speed*0.8)
 		attack_animation_finished()
 	else:
 		attack_animation_finished()
