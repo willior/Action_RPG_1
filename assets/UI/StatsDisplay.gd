@@ -1,7 +1,7 @@
 extends Control
 
 var currentHealth setget set_health
-var maxHealth
+var currentMax_health setget set_max_health
 var currentEndurance setget set_endurance
 var currentDefense setget set_defense
 var currentStrength setget set_strength
@@ -15,9 +15,13 @@ onready var strengthBox = $Vbox/str
 onready var dexterityBox = $Vbox/dex
 onready var speedBox = $Vbox/spd
 
+func set_max_health(value):
+	currentMax_health = str(value / 15)
+	healthBox.set_text("VIT " + (currentMax_health))
+
 func set_health(value):
-	currentHealth = str(value / 15)
-	healthBox.set_text("VIT " + (currentHealth))
+	currentHealth = str(value)
+	# healthBox.set_text("VIT " + (currentHealth))
 
 func set_endurance(value):
 	currentEndurance = str(value)
@@ -40,9 +44,9 @@ func set_speed(value):
 	speedBox.set_text("SPD " + currentSpeed)
 	
 func _ready():
-	self.currentHealth = PlayerStats.health
+	self.currentMax_health = PlayerStats.max_health
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("health_changed", self, "set_health")
+	PlayerStats.connect("max_health_changed", self, "set_max_health")
 	self.currentEndurance = PlayerStats.endurance
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("endurance_changed", self, "set_endurance")

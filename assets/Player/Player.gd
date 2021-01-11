@@ -217,6 +217,11 @@ func move_state(delta):
 		inventory.advance_selected_item()
 		interactHitbox.disabled = true
 		interactHitbox.disabled = false
+		
+	if Input.is_action_just_pressed("previous_item"): # E
+		inventory.previous_selected_item()
+		interactHitbox.disabled = true
+		interactHitbox.disabled = false
 
 	if Input.is_action_pressed("attack"):
 		if !talkTimer.is_stopped():
@@ -482,6 +487,7 @@ func level_up():
 	var levelNotice = LevelNotice.instance()
 	levelNotice.rect_position = global_position
 	levelNotice.levelDisplay = stats.level
+	
 	var choice = levelStats[randi() % levelStats.size()]
 	match choice:
 		LEVELHEALTH:
@@ -489,11 +495,11 @@ func level_up():
 			stats.health += 15
 			levelNotice.statDisplay = "WILLPOWER"
 			levelNotice.statColor = Color(1, 0.272549, 0.315686)
-		LEVELSTAMINA:
+		LEVELDEFENSE:
 			stats.defense += 1
 			levelNotice.statDisplay = "HARDINESS"
 			levelNotice.statColor = Color(0.372549, 1, 0.415686)
-		LEVELDEFENSE:
+		LEVELSTAMINA:
 			stats.endurance += 1
 			stats.max_stamina += 15
 			levelNotice.statDisplay = "LUNG CAPACITY"
@@ -509,14 +515,8 @@ func level_up():
 		LEVELSPEED:
 			stats.iframes += 0.1
 			stats.speed += 1
-			# var totalSpeed = animationPlayer.get_playing_speed() + stats.speed
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
-	# prints('LEVEL ' + str(stats.level) + ":")
-	# prints("max_health = " + str(stats.max_health))
-	# prints("max_stamina = " + str(stats.max_stamina))
-	# prints("max_strength = " + str(stats.strength))
-	# prints("max_speed = " + str(stats.iframes))
 	get_node("/root").add_child(levelNotice)
 	
 func roll_stamina_drain():
@@ -524,8 +524,6 @@ func roll_stamina_drain():
 	base_enemy_accuracy = 32
 	if hurtbox.timer.is_stopped(): 
 		hurtbox.start_invincibility(stats.iframes)
-	else:
-		pass
 		
 # warning-ignore:unused_argument
 func roll_state(delta):

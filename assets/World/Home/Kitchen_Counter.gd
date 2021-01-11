@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 onready var sinkSprite = $Sprite/AnimatedSprite
 onready var sinkAnim = $AnimationTree.get("parameters/playback")
@@ -43,7 +44,6 @@ func examine():
 	get_node("/root/World/GUI").add_child(dialogBox)
 
 func interact():
-	print('interacting with sink')
 	if !is_on:
 		sinkAnim.travel("Run")
 		index = 1
@@ -57,6 +57,7 @@ func interact():
 
 func use_item_on_object():
 	var dialogBox = DialogBox.instance()
+	dialogBox.dialog_object_path = get_path()
 	if !is_on:
 		dialogBox.dialog_script = [
 				{'text': "You hold the Metal Pot under the faucet."},
@@ -65,7 +66,21 @@ func use_item_on_object():
 	else:
 		dialogBox.dialog_script = [
 				{'text': "You hold the Metal Pot under the faucet."},
-				{'text': "It fills with water!"}
+				{'text': "It fills with water!",
+				'action': 'take_item',
+				'skip': '0'
+				}
 			]
 
+		GameManager.player.inventory.remove_item("Metal_Pot", 1)
+		# PlayerLog.metal_pot_water_collected = true
+
 	get_node("/root/World/GUI").add_child(dialogBox)
+	
+func acquire_item():
+	var itemCollectEffect = ItemCollectEffect.instance()
+	get_parent().add_child(itemCollectEffect)
+	itemCollectEffect.playSound(1)
+	GameManager.player.inventory.add_item("Metal_Pot_Water", 1)
+#	PlayerLog.metal_pot_collected = true
+#	queue_free()

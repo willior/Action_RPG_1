@@ -38,12 +38,25 @@ func advance_selected_item():
 			current_selected_item = 0
 		var new_selected_item = get_item(current_selected_item)
 		emit_signal("current_selected_item_changed", new_selected_item)
+		
+func previous_selected_item():
+	if _items.size() == 1:
+		GameManager.player.audio.stream = load("res://assets/Audio/Bamboo.wav")
+		GameManager.player.audio.play()
+
+	else:
+		GameManager.player.audio.stream = load("res://assets/Audio/Player/Item_Next.wav")
+		GameManager.player.audio.play()
+		current_selected_item -= 1
+		if current_selected_item < 0:
+			current_selected_item = _items.size() - 1
+		var new_selected_item = get_item(current_selected_item)
+		emit_signal("current_selected_item_changed", new_selected_item)
 	
 func check_item(item_name, quantity):
 	if quantity <= 0:
 		GameManager.player.audio.stream = load("res://assets/Audio/Bamboo.wav")
 		GameManager.player.audio.play()
-		print("quantity is 0 or less; returning")
 		return
 	
 	var item = ItemDatabase.get_item(item_name)
@@ -81,7 +94,7 @@ func remove_item(item_name, quantity):
 				emit_signal("item_quantity_zero")
 				prints(str(inventory_item.item_reference.name) + " cleared from inventory")
 				_items.erase(get_item(current_selected_item))
-				current_selected_item = 0
+				current_selected_item = 1
 			else:
 				var updated_selected_item = get_item(current_selected_item)
 				emit_signal("selected_item_quantity_updated", updated_selected_item)

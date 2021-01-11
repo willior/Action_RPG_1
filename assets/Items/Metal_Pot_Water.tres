@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/Scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://assets/ItemsInventory/Metal_Pot_Water.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Metal_Pot_Water"
+stackable = false
+max_stack_size = 1
+type = 2
+texture = ExtResource( 2 )
+healing = 0
+ready_to_use = false
