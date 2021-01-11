@@ -19,8 +19,8 @@ func _ready():
 #	PlayerStats.connect("strength_mod_changed", self, "set_damage_mod")
 	orig_damage = damage
 
-func set_damage(_damage):
-	damage = PlayerStats.strength
+func set_damage(value):
+	damage = value
 	# calculate_damage(PlayerStats.strength, damage_mod)
 	
 #func set_damage_mod(_damage_mod):
@@ -44,8 +44,7 @@ func shade_begin():
 	damage = modify_damage(damage, 3)
 	
 func shade_end():
-	set_deferred("monitorable", false)
-	damage = orig_damage
+	reset_damage()
 	
 func flash_whoosh_audio():
 	audio.stream = flash_whoosh
@@ -61,6 +60,4 @@ func flash_begin():
 	damage = modify_damage(damage, 2)
 	
 func flash_end():
-	$CollisionShape2D.scale.x = 1
-	set_deferred("monitorable", false)
-	damage = orig_damage
+	reset_damage()

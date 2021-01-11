@@ -63,7 +63,7 @@ func _ready():
 	rng.randomize()
 	random_number = rng.randi_range(0, 4)
 	sprite.frame = random_number
-	eye.frame = random_number
+	eye.frame = sprite.frame
 	set_speed_scale(1)
 	sprite.playing = true
 	eye.playing = true
@@ -77,7 +77,8 @@ func _ready():
 	
 func set_speed_scale(value):
 	sprite.speed_scale = value
-	eye.speed_scale = value
+	eye.speed_scale = sprite.speed_scale
+	eye.frame = sprite.frame
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -114,7 +115,7 @@ func _physics_process(delta):
 				attacking = false
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
-				sprite.speed_scale = 1
+				set_speed_scale(1)
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)

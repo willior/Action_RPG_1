@@ -7,7 +7,6 @@ onready var attackTimer = $AttackTimer
 
 func can_attack_player():
 	return player != null
-	
 
 func _on_AttackPlayerZone_body_entered(body):
 	player = body

@@ -99,6 +99,7 @@ func _physics_process(delta):
 				attack_player()
 			else:
 				eye.modulate = Color(0,0,0)
+				eye.frame = sprite.frame
 				state = IDLE
 
 		ATTACK:
@@ -153,6 +154,7 @@ func seek_player():
 		# animationState.travel("Fly")
 		fly_animation()
 		eye.modulate = Color(1,0.8,0)
+		eye.frame = sprite.frame
 		state = CHASE
 
 func attack_player():
@@ -163,6 +165,7 @@ func attack_player():
 #		$DelayTimer.start()
 #		yield($DelayTimer, "timeout")
 		eye.modulate = Color(1,0,0)
+		eye.frame = sprite.frame
 		attackTimer.start()
 		state = ATTACK
 		
@@ -170,6 +173,7 @@ func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
 	# hitbox.set_deferred("monitorable", false)
 	eye.modulate = Color(0,0,0)
+	eye.frame = sprite.frame
 	state = IDLE
 	timer.start(1.2)
 	yield(timer, "timeout")
