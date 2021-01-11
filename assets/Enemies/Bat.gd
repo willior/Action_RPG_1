@@ -236,12 +236,13 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
 		SoundPlayer.play_sound("miss")
+		hurtbox.display_damage_popup("Miss!")
 	else:
 		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		stats.health -= damage
 		
 		hurtbox.create_hit_effect()
-		hurtbox.display_damage_popup(damage)
+		hurtbox.display_damage_popup(str(damage))
 		hurtbox.start_invincibility(0.4)
 		
 		sprite.modulate = Color(1,1,0)

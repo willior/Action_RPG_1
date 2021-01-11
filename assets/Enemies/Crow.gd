@@ -231,6 +231,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
 		SoundPlayer.play_sound("miss")
+		hurtbox.display_damage_popup("Miss!")
 	else:
 		state = IDLE
 		animationState.travel("Landing")
@@ -239,7 +240,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		print(damage, "dmg dealt to crow.")
 		stats.health -= damage
 		print("crow HP: ", stats.health, "/", stats.max_health)
-		hurtbox.display_damage_popup(damage)
+		hurtbox.display_damage_popup(str(damage))
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.4)
 		

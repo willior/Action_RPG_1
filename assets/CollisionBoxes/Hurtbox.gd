@@ -31,10 +31,11 @@ func create_hit_effect():
 func display_damage_popup(value):
 	var damagePopup = DamagePopup.instance()
 	var main = get_tree().get_root().get_node("World")
+	damagePopup.global_position = global_position
 	damagePopup.damageDisplay = value
 	main.add_child(damagePopup)
-	damagePopup.global_position = global_position
 	
+
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter
 

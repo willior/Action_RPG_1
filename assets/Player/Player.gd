@@ -650,11 +650,12 @@ func _on_Hurtbox_area_entered(area):
 			charge_reset()
 		# damageTaken = area.damage
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-		hurtbox.display_damage_popup(damageTaken)
+		hurtbox.display_damage_popup(str(damageTaken))
 		print("player hit for ", damageTaken, "HP!!!")
 		state = HIT
 	else:
 		$DodgeAudio.play()
+		hurtbox.display_damage_popup("Miss!")
 		print("dodged!!!")
 
 func _on_Hurtbox_invincibility_started():

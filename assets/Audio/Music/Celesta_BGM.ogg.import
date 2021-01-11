@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Celesta_BGM.ogg-ab8bf481c2e69973a79c1da5aff77599.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/Music/Celesta_BGM.ogg"
+dest_files=[ "res://.import/Celesta_BGM.ogg-ab8bf481c2e69973a79c1da5aff77599.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

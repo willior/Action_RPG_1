@@ -1872,24 +1872,24 @@ graph_offset = Vector2( -255.039, -46.2004 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=117]
 
-[sub_resource type="CapsuleShape2D" id=126]
+[sub_resource type="CapsuleShape2D" id=118]
 radius = 11.0
 height = 12.0
 
-[sub_resource type="RectangleShape2D" id=118]
+[sub_resource type="RectangleShape2D" id=119]
 extents = Vector2( 5, 7.99995 )
 
-[sub_resource type="CircleShape2D" id=119]
+[sub_resource type="CircleShape2D" id=120]
 radius = 5.0
 
-[sub_resource type="CapsuleShape2D" id=120]
+[sub_resource type="CapsuleShape2D" id=121]
 height = 5.43185
 
-[sub_resource type="CapsuleShape2D" id=121]
+[sub_resource type="CapsuleShape2D" id=122]
 radius = 180.0
 height = 260.0
 
-[sub_resource type="Animation" id=122]
+[sub_resource type="Animation" id=123]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -1905,7 +1905,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=123]
+[sub_resource type="Animation" id=124]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -1920,8 +1920,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=124]
-resource_name = "Start"
+[sub_resource type="Animation" id=125]
 length = 3.0
 step = 1.0
 tracks/0/type = "value"
@@ -1937,8 +1936,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0.25098, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=125]
-resource_name = "Stop"
+[sub_resource type="Animation" id=126]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -2064,7 +2062,7 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/SwordHitbox"]
 position = Vector2( -9.53674e-07, 0 )
-shape = SubResource( 126 )
+shape = SubResource( 118 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitboxPivot/SwordHitbox"]
 stream = ExtResource( 7 )
@@ -2076,7 +2074,7 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/InteractHitbox"]
 position = Vector2( -2, -4.69685e-05 )
-shape = SubResource( 118 )
+shape = SubResource( 119 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 4
@@ -2085,7 +2083,7 @@ script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -2 )
-shape = SubResource( 119 )
+shape = SubResource( 120 )
 
 [node name="Timer" type="Timer" parent="Hurtbox"]
 one_shot = true
@@ -2097,7 +2095,7 @@ collision_mask = 768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collectbox"]
 position = Vector2( -0.488346, -7.73805 )
-shape = SubResource( 120 )
+shape = SubResource( 121 )
 
 [node name="SpawnBox" type="Area2D" parent="."]
 visible = false
@@ -2106,7 +2104,7 @@ collision_mask = 1536
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnBox"]
 rotation = 1.5708
-shape = SubResource( 121 )
+shape = SubResource( 122 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
@@ -2119,12 +2117,12 @@ stream = ExtResource( 10 )
 volume_db = 12.0
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 122 )
-anims/Stop = SubResource( 123 )
+anims/Start = SubResource( 123 )
+anims/Stop = SubResource( 124 )
 
 [node name="FrenzyAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 124 )
-anims/Stop = SubResource( 125 )
+anims/Start = SubResource( 125 )
+anims/Stop = SubResource( 126 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -2137,9 +2135,9 @@ one_shot = true
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
