@@ -28,9 +28,10 @@ var strength_mod = 0 setget set_strength_mod
 var defense = 4.0 setget set_defense
 var defense_mod = 0 setget set_defense_mod
 
-var base_accuracy = 75
 var dexterity = 4.0 setget set_dexterity
 var dexterity_mod = 0.0 setget set_dexterity_mod
+var base_accuracy = 75
+var base_crit_rate = 4
 
 var speed = 4.0 setget set_speed
 var iframes = 0.1 setget set_iframes

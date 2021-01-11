@@ -237,14 +237,19 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		SoundPlayer.play_sound("miss")
 		hurtbox.display_damage_popup("Miss!")
 	else:
+		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity)
+		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+		if is_crit:
+			print('CRITICAL HIT!!!')
+			stats.health -= damage*2
+			hurtbox.display_crit_popup(str(damage*2))
+		else:
+			stats.health -= damage
+			hurtbox.display_damage_popup(str(damage))
 		state = IDLE
 		animationState.travel("Landing")
 		audio_caw()
-		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-		print(damage, "dmg dealt to crow.")
-		stats.health -= damage
 		print("crow HP: ", stats.health, "/", stats.max_health)
-		hurtbox.display_damage_popup(str(damage))
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.4)
 		

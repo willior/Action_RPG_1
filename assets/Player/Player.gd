@@ -544,12 +544,13 @@ func roll_state(delta):
 				attack_1_charged = false
 				print('rolling flash attack!!!')
 				flash_queued = true
+			else: attack1_queued = true
 	
-	elif Input.is_action_just_pressed("attack"):
-		if stats.stamina <= 0:
-			noStamina()
-		else:
-			attack1_queued = true
+#	elif Input.is_action_just_pressed("attack"):
+#		if stats.stamina <= 0:
+#			noStamina()
+#		else:
+#			attack1_queued = true
 	move()
 
 func roll_stop():

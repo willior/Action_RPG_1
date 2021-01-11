@@ -2,6 +2,9 @@ extends Area2D
 
 const HitEffect = preload("res://assets/Effects/HitEffect.tscn")
 const DamagePopup = preload("res://assets/UI/Popups/DamagePopup.tscn")
+const CritPopup = preload("res://assets/UI/Popups/CritPopup.tscn")
+
+onready var main = get_tree().get_root().get_node("World")
 
 var invincible = false setget set_invincible
 
@@ -24,17 +27,20 @@ func start_invincibility(duration):
 
 func create_hit_effect():
 	var effect = HitEffect.instance()
-	var main = get_tree().get_root().get_node("World")
 	main.add_child(effect)
 	effect.global_position = global_position
 	
 func display_damage_popup(value):
 	var damagePopup = DamagePopup.instance()
-	var main = get_tree().get_root().get_node("World")
 	damagePopup.global_position = global_position
 	damagePopup.damageDisplay = value
 	main.add_child(damagePopup)
 	
+func display_crit_popup(value):
+	var critPopup = CritPopup.instance()
+	critPopup.global_position = global_position
+	critPopup.damageDisplay = value
+	main.add_child(critPopup)
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter

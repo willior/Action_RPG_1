@@ -120,10 +120,22 @@ anims/Stop = SubResource( 1 )
 anims/Sweating = SubResource( 2 )
 
 [node name="ExpBar" parent="." instance=ExtResource( 10 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 4.0
+margin_top = -20.0
 margin_right = 164.0
+margin_bottom = -4.0
 
 [node name="CashUI" parent="." instance=ExtResource( 13 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -36.0
+margin_top = -18.0
+margin_right = -320.0
+margin_bottom = -180.0
 
 [node name="Dim" type="ColorRect" parent="."]
 visible = false
@@ -230,9 +242,11 @@ text = "stats"
 [node name="Controls" parent="StatsDisplay" instance=ExtResource( 15 )]
 
 [node name="InventoryUI" type="Control" parent="."]
-margin_left = 288.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -32.0
 margin_top = 8.0
-margin_right = 312.0
+margin_right = -8.0
 margin_bottom = 32.0
 __meta__ = {
 "_edit_group_": true,
