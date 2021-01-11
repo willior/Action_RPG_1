@@ -48,7 +48,7 @@ func player_hit_calculation(base_accuracy, dexterity, modulator, evasion):
 	var random_value = rng.randf_range(0, 100)
 	var base_hit_rate = base_accuracy + (2*(dexterity+modulator))
 	var final_hit_rate = base_hit_rate - evasion
-	print("player final_hit_rate: ", final_hit_rate, "% > ", "RNG: ", random_value)
+	print("player final_hit_rate: ", final_hit_rate, "% > ", "random_value: ", random_value)
 	if final_hit_rate >= random_value:
 		return true
 	elif final_hit_rate < random_value:

@@ -981,6 +981,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id=19]
 length = 0.3
+step = 0.08
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1000,7 +1001,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.24 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -1966,7 +1967,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 181
+frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2016,7 +2017,7 @@ parameters/Attack1/BlendSpace2D/blend_position = Vector2( -0.00126582, 0.963019 
 parameters/Attack1/TimeScale/scale = 1.0
 parameters/Attack2/BlendSpace2D/blend_position = Vector2( -0.00258398, 0.983774 )
 parameters/Attack2/TimeScale/scale = 1.0
-parameters/Backstep/blend_position = Vector2( -0.000853956, 0.161238 )
+parameters/Backstep/blend_position = Vector2( 0, 0 )
 parameters/Flash/blend_position = Vector2( -0.00122851, 1.09371 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
 parameters/Idle/blend_position = Vector2( -0.00124067, 1.01963 )
@@ -2050,7 +2051,7 @@ margin_bottom = -7.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = -1.5708
+rotation = 1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
