@@ -482,7 +482,7 @@ func enemy_killed(experience_from_kill):
 func level_up():
 	stats.level += 1
 	var levelNotice = LevelNotice.instance()
-	levelNotice.rect_position = global_position
+	levelNotice.global_position = global_position
 	levelNotice.levelDisplay = stats.level
 	
 	var choice = levelStats[randi() % levelStats.size()]

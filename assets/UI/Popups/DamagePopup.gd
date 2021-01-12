@@ -31,7 +31,6 @@ func _ready():
 		Tween.EASE_OUT
 		)
 	tween.start()
-	
 	yield(tween, "tween_all_completed")
 	tween.interpolate_property(
 		text,
