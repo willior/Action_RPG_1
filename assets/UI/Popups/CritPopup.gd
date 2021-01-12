@@ -3,7 +3,7 @@ extends Node2D
 onready var timer = $Timer
 onready var text = $Label
 onready var tween = $Tween
-# onready var animation = $AnimationPlayer
+onready var animation = $AnimationPlayer
 
 var is_crit
 var is_miss
@@ -20,8 +20,9 @@ func _ready():
 		fade = white_fade
 	else:
 		fade = red_fade
-	# animation.play("Flash")
-	text.set_text(damageDisplay)
+		
+	animation.play("On")
+	text.set_text(damageDisplay + "!")
 	tween.interpolate_property(
 		text,
 		"rect_position",

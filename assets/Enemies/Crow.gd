@@ -251,7 +251,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		audio_caw()
 		print("crow HP: ", stats.health, "/", stats.max_health)
 		hurtbox.create_hit_effect()
-		hurtbox.start_invincibility(0.4)
+		hurtbox.start_invincibility(0.3)
 		
 		sprite.modulate = Color(1,1,0)
 		if stats.health > 0:

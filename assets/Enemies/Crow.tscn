@@ -511,12 +511,12 @@ texture = ExtResource( 12 )
 offset = Vector2( 0, -12 )
 vframes = 2
 hframes = 12
-frame = 4
+frame = 7
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
 frames = SubResource( 26 )
-frame = 4
+frame = 7
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -556,7 +556,7 @@ position = Vector2( 0, 4 )
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -20 )
+position = Vector2( 0, -24 )
 shape = SubResource( 51 )
 
 [node name="WanderController" parent="." instance=ExtResource( 7 )]
@@ -586,7 +586,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
-position = Vector2( 0, -10 )
+position = Vector2( 0, -14 )
 collision_mask = 4
 damage = 16.0
 accuracy = 4.0
