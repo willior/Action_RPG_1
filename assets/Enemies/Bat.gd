@@ -239,7 +239,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		SoundPlayer.play_sound("miss")
 		hurtbox.display_damage_popup("Miss!")
 	else:
-		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity)
+		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
 		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		if is_crit:
 			print('CRITICAL HIT!!!')
