@@ -22,7 +22,7 @@ var endurance = 4 setget set_endurance
 var max_stamina = 60 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
 
-var strength = 4.0 setget set_strength
+var strength = 40.0 setget set_strength
 var strength_mod = 0 setget set_strength_mod
 
 var defense = 4.0 setget set_defense

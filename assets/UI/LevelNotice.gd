@@ -15,18 +15,9 @@ func _ready():
 	statColor_fade.a = 0
 	levelText.set_text("LEVEL " + str(levelDisplay) )
 	statText.set_text(statDisplay)
-	statText.add_color_override("font_color", statColor)
-#	tween.interpolate_property(
-#		$VBoxContainer,
-#		"rect_position",
-#		Vector2(0,-16),
-#		Vector2(0,0),
-#		2,
-#		Tween.TRANS_BOUNCE,
-#		Tween.EASE_OUT
-#		)
-#	tween.start()
-#	yield(tween, "tween_all_completed")
+	#statText.add_color_override("font_color", statColor)
+	statText.modulate = statColor
+
 	timer.start()
 	yield(timer, "timeout")
 	tween.interpolate_property(
@@ -42,7 +33,7 @@ func _ready():
 		statText,
 		"modulate",
 		statColor,
-		statColor_fade,
+		Color(1,1,1,0),
 		1,
 		Tween.TRANS_QUART,
 		Tween.EASE_IN

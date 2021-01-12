@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/UI/Popups/CritPopup.gd" type="Script" id=2]
 [ext_resource path="res://assets/Shaders/pixel_text_outline.shader" type="Shader" id=3]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 
 [node name="CritPopup" type="Node2D"]
@@ -12,7 +12,7 @@ pause_mode = 1
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 grow_horizontal = 0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )

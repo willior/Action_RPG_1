@@ -3,9 +3,7 @@
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/LevelNotice.gd" type="Script" id=2]
 [ext_resource path="res://assets/Shaders/pixel_text_outline.shader" type="Shader" id=3]
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 3 )
+[ext_resource path="res://assets/Shaders/pixel_text_outline_tres.tres" type="Material" id=4]
 
 [sub_resource type="DynamicFont" id=2]
 outline_size = 1
@@ -13,13 +11,14 @@ outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_char = 2
 font_data = ExtResource( 1 )
 
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 3 )
+
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 3 )
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = ExtResource( 3 )
-
 [node name="LevelNotice" type="Node2D"]
+z_index = 4
 script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -36,7 +35,7 @@ __meta__ = {
 }
 
 [node name="LabelLevel" type="Label" parent="VBoxContainer"]
-material = SubResource( 3 )
+material = ExtResource( 4 )
 margin_right = 224.0
 margin_bottom = 13.0
 grow_horizontal = 0
@@ -56,7 +55,7 @@ custom_constants/separation = 0
 alignment = 1
 
 [node name="LabelLevelStat" type="Label" parent="VBoxContainer/HBoxContainer"]
-material = SubResource( 4 )
+material = SubResource( 3 )
 margin_left = 58.0
 margin_right = 144.0
 margin_bottom = 13.0
@@ -71,7 +70,7 @@ __meta__ = {
 }
 
 [node name="LabelUp" type="Label" parent="VBoxContainer/HBoxContainer"]
-material = SubResource( 5 )
+material = SubResource( 4 )
 margin_left = 144.0
 margin_right = 165.0
 margin_bottom = 13.0

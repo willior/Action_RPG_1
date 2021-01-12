@@ -310,7 +310,7 @@ func _on_BatStats_no_health():
 	enemyDeathEffect.global_position = global_position
 	
 	var expNotice = ExpNotice.instance()
-	expNotice.rect_position = global_position
+	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool
 	
 	get_node("/root/World").add_child(expNotice)

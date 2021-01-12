@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 onready var timer = $Timer
 onready var text = $Label
@@ -42,4 +42,4 @@ func _ready():
 	queue_free()
 
 func _process(_delta):
-	rect_position.y -= 0.25
+	position.y -= 0.25

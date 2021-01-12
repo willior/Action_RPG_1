@@ -1,20 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/Font/small_dynamicfont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/UI/ExpNotice.gd" type="Script" id=2]
 [ext_resource path="res://assets/Shaders/pixel_text_outline.shader" type="Shader" id=3]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=1]
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-extra_spacing_char = 1
-font_data = ExtResource( 1 )
-
-[sub_resource type="Animation" id=2]
-resource_name = "Flash"
+[sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:modulate")
@@ -29,19 +22,18 @@ tracks/0/keys = {
 "values": [ Color( 1, 0.65, 0, 1 ), Color( 1, 0.913333, 0.8, 1 ), Color( 1, 0.65, 0, 1 ) ]
 }
 
-[node name="ExpNotice" type="Control"]
+[node name="ExpNotice" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
 modulate = Color( 1, 0.65, 0, 1 )
-material = SubResource( 3 )
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
+margin_right = 11.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 1 )
 text = "XP"
 align = 1
 valign = 1
@@ -55,4 +47,4 @@ one_shot = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Flash = SubResource( 2 )
+anims/Flash = SubResource( 4 )
