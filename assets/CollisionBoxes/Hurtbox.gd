@@ -2,7 +2,6 @@ extends Area2D
 
 const HitEffect = preload("res://assets/Effects/HitEffect.tscn")
 const DamagePopup = preload("res://assets/UI/Popups/DamagePopup.tscn")
-const CritPopup = preload("res://assets/UI/Popups/CritPopup.tscn")
 
 onready var main = get_tree().get_root().get_node("World")
 
@@ -30,17 +29,12 @@ func create_hit_effect():
 	main.add_child(effect)
 	effect.global_position = global_position
 	
-func display_damage_popup(value):
+func display_damage_popup(value, crit):
 	var damagePopup = DamagePopup.instance()
 	damagePopup.global_position = global_position
 	damagePopup.damageDisplay = value
+	damagePopup.is_crit = crit
 	main.add_child(damagePopup)
-	
-func display_crit_popup(value):
-	var critPopup = CritPopup.instance()
-	critPopup.global_position = global_position
-	critPopup.damageDisplay = value
-	main.add_child(critPopup)
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter

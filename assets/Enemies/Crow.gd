@@ -240,12 +240,9 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
 		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		if is_crit:
-			print('CRITICAL HIT!!!')
-			stats.health -= damage*2
-			hurtbox.display_crit_popup(str(damage*2))
-		else:
-			stats.health -= damage
-			hurtbox.display_damage_popup(str(damage))
+			damage *= 2
+		stats.health -= damage
+		hurtbox.display_damage_popup(str(damage), is_crit)
 		state = IDLE
 		animationState.travel("Landing")
 		audio_caw()

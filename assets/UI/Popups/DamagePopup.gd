@@ -3,6 +3,7 @@ extends Node2D
 onready var timer = $Timer
 onready var text = $Label
 onready var tween = $Tween
+onready var animation = $AnimationPlayer
 
 var is_crit
 var is_miss
@@ -19,6 +20,10 @@ func _ready():
 		fade = white_fade
 	else:
 		fade = red_fade
+	if is_crit:
+		animation.play("On")
+		text.add_font_override("font", load("res://assets/Font/large_dynamicFont.tres"))
+		damageDisplay = damageDisplay + "!"
 		
 	text.set_text(damageDisplay)
 	tween.interpolate_property(
