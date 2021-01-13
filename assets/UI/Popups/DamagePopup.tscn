@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/Font/small_dynamicfont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "On"
 step = 0.05
 tracks/0/type = "value"
@@ -43,4 +43,4 @@ one_shot = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/On = SubResource( 2 )
+anims/On = SubResource( 1 )

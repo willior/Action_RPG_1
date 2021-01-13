@@ -4,14 +4,28 @@ var health setget set_health
 var max_health setget set_max_health
 
 onready var healthBar = $HealthTexture
+onready var healthBack = $HealthBack
 	
 func set_health(value):
 	health = value
 	healthBar.value = health
+	set_health_background(health)
+	
 func set_max_health(value):
 	max_health = value
 	healthBar.max_value = max_health
 	healthBar.rect_size.x = max_health
+	healthBack.max_value = max_health
+	healthBack.rect_size.x = max_health
+	
+func set_health_background(value):
+	if healthBack.value > value:
+		healthBack.value -= 1
+		$Timer.start()
+		yield($Timer, "timeout")
+		set_health_background(value)
+	else:
+		healthBack.value = value
 	
 func _ready():
 	self.max_health = PlayerStats.max_health
