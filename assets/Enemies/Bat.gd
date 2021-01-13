@@ -6,7 +6,7 @@ const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 var BatSpawner = load("res://assets/Spawners/BatSpawner.tscn")
-
+const ENEMY_NAME = "Bat"
 export var ACCELERATION = 240
 export var MAX_SPEED = 40
 export var WANDER_SPEED = 20
@@ -67,13 +67,6 @@ func _ready():
 	set_speed_scale(1)
 	sprite.playing = true
 	eye.playing = true
-	
-	# turn off playerDetectionZone and attackPlayerZone:
-	# attackPlayerZone.set_deferred("monitoring", false)
-	# playerDetectionZone.set_deferred("monitoring", false)
-	
-	# turn off hitbox:
-	# hitbox.set_deferred("monitorable", false)
 	
 func set_speed_scale(value):
 	sprite.speed_scale = value
@@ -222,17 +215,6 @@ func pick_random_state(state_list):
 	return state_list.pop_front() # spits one out
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
-	if state == ATTACK:
-		state = IDLE
-	if attack_on_cooldown:
-		pass
-#		attack_on_cooldown = false
-#		timer.stop()
-#		enable_detection()
-
-	# stats.health -= area.damage
-	# var damage_A = area.damage - stats.defense
-	
 	var evasion_mod = 0
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
@@ -247,6 +229,12 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		hurtbox.display_damage_popup(str(damage), is_crit)
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.3)
+		
+		if state == ATTACK:
+			state = IDLE
+			
+		$EnemyHealth.show_health()
+		
 		sprite.modulate = Color(1,1,0)
 		if stats.health > 0:
 			knockback = area.knockback_vector * 120 # knockback velocity

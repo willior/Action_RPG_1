@@ -7,8 +7,6 @@ const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
 var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
-
-
 const ENEMY_NAME = "Crow"
 export var ACCELERATION = 200
 export var MAX_SPEED = 400
@@ -222,13 +220,6 @@ func pick_random_state(state_list):
 	return state_list.pop_front() # spits one out
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
-#	if attack_on_cooldown:
-#		attack_on_cooldown = false
-#		timer.stop()
-#		enable_detection()
-	# stats.health -= area.damage # does damage equal to the variable exported by the sword hitbox's script
-	
-	# base_accuracy, dexterity, modulator, evasion
 	var evasion_mod = 0
 	if flying:
 		evasion_mod = 48
@@ -243,12 +234,13 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 			damage *= 2
 		stats.health -= damage
 		hurtbox.display_damage_popup(str(damage), is_crit)
-		state = IDLE
-		animationState.travel("Landing")
-		audio_caw()
-		print("crow HP: ", stats.health, "/", stats.max_health)
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.3)
+		$EnemyHealth.show_health()
+		if state == ATTACK:
+			state = IDLE
+		animationState.travel("Landing")
+		audio_caw()
 		
 		sprite.modulate = Color(1,1,0)
 		if stats.health > 0:
