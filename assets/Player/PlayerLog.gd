@@ -7,6 +7,7 @@ var penny_examined = false
 # Enemies
 var bat_examined = false
 var crow_examined = false
+var wolf_examined = false
 var tumbleweed_examined = false
 
 # Home
@@ -44,6 +45,8 @@ signal penny_complete()
 signal bat_complete()
 # warning-ignore:unused_signal
 signal crow_complete()
+# warning-ignore:unused_signal
+signal wolf_complete()
 # warning-ignore:unused_signal
 signal tumbleweed_complete()
 # warning-ignore:unused_signal
