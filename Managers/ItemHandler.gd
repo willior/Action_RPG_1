@@ -8,7 +8,10 @@ func item_handler(item_used):
 	# 2 Quest
 	match item_used.type:
 		0:
-			PlayerStats.health += item_used.healing
+			if PlayerStats.dying:
+				PlayerStats.health += item_used.healing/2
+			else:
+				PlayerStats.health += item_used.healing
 			GameManager.player.audio.stream = load("res://assets/Audio/Slither_02.wav")
 			GameManager.player.audio.play()
 		1:

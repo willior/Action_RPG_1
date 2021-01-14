@@ -102,6 +102,8 @@ func _ready():
 # warning-ignore:return_value_discarded
 	stats.connect("status_changed", self, "apply_status")
 	stats.connect("no_health", self, "game_over")
+	# get_node("/root/World/GUI/HealthUI").connect("no_health", self, "game_over")
+	
 	
 	if PlayerStats.is_poisoned:
 		apply_status("poison")
@@ -260,11 +262,12 @@ func move_state(delta):
 			noStamina()
 			
 func apply_status(status):
+	print("player: applying status... ", status)
 	match status:
 		"default_speed":
 			animationTree.set("parameters/Run/TimeScale/scale", 1)
 		"sweating":
-			print('applying sweating status')
+			set_sweating()
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"poison":
@@ -295,9 +298,9 @@ func noStamina():
 func set_sweating():
 	$Sweat.visible = true
 	sweating = true
-	stats.status = "sweating"
+	# stats.status = "sweating"
 	$ChargeUI/StaminaProgress.visible = false
-	
+
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
 # on attack1_animation_finished, checks attack2_queued
@@ -364,7 +367,8 @@ func charge_state(delta):
 	# if either attack is charged and the player runs out of stamina
 	if stats.stamina <= 0:
 		if !sweating:
-			set_sweating()
+			#set_sweating()
+			stats.status = "sweating"
 		attack_1_charged = false
 		attack_2_charged = false
 		charge.stop_charge()
@@ -684,7 +688,7 @@ func _on_Hurtbox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
 	
 func game_over():
-	dying = true
+	# dying = true
 	get_node("/root/World/Music").stream_paused = true
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)

@@ -33,11 +33,3 @@ func _ready():
 	
 	yield(timer, "timeout")
 	$Label.visible = true
-	
-func _input(event):
-	if event.is_action_pressed("start"):
-		prints('continue #', PlayerStats.continue_count)
-
-#func _process(delta):
-	#if Input.is_action_just_pressed("start"):
-		

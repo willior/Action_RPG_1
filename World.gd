@@ -41,18 +41,21 @@ func _input(event):
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen:
 			return
-		if PlayerStats.health <= 0:
+		if PlayerStats.dead:
+			print('resuming')
 			player.dying = false
 			music.stream_paused = false
 			get_tree().paused = false
-			get_node("/root/World/GUI/GameOver").visible = false
+			# get_node("/root/World/GUI/GameOver").visible = false
 			get_node("/root/World/GUI/GameOver").queue_free()
 			get_node("/root/World/GUI/HealthUI").visible = true
 			get_node("/root/World/GUI/ExpBar").visible = true
 			get_node("/root/World/GUI/StaminaBar").visible = true
 			get_node("/root/World/YSort/Player").visible = true
 			PlayerStats.health += PlayerStats.max_health
+			get_node("/root/World/GUI/HealthUI/HealthBack").value = PlayerStats.health
 			PlayerStats.continue_count += 1
+			PlayerStats.dead = false
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
 			
 		elif get_tree().paused == false:

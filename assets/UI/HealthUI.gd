@@ -1,16 +1,20 @@
 extends Control
 
-var health setget set_health
-var max_health setget set_max_health
+var health = PlayerStats.health setget set_health
+var max_health = PlayerStats.max_health setget set_max_health
 
 onready var healthBar = $HealthTexture
 onready var healthBack = $HealthBack
 	
 func set_health(value):
+	var old_health = health
 	health = value
 	healthBar.value = health
-	set_health_background(health)
-	
+	if old_health < health:
+		reset_health_background()
+	else:
+		set_health_background(health)
+
 func set_max_health(value):
 	max_health = value
 	healthBar.max_value = max_health
@@ -20,12 +24,26 @@ func set_max_health(value):
 	
 func set_health_background(value):
 	if healthBack.value > value:
+		$Timer.start()
+		yield($Timer, "timeout")
+		health_tick()
+	else:
+		reset_health_background()
+		
+func reset_health_background():
+	if healthBack.value > healthBar.value:
+		return
+	else:
+		healthBack.value = healthBar.value
+		
+func health_tick():
+	if healthBack.value > health:
 		healthBack.value -= 1
 		$Timer.start()
 		yield($Timer, "timeout")
-		set_health_background(value)
-	else:
-		healthBack.value = value
+		health_tick()
+	elif healthBack.value == 0 && !PlayerStats.dead:
+		PlayerStats.dead = true
 	
 func _ready():
 	self.max_health = PlayerStats.max_health

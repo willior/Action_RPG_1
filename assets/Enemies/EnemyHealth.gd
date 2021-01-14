@@ -45,7 +45,6 @@ func set_health_background(value):
 		set_health_background(value)
 	else:
 		healthBack.value = value
-		print('health drain done')
 
 func _ready():
 	self.max_health = stats.max_health
