@@ -39,6 +39,7 @@ func reset_health_background():
 func health_tick():
 	if healthBack.value > health:
 		healthBack.value -= 1
+		PlayerStats.final_health = healthBack.value
 		$Timer.start()
 		yield($Timer, "timeout")
 		health_tick()

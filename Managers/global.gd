@@ -84,5 +84,3 @@ func random_variance(base_damage, random):
 	rng.randomize()
 	var random_value = rng.randf_range(1-random, 1+random)
 	return int(base_damage * random_value)
-	
-

@@ -224,8 +224,11 @@ one_shot = true
 stream = ExtResource( 15 )
 
 [node name="EnemyHealth" parent="." instance=ExtResource( 16 )]
+visible = false
+margin_left = -13.0
 margin_top = 4.0
-margin_bottom = 16.0
+margin_right = 13.0
+margin_bottom = 7.0
 [connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

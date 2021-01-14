@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/UI/HealthUI.gd" type="Script" id=1]
-[ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=4]
+[ext_resource path="res://assets/UI/8x6_Progress.png" type="Texture" id=2]
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=6]
 
@@ -15,17 +15,17 @@ __meta__ = {
 
 [node name="HealthBack" type="TextureProgress" parent="."]
 pause_mode = 1
-margin_right = 64.0
-margin_bottom = 7.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 max_value = 60.0
 value = 60.0
 texture_under = ExtResource( 6 )
-texture_progress = ExtResource( 4 )
+texture_progress = ExtResource( 2 )
 tint_progress = Color( 1, 0.833333, 0, 0.784314 )
 nine_patch_stretch = true
-stretch_margin_left = 2
+stretch_margin_left = 3
 stretch_margin_top = 1
-stretch_margin_right = 2
+stretch_margin_right = 3
 stretch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -37,12 +37,12 @@ margin_bottom = 7.0
 max_value = 15.0
 value = 8.0
 texture_over = ExtResource( 5 )
-texture_progress = ExtResource( 4 )
+texture_progress = ExtResource( 2 )
 tint_progress = Color( 0.74902, 0, 0, 0.784314 )
 nine_patch_stretch = true
-stretch_margin_left = 2
+stretch_margin_left = 3
 stretch_margin_top = 1
-stretch_margin_right = 2
+stretch_margin_right = 3
 stretch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false

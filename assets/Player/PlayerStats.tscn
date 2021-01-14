@@ -17,7 +17,9 @@ var shade_friction = 1600
 
 var max_health = 60 setget set_max_health
 var health = 60 setget set_health
-var dying = false
+var old_health = health
+var final_health setget set_final_health
+var dying = false setget set_dying
 var dead = false setget set_dead
 
 var endurance = 4 setget set_endurance
@@ -60,6 +62,8 @@ signal no_health
 signal status_changed(value)
 signal health_changed(value)
 signal max_health_changed(value)
+signal final_health_changed(value)
+signal player_dying(value)
 signal endurance_changed(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
@@ -108,9 +112,6 @@ func _ready():
 	self.charge = charge
 	self.charge_level = charge_level
 	
-func set_speed_mod(value):
-	speed_mod = value
-	
 func set_status(value):
 	status = value
 	match status:
@@ -142,17 +143,31 @@ func set_max_health(value):
 	emit_signal(\"max_health_changed\", max_health)
 
 func set_health(value):
+	old_health = health
 	health = value
 	health = clamp(value, 0, max_health)
-	if health <= 0:
-		dying = true
+	if health <= 0 && !dying:
+		set_dying(true)
+		
+	elif dying && value > 0:
+		set_dying(false)
+		
+	emit_signal(\"health_changed\", health) # every time the health is set, emits a signal \"health_changed\" along with an argument, our new health value
+
+func set_final_health(value):
+	final_health = value
+	emit_signal(\"final_health_changed\", final_health)
+
+func set_dying(value):
+	dying = value
+	if value:
 		self.stamina = 0
 		self.status = \"slow\"
 		self.status = \"sweating\"
-	elif health > 0 && dying:
-		dying = false
+	else:
 		self.status = \"default_speed\"
-	emit_signal(\"health_changed\", health) # every time the health is set, emits a signal \"health_changed\" along with an argument, our new health value
+	
+	emit_signal(\"player_dying\", value)
 
 func set_dead(value):
 	dead = value
@@ -173,6 +188,14 @@ func set_stamina(value):
 	stamina = clamp(value, -30, max_stamina)
 	emit_signal(\"stamina_changed\", stamina)
 	
+func set_defense(value):
+	defense = value
+	emit_signal(\"defense_changed\", defense)
+	
+func set_defense_mod(value):
+	defense_mod = value
+	emit_signal(\"defense_mod_changed\", defense_mod)
+	
 func set_strength(value):
 	strength = value
 	emit_signal(\"strength_changed\", strength)
@@ -189,13 +212,6 @@ func set_dexterity_mod(value):
 	dexterity_mod = value
 	emit_signal(\"dexterity_mod_changed\", dexterity_mod)
 
-func set_defense(value):
-	defense = value
-	emit_signal(\"defense_changed\", defense)
-	
-func set_defense_mod(value):
-	defense_mod = value
-	emit_signal(\"defense_mod_changed\", defense_mod)
 	
 func set_iframes(value):
 	iframes = value
@@ -204,6 +220,9 @@ func set_iframes(value):
 func set_speed(value):
 	speed = value
 	emit_signal(\"speed_changed\", speed)
+	
+func set_speed_mod(value):
+	speed_mod = value
 	
 func set_attack_speed(value):
 	attack_speed = value

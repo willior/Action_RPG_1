@@ -9,9 +9,10 @@ func item_handler(item_used):
 	match item_used.type:
 		0:
 			if PlayerStats.dying:
-				PlayerStats.health += item_used.healing/2
+				PlayerStats.health += item_used.healing/3
 			else:
 				PlayerStats.health += item_used.healing
+				
 			GameManager.player.audio.stream = load("res://assets/Audio/Slither_02.wav")
 			GameManager.player.audio.play()
 		1:

@@ -1,76 +1,16 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/InventoryUI.gd" type="Script" id=2]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=4]
-[ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=5]
-[ext_resource path="res://assets/UI/StaminaBar.gd" type="Script" id=6]
 [ext_resource path="res://assets/UI/24x24_Container.png" type="Texture" id=7]
 [ext_resource path="res://assets/UI/StatsDisplay.gd" type="Script" id=8]
-[ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=9]
 [ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.png" type="Texture" id=14]
 [ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=15]
-
-[sub_resource type="Animation" id=1]
-resource_name = "Stop"
-tracks/0/type = "value"
-tracks/0/path = NodePath("StaminaBarTexture:tint_progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("StaminaBarTexture:tint_over")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "Sweating"
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("StaminaBarTexture:tint_progress")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ), Color( 1, 0.737255, 0.211765, 0.784314 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("StaminaBarTexture:tint_over")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0.67451, 0.282353, 0.282353, 1 ) ]
-}
 
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
@@ -80,43 +20,16 @@ font_data = ExtResource( 3 )
 
 [node name="GUI" type="CanvasLayer"]
 pause_mode = 2
+layer = 3
 
 [node name="HealthUI" parent="." instance=ExtResource( 11 )]
 pause_mode = 2
 show_behind_parent = true
 margin_left = 4.0
 margin_top = 4.0
-margin_bottom = 16.0
+margin_bottom = 11.0
 
 [node name="StaminaBar" parent="." instance=ExtResource( 12 )]
-margin_left = 4.0
-margin_top = 16.0
-margin_right = 64.0
-margin_bottom = 28.0
-script = ExtResource( 6 )
-
-[node name="StaminaBarTexture" type="TextureProgress" parent="StaminaBar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = -5.0
-value = 100.0
-allow_lesser = true
-texture_under = ExtResource( 5 )
-texture_over = ExtResource( 4 )
-texture_progress = ExtResource( 9 )
-tint_progress = Color( 0.231373, 0.737255, 0.211765, 0.784314 )
-nine_patch_stretch = true
-stretch_margin_left = 2
-stretch_margin_top = 1
-stretch_margin_right = 2
-stretch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="StaminaBar"]
-anims/Stop = SubResource( 1 )
-anims/Sweating = SubResource( 2 )
 
 [node name="ExpBar" parent="." instance=ExtResource( 10 )]
 anchor_top = 1.0

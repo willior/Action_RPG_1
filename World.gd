@@ -39,11 +39,10 @@ func _input(event):
 			stats.visible = false
 			
 	if event.is_action_pressed("start"): # SPACEBAR
-		if Global.dialogOpen:
+		if Global.dialogOpen or PlayerStats.dying and !PlayerStats.dead:
 			return
 		if PlayerStats.dead:
 			print('resuming')
-			player.dying = false
 			music.stream_paused = false
 			get_tree().paused = false
 			# get_node("/root/World/GUI/GameOver").visible = false

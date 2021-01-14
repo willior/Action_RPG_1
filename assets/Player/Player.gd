@@ -5,6 +5,9 @@ const Poison = preload("res://assets/UI/Status/PoisonNotice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
+const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
+const WhiteFlash = preload("res://assets/Shaders/White_CanvasModulate.tscn")
+const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 
 var inventory_resource = load("res://assets/Player/Inventory.gd")
 var inventory = inventory_resource.new()
@@ -101,13 +104,9 @@ func _ready():
 	
 # warning-ignore:return_value_discarded
 	stats.connect("status_changed", self, "apply_status")
+	stats.connect("player_dying", self, "dying_effect")
 	stats.connect("no_health", self, "game_over")
-	# get_node("/root/World/GUI/HealthUI").connect("no_health", self, "game_over")
 	
-	
-	if PlayerStats.is_poisoned:
-		apply_status("poison")
-		
 	PlayerStats.status = "default_speed"
 
 func _process(delta):
@@ -129,12 +128,12 @@ func _input(event):
 					state = ATTACK1
 				elif stats.stamina <= 0:
 					noStamina()
-				elif interacting && interactObject.interactable:
+				elif interacting && interactObject.interactable && !dying:
 					talkTimer.start()
 					interactObject.interact()
 					if examining:
 						self.noticeDisplay = false
-				elif talking && interactObject.talkable && talkTimer.is_stopped():
+				elif talking && interactObject.talkable && talkTimer.is_stopped() && !dying:
 					talkTimer.start()
 					interactObject.talk()
 					
@@ -146,7 +145,7 @@ func _input(event):
 					1: # TOOL
 						pass
 					2: # QUEST
-						if talkTimer.is_stopped():
+						if talkTimer.is_stopped && !dying:
 							if !using_item:
 								talkTimer.start()
 								var dialogBox = DialogBox.instance()
@@ -206,14 +205,15 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("examine"): # F
-		if !examining && talkTimer.is_stopped():
-			talkTimer.start()
-			var dialogBox = DialogBox.instance()
-			dialogBox.dialog_script = [{'text': "You find nothing of interest."}]
-			get_node("/root/World/GUI").add_child(dialogBox)
-		elif examining && talkTimer.is_stopped():
-			talkTimer.start()
-			interactObject.examine()
+		if !dying:
+			if !examining && talkTimer.is_stopped():
+				talkTimer.start()
+				var dialogBox = DialogBox.instance()
+				dialogBox.dialog_script = [{'text': "You find nothing of interest."}]
+				get_node("/root/World/GUI").add_child(dialogBox)
+			elif examining && talkTimer.is_stopped():
+				talkTimer.start()
+				interactObject.examine()
 			
 	if Input.is_action_just_pressed("next_item"): # R
 		inventory.advance_selected_item()
@@ -228,7 +228,7 @@ func move_state(delta):
 	if Input.is_action_pressed("attack"):
 		if !talkTimer.is_stopped():
 			return
-		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 0:
+		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 1:
 			charge.begin_charge_1()
 		elif charge_count == stats.max_charge/2 && charge_level_count == 1:
 			charge.begin_charge_2()
@@ -262,7 +262,6 @@ func move_state(delta):
 			noStamina()
 			
 func apply_status(status):
-	print("player: applying status... ", status)
 	match status:
 		"default_speed":
 			animationTree.set("parameters/Run/TimeScale/scale", 1)
@@ -472,6 +471,7 @@ func player_state_reset():
 	swordHitbox.damage = swordHitbox.orig_damage
 	swordHitbox.reset_damage()
 	base_enemy_accuracy = 66
+	charge.stop_charge()
 	# stats.strength_mod = 0
 	
 func enemy_killed(experience_from_kill):
@@ -687,8 +687,33 @@ func _on_Hurtbox_invincibility_started():
 func _on_Hurtbox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
 	
+func dying_effect(value):
+	if value && !dying:
+		print('player dying: applying greyscale')
+		var heartbeat = Heartbeat.instance()
+		var greyscale = Greyscale.instance()
+		var whiteFlash = WhiteFlash.instance()
+		get_node("/root/World/").add_child(heartbeat)
+		get_node("/root/World/GUI").add_child(greyscale)
+		get_node("/root/World/GUI").add_child(whiteFlash)
+		get_node("/root/World/Music").stream_paused = true
+		get_node("/root/World/SFX").stream_paused = true
+		dying = true
+	elif !value && dying:
+		print('player saved: deleting greyscale')
+		AudioServer.set_bus_effect_enabled(0, 0, false)
+		get_node("/root/World/GUI/Greyscale").queue_free()
+		get_node("/root/World/GUI/White").queue_free()
+		get_node("/root/World/Heartbeat").queue_free()
+		get_node("/root/World/Music").stream_paused = false
+		get_node("/root/World/SFX").stream_paused = false
+		dying = false
+	
 func game_over():
+	print("running game_over()")
 	# dying = true
+	AudioServer.set_bus_effect_enabled(0, 0, false)
+	get_node("/root/World/Heartbeat").stream_paused = true
 	get_node("/root/World/Music").stream_paused = true
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
@@ -739,6 +764,8 @@ func set_interact_notice(value):
 # function that runs when the player's InteractHitbox detects an area entererd
 func _on_InteractHitbox_area_entered(area):
 	# gets the object in the interact bounding box
+	if dying:
+		return
 	interactObject = area.get_owner()
 	examining = true
 	# displays notice is object not examined
