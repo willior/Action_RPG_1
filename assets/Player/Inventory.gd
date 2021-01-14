@@ -103,6 +103,8 @@ func add_item(item_name, quantity):
 	prints("adding " + str(quantity) + " " + str(item_name))
 	
 	var item = check_item(item_name, quantity)
+	
+	print(_items.size())
 
 	for i in range(_items.size()):
 		var inventory_item = _items[i]
@@ -115,6 +117,7 @@ func add_item(item_name, quantity):
 			print("max stack reached; discarding")
 			return
 		else: 
+			print("applying quantity; ", quantity)
 			inventory_item.quantity += quantity
 			quantity = 0
 			
@@ -130,6 +133,11 @@ func add_item(item_name, quantity):
 		_items.append(new_item)
 		quantity = 0
 	
+func set_ingredients():
+	pass
+	
+func get_ingredients():
+	pass
 #func remove_item(item_name, quantity):
 #	print('removing item')
 #	var item = check_item(item_name, quantity)

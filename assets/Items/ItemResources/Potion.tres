@@ -7,7 +7,7 @@
 script = ExtResource( 1 )
 name = "Potion"
 stackable = true
-max_stack_size = 4
+max_stack_size = 5
 type = 0
 texture = ExtResource( 2 )
 healing = 30

@@ -10,7 +10,9 @@ const WhiteFlash = preload("res://assets/Shaders/White_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 
 var inventory_resource = load("res://assets/Player/Inventory.gd")
+var pouch_resource = load("res://assets/Player/Pouch/Pouch.gd")
 var inventory = inventory_resource.new()
+var pouch = pouch_resource.new()
 
 enum {
 	MOVE,
