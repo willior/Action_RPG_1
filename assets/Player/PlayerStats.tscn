@@ -14,7 +14,8 @@ var shade_speed = 420
 var friction = 800
 var shade_friction = 1600
 
-var max_health = 270 setget set_max_health
+var vitality = 4 setget set_vitality
+var max_health = vitality*15 setget set_max_health
 var health = max_health setget set_health
 var old_health = health
 var final_health setget set_final_health
@@ -22,7 +23,7 @@ var dying = false setget set_dying
 var dead = false setget set_dead
 
 var endurance = 4 setget set_endurance
-var max_stamina = 270 setget set_max_stamina
+var max_stamina = endurance*15 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
 
 var strength = 4.0 setget set_strength
@@ -96,19 +97,20 @@ func _ready():
 	self.shade_speed = shade_speed
 	self.friction = friction
 	self.shade_friction = shade_friction
-
-	self.status = status
+	# self.vitality = vitality
 	self.health = health
-	self.experience = experience_total
+	self.endurance = endurance
+	self.stamina = max_stamina
+	self.defense = defense
 	self.strength = strength
 	self.dexterity = dexterity
-	self.defense = defense
-	self.stamina = max_stamina
-	self.iframes = iframes
-	self.endurance = endurance
 	self.speed = speed
+	self.iframes = iframes
 	# self.attack_speed = attack_speed
+	
+	self.experience = experience_total
 	self.cash = cash
+	self.status = status
 	self.charge = charge
 	self.charge_level = charge_level
 	
@@ -139,6 +141,21 @@ func set_status(value):
 
 func set_speed_mod(value):
 	speed_mod = value
+	
+func set_vitality(value):
+	vitality = value
+	var health_increase
+	if vitality > 30:
+		health_increase = 1
+	elif vitality > 20:
+		health_increase = 4
+	elif vitality > 10:
+		health_increase = 7
+	elif vitality <= 10:
+		health_increase = 10
+		
+	self.max_health += health_increase
+	print('vitality changed: health increased by ', health_increase)
 
 func set_max_health(value):
 	max_health = value

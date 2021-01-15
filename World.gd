@@ -21,9 +21,7 @@ func _input(event):
 		PlayerStats.status = "frenzy"
 		
 	if event.is_action_pressed("test2"): # Y
-		# print("test1: applying poison")
-		# PlayerStats.status = "poison"
-		print("player hit = ", Global.player_hit_calculation(75, 4, 1, 2))
+		player.level_up()
 		
 	if event.is_action_pressed("test3"): # U
 		if PlayerStats.speed < 40:

@@ -493,8 +493,9 @@ func level_up():
 	var choice = levelStats[randi() % levelStats.size()]
 	match choice:
 		LEVELHEALTH:
-			stats.max_health += 15
-			stats.health += 15
+#			stats.max_health += 15
+#			stats.health += 15
+			stats.vitality +=1
 			levelNotice.statDisplay = "WILLPOWER"
 			levelNotice.statColor = Color(1, 0.272549, 0.315686)
 		LEVELDEFENSE:
@@ -503,7 +504,7 @@ func level_up():
 			levelNotice.statColor = Color(0.372549, 1, 0.415686)
 		LEVELSTAMINA:
 			stats.endurance += 1
-			stats.max_stamina += 15
+			# stats.max_stamina += 15
 			levelNotice.statDisplay = "LUNG CAPACITY"
 			levelNotice.statColor = Color(0.372549, 1, 0.415686)
 		LEVELSTRENGTH:
