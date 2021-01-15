@@ -490,12 +490,13 @@ radius = 14.0
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id=52]
-radius = 24.0832
+radius = 28.0
 
 [sub_resource type="CircleShape2D" id=53]
+radius = 12.0
 
-[sub_resource type="CircleShape2D" id=54]
-radius = 6.0
+[sub_resource type="CircleShape2D" id=56]
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id=55]
 radius = 5.0
@@ -573,7 +574,6 @@ shape = SubResource( 52 )
 visible = false
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 10 )]
-visible = false
 scale = Vector2( 2, 2 )
 collision_layer = 0
 collision_mask = 2
@@ -593,7 +593,8 @@ damage = 16.0
 accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 54 )
+position = Vector2( 0, 3 )
+shape = SubResource( 56 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 8 )]
 visible = false

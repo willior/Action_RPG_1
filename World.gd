@@ -26,7 +26,10 @@ func _input(event):
 		print("player hit = ", Global.player_hit_calculation(75, 4, 1, 2))
 		
 	if event.is_action_pressed("test3"): # U
-		print("enemy hit = ", Global.enemy_hit_calculation(50, 2, 4))
+		if PlayerStats.speed < 40:
+			PlayerStats.speed = 40.0
+		else:
+			PlayerStats.speed = 4.0
 	
 	if event.is_action_pressed("pause"): # P
 		if get_tree().paused == false:

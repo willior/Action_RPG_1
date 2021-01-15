@@ -103,12 +103,11 @@ func _ready():
 	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
 	charge_reset()
-	
-# warning-ignore:return_value_discarded
 	stats.connect("status_changed", self, "apply_status")
 	stats.connect("player_dying", self, "dying_effect")
 	stats.connect("no_health", self, "game_over")
-	
+	stats.connect("attack_speed_changed", self, "set_attack_timescale")
+	set_attack_timescale(PlayerStats.attack_speed)
 	PlayerStats.status = "default_speed"
 
 func _process(delta):
@@ -248,13 +247,8 @@ func move_state(delta):
 		attack_charging = false
 		
 	if Input.is_action_just_pressed("roll"): # B
-		# if attack_2_charged:
-		#	attack_2_charged = false
-		#	shade_moving = true
-		#	state = SHADE
 		if stats.stamina > 0:
 			if input_vector != Vector2.ZERO:
-				# charge.stop_charge()
 				roll_moving = true
 				state = ROLL
 			else:
@@ -282,12 +276,12 @@ func apply_status(status):
 			get_node("/root/World/YSort/Player/PoisonNotice").queue_free()
 		"frenzy":
 			$FrenzyAnimationPlayer.play("Start")
-			animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
-			animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
+			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
+			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
 		"frenzy_end":
 			$FrenzyAnimationPlayer.play("Stop")
-			animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
-			animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
+			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
+			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
 	
 func move():
 	velocity = move_and_slide(velocity)
@@ -301,6 +295,11 @@ func set_sweating():
 	sweating = true
 	# stats.status = "sweating"
 	$ChargeUI/StaminaProgress.visible = false
+	
+func set_attack_timescale(value):
+	animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
+	animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
+	print('attack timescale set: ', value)
 
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
@@ -405,6 +404,7 @@ func shade_state(delta):
 	move()
 	
 func shade_start():
+	set_collision_mask_bit(4, false)
 	stats.stamina -= 30
 	PlayerStats.dexterity_mod = 8
 	charge.stop_charge()
@@ -413,16 +413,15 @@ func shade_start():
 	velocity = dir_vector * stats.shade_speed
 	
 func shade_stop():
-	# stats.strength_mod = 0
-	# velocity = Vector2.ZERO
+	set_collision_mask_bit(4, true)
 	$Tween.interpolate_property(
 		self,
 		"velocity",
 		velocity,
 		Vector2.ZERO,
-		0.1,
+		0.2,
 		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT
+		Tween.EASE_IN
 		)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
@@ -598,7 +597,7 @@ func backstep_state(delta):
 	if backstep_moving:
 		velocity = -dir_vector * (stats.roll_speed*0.66)
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, (stats.friction) * delta)
+		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
 	animationState.travel("Backstep")
 	if Input.is_action_just_released("attack"):
 		if stats.stamina <= 0:
@@ -617,26 +616,19 @@ func backstep_state(delta):
 			else:
 				attack1_queued = true
 	
-#	elif Input.is_action_just_pressed("attack"):
-#		if stats.stamina <= 0:
-#			noStamina()
-#		else:
-#			attack1_queued = true
-			
 	elif Input.is_action_just_pressed("roll"):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
 		else:
 			backstep_queued = true
-		
-	move()
 	
+	move()
+
 func backstep_stop():
 	base_enemy_accuracy = 50
 	backstep_moving = false
-	print('backstep_stop')
-	
+
 func backstep_animation_finished():
 	if shade_queued:
 		shade_queued = false

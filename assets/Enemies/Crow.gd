@@ -12,7 +12,7 @@ export var ACCELERATION = 200
 export var MAX_SPEED = 400
 export var WANDER_SPEED = 80
 export var ATTACK_SPEED = 6000
-export var FRICTION = 240
+export var FRICTION = 320
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
 
@@ -148,6 +148,7 @@ func accelerate_towards_point(point, speed, delta):
 		h_flip_handler()
 
 func seek_player():
+	hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking:
 		# animationState.travel("Fly")
 		fly_animation()
@@ -159,9 +160,9 @@ func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
 		disable_detection()
 		attacking = true
-		# hitbox.set_deferred("monitorable", true)
 #		$DelayTimer.start()
 #		yield($DelayTimer, "timeout")
+		hitbox.set_deferred("monitorable", true)
 		eye.modulate = Color(1,0,0)
 		eye.frame = sprite.frame
 		attackTimer.start()
@@ -169,7 +170,6 @@ func attack_player():
 		
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
-	# hitbox.set_deferred("monitorable", false)
 	eye.modulate = Color(0,0,0)
 	eye.frame = sprite.frame
 	state = IDLE
@@ -219,7 +219,7 @@ func pick_random_state(state_list):
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
 
-func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
+func _on_Hurtbox_area_entered(area):
 	var evasion_mod = 0
 	if flying:
 		evasion_mod = 48

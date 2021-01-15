@@ -1,21 +1,21 @@
 extends KinematicBody2D
 
-const EnemyDeathEffect = preload("res://assets/Effects/Crow_DeathEffect.tscn")
+const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
-var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
+# var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
 
 const ENEMY_NAME = "Wolf"
 export var ACCELERATION = 800
-export var MAX_SPEED = 800
-export var WANDER_SPEED = 80
+export var MAX_SPEED = 40
+export var WANDER_SPEED = 40
 export var ATTACK_SPEED = 3200
-export var FRICTION = 2400
+export var FRICTION = 1600
 export var WANDER_TARGET_RANGE = 4
-export var ATTACK_TARGET_RANGE = 4
+export var ATTACK_TARGET_RANGE = 16
 
 enum {
 	IDLE,
@@ -38,7 +38,6 @@ var examined = false
 var attacking = false
 var attack_on_cooldown = false
 var target
-var flying
 var currentAnim
 
 onready var stats = $WolfStats
@@ -86,9 +85,7 @@ func _physics_process(delta):
 			if wanderController.get_time_left() == 0:
 				update_wander_state()
 			
-			# fly_animation()
 			accelerate_towards_point(wanderController.target_position, WANDER_SPEED, delta)
-			
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
 
@@ -107,10 +104,10 @@ func _physics_process(delta):
 				target = player.global_position
 				attacking = false
 				audio_attack()
-				# fly_animation()
+				# attack_animation()
 				
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
-			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
+			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -128,12 +125,12 @@ func h_flip_handler():
 		sprite.flip_h = false
 		eye.flip_h = false
 	idle_animation()
-	
+
 func examine():
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog_script = [
-		{'text': "A common wolf."},
-		{'text': "Except that it's grossly over-sized."}
+		{'text': "A common wolf. It looks friendly."},
+		{'text': "Though it's probably safe to assume that it isn't."}
 	]
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined:
@@ -150,8 +147,9 @@ func accelerate_towards_point(point, speed, delta):
 	h_flip_handler()
 
 func seek_player():
+	hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking:
-		# animationState.travel("Fly")
+		# attack_animation()
 		audio_detect()
 		eye.modulate = Color(1,0.8,0)
 		eye.frame = sprite.frame
@@ -161,9 +159,9 @@ func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
 		disable_detection()
 		attacking = true
-		# hitbox.set_deferred("monitorable", true)
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
+		hitbox.set_deferred("monitorable", true)
 		eye.modulate = Color(1,0,0)
 		eye.frame = sprite.frame
 		attackTimer.start()
@@ -171,7 +169,6 @@ func attack_player():
 		
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
-	# hitbox.set_deferred("monitorable", false)
 	eye.modulate = Color(0,0,0)
 	eye.frame = sprite.frame
 	state = IDLE
@@ -208,17 +205,16 @@ func update_wander_state():
 				pass # otherwise plays the idle animation
 		elif state == 1: # WANDER STATE
 			pass
-			# animationState.travel("Fly")
 			# fly_animation()
 		
-		# h_flip_handler()
+		h_flip_handler()
 		wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
 		
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
 
-func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
+func _on_Hurtbox_area_entered(area):
 	var evasion_mod = 0
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
@@ -235,8 +231,11 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.3)
 		$EnemyHealth.show_health()
-		if state == ATTACK:
-			state = IDLE
+		state = IDLE
+#		disable_detection()
+#		timer.start(0.4)
+#		yield(timer, "timeout")
+#		enable_detection()
 		
 		sprite.modulate = Color(1,1,0)
 		if stats.health > 0:
@@ -263,6 +262,7 @@ func _on_WolfStats_no_health():
 	# sprite.playing = false # stop animation
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
 	hitbox.set_deferred("monitorable", false)
+	animationPlayer.stop()
 	state = DEAD
 	tween.interpolate_property(eye,
 	"offset:y",
@@ -318,21 +318,18 @@ func _on_WolfStats_no_health():
 
 func idle_animation():
 	animationState.travel("Idle")
-	
+
 func fly_animation():
 	animationState.travel("Fly")
-	
-func set_flying(value):
-	flying = value
-	
+
 func audio_detect():
 	audio.stream = load("res://assets/Audio/Enemies/Wolf_Growl_1.wav")
 	audio.play()
-	
+
 func audio_attack():
 	audio.stream = load("res://assets/Audio/Enemies/Wolf_Attack_1.wav")
 	audio.play()
-	
+
 func audio_hit():
 	audio.stream = load("res://assets/Audio/Enemies/Wolf_Hit_1.wav")
 	audio.play()

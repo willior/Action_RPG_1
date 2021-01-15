@@ -25,7 +25,7 @@ shader_param/active = false
 animations = [  ]
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 5.0
+radius = 6.0
 
 [sub_resource type="Animation" id=4]
 resource_name = "Idle"
@@ -143,21 +143,21 @@ graph_offset = Vector2( 31.9396, 14.194 )
 [sub_resource type="AnimationNodeStateMachinePlayback" id=21]
 
 [sub_resource type="CircleShape2D" id=22]
-radius = 14.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id=23]
-radius = 15.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id=24]
-radius = 24.0832
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id=25]
 
 [sub_resource type="CircleShape2D" id=26]
-radius = 6.0
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id=27]
-radius = 5.0
+radius = 6.0
 
 [node name="Wolf" type="KinematicBody2D"]
 collision_layer = 16
@@ -199,11 +199,12 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 21 )
 
 [node name="Talkbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
-position = Vector2( 0, -9 )
+position = Vector2( 0, -12 )
 shape = SubResource( 22 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
@@ -243,7 +244,7 @@ one_shot = true
 [node name="Hitbox" parent="." instance=ExtResource( 8 )]
 position = Vector2( 0, -4 )
 collision_mask = 4
-damage = 20.0
+damage = 12.0
 accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
@@ -253,6 +254,7 @@ shape = SubResource( 26 )
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
+position = Vector2( 0, -1 )
 shape = SubResource( 27 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -264,10 +266,6 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="TakeoffTimer" type="Timer" parent="."]
-wait_time = 0.4
-one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )

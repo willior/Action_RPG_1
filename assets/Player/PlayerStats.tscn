@@ -9,21 +9,20 @@ script/source = "extends Node
 var acceleration = 1600
 var max_speed = 100
 var speed_mod = 0 setget set_speed_mod
-var attack_speed = 1.0 setget set_attack_speed
 var roll_speed = 200
 var shade_speed = 420
 var friction = 800
 var shade_friction = 1600
 
-var max_health = 60 setget set_max_health
-var health = 60 setget set_health
+var max_health = 270 setget set_max_health
+var health = max_health setget set_health
 var old_health = health
 var final_health setget set_final_health
 var dying = false setget set_dying
 var dead = false setget set_dead
 
 var endurance = 4 setget set_endurance
-var max_stamina = 60 setget set_max_stamina
+var max_stamina = 270 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
 
 var strength = 4.0 setget set_strength
@@ -38,6 +37,7 @@ var base_accuracy = 75
 var base_crit_rate = 4
 
 var speed = 4.0 setget set_speed
+var attack_speed = 1.0 setget set_attack_speed
 var iframes = 0.1 setget set_iframes
 
 var max_charge = 100 setget set_max_charge
@@ -107,7 +107,7 @@ func _ready():
 	self.iframes = iframes
 	self.endurance = endurance
 	self.speed = speed
-	self.attack_speed = attack_speed
+	# self.attack_speed = attack_speed
 	self.cash = cash
 	self.charge = charge
 	self.charge_level = charge_level
@@ -136,6 +136,9 @@ func set_status(value):
 			print('frenzy ended.')
 			
 	emit_signal(\"status_changed\", status)
+
+func set_speed_mod(value):
+	speed_mod = value
 
 func set_max_health(value):
 	max_health = value
@@ -185,7 +188,7 @@ func set_max_stamina(value):
 	
 func set_stamina(value):
 	stamina = value
-	stamina = clamp(value, -30, max_stamina)
+	stamina = clamp(value, -max_stamina, max_stamina)
 	emit_signal(\"stamina_changed\", stamina)
 	
 func set_defense(value):
@@ -211,22 +214,20 @@ func set_dexterity(value):
 func set_dexterity_mod(value):
 	dexterity_mod = value
 	emit_signal(\"dexterity_mod_changed\", dexterity_mod)
-
+	
+func set_speed(value):
+	speed = value
+	self.attack_speed = 1 + (speed / 120)
+	emit_signal(\"speed_changed\", speed)
+	
+func set_attack_speed(value):
+	attack_speed = value
+	print('setting attack speed: ', attack_speed)
+	emit_signal(\"attack_speed_changed\", attack_speed)
 	
 func set_iframes(value):
 	iframes = value
 	emit_signal(\"iframes_changed\", iframes)
-	
-func set_speed(value):
-	speed = value
-	emit_signal(\"speed_changed\", speed)
-	
-func set_speed_mod(value):
-	speed_mod = value
-	
-func set_attack_speed(value):
-	attack_speed = value
-	emit_signal(\"attack_speed_changed\", attack_speed)
 	
 func set_max_charge(value):
 	max_charge = value
