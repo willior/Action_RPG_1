@@ -73,9 +73,9 @@ __meta__ = {
 }
 
 [node name="Vbox" type="VBoxContainer" parent="StatsDisplay"]
-margin_left = 224.0
+margin_left = 218.0
 margin_top = 38.0
-margin_right = 264.0
+margin_right = 258.0
 margin_bottom = 142.0
 custom_constants/separation = 0
 __meta__ = {

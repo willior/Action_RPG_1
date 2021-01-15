@@ -495,7 +495,7 @@ radius = 28.0
 [sub_resource type="CircleShape2D" id=53]
 radius = 12.0
 
-[sub_resource type="CircleShape2D" id=56]
+[sub_resource type="CircleShape2D" id=54]
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id=55]
@@ -594,7 +594,7 @@ accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 56 )
+shape = SubResource( 54 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 8 )]
 visible = false

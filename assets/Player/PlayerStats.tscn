@@ -60,7 +60,7 @@ var is_poisoned = false
 var continue_count = 0
 
 signal no_health
-signal status_changed(value)
+signal vitality_changed(value)
 signal health_changed(value)
 signal max_health_changed(value)
 signal final_health_changed(value)
@@ -77,6 +77,7 @@ signal defense_mod_changed(value)
 signal iframes_changed(value)
 signal speed_changed(value)
 signal attack_speed_changed(value)
+signal status_changed(value)
 
 signal max_charge_changed(value)
 signal charge_changed(value)
@@ -156,6 +157,7 @@ func set_vitality(value):
 		
 	self.max_health += health_increase
 	print('vitality changed: health increased by ', health_increase)
+	emit_signal(\"vitality_changed\", vitality)
 
 func set_max_health(value):
 	max_health = value

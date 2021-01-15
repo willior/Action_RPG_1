@@ -101,8 +101,8 @@ func _physics_process(delta):
 
 		ATTACK:
 			if attacking:
-				target = player.global_position
 				attacking = false
+				target = player.global_position
 				audio_attack()
 				# attack_animation()
 				
@@ -147,7 +147,8 @@ func accelerate_towards_point(point, speed, delta):
 	h_flip_handler()
 
 func seek_player():
-	hitbox.set_deferred("monitorable", false)
+	if hitbox.monitorable:
+		hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking:
 		# attack_animation()
 		audio_detect()
@@ -172,7 +173,7 @@ func _on_AttackTimer_timeout():
 	eye.modulate = Color(0,0,0)
 	eye.frame = sprite.frame
 	state = IDLE
-	timer.start(1.2)
+	timer.start()
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
@@ -194,7 +195,7 @@ func update_wander_state():
 #		var newCrowSpawner = CrowSpawner.instance()
 #		get_parent().call_deferred("add_child", newCrowSpawner)
 #		newCrowSpawner.global_position = global_position
-
+	
 	else:
 		state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 		var state_rng = rand_range(2, 4)
@@ -231,7 +232,7 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.3)
 		$EnemyHealth.show_health()
-		state = IDLE
+		# state = IDLE
 #		disable_detection()
 #		timer.start(0.4)
 #		yield(timer, "timeout")
@@ -282,12 +283,8 @@ func _on_WolfStats_no_health():
 	Tween.EASE_IN
 	)
 	tween.start()
-	
-	timer.start(0.5)
-	yield(timer, "timeout")
-	
+	yield(tween, "tween_all_completed")
 	player.enemy_killed(stats.experience_pool)
-	
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME

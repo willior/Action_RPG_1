@@ -186,12 +186,6 @@ func disable_detection():
 func enable_detection():
 	attackPlayerZone.set_deferred("monitoring", true)
 	playerDetectionZone.set_deferred("monitoring", true)
-		
-func attack_start():
-	pass
-		
-func attack_finished():
-	pass
 
 func update_wander_state():
 	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
@@ -222,7 +216,7 @@ func pick_random_state(state_list):
 func _on_Hurtbox_area_entered(area):
 	var evasion_mod = 0
 	if flying:
-		evasion_mod = 48
+		evasion_mod = 40
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
 		SoundPlayer.play_sound("miss")
@@ -239,6 +233,8 @@ func _on_Hurtbox_area_entered(area):
 		$EnemyHealth.show_health()
 		if state == ATTACK:
 			state = IDLE
+		if attacking:
+			attacking = false
 		animationState.travel("Landing")
 		audio_caw()
 		
@@ -284,7 +280,6 @@ func _on_CrowStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
-	
 	tween.interpolate_property(sprite,
 	"modulate",
 	Color(1, 1, 0),
@@ -294,38 +289,28 @@ func _on_CrowStats_no_health():
 	Tween.EASE_IN
 	)
 	tween.start()
-	
-	timer.start(0.5)
-	yield(timer, "timeout")
-	
+	yield(tween, "tween_all_completed")
 	player.enemy_killed(stats.experience_pool)
-	
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
 	enemyDeathEffect.global_position = global_position
-	
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool
-	
 	get_node("/root/World").add_child(expNotice)
-	
 	if randi() % 2 == 1:
 		var healingPotion = HealingPotion.instance()
 		get_node("/root/World/YSort/Items").call_deferred("add_child", healingPotion)
 		healingPotion.global_position = global_position
-	
 	elif player.stats.health < player.stats.max_health && randi() % 2 == 1:
 		var heartPickup = HeartPickup.instance()
 		get_node("/root/World/YSort/Items").call_deferred("add_child", heartPickup)
 		heartPickup.global_position = global_position
-		
 	elif randi() % 2 == 1:
 		var pennyPickup = PennyPickup.instance()
 		get_node("/root/World/YSort/Items").call_deferred("add_child", pennyPickup)
 		pennyPickup.global_position = global_position
-
 	queue_free()
 
 func idle_animation():
