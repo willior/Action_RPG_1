@@ -9,11 +9,11 @@ const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
 var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
 
 const ENEMY_NAME = "Wolf"
-export var ACCELERATION = 400
-export var MAX_SPEED = 400
+export var ACCELERATION = 800
+export var MAX_SPEED = 800
 export var WANDER_SPEED = 80
-export var ATTACK_SPEED = 6000
-export var FRICTION = 800
+export var ATTACK_SPEED = 3200
+export var FRICTION = 2400
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
 
@@ -27,6 +27,7 @@ enum {
 var state = IDLE
 
 var velocity = Vector2.ZERO
+# var dir_vector = Vector2.DOWN
 var knockback = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var random_number
@@ -105,7 +106,7 @@ func _physics_process(delta):
 			if attacking:
 				target = player.global_position
 				attacking = false
-				# audio_cawcawcaw()
+				audio_attack()
 				# fly_animation()
 				
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
@@ -126,6 +127,7 @@ func h_flip_handler():
 	else:
 		sprite.flip_h = false
 		eye.flip_h = false
+	idle_animation()
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -150,7 +152,7 @@ func accelerate_towards_point(point, speed, delta):
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
 		# animationState.travel("Fly")
-		fly_animation()
+		audio_detect()
 		eye.modulate = Color(1,0.8,0)
 		eye.frame = sprite.frame
 		state = CHASE
@@ -160,8 +162,8 @@ func attack_player():
 		disable_detection()
 		attacking = true
 		# hitbox.set_deferred("monitorable", true)
-#		$DelayTimer.start()
-#		yield($DelayTimer, "timeout")
+		$DelayTimer.start()
+		yield($DelayTimer, "timeout")
 		eye.modulate = Color(1,0,0)
 		eye.frame = sprite.frame
 		attackTimer.start()
@@ -228,6 +230,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		if is_crit:
 			damage *= 2
 		stats.health -= damage
+		audio_hit()
 		hurtbox.display_damage_popup(str(damage), is_crit)
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.3)
@@ -261,14 +264,6 @@ func _on_WolfStats_no_health():
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
 	hitbox.set_deferred("monitorable", false)
 	state = DEAD
-	tween.interpolate_property(sprite,
-	"offset:y",
-	-16,
-	0,
-	0.5,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
 	tween.interpolate_property(eye,
 	"offset:y",
 	-16,
@@ -330,10 +325,14 @@ func fly_animation():
 func set_flying(value):
 	flying = value
 	
-func audio_caw():
-	audio.stream = load("res://assets/Audio/Crow_caw.wav")
+func audio_detect():
+	audio.stream = load("res://assets/Audio/Enemies/Wolf_Growl_1.wav")
 	audio.play()
 	
-func audio_cawcawcaw():
-	audio.stream = load("res://assets/Audio/Crow_cawcawcaw.wav")
+func audio_attack():
+	audio.stream = load("res://assets/Audio/Enemies/Wolf_Attack_1.wav")
+	audio.play()
+	
+func audio_hit():
+	audio.stream = load("res://assets/Audio/Enemies/Wolf_Hit_1.wav")
 	audio.play()
