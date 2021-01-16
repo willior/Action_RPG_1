@@ -6,7 +6,7 @@ const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
-# var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
+var EnemySpawner = load("res://assets/Spawners/EnemySpawner.tscn")
 
 const ENEMY_NAME = "Wolf"
 export var ACCELERATION = 800
@@ -192,10 +192,11 @@ func update_wander_state():
 		print('too far: deleting wolf')
 		queue_free()
 		
-#		var newCrowSpawner = CrowSpawner.instance()
-#		get_parent().call_deferred("add_child", newCrowSpawner)
-#		newCrowSpawner.global_position = global_position
-	
+		var newEnemySpawner = EnemySpawner.instance()
+		get_parent().call_deferred("add_child", newEnemySpawner)
+		newEnemySpawner.ENEMY = load("res://assets/Enemies/Wolf.tscn")
+		newEnemySpawner.global_position = global_position
+
 	else:
 		state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 		var state_rng = rand_range(2, 4)

@@ -5,7 +5,7 @@ const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
-var BatSpawner = load("res://assets/Spawners/BatSpawner.tscn")
+var EnemySpawner = load("res://assets/Spawners/EnemySpawner.tscn")
 const ENEMY_NAME = "Bat"
 export var ACCELERATION = 240
 export var MAX_SPEED = 40
@@ -202,9 +202,10 @@ func attack_finished():
 		
 func update_wander_state():
 	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
-		var newBatSpawner = BatSpawner.instance()
-		get_parent().call_deferred("add_child", newBatSpawner)
-		newBatSpawner.global_position = global_position
+		var newEnemySpawner = EnemySpawner.instance()
+		get_parent().call_deferred("add_child", newEnemySpawner)
+		newEnemySpawner.ENEMY = load("res://assets/Enemies/Bat.tscn")
+		newEnemySpawner.global_position = global_position
 		queue_free()
 	else:
 		state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument

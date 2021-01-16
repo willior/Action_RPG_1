@@ -100,7 +100,7 @@ func _ready():
 	self.shade_friction = shade_friction
 	# self.vitality = vitality
 	self.health = health
-	self.endurance = endurance
+	# self.endurance = endurance
 	self.stamina = max_stamina
 	self.defense = defense
 	self.strength = strength
@@ -155,6 +155,8 @@ func set_vitality(value):
 	elif vitality <= 10:
 		health_increase = 10
 		
+		
+		
 	self.max_health += health_increase
 	print('vitality changed: health increased by ', health_increase)
 	emit_signal(\"vitality_changed\", vitality)
@@ -199,7 +201,16 @@ func set_dead(value):
 		
 func set_endurance(value):
 	endurance = value
-	self.max_stamina = endurance*15
+	var stamina_increase
+	if endurance > 30:
+		stamina_increase = 1
+	elif endurance > 20:
+		stamina_increase = 4
+	elif endurance > 10:
+		stamina_increase = 7
+	elif endurance <= 10:
+		stamina_increase = 10
+	self.max_stamina += stamina_increase
 	emit_signal(\"endurance_changed\", endurance)
 		
 func set_max_stamina(value):

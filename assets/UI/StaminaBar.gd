@@ -13,7 +13,6 @@ func set_max_stamina(value):
 	max_stamina = value
 	stamBar.max_value = max_stamina
 	stamBar.rect_size.x = max_stamina
-	print('setting stamina bar', max_stamina)
 
 func _ready():
 	self.max_stamina = PlayerStats.max_stamina

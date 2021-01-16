@@ -6,7 +6,8 @@ const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
-var CrowSpawner = load("res://assets/Spawners/CrowSpawner.tscn")
+var EnemySpawner = load("res://assets/Spawners/EnemySpawner.tscn")
+
 const ENEMY_NAME = "Crow"
 export var ACCELERATION = 200
 export var MAX_SPEED = 400
@@ -190,9 +191,10 @@ func enable_detection():
 func update_wander_state():
 	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
 		queue_free()
-		var newCrowSpawner = CrowSpawner.instance()
-		get_parent().call_deferred("add_child", newCrowSpawner)
-		newCrowSpawner.global_position = global_position
+		var newEnemySpawner = EnemySpawner.instance()
+		get_parent().call_deferred("add_child", newEnemySpawner)
+		newEnemySpawner.ENEMY = load("res://assets/Enemies/Crow.tscn")
+		newEnemySpawner.global_position = global_position
 
 	else:
 		state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
