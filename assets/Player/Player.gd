@@ -489,6 +489,7 @@ func level_up():
 	var levelNotice = LevelNotice.instance()
 	levelNotice.global_position = global_position
 	levelNotice.levelDisplay = stats.level
+	SoundPlayer.play_sound("level_up")
 	
 	var choice = levelStats[randi() % levelStats.size()]
 	match choice:

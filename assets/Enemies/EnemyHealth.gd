@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 var health setget set_health
 var max_health setget set_max_health

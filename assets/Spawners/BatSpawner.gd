@@ -1,12 +1,11 @@
 extends Node2D
 
-#export var ENEMY = preload(Filepath)
-export(PackedScene) var ENEMY
+var BAT = preload("res://assets/Enemies/Bat.tscn")
 onready var pos = global_position
 
 func _on_Area2D_area_entered(_area):
-	var enemy = ENEMY.instance()
-	get_parent().call_deferred("add_child", enemy)
-	print('spawning: ', enemy.ENEMY_NAME)
-	enemy.global_position = pos
+	var bat = BAT.instance()
+	get_parent().call_deferred("add_child", bat)
+	print('spawning: ', bat.ENEMY_NAME)
+	bat.global_position = pos
 	queue_free()

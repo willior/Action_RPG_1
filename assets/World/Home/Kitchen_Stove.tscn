@@ -5,8 +5,8 @@
 [ext_resource path="res://assets/World/Home/Kitchen_Stove.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=4]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 10 )
+[sub_resource type="RectangleShape2D" id=56]
+extents = Vector2( 16, 14 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 4 )
@@ -21,8 +21,8 @@ texture = ExtResource( 1 )
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -10, 9 )
-shape = SubResource( 1 )
+position = Vector2( -10, 4 )
+shape = SubResource( 56 )
 
 [node name="TalkBox" parent="." instance=ExtResource( 2 )]
 position = Vector2( -16, 12 )

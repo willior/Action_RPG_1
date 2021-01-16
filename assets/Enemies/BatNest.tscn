@@ -8,4 +8,4 @@ position = Vector2( -175.406, -85.759 )
 script = ExtResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0

@@ -244,7 +244,7 @@ one_shot = true
 [node name="Hitbox" parent="." instance=ExtResource( 8 )]
 position = Vector2( 0, -4 )
 collision_mask = 4
-damage = 12.0
+damage = 28.0
 accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
@@ -274,10 +274,6 @@ attenuation = 0.659754
 
 [node name="EnemyHealth" parent="." instance=ExtResource( 9 )]
 visible = false
-margin_left = -13.0
-margin_top = 6.0
-margin_right = 13.0
-margin_bottom = 9.0
 [connection signal="no_health" from="WolfStats" to="." method="_on_WolfStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

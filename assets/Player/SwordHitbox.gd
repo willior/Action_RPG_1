@@ -4,7 +4,7 @@ onready var flash_whoosh = preload("res://assets/Audio/Sword_Flash_Whoosh.wav")
 onready var flash_swing = preload("res://assets/Audio/Sword_Flash_Swing.wav")
 onready var audio = $AudioStreamPlayer
 
-onready var damage = PlayerStats.strength setget set_damage
+onready var damage = PlayerStats.strength*2 setget set_damage
 # onready var damage_mod = PlayerStats.strength_mod setget set_damage_mod
 # onready var shade_mod = PlayerStats.strength_mod setget set_shade_mod
 
