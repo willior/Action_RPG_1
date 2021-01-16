@@ -199,6 +199,7 @@ func set_dead(value):
 		
 func set_endurance(value):
 	endurance = value
+	self.max_stamina = endurance*15
 	emit_signal(\"endurance_changed\", endurance)
 		
 func set_max_stamina(value):
