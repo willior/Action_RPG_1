@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Air_SFX.wav-3db7d13215e517f78205a451e7f49322.sample"
+
+[deps]
+
+source_file="res://assets/Audio/World/Air_SFX.wav"
+dest_files=[ "res://.import/Air_SFX.wav-3db7d13215e517f78205a451e7f49322.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

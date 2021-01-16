@@ -18,7 +18,7 @@ func set_max_health(value):
 func set_health(value):
 	health = value
 	health = clamp(value, 0, max_health)
-	emit_signal("health_changed", health) # every time the health is set, emits a signal "health_changed" along with an argument, our new health value
+	emit_signal("health_changed", health)
 	if health <= 0:
 		emit_signal("no_health")
 

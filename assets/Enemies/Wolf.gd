@@ -189,7 +189,6 @@ func enable_detection():
 
 func update_wander_state():
 	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
-		print('too far: deleting wolf')
 		queue_free()
 		
 		var newEnemySpawner = EnemySpawner.instance()

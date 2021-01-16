@@ -146,7 +146,7 @@ func _input(event):
 					1: # TOOL
 						pass
 					2: # QUEST
-						if talkTimer.is_stopped && !dying:
+						if talkTimer.is_stopped() && !dying:
 							if !using_item:
 								talkTimer.start()
 								var dialogBox = DialogBox.instance()
