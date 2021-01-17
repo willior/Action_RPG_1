@@ -30,4 +30,3 @@ func set_sweating(value):
 			$AnimationPlayer.play("Sweating")
 		"sweating_end":
 			$AnimationPlayer.play("Stop")
-	

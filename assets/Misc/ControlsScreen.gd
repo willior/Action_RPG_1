@@ -12,6 +12,7 @@ func _input(event):
 		print('starting game')
 		$ControlsDisplay.queue_free()
 		var chapterScreen = ChapterScreen.instance()
+		chapterScreen.SCENE_STRING = "res://assets/Maps/0-1_Home.tscn"
 		add_child(chapterScreen)
 		ok_to_start = false
 		

@@ -1,5 +1,7 @@
 extends Node
 
+export(PackedScene) var SCENE_STRING
+
 var index = 0
 
 func _on_Timer_timeout():
@@ -11,4 +13,4 @@ func _on_Timer_timeout():
 		$Chapter.visible = false
 
 func _on_AudioStreamPlayer_finished():
-	Global.goto_scene("res://assets/Maps/0-1_Home.tscn")
+	Global.goto_scene(SCENE_STRING)
