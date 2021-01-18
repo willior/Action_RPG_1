@@ -9,12 +9,12 @@ func _ready():
 	
 func _input(event):
 	if event.is_action_pressed("start") && ok_to_start:
-		print('starting game')
 		$ControlsDisplay.queue_free()
-		var chapterScreen = ChapterScreen.instance()
-		chapterScreen.SCENE_STRING = "res://assets/Maps/0-1_Home.tscn"
-		add_child(chapterScreen)
+#		var chapterScreen = ChapterScreen.instance()
+#		chapterScreen.SCENE_STRING = "res://assets/Maps/0-1_Home.tscn"
+#		add_child(chapterScreen)
 		ok_to_start = false
+		Global.goto_scene("res://assets/Maps/0-1_Home/0-1_Home_NEW.tscn")
 		
 	if event.is_action_pressed("quit_game"):
 		get_tree().quit()

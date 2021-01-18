@@ -1,7 +1,6 @@
 extends ColorRect
 
 func _ready():
-	
 	flash()
 
 func flash():

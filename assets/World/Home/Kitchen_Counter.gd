@@ -2,6 +2,9 @@ extends StaticBody2D
 
 const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
+const on_SFX = preload("res://assets/Audio/World/Home/Home_Sink_On.wav")
+const run_SFX = preload("res://assets/Audio/World/Home/Home_Sink_Audio.wav")
+const off_SFX = preload("res://assets/Audio/World/Home/Home_Sink_Off.wav")
 onready var sinkSprite = $Sprite/AnimatedSprite
 onready var sinkAnim = $AnimationTree.get("parameters/playback")
 
@@ -84,3 +87,13 @@ func acquire_item():
 	GameManager.player.inventory.add_item("Metal_Pot_Water", 1)
 #	PlayerLog.metal_pot_collected = true
 #	queue_free()
+
+func load_and_play(SFX):
+	match SFX:
+		"on":
+			$AudioStreamPlayer.stream = on_SFX
+		"run":
+			$AudioStreamPlayer.stream = run_SFX
+		"off":
+			$AudioStreamPlayer.stream = off_SFX
+	$AudioStreamPlayer.play()

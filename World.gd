@@ -6,12 +6,18 @@ onready var music = $Music
 onready var sfx = $SFX
 onready var player = $YSort/Player
 
+onready var ChapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn")
+
 func _ready():
 	sfx.play()
 	music.play()
 	if GameManager.on_title_screen:
 		GameManager.on_title_screen = false
 		
+	if Global.chapter_display:
+		var chapterDisplay = ChapterDisplay.instance()
+		add_child(chapterDisplay)
+
 func _input(event):
 	if event.is_action_pressed("quit_game"):
 		get_tree().quit()
@@ -40,7 +46,7 @@ func _input(event):
 			stats.visible = false
 			
 	if event.is_action_pressed("start"): # SPACEBAR
-		if Global.dialogOpen or PlayerStats.dying and !PlayerStats.dead:
+		if Global.dialogOpen or Global.chapter_display or PlayerStats.dying and !PlayerStats.dead:
 			return
 		if PlayerStats.dead:
 			print('resuming')

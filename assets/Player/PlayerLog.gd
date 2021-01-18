@@ -1,5 +1,7 @@
 extends Node
 
+var chapter_number = 0
+
 # Items
 var heart_examined = false
 var penny_examined = false

@@ -828,7 +828,7 @@ tile_data = PoolIntArray( 131107, 0, 4, 131117, 0, 0, 131119, 0, 4, 131121, 0, 1
 [node name="Exit_toHome" parent="Map" instance=ExtResource( 12 )]
 position = Vector2( 288, 0 )
 collision_layer = 2048
-map_file = "res://assets/Maps/0-1_Home.tscn"
+map_file = "res://assets/Maps/0-1_Home/0-1_Home_NEW.tscn"
 selected_location = Vector2( 160, 168 )
 
 [node name="CollisionShape2D" parent="Map/Exit_toHome" index="0"]

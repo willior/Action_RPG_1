@@ -1,5 +1,7 @@
 extends Node
 
+var chapter_display = null
+var chapter_name
 var custom_variables = {}
 var dialogOpen = false
 var _attributes = null
