@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/UI/DialogBox_160.png" type="Texture" id=1]
+[ext_resource path="res://assets/UI/Dialog/Dialog_Button.tscn" type="PackedScene" id=9]
+
+[node name="OptionsRect" type="TextureRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSplitContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="VBoxContainer" parent="HSplitContainer"]
+margin_left = 48.0
+margin_right = 78.0
+margin_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonVIT" parent="HSplitContainer/Options" instance=ExtResource( 9 )]
+margin_top = 4.0
+margin_right = 30.0
+margin_bottom = 17.0
+text = "VIT"
+
+[node name="ButtonEND" parent="HSplitContainer/Options" instance=ExtResource( 9 )]
+margin_top = 21.0
+margin_right = 30.0
+margin_bottom = 34.0
+text = "END"
+
+[node name="ButtonDEF" parent="HSplitContainer/Options" instance=ExtResource( 9 )]
+margin_top = 38.0
+margin_right = 30.0
+margin_bottom = 51.0
+text = "DEF"
+
+[node name="Options2" type="VBoxContainer" parent="HSplitContainer"]
+margin_left = 82.0
+margin_right = 112.0
+margin_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSTR" parent="HSplitContainer/Options2" instance=ExtResource( 9 )]
+margin_top = 4.0
+margin_right = 30.0
+margin_bottom = 17.0
+text = "STR"
+
+[node name="ButtonDEX" parent="HSplitContainer/Options2" instance=ExtResource( 9 )]
+margin_top = 21.0
+margin_right = 30.0
+margin_bottom = 34.0
+text = "DEX"
+
+[node name="ButtonSPD" parent="HSplitContainer/Options2" instance=ExtResource( 9 )]
+margin_top = 38.0
+margin_right = 30.0
+margin_bottom = 51.0
+text = "SPD"

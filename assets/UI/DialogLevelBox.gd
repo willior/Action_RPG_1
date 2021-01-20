@@ -1,12 +1,9 @@
 extends Control
 
-# export(String, FILE, "*.json") var extenal_file = ''
-
-const BUTTON = preload("Dialog/Dialog_Button.tscn")
 onready var label = $Text/RichTextLabel
 
 var dialog_index = 0
-var speaker = "Nobody"
+var speakerName = ""
 var next_icon_modulator = 1
 var finished = false
 var waiting_for_answer = false
@@ -14,71 +11,22 @@ var waiting_for_input = false
 
 var dialog_object_path
 var dialog_script = [
-				{
-					'text': "Hello.",
-					'name': speaker
-				},
-				{
-					'name': speaker,
-					'question': 'Yes or no?',
-					'options': [
-						{ 'label': 'Yes', 'skip': '0'},
-						{ 'label': 'No', 'skip': '1'},
-						{ 'label': 'Maybe', 'skip': '2'}
-					],
-					'variable': 'answer',
-				},
-				{
-					'name': speaker,
-					'text': 'Nice to have some blind positivity around here, for a change.',
-					'skip': '2'
-				},
-				{
-					'name': speaker,
-					'text': "Oh, great. I was hoping you'd say that.",
-					'skip': '1'
-				},
-				{
-					'name': speaker,
-					'text': "You didn't seem like the type to commit to anything, anyway.",
-					'skip': '0'
-				},
-				{
-					'name': speaker,
-					'question': "Unless... you've changed your mind?",
-					'options': [
-						{ 'label': 'Uh...', 'value': '0'},
-						{ 'label': 'Nope.', 'value': 'confirm'}
-					],
-					'checkpoint': '-5',
-				},
-				{
-					'name': speaker,
-					'text': 'Well, alright, then.'
-				}
-				
-			]
+	{
+		'question': 'LEVEL UP',
+		'options': [
+			{ 'label': 'Yes', 'skip': '0'},
+			{ 'label': 'No', 'skip': '1'},
+			{ 'label': 'Maybe', 'skip': '2'}
+		],
+		'variable': 'answer',
+	}
+]	
 
 func _process(_delta):
 	if waiting_for_answer:
 		$OptionsRect.visible = finished
 	else:
 		$OptionsRect.visible = false
-
-#func file(file_path):
-#	# Reading a json file to use as a dialog.
-#	var file = File.new()
-#	var fileExists = file.file_exists(file_path)
-#	var dict = []
-#	if fileExists:
-#		file.open(file_path, File.READ)
-#		var content = file.get_as_text()
-#		dict = parse_json(content)
-#		file.close()
-#		return dict
-#	else:
-#		push_error("File " + file_path  + " doesn't exist. ")
-#	return dict
 	
 func parse_text(text):
 	# This will parse the text and automatically format some of your available variables
@@ -157,62 +105,28 @@ func load_dialog():
 		finished = true
 		
 func end_dialog():
-	get_tree().paused = false
-	get_node("/root/World/YSort/Player").noticeDisplay = false
-	get_node("/root/World/YSort/Player").talkNoticeDisplay = false
-	Global.dialogOpen = false
+	# get_tree().paused = false
+	# get_node("/root/World/YSort/Player").noticeDisplay = false
+	# get_node("/root/World/YSort/Player").talkNoticeDisplay = false
+	# Global.dialogOpen = false
 	queue_free()
 
 func event_handler(event):
 	match event:
-		{'text'}, {'name', 'text'}:
-			finished = false
-			update_name(event)
-			update_text(event['text'])
-		{'text', 'skip'}, {'name', 'text', 'skip'}:
-			finished = false
-			advance_dialog(int(event['skip']))
-			update_name(event)
-			update_text(event['text'])
-		{'question', ..}:
+		{'level_up', ..}:
 			finished = false
 			waiting_for_answer = true
-			update_name(event)
 			update_text(event['question'])
 			for o in event['options']:
-				print(o)
-				var button = BUTTON.instance()
-				# button.get_node("Label").bbcode_text = o['label']
-				button.text = o['label']
 				
 				if event.has('variable'):
-					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
-					# connects the button's "pressed" signal to the _on_option_selected function
-					# 3 arguments:
-					# 1. reference variable to the button itself  // button
-					# 2. the index named 'variable' of the event being handled // event['variable']
-					# 3. the 'options' array that follows the 'question' // o
-				
+					pass
 				else:
 					# Checking for checkpoints
 					if o['value'] == '0':
-						button.connect("pressed", self, "change_position", [button, int(event['checkpoint'])])
+						pass
 					else:
-						button.connect("pressed", self, "change_position", [button, 0])
-					
-						
-				$OptionsRect/Options.add_child(button)
-				# $OptionsRect.show()
-				
-		{'action', ..}:
-			if event['action'] == 'take_item':
-				advance_dialog(int(event['skip']))
-				update_name(event)
-				update_text(event['text'])
-				get_node(dialog_object_path).acquire_item()
-			if event['action'] == 'end_dialog':
-				print('ending dialog')
-				end_dialog()
+						pass
 
 func reset_options():
 	# Clearing out the options after one was selected.
@@ -256,6 +170,5 @@ func _on_TimerText_timeout():
 		if waiting_for_answer:
 			$TimerDelaySelect.start()
 			yield($TimerDelaySelect, "timeout")
-			# get_node("/root/World/GUI/DialogBox/OptionsRect/Options").get_child(0).grab_focus()
-			get_child(1).get_child(0).get_child(0).grab_focus()
+			get_child(1).get_child(0).get_child(0).get_child(0).grab_focus()
 			waiting_for_input = true

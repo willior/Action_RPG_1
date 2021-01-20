@@ -1,0 +1,233 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/UI/Dialog/LevelUp_Container.gd" type="Script" id=2]
+[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+extra_spacing_top = -4
+extra_spacing_bottom = -2
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[node name="LevelUp_Container" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="VBoxContainer" parent="."]
+margin_left = 128.0
+margin_right = 158.0
+margin_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonVIT" type="Button" parent="Options"]
+margin_top = 66.0
+margin_right = 30.0
+margin_bottom = 79.0
+mouse_filter = 2
+custom_fonts/font = SubResource( 1 )
+button_mask = 0
+text = "VIT"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="Options/ButtonVIT"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEND" type="Button" parent="Options"]
+margin_top = 83.0
+margin_right = 30.0
+margin_bottom = 96.0
+mouse_filter = 2
+custom_fonts/font = SubResource( 1 )
+button_mask = 0
+text = "END"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="Options/ButtonEND"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonDEF" type="Button" parent="Options"]
+margin_top = 100.0
+margin_right = 30.0
+margin_bottom = 113.0
+mouse_filter = 2
+custom_fonts/font = SubResource( 1 )
+button_mask = 0
+text = "DEF"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="Options/ButtonDEF"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options2" type="VBoxContainer" parent="."]
+margin_left = 162.0
+margin_right = 192.0
+margin_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSTR" type="Button" parent="Options2"]
+margin_top = 66.0
+margin_right = 30.0
+margin_bottom = 79.0
+mouse_filter = 2
+custom_fonts/font = SubResource( 1 )
+button_mask = 0
+text = "STR"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="Options2/ButtonSTR"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonDEX" type="Button" parent="Options2"]
+margin_top = 83.0
+margin_right = 30.0
+margin_bottom = 96.0
+mouse_filter = 2
+custom_fonts/font = SubResource( 1 )
+button_mask = 0
+text = "DEX"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="Options2/ButtonDEX"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSPD" type="Button" parent="Options2"]
+margin_top = 100.0
+margin_right = 30.0
+margin_bottom = 113.0
+mouse_filter = 2
+custom_fonts/font = SubResource( 1 )
+button_mask = 0
+text = "SPD"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="Options2/ButtonSPD"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+[connection signal="focus_entered" from="Options/ButtonVIT" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="Options/ButtonVIT" to="." method="_on_ButtonVIT_pressed"]
+[connection signal="focus_entered" from="Options/ButtonEND" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="Options/ButtonEND" to="." method="_on_ButtonEND_pressed"]
+[connection signal="focus_entered" from="Options/ButtonDEF" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="Options/ButtonDEF" to="." method="_on_ButtonDEF_pressed"]
+[connection signal="focus_entered" from="Options2/ButtonSTR" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="Options2/ButtonSTR" to="." method="_on_ButtonSTR_pressed"]
+[connection signal="focus_entered" from="Options2/ButtonDEX" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="Options2/ButtonDEX" to="." method="_on_ButtonDEX_pressed"]
+[connection signal="focus_entered" from="Options2/ButtonSPD" to="." method="_on_focus_entered"]
+[connection signal="pressed" from="Options2/ButtonSPD" to="." method="_on_ButtonSPD_pressed"]

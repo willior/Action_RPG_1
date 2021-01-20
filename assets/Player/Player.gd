@@ -5,6 +5,7 @@ const Poison = preload("res://assets/UI/Status/PoisonNotice.tscn")
 const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
+const DialogLevelBox = preload("res://assets/UI/DialogLevelBox.tscn")
 const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const WhiteFlash = preload("res://assets/Shaders/White_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
@@ -486,11 +487,14 @@ func enemy_killed(experience_from_kill):
 	
 func level_up():
 	stats.level += 1
+	
+	# var dialogLevelBox = DialogLevelBox.instance()
+	
 	var levelNotice = LevelNotice.instance()
 	levelNotice.global_position = global_position
 	levelNotice.levelDisplay = stats.level
 	SoundPlayer.play_sound("level_up")
-	
+
 	var choice = levelStats[randi() % levelStats.size()]
 	match choice:
 		LEVELHEALTH:
