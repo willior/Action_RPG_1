@@ -6,58 +6,13 @@ const BUTTON = preload("Dialog/Dialog_Button.tscn")
 onready var label = $Text/RichTextLabel
 
 var dialog_index = 0
-var speaker = "Nobody"
 var next_icon_modulator = 1
 var finished = false
 var waiting_for_answer = false
 var waiting_for_input = false
 
 var dialog_object_path
-var dialog_script = [
-				{
-					'text': "Hello.",
-					'name': speaker
-				},
-				{
-					'name': speaker,
-					'question': 'Yes or no?',
-					'options': [
-						{ 'label': 'Yes', 'skip': '0'},
-						{ 'label': 'No', 'skip': '1'},
-						{ 'label': 'Maybe', 'skip': '2'}
-					],
-					'variable': 'answer',
-				},
-				{
-					'name': speaker,
-					'text': 'Nice to have some blind positivity around here, for a change.',
-					'skip': '2'
-				},
-				{
-					'name': speaker,
-					'text': "Oh, great. I was hoping you'd say that.",
-					'skip': '1'
-				},
-				{
-					'name': speaker,
-					'text': "You didn't seem like the type to commit to anything, anyway.",
-					'skip': '0'
-				},
-				{
-					'name': speaker,
-					'question': "Unless... you've changed your mind?",
-					'options': [
-						{ 'label': 'Uh...', 'value': '0'},
-						{ 'label': 'Nope.', 'value': 'confirm'}
-					],
-					'checkpoint': '-5',
-				},
-				{
-					'name': speaker,
-					'text': 'Well, alright, then.'
-				}
-				
-			]
+var dialog_script
 
 func _process(_delta):
 	if waiting_for_answer:
@@ -180,7 +135,6 @@ func event_handler(event):
 			update_name(event)
 			update_text(event['question'])
 			for o in event['options']:
-				print(o)
 				var button = BUTTON.instance()
 				# button.get_node("Label").bbcode_text = o['label']
 				button.text = o['label']
@@ -256,6 +210,5 @@ func _on_TimerText_timeout():
 		if waiting_for_answer:
 			$TimerDelaySelect.start()
 			yield($TimerDelaySelect, "timeout")
-			# get_node("/root/World/GUI/DialogBox/OptionsRect/Options").get_child(0).grab_focus()
-			get_child(1).get_child(0).get_child(0).grab_focus()
+			get_node("/root/World/GUI/DialogBox/OptionsRect/Options").get_child(0).grab_focus()
 			waiting_for_input = true

@@ -1,33 +1,36 @@
 extends Control
 
+const BUTTON = preload("Dialog/Dialog_Button.tscn")
+const LEVELUPCONTAINER = preload("Dialog/LevelUp_Container.tscn")
 onready var label = $Text/RichTextLabel
 
+var stats_remaining = 2
+
 var dialog_index = 0
-var speakerName = ""
+var speaker = "Nobody"
 var next_icon_modulator = 1
 var finished = false
 var waiting_for_answer = false
+var waiting_for_level = false
 var waiting_for_input = false
 
 var dialog_object_path
 var dialog_script = [
-	{
-		'question': 'LEVEL UP',
-		'options': [
-			{ 'label': 'Yes', 'skip': '0'},
-			{ 'label': 'No', 'skip': '1'},
-			{ 'label': 'Maybe', 'skip': '2'}
-		],
-		'variable': 'answer',
-	}
-]	
+				{
+					'text': "LEVEL UP!",
+					'level_up': '2',
+				},
+				{
+					'text': "Ending dialog."
+				}
+			]
 
 func _process(_delta):
 	if waiting_for_answer:
 		$OptionsRect.visible = finished
 	else:
 		$OptionsRect.visible = false
-	
+
 func parse_text(text):
 	# This will parse the text and automatically format some of your available variables
 	var end_text = text
@@ -47,23 +50,18 @@ func parse_text(text):
 	return end_text
 
 func _ready():
-#	if extenal_file != '':
-#		dialog_script = file(extenal_file)
 	event_handler(dialog_script[dialog_index])
 	get_tree().paused = true
 	Global.dialogOpen = true
 	
 func _input(event):
-#	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
-#		get_tree().set_input_as_handled()
-#		load_dialog()
-		
 	if event.is_action_pressed("ui_accept"):
 		if !$TimerDelaySelect.is_stopped():
 			return
-		elif waiting_for_input:
+		elif waiting_for_input && stats_remaining > 0:
 			$AudioSelect.play()
-			waiting_for_input = false
+			if stats_remaining == 0:
+				waiting_for_input = false
 			return
 		else:
 			get_tree().set_input_as_handled()
@@ -105,31 +103,73 @@ func load_dialog():
 		finished = true
 		
 func end_dialog():
-	# get_tree().paused = false
+	get_tree().paused = false
 	# get_node("/root/World/YSort/Player").noticeDisplay = false
 	# get_node("/root/World/YSort/Player").talkNoticeDisplay = false
-	# Global.dialogOpen = false
+	Global.dialogOpen = false
 	queue_free()
+	get_tree().quit()
 
 func event_handler(event):
 	match event:
-		{'level_up', ..}:
+		{'text'}, {'name', 'text'}:
+			finished = false
+			update_name(event)
+			update_text(event['text'])
+		{'text', 'skip'}, {'name', 'text', 'skip'}:
+			finished = false
+			advance_dialog(int(event['skip']))
+			update_name(event)
+			update_text(event['text'])
+		{'question', ..}:
 			finished = false
 			waiting_for_answer = true
+			update_name(event)
 			update_text(event['question'])
 			for o in event['options']:
-				
+				var button = BUTTON.instance()
+				# button.get_node("Label").bbcode_text = o['label']
+				button.text = o['label']
 				if event.has('variable'):
-					pass
+					button.connect("pressed", self, "_on_option_selected", [button, event['variable'], o])
+					# connects the button's "pressed" signal to the _on_option_selected function
+					# 3 arguments:
+					# 1. reference variable to the button itself  // button
+					# 2. the index named 'variable' of the event being handled // event['variable']
+					# 3. the 'options' array that follows the 'question' // o
 				else:
 					# Checking for checkpoints
 					if o['value'] == '0':
-						pass
+						button.connect("pressed", self, "change_position", [button, int(event['checkpoint'])])
 					else:
-						pass
+						button.connect("pressed", self, "change_position", [button, 0])
+				$OptionsRect/Options.add_child(button)
+				
+		{'level_up', ..}:
+			finished = false
+			waiting_for_answer = true
+			waiting_for_level = true
+			var levelUpButtons = LEVELUPCONTAINER.instance()
+			$OptionsRect.add_child(levelUpButtons)
+			$OptionsRect/LevelUp_Container/Options/ButtonVIT.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
+			$OptionsRect/LevelUp_Container/Options/ButtonEND.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
+			$OptionsRect/LevelUp_Container/Options/ButtonDEF.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
+			$OptionsRect/LevelUp_Container/Options2/ButtonSTR.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
+			$OptionsRect/LevelUp_Container/Options2/ButtonDEX.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
+			$OptionsRect/LevelUp_Container/Options2/ButtonSPD.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
+			update_text(event['text'])
+			
+		{'action', ..}:
+			if event['action'] == 'take_item':
+				advance_dialog(int(event['skip']))
+				update_name(event)
+				update_text(event['text'])
+				get_node(dialog_object_path).acquire_item()
+			if event['action'] == 'end_dialog':
+				print('ending dialog')
+				end_dialog()
 
 func reset_options():
-	# Clearing out the options after one was selected.
 	for option in $OptionsRect/Options.get_children():
 		option.queue_free()
 
@@ -140,7 +180,6 @@ func change_position(_i, checkpoint):
 	load_dialog()
 
 func _on_option_selected(option, variable, value):
-	# $OptionsRect.hide()
 	Global.custom_variables[variable] = value
 	waiting_for_answer = false
 	advance_dialog(int(value['skip']))
@@ -148,6 +187,17 @@ func _on_option_selected(option, variable, value):
 	load_dialog()
 	print('[!] Option selected: ', option.text, ' \\//\\ value = ' , value)
 	
+func _on_level_selected(value, quantity_remaining):
+	stats_remaining -= 1
+	if stats_remaining == 0:
+		print('no stats remaining. deleting levelBox.')
+		waiting_for_answer = false
+		waiting_for_level = false
+		$OptionsRect/LevelUp_Container.queue_free()
+		load_dialog()
+	else:
+		print('applying stat; stats remaining: ', stats_remaining)
+
 func advance_dialog(skip_index):
 	dialog_index += skip_index
 
@@ -170,5 +220,8 @@ func _on_TimerText_timeout():
 		if waiting_for_answer:
 			$TimerDelaySelect.start()
 			yield($TimerDelaySelect, "timeout")
-			get_child(1).get_child(0).get_child(0).get_child(0).grab_focus()
+			if waiting_for_level:
+				get_child(1).get_child(1).get_child(0).get_child(0).grab_focus()
+			else:
+				get_child(1).get_child(0).get_child(0).grab_focus()
 			waiting_for_input = true
