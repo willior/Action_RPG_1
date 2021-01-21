@@ -25,18 +25,28 @@ func _on_focus_entered():
 
 func _on_ButtonVIT_pressed():
 	VIT_to_add += 1
+	button_pressed()
 	
 func _on_ButtonEND_pressed():
 	END_to_add += 1
+	button_pressed()
 
 func _on_ButtonDEF_pressed():
 	DEF_to_add += 1
+	button_pressed()
 
 func _on_ButtonSTR_pressed():
 	STR_to_add += 1
+	button_pressed()
 
 func _on_ButtonDEX_pressed():
 	DEX_to_add += 1
+	button_pressed()
 
 func _on_ButtonSPD_pressed():
 	SPD_to_add += 1
+	button_pressed()
+	
+func button_pressed():
+	get_tree().set_input_as_handled()
+	print('button pressed')

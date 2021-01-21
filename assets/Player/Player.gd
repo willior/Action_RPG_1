@@ -42,6 +42,8 @@ var damageTaken = 0
 var stats = PlayerStats
 var levelStats = [0, 1, 2, 3, 4, 5]
 var levelResult = 0
+var level_queued = false
+var queued_levels = 0
 
 var roll_moving = false
 var backstep_moving = false
@@ -487,13 +489,11 @@ func enemy_killed(experience_from_kill):
 	
 func level_up():
 	stats.level += 1
-	
 	# var dialogLevelBox = DialogLevelBox.instance()
-	
+	# get_node("/root/World/GUI").add_child(dialogLevelBox)
 	var levelNotice = LevelNotice.instance()
 	levelNotice.global_position = global_position
 	levelNotice.levelDisplay = stats.level
-	SoundPlayer.play_sound("level_up")
 
 	var choice = levelStats[randi() % levelStats.size()]
 	match choice:
@@ -526,6 +526,7 @@ func level_up():
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
 	get_node("/root").add_child(levelNotice)
+	
 	
 func roll_stamina_drain():
 	stats.stamina -= 15
