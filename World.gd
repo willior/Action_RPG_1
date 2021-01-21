@@ -27,7 +27,8 @@ func _input(event):
 		PlayerStats.status = "frenzy"
 		
 	if event.is_action_pressed("test2"): # Y
-		player.level_up()
+		# player.level_up()
+		pass
 		
 	if event.is_action_pressed("test3"): # U
 		if PlayerStats.speed < 40:

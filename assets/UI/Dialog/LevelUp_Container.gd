@@ -20,9 +20,6 @@ var stats_to_add = {
 		'SPD': 0,
 	}
 
-func _ready():
-	get_child(0).get_child(0).grab_focus()
-
 func _on_focus_entered():
 	$AudioMenu.play()
 

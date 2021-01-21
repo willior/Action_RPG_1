@@ -4,12 +4,20 @@ const BUTTON = preload("Dialog/Dialog_Button.tscn")
 const LEVELUPCONTAINER = preload("Dialog/LevelUp_Container.tscn")
 onready var label = $Text/RichTextLabel
 
-var stats_remaining = 2
+var default_stats_remaining = 2
+var stats_remaining = default_stats_remaining
+var VIT_to_add = 0
+var END_to_add = 0
+var DEF_to_add = 0
+var STR_to_add = 0
+var DEX_to_add = 0
+var SPD_to_add = 0
 
 var dialog_index = 0
 var speaker = "Nobody"
 var next_icon_modulator = 1
 var finished = false
+var level_flag = false
 var waiting_for_answer = false
 var waiting_for_level = false
 var waiting_for_input = false
@@ -21,7 +29,15 @@ var dialog_script = [
 					'level_up': '2',
 				},
 				{
-					'text': "Ending dialog."
+					'question': "Are you sure about that?",
+					'options': [
+						{ 'label': 'Well...', 'value': '0'},
+						{ 'label': 'Yup.', 'value': 'confirm'}
+					],
+					'checkpoint': '-2',
+				},
+				{
+					'text': "You levelled successfully!"
 				}
 			]
 
@@ -55,15 +71,21 @@ func _ready():
 	Global.dialogOpen = true
 	
 func _input(event):
+	if event.is_action_pressed("test2"): # Y
+		print(waiting_for_input)
 	if event.is_action_pressed("ui_accept"):
 		if !$TimerDelaySelect.is_stopped():
 			return
-		elif waiting_for_input && stats_remaining > 0:
+		elif waiting_for_input:
 			$AudioSelect.play()
-			if stats_remaining == 0:
+			print('waiting_for_input: stats remaining = ', stats_remaining)
+			if stats_remaining == 1:
 				waiting_for_input = false
+				waiting_for_level = false
+				print(waiting_for_input)
 			return
 		else:
+			print('input: advancing dialog')
 			get_tree().set_input_as_handled()
 			load_dialog()
 		
@@ -149,14 +171,23 @@ func event_handler(event):
 			finished = false
 			waiting_for_answer = true
 			waiting_for_level = true
+			level_flag = true
+			update_text(event['text'])
+			stats_remaining = default_stats_remaining
 			var levelUpButtons = LEVELUPCONTAINER.instance()
 			$OptionsRect.add_child(levelUpButtons)
-			$OptionsRect/LevelUp_Container/Options/ButtonVIT.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
-			$OptionsRect/LevelUp_Container/Options/ButtonEND.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
-			$OptionsRect/LevelUp_Container/Options/ButtonDEF.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
-			$OptionsRect/LevelUp_Container/Options2/ButtonSTR.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
-			$OptionsRect/LevelUp_Container/Options2/ButtonDEX.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
-			$OptionsRect/LevelUp_Container/Options2/ButtonSPD.connect("pressed", self, "_on_level_selected", [1, stats_remaining])
+# warning-ignore:return_value_discarded
+			$OptionsRect/LevelUp_Container/Options/ButtonVIT.connect("pressed", self, "_on_level_selected", ["VIT", stats_remaining])
+# warning-ignore:return_value_discarded
+			$OptionsRect/LevelUp_Container/Options/ButtonEND.connect("pressed", self, "_on_level_selected", ["END", stats_remaining])
+# warning-ignore:return_value_discarded
+			$OptionsRect/LevelUp_Container/Options/ButtonDEF.connect("pressed", self, "_on_level_selected", ["DEF", stats_remaining])
+# warning-ignore:return_value_discarded
+			$OptionsRect/LevelUp_Container/Options2/ButtonSTR.connect("pressed", self, "_on_level_selected", ["STR", stats_remaining])
+# warning-ignore:return_value_discarded
+			$OptionsRect/LevelUp_Container/Options2/ButtonDEX.connect("pressed", self, "_on_level_selected", ["DEX", stats_remaining])
+# warning-ignore:return_value_discarded
+			$OptionsRect/LevelUp_Container/Options2/ButtonSPD.connect("pressed", self, "_on_level_selected", ["SPD", stats_remaining])
 			update_text(event['text'])
 			
 		{'action', ..}:
@@ -189,14 +220,37 @@ func _on_option_selected(option, variable, value):
 	
 func _on_level_selected(value, quantity_remaining):
 	stats_remaining -= 1
+	match value:
+		"VIT":
+			VIT_to_add += 1
+		"END":
+			END_to_add += 1
+		"DEF":
+			DEF_to_add += 1
+		"STR":
+			STR_to_add += 1
+		"DEX":
+			DEX_to_add += 1
+		"SPD":
+			SPD_to_add += 1
+	
 	if stats_remaining == 0:
-		print('no stats remaining. deleting levelBox.')
+		print(value, ' incremented... no stats remaining: deleting levelBox.')
 		waiting_for_answer = false
 		waiting_for_level = false
 		$OptionsRect/LevelUp_Container.queue_free()
 		load_dialog()
 	else:
-		print('applying stat; stats remaining: ', stats_remaining)
+		print(value, ' incremented.')
+		
+func reset_to_add_stats():
+	stats_remaining = default_stats_remaining
+	VIT_to_add = 0
+	END_to_add = 0
+	DEF_to_add = 0
+	STR_to_add = 0
+	DEX_to_add = 0
+	SPD_to_add = 0
 
 func advance_dialog(skip_index):
 	dialog_index += skip_index
@@ -220,8 +274,11 @@ func _on_TimerText_timeout():
 		if waiting_for_answer:
 			$TimerDelaySelect.start()
 			yield($TimerDelaySelect, "timeout")
-			if waiting_for_level:
+			if level_flag:
+				print('waiting for level: grabbing focus')
 				get_child(1).get_child(1).get_child(0).get_child(0).grab_focus()
+				level_flag = false
 			else:
+				print('not a level box: grabbing focus')
 				get_child(1).get_child(0).get_child(0).grab_focus()
 			waiting_for_input = true
