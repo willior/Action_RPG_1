@@ -82,11 +82,11 @@ func _input(event):
 			get_tree().set_input_as_handled()
 			return
 		elif waiting_for_input:
-			$AudioSelect.play()
 			print('waiting_for_input: stats remaining = ', stats_remaining)
 			if stats_remaining == 0:
 				waiting_for_input = false
-				waiting_for_level = false
+				return
+			$AudioSelect.play()
 			return
 		else:
 			get_tree().set_input_as_handled()
@@ -248,6 +248,7 @@ func _on_level_selected(value):
 		print(value, ' incremented... 0 stats remaining. stats to add:')
 		waiting_for_answer = false
 		waiting_for_level = false
+		waiting_for_input = false
 		$OptionsRect/LevelUp_Container.queue_free()
 		print(VIT_to_add, ' VIT')
 		print(END_to_add, ' END')

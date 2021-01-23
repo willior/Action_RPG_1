@@ -92,6 +92,10 @@ onready var charge = $ChargeUI
 onready var audio = $AudioStreamPlayer
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
+#func _init():
+#	if Global.get_attribute("location") != null:
+#		position = Global.get_attribute("location")
+
 func _ready():
 	# gets the spawn location from the previous exit's attribute
 	if Global.get_attribute("location") != null:

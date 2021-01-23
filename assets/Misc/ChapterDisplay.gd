@@ -5,7 +5,6 @@ onready var rain_SFX = get_node("/root/World/SFX")
 var index = 0
 
 func _ready():
-	print(get_tree().get_root())
 	$Chapter.visible = false
 	$Chapter.text = Global.chapter_name
 	get_tree().paused = true

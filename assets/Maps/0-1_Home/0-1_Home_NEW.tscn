@@ -89,7 +89,7 @@ pause_mode = 2
 script = ExtResource( 26 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 82, 118 )
+position = Vector2( 510, 90 )
 limit_right = 600
 limit_bottom = 0
 smoothing_enabled = true
@@ -225,7 +225,7 @@ autostart = true
 pause_mode = 1
 
 [node name="Player" parent="YSort" instance=ExtResource( 15 )]
-position = Vector2( 82, 118 )
+position = Vector2( 510, 90 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")

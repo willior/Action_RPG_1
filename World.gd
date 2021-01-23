@@ -7,6 +7,7 @@ onready var sfx = $SFX
 onready var player = $YSort/Player
 
 onready var ChapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn")
+onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
 
 func _ready():
 	sfx.play()
@@ -17,6 +18,16 @@ func _ready():
 	if Global.chapter_display:
 		var chapterDisplay = ChapterDisplay.instance()
 		add_child(chapterDisplay)
+		
+	if get_tree().paused:
+		print('scene started paused. unpausing.')
+		get_tree().paused = false
+		
+func fade_out():
+	print('fade_out()')
+	get_tree().paused = true
+	var fade = FadeOut.instance()
+	add_child(fade)
 
 func _input(event):
 	if event.is_action_pressed("quit_game"):
@@ -28,13 +39,9 @@ func _input(event):
 		
 	if event.is_action_pressed("test2"): # Y
 		player.level_up()
-		
-		
+	
 	if event.is_action_pressed("test3"): # U
-		if PlayerStats.speed < 40:
-			PlayerStats.speed = 40.0
-		else:
-			PlayerStats.speed = 4.0
+		pass
 	
 	if event.is_action_pressed("pause"): # P
 		if get_tree().paused == false:

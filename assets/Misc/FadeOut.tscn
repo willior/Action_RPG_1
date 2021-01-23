@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Misc/BlackPixel.png" type="Texture" id=1]
+[ext_resource path="res://assets/Misc/FadeOut.gd" type="Script" id=2]
+
+[node name="FadeOut" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 320, 180 )
+
+[node name="Tween" type="Tween" parent="."]

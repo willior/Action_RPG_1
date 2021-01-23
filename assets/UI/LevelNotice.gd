@@ -52,4 +52,4 @@ func _ready():
 	queue_free()
 	
 func _process(_delta):
-	global_position = player.global_position
+	global_position = get_tree().get_root().get_node("World/YSort/Player").global_position
