@@ -157,15 +157,15 @@ texture = ExtResource( 12 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 496, 49 )
-frame = 4
+frame = 6
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 139, 17 )
-frame = 4
+frame = 6
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 278, 17 )
-frame = 4
+frame = 6
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
 
@@ -255,7 +255,6 @@ position = Vector2( 45, 87 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
-volume_db = -27.0
 autoplay = true
 
 [node name="GUI" parent="." instance=ExtResource( 21 )]

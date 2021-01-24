@@ -1,7 +1,7 @@
 extends Node
 export(PackedScene) var SCENE_STRING
 onready var sprite = $Sprite
-onready var rain_SFX = get_node("/root/World/SFX")
+onready var sfx = get_node("/root/World/SFX")
 var index = 0
 
 func _ready():
@@ -24,7 +24,7 @@ func _on_Timer_timeout():
 			Color(1,0,0,1), Color(1,1,0,0), 3.5,
 			Tween.TRANS_QUAD, Tween.EASE_IN
 			)
-			$Tween.interpolate_property(rain_SFX, "volume_db",
+			$Tween.interpolate_property(sfx, "volume_db",
 			-27, 0, 5.5,
 			Tween.TRANS_QUAD, Tween.EASE_IN_OUT
 			)
