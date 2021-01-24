@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/Player/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/World/Home/Kitchen_Fridge.tscn" type="PackedScene" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/Audio/Rain_Indoors.ogg" type="AudioStream" id=27]
 [ext_resource path="res://assets/Tilesets/Home/tileset_Home.tres" type="TileSet" id=28]
 [ext_resource path="res://assets/Audio/Thunder_1.wav" type="AudioStream" id=29]
+[ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=30]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8 )
@@ -88,7 +89,10 @@ tracks/1/keys = {
 pause_mode = 2
 script = ExtResource( 26 )
 
+[node name="FadeIn" parent="." instance=ExtResource( 30 )]
+
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
+pause_mode = 2
 position = Vector2( 510, 90 )
 limit_right = 600
 limit_bottom = 0
@@ -157,15 +161,12 @@ texture = ExtResource( 12 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 496, 49 )
-frame = 6
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 139, 17 )
-frame = 6
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 278, 17 )
-frame = 6
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
 
@@ -228,6 +229,7 @@ pause_mode = 1
 position = Vector2( 510, 90 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+pause_mode = 2
 remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
@@ -255,6 +257,7 @@ position = Vector2( 45, 87 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 27 )
+volume_db = -48.0
 autoplay = true
 
 [node name="GUI" parent="." instance=ExtResource( 21 )]

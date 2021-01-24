@@ -5,29 +5,22 @@ onready var dim = $GUI/Dim
 onready var music = $Music
 onready var sfx = $SFX
 onready var player = $YSort/Player
-
-onready var ChapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn")
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
+# onready var FadeIn = load("res://assets/Misc/FadeIn.tscn")
 
 func _ready():
 	sfx.play()
-	music.play()
 	if GameManager.on_title_screen:
 		GameManager.on_title_screen = false
 		
 	if Global.chapter_display:
-		var chapterDisplay = ChapterDisplay.instance()
+		$FadeIn.free()
+		var chapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn").instance()
 		add_child(chapterDisplay)
 		
-	if get_tree().paused:
-		print('scene started paused. unpausing.')
-		get_tree().paused = false
-		
 func fade_out():
-	print('fade_out()')
-	get_tree().paused = true
-	var fade = FadeOut.instance()
-	add_child(fade)
+	var fadeout = FadeOut.instance()
+	add_child(fadeout)
 
 func _input(event):
 	if event.is_action_pressed("quit_game"):

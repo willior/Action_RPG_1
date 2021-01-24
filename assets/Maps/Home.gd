@@ -9,5 +9,5 @@ func _ready():
 		Global.chapter_display = true
 		Global.chapter_name = "CHAPTER ONE"
 		PlayerLog.chapter_number = 1
-	else:
-		get_node("/root/World/SFX").volume_db = 0
+#	else:
+#		get_node("/root/World/SFX").volume_db = 0

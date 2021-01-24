@@ -13,6 +13,7 @@ var roll_speed = 200
 var shade_speed = 420
 var friction = 800
 var shade_friction = 1600
+var dir_vector = Vector2.DOWN
 
 var vitality = 4 setget set_vitality
 var max_health = vitality*15 setget set_max_health

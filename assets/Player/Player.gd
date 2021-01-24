@@ -37,7 +37,7 @@ enum {
 
 var state = MOVE
 var velocity = Vector2.ZERO
-var dir_vector = Vector2.DOWN
+var dir_vector = Vector2.ZERO
 var damageTaken = 0
 var stats = PlayerStats
 var levelStats = [0, 1, 2, 3, 4, 5]
@@ -92,16 +92,11 @@ onready var charge = $ChargeUI
 onready var audio = $AudioStreamPlayer
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
-func _init():
-	if Global.get_attribute("location") != null:
-		position = Global.get_attribute("location")
-		print('init')
-
 func _ready():
 	# gets the spawn location from the previous exit's attribute
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
-		print('ready')
+		print('player ready')
 	if Global.get_attribute("inventory") != null:
 		inventory.set_items(Global.get_attribute("inventory").get_items())
 		inventory.items_set = false

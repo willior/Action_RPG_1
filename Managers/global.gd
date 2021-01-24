@@ -22,7 +22,6 @@ func goto_scene(path, attributes=null):
 	# Deleting the current scene at this point might be
 	# a bad idea, because it may be inside of a callback or function of it.
 	# The worst case will be a crash or unexpected behavior.
-
 	# The way around this is deferring the load to a later time, when
 	# it is ensured that no code from the current scene is running:
 

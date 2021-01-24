@@ -10,6 +10,5 @@ func _on_Exit_body_entered(_body):
 	$Timer.start()
 	yield($Timer, "timeout")
 	print('changing scene')
-	
 	var new_inventory = _body.inventory
 	Global.goto_scene(map_file, {"location":selected_location, "inventory":new_inventory})
