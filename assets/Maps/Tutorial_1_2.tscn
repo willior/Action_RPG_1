@@ -383,11 +383,11 @@ position = Vector2( 558, 44 )
 
 [node name="Trees" type="YSort" parent="YSort"]
 
-[node name="Tree_1_green_alt" parent="YSort/Trees" instance=ExtResource( 20 )]
-position = Vector2( 28, 234 )
-
 [node name="Tree_1_green_alt2" parent="YSort/Trees" instance=ExtResource( 20 )]
 position = Vector2( 12, 233 )
+
+[node name="Tree_1_green_alt" parent="YSort/Trees" instance=ExtResource( 20 )]
+position = Vector2( 28, 234 )
 
 [node name="Tree_1_green_alt3" parent="YSort/Trees" instance=ExtResource( 20 )]
 position = Vector2( 9, 253 )

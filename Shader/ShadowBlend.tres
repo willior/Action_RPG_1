@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://assets/Shaders/EasyBlend/Blends/add.png" type="Texture" id=1]
+[ext_resource path="res://assets/Shaders/EasyBlend/EasyBlend.shader" type="Shader" id=2]
+
+[resource]
+shader = ExtResource( 2 )
+shader_param/enabled = true
+shader_param/Intensity = 0.75
+shader_param/Blend = ExtResource( 1 )

@@ -4,9 +4,11 @@
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Shaders/Night_CanvasModulate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Weather/LightningCanvas.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=6]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=7]
-[ext_resource path="res://assets/Weather/Rain.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/Weather/ParallaxRain.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/Audio/World/Rain_Outside.ogg" type="AudioStream" id=9]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_green_1_sheet.png" type="Texture" id=10]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=11]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=12]
@@ -16,8 +18,6 @@
 [ext_resource path="res://assets/World/Grass/Leaf_dark_red_1_sheet.png" type="Texture" id=17]
 [ext_resource path="res://World.gd" type="Script" id=18]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=19]
-[ext_resource path="res://assets/Audio/Rain_Outside_01.ogg" type="AudioStream" id=20]
-[ext_resource path="res://assets/Weather/Lightning.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/Spawners/BatSpawner.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_orange_1_sheet.png" type="Texture" id=23]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_yellow_1_sheet.png" type="Texture" id=24]
@@ -832,7 +832,7 @@ tile_data = PoolIntArray( 131107, 0, 4, 131117, 0, 0, 131119, 0, 4, 131121, 0, 1
 [node name="Exit_toHome" parent="Map" instance=ExtResource( 12 )]
 position = Vector2( 288, 0 )
 collision_layer = 2048
-map_file = "res://assets/Maps/0-1_Home/0-1_Home_NEW.tscn"
+map_file = "res://assets/Maps/0_Prologue/0-1_Home.tscn"
 selected_location = Vector2( 160, 168 )
 
 [node name="CollisionShape2D" parent="Map/Exit_toHome" index="0"]
@@ -848,21 +848,9 @@ selected_location = Vector2( 160, 168 )
 position = Vector2( 0, 224 )
 shape = SubResource( 52 )
 
-[node name="ParallaxOverlay" type="ParallaxBackground" parent="Map"]
-layer = 0
+[node name="ParallaxOverlay" parent="Map" instance=ExtResource( 8 )]
 
-[node name="ParallaxLayerBackground" type="ParallaxLayer" parent="Map/ParallaxOverlay"]
-motion_scale = Vector2( 0.7, 0.7 )
-motion_mirroring = Vector2( 320, 180 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Rain" parent="Map/ParallaxOverlay/ParallaxLayerBackground" instance=ExtResource( 9 )]
-
-[node name="WeatherCanvas" type="CanvasLayer" parent="Map"]
-
-[node name="Lightning" parent="Map/WeatherCanvas" instance=ExtResource( 21 )]
+[node name="WeatherCanvas" parent="Map" instance=ExtResource( 5 )]
 
 [node name="Timer" type="Timer" parent="Map"]
 wait_time = 60.0
@@ -2002,7 +1990,7 @@ stream = ExtResource( 14 )
 bus = "Reverb"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 20 )
+stream = ExtResource( 9 )
 volume_db = -48.0
 [connection signal="timeout" from="Map/Timer" to="Map" method="_on_Timer_timeout"]
 [connection signal="tween_all_completed" from="Map/Tween" to="Map" method="_on_Tween_tween_all_completed"]
@@ -2010,7 +1998,3 @@ volume_db = -48.0
 [editable path="Map/Exit_toHome"]
 
 [editable path="Map/Exit_toDesert"]
-
-[editable path="Map/ParallaxOverlay/ParallaxLayerBackground/Rain"]
-
-[editable path="Map/WeatherCanvas/Lightning"]

@@ -53,9 +53,9 @@ func flash_whoosh_audio():
 func flash_begin():
 	audio.stream = flash_swing
 	audio.play()
-	$CollisionShape2D.scale.x = 3
+	$CollisionShape2D.scale.x = 2
 	set_deferred("monitorable", true)
-	knockback_vector *= 1.4
+	knockback_vector *= 1.33
 	orig_damage = damage
 	damage = modify_damage(damage, 2)
 	

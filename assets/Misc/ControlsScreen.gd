@@ -14,7 +14,7 @@ func _input(event):
 #		chapterScreen.SCENE_STRING = "res://assets/Maps/0-1_Home.tscn"
 #		add_child(chapterScreen)
 		ok_to_start = false
-		Global.goto_scene("res://assets/Maps/0-1_Home/0-1_Home_NEW.tscn")
+		Global.goto_scene("res://assets/Maps/0_Prologue/0-1_Home.tscn")
 		
 	if event.is_action_pressed("quit_game"):
 		get_tree().quit()
