@@ -6,5 +6,5 @@
 [resource]
 shader = ExtResource( 2 )
 shader_param/enabled = true
-shader_param/Intensity = 0.75
+shader_param/Intensity = 0.5
 shader_param/Blend = ExtResource( 1 )

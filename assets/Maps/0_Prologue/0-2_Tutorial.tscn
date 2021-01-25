@@ -18,11 +18,11 @@
 [ext_resource path="res://assets/World/Doodads/Rock_Group_4.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/World/Doodads/Rock_Medium_7.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/World/Plants/Plant_16_green_alt.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/Weather/RainParallax.tscn" type="PackedScene" id=19]
 [ext_resource path="res://World.gd" type="Script" id=20]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=21]
 [ext_resource path="res://assets/Andrew/Walkways/Walkway_1_1.png" type="Texture" id=22]
 [ext_resource path="res://assets/Weather/LightningCanvas.tscn" type="PackedScene" id=23]
-[ext_resource path="res://assets/Weather/ParallaxRain.tscn" type="PackedScene" id=24]
 [ext_resource path="res://assets/Shaders/Night_CanvasModulate.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/Audio/World/Rain_Outside.ogg" type="AudioStream" id=26]
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=27]
@@ -122,6 +122,8 @@ __meta__ = {
 
 [node name="FadeIn" parent="." instance=ExtResource( 27 )]
 
+[node name="CanvasModulate" parent="." instance=ExtResource( 25 )]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 352, 16 )
 current = true
@@ -164,16 +166,15 @@ selected_location = Vector2( 160, 168 )
 shape = SubResource( 3 )
 
 [node name="River_1" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 40, 828 )
+position = Vector2( 256, 872 )
 
 [node name="River_2" parent="Map" instance=ExtResource( 8 )]
-position = Vector2( 640, 688 )
-
-[node name="ParallaxOverlay" parent="Map" instance=ExtResource( 24 )]
+position = Vector2( 1064, 806 )
 
 [node name="WeatherCanvas" parent="Map" instance=ExtResource( 23 )]
 
-[node name="CanvasModulate" parent="Map" instance=ExtResource( 25 )]
+[node name="ParallaxOverlay" parent="Map" instance=ExtResource( 19 )]
+scroll_base_scale = Vector2( 2, 2 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
@@ -798,10 +799,10 @@ position = Vector2( 472, 580 )
 position = Vector2( 456, 596 )
 
 [node name="Tree_1_green_alt187" parent="YSort/Trees" instance=ExtResource( 6 )]
-position = Vector2( 537, 725 )
+position = Vector2( 533, 743 )
 
 [node name="Tree_1_green_alt188" parent="YSort/Trees" instance=ExtResource( 6 )]
-position = Vector2( 560, 708 )
+position = Vector2( 559, 735 )
 
 [node name="Tree_1_green_alt189" parent="YSort/Trees" instance=ExtResource( 6 )]
 position = Vector2( 576, 692 )
@@ -810,7 +811,7 @@ position = Vector2( 576, 692 )
 position = Vector2( 640, 840 )
 
 [node name="Tree_1_green_alt191" parent="YSort/Trees" instance=ExtResource( 6 )]
-position = Vector2( 656, 848 )
+position = Vector2( 720, 880 )
 
 [node name="Tree_1_green_alt192" parent="YSort/Trees" instance=ExtResource( 6 )]
 position = Vector2( 632, 880 )

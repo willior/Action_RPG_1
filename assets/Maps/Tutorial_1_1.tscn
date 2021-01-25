@@ -132,6 +132,9 @@ shape = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map"]
 shape = SubResource( 4 )
 
+[node name="River_1" parent="Map" instance=ExtResource( 12 )]
+position = Vector2( 256, 848 )
+
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
@@ -1160,9 +1163,6 @@ position = Vector2( 128, 120 )
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="Rivers" type="YSort" parent="YSort"]
-
-[node name="River_1" parent="YSort/Rivers" instance=ExtResource( 12 )]
-position = Vector2( 0, 805 )
 
 [node name="GUI" parent="." instance=ExtResource( 4 )]
 

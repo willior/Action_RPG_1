@@ -1,5 +1,7 @@
 [gd_scene format=2]
 
 [node name="CanvasModulate" type="CanvasModulate"]
-z_index = 2
-color = Color( 0.333333, 0.34902, 0.639216, 1 )
+z_index = 8
+color = Color( 0.25098, 0.262745, 0.501961, 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

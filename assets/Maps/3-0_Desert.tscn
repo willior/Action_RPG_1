@@ -388,6 +388,7 @@ position = Vector2( 104, 96 )
 motion_mirroring = Vector2( 320, 180 )
 
 [node name="Particles2D" type="Particles2D" parent="Map/ParallaxOverlay/ParallaxLayer2"]
+modulate = Color( 0.615686, 0.54902, 0.368627, 1 )
 position = Vector2( 160, 90 )
 amount = 6000
 visibility_rect = Rect2( -100, -100, 320, 180 )

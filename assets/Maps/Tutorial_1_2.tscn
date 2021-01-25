@@ -139,6 +139,9 @@ selected_location = Vector2( 338, 941 )
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Exit_ToTutorial_1_6"]
 shape = SubResource( 4 )
 
+[node name="River_2" parent="Map" instance=ExtResource( 9 )]
+position = Vector2( 408, 584 )
+
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
@@ -1142,11 +1145,6 @@ position = Vector2( 715, 108 )
 
 [node name="Healing_Potion" parent="YSort/Items" instance=ExtResource( 21 )]
 position = Vector2( 356.986, 529.247 )
-
-[node name="Rivers" type="YSort" parent="YSort"]
-
-[node name="River_2" parent="YSort/Rivers" instance=ExtResource( 9 )]
-position = Vector2( -2, 503 )
 
 [node name="GUI" parent="." instance=ExtResource( 5 )]
 

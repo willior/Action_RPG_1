@@ -298,7 +298,7 @@ position = Vector2( 160, 0 )
 [node name="Particle2D" type="Particles2D" parent="Map/ParallaxBackground/ParallaxLayer/Snow"]
 amount = 2000
 lifetime = 8.0
-preprocess = 5.0
+preprocess = 16.0
 randomness = 1.0
 visibility_rect = Rect2( -160, -90, 320, 180 )
 process_material = SubResource( 4 )
