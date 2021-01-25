@@ -10,6 +10,10 @@ func _ready():
 			0, -48, 2,
 			Tween.TRANS_QUAD, Tween.EASE_IN_OUT
 			)
+	$Tween.interpolate_property(get_node("/root/World/SFX2"), "volume_db",
+			0, -48, 2,
+			Tween.TRANS_QUAD, Tween.EASE_IN_OUT
+			)
 	$Tween.interpolate_property(get_node("/root/World/Music"), "volume_db",
 			0, -48, 2,
 			Tween.TRANS_QUAD, Tween.EASE_IN_OUT

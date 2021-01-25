@@ -1992,6 +1992,9 @@ bus = "Reverb"
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -48.0
+
+[node name="SFX2" type="AudioStreamPlayer" parent="."]
+volume_db = -48.0
 [connection signal="timeout" from="Map/Timer" to="Map" method="_on_Timer_timeout"]
 [connection signal="tween_all_completed" from="Map/Tween" to="Map" method="_on_Tween_tween_all_completed"]
 

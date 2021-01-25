@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
+[ext_resource path="res://assets/Audio/Music/LowContrabassAmbience.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=6]
@@ -1149,6 +1150,7 @@ position = Vector2( 356.986, 529.247 )
 [node name="GUI" parent="." instance=ExtResource( 5 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
 pitch_scale = 0.8
 bus = "Reverb"
 

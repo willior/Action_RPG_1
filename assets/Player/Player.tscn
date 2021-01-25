@@ -2059,7 +2059,7 @@ margin_bottom = -7.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = -1.5708
+rotation = 1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 11, 0 )
@@ -2116,7 +2116,6 @@ rotation = 1.5708
 shape = SubResource( 158 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
 
 [node name="HurtAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )

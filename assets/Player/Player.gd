@@ -286,20 +286,20 @@ func apply_status(status):
 			$FrenzyAnimationPlayer.play("Stop")
 			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
 			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
-	
+
 func move():
 	velocity = move_and_slide(velocity)
-	
+
 func noStamina():
 	audio.stream = load("res://assets/Audio/Bamboo.wav")
 	audio.play()
-	
+
 func set_sweating():
 	$Sweat.visible = true
 	sweating = true
 	# stats.status = "sweating"
 	$ChargeUI/StaminaProgress.visible = false
-	
+
 func set_attack_timescale(value):
 	animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
 	animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
@@ -321,17 +321,15 @@ func attack1_state(delta):
 # warning-ignore:unused_argument
 func attack2_state(delta):
 	animationState.travel("Attack2")
-		
+
 func attack1_stamina_drain():
 	stats.stamina -= 10
-	audio.stream = sword_swipe
-	audio.play()
+	swordHitbox.sword_attack_audio()
 	swordHitbox.set_deferred("monitorable", true)
-	
+
 func attack2_stamina_drain():
 	stats.stamina -= 5
-	audio.stream = sword_swipe
-	audio.play()
+	swordHitbox.sword_attack_audio()
 	swordHitbox.set_deferred("monitorable", true)
 
 func attack_animation_finished():
@@ -355,17 +353,14 @@ func attack_animation_finished():
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		# charge_reset()
-	
+
 # when an attack animation finishes, checks to see if the button is still held
 # if it is, changes the player state to "charging"
 # if the player releases the attack button, charging state ends
 # if the player holds the button for enough time, charge_level_1 is achieved
 # if the player continues to hold the button, charge_level_2 is achieved
 # releasing the attack button after achieving a charge level unleashes a special attack
-
-# warning-ignore:unused_argument
-# warning-ignore:unused_argument
-func charge_state(delta):
+func charge_state(_delta):
 	# stamina drain
 	stats.stamina -= 0.5
 	# if either attack is charged and the player runs out of stamina

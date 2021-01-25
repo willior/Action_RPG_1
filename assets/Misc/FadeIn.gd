@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-onready var sfx = get_node("/root/World/SFX")
-
 func _ready():
 	get_tree().paused = true
 	if Global.get_attribute("location") != null:
@@ -12,6 +10,10 @@ func _ready():
 			Tween.TRANS_QUAD, Tween.EASE_IN
 			)
 	$Tween.interpolate_property(get_node("/root/World/SFX"), "volume_db",
+			-48, 0, 1,
+			Tween.TRANS_QUAD, Tween.EASE_IN_OUT
+			)
+	$Tween.interpolate_property(get_node("/root/World/SFX2"), "volume_db",
 			-48, 0, 1,
 			Tween.TRANS_QUAD, Tween.EASE_IN_OUT
 			)

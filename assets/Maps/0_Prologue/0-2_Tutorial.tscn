@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=1]
 [ext_resource path="res://assets/World/Rivers/River_1.tscn" type="PackedScene" id=2]
@@ -23,9 +23,11 @@
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=21]
 [ext_resource path="res://assets/Andrew/Walkways/Walkway_1_1.png" type="Texture" id=22]
 [ext_resource path="res://assets/Weather/LightningCanvas.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/Audio/World/Rain_Outside_Night.wav" type="AudioStream" id=24]
 [ext_resource path="res://assets/Shaders/Night_CanvasModulate.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/Audio/World/Rain_Outside.ogg" type="AudioStream" id=26]
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=27]
+[ext_resource path="res://assets/Audio/Music/LowContrabassAmbience.wav" type="AudioStream" id=28]
 
 [sub_resource type="TileSet" id=1]
 0/name = "GrassBasicDark.png 0"
@@ -213,7 +215,7 @@ position = Vector2( 371, 391 )
 position = Vector2( 487, 419 )
 
 [node name="Rock_Group_18" parent="YSort/Doodads" instance=ExtResource( 13 )]
-position = Vector2( 466, 786 )
+position = Vector2( 560, 750 )
 
 [node name="Plants" type="YSort" parent="YSort"]
 
@@ -724,7 +726,7 @@ position = Vector2( 496, 572 )
 position = Vector2( 608, 580 )
 
 [node name="Tree_1_green_alt151" parent="YSort/Trees" instance=ExtResource( 6 )]
-position = Vector2( 530, 670 )
+position = Vector2( 538, 679 )
 
 [node name="Tree_1_green_alt152" parent="YSort/Trees" instance=ExtResource( 6 )]
 position = Vector2( 536, 580 )
@@ -786,9 +788,6 @@ position = Vector2( 432, 644 )
 [node name="Tree_1_green_alt181" parent="YSort/Trees" instance=ExtResource( 6 )]
 position = Vector2( 472, 660 )
 
-[node name="Tree_1_green_alt182" parent="YSort/Trees" instance=ExtResource( 6 )]
-position = Vector2( 507, 654 )
-
 [node name="Tree_1_green_alt183" parent="YSort/Trees" instance=ExtResource( 6 )]
 position = Vector2( 472, 548 )
 
@@ -802,10 +801,10 @@ position = Vector2( 456, 596 )
 position = Vector2( 533, 743 )
 
 [node name="Tree_1_green_alt188" parent="YSort/Trees" instance=ExtResource( 6 )]
-position = Vector2( 559, 735 )
+position = Vector2( 576, 734 )
 
 [node name="Tree_1_green_alt189" parent="YSort/Trees" instance=ExtResource( 6 )]
-position = Vector2( 576, 692 )
+position = Vector2( 576, 706 )
 
 [node name="Tree_1_green_alt190" parent="YSort/Trees" instance=ExtResource( 6 )]
 position = Vector2( 640, 840 )
@@ -1206,8 +1205,13 @@ position = Vector2( 168, 143 )
 [node name="GUI" parent="." instance=ExtResource( 3 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 28 )
 bus = "Reverb"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 26 )
-volume_db = -27.0
+volume_db = -48.0
+
+[node name="SFX2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 24 )
+volume_db = -48.0

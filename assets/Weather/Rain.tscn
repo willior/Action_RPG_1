@@ -16,7 +16,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 1.0
 linear_accel_random = 0.5
-color = Color( 0.239216, 0.301961, 0.47451, 0.705882 )
+color = Color( 0.239216, 0.301961, 0.47451, 0.611765 )
 
 [node name="Rain" type="Node2D"]
 

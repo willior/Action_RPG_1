@@ -402,3 +402,6 @@ bus = "Reverb"
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 volume_db = -48.0
+
+[node name="SFX2" type="AudioStreamPlayer" parent="."]
+volume_db = -48.0

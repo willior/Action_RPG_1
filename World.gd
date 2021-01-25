@@ -3,13 +3,13 @@ extends Node2D
 onready var stats = $GUI/StatsDisplay
 onready var dim = $GUI/Dim
 onready var music = $Music
-onready var sfx = $SFX
 onready var player = $YSort/Player
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
 # onready var FadeIn = load("res://assets/Misc/FadeIn.tscn")
 
 func _ready():
-	sfx.play()
+	$SFX.play()
+	$SFX2.play()
 	if GameManager.on_title_screen:
 		GameManager.on_title_screen = false
 		
@@ -67,13 +67,15 @@ func _input(event):
 			
 		elif get_tree().paused == false:
 			music.stream_paused = true
-			sfx.stream_paused = true
+			$SFX.stream_paused = true
+			$SFX2.stream_paused = true
 			get_tree().paused = true
 			dim.visible = true
 			stats.visible = true
 		else:
 			music.stream_paused = false
-			sfx.stream_paused = false
+			$SFX.stream_paused = false
+			$SFX2.stream_paused = false
 			get_tree().paused = false
 			dim.visible = false
 			stats.visible = false

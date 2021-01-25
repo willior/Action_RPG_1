@@ -1,7 +1,8 @@
 extends Area2D
 
-onready var flash_whoosh = preload("res://assets/Audio/Sword_Flash_Whoosh.wav")
-onready var flash_swing = preload("res://assets/Audio/Sword_Flash_Swing.wav")
+onready var sword_attack = preload("res://assets/Audio/Player/Sword_Attack_1.wav")
+onready var flash_whoosh = preload("res://assets/Audio/Player/Sword_Flash_Whoosh.wav")
+onready var flash_swing = preload("res://assets/Audio/Player/Sword_Flash_Swing.wav")
 onready var audio = $AudioStreamPlayer
 
 onready var damage = PlayerStats.strength*2 setget set_damage
@@ -36,6 +37,12 @@ func reset_damage():
 	damage = orig_damage
 	$CollisionShape2D.scale.x = 1
 	set_deferred("monitorable", false)
+	
+func sword_attack_audio():
+	if audio.stream != sword_attack:
+		audio.stream = sword_attack
+		print('sword')
+	audio.play()
 	
 func shade_begin():
 	set_deferred("monitorable", true)
