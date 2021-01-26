@@ -37,7 +37,7 @@ enum {
 
 var state = MOVE
 var velocity = Vector2.ZERO
-var dir_vector = Vector2.ZERO
+var dir_vector = PlayerStats.dir_vector
 var damageTaken = 0
 var stats = PlayerStats
 var levelStats = [0, 1, 2, 3, 4, 5]
@@ -93,10 +93,8 @@ onready var audio = $AudioStreamPlayer
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
 func _ready():
-	# gets the spawn location from the previous exit's attribute
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
-		print('player ready')
 	if Global.get_attribute("inventory") != null:
 		inventory.set_items(Global.get_attribute("inventory").get_items())
 		inventory.items_set = false
@@ -124,7 +122,7 @@ func _process(delta):
 		SHADE: shade_state(delta)
 		FLASH: flash_state(delta)
 		HIT: hit_state(delta)
-		
+
 func _input(event):
 	match state:
 		MOVE:
@@ -791,3 +789,10 @@ func _on_InteractHitbox_area_exited(_area):
 	interacting = false
 	using_item = false
 	interactObject = null
+
+func reset_animation():
+	get_tree().paused = false
+	print('reset_animation()')
+	animationTree.set("parameters/Idle/blend_position", dir_vector)
+	animationState.travel("Idle")
+	# get_tree().paused = true

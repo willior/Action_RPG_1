@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=1]
 [ext_resource path="res://assets/World/Rivers/River_1.tscn" type="PackedScene" id=2]
@@ -23,11 +23,12 @@
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=21]
 [ext_resource path="res://assets/Andrew/Walkways/Walkway_1_1.png" type="Texture" id=22]
 [ext_resource path="res://assets/Weather/LightningCanvas.tscn" type="PackedScene" id=23]
-[ext_resource path="res://assets/Audio/World/Rain_Outside_Night.wav" type="AudioStream" id=24]
+[ext_resource path="res://assets/Audio/Music/LowContrabassAmbience.ogg" type="AudioStream" id=24]
 [ext_resource path="res://assets/Shaders/Night_CanvasModulate.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/Audio/World/Rain_Outside.ogg" type="AudioStream" id=26]
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=27]
-[ext_resource path="res://assets/Audio/Music/LowContrabassAmbience.wav" type="AudioStream" id=28]
+[ext_resource path="res://assets/Audio/World/Rain_Outside_Night.ogg" type="AudioStream" id=28]
+[ext_resource path="res://assets/World/Doodads/Rock_Medium_1.tscn" type="PackedScene" id=29]
 
 [sub_resource type="TileSet" id=1]
 0/name = "GrassBasicDark.png 0"
@@ -122,8 +123,6 @@ __meta__ = {
 "_edit_vertical_guides_": [ 128.0 ]
 }
 
-[node name="FadeIn" parent="." instance=ExtResource( 27 )]
-
 [node name="CanvasModulate" parent="." instance=ExtResource( 25 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -212,10 +211,13 @@ position = Vector2( 254, 917 )
 position = Vector2( 371, 391 )
 
 [node name="Rock_Group_13" parent="YSort/Doodads" instance=ExtResource( 12 )]
-position = Vector2( 487, 419 )
+position = Vector2( 486, 421 )
 
 [node name="Rock_Group_18" parent="YSort/Doodads" instance=ExtResource( 13 )]
-position = Vector2( 560, 750 )
+position = Vector2( 538, 752 )
+
+[node name="Rock_Medium_1" parent="YSort/Doodads" instance=ExtResource( 29 )]
+position = Vector2( 573, 768 )
 
 [node name="Plants" type="YSort" parent="YSort"]
 
@@ -1205,7 +1207,7 @@ position = Vector2( 168, 143 )
 [node name="GUI" parent="." instance=ExtResource( 3 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 28 )
+stream = ExtResource( 24 )
 bus = "Reverb"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
@@ -1213,5 +1215,7 @@ stream = ExtResource( 26 )
 volume_db = -48.0
 
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 24 )
+stream = ExtResource( 28 )
 volume_db = -48.0
+
+[node name="FadeIn" parent="." instance=ExtResource( 27 )]

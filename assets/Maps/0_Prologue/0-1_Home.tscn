@@ -89,8 +89,6 @@ tracks/1/keys = {
 pause_mode = 2
 script = ExtResource( 26 )
 
-[node name="FadeIn" parent="." instance=ExtResource( 30 )]
-
 [node name="Camera2D" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
 position = Vector2( 510, 90 )
@@ -161,15 +159,15 @@ texture = ExtResource( 12 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 496, 49 )
-frame = 5
+frame = 4
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 139, 17 )
-frame = 5
+frame = 4
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 278, 17 )
-frame = 5
+frame = 4
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
 
@@ -268,6 +266,8 @@ volume_db = -48.0
 autoplay = true
 
 [node name="GUI" parent="." instance=ExtResource( 21 )]
+
+[node name="FadeIn" parent="." instance=ExtResource( 30 )]
 [connection signal="timeout" from="Map/Lightning/Timer" to="Map/Lightning" method="_on_Timer_timeout"]
 
 [editable path="Map/Exit_toForest"]

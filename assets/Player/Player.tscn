@@ -1036,7 +1036,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=137]
-length = 0.25
+length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -1974,7 +1974,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 18
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -1982,6 +1982,7 @@ shape = SubResource( 164 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.5
+method_call_mode = 1
 anims/Attack1Down = SubResource( 165 )
 anims/Attack1Left = SubResource( 166 )
 anims/Attack1Right = SubResource( 167 )

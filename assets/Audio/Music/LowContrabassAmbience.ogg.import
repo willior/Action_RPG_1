@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/LowContrabassAmbience.ogg-4aff3f8d4db20f1e8fa7c933eb55d7fc.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/Music/LowContrabassAmbience.ogg"
+dest_files=[ "res://.import/LowContrabassAmbience.ogg-4aff3f8d4db20f1e8fa7c933eb55d7fc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

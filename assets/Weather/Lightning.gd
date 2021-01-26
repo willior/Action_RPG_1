@@ -1,7 +1,7 @@
 extends Node2D
 
-export(int) var minTimeBetweenLightning = 12
-export(int) var maxTimeBetweenLightning = 24
+export(int) var minTimeBetweenLightning = 16
+export(int) var maxTimeBetweenLightning = 32
 var lightningTimer = 0
 var lightningPause = false
 var lightningEnergy = 0

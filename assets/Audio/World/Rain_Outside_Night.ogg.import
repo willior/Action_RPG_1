@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Rain_Outside_Night.ogg-95ee4ce88ed17bf5cf6b0c137667f5c2.oggstr"
+
+[deps]
+
+source_file="res://assets/Audio/World/Rain_Outside_Night.ogg"
+dest_files=[ "res://.import/Rain_Outside_Night.ogg-95ee4ce88ed17bf5cf6b0c137667f5c2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
