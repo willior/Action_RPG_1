@@ -4,6 +4,7 @@ var chapter_display = null
 var chapter_name
 var custom_variables = {}
 var dialogOpen = false
+var changingScene = true
 var _attributes = null
 var current_scene = null
 var rng = RandomNumberGenerator.new()

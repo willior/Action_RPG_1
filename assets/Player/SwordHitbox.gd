@@ -41,7 +41,6 @@ func reset_damage():
 func sword_attack_audio():
 	if audio.stream != sword_attack:
 		audio.stream = sword_attack
-		print('sword')
 	audio.play()
 	
 func shade_begin():

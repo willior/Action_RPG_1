@@ -3,7 +3,7 @@ extends CanvasLayer
 #onready var player = get_node("root/World/YSort/Player")
 
 func _ready():
-	get_tree().paused = true
+	Global.changingScene = false
 	if Global.get_attribute("location") != null:
 		get_node("/root/World/YSort/Player").position = Global.get_attribute("location")
 	if Global.get_attribute("direction") != null:
@@ -23,6 +23,5 @@ func _ready():
 			)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
-	get_tree().paused = false
 	get_parent().get_node("Music").play()
 	queue_free()

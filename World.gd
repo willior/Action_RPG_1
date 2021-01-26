@@ -5,7 +5,6 @@ onready var dim = $GUI/Dim
 onready var music = $Music
 onready var player = $YSort/Player
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
-# onready var FadeIn = load("res://assets/Misc/FadeIn.tscn")
 
 func _ready():
 	$SFX.play()
@@ -47,7 +46,7 @@ func _input(event):
 			stats.visible = false
 			
 	if event.is_action_pressed("start"): # SPACEBAR
-		if Global.dialogOpen or Global.chapter_display or PlayerStats.dying and !PlayerStats.dead:
+		if Global.dialogOpen or Global.chapter_display or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
 			return
 		if PlayerStats.dead:
 			print('resuming')

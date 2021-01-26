@@ -792,7 +792,5 @@ func _on_InteractHitbox_area_exited(_area):
 
 func reset_animation():
 	get_tree().paused = false
-	print('reset_animation()')
 	animationTree.set("parameters/Idle/blend_position", dir_vector)
 	animationState.travel("Idle")
-	# get_tree().paused = true
