@@ -2,13 +2,10 @@ extends Area2D
 
 const HitEffect = preload("res://assets/Effects/HitEffect.tscn")
 const DamagePopup = preload("res://assets/UI/Popups/DamagePopup.tscn")
-
-onready var main = get_tree().get_root().get_node("World")
-
-var invincible = false setget set_invincible
-
 onready var timer = $Timer
 onready var collision = $CollisionShape2D
+onready var main = get_tree().get_root().get_node("World")
+var invincible = false setget set_invincible
 
 signal invincibility_started
 signal invincibility_ended
@@ -19,7 +16,7 @@ func set_invincible(value):
 		emit_signal("invincibility_started")
 	else:
 		emit_signal("invincibility_ended")
-		
+
 func start_invincibility(duration):
 	self.invincible = true
 	timer.start(duration)
@@ -28,7 +25,7 @@ func create_hit_effect():
 	var effect = HitEffect.instance()
 	main.add_child(effect)
 	effect.global_position = global_position
-	
+
 func display_damage_popup(value, crit):
 	var damagePopup = DamagePopup.instance()
 	damagePopup.global_position = global_position

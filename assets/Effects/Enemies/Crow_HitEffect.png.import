@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Crow_DeathEffect_10frames.png-7a0579da7b4461538a7986a57d238938.stex"
+path="res://.import/Crow_HitEffect.png-7d14b4ed37ae1f38f7c8924d1237d089.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Effects/Crow_DeathEffect_10frames.png"
-dest_files=[ "res://.import/Crow_DeathEffect_10frames.png-7a0579da7b4461538a7986a57d238938.stex" ]
+source_file="res://assets/Effects/Enemies/Crow_HitEffect.png"
+dest_files=[ "res://.import/Crow_HitEffect.png-7d14b4ed37ae1f38f7c8924d1237d089.stex" ]
 
 [params]
 

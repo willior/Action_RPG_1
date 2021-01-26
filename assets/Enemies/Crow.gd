@@ -1,6 +1,7 @@
 extends KinematicBody2D
-
-const EnemyDeathEffect = preload("res://assets/Effects/Crow_DeathEffect.tscn")
+const ENEMY_NAME = "Crow"
+const EnemyDeathEffect = preload("res://assets/Effects/Enemies/Crow_DeathEffect.tscn")
+const EnemyHitEffect = preload("res://assets/Effects/Enemies/Crow_HitEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
@@ -8,7 +9,6 @@ const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
 var EnemySpawner = load("res://assets/Spawners/EnemySpawner.tscn")
 
-const ENEMY_NAME = "Crow"
 export var ACCELERATION = 200
 export var MAX_SPEED = 400
 export var WANDER_SPEED = 80
@@ -214,6 +214,14 @@ func update_wander_state():
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
+	
+func create_hit_effect():
+	var hit_effect = EnemyHitEffect.instance()
+	get_parent().add_child(hit_effect)
+	hit_effect.global_position = global_position
+	var randX = int(rand_range(-12, 12))
+	var randY = int(rand_range(-12, 12))
+	hit_effect.global_position += Vector2(randX, randY)
 
 func _on_Hurtbox_area_entered(area):
 	var evasion_mod = 0
@@ -229,6 +237,12 @@ func _on_Hurtbox_area_entered(area):
 		if is_crit:
 			damage *= 2
 		stats.health -= damage
+		
+		var damage_count = damage
+		while damage_count > 0:
+			create_hit_effect()
+			damage_count -= 10
+			
 		hurtbox.display_damage_popup(str(damage), is_crit)
 		hurtbox.create_hit_effect()
 		hurtbox.start_invincibility(0.3)
