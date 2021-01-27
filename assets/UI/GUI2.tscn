@@ -1,0 +1,415 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/ItemsInventory/Healing_Potion.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/ExpBar1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/UI/18x18_Container.png" type="Texture" id=5]
+[ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/UI/InventoryUI.gd" type="Script" id=7]
+[ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/UI/StatsDisplay.gd" type="Script" id=9]
+[ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/UI/HealthUI.gd" type="Script" id=11]
+[ext_resource path="res://assets/UI/ExpBar2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/UI/StaminaBar2.gd" type="Script" id=13]
+[ext_resource path="res://assets/UI/HealthUI2.gd" type="Script" id=14]
+[ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=15]
+[ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=16]
+[ext_resource path="res://assets/UI/8x6_Progress.png" type="Texture" id=17]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Stop"
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaminaBarTexture:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaminaBarTexture:tint_over")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Sweating"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("StaminaBarTexture:tint_progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.231373, 0.737255, 0.211765, 0.784314 ), Color( 1, 0.737255, 0.211765, 0.784314 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaminaBarTexture:tint_over")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.67451, 0.282353, 0.282353, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 2 )
+
+[node name="GUI" type="CanvasLayer"]
+pause_mode = 2
+layer = 3
+
+[node name="HealthUI1" type="Control" parent="."]
+pause_mode = 2
+show_behind_parent = true
+margin_left = 27.0
+margin_top = 167.0
+margin_right = 147.0
+margin_bottom = 171.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBack" type="TextureProgress" parent="HealthUI1"]
+pause_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 60.0
+value = 60.0
+texture_under = ExtResource( 15 )
+texture_progress = ExtResource( 17 )
+tint_progress = Color( 1, 0.833333, 0, 0.784314 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 1
+stretch_margin_right = 3
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthTexture" type="TextureProgress" parent="HealthUI1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+max_value = 15.0
+value = 8.0
+texture_over = ExtResource( 16 )
+texture_progress = ExtResource( 17 )
+tint_progress = Color( 0.74902, 0, 0, 0.784314 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 1
+stretch_margin_right = 3
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="HealthUI1"]
+pause_mode = 1
+wait_time = 0.1
+one_shot = true
+
+[node name="StaminaBar1" parent="." instance=ExtResource( 6 )]
+margin_left = 27.0
+margin_top = 172.0
+margin_right = 87.0
+margin_bottom = 176.0
+
+[node name="ExpBar1" parent="." instance=ExtResource( 4 )]
+
+[node name="HealthUI2" type="Control" parent="."]
+pause_mode = 2
+show_behind_parent = true
+margin_left = 246.0
+margin_top = 167.0
+margin_right = 292.818
+margin_bottom = 171.0
+grow_horizontal = 0
+rect_min_size = Vector2( 46.818, 0 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBack" type="TextureProgress" parent="HealthUI2"]
+pause_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+max_value = 60.0
+value = 60.0
+texture_under = ExtResource( 15 )
+texture_progress = ExtResource( 17 )
+fill_mode = 1
+tint_progress = Color( 1, 0.833333, 0, 0.784314 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 1
+stretch_margin_right = 3
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthTexture" type="TextureProgress" parent="HealthUI2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+max_value = 15.0
+value = 8.0
+texture_over = ExtResource( 16 )
+texture_progress = ExtResource( 17 )
+fill_mode = 1
+tint_progress = Color( 0.74902, 0, 0, 0.784314 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 1
+stretch_margin_right = 3
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="HealthUI2"]
+pause_mode = 1
+wait_time = 0.1
+one_shot = true
+
+[node name="StaminaBar2" type="Control" parent="."]
+margin_left = 233.0
+margin_top = 172.0
+margin_right = 293.0
+margin_bottom = 176.0
+grow_horizontal = 0
+rect_min_size = Vector2( 60, 0 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaminaBarTexture" type="TextureProgress" parent="StaminaBar2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+value = 100.0
+allow_lesser = true
+texture_under = ExtResource( 15 )
+texture_over = ExtResource( 16 )
+texture_progress = ExtResource( 17 )
+fill_mode = 1
+tint_progress = Color( 0.231373, 0.737255, 0.211765, 0.784314 )
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 1
+stretch_margin_right = 3
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StaminaBar2"]
+anims/Stop = SubResource( 1 )
+anims/Sweating = SubResource( 2 )
+
+[node name="ExpBar2" parent="." instance=ExtResource( 12 )]
+
+[node name="CashUI" parent="." instance=ExtResource( 10 )]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -36.0
+margin_top = -18.0
+margin_right = -36.0
+margin_bottom = -18.0
+
+[node name="Dim" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 0.505882 )
+margin_right = 320.0
+margin_bottom = 180.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="StatsDisplay" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vbox" type="VBoxContainer" parent="StatsDisplay"]
+margin_left = 218.0
+margin_top = 38.0
+margin_right = 258.0
+margin_bottom = 142.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="Label" parent="StatsDisplay/Vbox"]
+margin_right = 40.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = 0
+text = "STATS:
+"
+
+[node name="vit" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 26.0
+margin_right = 40.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="end" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 39.0
+margin_right = 40.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="def" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 52.0
+margin_right = 40.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="str" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 65.0
+margin_right = 40.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="dex" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 78.0
+margin_right = 40.0
+margin_bottom = 91.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="spd" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 91.0
+margin_right = 40.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="Controls" parent="StatsDisplay" instance=ExtResource( 8 )]
+margin_left = 64.0
+margin_top = 38.0
+margin_right = 169.0
+margin_bottom = 163.0
+
+[node name="InventoryUI" type="Control" parent="."]
+anchor_right = 1.0
+margin_left = 148.0
+margin_top = 158.0
+margin_right = -154.0
+margin_bottom = 176.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="TextureRect" parent="InventoryUI"]
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 1
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="VBoxContainer" parent="InventoryUI/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="TextureRect" parent="InventoryUI/Panel"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 17.0
+margin_bottom = 17.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="InventoryUI/Panel"]
+margin_left = 1.0
+margin_top = 5.0
+margin_right = 17.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 4 )
+text = "?"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

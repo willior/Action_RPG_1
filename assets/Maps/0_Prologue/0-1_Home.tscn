@@ -20,7 +20,7 @@
 [ext_resource path="res://assets/World/Home/Home_Rug_Small.png" type="Texture" id=18]
 [ext_resource path="res://assets/World/Home/Desk.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/World/Home/Bed.tscn" type="PackedScene" id=20]
-[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/World/Home/Home_Rug_Large.png" type="Texture" id=22]
 [ext_resource path="res://assets/World/Home/Bookshelf.tscn" type="PackedScene" id=23]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=24]
@@ -121,7 +121,6 @@ tile_data = PoolIntArray( 3, 0, 0, 4, 0, 1, 5, 0, 1, 6, 0, 1, 7, 0, 1, 8, 0, 1, 
 
 [node name="Exit_toForest" parent="Map" instance=ExtResource( 24 )]
 position = Vector2( 160, 184 )
-collision_layer = 2048
 map_file = "res://assets/Maps/0_Prologue/0-2_Tutorial.tscn"
 selected_location = Vector2( 352, 16 )
 
@@ -159,15 +158,15 @@ texture = ExtResource( 12 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 496, 49 )
-frame = 4
+frame = 1
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 139, 17 )
-frame = 4
+frame = 1
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 278, 17 )
-frame = 4
+frame = 1
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
 
@@ -265,9 +264,9 @@ autoplay = true
 volume_db = -48.0
 autoplay = true
 
-[node name="GUI" parent="." instance=ExtResource( 21 )]
-
 [node name="FadeIn" parent="." instance=ExtResource( 30 )]
+
+[node name="GUI" parent="." instance=ExtResource( 21 )]
 [connection signal="timeout" from="Map/Lightning/Timer" to="Map/Lightning" method="_on_Timer_timeout"]
 
 [editable path="Map/Exit_toForest"]

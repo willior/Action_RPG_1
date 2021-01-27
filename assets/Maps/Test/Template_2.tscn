@@ -73,4 +73,7 @@ bus = "Reverb"
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 pitch_scale = 0.8
 
+[node name="SFX2" type="AudioStreamPlayer" parent="."]
+pitch_scale = 0.8
+
 [editable path="Map/Exit"]

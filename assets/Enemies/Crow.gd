@@ -320,7 +320,7 @@ func _on_CrowStats_no_health():
 	)
 	tween.start()
 	yield(tween, "tween_all_completed")
-	player.enemy_killed(stats.experience_pool)
+	# player.enemy_killed(stats.experience_pool)
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
@@ -345,6 +345,7 @@ func _on_CrowStats_no_health():
 	create_blood_effect(40)
 	create_blood_effect(40)
 	create_blood_effect(40)
+	Global.distribute_exp(stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool

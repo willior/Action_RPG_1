@@ -8,15 +8,14 @@ extends Node
 # when the player is reinitialized, the old inventory is stored,
 # and used as the argument to run the "reinitialize_player" function,
 # which sets the current player scene's inventory to that of the argument's.
-
 var on_title_screen = false
+var existing_inventory
+var player
+var player2
+var multiplayer_2 = true
 
 signal player_initialized
 signal player_reinitialized
-
-var existing_inventory
-
-var player
 
 func _ready():
 	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -27,18 +26,15 @@ func reinitialize_player(inventory):
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	if not player:
 		return
-
 	emit_signal("player_reinitialized", player) 
 	player.inventory.set_items(inventory.get_items())
 	
 func initialize_player():
 	print('attempting to initialize player...')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
-	
 	if not player:
 		print('player not created; cannot initialize.')
 		return
-	
 	emit_signal("player_initialized", player)
 	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
 	print('player successfully initialized.')

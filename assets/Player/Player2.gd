@@ -10,9 +10,9 @@ const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const WhiteFlash = preload("res://assets/Shaders/White_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 
-var inventory_resource = load("res://assets/Player/Inventory.gd")
+#var inventory_resource = load("res://assets/Player/Inventory.gd")
 var pouch_resource = load("res://assets/Player/Pouch/Pouch.gd")
-var inventory = inventory_resource.new()
+#var inventory = inventory_resource.new()
 var pouch = pouch_resource.new()
 
 enum {
@@ -37,9 +37,9 @@ enum {
 
 var state = MOVE
 var velocity = Vector2.ZERO
-var dir_vector = PlayerStats.dir_vector
+var dir_vector = Player2Stats.dir_vector
 var damageTaken = 0
-var stats = PlayerStats
+var stats = Player2Stats
 var levelStats = [0, 1, 2, 3, 4, 5]
 var levelResult = 0
 var level_queued = false
@@ -91,16 +91,19 @@ onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
 onready var audio = $AudioStreamPlayer
 onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
+onready var player1 = get_node("/root/World/YSort/Player")
 
 func _ready():
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
-	if Global.get_attribute("inventory") != null:
-		inventory.set_items(Global.get_attribute("inventory").get_items())
-		inventory.items_set = false
-		GameManager.reinitialize_player(inventory)
-	else:
-		GameManager.initialize_player()
+	if Global.get_attribute("direction") != null:
+		dir_vector = Global.get_attribute("direction")
+		reset_animation()
+#	if Global.get_attribute("inventory") != null:
+#		inventory.set_items(Global.get_attribute("inventory").get_items())
+#		inventory.items_set = false
+#		GameManager.reinitialize_player(inventory)
+#	else: GameManager.initialize_player()
 
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
@@ -110,8 +113,8 @@ func _ready():
 	stats.connect("player_dying", self, "dying_effect")
 	stats.connect("no_health", self, "game_over")
 	stats.connect("attack_speed_changed", self, "set_attack_timescale")
-	set_attack_timescale(PlayerStats.attack_speed)
-	PlayerStats.status = "default_speed"
+	set_attack_timescale(Player2Stats.attack_speed)
+	Player2Stats.status = "default_speed"
 
 func _process(delta):
 	match state:
@@ -127,7 +130,7 @@ func _process(delta):
 func _input(event):
 	match state:
 		MOVE:
-			if event.is_action_pressed("attack") && !event.is_echo():
+			if event.is_action_pressed("attack_2") && !event.is_echo():
 				if (!talking && !interacting) && stats.stamina > 0:
 					state = ATTACK1
 				elif interacting && interactObject.interactable && !dying:
@@ -141,11 +144,11 @@ func _input(event):
 				elif stats.stamina <= 0:
 					noStamina()
 					
-			if event.is_action_pressed("item"): # G
-				var item_used = inventory._items[inventory.current_selected_item]
+			if event.is_action_pressed("item_2"): # G
+				var item_used = player1.inventory._items[player1.inventory.current_selected_item]
 				match item_used.item_reference.type:
 					0: # CONSUMABLE
-						inventory.use_item(1)
+						player1.inventory.use_item(2)
 					1: # TOOL
 						pass
 					2: # QUEST
@@ -161,13 +164,13 @@ func _input(event):
 								interactObject.use_item_on_object()
 		
 		ATTACK1:
-			if event.is_action_pressed("attack") && !event.is_echo():
+			if event.is_action_pressed("attack_2") && !event.is_echo():
 				if stats.stamina <= 0:
 					noStamina()
 				else:
 					attack2_queued = true
 		ATTACK2:
-			if event.is_action_pressed("attack") && !event.is_echo():
+			if event.is_action_pressed("attack_2") && !event.is_echo():
 				if stats.stamina <= 0:
 					noStamina()
 				else:
@@ -175,8 +178,8 @@ func _input(event):
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector.x = Input.get_action_strength("ui_right_2") - Input.get_action_strength ("ui_left_2")
+	input_vector.y = Input.get_action_strength("ui_down_2") - Input.get_action_strength("ui_up_2")
 	input_vector = input_vector.normalized()
 	if sweating:
 		stats.stamina += 0.3
@@ -208,7 +211,7 @@ func move_state(delta):
 		
 	move()
 	
-	if Input.is_action_just_pressed("examine"): # F
+	if Input.is_action_just_pressed("examine_2"):
 		if !dying:
 			if !examining && talkTimer.is_stopped():
 				talkTimer.start()
@@ -219,17 +222,17 @@ func move_state(delta):
 				talkTimer.start()
 				interactObject.examine()
 			
-	if Input.is_action_just_pressed("next_item"): # R
-		inventory.advance_selected_item()
+	if Input.is_action_just_pressed("next_item_2"):
+		player1.inventory.advance_selected_item()
 		interactHitbox.disabled = true
 		interactHitbox.disabled = false
 		
-	if Input.is_action_just_pressed("previous_item"): # E
-		inventory.previous_selected_item()
+	if Input.is_action_just_pressed("previous_item_2"): # E
+		player1.inventory.previous_selected_item()
 		interactHitbox.disabled = true
 		interactHitbox.disabled = false
 
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack_2"):
 		if !talkTimer.is_stopped():
 			return
 		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 1:
@@ -238,7 +241,7 @@ func move_state(delta):
 			charge.begin_charge_2()
 		charge_state(delta)
 			
-	if Input.is_action_just_released("attack"): # V
+	if Input.is_action_just_released("attack_2"):
 		if attack_2_charged or stats.charge_level == 2:
 			attack_2_charged = false
 			state = SHADE
@@ -249,7 +252,7 @@ func move_state(delta):
 		charge_reset()
 		attack_charging = false
 		
-	if Input.is_action_just_pressed("roll"): # B
+	if Input.is_action_just_pressed("roll_2"):
 		if stats.stamina > 0:
 			if input_vector != Vector2.ZERO:
 				roll_moving = true
@@ -279,12 +282,12 @@ func apply_status(status):
 			get_node("/root/World/YSort/Player/PoisonNotice").queue_free()
 		"frenzy":
 			$FrenzyAnimationPlayer.play("Start")
-			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
-			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
+			# animationTree.set("parameters/Attack1/TimeScale/scale", Player2Stats.attack_speed)
+			# animationTree.set("parameters/Attack2/TimeScale/scale", Player2Stats.attack_speed)
 		"frenzy_end":
 			$FrenzyAnimationPlayer.play("Stop")
-			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
-			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
+			# animationTree.set("parameters/Attack1/TimeScale/scale", Player2Stats.attack_speed)
+			# animationTree.set("parameters/Attack2/TimeScale/scale", Player2Stats.attack_speed)
 
 func move():
 	velocity = move_and_slide(velocity)
@@ -300,8 +303,8 @@ func set_sweating():
 	$ChargeUI/StaminaProgress.visible = false
 
 func set_attack_timescale(value):
-	animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
-	animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
+	animationTree.set("parameters/Attack1/TimeScale/scale", Player2Stats.attack_speed)
+	animationTree.set("parameters/Attack2/TimeScale/scale", Player2Stats.attack_speed)
 	print('attack timescale set: ', value)
 
 # 1st attack pressed: state switches to attack1, plays attack1
@@ -335,7 +338,7 @@ func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
 	state = MOVE
 	base_enemy_accuracy = 66
-	PlayerStats.dexterity_mod = 0
+	Player2Stats.dexterity_mod = 0
 	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
@@ -349,7 +352,7 @@ func attack_animation_finished():
 	else:
 		state = MOVE
 	# if attack button is held when an attack animation finishes
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack_2"):
 		attack_charging = true
 		# charge_reset()
 
@@ -397,7 +400,7 @@ func shade_state(delta):
 # warning-ignore:integer_division
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	else:
-		if Input.is_action_just_pressed("attack"):
+		if Input.is_action_just_pressed("attack_2"):
 			attack2_queued = true
 	animationState.travel("Shade")
 	move()
@@ -405,7 +408,7 @@ func shade_state(delta):
 func shade_start():
 	set_collision_mask_bit(4, false)
 	stats.stamina -= 30
-	PlayerStats.dexterity_mod = 8
+	Player2Stats.dexterity_mod = 8
 	charge.stop_charge()
 	swordHitbox.shade_begin()
 	# stats.strength_mod = 4
@@ -437,7 +440,7 @@ func flash_state(delta):
 	
 func flash_start():
 	stats.stamina -= 20
-	PlayerStats.dexterity_mod = 4
+	Player2Stats.dexterity_mod = 4
 	charge.stop_charge()
 	swordHitbox.flash_begin()
 	# stats.strength_mod = 2
@@ -461,7 +464,7 @@ func hit_state(_delta):
 	
 func hit_animation_finished():
 	player_state_reset()
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack_2"):
 		attack_charging = true
 		charge_reset()
 	state = MOVE
@@ -538,7 +541,7 @@ func roll_state(delta):
 		# warning-ignore:integer_division
 		velocity = dir_vector * (stats.roll_speed/4)
 	animationState.travel("Roll")
-	if Input.is_action_just_released("attack"):
+	if Input.is_action_just_released("attack_2"):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
@@ -600,7 +603,7 @@ func backstep_state(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
 	animationState.travel("Backstep")
-	if Input.is_action_just_released("attack"):
+	if Input.is_action_just_released("attack_2"):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
@@ -615,7 +618,7 @@ func backstep_state(delta):
 			else:
 				attack1_queued = true
 	
-	elif Input.is_action_just_pressed("roll"):
+	elif Input.is_action_just_pressed("roll_2"):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
@@ -645,7 +648,7 @@ func backstep_animation_finished():
 		charge_reset()
 		attack_charging = false
 		state = FLASH
-	elif Input.is_action_pressed("attack"):
+	elif Input.is_action_pressed("attack_2"):
 		attack_animation_finished()
 	elif attack1_queued:
 		velocity = dir_vector * (stats.roll_speed*0.75)
@@ -770,7 +773,7 @@ func _on_InteractHitbox_area_entered(area):
 		self.interactNoticeDisplay = true
 		interacting = true
 	if "item_usable" in interactObject:
-		var item_to_use = inventory._items[inventory.current_selected_item]
+		var item_to_use = player1.inventory._items[player1.inventory.current_selected_item]
 		if item_to_use.item_reference.name == interactObject.item_needed:
 			using_item = true
 			print('using_item = true')
@@ -786,6 +789,6 @@ func _on_InteractHitbox_area_exited(_area):
 	interactObject = null
 
 func reset_animation():
-	get_tree().paused = false
+	# get_tree().paused = false
 	animationTree.set("parameters/Idle/blend_position", dir_vector)
 	# animationState.travel("Idle")

@@ -14,7 +14,6 @@ func _on_player_initialized(player):
 	player.inventory.connect("current_selected_item_changed", self, "_on_current_selected_item_changed")
 	player.inventory.connect("item_quantity_zero", self, "_on_item_quantity_zero")
 
-
 func _on_selected_item_quantity_updated(updated_selected_item):
 	for n in get_children():
 		if !n.visible: n.visible = true

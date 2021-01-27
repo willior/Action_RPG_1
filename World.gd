@@ -1,10 +1,10 @@
 extends Node2D
 
-onready var stats = $GUI/StatsDisplay
-onready var dim = $GUI/Dim
 onready var music = $Music
 onready var player = $YSort/Player
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
+onready var stats = $GUI/StatsDisplay
+onready var dim = $GUI/Dim
 
 func _ready():
 	$SFX.play()
@@ -16,6 +16,11 @@ func _ready():
 		$FadeIn.free()
 		var chapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn").instance()
 		add_child(chapterDisplay)
+	
+	if GameManager.multiplayer_2:
+		var player2 = load("res://assets/Player/Player2.tscn").instance()
+		player2.global_position = player.global_position
+		get_node("YSort").add_child(player2)
 		
 func fade_out():
 	var fadeout = FadeOut.instance()

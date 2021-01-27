@@ -24,4 +24,5 @@ func _ready():
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	get_parent().get_node("Music").play()
+	
 	queue_free()

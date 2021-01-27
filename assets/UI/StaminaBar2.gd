@@ -12,17 +12,17 @@ func set_stamina(value):
 func set_max_stamina(value):
 	max_stamina = value
 	stamBar.max_value = max_stamina
-	stamBar.rect_size.x = max_stamina/3
+	stamBar.rect_min_size.x = max_stamina/3
 
 func _ready():
-	self.max_stamina = PlayerStats.max_stamina
-	self.stamina = PlayerStats.stamina
+	self.max_stamina = Player2Stats.max_stamina
+	self.stamina = Player2Stats.stamina
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("stamina_changed", self, "set_stamina")
+	Player2Stats.connect("stamina_changed", self, "set_stamina")
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("max_stamina_changed", self, "set_max_stamina")
+	Player2Stats.connect("max_stamina_changed", self, "set_max_stamina")
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("status_changed", self, "set_sweating")
+	Player2Stats.connect("status_changed", self, "set_sweating")
 
 func set_sweating(value):
 	match value:

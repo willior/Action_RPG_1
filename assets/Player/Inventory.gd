@@ -66,14 +66,14 @@ func check_item(item_name, quantity):
 		
 	return item
 	
-func use_item():
+func use_item(who):
 	var used_item = check_item(_items[current_selected_item].item_reference.name, _items[current_selected_item].quantity)
 	if used_item:
 		if used_item.type == 0:
 			# removes item from inventory if it is a consumable
 			remove_item(used_item.name, 1)
 			
-		ItemHandler.item_handler(used_item)
+		ItemHandler.item_handler(used_item, who)
 	
 func remove_item(item_name, quantity):
 	prints("removing " + str(quantity) + " " + str(item_name))

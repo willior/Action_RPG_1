@@ -13,5 +13,6 @@ func _on_Exit_body_entered(_body):
 	$Timer.start()
 	yield($Timer, "timeout")
 	print('changing scene')
-	var new_inventory = _body.inventory
+	# var new_inventory = _body.inventory
+	var new_inventory = get_node("/root/World/YSort/Player").inventory
 	Global.goto_scene(map_file, {"direction": facing_direction, "location":selected_location, "inventory":new_inventory})

@@ -87,3 +87,14 @@ func random_variance(base_damage, random):
 	rng.randomize()
 	var random_value = rng.randf_range(1-random, 1+random)
 	return int(base_damage * random_value)
+
+func distribute_exp(value):
+	#PlayerStats.experience += value
+	#Player2Stats.experience += value
+	var experience_gained = value
+	if GameManager.multiplayer_2:
+		experience_gained /= 2
+		get_node("/root/World/YSort/Player").enemy_killed(experience_gained)
+		get_node("/root/World/YSort/Player2").enemy_killed(experience_gained)
+	else:
+		get_node("/root/World/YSort/Player").enemy_killed(experience_gained)

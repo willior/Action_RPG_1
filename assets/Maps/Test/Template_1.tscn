@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/ItemDrops/HeartPickup.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ItemDrops/PennyPickup.tscn" type="PackedScene" id=2]
@@ -8,8 +8,6 @@
 [ext_resource path="res://assets/World/Ground_Test_1_500.png" type="Texture" id=6]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/Misc/RedPixel.png" type="Texture" id=8]
-[ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -66,12 +64,6 @@ remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
-[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 176, 184 )
-
-[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 240, 64 )
-
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="HeartPickup" parent="YSort/Items" instance=ExtResource( 1 )]
@@ -87,6 +79,9 @@ pitch_scale = 0.8
 bus = "Reverb"
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
+pitch_scale = 0.8
+
+[node name="SFX2" type="AudioStreamPlayer" parent="."]
 pitch_scale = 0.8
 
 [editable path="Map/Exit"]

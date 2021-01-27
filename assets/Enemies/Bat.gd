@@ -105,7 +105,6 @@ func _physics_process(delta):
 		ATTACK:
 			if attacking:
 				audio.play()
-				target = player.global_position
 				attacking = false
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
@@ -165,6 +164,7 @@ func seek_player():
 
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
+		target = attackPlayerZone.player.global_position
 		disable_detection()
 		attacking = true
 		# hitbox.set_deferred("monitorable", true)
@@ -304,8 +304,6 @@ func _on_BatStats_no_health():
 	timer.start(0.5)
 	yield(timer, "timeout")
 	
-	player.enemy_killed(stats.experience_pool)
-	
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
@@ -324,7 +322,7 @@ func _on_BatStats_no_health():
 	create_blood_effect(40)
 	create_blood_effect(40)
 	create_blood_effect(40)
-	
+	Global.distribute_exp(stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool

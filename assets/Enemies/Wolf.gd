@@ -102,7 +102,6 @@ func _physics_process(delta):
 		ATTACK:
 			if attacking:
 				attacking = false
-				target = player.global_position
 				audio_attack()
 				# attack_animation()
 				
@@ -158,6 +157,7 @@ func seek_player():
 
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
+		target = attackPlayerZone.player.global_position
 		disable_detection()
 		attacking = true
 		$DelayTimer.start()
@@ -273,7 +273,6 @@ func _on_WolfStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
-	
 	tween.interpolate_property(sprite,
 	"modulate",
 	Color(1, 1, 0),
@@ -284,12 +283,11 @@ func _on_WolfStats_no_health():
 	)
 	tween.start()
 	yield(tween, "tween_all_completed")
-	player.enemy_killed(stats.experience_pool)
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
 	enemyDeathEffect.global_position = global_position
-	
+	Global.distribute_exp(stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool

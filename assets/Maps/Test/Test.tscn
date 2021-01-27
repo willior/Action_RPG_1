@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=3]
 [ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World.gd" type="Script" id=8]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=9]
@@ -415,8 +415,6 @@ position = Vector2( 8, 56 )
 [node name="Skeleton" parent="YSort/NPCs" instance=ExtResource( 2 )]
 position = Vector2( 80, 8 )
 
-[node name="GUI" parent="." instance=ExtResource( 6 )]
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 bus = "Reverb"
@@ -427,3 +425,5 @@ volume_db = -48.0
 
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
 volume_db = -48.0
+
+[node name="GUI" parent="." instance=ExtResource( 6 )]
