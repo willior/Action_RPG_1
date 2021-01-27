@@ -1,11 +1,11 @@
 extends AnimatedSprite
 
 var speed = 200
-var target_position
-var rng = randi()%4+1
+var target_position : Vector2
 
 func _ready():
 	randomize()
+	var rng = randi()%4+1
 	play(str(rng))
 	rng = randi()%2+1
 	if rng == 2:

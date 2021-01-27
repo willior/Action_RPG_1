@@ -7,9 +7,10 @@
 
 [node name="HealthUI" type="Control"]
 margin_right = 64.0
-margin_bottom = 7.0
+margin_bottom = 6.0
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -32,8 +33,8 @@ __meta__ = {
 }
 
 [node name="HealthTexture" type="TextureProgress" parent="."]
-margin_right = 64.0
-margin_bottom = 7.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 max_value = 15.0
 value = 8.0
 texture_over = ExtResource( 5 )

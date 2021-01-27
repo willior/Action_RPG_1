@@ -104,13 +104,13 @@ func _physics_process(delta):
 
 		ATTACK:
 			if attacking:
-				target = player.global_position
+				# target = attackPlayerZone.player.global_position
 				attacking = false
 				audio_cawcawcaw()
 				fly_animation()
 				
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
-			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
+			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -160,6 +160,7 @@ func seek_player():
 
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
+		target = attackPlayerZone.player.global_position
 		disable_detection()
 		attacking = true
 #		$DelayTimer.start()
@@ -219,7 +220,7 @@ func pick_random_state(state_list):
 func create_hit_effect(damage_count):
 	var hit_effect = EnemyHitEffect.instance()
 	var randX = int(rand_range(-damage_count, damage_count))
-	var randY = int(rand_range(-damage_count, damage_count/2))
+	var randY = int(rand_range(-damage_count/2, damage_count))
 	hit_effect.global_position = global_position
 	# hit_effect.global_position += Vector2(randX, randY)
 	hit_effect.target_position = global_position + Vector2(randX, randY)
@@ -229,7 +230,7 @@ func create_blood_effect(damage_count):
 	randomize()
 	var blood_effect = BloodHitEffect.instance()
 	var randX = int(rand_range(-damage_count, damage_count))
-	var randY = int(rand_range(-damage_count, damage_count/2))
+	var randY = int(rand_range(-damage_count/2, damage_count))
 	blood_effect.global_position = global_position
 	blood_effect.target_position = global_position + Vector2(randX, randY)
 	get_parent().add_child(blood_effect)
@@ -237,7 +238,7 @@ func create_blood_effect(damage_count):
 func _on_Hurtbox_area_entered(area):
 	var evasion_mod = 0
 	if flying:
-		evasion_mod = 40
+		evasion_mod = 32
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
 		SoundPlayer.play_sound("miss")
@@ -324,10 +325,10 @@ func _on_CrowStats_no_health():
 	get_parent().add_child(enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
 	enemyDeathEffect.global_position = global_position
-	create_hit_effect(40)
-	create_hit_effect(40)
-	create_hit_effect(40)
-	create_hit_effect(40)
+	create_hit_effect(32)
+	create_hit_effect(32)
+	create_hit_effect(32)
+	create_hit_effect(32)
 	create_blood_effect(40)
 	create_blood_effect(40)
 	create_blood_effect(40)

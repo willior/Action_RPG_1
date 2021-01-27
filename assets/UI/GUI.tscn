@@ -25,20 +25,23 @@ layer = 3
 [node name="HealthUI" parent="." instance=ExtResource( 11 )]
 pause_mode = 2
 show_behind_parent = true
-margin_left = 4.0
-margin_top = 4.0
-margin_bottom = 11.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 68.0
+margin_bottom = 12.0
 
 [node name="StaminaBar" parent="." instance=ExtResource( 12 )]
-margin_top = 13.0
-margin_bottom = 25.0
+margin_left = 8.0
+margin_top = 14.0
+margin_right = 68.0
+margin_bottom = 18.0
 
 [node name="ExpBar" parent="." instance=ExtResource( 10 )]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
+margin_left = 8.0
 margin_top = -20.0
-margin_right = 164.0
+margin_right = 168.0
 margin_bottom = -4.0
 
 [node name="CashUI" parent="." instance=ExtResource( 13 )]
@@ -162,10 +165,10 @@ margin_bottom = 163.0
 [node name="InventoryUI" type="Control" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -28.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = 28.0
+margin_left = -32.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 32.0
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false

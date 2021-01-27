@@ -545,11 +545,9 @@ func roll_state(delta):
 			if attack_2_charged:
 				attack_2_charged = false
 				attack_1_charged = false
-				print('rolling shade attack!!!')
 				shade_queued = true
 			elif attack_1_charged:
 				attack_1_charged = false
-				print('rolling flash attack!!!')
 				flash_queued = true
 			else: attack1_queued = true
 	
@@ -609,11 +607,9 @@ func backstep_state(delta):
 			if attack_2_charged:
 				attack_1_charged = false # getting rid of this stores the charge for next backstep - mite b cool
 				attack_2_charged = false
-				print('backstep shade attack!!!')
 				shade_queued = true
 			elif attack_1_charged:
 				attack_1_charged = false
-				print('backstep flash attack!!!')
 				flash_queued = true
 			else:
 				attack1_queued = true
@@ -670,12 +666,10 @@ func _on_Hurtbox_area_entered(area):
 		var is_crit = false # enemies currently do not crit
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		hurtbox.display_damage_popup(str(damageTaken), is_crit)
-		print("player hit for ", damageTaken, "HP!!!")
 		state = HIT
 	else:
 		$DodgeAudio.play()
 		hurtbox.display_damage_popup("Miss!", false)
-		print("dodged!!!")
 
 func _on_Hurtbox_invincibility_started():
 	blinkAnimationPlayer.play("Start")
@@ -685,7 +679,6 @@ func _on_Hurtbox_invincibility_ended():
 	
 func dying_effect(value):
 	if value && !dying:
-		print('player dying: applying greyscale')
 		set_collision_mask_bit(12, true)
 		var heartbeat = Heartbeat.instance()
 		var greyscale = Greyscale.instance()
@@ -697,7 +690,6 @@ func dying_effect(value):
 		get_node("/root/World/SFX").stream_paused = true
 		dying = true
 	elif !value && dying:
-		print('player saved: deleting greyscale')
 		set_collision_mask_bit(12, false)
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 		get_node("/root/World/GUI/Greyscale").queue_free()
@@ -708,7 +700,6 @@ func dying_effect(value):
 		dying = false
 	
 func game_over():
-	print("running game_over()")
 	# dying = true
 	AudioServer.set_bus_effect_enabled(0, 0, false)
 	get_node("/root/World/Heartbeat").stream_paused = true

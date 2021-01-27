@@ -62,10 +62,8 @@ tracks/1/keys = {
 }
 
 [node name="StaminaBar" type="Control"]
-margin_left = 4.0
-margin_top = 16.0
 margin_right = 64.0
-margin_bottom = 28.0
+margin_bottom = 6.0
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -74,7 +72,6 @@ __meta__ = {
 [node name="StaminaBarTexture" type="TextureProgress" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -5.0
 value = 100.0
 allow_lesser = true
 texture_under = ExtResource( 2 )

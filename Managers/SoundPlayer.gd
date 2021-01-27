@@ -14,8 +14,8 @@ func play_sound(value):
 			audio.stream = miss
 		"level_up":
 			audio.stream = level_up
-		"crit":
-			audio.stream = level_up
+		"crit":pass
+			#audio.stream = level_up
 	audio.play()
 	
 		
