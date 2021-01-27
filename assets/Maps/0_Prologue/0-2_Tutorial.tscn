@@ -115,8 +115,8 @@
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 115.849, 10 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 120, 10 )
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -131,7 +131,7 @@ __meta__ = {
 position = Vector2( 352, 16 )
 current = true
 limit_left = 64
-limit_top = 0
+limit_top = -64
 limit_right = 100000
 limit_bottom = 100000
 drag_margin_h_enabled = true
@@ -168,8 +168,11 @@ position = Vector2( 344, -8 )
 map_file = "res://assets/Maps/0_Prologue/0-1_Home.tscn"
 selected_location = Vector2( 160, 168 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Exit_toHome"]
-shape = SubResource( 3 )
+[node name="CollisionShape2D" parent="Map/Exit_toHome" index="0"]
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D" parent="Map/Exit_toHome/StaticBody2D" index="0"]
+shape = SubResource( 5 )
 
 [node name="River_1" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 256, 872 )
@@ -1236,3 +1239,5 @@ stream = ExtResource( 28 )
 volume_db = -48.0
 
 [node name="FadeIn" parent="." instance=ExtResource( 27 )]
+
+[editable path="Map/Exit_toHome"]

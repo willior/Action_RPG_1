@@ -213,6 +213,7 @@ previous_item={
 2d_physics/layer_10="Spawners"
 2d_physics/layer_11="Despawners"
 2d_physics/layer_12="Exits"
+2d_physics/layer_13="ExitBlock"
 
 [rendering]
 

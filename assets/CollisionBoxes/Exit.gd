@@ -5,6 +5,9 @@ export var selected_location = Vector2()
 var facing_direction = Vector2()
 
 func _on_Exit_body_entered(_body):
+	if _body.dying:
+		return
+		
 	facing_direction = _body.dir_vector
 	get_node("/root/World/").fade_out()
 	$Timer.start()

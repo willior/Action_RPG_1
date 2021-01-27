@@ -685,6 +685,7 @@ func _on_Hurtbox_invincibility_ended():
 func dying_effect(value):
 	if value && !dying:
 		print('player dying: applying greyscale')
+		set_collision_mask_bit(12, true)
 		var heartbeat = Heartbeat.instance()
 		var greyscale = Greyscale.instance()
 		var whiteFlash = WhiteFlash.instance()
@@ -696,6 +697,7 @@ func dying_effect(value):
 		dying = true
 	elif !value && dying:
 		print('player saved: deleting greyscale')
+		set_collision_mask_bit(12, false)
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 		get_node("/root/World/GUI/Greyscale").queue_free()
 		get_node("/root/World/GUI/White").queue_free()
