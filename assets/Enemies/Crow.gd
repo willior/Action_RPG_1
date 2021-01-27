@@ -215,12 +215,13 @@ func pick_random_state(state_list):
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
 	
-func create_hit_effect():
+func create_hit_effect(damage_count):
+	damage_count = min(damage_count, 32)
 	var hit_effect = EnemyHitEffect.instance()
 	get_parent().add_child(hit_effect)
 	hit_effect.global_position = global_position
-	var randX = int(rand_range(-12, 12))
-	var randY = int(rand_range(-12, 12))
+	var randX = int(rand_range(-damage_count, damage_count))
+	var randY = int(rand_range(-damage_count, damage_count/2))
 	hit_effect.global_position += Vector2(randX, randY)
 
 func _on_Hurtbox_area_entered(area):
@@ -238,10 +239,10 @@ func _on_Hurtbox_area_entered(area):
 			damage *= 2
 		stats.health -= damage
 		
-		var damage_count = damage
+		var damage_count = min(damage, 80)
 		while damage_count > 0:
-			create_hit_effect()
-			damage_count -= 10
+			create_hit_effect(damage_count)
+			damage_count -= 8
 			
 		hurtbox.display_damage_popup(str(damage), is_crit)
 		hurtbox.create_hit_effect()
@@ -311,6 +312,10 @@ func _on_CrowStats_no_health():
 	get_parent().add_child(enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
 	enemyDeathEffect.global_position = global_position
+	create_hit_effect(32)
+	create_hit_effect(32)
+	create_hit_effect(32)
+	create_hit_effect(32)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool

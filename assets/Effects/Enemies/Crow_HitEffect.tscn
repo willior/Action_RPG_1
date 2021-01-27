@@ -238,4 +238,6 @@ animations = [ {
 frames = SubResource( 56 )
 animation = "1"
 script = ExtResource( 1 )
-[connection signal="animation_finished" from="." to="." method="_on_CrowHitEffect_animation_finished"]
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

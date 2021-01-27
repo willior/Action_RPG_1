@@ -27,13 +27,13 @@ var endurance = 4 setget set_endurance
 var max_stamina = endurance*15 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
 
-var strength = 4.0 setget set_strength
+var strength = 10.0 setget set_strength
 var strength_mod = 0 setget set_strength_mod
 
 var defense = 4.0 setget set_defense
 var defense_mod = 0 setget set_defense_mod
 
-var dexterity = 4.0 setget set_dexterity
+var dexterity = 40.0 setget set_dexterity
 var dexterity_mod = 0.0 setget set_dexterity_mod
 var base_accuracy = 75
 var base_crit_rate = 4

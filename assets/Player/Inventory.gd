@@ -98,14 +98,10 @@ func remove_item(item_name, quantity):
 			else:
 				var updated_selected_item = get_item(current_selected_item)
 				emit_signal("selected_item_quantity_updated", updated_selected_item)
-	
+
 func add_item(item_name, quantity):
 	prints("adding " + str(quantity) + " " + str(item_name))
-	
 	var item = check_item(item_name, quantity)
-	
-	print(_items.size())
-
 	for i in range(_items.size()):
 		var inventory_item = _items[i]
 		
@@ -117,7 +113,6 @@ func add_item(item_name, quantity):
 			print("max stack reached; discarding")
 			return
 		else: 
-			print("applying quantity; ", quantity)
 			inventory_item.quantity += quantity
 			quantity = 0
 			

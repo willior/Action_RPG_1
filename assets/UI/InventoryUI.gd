@@ -26,7 +26,6 @@ func _on_selected_item_quantity_updated(updated_selected_item):
 #	var sprite = Sprite.new()
 	$Sprite.texture = updated_selected_item.item_reference.texture
 #	add_child(sprite)
-	print('quantity updated')
 
 func _on_current_selected_item_changed(new_selected_item):
 	for n in get_children():
@@ -39,7 +38,6 @@ func _on_current_selected_item_changed(new_selected_item):
 #	var sprite = Sprite.new()
 	$Sprite.texture = new_selected_item.item_reference.texture
 #	add_child(sprite)
-	prints('selected item changed: ' + str(new_selected_item))
 	
 func _on_item_quantity_zero():
 	for n in get_children():
