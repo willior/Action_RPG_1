@@ -267,6 +267,7 @@ pause_mode = 1
 modulate = Color( 0.882353, 0.882353, 0.882353, 1 )
 position = Vector2( -320, -180 )
 scale = Vector2( 1280, 720 )
+z_index = -1
 texture = ExtResource( 3 )
 centered = false
 region_enabled = true
@@ -371,9 +372,6 @@ position = Vector2( 168, 112 )
 [node name="BatNest" parent="YSort/Enemies" instance=ExtResource( 1 )]
 position = Vector2( 184, 88 )
 
-[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 288, 152 )
-
 [node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 11 )]
 position = Vector2( -112, 32 )
 
@@ -382,6 +380,30 @@ position = Vector2( 24, 192 )
 
 [node name="Wolf3" parent="YSort/Enemies" instance=ExtResource( 11 )]
 position = Vector2( 56, -64 )
+
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 335, -5 )
+
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 335, -5 )
+
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 335, -5 )
+
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 335, -5 )
+
+[node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 335, -5 )
+
+[node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 335, -5 )
+
+[node name="Crow7" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 335, -5 )
+
+[node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 335, -5 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

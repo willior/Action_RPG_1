@@ -2,6 +2,7 @@ extends KinematicBody2D
 const ENEMY_NAME = "Crow"
 const EnemyDeathEffect = preload("res://assets/Effects/Enemies/Crow_DeathEffect.tscn")
 const EnemyHitEffect = preload("res://assets/Effects/Enemies/Crow_HitEffect.tscn")
+const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
@@ -223,6 +224,14 @@ func create_hit_effect(damage_count):
 	# hit_effect.global_position += Vector2(randX, randY)
 	hit_effect.target_position = global_position + Vector2(randX, randY)
 	get_parent().add_child(hit_effect)
+	
+func create_blood_effect(damage_count):
+	var blood_effect = BloodHitEffect.instance()
+	var randX = int(rand_range(-damage_count, damage_count))
+	var randY = int(rand_range(-damage_count, damage_count/2))
+	blood_effect.global_position = global_position
+	blood_effect.target_position = global_position + Vector2(randX, randY)
+	get_parent().add_child(blood_effect)
 
 func _on_Hurtbox_area_entered(area):
 	var evasion_mod = 0
@@ -242,6 +251,8 @@ func _on_Hurtbox_area_entered(area):
 		var damage_count = min(damage/2, 32)
 		while damage_count > 0:
 			create_hit_effect(damage_count)
+			create_blood_effect(damage_count)
+			create_blood_effect(damage_count)
 			damage_count -= 4
 			
 		hurtbox.display_damage_popup(str(damage), is_crit)
@@ -316,6 +327,22 @@ func _on_CrowStats_no_health():
 	create_hit_effect(40)
 	create_hit_effect(40)
 	create_hit_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
+	create_blood_effect(40)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool
