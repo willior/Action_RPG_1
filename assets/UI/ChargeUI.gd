@@ -88,7 +88,7 @@ func set_charge(value):
 		PlayerStats.charge_level = 1
 		begin_charge_2()
 		
-	if currentCharge == 100 && PlayerStats.charge_level == 1:
+	if currentCharge >= 100 && PlayerStats.charge_level == 1:
 		PlayerStats.charge_level = 2
 
 	# if currentCharge == PlayerStats.max_charge:
@@ -101,7 +101,7 @@ func set_charge(value):
 func set_charge_level(value):
 	currentChargeLevel = value
 	if currentChargeLevel == 1:
-		chargeBeep1.play()	
+		chargeBeep1.play()
 	elif currentChargeLevel == 2:
 		chargeBeep2.play()
 

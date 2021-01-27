@@ -15,7 +15,13 @@ var friction = 800
 var shade_friction = 1600
 var dir_vector = Vector2.DOWN
 
-var vitality = 4 setget set_vitality
+var vitality = 10 setget set_vitality
+var endurance = 10 setget set_endurance
+var defense = 10.0 setget set_defense
+var strength = 10.0 setget set_strength
+var dexterity = 10.0 setget set_dexterity
+var speed = 10.0 setget set_speed
+
 var max_health = vitality*15 setget set_max_health
 var health = max_health setget set_health
 var old_health = health
@@ -23,22 +29,17 @@ var final_health setget set_final_health
 var dying = false setget set_dying
 var dead = false setget set_dead
 
-var endurance = 4 setget set_endurance
 var max_stamina = endurance*15 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
 
-var strength = 40.0 setget set_strength
 var strength_mod = 0 setget set_strength_mod
 
-var defense = 4.0 setget set_defense
 var defense_mod = 0 setget set_defense_mod
 
-var dexterity = 40.0 setget set_dexterity
 var dexterity_mod = 0.0 setget set_dexterity_mod
 var base_accuracy = 75
 var base_crit_rate = 4
 
-var speed = 4.0 setget set_speed
 var attack_speed = 1.0 setget set_attack_speed
 var iframes = 0.1 setget set_iframes
 

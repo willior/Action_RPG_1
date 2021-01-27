@@ -129,8 +129,6 @@ func _input(event):
 			if event.is_action_pressed("attack") && !event.is_echo():
 				if (!talking && !interacting) && stats.stamina > 0:
 					state = ATTACK1
-				elif stats.stamina <= 0:
-					noStamina()
 				elif interacting && interactObject.interactable && !dying:
 					talkTimer.start()
 					interactObject.interact()
@@ -139,6 +137,8 @@ func _input(event):
 				elif talking && interactObject.talkable && talkTimer.is_stopped() && !dying:
 					talkTimer.start()
 					interactObject.talk()
+				elif stats.stamina <= 0:
+					noStamina()
 					
 			if event.is_action_pressed("item"): # G
 				var item_used = inventory._items[inventory.current_selected_item]
@@ -238,12 +238,12 @@ func move_state(delta):
 		charge_state(delta)
 			
 	if Input.is_action_just_released("attack"): # V
-		if attack_1_charged:
-			attack_1_charged = false
-			state = FLASH
-		if attack_2_charged:
+		if attack_2_charged or stats.charge_level == 2:
 			attack_2_charged = false
 			state = SHADE
+		if attack_1_charged and stats.charge_level == 1:
+			attack_1_charged = false
+			state = FLASH
 		charge.stop_charge()
 		charge_reset()
 		attack_charging = false
@@ -374,13 +374,14 @@ func charge_state(_delta):
 		
 	# if the current charge is less than the max charge
 	if charge_count < stats.max_charge:
-		charge_count += 0.5
+		charge_count += 2
 		stats.charge = charge_count
 	# if the charge count reaches 50%
 	if charge_count == stats.max_charge/2:
 		attack_1_charged = true
 	# if the charge count reaches 100%
 	elif charge_count == stats.max_charge && attack_charging:
+		attack_1_charged = false
 		attack_2_charged = true
 		attack_charging = false
 		

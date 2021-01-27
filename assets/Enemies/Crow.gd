@@ -226,6 +226,7 @@ func create_hit_effect(damage_count):
 	get_parent().add_child(hit_effect)
 	
 func create_blood_effect(damage_count):
+	randomize()
 	var blood_effect = BloodHitEffect.instance()
 	var randX = int(rand_range(-damage_count, damage_count))
 	var randY = int(rand_range(-damage_count, damage_count/2))

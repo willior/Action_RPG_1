@@ -73,6 +73,7 @@ func crit_calculation(base_crit_rate, dexterity, dexterity_mod):
 	var final_crit_rate = base_crit_rate + (dexterity/4) + (dexterity_mod/2)
 	print("crit calculation: ", final_crit_rate, "% > ", "RNG: ", random_value)
 	if final_crit_rate >= random_value:
+		SoundPlayer.play_sound("crit")
 		return true
 	elif final_crit_rate < random_value:
 		return false
