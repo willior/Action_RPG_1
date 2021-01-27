@@ -217,11 +217,12 @@ func pick_random_state(state_list):
 	
 func create_hit_effect(damage_count):
 	var hit_effect = EnemyHitEffect.instance()
-	get_parent().add_child(hit_effect)
-	hit_effect.global_position = global_position
 	var randX = int(rand_range(-damage_count, damage_count))
 	var randY = int(rand_range(-damage_count, damage_count/2))
-	hit_effect.global_position += Vector2(randX, randY)
+	hit_effect.global_position = global_position
+	# hit_effect.global_position += Vector2(randX, randY)
+	hit_effect.target_position = global_position + Vector2(randX, randY)
+	get_parent().add_child(hit_effect)
 
 func _on_Hurtbox_area_entered(area):
 	var evasion_mod = 0
@@ -238,7 +239,7 @@ func _on_Hurtbox_area_entered(area):
 			damage *= 2
 		stats.health -= damage
 		
-		var damage_count = min(damage/2, 40)
+		var damage_count = min(damage/2, 32)
 		while damage_count > 0:
 			create_hit_effect(damage_count)
 			damage_count -= 4
