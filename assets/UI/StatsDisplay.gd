@@ -1,12 +1,12 @@
 extends Control
-var currentVitality setget set_vitality
-var currentHealth setget set_health
-var currentMax_health setget set_max_health
-var currentEndurance setget set_endurance
-var currentDefense setget set_defense
-var currentStrength setget set_strength
-var currentDexterity setget set_dexterity
-var currentSpeed setget set_speed
+var currentVitality = str(PlayerStats.vitality) setget set_vitality
+var currentHealth = str(PlayerStats.health) setget set_health
+var currentMax_health = str(PlayerStats.max_health) setget set_max_health
+var currentEndurance = str(PlayerStats.endurance) setget set_endurance
+var currentDefense = str(PlayerStats.defense) setget set_defense
+var currentStrength = str(PlayerStats.strength) setget set_strength
+var currentDexterity = str(PlayerStats.dexterity) setget set_dexterity
+var currentSpeed = str(Player2Stats.speed) setget set_speed
 
 onready var healthBox = $Vbox/vit
 onready var enduranceBox = $Vbox/end
@@ -16,14 +16,22 @@ onready var dexterityBox = $Vbox/dex
 onready var speedBox = $Vbox/spd
 
 func set_vitality(value):
+	print('vit set')
 	currentVitality = str(value)
+	healthBox.set_text("VIT " + currentVitality + " (" + currentHealth + "/" + currentMax_health + "HP)")
 
 func set_max_health(value):
+	print('max hp set')
 	currentMax_health = str(value)
+	healthBox.set_text("VIT " + currentVitality + " (" + currentHealth + "/" + currentMax_health + "HP)")
 
 func set_health(value):
+	print('health set')
 	currentHealth = str(value)
 	healthBox.set_text("VIT " + currentVitality + " (" + currentHealth + "/" + currentMax_health + "HP)")
+	
+func set_vitality_stat_display(vitality, health, max_health):
+	healthBox.set_text("VIT " + vitality + " (" + health + "/" + max_health + "HP)")
 
 func set_endurance(value):
 	currentEndurance = str(value)

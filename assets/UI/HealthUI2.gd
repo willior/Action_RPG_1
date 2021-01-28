@@ -47,6 +47,9 @@ func health_tick():
 		Player2Stats.dead = true
 	
 func _ready():
+	if !GameManager.multiplayer_2:
+		queue_free()
+		return
 	self.max_health = Player2Stats.max_health
 	self.health = Player2Stats.health
 # warning-ignore:return_value_discarded

@@ -10,6 +10,7 @@ func set_health(value):
 	var old_health = health
 	health = value
 	healthBar.value = health
+	$hp.set_text(str(healthBar.value) + "/" + str(max_health))
 	if old_health < health:
 		reset_health_background()
 	else:
@@ -49,6 +50,7 @@ func health_tick():
 func _ready():
 	self.max_health = PlayerStats.max_health
 	self.health = PlayerStats.health
+	$hp.set_text(str(healthBack.value) + "/" + str(max_health))
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("health_changed", self, "set_health") # connecting to the "health_changed" signal to the UI, connecting the value passed to the "set_health" function
 # warning-ignore:return_value_discarded

@@ -36,11 +36,11 @@ var dialog_script = [
 #					],
 #					'checkpoint': '-2',
 #				},
-				{
-					'text': "You levelled successfully!",
-					'action': 'apply_level'
-					
-				},
+#				{
+##					'text': "You levelled successfully!",
+#					'action': 'apply_level'
+#
+#				},
 				{
 					'action': 'end_dialog'
 				}
@@ -198,9 +198,11 @@ func event_handler(event):
 				update_text(event['text'])
 				get_node(dialog_object_path).acquire_item()
 			if event['action'] == 'apply_level':
-				update_text(event['text'])
+				#update_text(event['text'])
 				apply_level_stats()
 			if event['action'] == 'end_dialog':
+				$TimerDelaySelect.start()
+				yield($TimerDelaySelect, "timeout")
 				end_dialog()
 
 func reset_options():
@@ -274,22 +276,22 @@ func reset_level_stats():
 func apply_level_stats():
 	print('applying stats: ')
 	if VIT_to_add > 0:
-		PlayerStats.vitality += VIT_to_add
+		# PlayerStats.vitality += VIT_to_add
 		print(VIT_to_add, ' VIT')
 	if END_to_add > 0:
-		PlayerStats.endurance += END_to_add
+		# PlayerStats.endurance += END_to_add
 		print(END_to_add, ' END')
 	if DEF_to_add > 0:
-		PlayerStats.defense += DEF_to_add
+		# PlayerStats.defense += DEF_to_add
 		print(DEF_to_add, ' DEF')
 	if STR_to_add > 0:
-		PlayerStats.strength += STR_to_add
+		# PlayerStats.strength += STR_to_add
 		print(STR_to_add, ' STR')
 	if DEX_to_add > 0:
-		PlayerStats.dexterity += DEX_to_add
+		# PlayerStats.dexterity += DEX_to_add
 		print(DEX_to_add, ' DEX')
 	if SPD_to_add > 0:
-		PlayerStats.speed += SPD_to_add
+		# PlayerStats.speed += SPD_to_add
 		print(SPD_to_add, ' SPD')
 
 func advance_dialog(skip_index):

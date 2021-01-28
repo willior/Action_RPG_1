@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=15]
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=16]
 [ext_resource path="res://assets/UI/8x6_Progress.png" type="Texture" id=17]
+[ext_resource path="res://assets/Font/small_dynamicfont.tres" type="DynamicFont" id=18]
+[ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=19]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Stop"
@@ -135,6 +137,19 @@ __meta__ = {
 pause_mode = 1
 wait_time = 0.1
 one_shot = true
+
+[node name="hp" type="Label" parent="HealthUI1"]
+material = ExtResource( 19 )
+margin_left = 1.0
+margin_top = -14.0
+margin_right = 41.0
+margin_bottom = -1.0
+custom_fonts/font = ExtResource( 18 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "###/###"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StaminaBar1" parent="." instance=ExtResource( 6 )]
 margin_left = 27.0
@@ -264,7 +279,6 @@ __meta__ = {
 }
 
 [node name="StatsDisplay" type="Control" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 9 )
@@ -354,6 +368,7 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
 [node name="Controls" parent="StatsDisplay" instance=ExtResource( 8 )]
+visible = false
 margin_left = 64.0
 margin_top = 38.0
 margin_right = 169.0

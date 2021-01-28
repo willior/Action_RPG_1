@@ -501,11 +501,11 @@ func enemy_killed(experience_from_kill):
 func level_up():
 #	var greyscale = load("res://assets/Shaders/Greyscale_CanvasModulate.tscn").instance()
 #	get_node("/root/World/GUI").add_child(greyscale)
+	$LevelTimer.start()
+	yield($LevelTimer, "timeout")
 	if just_leveled > 0:
 		#get_node("/root/World/GUI/Greyscale").queue_free()
 		just_leveled -= 1
-		$LevelTimer.start()
-		yield($LevelTimer, "timeout")
 		level_up()
 		return
 		
