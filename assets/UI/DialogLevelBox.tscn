@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://assets/UI/DialogBox_160.png" type="Texture" id=1]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/UI/DialogNext.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/DialogLevelBox.gd" type="Script" id=4]
@@ -82,13 +81,10 @@ position = Vector2( 265, 43 )
 texture = ExtResource( 3 )
 
 [node name="OptionsRect" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

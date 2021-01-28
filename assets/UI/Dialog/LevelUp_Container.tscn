@@ -33,6 +33,7 @@ __meta__ = {
 }
 
 [node name="ButtonVIT" type="Button" parent="Options"]
+modulate = Color( 0.67, 0.39, 0, 1 )
 margin_top = 66.0
 margin_right = 30.0
 margin_bottom = 79.0
@@ -62,6 +63,7 @@ __meta__ = {
 }
 
 [node name="ButtonEND" type="Button" parent="Options"]
+modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
 margin_top = 83.0
 margin_right = 30.0
 margin_bottom = 96.0
@@ -91,6 +93,7 @@ __meta__ = {
 }
 
 [node name="ButtonDEF" type="Button" parent="Options"]
+modulate = Color( 0.2, 0.2, 1, 1 )
 margin_top = 100.0
 margin_right = 30.0
 margin_bottom = 113.0
@@ -131,6 +134,7 @@ __meta__ = {
 }
 
 [node name="ButtonSTR" type="Button" parent="Options2"]
+modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
 margin_top = 66.0
 margin_right = 30.0
 margin_bottom = 79.0
@@ -160,6 +164,7 @@ __meta__ = {
 }
 
 [node name="ButtonDEX" type="Button" parent="Options2"]
+modulate = Color( 0.32, 0.62, 0.7, 1 )
 margin_top = 83.0
 margin_right = 30.0
 margin_bottom = 96.0
@@ -189,6 +194,7 @@ __meta__ = {
 }
 
 [node name="ButtonSPD" type="Button" parent="Options2"]
+modulate = Color( 1, 1, 0.752941, 1 )
 margin_top = 100.0
 margin_right = 30.0
 margin_bottom = 113.0

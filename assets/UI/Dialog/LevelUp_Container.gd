@@ -19,7 +19,29 @@ var stats_to_add = {
 		'DEX': 0,
 		'SPD': 0,
 	}
-
+#			levelNotice.statColor = Color(0.666, 0.392549, 0)
+#		LEVELDEFENSE:
+#			stats.defense += 1
+#			levelNotice.statDisplay = "HARDINESS"
+#			levelNotice.statColor = Color(0.2, 0.2, 1)
+#		LEVELSTAMINA:
+#			stats.endurance += 1
+#			# stats.max_stamina += 15
+#			levelNotice.statDisplay = "LUNG CAPACITY"
+#			levelNotice.statColor = Color(0.372549, 1, 0.415686)
+#		LEVELSTRENGTH:
+#			stats.strength += 1
+#			levelNotice.statDisplay = "VIOLENT NATURE"
+#			levelNotice.statColor = Color(1, 0.12, 0)
+#		LEVELDEXTERITY:
+#			stats.dexterity += 1
+#			levelNotice.statDisplay = "PATIENCE"
+#			levelNotice.statColor = Color(0.324902, 0.622549, 0.705686)
+#		LEVELSPEED:
+#			stats.iframes += 0.1
+#			stats.speed += 1
+#			levelNotice.statDisplay = "SWIFTNESS"
+#			levelNotice.statColor = Color(1, 1, 0.665686)
 func _on_focus_entered():
 	$AudioMenu.play()
 

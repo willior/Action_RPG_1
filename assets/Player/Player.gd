@@ -499,7 +499,10 @@ func enemy_killed(experience_from_kill):
 		stats.experience_required *= 1.618034
 	
 func level_up():
+#	var greyscale = load("res://assets/Shaders/Greyscale_CanvasModulate.tscn").instance()
+#	get_node("/root/World/GUI").add_child(greyscale)
 	if just_leveled > 0:
+		#get_node("/root/World/GUI/Greyscale").queue_free()
 		just_leveled -= 1
 		$LevelTimer.start()
 		yield($LevelTimer, "timeout")
@@ -731,9 +734,9 @@ func game_over():
 	get_node("/root/World/Music").stream_paused = true
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
-	get_node("/root/World/GUI/HealthUI").visible = false
-	get_node("/root/World/GUI/ExpBar").visible = false
-	get_node("/root/World/GUI/StaminaBar").visible = false
+	get_node("/root/World/GUI/HealthUI1").visible = false
+	get_node("/root/World/GUI/ExpBar1").visible = false
+	get_node("/root/World/GUI/StaminaBar1").visible = false
 	self.visible = false
 	get_tree().paused = true
 
