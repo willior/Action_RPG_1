@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/Audio/SFX/Miss.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/Audio/Player/Crit.wav" type="AudioStream" id=1]
 [ext_resource path="res://Managers/SoundPlayer.gd" type="Script" id=2]
 
 [node name="SoundPlayer" type="Node"]
@@ -8,6 +8,5 @@ script = ExtResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = 6.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

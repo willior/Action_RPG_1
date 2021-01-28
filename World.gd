@@ -36,6 +36,7 @@ func _input(event):
 		
 	if event.is_action_pressed("test2"): # Y
 		player.level_up()
+		Global.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
 		pass

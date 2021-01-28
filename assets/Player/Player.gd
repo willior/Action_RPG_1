@@ -90,7 +90,6 @@ onready var talkNotice = $TalkNotice
 onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
 onready var audio = $AudioStreamPlayer
-onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
 
 func _ready():
 	if Global.get_attribute("location") != null:
@@ -287,6 +286,20 @@ func apply_status(status):
 			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
 
 func move():
+#	if position.x - Global.player2.position.x > 288 or position.x - Global.player2.position.x < -288 or position.y - Global.player2.position.y > 160 or position.y - Global.player2.position.y < -136:
+#		Global.player2.position = position
+	if position.x - Global.player2.position.x > 272:
+		Global.player2.position.x += 1
+		#return
+	if position.x - Global.player2.position.x < -272:
+		Global.player2.position.x -= 1
+		#return
+	if position.y - Global.player2.position.y > 136:
+		Global.player2.position.y += 1
+		#return
+	if position.y - Global.player2.position.y < -136:
+		Global.player2.position.y -= 1
+		#return
 	velocity = move_and_slide(velocity)
 
 func noStamina():
@@ -302,7 +315,6 @@ func set_sweating():
 func set_attack_timescale(value):
 	animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
 	animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
-	print('attack timescale set: ', value)
 
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
@@ -403,7 +415,7 @@ func shade_state(delta):
 	move()
 	
 func shade_start():
-	set_collision_mask_bit(4, false)
+	#set_collision_mask_bit(4, false)
 	stats.stamina -= 30
 	PlayerStats.dexterity_mod = 8
 	charge.stop_charge()
@@ -488,7 +500,7 @@ func level_up():
 	# var dialogLevelBox = DialogLevelBox.instance()
 	# get_node("/root/World/GUI").add_child(dialogLevelBox)
 	var levelNotice = LevelNotice.instance()
-	levelNotice.global_position = global_position
+	levelNotice.position = Vector2(87, 116)
 	levelNotice.levelDisplay = stats.level
 
 	var choice = levelStats[randi() % levelStats.size()]
@@ -521,7 +533,7 @@ func level_up():
 			stats.speed += 1
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
-	get_node("/root").add_child(levelNotice)
+	get_node("/root/World/GUI").add_child(levelNotice)
 	
 	
 func roll_stamina_drain():

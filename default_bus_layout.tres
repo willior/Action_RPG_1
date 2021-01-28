@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=4 format=2]
+[gd_resource type="AudioBusLayout" load_steps=5 format=2]
 
 [sub_resource type="AudioEffectLowPassFilter" id=1]
 resource_name = "LowPassFilter"
@@ -23,6 +23,13 @@ damping = 0.6
 hipass = 0.14
 wet = 0.1
 
+[sub_resource type="AudioEffectDelay" id=4]
+resource_name = "Delay"
+tap1/delay_ms = 90.0
+tap2/delay_ms = 110.0
+feedback/active = true
+feedback/delay_ms = 100.0
+
 [resource]
 bus/0/volume_db = -0.030508
 bus/0/effect/0/effect = SubResource( 1 )
@@ -43,3 +50,11 @@ bus/2/volume_db = 0.0
 bus/2/send = "Master"
 bus/2/effect/0/effect = SubResource( 3 )
 bus/2/effect/0/enabled = true
+bus/3/name = "ShortDelay"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = "Master"
+bus/3/effect/0/effect = SubResource( 4 )
+bus/3/effect/0/enabled = true

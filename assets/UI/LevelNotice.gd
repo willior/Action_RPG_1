@@ -4,16 +4,17 @@ onready var timer = $Timer
 onready var tween = $Tween
 onready var levelText = $VBoxContainer/LabelLevel
 onready var statText = $VBoxContainer/HBoxContainer/LabelLevelStat
-onready var player = get_tree().get_root().get_node("World/YSort/Player")
+#onready var player = get_tree().get_root().get_node("World/YSort/Player")
 
 var levelDisplay
 var statDisplay
 var statColor
 
 func _ready():
+	SoundPlayer.play_sound("level_up")
 	var statColor_fade = statColor
 	statColor_fade.a = 0
-	levelText.set_text("LEVEL " + str(levelDisplay) )
+	levelText.set_text("LEVEL " + str(levelDisplay) + "!!!")
 	statText.set_text(statDisplay)
 	#statText.add_color_override("font_color", statColor)
 	statText.modulate = statColor
@@ -51,5 +52,5 @@ func _ready():
 	yield(tween, "tween_all_completed")
 	queue_free()
 	
-func _process(_delta):
-	global_position = get_tree().get_root().get_node("World/YSort/Player").global_position
+#func _process(_delta):
+#	global_position = get_tree().get_root().get_node("World/YSort/Player").global_position

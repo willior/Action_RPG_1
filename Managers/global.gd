@@ -1,5 +1,7 @@
 extends Node
 
+var player1
+var player2
 var chapter_display = null
 var chapter_name
 var custom_variables = {}
@@ -13,6 +15,11 @@ func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() -1 )
 	rng.randomize()
+		
+func update_player():
+	player1 = get_node("/root/World/YSort/Player")
+	if GameManager.multiplayer_2:
+		player2 = get_node("/root/World/YSort/Player2")
 		
 func goto_scene(path, attributes=null):
 

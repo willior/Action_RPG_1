@@ -104,7 +104,7 @@ func _ready():
 #		inventory.items_set = false
 #		GameManager.reinitialize_player(inventory)
 #	else: GameManager.initialize_player()
-
+	Global.update_player()
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector / 4
 	collision.disabled = false
@@ -290,6 +290,20 @@ func apply_status(status):
 			# animationTree.set("parameters/Attack2/TimeScale/scale", Player2Stats.attack_speed)
 
 func move():
+#	if position.x - Global.player1.position.x > 288 or position.x - Global.player1.position.x < -288 or position.y - Global.player1.position.y > 160 or position.y - Global.player1.position.y < -136:
+#		Global.player1.position = position
+	if position.x - Global.player1.position.x > 272:
+		Global.player1.position.x += 1
+		#return
+	if position.x - Global.player1.position.x < -272:
+		Global.player1.position.x -= 1
+		#return
+	if position.y - Global.player1.position.y > 136:
+		Global.player1.position.y += 1
+		#return
+	if position.y - Global.player1.position.y < -136:
+		Global.player1.position.y -= 1
+		#return
 	velocity = move_and_slide(velocity)
 
 func noStamina():
@@ -302,10 +316,9 @@ func set_sweating():
 	# stats.status = "sweating"
 	$ChargeUI/StaminaProgress.visible = false
 
-func set_attack_timescale(value):
+func set_attack_timescale(_value):
 	animationTree.set("parameters/Attack1/TimeScale/scale", Player2Stats.attack_speed)
 	animationTree.set("parameters/Attack2/TimeScale/scale", Player2Stats.attack_speed)
-	print('attack timescale set: ', value)
 
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
@@ -406,7 +419,7 @@ func shade_state(delta):
 	move()
 	
 func shade_start():
-	set_collision_mask_bit(4, false)
+	#set_collision_mask_bit(4, false)
 	stats.stamina -= 30
 	Player2Stats.dexterity_mod = 8
 	charge.stop_charge()
@@ -491,9 +504,8 @@ func level_up():
 	# var dialogLevelBox = DialogLevelBox.instance()
 	# get_node("/root/World/GUI").add_child(dialogLevelBox)
 	var levelNotice = LevelNotice.instance()
-	levelNotice.global_position = global_position
+	levelNotice.position = Vector2(233, 116)
 	levelNotice.levelDisplay = stats.level
-
 	var choice = levelStats[randi() % levelStats.size()]
 	match choice:
 		LEVELHEALTH:
@@ -524,7 +536,7 @@ func level_up():
 			stats.speed += 1
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.415686)
-	get_node("/root").add_child(levelNotice)
+	get_node("/root/World/GUI").add_child(levelNotice)
 	
 	
 func roll_stamina_drain():
