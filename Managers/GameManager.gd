@@ -12,7 +12,7 @@ var on_title_screen = false
 var existing_inventory
 var player
 var player2
-var multiplayer_2 = true
+var multiplayer_2 = false
 
 signal player_initialized
 signal player_reinitialized

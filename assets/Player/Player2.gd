@@ -205,6 +205,8 @@ func move_state(delta):
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.speed_mod), stats.acceleration * delta)
+		if position.x - Global.player1.position.x > 288 or position.x - Global.player1.position.x < -288 or position.y - Global.player1.position.y > 160 or position.y - Global.player1.position.y < -136:
+			Global.player1.position = position
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
@@ -290,8 +292,6 @@ func apply_status(status):
 			# animationTree.set("parameters/Attack2/TimeScale/scale", Player2Stats.attack_speed)
 
 func move():
-#	if position.x - Global.player1.position.x > 288 or position.x - Global.player1.position.x < -288 or position.y - Global.player1.position.y > 160 or position.y - Global.player1.position.y < -136:
-#		Global.player1.position = position
 	if position.x - Global.player1.position.x > 272:
 		Global.player1.position.x += 1
 		#return
@@ -316,9 +316,9 @@ func set_sweating():
 	# stats.status = "sweating"
 	$ChargeUI/StaminaProgress.visible = false
 
-func set_attack_timescale(_value):
-	animationTree.set("parameters/Attack1/TimeScale/scale", Player2Stats.attack_speed)
-	animationTree.set("parameters/Attack2/TimeScale/scale", Player2Stats.attack_speed)
+func set_attack_timescale(value):
+	animationTree.set("parameters/Attack1/TimeScale/scale", value)
+	animationTree.set("parameters/Attack2/TimeScale/scale", value)
 
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true

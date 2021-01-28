@@ -202,15 +202,8 @@ func attack_finished():
 	pass
 		
 func update_wander_state():
-	if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
-		var newEnemySpawner = EnemySpawner.instance()
-		get_parent().call_deferred("add_child", newEnemySpawner)
-		newEnemySpawner.ENEMY = load("res://assets/Enemies/Bat.tscn")
-		newEnemySpawner.global_position = global_position
-		queue_free()
-	else:
-		state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
-		wanderController.start_wander_timer(rand_range(1, 3)) # starts wander timer between 1s & 3s
+	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
+	wanderController.start_wander_timer(rand_range(1, 3)) # starts wander timer between 1s & 3s
 		
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved
@@ -339,3 +332,14 @@ func _on_Hurtbox_invincibility_started():
 
 func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
+
+func _on_VisibilityNotifier2D_viewport_exited(_viewport):
+	if stats.health <= 0:
+		queue_free()
+	else:
+		queue_free()
+		var newEnemySpawner = EnemySpawner.instance()
+		get_parent().call_deferred("add_child", newEnemySpawner)
+		newEnemySpawner.ENEMY = load("res://assets/Enemies/Bat.tscn")
+		newEnemySpawner.global_position = global_position
+	

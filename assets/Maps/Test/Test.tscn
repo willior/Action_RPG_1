@@ -253,10 +253,8 @@ __meta__ = {
 }
 
 [node name="Camera2D" parent="." instance=ExtResource( 20 )]
-position = Vector2( 48, 48 )
-offset = Vector2( 0, -8 )
-drag_margin_left = 0.05
-drag_margin_right = 0.05
+smoothing_enabled = true
+smoothing_speed = 8.0
 
 [node name="FadeIn" parent="." instance=ExtResource( 19 )]
 

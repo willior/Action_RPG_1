@@ -225,11 +225,20 @@ stream = ExtResource( 15 )
 
 [node name="EnemyHealth" parent="." instance=ExtResource( 16 )]
 visible = false
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, -16 )
+scale = Vector2( 1, 2.75 )
+rect = Rect2( -1, -1, 2, 8 )
+__meta__ = {
+"_editor_description_": "	"
+}
 [connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="AttackPlayerZone/AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
 
 [editable path="Hurtbox"]
 
