@@ -72,6 +72,7 @@ var talkNoticeDisplay = false setget set_talk_notice
 var interactNoticeDisplay = false setget set_interact_notice
 var sweating = false
 var dying = false
+var just_leveled = 0
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -498,44 +499,54 @@ func enemy_killed(experience_from_kill):
 		stats.experience_required *= 1.618034
 	
 func level_up():
+	if just_leveled > 0:
+		just_leveled -= 1
+		$LevelTimer.start()
+		yield($LevelTimer, "timeout")
+		level_up()
+		return
+		
+	just_leveled += 1
 	stats.level += 1
-	# var dialogLevelBox = DialogLevelBox.instance()
-	# get_node("/root/World/GUI").add_child(dialogLevelBox)
-	var levelNotice = LevelNotice.instance()
-	levelNotice.position = Vector2(87, 116)
-	levelNotice.levelDisplay = stats.level
+	var dialogLevelBox = DialogLevelBox.instance()
+	get_node("/root/World/GUI").add_child(dialogLevelBox)
+	
+	
+#	var levelNotice = LevelNotice.instance()
+#	levelNotice.position = Vector2(87, 116)
+#	levelNotice.levelDisplay = stats.level
 
-	var choice = levelStats[randi() % levelStats.size()]
-	match choice:
-		LEVELHEALTH:
-#			stats.max_health += 15
-#			stats.health += 15
-			stats.vitality +=1
-			levelNotice.statDisplay = "WILLPOWER"
-			levelNotice.statColor = Color(0.666, 0.392549, 0)
-		LEVELDEFENSE:
-			stats.defense += 1
-			levelNotice.statDisplay = "HARDINESS"
-			levelNotice.statColor = Color(0.2, 0.2, 1)
-		LEVELSTAMINA:
-			stats.endurance += 1
-			# stats.max_stamina += 15
-			levelNotice.statDisplay = "LUNG CAPACITY"
-			levelNotice.statColor = Color(0.372549, 1, 0.415686)
-		LEVELSTRENGTH:
-			stats.strength += 1
-			levelNotice.statDisplay = "VIOLENT NATURE"
-			levelNotice.statColor = Color(1, 0.12, 0)
-		LEVELDEXTERITY:
-			stats.dexterity += 1
-			levelNotice.statDisplay = "PATIENCE"
-			levelNotice.statColor = Color(0.324902, 0.622549, 0.705686)
-		LEVELSPEED:
-			stats.iframes += 0.1
-			stats.speed += 1
-			levelNotice.statDisplay = "SWIFTNESS"
-			levelNotice.statColor = Color(1, 1, 0.665686)
-	get_node("/root/World/GUI").add_child(levelNotice)
+#	var choice = levelStats[randi() % levelStats.size()]
+#	match choice:
+#		LEVELHEALTH:
+##			stats.max_health += 15
+##			stats.health += 15
+#			stats.vitality +=1
+#			levelNotice.statDisplay = "WILLPOWER"
+#			levelNotice.statColor = Color(0.666, 0.392549, 0)
+#		LEVELDEFENSE:
+#			stats.defense += 1
+#			levelNotice.statDisplay = "HARDINESS"
+#			levelNotice.statColor = Color(0.2, 0.2, 1)
+#		LEVELSTAMINA:
+#			stats.endurance += 1
+#			# stats.max_stamina += 15
+#			levelNotice.statDisplay = "LUNG CAPACITY"
+#			levelNotice.statColor = Color(0.372549, 1, 0.415686)
+#		LEVELSTRENGTH:
+#			stats.strength += 1
+#			levelNotice.statDisplay = "VIOLENT NATURE"
+#			levelNotice.statColor = Color(1, 0.12, 0)
+#		LEVELDEXTERITY:
+#			stats.dexterity += 1
+#			levelNotice.statDisplay = "PATIENCE"
+#			levelNotice.statColor = Color(0.324902, 0.622549, 0.705686)
+#		LEVELSPEED:
+#			stats.iframes += 0.1
+#			stats.speed += 1
+#			levelNotice.statDisplay = "SWIFTNESS"
+#			levelNotice.statColor = Color(1, 1, 0.665686)
+	#get_node("/root/World/GUI").add_child(levelNotice)
 
 func roll_stamina_drain():
 	stats.stamina -= 15

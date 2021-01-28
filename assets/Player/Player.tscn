@@ -2195,6 +2195,8 @@ one_shot = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="LevelTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

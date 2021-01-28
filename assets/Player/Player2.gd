@@ -501,11 +501,14 @@ func enemy_killed(experience_from_kill):
 	
 func level_up():
 	stats.level += 1
+	
 	# var dialogLevelBox = DialogLevelBox.instance()
 	# get_node("/root/World/GUI").add_child(dialogLevelBox)
+	
 	var levelNotice = LevelNotice.instance()
 	levelNotice.position = Vector2(233, 116)
 	levelNotice.levelDisplay = stats.level
+	
 	var choice = levelStats[randi() % levelStats.size()]
 	match choice:
 		LEVELHEALTH:
@@ -537,8 +540,7 @@ func level_up():
 			levelNotice.statDisplay = "SWIFTNESS"
 			levelNotice.statColor = Color(1, 1, 0.665686)
 	get_node("/root/World/GUI").add_child(levelNotice)
-	
-	
+
 func roll_stamina_drain():
 	stats.stamina -= 15
 	base_enemy_accuracy = 32
