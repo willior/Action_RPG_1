@@ -82,5 +82,13 @@ func _on_ButtonSPD_pressed():
 	button_pressed()
 	
 func button_pressed():
-	get_tree().set_input_as_handled()
+	#get_tree().set_input_as_handled()
 	print('button pressed')
+
+
+func _on_ButtonVIT_button_down():
+	pass # Replace with function body.
+
+
+func _on_ButtonVIT_button_up():
+	pass # Replace with function body.
