@@ -512,11 +512,11 @@ func level_up():
 #			stats.health += 15
 			stats.vitality +=1
 			levelNotice.statDisplay = "WILLPOWER"
-			levelNotice.statColor = Color(1, 0.272549, 0.315686)
+			levelNotice.statColor = Color(0.666, 0.392549, 0)
 		LEVELDEFENSE:
 			stats.defense += 1
 			levelNotice.statDisplay = "HARDINESS"
-			levelNotice.statColor = Color(0.372549, 1, 0.415686)
+			levelNotice.statColor = Color(0.2, 0.2, 1)
 		LEVELSTAMINA:
 			stats.endurance += 1
 			# stats.max_stamina += 15
@@ -525,19 +525,18 @@ func level_up():
 		LEVELSTRENGTH:
 			stats.strength += 1
 			levelNotice.statDisplay = "VIOLENT NATURE"
-			levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
+			levelNotice.statColor = Color(1, 0.12, 0)
 		LEVELDEXTERITY:
 			stats.dexterity += 1
 			levelNotice.statDisplay = "PATIENCE"
-			levelNotice.statColor = Color(0.254902, 0.372549, 0.415686)
+			levelNotice.statColor = Color(0.324902, 0.622549, 0.705686)
 		LEVELSPEED:
 			stats.iframes += 0.1
 			stats.speed += 1
 			levelNotice.statDisplay = "SWIFTNESS"
-			levelNotice.statColor = Color(1, 1, 0.415686)
+			levelNotice.statColor = Color(1, 1, 0.665686)
 	get_node("/root/World/GUI").add_child(levelNotice)
-	
-	
+
 func roll_stamina_drain():
 	stats.stamina -= 15
 	base_enemy_accuracy = 32
