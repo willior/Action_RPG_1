@@ -23,7 +23,6 @@ tracks/0/keys = {
 }
 
 [node name="ExpNotice" type="Node2D"]
-pause_mode = 1
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]

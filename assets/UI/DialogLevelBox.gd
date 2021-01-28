@@ -26,7 +26,7 @@ var dialog_object_path
 var dialog_script = [
 				{
 					'level_up': '2',
-					'text': "LEVEL UP!",
+					'text': "LEVEL UP!!",
 				},
 #				{
 #					'question': "Are you sure about that?",
