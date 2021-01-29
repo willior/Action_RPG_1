@@ -15,9 +15,9 @@ var friction = 800
 var shade_friction = 1600
 var dir_vector = Vector2.DOWN
 
-var vitality = 10 setget set_vitality
+var vitality = 4 setget set_vitality
 var endurance = 10 setget set_endurance
-var defense = 10.0 setget set_defense
+var defense = 4.0 setget set_defense
 var strength = 10.0 setget set_strength
 var dexterity = 10.0 setget set_dexterity
 var speed = 10.0 setget set_speed

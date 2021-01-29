@@ -201,6 +201,7 @@ func event_handler(event):
 				#update_text(event['text'])
 				apply_level_stats()
 			if event['action'] == 'end_dialog':
+				get_node("/root/World/GUI/TweenGreyscale").fade_out_greyscale()
 				$TimerDelaySelect.start()
 				yield($TimerDelaySelect, "timeout")
 				end_dialog()

@@ -1618,7 +1618,7 @@ nodes/BlendSpace2D/position = Vector2( 30, 110 )
 nodes/TimeScale/node = SubResource( 42 )
 nodes/TimeScale/position = Vector2( 210, 110 )
 nodes/output/position = Vector2( 360, 110 )
-node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
 
 [sub_resource type="AnimationNodeAnimation" id=44]
 animation = "Attack2Down"
@@ -1654,7 +1654,7 @@ nodes/BlendSpace2D/position = Vector2( 140, 120 )
 nodes/TimeScale/node = SubResource( 49 )
 nodes/TimeScale/position = Vector2( 340, 100 )
 nodes/output/position = Vector2( 540, 90 )
-node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
 
 [sub_resource type="AnimationNodeAnimation" id=51]
 animation = "BackstepRight"
@@ -1815,7 +1815,7 @@ nodes/BlendSpace2D/position = Vector2( -70, 140 )
 nodes/TimeScale/node = SubResource( 81 )
 nodes/TimeScale/position = Vector2( 110, 140 )
 nodes/output/position = Vector2( 260, 140 )
-node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
 
 [sub_resource type="AnimationNodeAnimation" id=83]
 animation = "AttackShadeLeft"

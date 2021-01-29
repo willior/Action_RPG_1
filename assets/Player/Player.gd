@@ -6,6 +6,7 @@ const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const DialogLevelBox = preload("res://assets/UI/DialogLevelBox.tscn")
+const TweenGreyscale = preload("res://assets/Shaders/Greyscale_TweenCanvasModulate.tscn")
 const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const WhiteFlash = preload("res://assets/Shaders/White_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
@@ -512,9 +513,9 @@ func level_up():
 	just_leveled += 1
 	stats.level += 1
 	var dialogLevelBox = DialogLevelBox.instance()
-	get_node("/root/World/GUI").add_child(dialogLevelBox)
-	
-	
+	get_node("/root/World/Overlay").add_child(dialogLevelBox)
+	var tweenGreyscale = TweenGreyscale.instance()
+	get_node("/root/World/GUI").add_child(tweenGreyscale)
 #	var levelNotice = LevelNotice.instance()
 #	levelNotice.position = Vector2(87, 116)
 #	levelNotice.levelDisplay = stats.level

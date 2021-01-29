@@ -1260,4 +1260,7 @@ volume_db = -48.0
 
 [node name="GUI" parent="." instance=ExtResource( 32 )]
 
+[node name="Overlay" type="CanvasLayer" parent="."]
+layer = 4
+
 [editable path="Map/Exit_toHome"]
