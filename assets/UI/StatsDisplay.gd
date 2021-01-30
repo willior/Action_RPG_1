@@ -16,17 +16,14 @@ onready var dexterityBox = $Vbox/dex
 onready var speedBox = $Vbox/spd
 
 func set_vitality(value):
-	print('vit set')
 	currentVitality = str(value)
 	healthBox.set_text("VIT " + currentVitality + " (" + currentHealth + "/" + currentMax_health + "HP)")
 
 func set_max_health(value):
-	print('max hp set')
 	currentMax_health = str(value)
 	healthBox.set_text("VIT " + currentVitality + " (" + currentHealth + "/" + currentMax_health + "HP)")
 
 func set_health(value):
-	print('health set')
 	currentHealth = str(value)
 	healthBox.set_text("VIT " + currentVitality + " (" + currentHealth + "/" + currentMax_health + "HP)")
 	

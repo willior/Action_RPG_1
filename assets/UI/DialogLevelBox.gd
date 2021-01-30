@@ -197,9 +197,11 @@ func event_handler(event):
 				update_name(event)
 				update_text(event['text'])
 				get_node(dialog_object_path).acquire_item()
+				
 			if event['action'] == 'apply_level':
 				#update_text(event['text'])
 				apply_level_stats()
+				
 			if event['action'] == 'end_dialog':
 				get_node("/root/World/GUI/TweenGreyscale").fade_out_greyscale()
 				$TimerDelaySelect.start()

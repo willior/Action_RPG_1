@@ -500,18 +500,20 @@ func enemy_killed(experience_from_kill):
 		stats.experience_required *= 1.618034
 	
 func level_up():
-#	var greyscale = load("res://assets/Shaders/Greyscale_CanvasModulate.tscn").instance()
-#	get_node("/root/World/GUI").add_child(greyscale)
+	print('level_up(): checking if just_leveled > 0')
+	# THE ISSUE IS HERE:
 	$LevelTimer.start()
 	yield($LevelTimer, "timeout")
+	
 	if just_leveled > 0:
-		#get_node("/root/World/GUI/Greyscale").queue_free()
+		print('LevelTimer timeout: re-leveling & returning')
 		just_leveled -= 1
 		level_up()
 		return
 		
 	just_leveled += 1
 	stats.level += 1
+	print('just_leveled +=1: instancing level screen')
 	var dialogLevelBox = DialogLevelBox.instance()
 	get_node("/root/World/Overlay").add_child(dialogLevelBox)
 	var tweenGreyscale = TweenGreyscale.instance()
