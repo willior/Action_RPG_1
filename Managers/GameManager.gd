@@ -8,11 +8,12 @@ extends Node
 # when the player is reinitialized, the old inventory is stored,
 # and used as the argument to run the "reinitialize_player" function,
 # which sets the current player scene's inventory to that of the argument's.
+
 var on_title_screen = false
 var existing_inventory
 var player
 var player2
-var multiplayer_2 = true
+var multiplayer_2 = false
 
 signal player_initialized
 signal player_reinitialized

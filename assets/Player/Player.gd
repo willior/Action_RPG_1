@@ -186,7 +186,7 @@ func move_state(delta):
 			$Sweat.visible = false
 			stats.status = "sweating_end"
 	elif stats.stamina < stats.max_stamina:
-		stats.stamina += 0.45
+		stats.stamina += 0.5
 
 	# if player is moving
 	if input_vector != Vector2.ZERO:
@@ -377,7 +377,7 @@ func attack_animation_finished():
 # releasing the attack button after achieving a charge level unleashes a special attack
 func charge_state(_delta):
 	# stamina drain
-	stats.stamina -= 0.5
+	stats.stamina -= 0.55
 	# if either attack is charged and the player runs out of stamina
 	if stats.stamina <= 0:
 		if !sweating:
@@ -391,7 +391,7 @@ func charge_state(_delta):
 		
 	# if the current charge is less than the max charge
 	if charge_count < stats.max_charge:
-		charge_count += 2
+		charge_count += 1
 		stats.charge = charge_count
 	# if the charge count reaches 50%
 	if charge_count == stats.max_charge/2:
@@ -708,6 +708,7 @@ func _on_Hurtbox_invincibility_ended():
 	
 func dying_effect(value):
 	if value && !dying:
+		Engine.time_scale = 0.8
 		set_collision_mask_bit(12, true)
 		var heartbeat = Heartbeat.instance()
 		var greyscale = Greyscale.instance()
@@ -719,6 +720,7 @@ func dying_effect(value):
 		get_node("/root/World/SFX").stream_paused = true
 		dying = true
 	elif !value && dying:
+		Engine.time_scale = 1
 		set_collision_mask_bit(12, false)
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 		get_node("/root/World/GUI/Greyscale").queue_free()

@@ -335,7 +335,7 @@ func _on_Hurtbox_invincibility_ended():
 
 func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if stats.health <= 0:
-		queue_free()
+		return
 	else:
 		queue_free()
 		var newEnemySpawner = EnemySpawner.instance()

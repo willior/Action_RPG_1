@@ -91,7 +91,6 @@ func _physics_process(delta):
 			
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
-
 				
 		CHASE:
 			if playerDetectionZone.player != null:
@@ -377,7 +376,7 @@ func audio_cawcawcaw():
 
 func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if stats.health <= 0:
-		queue_free()
+		return
 	else:
 		queue_free()
 		var newEnemySpawner = EnemySpawner.instance()

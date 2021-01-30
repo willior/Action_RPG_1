@@ -322,7 +322,7 @@ func audio_hit():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	if stats.health <= 0:
-		queue_free()
+		return
 	else:
 		queue_free()
 		var newEnemySpawner = EnemySpawner.instance()

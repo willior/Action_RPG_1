@@ -44,7 +44,27 @@ func set_stamina(value):
 	
 	if !staminaProgress.visible && staminaPercent < 1:
 		staminaProgress.visible = true
+		$Tween.interpolate_property(staminaProgress,
+		"modulate",
+		Color(1, 1, 1, 0),
+		Color(1, 1, 1, 1),
+		0.3,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+		)
+		$Tween.start()
+	
 	elif staminaProgress.visible && (staminaPercent == 1 || (staminaPercent <= 0 && PlayerStats.status == "sweating")):
+		$Tween.interpolate_property(staminaProgress,
+		"modulate",
+		Color(1, 1, 1, 1),
+		Color(1, 1, 1, 0),
+		0.3,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+		)
+		$Tween.start()
+		yield($Tween, "tween_all_completed")
 		staminaProgress.visible = false
 
 	if staminaPercent < 0.25 && staminaPercent != 0 && !staminaWarning:

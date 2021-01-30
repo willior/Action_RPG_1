@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/UI/Dialog/Hover_StyleBoxTex_LevelUp_Button.tres" type="StyleBox" id=6]
 [ext_resource path="res://assets/UI/Dialog/Font_LevelUp_Button.tres" type="DynamicFont" id=7]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
 [node name="LevelUp_Container" type="HBoxContainer"]
@@ -60,7 +60,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "option1"
 text = "option1"
@@ -94,7 +94,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "option1"
 text = "option1"
@@ -128,7 +128,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "option1"
 text = "option1"
@@ -138,8 +138,8 @@ __meta__ = {
 }
 
 [node name="Options2" type="VBoxContainer" parent="."]
-margin_left = 156.0
-margin_right = 246.0
+margin_left = 158.0
+margin_right = 248.0
 margin_bottom = 180.0
 grow_vertical = 2
 rect_min_size = Vector2( 90, 0 )
@@ -173,7 +173,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "option1"
 text = "option1"
@@ -207,7 +207,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "option1"
 text = "option1"
@@ -241,7 +241,7 @@ anchor_bottom = 1.0
 margin_left = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
-custom_fonts/normal_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "option1"
 text = "option1"

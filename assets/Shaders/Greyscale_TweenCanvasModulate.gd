@@ -10,7 +10,6 @@ func _ready():
 	Tween.EASE_IN
 	)
 	$Tween.start()
-	yield($Tween, "tween_all_completed")
 
 func fade_out_greyscale():
 	$Tween.interpolate_property(self,
