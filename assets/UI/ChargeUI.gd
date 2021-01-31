@@ -47,7 +47,7 @@ func set_stamina(value):
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
 		Color(1, 1, 1, 0),
-		Color(1, 1, 1, 1),
+		Color(1, 1, 1, 0.6),
 		0.3,
 		Tween.TRANS_LINEAR,
 		Tween.EASE_IN

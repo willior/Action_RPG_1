@@ -92,7 +92,7 @@ stream = ExtResource( 5 )
 stream = ExtResource( 7 )
 
 [node name="StaminaProgress" type="TextureProgress" parent="."]
-modulate = Color( 1, 1, 1, 0.627451 )
+modulate = Color( 1, 1, 1, 0.6 )
 light_mask = 0
 use_parent_material = true
 margin_left = -36.0
