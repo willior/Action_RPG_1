@@ -1,7 +1,7 @@
 extends Control
 
 const BUTTON = preload("Dialog/Dialog_Button.tscn")
-const LEVELUPCONTAINER = preload("Dialog/LevelUp_Container.tscn")
+# const LEVELUPCONTAINER = preload("Dialog/LevelUp_Container.tscn")
 onready var label = $Text/RichTextLabel
 
 var default_stats_remaining = 2
@@ -21,7 +21,6 @@ var level_flag = false
 var waiting_for_answer = false
 var waiting_for_level = false
 var waiting_for_input = false
-
 var dialog_object_path
 var dialog_script = [
 				{
@@ -37,9 +36,8 @@ var dialog_script = [
 #					'checkpoint': '-2',
 #				},
 #				{
-##					'text': "You levelled successfully!",
+#					'text': "You levelled successfully!",
 #					'action': 'apply_level'
-#
 #				},
 				{
 					'action': 'end_dialog'
@@ -176,8 +174,8 @@ func event_handler(event):
 			level_flag = true
 			update_text(event['text'])
 			# stats_remaining = default_stats_remaining
-			var levelUpButtons = LEVELUPCONTAINER.instance()
-			$OptionsRect.add_child(levelUpButtons)
+#			var levelUpButtons = LEVELUPCONTAINER.instance()
+#			$OptionsRect.add_child(levelUpButtons)
 # warning-ignore:return_value_discarded
 			$OptionsRect/LevelUp_Container/Options/ButtonVIT.connect("pressed", self, "_on_level_selected", ["VIT"])
 # warning-ignore:return_value_discarded

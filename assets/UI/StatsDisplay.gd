@@ -17,7 +17,7 @@ onready var speedBox = $Vbox/spd
 
 func set_vitality(value):
 	currentVitality = str(value)
-	healthBox.set_text("VIT " + currentVitality + " (" + currentHealth + "/" + currentMax_health + "HP)")
+	healthBox.set_text("VIT " + currentVitality + " (" + currentHealth + "/" + currentMax_health + ")")
 
 func set_max_health(value):
 	currentMax_health = str(value)

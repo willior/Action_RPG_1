@@ -279,6 +279,7 @@ __meta__ = {
 }
 
 [node name="StatsDisplay" type="Control" parent="."]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 9 )
@@ -368,7 +369,6 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
 [node name="Controls" parent="StatsDisplay" instance=ExtResource( 8 )]
-visible = false
 margin_left = 64.0
 margin_top = 38.0
 margin_right = 169.0

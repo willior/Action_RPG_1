@@ -513,11 +513,11 @@ func level_up():
 		stats_to_allocate += 4
 	elif stats.level >= 31:
 		stats_to_allocate += 5
-	print('Level ', stats.level, ' achieved. Total stats_to_allocate: ', stats_to_allocate)
+	print('Level ', stats.level, ' achieved. Current total stats_to_allocate: ', stats_to_allocate)
 	$LevelTimer.start()
 	yield($LevelTimer, "timeout")
 	if just_leveled:
-		print('LevelTimer timeout. stats_to_allocate = ', stats_to_allocate)
+		print('LevelTimer timeout. Final total stats_to_allocate = ', stats_to_allocate)
 		just_leveled = false
 		var dialogLevelBox = DialogLevelBox.instance()
 		dialogLevelBox.stats_remaining = stats_to_allocate
