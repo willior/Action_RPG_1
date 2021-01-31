@@ -47,6 +47,7 @@ var levelResult = 0
 var level_queued = false
 var queued_levels = 0
 var levels_to_add = 0
+var stats_to_allocate = 0
 
 var roll_moving = false
 var backstep_moving = false
@@ -502,13 +503,29 @@ func enemy_killed(experience_from_kill):
 		stats.experience_required *= 1.618034
 		
 func level_up():
-	levels_to_add += 1
+	just_leveled = true
+	stats.level += 1
+	if stats.level < 11:
+		stats_to_allocate += 2
+	elif stats.level < 21:
+		stats_to_allocate += 3
+	elif stats.level < 31:
+		stats_to_allocate += 4
+	elif stats.level >= 31:
+		stats_to_allocate += 5
+	print('Level ', stats.level, ' achieved. Total stats_to_allocate: ', stats_to_allocate)
 	$LevelTimer.start()
 	yield($LevelTimer, "timeout")
-	for x in levels_to_add:
-		levels_to_add -= 1
-		print(x)
-	
+	if just_leveled:
+		print('LevelTimer timeout. stats_to_allocate = ', stats_to_allocate)
+		just_leveled = false
+		var dialogLevelBox = DialogLevelBox.instance()
+		dialogLevelBox.stats_remaining = stats_to_allocate
+		stats_to_allocate = 0
+		get_node("/root/World/Overlay").add_child(dialogLevelBox)
+		var tweenGreyscale = TweenGreyscale.instance()
+		get_node("/root/World/GUI").add_child(tweenGreyscale)
+		
 func old_level_up():
 	print('level_up(): checking if just_leveled > 0')
 	# THE ISSUE IS HERE:

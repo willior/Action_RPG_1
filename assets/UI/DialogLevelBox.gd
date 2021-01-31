@@ -175,7 +175,7 @@ func event_handler(event):
 			waiting_for_level = true
 			level_flag = true
 			update_text(event['text'])
-			stats_remaining = default_stats_remaining
+			# stats_remaining = default_stats_remaining
 			var levelUpButtons = LEVELUPCONTAINER.instance()
 			$OptionsRect.add_child(levelUpButtons)
 # warning-ignore:return_value_discarded
