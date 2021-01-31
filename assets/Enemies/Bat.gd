@@ -259,7 +259,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 			)
 			tween.start()
 		else:
-			knockback = area.knockback_vector * 200 # knockback velocity on killing blow
+			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
 
 func _on_BatStats_no_health():
 	sprite.playing = false # stop animation

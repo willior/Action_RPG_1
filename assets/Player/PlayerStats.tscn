@@ -158,6 +158,7 @@ func set_vitality(value):
 		health_increase = 10
 
 	self.max_health += health_increase
+	self.health += health_increase
 	print('vitality changed: health increased by ', health_increase)
 	emit_signal(\"vitality_changed\", vitality)
 

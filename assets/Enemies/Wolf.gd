@@ -242,7 +242,7 @@ func _on_Hurtbox_area_entered(area):
 			)
 			tween.start()
 		else:
-			knockback = area.knockback_vector * 200 # knockback velocity on killing blow
+			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")

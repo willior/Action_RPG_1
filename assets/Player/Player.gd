@@ -352,10 +352,9 @@ func attack2_stamina_drain():
 
 func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
-	state = MOVE
 	base_enemy_accuracy = 66
 	PlayerStats.dexterity_mod = 0
-	if attack2_queued:
+	if attack2_queued && !Input.is_action_pressed("attack"):
 		attack2_queued = false
 		state = ATTACK2
 	elif attack1_queued:
@@ -416,8 +415,9 @@ func shade_state(delta):
 # warning-ignore:integer_division
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	else:
-		if Input.is_action_just_pressed("attack"):
+		if Input.is_action_just_released("attack"):
 			attack2_queued = true
+			print('attack released during shade: attack2_queued')
 	animationState.travel("Shade")
 	move()
 	

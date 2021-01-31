@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=2]
+[gd_scene load_steps=143 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -641,10 +641,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.35, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143 ]
+"values": [ 132, 133, 134, 135, 136, 137, 138, 139, 140 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -741,10 +741,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.35, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71 ]
+"values": [ 60, 61, 62, 63, 64, 65, 66, 67, 68 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -841,10 +841,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.35, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131 ]
+"values": [ 120, 121, 122, 123, 124, 125, 126, 127, 128 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -941,10 +941,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.35, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83 ]
+"values": [ 72, 73, 74, 75, 76, 77, 78, 79, 80 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -1031,6 +1031,44 @@ tracks/6/keys = {
 "values": [ 3585 ]
 }
 
+[sub_resource type="Animation" id=127]
+resource_name = "BackstepLeft"
+length = 0.3
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.16, 0.24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 184, 185, 186, 187 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.16, 0.24 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "backstep_stamina_drain"
+}, {
+"args": [  ],
+"method": "backstep_stop"
+}, {
+"args": [  ],
+"method": "backstep_animation_finished"
+} ]
+}
+
 [sub_resource type="Animation" id=19]
 length = 0.3
 loop = true
@@ -1045,7 +1083,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.08, 0.16, 0.24 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 181, 182, 183, 184 ]
+"values": [ 180, 181, 182, 183 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -1657,10 +1695,10 @@ nodes/output/position = Vector2( 540, 90 )
 node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
 
 [sub_resource type="AnimationNodeAnimation" id=51]
-animation = "BackstepRight"
+animation = "BackstepLeft"
 
 [sub_resource type="AnimationNodeAnimation" id=52]
-animation = "BackstepRight"
+animation = "BackstepLeft"
 
 [sub_resource type="AnimationNodeAnimation" id=53]
 animation = "BackstepRight"
@@ -2022,7 +2060,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 134
+frame = 132
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2047,6 +2085,7 @@ anims/AttackShadeDown = SubResource( 15 )
 anims/AttackShadeLeft = SubResource( 16 )
 anims/AttackShadeRight = SubResource( 17 )
 anims/AttackShadeUp = SubResource( 18 )
+anims/BackstepLeft = SubResource( 127 )
 anims/BackstepRight = SubResource( 19 )
 anims/Death = SubResource( 20 )
 anims/HitDown = SubResource( 21 )
@@ -2074,7 +2113,7 @@ parameters/Attack1/BlendSpace2D/blend_position = Vector2( -0.00126582, 0.963019 
 parameters/Attack1/TimeScale/scale = 1.0
 parameters/Attack2/BlendSpace2D/blend_position = Vector2( -0.00258398, 0.983774 )
 parameters/Attack2/TimeScale/scale = 1.0
-parameters/Backstep/blend_position = Vector2( 0, 0 )
+parameters/Backstep/blend_position = Vector2( 0.00119328, 0.0167301 )
 parameters/Flash/blend_position = Vector2( -0.00122851, 1.09371 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
 parameters/Idle/blend_position = Vector2( -0.00124067, 1.01963 )
