@@ -41,6 +41,7 @@ var velocity = Vector2.ZERO
 var dir_vector = PlayerStats.dir_vector
 var damageTaken = 0
 var stats = PlayerStats
+var stamina_regen_level = 0
 var levelStats = [0, 1, 2, 3, 4, 5]
 var levelResult = 0
 
@@ -176,16 +177,6 @@ func _input(event):
 					noStamina()
 				else:
 					attack1_queued = true
-					
-func stamina_regeneration():
-	if sweating:
-		stats.stamina += 0.3
-		if stats.stamina > 30:
-			sweating = false
-			$Sweat.visible = false
-			stats.status = "sweating_end"
-	elif stats.stamina < stats.max_stamina:
-		stats.stamina += 0.5
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -270,7 +261,41 @@ func move_state(delta):
 				state = BACKSTEP
 		else:
 			noStamina()
-			
+
+func stamina_regeneration():
+	if sweating:
+		stats.stamina += (stats.stamina_regen_rate * 0.6) # sweating rate
+		if stats.stamina > 30:
+			sweating = false
+			$Sweat.visible = false
+			stats.status = "sweating_end"
+	
+	elif stats.stamina < stats.max_stamina:
+		match stamina_regen_level:
+			0:
+				stats.stamina += stats.stamina_regen_rate
+			1:
+				stats.stamina += stats.stamina_regen_rate * 2
+			2:
+				stats.stamina += stats.stamina_regen_rate * 10
+		if Input.is_action_pressed("attack") || Input.is_action_pressed("roll"):
+			if timer.is_stopped():
+				timer.start()
+			return
+		elif stamina_regen_level < 2 && timer.is_stopped():
+			print('starting stamina regen level timer...')
+			timer.start(0.6)
+			yield(timer, "timeout")
+			stamina_regen_level += 1
+			print('stam regen timeout: stamina_regen_level = ', stamina_regen_level)
+
+func stamina_regen_reset():
+	print('restarting timer; checking stamina_regen_level')
+	timer.start(0.7)
+	if stamina_regen_level > 0:
+		stamina_regen_level = 0
+		print('regen reset: stamina_regen_level = ', stamina_regen_level)
+
 func apply_status(status):
 	match status:
 		"default_speed":
@@ -345,7 +370,7 @@ func attack2_state(delta):
 	animationState.travel("Attack2")
 
 func attack1_stamina_drain():
-	stats.stamina -= 10
+	stats.stamina -= 100
 	swordHitbox.sword_attack_audio()
 	swordHitbox.set_deferred("monitorable", true)
 
@@ -358,7 +383,7 @@ func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
 	base_enemy_accuracy = 66
 	PlayerStats.dexterity_mod = 0
-	if attack2_queued && !Input.is_action_pressed("attack"):
+	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
 	elif attack1_queued:
@@ -369,6 +394,7 @@ func attack_animation_finished():
 		backstep_moving = true
 		state = BACKSTEP
 	else:
+		stamina_regen_reset()
 		state = MOVE
 	# if attack button is held when an attack animation finishes
 	if Input.is_action_pressed("attack"):
@@ -382,6 +408,9 @@ func attack_animation_finished():
 # if the player continues to hold the button, charge_level_2 is achieved
 # releasing the attack button after achieving a charge level unleashes a special attack
 func charge_state(_delta):
+	if stamina_regen_level > 0:
+		# stamina_regen_reset()
+		stamina_regen_level = 0
 	# stamina drain
 	stats.stamina -= 0.55
 	# if either attack is charged and the player runs out of stamina
@@ -426,6 +455,7 @@ func shade_state(delta):
 	move()
 	
 func shade_start():
+	print('shade attack')
 	#set_collision_mask_bit(4, false)
 	stats.stamina -= 30
 	PlayerStats.dexterity_mod = 8
@@ -487,6 +517,7 @@ func hit_animation_finished():
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_reset()
+	stamina_regen_reset()
 	state = MOVE
 	
 func player_state_reset():

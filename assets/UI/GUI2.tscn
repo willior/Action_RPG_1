@@ -376,10 +376,10 @@ margin_bottom = 163.0
 
 [node name="InventoryUI" type="Control" parent="."]
 anchor_right = 1.0
-margin_left = 151.0
-margin_top = 158.0
-margin_right = -151.0
-margin_bottom = 176.0
+margin_left = 8.0
+margin_top = 141.0
+margin_right = -294.0
+margin_bottom = 159.0
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false

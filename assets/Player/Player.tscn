@@ -2207,7 +2207,6 @@ shape = SubResource( 123 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
-bus = "Delay"
 
 [node name="HurtAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
@@ -2225,17 +2224,18 @@ anims/Start = SubResource( 126 )
 anims/Stop = SubResource( 127 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.4
+one_shot = true
 
 [node name="TalkTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
 
-[node name="Tween" type="Tween" parent="."]
-
 [node name="LevelTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

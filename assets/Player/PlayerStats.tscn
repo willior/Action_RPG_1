@@ -16,7 +16,7 @@ var shade_friction = 1600
 var dir_vector = Vector2.DOWN
 
 var vitality = 4 setget set_vitality
-var endurance = 4 setget set_endurance
+var endurance = 40 setget set_endurance
 var defense = 4.0 setget set_defense
 var strength = 4.0 setget set_strength
 var dexterity = 40.0 setget set_dexterity
@@ -31,6 +31,7 @@ var dead = false setget set_dead
 
 var max_stamina = endurance*15 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
+var stamina_regen_rate = 0.5 setget set_stamina_regen_rate
 
 var strength_mod = 0 setget set_strength_mod
 
@@ -70,6 +71,7 @@ signal player_dying(value)
 signal endurance_changed(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
+signal stamina_regen_rate_changed(value)
 signal strength_changed(value)
 signal strength_mod_changed(value)
 signal dexterity_changed(value)
@@ -151,11 +153,11 @@ func set_vitality(value):
 	if vitality > 30:
 		health_increase = 1
 	elif vitality > 20:
-		health_increase = 4
+		health_increase = 3
 	elif vitality > 10:
-		health_increase = 7
+		health_increase = 6
 	elif vitality <= 10:
-		health_increase = 10
+		health_increase = 9
 
 	self.max_health += health_increase
 	self.health += health_increase
@@ -206,11 +208,11 @@ func set_endurance(value):
 	if endurance > 30:
 		stamina_increase = 1
 	elif endurance > 20:
-		stamina_increase = 4
+		stamina_increase = 3
 	elif endurance > 10:
-		stamina_increase = 7
+		stamina_increase = 6
 	elif endurance <= 10:
-		stamina_increase = 10
+		stamina_increase = 9
 	self.max_stamina += stamina_increase
 	emit_signal(\"endurance_changed\", endurance)
 		
@@ -222,6 +224,10 @@ func set_stamina(value):
 	stamina = value
 	stamina = clamp(value, -max_stamina, max_stamina)
 	emit_signal(\"stamina_changed\", stamina)
+	
+func set_stamina_regen_rate(value):
+	stamina_regen_rate = value
+	emit_signal(\"stamina_regen_rate_changed\", stamina_regen_rate)
 	
 func set_defense(value):
 	defense = value
