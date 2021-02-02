@@ -21,16 +21,6 @@ region = Rect2( 21, 0, 7, 7 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": false,
-"name": "1",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
-"loop": false,
-"name": "2",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ) ],
 "loop": false,
 "name": "3",
@@ -39,6 +29,16 @@ animations = [ {
 "frames": [ SubResource( 1 ) ],
 "loop": false,
 "name": "4",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": false,
+"name": "1",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": false,
+"name": "2",
 "speed": 10.0
 } ]
 

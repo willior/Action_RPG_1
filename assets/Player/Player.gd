@@ -176,12 +176,8 @@ func _input(event):
 					noStamina()
 				else:
 					attack1_queued = true
-
-func move_state(delta):
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	input_vector = input_vector.normalized()
+					
+func stamina_regeneration():
 	if sweating:
 		stats.stamina += 0.3
 		if stats.stamina > 30:
@@ -190,6 +186,14 @@ func move_state(delta):
 			stats.status = "sweating_end"
 	elif stats.stamina < stats.max_stamina:
 		stats.stamina += 0.5
+
+func move_state(delta):
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
+	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector = input_vector.normalized()
+	
+	stamina_regeneration()
 
 	# if player is moving
 	if input_vector != Vector2.ZERO:

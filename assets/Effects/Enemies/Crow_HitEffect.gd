@@ -16,6 +16,7 @@ func _process(delta):
 	if global_position == target_position:
 		global_position = global_position.move_toward(Vector2.ZERO, delta*speed)
 		set_process(false)
+	global_position = global_position.round()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
