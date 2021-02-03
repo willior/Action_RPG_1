@@ -17,8 +17,11 @@ func _ready():
 	if is_crit:
 		$AnimationPlayer.play("On")
 		text.add_font_override("font", load("res://assets/Font/large_dynamicFont.tres"))
-		text.rect_size.y = 18
+		rect_min_size.y = 6
+		
 		damageDisplay = damageDisplay + "!"
+		visible = false
+		call_deferred("set_visible", true)
 	
 	text.set_text(damageDisplay)
 	tween.interpolate_property(

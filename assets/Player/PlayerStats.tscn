@@ -19,7 +19,7 @@ var vitality = 4 setget set_vitality
 var endurance = 4 setget set_endurance
 var defense = 4.0 setget set_defense
 var strength = 4.0 setget set_strength
-var dexterity = 99.0 setget set_dexterity
+var dexterity = 120.0 setget set_dexterity
 var speed = 4.0 setget set_speed
 
 var max_health = vitality*15 setget set_max_health
