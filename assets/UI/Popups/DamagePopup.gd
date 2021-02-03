@@ -17,6 +17,7 @@ func _ready():
 	if is_crit:
 		$AnimationPlayer.play("On")
 		text.add_font_override("font", load("res://assets/Font/large_dynamicFont.tres"))
+		text.rect_size.y = 18
 		damageDisplay = damageDisplay + "!"
 	
 	text.set_text(damageDisplay)
@@ -36,7 +37,7 @@ func _ready():
 		"modulate",
 		Color(1,1,1,1),
 		fade,
-		1.4,
+		3.4,
 		Tween.TRANS_QUART,
 		Tween.EASE_IN
 		)
