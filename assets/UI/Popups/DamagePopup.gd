@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 onready var text = $Label
 onready var tween = $Tween
@@ -18,7 +18,7 @@ func _ready():
 		$AnimationPlayer.play("On")
 		text.add_font_override("font", load("res://assets/Font/large_dynamicFont.tres"))
 		damageDisplay = damageDisplay + "!"
-		
+	
 	text.set_text(damageDisplay)
 	tween.interpolate_property(
 		text,

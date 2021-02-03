@@ -5,9 +5,14 @@
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=3]
 [ext_resource path="res://assets/Enemies/EnemyHealth.gd" type="Script" id=4]
 
-[node name="EnemyHealth" type="Node2D"]
-z_index = 4
+[node name="EnemyHealth" type="Control"]
+visible = false
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HealthBack" type="TextureProgress" parent="."]
 anchor_right = 1.0
@@ -15,6 +20,7 @@ anchor_bottom = 1.0
 margin_left = -12.0
 margin_right = 12.0
 margin_bottom = 3.0
+rect_min_size = Vector2( 24, 3 )
 max_value = 15.0
 value = 15.0
 texture_under = ExtResource( 1 )
@@ -35,6 +41,7 @@ anchor_bottom = 1.0
 margin_left = -12.0
 margin_right = 12.0
 margin_bottom = 3.0
+rect_min_size = Vector2( 24, 3 )
 max_value = 15.0
 value = 15.0
 texture_over = ExtResource( 3 )

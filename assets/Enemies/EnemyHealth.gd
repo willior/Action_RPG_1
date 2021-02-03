@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var health setget set_health
 var max_health setget set_max_health
@@ -31,6 +31,8 @@ func set_health(value):
 	health = value
 	healthBar.value = health
 	set_health_background(health)
+	# visible = false
+	# call_deferred("set_visible", true)
 	
 func set_max_health(value):
 	max_health = value
