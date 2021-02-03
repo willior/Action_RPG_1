@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Enemies/Wolf.gd" type="Script" id=2]
@@ -12,17 +12,28 @@
 [ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/Audio/Crow_caw.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/Enemies/Wolf_eye.png" type="Texture" id=13]
 [ext_resource path="res://assets/Enemies/WolfStats.gd" type="Script" id=14]
 [ext_resource path="res://assets/Andrew/Enemies/wolf_edit_wag_spritesheet.png" type="Texture" id=15]
+[ext_resource path="res://assets/UI/Popups/DamageContainer.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/active = false
 
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 32, 32 )
+
 [sub_resource type="SpriteFrames" id=2]
-animations = [  ]
+animations = [ {
+"frames": [ SubResource( 28 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 6.0
@@ -172,7 +183,6 @@ hframes = 17
 frame = 16
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
-modulate = Color( 0, 0, 0, 1 )
 frames = SubResource( 2 )
 offset = Vector2( 0, -12 )
 
@@ -209,6 +219,7 @@ shape = SubResource( 22 )
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 4 )
 collision_layer = 8
+script = ExtResource( 17 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -16 )
@@ -223,6 +234,9 @@ scale = Vector2( 3, 3 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 shape = SubResource( 24 )
+
+[node name="ChaseTimer" type="Timer" parent="PlayerDetectionZone"]
+wait_time = 0.75
 
 [node name="AttackController" parent="." instance=ExtResource( 1 )]
 visible = false
@@ -268,12 +282,16 @@ one_shot = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 13 )
 max_distance = 320.0
 attenuation = 0.659754
 
 [node name="EnemyHealth" parent="." instance=ExtResource( 9 )]
-visible = false
+margin_top = 3.0
+margin_bottom = 3.0
+
+[node name="DamageContainer" parent="." instance=ExtResource( 16 )]
+margin_top = 1.0
+margin_bottom = 1.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 [connection signal="no_health" from="WolfStats" to="." method="_on_WolfStats_no_health"]

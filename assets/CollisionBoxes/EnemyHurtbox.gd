@@ -30,7 +30,7 @@ func display_damage_popup(value, crit):
 	var damagePopup = DamagePopup.instance()
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
-	get_parent().get_node("VBoxContainer").add_child(damagePopup)
+	get_parent().get_node("DamageContainer").add_child(damagePopup)
 	#move_child(damagePopup, 0)
 
 func _on_Timer_timeout():

@@ -35,6 +35,7 @@ var random_number
 var interactable = false
 var talkable = false
 var examined = false
+var seeking = false
 var attacking = false
 var attack_on_cooldown = false
 var target
@@ -48,6 +49,7 @@ onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
 onready var playerDetectionZone = $PlayerDetectionZone
+onready var chaseTimer = $PlayerDetectionZone/ChaseTimer
 onready var attackPlayerZone = $AttackPlayerZone
 onready var attackTimer = $AttackPlayerZone/AttackTimer
 onready var softCollision = $SoftCollision
@@ -77,7 +79,7 @@ func _physics_process(delta):
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek_player()
-			if wanderController.get_time_left() == 0:
+			if wanderController.get_time_left() == 0 && !seeking:
 				update_wander_state()
 				
 		WANDER:
@@ -95,6 +97,7 @@ func _physics_process(delta):
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
 			else:
+				print('wolf lost sight of player.')
 				eye.modulate = Color(0,0,0)
 				eye.frame = sprite.frame
 				state = IDLE
@@ -148,11 +151,17 @@ func accelerate_towards_point(point, speed, delta):
 func seek_player():
 	if hitbox.monitorable:
 		hitbox.set_deferred("monitorable", false)
-	if playerDetectionZone.can_see_player() && !attacking:
-		# attack_animation()
+	if playerDetectionZone.can_see_player() && !attacking && !seeking:
+		print('wolf sees player...')
+		seeking = true
+		state = IDLE
 		audio_detect()
 		eye.modulate = Color(1,0.8,0)
 		eye.frame = sprite.frame
+		chaseTimer.start()
+		yield(chaseTimer, "timeout")
+		print('... and begins chasing')
+		seeking = false
 		state = CHASE
 
 func attack_player():
@@ -164,7 +173,7 @@ func attack_player():
 		yield($DelayTimer, "timeout")
 		hitbox.set_deferred("monitorable", true)
 		eye.modulate = Color(1,0,0)
-		eye.frame = sprite.frame
+		# eye.frame = sprite.frame
 		attackTimer.start()
 		state = ATTACK
 		

@@ -19,7 +19,7 @@ var vitality = 4 setget set_vitality
 var endurance = 4 setget set_endurance
 var defense = 4.0 setget set_defense
 var strength = 4.0 setget set_strength
-var dexterity = 120.0 setget set_dexterity
+var dexterity = 4.0 setget set_dexterity
 var speed = 4.0 setget set_speed
 
 var max_health = vitality*15 setget set_max_health
@@ -188,9 +188,9 @@ func set_final_health(value):
 func set_dying(value):
 	dying = value
 	if value:
-		self.stamina = 0
+		# self.stamina = 0
 		self.status = \"slow\"
-		self.status = \"sweating\"
+		# self.status = \"sweating\"
 	else:
 		self.status = \"default_speed\"
 	

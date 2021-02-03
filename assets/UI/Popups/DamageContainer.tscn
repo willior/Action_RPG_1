@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="DamageContainer" type="VBoxContainer"]
+show_behind_parent = true
+margin_left = 14.0
+margin_top = -2.0
+margin_right = 14.0
+margin_bottom = -2.0
+grow_vertical = 0
+size_flags_vertical = 9
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
