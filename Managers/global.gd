@@ -1,5 +1,7 @@
 extends Node
 
+const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
+
 var player1
 var player2
 var chapter_display = null
@@ -106,3 +108,13 @@ func distribute_exp(value):
 		get_node("/root/World/YSort/Player2").enemy_killed(experience_gained)
 	else:
 		get_node("/root/World/YSort/Player").enemy_killed(experience_gained)
+		
+func create_blood_effect(damage_count, location):
+	randomize()
+	var blood_effect = BloodHitEffect.instance()
+	var randX = int(rand_range(-damage_count, damage_count))
+	var randY = int(rand_range(-damage_count/2, damage_count))
+	blood_effect.global_position = location
+	blood_effect.target_position = location + Vector2(randX, randY)
+	# get_parent().add_child(blood_effect)
+	get_node("/root/World/Map").add_child(blood_effect)

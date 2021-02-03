@@ -8,6 +8,7 @@ pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true

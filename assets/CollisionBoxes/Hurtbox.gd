@@ -25,13 +25,13 @@ func create_hit_effect():
 	var effect = HitEffect.instance()
 	main.add_child(effect)
 	effect.global_position = global_position
-
+	
 func display_damage_popup(value, crit):
 	var damagePopup = DamagePopup.instance()
-	damagePopup.global_position = global_position
+	# damagePopup.global_position = global_position
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
-	main.add_child(damagePopup)
+	get_parent().add_child(damagePopup)
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter

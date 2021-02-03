@@ -3,6 +3,7 @@ extends CanvasLayer
 #onready var player = get_node("root/World/YSort/Player")
 
 func _ready():
+	$Sprite.show()
 	Global.changingScene = false
 	if Global.get_attribute("location") != null:
 		get_node("/root/World/YSort/Player").position = Global.get_attribute("location")

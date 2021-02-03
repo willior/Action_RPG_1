@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
-const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
@@ -209,14 +208,14 @@ func pick_random_state(state_list):
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
 	
-func create_blood_effect(damage_count):
-	randomize()
-	var blood_effect = BloodHitEffect.instance()
-	var randX = int(rand_range(-damage_count, damage_count))
-	var randY = int(rand_range(-damage_count, damage_count/2))
-	blood_effect.global_position = global_position
-	blood_effect.target_position = global_position + Vector2(randX, randY)
-	get_parent().add_child(blood_effect)
+#func create_blood_effect(damage_count):
+#	randomize()
+#	var blood_effect = BloodHitEffect.instance()
+#	var randX = int(rand_range(-damage_count, damage_count))
+#	var randY = int(rand_range(-damage_count, damage_count/2))
+#	blood_effect.global_position = global_position
+#	blood_effect.target_position = global_position + Vector2(randX, randY)
+#	get_parent().add_child(blood_effect)
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
 	var evasion_mod = 0
@@ -233,8 +232,8 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		
 		var damage_count = min(damage/2, 32)
 		while damage_count > 0:
-			create_blood_effect(damage_count)
-			create_blood_effect(damage_count)
+			Global.create_blood_effect(damage_count, global_position)
+			Global.create_blood_effect(damage_count, global_position)
 			damage_count -= 4
 		
 		hurtbox.display_damage_popup(str(damage), is_crit)
@@ -300,14 +299,14 @@ func _on_BatStats_no_health():
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
-	create_blood_effect(32)
-	create_blood_effect(32)
-	create_blood_effect(32)
-	create_blood_effect(32)
-	create_blood_effect(24)
-	create_blood_effect(24)
-	create_blood_effect(16)
-	create_blood_effect(8)
+	Global.create_blood_effect(16, global_position)
+	Global.create_blood_effect(12, global_position)
+	Global.create_blood_effect(8, global_position)
+	Global.create_blood_effect(6, global_position)
+	Global.create_blood_effect(4, global_position)
+	Global.create_blood_effect(4, global_position)
+	Global.create_blood_effect(2, global_position)
+	Global.create_blood_effect(2, global_position)
 	Global.distribute_exp(stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
