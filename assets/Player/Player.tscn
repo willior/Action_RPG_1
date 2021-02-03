@@ -2140,10 +2140,10 @@ light_mask = 0
 [node name="Sweat" parent="." instance=ExtResource( 16 )]
 visible = false
 light_mask = 0
-margin_left = -5.0
-margin_top = -7.0
-margin_right = -5.0
-margin_bottom = -7.0
+margin_left = -8.0
+margin_top = -11.0
+margin_right = -8.0
+margin_bottom = -11.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
@@ -2224,7 +2224,6 @@ anims/Start = SubResource( 126 )
 anims/Stop = SubResource( 127 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.4
 one_shot = true
 
 [node name="TalkTimer" type="Timer" parent="."]

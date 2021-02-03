@@ -268,6 +268,7 @@ func stamina_regeneration():
 		if stats.stamina > 30:
 			sweating = false
 			$Sweat.visible = false
+			$ChargeUI.sweatFlag = false
 			stats.status = "sweating_end"
 	
 	elif stats.stamina < stats.max_stamina:
@@ -277,12 +278,17 @@ func stamina_regeneration():
 			1:
 				stats.stamina += stats.stamina_regen_rate * 2
 			2:
-				stats.stamina += stats.stamina_regen_rate * 10
+				stats.stamina += stats.stamina_regen_rate * 4
+			3:
+				stats.stamina += stats.stamina_regen_rate * 8
+			4:
+				stats.stamina += stats.stamina_regen_rate * 16
+		
 		if Input.is_action_pressed("attack") || Input.is_action_pressed("roll"):
 			if timer.is_stopped():
 				timer.start()
 			return
-		elif stamina_regen_level < 2 && timer.is_stopped():
+		elif stamina_regen_level < 4 && timer.is_stopped():
 			print('starting stamina regen level timer...')
 			timer.start(0.6)
 			yield(timer, "timeout")
@@ -290,11 +296,11 @@ func stamina_regeneration():
 			print('stam regen timeout: stamina_regen_level = ', stamina_regen_level)
 
 func stamina_regen_reset():
-	print('restarting timer; checking stamina_regen_level')
-	timer.start(0.7)
+	print('regen reset')
 	if stamina_regen_level > 0:
+		print('resetting while stamina_regen_level > 0 = ', stamina_regen_level)
 		stamina_regen_level = 0
-		print('regen reset: stamina_regen_level = ', stamina_regen_level)
+	timer.start()
 
 func apply_status(status):
 	match status:
@@ -346,7 +352,9 @@ func set_sweating():
 	$Sweat.visible = true
 	sweating = true
 	# stats.status = "sweating"
-	$ChargeUI/StaminaProgress.visible = false
+	# $ChargeUI/StaminaProgress.visible = false
+	print('set_sweating: sweatFlag becomes true')
+	$ChargeUI.sweatFlag = true
 
 func set_attack_timescale(value):
 	animationTree.set("parameters/Attack1/TimeScale/scale", value)
@@ -370,7 +378,7 @@ func attack2_state(delta):
 	animationState.travel("Attack2")
 
 func attack1_stamina_drain():
-	stats.stamina -= 100
+	stats.stamina -= 10
 	swordHitbox.sword_attack_audio()
 	swordHitbox.set_deferred("monitorable", true)
 
@@ -409,8 +417,7 @@ func attack_animation_finished():
 # releasing the attack button after achieving a charge level unleashes a special attack
 func charge_state(_delta):
 	if stamina_regen_level > 0:
-		# stamina_regen_reset()
-		stamina_regen_level = 0
+		stamina_regen_reset()
 	# stamina drain
 	stats.stamina -= 0.55
 	# if either attack is charged and the player runs out of stamina
@@ -513,11 +520,11 @@ func hit_state(_delta):
 	move()
 	
 func hit_animation_finished():
+	stamina_regen_reset()
 	player_state_reset()
 	if Input.is_action_pressed("attack"):
 		attack_charging = true
 		charge_reset()
-	stamina_regen_reset()
 	state = MOVE
 	
 func player_state_reset():
@@ -783,6 +790,7 @@ func dying_effect(value):
 		get_node("/root/World/GUI").add_child(whiteFlash)
 		get_node("/root/World/Music").stream_paused = true
 		get_node("/root/World/SFX").stream_paused = true
+		get_node("/root/World/SFX2").stream_paused = true
 		dying = true
 	elif !value && dying:
 		Engine.time_scale = 1
@@ -793,6 +801,7 @@ func dying_effect(value):
 		get_node("/root/World/Heartbeat").queue_free()
 		get_node("/root/World/Music").stream_paused = false
 		get_node("/root/World/SFX").stream_paused = false
+		get_node("/root/World/SFX2").stream_paused = false
 		dying = false
 	
 func game_over():

@@ -8,7 +8,10 @@ func _ready():
 	$AnimatedSprite2.play("1")
 	if rng == 2:
 		$AnimatedSprite2.flip_h = true
+
+func _process(_delta):
 	global_position = global_position.round()
+	set_process(false)
 
 func _on_animation_finished():
 	$AudioStreamPlayer.queue_free()

@@ -18,6 +18,7 @@ var currentStamina = PlayerStats.stamina setget set_stamina
 var currentMaxStamina = PlayerStats.max_stamina setget set_max_stamina
 var staminaPercent = 1
 var staminaWarning = false
+var sweatFlag = false
 
 func _ready():
 	PlayerStats.charge = 0
@@ -38,11 +39,9 @@ func _ready():
 func set_stamina(value):
 	currentStamina = value
 	staminaProgress.value = currentStamina
-	
 	staminaPercent = currentStamina / currentMaxStamina
-	# call_deferred("staminaPercent = currentStamina / currentMaxStamina")
-	
-	if !staminaProgress.visible && staminaPercent < 1:
+	if !staminaProgress.visible && staminaPercent < 1 && !PlayerStats.status == "sweating":
+		print('showing staminaProgress: less than 100% stamina and not sweating')
 		staminaProgress.visible = true
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
@@ -53,11 +52,38 @@ func set_stamina(value):
 		Tween.EASE_IN
 		)
 		$Tween.start()
-	
-	elif staminaProgress.visible && (staminaPercent == 1 || (staminaPercent <= 0 && PlayerStats.status == "sweating")):
+	elif !staminaProgress.visible && staminaPercent >= 0 && PlayerStats.status == "sweating":
+		print('showing staminaProgress: more than 0% stamina and sweating')
+		sweatFlag = false
+		staminaProgress.visible = true
+		$Tween.interpolate_property(staminaProgress,
+		"modulate",
+		Color(1, 1, 1, 0),
+		Color(1, 1, 1, 0.6),
+		0.3,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+		)
+		$Tween.start()
+	elif staminaProgress.visible && (staminaPercent == 1):
+		print('100% stamina: hiding staminaProgress')
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
 		Color(1, 1, 1, 1),
+		Color(1, 1, 1, 0),
+		0.3,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN
+		)
+		$Tween.start()
+		yield($Tween, "tween_all_completed")
+		staminaProgress.visible = false
+	elif sweatFlag && (staminaPercent <= 0 && PlayerStats.status == "sweating"):
+		print('player sweating: hiding staminaProgress')
+		sweatFlag = false
+		$Tween.interpolate_property(staminaProgress,
+		"modulate",
+		Color(1, 1, 1, 0.6),
 		Color(1, 1, 1, 0),
 		0.3,
 		Tween.TRANS_LINEAR,

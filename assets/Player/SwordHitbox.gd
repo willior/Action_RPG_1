@@ -10,7 +10,6 @@ onready var damage = PlayerStats.strength*2 setget set_damage
 var knockback_vector = Vector2.ZERO
 var orig_damage
 var randomness = 0.25
-var player_no = 1
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -18,9 +17,11 @@ func _ready():
 # warning-ignore:return_value_discarded
 #	PlayerStats.connect("strength_mod_changed", self, "set_damage_mod")
 	orig_damage = damage
+	print('damage = ', damage)
 
 func set_damage(value):
-	damage = value
+	damage = value*2
+	print('damage set = ', damage)
 	
 func modify_damage(base, modulator):
 	return int(base * modulator)

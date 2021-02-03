@@ -87,7 +87,8 @@ func crit_calculation(base_crit_rate, dexterity, dexterity_mod):
 	
 func damage_calculation(attack, defense, random):
 	var base_damage = 2 * (attack*attack / (attack+defense))
-	# print("base damage : ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage)
+	print('[[[ attack = ', attack, " vs. ", "defense = ", defense)
+	print("base damage = ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage, " ]]]")
 	return random_variance(base_damage, random)
 	
 func random_variance(base_damage, random):
