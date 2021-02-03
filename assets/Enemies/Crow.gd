@@ -218,15 +218,6 @@ func create_hit_effect(damage_count):
 	# hit_effect.global_position += Vector2(randX, randY)
 	hit_effect.target_position = global_position + Vector2(randX, randY)
 	get_parent().add_child(hit_effect)
-	
-func create_blood_effect(damage_count):
-	randomize()
-	var blood_effect = BloodHitEffect.instance()
-	var randX = int(rand_range(-damage_count, damage_count))
-	var randY = int(rand_range(-damage_count/2, damage_count))
-	blood_effect.global_position = global_position
-	blood_effect.target_position = global_position + Vector2(randX, randY)
-	get_parent().add_child(blood_effect)
 
 func _on_Hurtbox_area_entered(area):
 	var evasion_mod = 0
@@ -246,8 +237,8 @@ func _on_Hurtbox_area_entered(area):
 		var damage_count = min(damage/2, 32)
 		while damage_count > 0:
 			create_hit_effect(damage_count)
-			create_blood_effect(damage_count)
-			create_blood_effect(damage_count)
+			Global.create_blood_effect(damage_count, global_position)
+			Global.create_blood_effect(damage_count, global_position)
 			damage_count -= 4
 			
 		hurtbox.display_damage_popup(str(damage), is_crit)
@@ -322,22 +313,22 @@ func _on_CrowStats_no_health():
 	create_hit_effect(32)
 	create_hit_effect(32)
 	create_hit_effect(32)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
-	create_blood_effect(40)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(32, global_position)
+	Global.create_blood_effect(32, global_position)
+	Global.create_blood_effect(32, global_position)
+	Global.create_blood_effect(32, global_position)
 	Global.distribute_exp(stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
