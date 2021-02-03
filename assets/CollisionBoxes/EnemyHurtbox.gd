@@ -28,10 +28,10 @@ func create_hit_effect():
 	
 func display_damage_popup(value, crit):
 	var damagePopup = DamagePopup.instance()
-	# damagePopup.global_position = global_position
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
 	get_parent().get_node("VBoxContainer").add_child(damagePopup)
+	#move_child(damagePopup, 0)
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter

@@ -860,7 +860,8 @@ func _on_InteractHitbox_area_entered(area):
 	# gets the object in the interact bounding box
 	if dying:
 		return
-	interactObject = area.get_owner()
+	#interactObject = area.get_owner()
+	interactObject = area.get_parent()
 	examining = true
 	# displays notice is object not examined
 	if !interactObject.examined:

@@ -629,7 +629,7 @@ max_distance = 320.0
 attenuation = 0.4
 
 [node name="EnemyHealth" parent="." instance=ExtResource( 16 )]
-visible = false
+show_behind_parent = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -4, -4, 8, 8 )

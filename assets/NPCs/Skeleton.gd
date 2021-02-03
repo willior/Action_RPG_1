@@ -1,20 +1,16 @@
 extends Node2D
 
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-
-onready var sprite = $KinematicBody2D/Sprite
-
 var interactable = false
 var talkable = true
 var examined = false
 var dialog_index = 0
 var examine_index = 0
 var answer
-
 var speaker = "Skeleton"
 
 func ready():
-	sprite.frame = 1
+	$Sprite.frame = 1
 
 func talk():
 	var dialogBox = DialogBox.instance()

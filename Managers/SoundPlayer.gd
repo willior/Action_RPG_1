@@ -25,7 +25,7 @@ func play_sound(value):
 		"crit":
 			$AudioStreamPlayer.bus = "ShortDelay"
 			audio.stream = crit
-		
+	
 		"awesome":
 			audio.stream = awesome
 		"great":

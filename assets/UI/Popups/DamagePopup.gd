@@ -40,7 +40,7 @@ func _ready():
 		"modulate",
 		Color(1,1,1,1),
 		fade,
-		3.4,
+		1.4,
 		Tween.TRANS_QUART,
 		Tween.EASE_IN
 		)
