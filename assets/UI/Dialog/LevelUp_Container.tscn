@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/UI/Dialog/LevelUp_Container.gd" type="Script" id=2]
@@ -7,15 +7,26 @@
 [ext_resource path="res://assets/UI/Dialog/Theme_LevelUpButton.tres" type="Theme" id=5]
 [ext_resource path="res://assets/UI/Dialog/Hover_StyleBoxTex_LevelUp_Button.tres" type="StyleBox" id=6]
 [ext_resource path="res://assets/UI/Dialog/Font_LevelUp_Button.tres" type="DynamicFont" id=7]
+[ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )
 
-[node name="LevelUp_Container" type="HBoxContainer"]
+[node name="LevelUp_Rect" type="NinePatchRect"]
+margin_left = 64.0
+margin_top = 55.0
+margin_right = 256.0
+margin_bottom = 120.0
+rect_pivot_offset = Vector2( 64, 36 )
+texture = ExtResource( 8 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="LevelUp_Container" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = -4.0
 theme = ExtResource( 5 )
 alignment = 1
 script = ExtResource( 2 )
@@ -23,10 +34,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options" type="VBoxContainer" parent="."]
-margin_left = 64.0
-margin_right = 154.0
-margin_bottom = 180.0
+[node name="Options" type="VBoxContainer" parent="LevelUp_Container"]
+margin_left = 4.0
+margin_right = 94.0
+margin_bottom = 65.0
 grow_horizontal = 0
 grow_vertical = 2
 rect_min_size = Vector2( 90, 0 )
@@ -35,11 +46,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonVIT" type="Button" parent="Options"]
+[node name="ButtonVIT" type="Button" parent="LevelUp_Container/Options"]
 modulate = Color( 0.8, 0.466667, 0, 1 )
-margin_top = 60.0
+margin_top = 3.0
 margin_right = 90.0
-margin_bottom = 77.0
+margin_bottom = 20.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -53,7 +64,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="RichTextLabel" parent="Options/ButtonVIT"]
+[node name="Label" type="RichTextLabel" parent="LevelUp_Container/Options/ButtonVIT"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -69,11 +80,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonEND" type="Button" parent="Options"]
+[node name="ButtonEND" type="Button" parent="LevelUp_Container/Options"]
 modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
-margin_top = 81.0
+margin_top = 24.0
 margin_right = 90.0
-margin_bottom = 98.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -87,7 +98,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="RichTextLabel" parent="Options/ButtonEND"]
+[node name="Label" type="RichTextLabel" parent="LevelUp_Container/Options/ButtonEND"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -103,11 +114,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonDEF" type="Button" parent="Options"]
+[node name="ButtonDEF" type="Button" parent="LevelUp_Container/Options"]
 modulate = Color( 0.2, 0.2, 1, 1 )
-margin_top = 102.0
+margin_top = 45.0
 margin_right = 90.0
-margin_bottom = 119.0
+margin_bottom = 62.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -121,7 +132,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="RichTextLabel" parent="Options/ButtonDEF"]
+[node name="Label" type="RichTextLabel" parent="LevelUp_Container/Options/ButtonDEF"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -137,10 +148,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Options2" type="VBoxContainer" parent="."]
-margin_left = 158.0
-margin_right = 248.0
-margin_bottom = 180.0
+[node name="Options2" type="VBoxContainer" parent="LevelUp_Container"]
+margin_left = 98.0
+margin_right = 188.0
+margin_bottom = 65.0
 grow_vertical = 2
 rect_min_size = Vector2( 90, 0 )
 alignment = 1
@@ -148,11 +159,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonSTR" type="Button" parent="Options2"]
+[node name="ButtonSTR" type="Button" parent="LevelUp_Container/Options2"]
 modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
-margin_top = 60.0
+margin_top = 3.0
 margin_right = 90.0
-margin_bottom = 77.0
+margin_bottom = 20.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -166,7 +177,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="RichTextLabel" parent="Options2/ButtonSTR"]
+[node name="Label" type="RichTextLabel" parent="LevelUp_Container/Options2/ButtonSTR"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -182,11 +193,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonDEX" type="Button" parent="Options2"]
+[node name="ButtonDEX" type="Button" parent="LevelUp_Container/Options2"]
 modulate = Color( 0.32, 0.62, 0.7, 1 )
-margin_top = 81.0
+margin_top = 24.0
 margin_right = 90.0
-margin_bottom = 98.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -200,7 +211,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="RichTextLabel" parent="Options2/ButtonDEX"]
+[node name="Label" type="RichTextLabel" parent="LevelUp_Container/Options2/ButtonDEX"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -216,11 +227,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonSPD" type="Button" parent="Options2"]
+[node name="ButtonSPD" type="Button" parent="LevelUp_Container/Options2"]
 modulate = Color( 1, 1, 0.752941, 1 )
-margin_top = 102.0
+margin_top = 45.0
 margin_right = 90.0
-margin_bottom = 119.0
+margin_bottom = 62.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -234,7 +245,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="RichTextLabel" parent="Options2/ButtonSPD"]
+[node name="Label" type="RichTextLabel" parent="LevelUp_Container/Options2/ButtonSPD"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -250,17 +261,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AudioMenu" type="AudioStreamPlayer" parent="."]
+[node name="AudioMenu" type="AudioStreamPlayer" parent="LevelUp_Container"]
 stream = ExtResource( 1 )
-[connection signal="focus_entered" from="Options/ButtonVIT" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="Options/ButtonVIT" to="." method="_on_ButtonVIT_pressed"]
-[connection signal="focus_entered" from="Options/ButtonEND" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="Options/ButtonEND" to="." method="_on_ButtonEND_pressed"]
-[connection signal="focus_entered" from="Options/ButtonDEF" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="Options/ButtonDEF" to="." method="_on_ButtonDEF_pressed"]
-[connection signal="focus_entered" from="Options2/ButtonSTR" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="Options2/ButtonSTR" to="." method="_on_ButtonSTR_pressed"]
-[connection signal="focus_entered" from="Options2/ButtonDEX" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="Options2/ButtonDEX" to="." method="_on_ButtonDEX_pressed"]
-[connection signal="focus_entered" from="Options2/ButtonSPD" to="." method="_on_focus_entered"]
-[connection signal="pressed" from="Options2/ButtonSPD" to="." method="_on_ButtonSPD_pressed"]
+[connection signal="focus_entered" from="LevelUp_Container/Options/ButtonVIT" to="LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="LevelUp_Container/Options/ButtonVIT" to="LevelUp_Container" method="_on_ButtonVIT_pressed"]
+[connection signal="focus_entered" from="LevelUp_Container/Options/ButtonEND" to="LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="LevelUp_Container/Options/ButtonEND" to="LevelUp_Container" method="_on_ButtonEND_pressed"]
+[connection signal="focus_entered" from="LevelUp_Container/Options/ButtonDEF" to="LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="LevelUp_Container/Options/ButtonDEF" to="LevelUp_Container" method="_on_ButtonDEF_pressed"]
+[connection signal="focus_entered" from="LevelUp_Container/Options2/ButtonSTR" to="LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="LevelUp_Container/Options2/ButtonSTR" to="LevelUp_Container" method="_on_ButtonSTR_pressed"]
+[connection signal="focus_entered" from="LevelUp_Container/Options2/ButtonDEX" to="LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="LevelUp_Container/Options2/ButtonDEX" to="LevelUp_Container" method="_on_ButtonDEX_pressed"]
+[connection signal="focus_entered" from="LevelUp_Container/Options2/ButtonSPD" to="LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="LevelUp_Container/Options2/ButtonSPD" to="LevelUp_Container" method="_on_ButtonSPD_pressed"]

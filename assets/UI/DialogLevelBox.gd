@@ -120,7 +120,7 @@ func load_dialog():
 			# setting the dialog
 			event_handler(dialog_script[dialog_index])
 			$TimerText.start()
-			$Text/Sprite.hide()
+			# $Text/Sprite.hide()
 	# if the amount of visible characters is less than the total amount of characters:
 	else:
 		# displays all the characters in the current dialog_index
@@ -181,17 +181,17 @@ func event_handler(event):
 #			var levelUpButtons = LEVELUPCONTAINER.instance()
 #			$OptionsRect.add_child(levelUpButtons)
 # warning-ignore:return_value_discarded
-			$OptionsRect/LevelUp_Container/Options/ButtonVIT.connect("pressed", self, "_on_level_selected", ["VIT"])
+			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT.connect("pressed", self, "_on_level_selected", ["VIT"])
 # warning-ignore:return_value_discarded
-			$OptionsRect/LevelUp_Container/Options/ButtonEND.connect("pressed", self, "_on_level_selected", ["END"])
+			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND.connect("pressed", self, "_on_level_selected", ["END"])
 # warning-ignore:return_value_discarded
-			$OptionsRect/LevelUp_Container/Options/ButtonDEF.connect("pressed", self, "_on_level_selected", ["DEF"])
+			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF.connect("pressed", self, "_on_level_selected", ["DEF"])
 # warning-ignore:return_value_discarded
-			$OptionsRect/LevelUp_Container/Options2/ButtonSTR.connect("pressed", self, "_on_level_selected", ["STR"])
+			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSTR.connect("pressed", self, "_on_level_selected", ["STR"])
 # warning-ignore:return_value_discarded
-			$OptionsRect/LevelUp_Container/Options2/ButtonDEX.connect("pressed", self, "_on_level_selected", ["DEX"])
+			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonDEX.connect("pressed", self, "_on_level_selected", ["DEX"])
 # warning-ignore:return_value_discarded
-			$OptionsRect/LevelUp_Container/Options2/ButtonSPD.connect("pressed", self, "_on_level_selected", ["SPD"])
+			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD.connect("pressed", self, "_on_level_selected", ["SPD"])
 			
 			
 		{'action', ..}:
@@ -259,7 +259,7 @@ func _on_level_selected(value):
 		waiting_for_answer = false
 		waiting_for_level = false
 		waiting_for_input = false
-		$OptionsRect/LevelUp_Container.queue_free()
+		$OptionsRect/LevelUp_Rect.queue_free()
 		print(VIT_to_add, ' VIT')
 		print(END_to_add, ' END')
 		print(DEF_to_add, ' DEF')
@@ -306,11 +306,12 @@ func advance_dialog(skip_index):
 	dialog_index += skip_index
 
 func _on_TimerNext_timeout():
-	if $Text/Sprite.position.x == 268:
-		next_icon_modulator = -1
-	elif $Text/Sprite.position.x == 265:
-		next_icon_modulator = 1
-	$Text/Sprite.position.x += next_icon_modulator
+	pass
+#	if $Text/Sprite.position.x == 268:
+#		next_icon_modulator = -1
+#	elif $Text/Sprite.position.x == 265:
+#		next_icon_modulator = 1
+#	$Text/Sprite.position.x += next_icon_modulator
 
 func _on_TimerText_timeout():
 	if label.get_visible_characters() <= label.get_total_character_count():
@@ -319,7 +320,7 @@ func _on_TimerText_timeout():
 	else:
 		$AudioStreamPlayer.stop()
 		$TimerText.stop()
-		$Text/Sprite.show()
+		# $Text/Sprite.show()
 		finished = true
 		
 		if waiting_for_answer:
@@ -327,7 +328,7 @@ func _on_TimerText_timeout():
 			yield($TimerDelaySelect, "timeout")
 			if level_flag:
 				$Music.play()
-				get_child(1).get_child(1).get_child(0).get_child(0).grab_focus()
+				get_child(1).get_child(1).get_child(0).get_child(0).get_child(0).grab_focus()
 				print('level flag')
 				level_flag = false
 				waiting_for_input = true

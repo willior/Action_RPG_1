@@ -109,7 +109,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelUp_Container" parent="OptionsRect" instance=ExtResource( 6 )]
+[node name="LevelUp_Rect" parent="OptionsRect" instance=ExtResource( 6 )]
 
 [node name="TimerNext" type="Timer" parent="."]
 wait_time = 0.08
@@ -143,3 +143,5 @@ stream = ExtResource( 10 )
 [node name="Tween" type="Tween" parent="."]
 [connection signal="timeout" from="TimerNext" to="." method="_on_TimerNext_timeout"]
 [connection signal="timeout" from="TimerText" to="." method="_on_TimerText_timeout"]
+
+[editable path="OptionsRect/LevelUp_Rect"]
