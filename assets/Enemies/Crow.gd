@@ -373,5 +373,9 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 		var newEnemySpawner = EnemySpawner.instance()
 		get_parent().call_deferred("add_child", newEnemySpawner)
 		newEnemySpawner.ENEMY = load("res://assets/Enemies/Crow.tscn")
+		newEnemySpawner.health = stats.health
 		newEnemySpawner.global_position = global_position
 	
+func set_health(value):
+	stats.health = value
+	print(ENEMY_NAME, ' spawned, setting health to previous value: ', value)

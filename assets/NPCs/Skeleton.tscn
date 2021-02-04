@@ -54,7 +54,7 @@ offset = Vector2( 0, 10 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -11 )
 frames = SubResource( 7 )
-frame = 4
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
