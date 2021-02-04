@@ -89,9 +89,9 @@ layer = 3
 [node name="HealthUI1" type="Control" parent="."]
 pause_mode = 2
 show_behind_parent = true
-margin_left = 27.0
+margin_left = 33.0
 margin_top = 167.0
-margin_right = 147.0
+margin_right = 153.0
 margin_bottom = 171.0
 script = ExtResource( 11 )
 __meta__ = {
@@ -152,12 +152,15 @@ __meta__ = {
 }
 
 [node name="StaminaBar1" parent="." instance=ExtResource( 6 )]
-margin_left = 27.0
+margin_left = 33.0
 margin_top = 172.0
-margin_right = 87.0
+margin_right = 93.0
 margin_bottom = 176.0
 
 [node name="ExpBar1" parent="." instance=ExtResource( 4 )]
+
+[node name="ExpBarTexture" parent="ExpBar1" index="0"]
+margin_right = 43.0
 
 [node name="HealthUI2" type="Control" parent="."]
 pause_mode = 2
@@ -376,18 +379,18 @@ margin_bottom = 163.0
 
 [node name="InventoryUI" type="Control" parent="."]
 anchor_right = 1.0
-margin_left = 8.0
+margin_left = 13.0
 margin_top = 141.0
-margin_right = -294.0
-margin_bottom = 159.0
+margin_right = -288.0
+margin_bottom = 160.0
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="TextureRect" parent="InventoryUI"]
-margin_right = 18.0
-margin_bottom = 18.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 1
@@ -396,35 +399,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Container" type="VBoxContainer" parent="InventoryUI/Panel"]
+[node name="Sprite" type="TextureRect" parent="InventoryUI/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="TextureRect" parent="InventoryUI/Panel"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 17.0
-margin_bottom = 17.0
 texture = ExtResource( 3 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="InventoryUI/Panel"]
-margin_left = 1.0
-margin_top = 5.0
-margin_right = 17.0
-margin_bottom = 18.0
+margin_left = 2.0
+margin_top = -3.0
+margin_right = 18.0
+margin_bottom = 10.0
 custom_fonts/font = SubResource( 4 )
 text = "?"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="ExpBar1"]

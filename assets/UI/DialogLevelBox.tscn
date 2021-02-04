@@ -372,10 +372,9 @@ __meta__ = {
 stream = ExtResource( 8 )
 
 [node name="LevelDescription" type="Control" parent="."]
-visible = false
-margin_left = 27.0
+margin_left = 33.0
 margin_top = 108.0
-margin_right = 295.0
+margin_right = 287.0
 margin_bottom = 156.0
 script = ExtResource( 16 )
 __meta__ = {
@@ -399,7 +398,6 @@ margin_top = 2.0
 margin_right = -6.0
 margin_bottom = -2.0
 custom_fonts/normal_font = SubResource( 1 )
-text = "asdfasdfhjasdfhasdfjkaskdfjla;ksdjf;alksdjf;kalsjdfl;kasjd;fkjasd;klfjas;kldfjal;skdjf;"
 
 [node name="TimerText" type="Timer" parent="LevelDescription"]
 wait_time = 0.001
