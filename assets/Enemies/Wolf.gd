@@ -232,11 +232,6 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.create_hit_effect()
 		#hurtbox.start_invincibility(0.3)
 		$EnemyHealth.show_health()
-		# state = IDLE
-#		disable_detection()
-#		timer.start(0.4)
-#		yield(timer, "timeout")
-#		enable_detection()
 		
 		sprite.modulate = Color(1,1,0)
 		if stats.health > 0:

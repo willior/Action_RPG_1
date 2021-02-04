@@ -76,7 +76,8 @@ func _ready():
 	
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
-		if !$TimerDelaySelect.is_stopped():
+		if !$TimerDelaySelect.is_stopped() || !waiting_for_input:
+			print('input while delay timer is not stopped')
 			get_tree().set_input_as_handled()
 			return
 		elif waiting_for_input:
@@ -87,6 +88,7 @@ func _input(event):
 			$AudioSelect.play()
 			return
 		else:
+			print('ending level screen')
 			get_tree().set_input_as_handled()
 			load_dialog()
 		
@@ -230,22 +232,22 @@ func _on_level_selected(value):
 	stats_remaining -= 1
 	match value:
 		"VIT":
-			print('applying V')
+			#print('applying V')
 			VIT_to_add += 1
 		"END":
-			print('applying E')
+			#print('applying E')
 			END_to_add += 1
 		"DEF":
-			print('applying D')
+			#print('applying D')
 			DEF_to_add += 1
 		"STR":
-			print('applying ST')
+			#print('applying ST')
 			STR_to_add += 1
 		"DEX":
-			print('applying DX')
+			#print('applying DX')
 			DEX_to_add += 1
 		"SPD":
-			print('applying SP')
+			#print('applying SP')
 			SPD_to_add += 1
 	
 	if stats_remaining == 0:

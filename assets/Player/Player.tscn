@@ -2064,14 +2064,13 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 188
+frame = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 0.5
 method_call_mode = 1
 anims/Attack1Down = SubResource( 3 )
 anims/Attack1Left = SubResource( 4 )
