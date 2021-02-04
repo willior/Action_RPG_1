@@ -12,11 +12,13 @@ onready var nice = load("res://assets/Audio/Gene/Nice!.wav")
 onready var whistle = load("res://assets/Audio/Gene/Whistle.wav")
 onready var wow = load("res://assets/Audio/Gene/Wow!.wav")
 
+# onready var level_up_BGM = load("res://assets/Audio/Music/LevelUp.ogg")
+
 func _ready():
 	print("SoundPlayer initialized")
 	
 func play_sound(value):
-	$AudioStreamPlayer.bus = "Master"
+	audio.bus = "Master"
 	match value:
 		"miss":
 			audio.stream = miss
@@ -40,5 +42,14 @@ func play_sound(value):
 			audio.stream = wow
 	
 	audio.play()
+
+func play_music(value):
+	print('playing music: ', value)
+	#$Music.bus = "Reverb"
+#	match value:
+#		"level_up":
+#			audio.stream = level_up_BGM
+	$Music.play()
 	
-		
+func stop_music():
+	$Music.stop()

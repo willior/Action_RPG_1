@@ -569,6 +569,7 @@ func level_up():
 	$LevelTimer.start()
 	yield($LevelTimer, "timeout")
 	if just_leveled:
+		get_node("/root/World/Music").stream_paused = true
 		print('LevelTimer timeout. Final total stats_to_allocate = ', stats_to_allocate)
 		just_leveled = false
 		var dialogLevelBox = DialogLevelBox.instance()
@@ -787,7 +788,7 @@ func _on_Hurtbox_invincibility_ended():
 	
 func dying_effect(value):
 	if value && !dying:
-		Engine.time_scale = 0.8
+		Engine.time_scale = 0.6
 		set_collision_mask_bit(12, true)
 		var heartbeat = Heartbeat.instance()
 		var greyscale = Greyscale.instance()
@@ -906,3 +907,4 @@ func check_attack_input():
 	if !Input.is_action_pressed("attack"):
 		charge.stop_charge()
 		charge_reset()
+	get_node("/root/World/Music").stream_paused = false

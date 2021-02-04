@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6.png" type="Texture" id=1]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/Audio/Player/Level_Up_Hit.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/Audio/Music/LevelUp.ogg" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
@@ -133,6 +134,9 @@ stream = ExtResource( 8 )
 
 [node name="AudioLevel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

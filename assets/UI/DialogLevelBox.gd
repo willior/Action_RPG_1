@@ -132,6 +132,7 @@ func end_dialog():
 	Global.dialogOpen = false
 	queue_free()
 	Global.reset_input_after_dialog()
+	
 
 func event_handler(event):
 	match event:
@@ -192,6 +193,7 @@ func event_handler(event):
 # warning-ignore:return_value_discarded
 			$OptionsRect/LevelUp_Container/Options2/ButtonSPD.connect("pressed", self, "_on_level_selected", ["SPD"])
 			
+			
 		{'action', ..}:
 			if event['action'] == 'take_item':
 				advance_dialog(int(event['skip']))
@@ -205,6 +207,8 @@ func event_handler(event):
 				
 			if event['action'] == 'end_dialog':
 				get_node("/root/World/GUI/TweenGreyscale").fade_out_greyscale()
+				#SoundPlayer.stop_music()
+				$Music.stop()
 				$TimerDelaySelect.start()
 				yield($TimerDelaySelect, "timeout")
 				end_dialog()
@@ -317,14 +321,20 @@ func _on_TimerText_timeout():
 		$TimerText.stop()
 		$Text/Sprite.show()
 		finished = true
+		
 		if waiting_for_answer:
 			$TimerDelaySelect.start()
 			yield($TimerDelaySelect, "timeout")
 			if level_flag:
+				$Music.play()
 				get_child(1).get_child(1).get_child(0).get_child(0).grab_focus()
+				print('level flag')
 				level_flag = false
 				waiting_for_input = true
+				
 			else:
+				print('not level flag')
 				get_child(1).get_child(0).get_child(0).grab_focus()
 				waiting_for_input = true
-			
+		
+		#SoundPlayer.play_music("level_up")
