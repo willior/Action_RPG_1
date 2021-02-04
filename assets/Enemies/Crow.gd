@@ -243,7 +243,7 @@ func _on_Hurtbox_area_entered(area):
 			
 		hurtbox.display_damage_popup(str(damage), is_crit)
 		hurtbox.create_hit_effect()
-		hurtbox.start_invincibility(0.3)
+		#hurtbox.start_invincibility(0.3)
 		$EnemyHealth.show_health()
 		if state == ATTACK:
 			state = IDLE

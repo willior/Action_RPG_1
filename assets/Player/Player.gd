@@ -108,7 +108,7 @@ func _ready():
 		GameManager.initialize_player()
 
 	animationTree.active = true # animation not active until game starts
-	swordHitbox.knockback_vector = dir_vector / 4
+	swordHitbox.knockback_vector = dir_vector
 	collision.disabled = false
 	charge_reset()
 	stats.connect("status_changed", self, "apply_status")
@@ -189,7 +189,10 @@ func move_state(delta):
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		dir_vector = input_vector
-		swordHitbox.knockback_vector = input_vector
+		if PlayerStats.frenzy.active:
+			swordHitbox.knockback_vector = input_vector / 10
+		else:
+			swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/BlendSpace2D/blend_position", input_vector)
 		animationTree.set("parameters/Attack1/BlendSpace2D/blend_position", input_vector)
@@ -249,7 +252,6 @@ func move_state(delta):
 			state = FLASH
 		charge.stop_charge()
 		charge_reset()
-		attack_charging = false
 		
 	if Input.is_action_just_pressed("roll"): # B
 		if stats.stamina > 0:
@@ -300,7 +302,7 @@ func stamina_regen_reset():
 	if stamina_regen_level > 0:
 		print('resetting while stamina_regen_level > 0 = ', stamina_regen_level)
 		stamina_regen_level = 0
-	timer.start()
+	timer.start(1.4)
 
 func apply_status(status):
 	match status:
@@ -321,10 +323,12 @@ func apply_status(status):
 			get_node("/root/World/YSort/Player/PoisonNotice").queue_free()
 		"frenzy":
 			$FrenzyAnimationPlayer.play("Start")
+			swordHitbox.knockback_vector = dir_vector / 10
 			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
 			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
 		"frenzy_end":
 			$FrenzyAnimationPlayer.play("Stop")
+			swordHitbox.knockback_vector = dir_vector
 			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
 			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
 
@@ -378,12 +382,18 @@ func attack2_state(delta):
 	animationState.travel("Attack2")
 
 func attack1_stamina_drain():
-	stats.stamina -= 10
+	if PlayerStats.frenzy.active:
+		stats.stamina -= 3
+	else:
+		stats.stamina -= 15
 	swordHitbox.sword_attack_audio()
 	swordHitbox.set_deferred("monitorable", true)
 
 func attack2_stamina_drain():
-	stats.stamina -= 5
+	if PlayerStats.frenzy.active:
+		stats.stamina -= 2
+	else:
+		stats.stamina -= 10
 	swordHitbox.sword_attack_audio()
 	swordHitbox.set_deferred("monitorable", true)
 
@@ -425,10 +435,8 @@ func charge_state(_delta):
 		if !sweating:
 			#set_sweating()
 			stats.status = "sweating"
-		attack_1_charged = false
-		attack_2_charged = false
+			noStamina()
 		charge.stop_charge()
-		# noStamina()
 		charge_reset()
 		
 	# if the current charge is less than the max charge
@@ -449,6 +457,9 @@ func charge_reset():
 	stats.charge_level = charge_level_count
 	charge_count = 0
 	stats.charge = charge_count
+	if attack_charging: attack_charging = false
+	if attack_1_charged: attack_1_charged = false
+	if attack_2_charged: attack_2_charged = false
 		
 func shade_state(delta):
 	if shade_moving:
@@ -464,7 +475,7 @@ func shade_state(delta):
 func shade_start():
 	print('shade attack')
 	#set_collision_mask_bit(4, false)
-	stats.stamina -= 30
+	stats.stamina -= 35
 	PlayerStats.dexterity_mod = 8
 	charge.stop_charge()
 	swordHitbox.shade_begin()
@@ -496,7 +507,7 @@ func flash_state(delta):
 	move()
 	
 func flash_start():
-	stats.stamina -= 20
+	stats.stamina -= 25
 	PlayerStats.dexterity_mod = 4
 	charge.stop_charge()
 	swordHitbox.flash_begin()
@@ -523,17 +534,16 @@ func hit_animation_finished():
 	stamina_regen_reset()
 	player_state_reset()
 	if Input.is_action_pressed("attack"):
-		attack_charging = true
 		charge_reset()
+		attack_charging = true
 	state = MOVE
 	
 func player_state_reset():
+	base_enemy_accuracy = 66
+	charge.stop_charge()
 	swordHitbox.set_deferred("monitorable", false)
 	swordHitbox.damage = swordHitbox.orig_damage
 	swordHitbox.reset_damage()
-	base_enemy_accuracy = 66
-	charge.stop_charge()
-	# stats.strength_mod = 0
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
@@ -760,9 +770,6 @@ func _on_Hurtbox_area_entered(area):
 			attack2_queued = false
 		if charge_count > 0:
 			charge.stop_charge()
-			if attack_charging: attack_charging = false
-			if attack_1_charged: attack_1_charged = false
-			if attack_2_charged: attack_2_charged = false
 			charge_reset()
 		var is_crit = false # enemies currently do not crit
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
@@ -894,3 +901,8 @@ func reset_animation():
 	get_tree().paused = false
 	animationTree.set("parameters/Idle/blend_position", dir_vector)
 	# animationState.travel("Idle")
+	
+func check_attack_input():
+	if !Input.is_action_pressed("attack"):
+		charge.stop_charge()
+		charge_reset()

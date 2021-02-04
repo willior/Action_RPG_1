@@ -12,7 +12,7 @@ var speed_mod = 0 setget set_speed_mod
 var roll_speed = 200
 var shade_speed = 420
 var friction = 800
-var shade_friction = 1600
+var shade_friction = 840
 var dir_vector = Vector2.DOWN
 
 var vitality = 4 setget set_vitality
@@ -61,6 +61,9 @@ var sweating = false
 var is_poisoned = false
 
 var continue_count = 0
+
+onready var poison = $Poison
+onready var frenzy = $Frenzy
 
 signal no_health
 signal vitality_changed(value)

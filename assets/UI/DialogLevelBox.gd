@@ -129,6 +129,7 @@ func end_dialog():
 	get_tree().paused = false
 	Global.dialogOpen = false
 	queue_free()
+	Global.reset_input_after_dialog()
 
 func event_handler(event):
 	match event:
