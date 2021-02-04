@@ -8,7 +8,7 @@ const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const DialogLevelBox = preload("res://assets/UI/DialogLevelBox.tscn")
 const TweenGreyscale = preload("res://assets/Shaders/Greyscale_TweenCanvasModulate.tscn")
 const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
-const WhiteFlash = preload("res://assets/Shaders/White_CanvasModulate.tscn")
+const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 
 var inventory_resource = load("res://assets/Player/Inventory.gd")
@@ -784,10 +784,10 @@ func dying_effect(value):
 		set_collision_mask_bit(12, true)
 		var heartbeat = Heartbeat.instance()
 		var greyscale = Greyscale.instance()
-		var whiteFlash = WhiteFlash.instance()
+		var redFlash = RedFlash.instance()
 		get_node("/root/World/").add_child(heartbeat)
 		get_node("/root/World/GUI").add_child(greyscale)
-		get_node("/root/World/GUI").add_child(whiteFlash)
+		get_node("/root/World/GUI").add_child(redFlash)
 		get_node("/root/World/Music").stream_paused = true
 		get_node("/root/World/SFX").stream_paused = true
 		get_node("/root/World/SFX2").stream_paused = true
@@ -797,7 +797,7 @@ func dying_effect(value):
 		set_collision_mask_bit(12, false)
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 		get_node("/root/World/GUI/Greyscale").queue_free()
-		get_node("/root/World/GUI/White").queue_free()
+		get_node("/root/World/GUI/Red").queue_free()
 		get_node("/root/World/Heartbeat").queue_free()
 		get_node("/root/World/Music").stream_paused = false
 		get_node("/root/World/SFX").stream_paused = false
