@@ -15,14 +15,17 @@ font_data = ExtResource( 3 )
 [node name="LevelUp_Rect" type="NinePatchRect"]
 margin_left = 64.0
 margin_top = 55.0
-margin_right = 256.0
-margin_bottom = 120.0
+margin_right = 258.0
+margin_bottom = 122.0
 rect_pivot_offset = Vector2( 64, 36 )
 texture = ExtResource( 8 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
 patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LevelUp_Container" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -35,9 +38,9 @@ __meta__ = {
 }
 
 [node name="Options" type="VBoxContainer" parent="LevelUp_Container"]
-margin_left = 4.0
-margin_right = 94.0
-margin_bottom = 65.0
+margin_left = 5.0
+margin_right = 95.0
+margin_bottom = 67.0
 grow_horizontal = 0
 grow_vertical = 2
 rect_min_size = Vector2( 90, 0 )
@@ -48,9 +51,9 @@ __meta__ = {
 
 [node name="ButtonVIT" type="Button" parent="LevelUp_Container/Options"]
 modulate = Color( 0.8, 0.466667, 0, 1 )
-margin_top = 3.0
+margin_top = 4.0
 margin_right = 90.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -82,9 +85,9 @@ __meta__ = {
 
 [node name="ButtonEND" type="Button" parent="LevelUp_Container/Options"]
 modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
-margin_top = 24.0
+margin_top = 25.0
 margin_right = 90.0
-margin_bottom = 41.0
+margin_bottom = 42.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -116,9 +119,9 @@ __meta__ = {
 
 [node name="ButtonDEF" type="Button" parent="LevelUp_Container/Options"]
 modulate = Color( 0.2, 0.2, 1, 1 )
-margin_top = 45.0
+margin_top = 46.0
 margin_right = 90.0
-margin_bottom = 62.0
+margin_bottom = 63.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -149,9 +152,9 @@ __meta__ = {
 }
 
 [node name="Options2" type="VBoxContainer" parent="LevelUp_Container"]
-margin_left = 98.0
-margin_right = 188.0
-margin_bottom = 65.0
+margin_left = 99.0
+margin_right = 189.0
+margin_bottom = 67.0
 grow_vertical = 2
 rect_min_size = Vector2( 90, 0 )
 alignment = 1
@@ -161,9 +164,9 @@ __meta__ = {
 
 [node name="ButtonSTR" type="Button" parent="LevelUp_Container/Options2"]
 modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
-margin_top = 3.0
+margin_top = 4.0
 margin_right = 90.0
-margin_bottom = 20.0
+margin_bottom = 21.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -195,9 +198,9 @@ __meta__ = {
 
 [node name="ButtonDEX" type="Button" parent="LevelUp_Container/Options2"]
 modulate = Color( 0.32, 0.62, 0.7, 1 )
-margin_top = 24.0
+margin_top = 25.0
 margin_right = 90.0
-margin_bottom = 41.0
+margin_bottom = 42.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )
@@ -229,9 +232,9 @@ __meta__ = {
 
 [node name="ButtonSPD" type="Button" parent="LevelUp_Container/Options2"]
 modulate = Color( 1, 1, 0.752941, 1 )
-margin_top = 45.0
+margin_top = 46.0
 margin_right = 90.0
-margin_bottom = 62.0
+margin_bottom = 63.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 4 )

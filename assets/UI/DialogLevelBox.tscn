@@ -1,20 +1,29 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6.png" type="Texture" id=1]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/UI/DialogNext.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/DialogLevelBox.gd" type="Script" id=4]
 [ext_resource path="res://assets/Audio/dialogue.wav" type="AudioStream" id=5]
-[ext_resource path="res://assets/UI/Dialog/LevelUp_Container.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=6]
 [ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/Audio/Player/Level_Up_Hit.wav" type="AudioStream" id=9]
 [ext_resource path="res://assets/Audio/Music/LevelUp.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/UI/Dialog/LevelUp_Container.gd" type="Script" id=11]
+[ext_resource path="res://assets/UI/Dialog/Theme_LevelUpButton.tres" type="Theme" id=12]
+[ext_resource path="res://assets/UI/Dialog/Pressed_StyleBoxTex_LevelUp_Button.tres" type="StyleBox" id=13]
+[ext_resource path="res://assets/UI/Dialog/Hover_StyleBoxTex_LevelUp_Button.tres" type="StyleBox" id=14]
+[ext_resource path="res://assets/UI/Dialog/Font_LevelUp_Button.tres" type="DynamicFont" id=15]
+[ext_resource path="res://assets/UI/LevelDescription.gd" type="Script" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 2 )
 
 [node name="DialogLevelBox" type="Control"]
@@ -28,20 +37,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Text" type="Control" parent="."]
+[node name="LevelText" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -32.0
-margin_top = -148.0
+margin_top = -167.0
 margin_right = 32.0
-margin_bottom = -128.0
+margin_bottom = -147.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="NinePatchRect" parent="Text"]
+[node name="TextureRect" type="NinePatchRect" parent="LevelText"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
@@ -53,7 +62,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Text"]
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelText"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
@@ -69,7 +78,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameLabel" type="RichTextLabel" parent="Text"]
+[node name="NameLabel" type="RichTextLabel" parent="LevelText"]
 margin_left = 6.0
 margin_top = -14.0
 margin_right = 266.0
@@ -81,7 +90,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="Text"]
+[node name="Sprite" type="Sprite" parent="LevelText"]
 visible = false
 position = Vector2( 265, 43 )
 texture = ExtResource( 3 )
@@ -89,6 +98,8 @@ texture = ExtResource( 3 )
 [node name="OptionsRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 5.0
+margin_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 __meta__ = {
@@ -98,10 +109,6 @@ __meta__ = {
 [node name="Options" type="VBoxContainer" parent="OptionsRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -109,7 +116,293 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelUp_Rect" parent="OptionsRect" instance=ExtResource( 6 )]
+[node name="LevelUp_Rect" type="NinePatchRect" parent="OptionsRect"]
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 258.0
+margin_bottom = 99.0
+rect_pivot_offset = Vector2( 64, 36 )
+texture = ExtResource( 6 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelUp_Container" type="HBoxContainer" parent="OptionsRect/LevelUp_Rect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 12 )
+alignment = 1
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="VBoxContainer" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
+margin_left = 5.0
+margin_right = 95.0
+margin_bottom = 67.0
+grow_horizontal = 0
+grow_vertical = 2
+rect_min_size = Vector2( 90, 0 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonVIT" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
+modulate = Color( 0.8, 0.466667, 0, 1 )
+margin_top = 4.0
+margin_right = 90.0
+margin_bottom = 21.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "WILLPOWER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonEND" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
+modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
+margin_top = 25.0
+margin_right = 90.0
+margin_bottom = 42.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "LUNG CAPACITY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonDEF" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
+modulate = Color( 0.2, 0.2, 1, 1 )
+margin_top = 46.0
+margin_right = 90.0
+margin_bottom = 63.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "HARDINESS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options2" type="VBoxContainer" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
+margin_left = 99.0
+margin_right = 189.0
+margin_bottom = 67.0
+grow_vertical = 2
+rect_min_size = Vector2( 90, 0 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSTR" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2"]
+modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
+margin_top = 4.0
+margin_right = 90.0
+margin_bottom = 21.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "VIOLENT NATURE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSTR"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonDEX" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2"]
+modulate = Color( 0.32, 0.62, 0.7, 1 )
+margin_top = 25.0
+margin_right = 90.0
+margin_bottom = 42.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "PATIENCE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonDEX"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonSPD" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2"]
+modulate = Color( 1, 1, 0.752941, 1 )
+margin_top = 46.0
+margin_right = 90.0
+margin_bottom = 63.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "SWIFTNESS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "option1"
+text = "option1"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioMenu" type="AudioStreamPlayer" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
+stream = ExtResource( 8 )
+
+[node name="LevelDescription" type="Control" parent="."]
+visible = false
+margin_left = 27.0
+margin_top = 108.0
+margin_right = 295.0
+margin_bottom = 156.0
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="LevelDescription"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelDescription"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 2.0
+margin_right = -6.0
+margin_bottom = -2.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "asdfasdfhjasdfhasdfjkaskdfjla;ksdjf;alksdjf;kalsjdfl;kasjd;fkjasd;klfjas;kldfjal;skdjf;"
+
+[node name="TimerText" type="Timer" parent="LevelDescription"]
+wait_time = 0.001
 
 [node name="TimerNext" type="Timer" parent="."]
 wait_time = 0.08
@@ -141,7 +434,24 @@ stream = ExtResource( 10 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="LevelDescription" method="_on_ButtonVIT_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonVIT_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="LevelDescription" method="_on_ButtonEND_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonEND_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="LevelDescription" method="_on_ButtonDEF_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEF_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSTR" to="LevelDescription" method="_on_ButtonSTR_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSTR_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonDEX" to="LevelDescription" method="_on_ButtonDEX_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEX_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD" to="LevelDescription" method="_on_ButtonSPD_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSPD_pressed"]
+[connection signal="timeout" from="LevelDescription/TimerText" to="LevelDescription" method="_on_TimerText_timeout"]
 [connection signal="timeout" from="TimerNext" to="." method="_on_TimerNext_timeout"]
 [connection signal="timeout" from="TimerText" to="." method="_on_TimerText_timeout"]
-
-[editable path="OptionsRect/LevelUp_Rect"]

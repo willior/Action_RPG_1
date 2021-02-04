@@ -4,8 +4,8 @@ func _ready():
 	$Tween.interpolate_property(self,
 	"modulate",
 	Color(1, 1, 1, 0),
-	Color(1, 1, 1, 1),
-	0.3,
+	Color(0.5, 0.5, 0.5, 1),
+	0.5,
 	Tween.TRANS_LINEAR,
 	Tween.EASE_IN
 	)
@@ -14,9 +14,9 @@ func _ready():
 func fade_out_greyscale():
 	$Tween.interpolate_property(self,
 	"modulate",
-	Color(1, 1, 1, 1),
+	Color(0.5, 0.5, 0.5, 1),
 	Color(1, 1, 1, 0),
-	0.3,
+	0.5,
 	Tween.TRANS_LINEAR,
 	Tween.EASE_IN
 	)

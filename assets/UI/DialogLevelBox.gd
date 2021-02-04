@@ -2,7 +2,7 @@ extends Control
 
 const BUTTON = preload("Dialog/Dialog_Button.tscn")
 # const LEVELUPCONTAINER = preload("Dialog/LevelUp_Container.tscn")
-onready var label = $Text/RichTextLabel
+onready var label = $LevelText/RichTextLabel
 
 var default_stats_remaining = 2
 var stats_remaining = default_stats_remaining
@@ -72,7 +72,7 @@ func _ready():
 	event_handler(dialog_script[dialog_index])
 	get_tree().paused = true
 	Global.dialogOpen = true
-	$AudioLevel.play()
+	# $AudioLevel.play()
 	
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
@@ -95,13 +95,13 @@ func _input(event):
 func update_name(event):
 	# search for the name key and parse it into the NameLabel
 	if event.has('name'):
-		$Text/NameLabel.bbcode_text = parse_text(event['name'])
+		$LevelText/NameLabel.bbcode_text = parse_text(event['name'])
 #		if '[name]' in event['name']:
 #			$CloseUp.visible = true
 #		else:
 #			$CloseUp.visible = false
 	else:
-		$Text/NameLabel.bbcode_text = ''
+		$LevelText/NameLabel.bbcode_text = ''
 		# $CloseUp.visible = false
 
 func update_text(text):
@@ -260,6 +260,7 @@ func _on_level_selected(value):
 		waiting_for_level = false
 		waiting_for_input = false
 		$OptionsRect/LevelUp_Rect.queue_free()
+		$LevelDescription.queue_free()
 		print(VIT_to_add, ' VIT')
 		print(END_to_add, ' END')
 		print(DEF_to_add, ' DEF')
