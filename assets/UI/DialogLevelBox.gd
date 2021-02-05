@@ -44,11 +44,11 @@ var dialog_script = [
 				}
 			]
 
-func _process(_delta):
-	if waiting_for_answer:
-		$OptionsRect.visible = finished
-	else:
-		$OptionsRect.visible = false
+#func _process(_delta):
+#	if waiting_for_answer:
+#		$OptionsRect.visible = finished
+#	else:
+#		$OptionsRect.visible = false
 
 func parse_text(text):
 	# This will parse the text and automatically format some of your available variables
@@ -126,13 +126,6 @@ func load_dialog():
 		# displays all the characters in the current dialog_index
 		label.set_visible_characters(label.get_total_character_count())
 		finished = true
-		
-func end_dialog():
-	get_tree().paused = false
-	Global.dialogOpen = false
-	queue_free()
-	Global.reset_input_after_dialog()
-	
 
 func event_handler(event):
 	match event:
@@ -172,6 +165,13 @@ func event_handler(event):
 				$OptionsRect/Options.add_child(button)
 		
 		{'level_up', 'text'}:
+			$Tween.interpolate_property($OptionsRect, "modulate",
+			Color(1, 1, 1, 0),
+			Color(1, 1, 1, 1),
+			0.6,
+			Tween.TRANS_QUINT, Tween.EASE_IN
+			)
+			$Tween.start()
 			finished = false
 			waiting_for_answer = true
 			waiting_for_level = true
@@ -212,6 +212,12 @@ func event_handler(event):
 				$TimerDelaySelect.start()
 				yield($TimerDelaySelect, "timeout")
 				end_dialog()
+				
+func end_dialog():
+	get_tree().paused = false
+	Global.dialogOpen = false
+	queue_free()
+	Global.reset_input_after_dialog()
 
 func reset_options():
 	for option in $OptionsRect/Options.get_children():
@@ -255,18 +261,53 @@ func _on_level_selected(value):
 			SPD_to_add += 1
 	
 	if stats_remaining == 0:
-		print(value, ' incremented... 0 stats remaining. stats to add:')
 		waiting_for_answer = false
 		waiting_for_level = false
 		waiting_for_input = false
-		$OptionsRect/LevelUp_Rect.queue_free()
-		$LevelDescription.queue_free()
-		print(VIT_to_add, ' VIT')
-		print(END_to_add, ' END')
-		print(DEF_to_add, ' DEF')
-		print(STR_to_add, ' STR')
-		print(DEX_to_add, ' DEX')
-		print(SPD_to_add, ' SPD')
+		for x in $OptionsRect/LevelUp_Rect/LevelUp_Container/Options.get_children():
+			x.focus_mode = 0
+		for y in $OptionsRect/LevelUp_Rect/LevelUp_Container/Options2.get_children():
+			y.focus_mode = 0
+		$Tween.interpolate_property($LevelText, "modulate",
+			Color(1, 1, 1, 1),
+			Color(1, 1, 1, 0),
+			0.6,
+			Tween.TRANS_QUINT, Tween.EASE_IN
+			)
+		$Tween.interpolate_property($LevelDescription, "modulate",
+			Color(1, 1, 1, 1),
+			Color(1, 1, 1, 0),
+			0.6,
+			Tween.TRANS_QUINT, Tween.EASE_IN
+			)
+		$Tween.interpolate_property($OptionsRect, "modulate",
+			Color(1, 1, 1, 1),
+			Color(1, 1, 1, 0),
+			0.6,
+			Tween.TRANS_QUINT, Tween.EASE_IN
+			)
+		$Tween.start()
+		print(value, ' incremented... 0 stats remaining. stats to add:')
+		if VIT_to_add > 0:
+			# PlayerStats.vitality += VIT_to_add
+			print(VIT_to_add, ' VIT')
+		if END_to_add > 0:
+			# PlayerStats.endurance += END_to_add
+			print(END_to_add, ' END')
+		if DEF_to_add > 0:
+			# PlayerStats.defense += DEF_to_add
+			print(DEF_to_add, ' DEF')
+		if STR_to_add > 0:
+			# PlayerStats.strength += STR_to_add
+			print(STR_to_add, ' STR')
+		if DEX_to_add > 0:
+			# PlayerStats.dexterity += DEX_to_add
+			print(DEX_to_add, ' DEX')
+		if SPD_to_add > 0:
+			# PlayerStats.speed += SPD_to_add
+			print(SPD_to_add, ' SPD')
+		$TimerDelaySelect.start()
+		yield($TimerDelaySelect, "timeout")
 		load_dialog()
 		
 	else:
@@ -283,7 +324,6 @@ func reset_level_stats():
 	SPD_to_add = 0
 
 func apply_level_stats():
-	print('applying stats: ')
 	if VIT_to_add > 0:
 		# PlayerStats.vitality += VIT_to_add
 		print(VIT_to_add, ' VIT')

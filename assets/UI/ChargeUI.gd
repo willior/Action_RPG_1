@@ -41,7 +41,6 @@ func set_stamina(value):
 	staminaProgress.value = currentStamina
 	staminaPercent = currentStamina / currentMaxStamina
 	if !staminaProgress.visible && staminaPercent < 1 && !PlayerStats.status == "sweating":
-		print('showing staminaProgress: less than 100% stamina and not sweating')
 		staminaProgress.visible = true
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
@@ -53,7 +52,6 @@ func set_stamina(value):
 		)
 		$Tween.start()
 	elif !staminaProgress.visible && staminaPercent >= 0 && PlayerStats.status == "sweating":
-		print('showing staminaProgress: more than 0% stamina and sweating')
 		sweatFlag = false
 		staminaProgress.visible = true
 		$Tween.interpolate_property(staminaProgress,
@@ -66,7 +64,6 @@ func set_stamina(value):
 		)
 		$Tween.start()
 	elif staminaProgress.visible && (staminaPercent == 1):
-		print('100% stamina: hiding staminaProgress')
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
 		Color(1, 1, 1, 1),
@@ -79,7 +76,6 @@ func set_stamina(value):
 		yield($Tween, "tween_all_completed")
 		staminaProgress.visible = false
 	elif sweatFlag && (staminaPercent <= 0 && PlayerStats.status == "sweating"):
-		print('player sweating: hiding staminaProgress')
 		sweatFlag = false
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",

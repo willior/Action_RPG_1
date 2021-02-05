@@ -1,41 +1,84 @@
 extends HBoxContainer
 
-var VIT_to_add = 0
-var END_to_add = 0
-var DEF_to_add = 0
-var STR_to_add = 0
-var DEX_to_add = 0
-var SPD_to_add = 0
+func _ready():
+	$Stats/LabelVIT.text = str(PlayerStats.vitality)
+	$Stats/LabelEND.text = str(PlayerStats.endurance)
+	$Stats/LabelDEF.text = str(PlayerStats.defense)
+	$Stats2/LabelSTR.text = str(PlayerStats.strength)
+	$Stats2/LabelDEX.text = str(PlayerStats.dexterity)
+	$Stats2/LabelSPD.text = str(PlayerStats.speed)
 
 func _on_focus_entered():
 	$AudioMenu.play()
 
 func _on_ButtonVIT_pressed():
-	# VIT_to_add += 1
 	PlayerStats.vitality += 1
 	SoundPlayer.play_sound("iloveit")
+	$Stats/LabelVIT.text = str(PlayerStats.vitality)
+	$Tween.interpolate_property($Stats/LabelVIT, "modulate",
+	Color(0.25, 1, 1, 1),
+	Color(1, 1, 1, 1),
+	0.3,
+	Tween.TRANS_QUAD, Tween.EASE_IN
+	)
+	$Tween.start()
 	
 func _on_ButtonEND_pressed():
-	# END_to_add += 1
 	PlayerStats.endurance += 1
 	SoundPlayer.play_sound("great")
+	$Stats/LabelEND.text = str(PlayerStats.endurance)
+	$Tween.interpolate_property($Stats/LabelEND, "modulate",
+	Color(0.25, 1, 1, 1),
+	Color(1, 1, 1, 1),
+	0.3,
+	Tween.TRANS_QUAD, Tween.EASE_IN
+	)
+	$Tween.start()
 
 func _on_ButtonDEF_pressed():
-	# DEF_to_add += 1
 	PlayerStats.defense += 1
 	SoundPlayer.play_sound("wow")
+	$Stats/LabelDEF.text = str(PlayerStats.defense)
+	$Tween.interpolate_property($Stats/LabelDEF, "modulate",
+	Color(0.25, 1, 1, 1),
+	Color(1, 1, 1, 1),
+	0.3,
+	Tween.TRANS_QUAD, Tween.EASE_IN
+	)
+	$Tween.start()
 
 func _on_ButtonSTR_pressed():
-	# STR_to_add += 1
 	PlayerStats.strength += 1
 	SoundPlayer.play_sound("awesome")
+	$Stats2/LabelSTR.text = str(PlayerStats.strength)
+	$Tween.interpolate_property($Stats2/LabelSTR, "modulate",
+	Color(0.25, 1, 1, 1),
+	Color(1, 1, 1, 1),
+	0.3,
+	Tween.TRANS_QUAD, Tween.EASE_IN
+	)
+	$Tween.start()
 
 func _on_ButtonDEX_pressed():
-	# DEX_to_add += 1
 	PlayerStats.dexterity += 1
 	SoundPlayer.play_sound("whistle")
+	$Stats2/LabelDEX.text = str(PlayerStats.dexterity)
+	$Tween.interpolate_property($Stats2/LabelDEX, "modulate",
+	Color(0.25, 1, 1, 1),
+	Color(1, 1, 1, 1),
+	0.3,
+	Tween.TRANS_QUAD, Tween.EASE_IN
+	)
+	$Tween.start()
 
 func _on_ButtonSPD_pressed():
-	# SPD_to_add += 1
 	PlayerStats.speed += 1
 	SoundPlayer.play_sound("nice")
+	$Stats2/LabelSPD.text = str(PlayerStats.speed)
+	$Tween.interpolate_property($Stats2/LabelSPD, "modulate",
+	Color(0.25, 1, 1, 1),
+	Color(1, 1, 1, 1),
+	0.3,
+	Tween.TRANS_QUAD, Tween.EASE_IN
+	)
+	$Tween.start()

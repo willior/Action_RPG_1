@@ -569,7 +569,7 @@ func level_up():
 	$LevelTimer.start()
 	yield($LevelTimer, "timeout")
 	if just_leveled:
-		SoundPlayer.play_sound("level_up")
+		# SoundPlayer.play_sound("level_up")
 		get_node("/root/World/Music").stream_paused = true
 		print('LevelTimer timeout. Final total stats_to_allocate = ', stats_to_allocate)
 		just_leveled = false
