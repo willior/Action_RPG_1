@@ -288,6 +288,7 @@ func _on_NewGame_pressed():
 	menuTimer.wait_time = 0.25
 	menuTimer.start()
 	yield(menuTimer, "timeout")
+	Global.chapter_name = "CHAPTER ONE"
 	Global.goto_scene("res://assets/Misc/ControlsScreen.tscn")
 
 func _on_QuitGame_pressed():

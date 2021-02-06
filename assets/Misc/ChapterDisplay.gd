@@ -17,9 +17,7 @@ func _on_Timer_timeout():
 			$Timer.start(3.0)
 			index += 1
 		1:
-			Global.chapter_display = false
 			get_tree().paused = false
-			
 			$Tween.interpolate_property(sprite, "modulate",
 			Color(1,0,0,1), Color(1,1,0,0), 3.5,
 			Tween.TRANS_QUAD, Tween.EASE_IN
@@ -30,7 +28,6 @@ func _on_Timer_timeout():
 			)
 			$Tween.start()
 			yield($Tween, "tween_completed")
-			
 			$Tween.interpolate_property($Chapter, "modulate",
 			Color(1,1,1,1), Color(1,1,1,0), 2.0,
 			Tween.TRANS_QUAD, Tween.EASE_OUT
@@ -41,7 +38,6 @@ func _on_Timer_timeout():
 			queue_free()
 
 func _on_AudioStreamPlayer_finished():
-	# Global.goto_scene(SCENE_STRING)
 	print('audio done')
 
 func _on_Tween_tween_completed(object, key):

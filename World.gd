@@ -12,10 +12,13 @@ func _ready():
 	if GameManager.on_title_screen:
 		GameManager.on_title_screen = false
 		
-	if Global.chapter_display:
+	if Global.chapter_name != null:
 		$FadeIn.free()
 		var chapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn").instance()
+		
 		add_child(chapterDisplay)
+		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
+		Global.chapter_name = null
 	
 	if GameManager.multiplayer_2:
 		var player2 = load("res://assets/Player/Player2.tscn").instance()

@@ -101,13 +101,12 @@ func set_max_stamina(value):
 	staminaProgress.max_value = currentMaxStamina
 	
 func toggle_stamina_warning(value):
-	match value:
-		true:
-			staminaWarning = true
-			staminaWarningAnimation.play("On")
-		false:
-			staminaWarning = false
-			staminaWarningAnimation.play("Off")
+	if value:
+		staminaWarning = true
+		staminaWarningAnimation.play("On")
+	else:
+		staminaWarning = false
+		staminaWarningAnimation.play("Off")
 
 func begin_charge_1():
 	chargeSound2.play()
