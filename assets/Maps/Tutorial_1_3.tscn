@@ -101,7 +101,6 @@ texture = ExtResource( 4 )
 position = Vector2( 92, 542 )
 
 [node name="Exit_ToTutorial_1_2" parent="Map" instance=ExtResource( 9 )]
-collision_layer = 2048
 map_file = "res://assets/Maps/Tutorial_1_2.tscn"
 selected_location = Vector2( 915, 235 )
 

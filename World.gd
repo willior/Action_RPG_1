@@ -56,7 +56,7 @@ func _input(event):
 			stats.visible = false
 			
 	if event.is_action_pressed("start"): # SPACEBAR
-		if Global.dialogOpen or Global.chapter_display or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
+		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
 			return
 		if PlayerStats.dead:
 			print('resuming')

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/river_edge_2.png-047f9ee144165ff4942428b9550576d1.stex"
+path="res://.import/river_interior_1.png-5f30b9d38c7821109eb11a3ef5a81dc6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/World/Rivers/river_edge_2.png"
-dest_files=[ "res://.import/river_edge_2.png-047f9ee144165ff4942428b9550576d1.stex" ]
+source_file="res://assets/Andrew/Complete/river_interior_1.png"
+dest_files=[ "res://.import/river_interior_1.png-5f30b9d38c7821109eb11a3ef5a81dc6.stex" ]
 
 [params]
 
