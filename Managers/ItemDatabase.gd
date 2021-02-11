@@ -7,6 +7,7 @@ extends Node
 # returns any item with a matching name
 
 var items = Array()
+var ingredients = Array()
 
 func _ready():
 	var directory = Directory.new()
