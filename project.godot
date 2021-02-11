@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "IngredientResource",
+"language": "GDScript",
+"path": "res://assets/Resources/Ingredient.gd"
+}, {
+"base": "Resource",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://assets/Player/Inventory.gd"
@@ -17,11 +22,18 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ItemResource",
 "language": "GDScript",
-"path": "res://assets/Scripts/Item.gd"
+"path": "res://assets/Resources/Item.gd"
+}, {
+"base": "Resource",
+"class": "Pouch",
+"language": "GDScript",
+"path": "res://assets/Player/Pouch.gd"
 } ]
 _global_script_class_icons={
+"IngredientResource": "",
 "Inventory": "",
-"ItemResource": ""
+"ItemResource": "",
+"Pouch": ""
 }
 
 [application]
@@ -36,6 +48,7 @@ config/windows_native_icon="res://game_icon.ico"
 [autoload]
 
 ItemDatabase="*res://Managers/ItemDatabase.gd"
+IngredientDatabase="*res://Managers/IngredientDatabase.gd"
 PlayerStats="*res://assets/Player/PlayerStats.tscn"
 Player2Stats="*res://assets/Player/Player2Stats.tscn"
 PlayerLog="*res://assets/Player/PlayerLog.tscn"

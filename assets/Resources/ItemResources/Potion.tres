@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://assets/Scripts/Item.gd" type="Script" id=1]
+[ext_resource path="res://assets/Resources/Item.gd" type="Script" id=1]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.png" type="Texture" id=2]
 
 [resource]

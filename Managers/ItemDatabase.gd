@@ -7,20 +7,19 @@ extends Node
 # returns any item with a matching name
 
 var items = Array()
-var ingredients = Array()
 
 func _ready():
 	var directory = Directory.new()
-	directory.open("res://assets/Items/ItemResources")
+	directory.open("res://assets/Resources/ItemResources")
 	directory.list_dir_begin()
 	
 	var filename = directory.get_next()
 	while(filename):
 		if not directory.current_is_dir():
-			items.append(load("res://assets/Items/ItemResources/%s" % filename))
+			items.append(load("res://assets/Resources/ItemResources/%s" % filename))
 			
 		filename = directory.get_next()
-		
+
 func get_item(item_name):
 	for i in items:
 		if i.name == item_name:

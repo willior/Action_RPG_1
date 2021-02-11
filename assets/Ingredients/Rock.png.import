@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rock.png-bfd17dc8a5bf8865ee293222bbf498b8.stex"
+path="res://.import/Rock.png-93d2be4361ad786f66ecfc68cd0f8e28.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/Pouch/Ingredients/Rock.png"
-dest_files=[ "res://.import/Rock.png-bfd17dc8a5bf8865ee293222bbf498b8.stex" ]
+source_file="res://assets/Ingredients/Rock.png"
+dest_files=[ "res://.import/Rock.png-93d2be4361ad786f66ecfc68cd0f8e28.stex" ]
 
 [params]
 

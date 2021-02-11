@@ -7,14 +7,9 @@ signal current_selected_item_changed
 signal selected_item_quantity_updated
 signal item_quantity_zero
 
-signal pouch_changed
-signal ingredient_quantity_zero
-
 export var _items = Array() setget set_items, get_items
-export var _ingredients = Array() setget set_ingredients, get_ingredients
 
 var current_selected_item = 0
-var items_set = false
 
 func set_items(new_items):
 	_items = new_items
@@ -129,44 +124,6 @@ func add_item(item_name, quantity):
 		}
 		_items.append(new_item)
 		quantity = 0
-	
-func set_ingredients(new_ingredients):
-	_ingredients = new_ingredients
-	emit_signal("pouch_changed", self)
-	
-func get_ingredients():
-	return _ingredients
-	
-func get_ingredient(index):
-	return _ingredients[index]
-	
-func remove_ingredient(ingredient_name, quantity):
-	for i in range(_ingredients.size()):
-		var pouch_ingredient = _ingredients[i]
-		
-		if pouch_ingredient.ingredient_reference.name != ingredient_name:
-			print('next loop')
-			continue
-		
-		if (pouch_ingredient.quantity-quantity) < 0:
-			print("none left / not enough ingredients")
-			return
-		
-		else: 
-			pouch_ingredient.quantity -= quantity
-			if pouch_ingredient.quantity <= 0:
-				
-				emit_signal("ingredient_quantity_zero")
-				prints(str(pouch_ingredient.ingredient_reference.name) + " cleared from pouch")
-				
-				_ingredients.erase(get_ingredient(i))
-				
-				# _ingredients.erase(get_ingredient(current_selected_ingredient))
-
-			else:
-				# var updated_selected_ingredient = get_ingredient(current_selected_ingredient)
-				emit_signal("selected_ingredient_quantity_updated", get_ingredient(i))
-
 
 #func remove_item(item_name, quantity):
 #	print('removing item')

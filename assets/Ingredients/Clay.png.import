@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Clay.png-6cf2483bead0e8f7a51f3c2528c32f4d.stex"
+path="res://.import/Clay.png-7b940fe16d6bec5a5852d95ac8d5d675.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/Pouch/Ingredients/Clay.png"
-dest_files=[ "res://.import/Clay.png-6cf2483bead0e8f7a51f3c2528c32f4d.stex" ]
+source_file="res://assets/Ingredients/Clay.png"
+dest_files=[ "res://.import/Clay.png-7b940fe16d6bec5a5852d95ac8d5d675.stex" ]
 
 [params]
 

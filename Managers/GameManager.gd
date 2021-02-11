@@ -23,12 +23,15 @@ func _ready():
 	pass
 	
 # warning-ignore:unused_argument
-func reinitialize_player(inventory):
+func reinitialize_player(inventory, pouch):
+	print('attempting to reinitialize player...')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	if not player:
 		return
 	emit_signal("player_reinitialized", player) 
 	player.inventory.set_items(inventory.get_items())
+	player.pouch.set_ingredients(pouch.get_ingredients())
+	print('player reinitialized.')
 	
 func initialize_player():
 	print('attempting to initialize player...')
@@ -38,15 +41,17 @@ func initialize_player():
 		return
 	emit_signal("player_initialized", player)
 	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
+	player.pouch.connect("pouch_changed", self, "_on_player_pouch_changed")
 	print('player successfully initialized.')
 	
 	if !ResourceLoader.exists("user://inventory.tres"):
 		player.inventory.add_item("Potion", 1)
 		player.inventory.add_item("Potion", 3)
+		player.pouch.add_ingredient("Rock", 10)
+		player.pouch.add_ingredient("Clay", 20)
 # warning-ignore:return_value_discarded
 		ResourceSaver.save("user://inventory.tres", player.inventory)
 		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
-
 	else:
 		var loaded_inventory = load("user://inventory.tres")
 		if loaded_inventory:
@@ -58,4 +63,8 @@ func _on_player_inventory_changed(inventory):
 # warning-ignore:return_value_discarded
 	# ResourceSaver.save("user://inventory.tres", inventory)
 	# prints(str(inventory) + str(OS.get_user_data_dir()))
+	pass
+	
+# warning-ignore:unused_argument
+func _on_player_pouch_changed(pouch):
 	pass

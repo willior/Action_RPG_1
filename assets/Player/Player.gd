@@ -12,8 +12,8 @@ const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 
 var inventory_resource = load("res://assets/Player/Inventory.gd")
-var pouch_resource = load("res://assets/Player/Pouch/Pouch.gd")
 var inventory = inventory_resource.new()
+var pouch_resource = load("res://assets/Player/Pouch.gd")
 var pouch = pouch_resource.new()
 
 enum {
@@ -101,9 +101,10 @@ func _ready():
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
 	if Global.get_attribute("inventory") != null:
-		inventory.set_items(Global.get_attribute("inventory").get_items())
-		inventory.items_set = false
-		GameManager.reinitialize_player(inventory)
+		# var new_inventory = Global.get_attribute("inventory").get_items()
+		inventory.set_items(Global.get_attribute("inventory")[0].get_items())
+		pouch.set_ingredients(Global.get_attribute("inventory")[1].get_ingredients())
+		GameManager.reinitialize_player(inventory, pouch)
 	else:
 		GameManager.initialize_player()
 
@@ -117,6 +118,8 @@ func _ready():
 	stats.connect("attack_speed_changed", self, "set_attack_timescale")
 	set_attack_timescale(PlayerStats.attack_speed)
 	PlayerStats.status = "default_speed"
+	print('player inventory: ', inventory)
+	print('player pouch: ', pouch)
 
 func _process(delta):
 	match state:
@@ -909,3 +912,12 @@ func check_attack_input():
 		charge.stop_charge()
 		charge_reset()
 	get_node("/root/World/Music").stream_paused = false
+	
+func save():
+	var save_dict = {
+		"filename" : get_filename(),
+		"parent" : get_parent().get_path(),
+		"inventory": inventory._items,
+		"pouch": pouch._ingredients
+	}
+	return save_dict
