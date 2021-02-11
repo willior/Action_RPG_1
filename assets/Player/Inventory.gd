@@ -7,7 +7,11 @@ signal current_selected_item_changed
 signal selected_item_quantity_updated
 signal item_quantity_zero
 
+signal pouch_changed
+signal ingredient_quantity_zero
+
 export var _items = Array() setget set_items, get_items
+export var _ingredients = Array() setget set_ingredients, get_ingredients
 
 var current_selected_item = 0
 var items_set = false
@@ -16,7 +20,6 @@ func set_items(new_items):
 	_items = new_items
 	emit_signal("inventory_changed", self)
 	var new_selected_item = get_item(current_selected_item)
-	
 	emit_signal("current_selected_item_changed", new_selected_item)
 
 func get_items():
@@ -76,8 +79,6 @@ func use_item(who):
 		ItemHandler.item_handler(used_item, who)
 	
 func remove_item(item_name, quantity):
-	prints("removing " + str(quantity) + " " + str(item_name))
-	
 	for i in range(_items.size()):
 		var inventory_item = _items[i]
 		
@@ -90,6 +91,7 @@ func remove_item(item_name, quantity):
 			return
 		else: 
 			inventory_item.quantity -= quantity
+			# additional conditional prevents Potion from being deleted from pouch, instead remaining at 0 quantity:
 			if inventory_item.quantity <= 0 && inventory_item.item_reference.name != "Potion":
 				emit_signal("item_quantity_zero")
 				prints(str(inventory_item.item_reference.name) + " cleared from inventory")
@@ -128,11 +130,44 @@ func add_item(item_name, quantity):
 		_items.append(new_item)
 		quantity = 0
 	
-func set_ingredients():
-	pass
+func set_ingredients(new_ingredients):
+	_ingredients = new_ingredients
+	emit_signal("pouch_changed", self)
 	
 func get_ingredients():
-	pass
+	return _ingredients
+	
+func get_ingredient(index):
+	return _ingredients[index]
+	
+func remove_ingredient(ingredient_name, quantity):
+	for i in range(_ingredients.size()):
+		var pouch_ingredient = _ingredients[i]
+		
+		if pouch_ingredient.ingredient_reference.name != ingredient_name:
+			print('next loop')
+			continue
+		
+		if (pouch_ingredient.quantity-quantity) < 0:
+			print("none left / not enough ingredients")
+			return
+		
+		else: 
+			pouch_ingredient.quantity -= quantity
+			if pouch_ingredient.quantity <= 0:
+				
+				emit_signal("ingredient_quantity_zero")
+				prints(str(pouch_ingredient.ingredient_reference.name) + " cleared from pouch")
+				
+				_ingredients.erase(get_ingredient(i))
+				
+				# _ingredients.erase(get_ingredient(current_selected_ingredient))
+
+			else:
+				# var updated_selected_ingredient = get_ingredient(current_selected_ingredient)
+				emit_signal("selected_ingredient_quantity_updated", get_ingredient(i))
+
+
 #func remove_item(item_name, quantity):
 #	print('removing item')
 #	var item = check_item(item_name, quantity)
