@@ -118,8 +118,6 @@ func _ready():
 	stats.connect("attack_speed_changed", self, "set_attack_timescale")
 	set_attack_timescale(PlayerStats.attack_speed)
 	PlayerStats.status = "default_speed"
-	print('player inventory: ', inventory)
-	print('player pouch: ', pouch)
 
 func _process(delta):
 	match state:
@@ -914,9 +912,9 @@ func check_attack_input():
 	get_node("/root/World/Music").stream_paused = false
 	
 func save():
+	# instead of saving a REFERENCE to the inventory's _items array, the array data itself should be gotten
+	# this requires parsing through the array
 	var save_dict = {
-		"filename" : get_filename(),
-		"parent" : get_parent().get_path(),
 		"inventory": inventory._items,
 		"pouch": pouch._ingredients
 	}

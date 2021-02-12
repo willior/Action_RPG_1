@@ -51,6 +51,35 @@ func save_game():
 		# Store the save dictionary as a new line in the save file.
 		save_game.store_line(to_json(node_data))
 		save_game.close()
+		
+func load_game():
+	print("load_game")
+	var save_game = File.new()
+	if not save_game.file_exists("user://savegame.save"):
+		print("savegame.save does not exist")
+		return # Error! We don't have a save to load.
+				
+	# We need to revert the game state so we're not cloning objects
+	# during loading. This will vary wildly depending on the needs of a
+	# project, so take care with this step.
+	# For our example, we will accomplish this by deleting saveable objects.
+	var save_nodes = get_tree().get_nodes_in_group("Persist")
+	for i in save_nodes:
+		# i.queue_free()
+				
+		# Load the file line by line and process that dictionary to restore
+		# the object it represents.
+		save_game.open("user://savegame.save", File.READ)
+		while save_game.get_position() < save_game.get_len():
+			# Get the saved dictionary from the next line in the save file
+			var node_data = parse_json(save_game.get_line())
+			for i in node_data.keys():
+				if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
+					continue
+				player.set(i, node_data[i])
+				print(node_data[i])
+			
+			save_game.close()
 
 func _input(event):
 	if event.is_action_pressed("quit_game"):
@@ -66,11 +95,15 @@ func _input(event):
 			Global.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
-		print(get_tree().get_nodes_in_group("Persist"))
+		print(player.inventory._items)
+		# load_game()
+		pass
 	
 	if event.is_action_pressed("pause"): # P
-		save_game()
-			
+		print(player.pouch._ingredients)
+		# save_game()
+		pass
+	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
 			return

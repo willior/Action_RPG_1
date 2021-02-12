@@ -6,9 +6,6 @@ signal ingredient_quantity_zero
 
 export var _ingredients = Array() setget set_ingredients, get_ingredients
 
-func _ready():
-	pass # Replace with function body.
-
 func set_ingredients(new_ingredients):
 	_ingredients = new_ingredients
 	emit_signal("pouch_changed", self)
@@ -66,23 +63,18 @@ func add_ingredient(ingredient_name, quantity):
 		if inventory_ingredient.ingredient_reference.name != ingredient_name:
 			print('next loop')
 			continue
-			
-		if inventory_ingredient.quantity + quantity > ingredient.max_stack_size:
-			print("max stack reached; discarding")
+		if inventory_ingredient.quantity+quantity > ingredient.max_stack_size:
+			print("max stack (", ingredient.max_stack_size, ") reached; discarding extras (", ingredient.max_stack_size-(inventory_ingredient.quantity+quantity), ")")
+			inventory_ingredient.quantity = ingredient.max_stack_size
 			return
 		else: 
 			inventory_ingredient.quantity += quantity
 			quantity = 0
-			
-#		if i == current_selected_ingredient:
-#			var updated_selected_ingredient = get_ingredient(current_selected_ingredient)
-#			emit_signal("selected_ingredient_quantity_updated", updated_selected_ingredient)
 	
 	if quantity > 0:
 		var new_ingredient = {
 			ingredient_reference = ingredient,
-			quantity = 1
+			quantity = quantity
 		}
 		_ingredients.append(new_ingredient)
 		quantity = 0
-	
