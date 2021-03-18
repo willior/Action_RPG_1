@@ -1,14 +1,11 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/ExpBar1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/UI/18x18_Container.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/UI/InventoryUI.gd" type="Script" id=7]
-[ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/UI/StatsDisplay.gd" type="Script" id=9]
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/HealthUI.gd" type="Script" id=11]
 [ext_resource path="res://assets/UI/ExpBar2.tscn" type="PackedScene" id=12]
@@ -75,9 +72,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.67451, 0.282353, 0.282353, 1 ) ]
 }
-
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 2 )
@@ -279,102 +273,6 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-
-[node name="StatsDisplay" type="Control" parent="."]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Vbox" type="VBoxContainer" parent="StatsDisplay"]
-margin_left = 218.0
-margin_top = 38.0
-margin_right = 258.0
-margin_bottom = 142.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Stats" type="Label" parent="StatsDisplay/Vbox"]
-margin_right = 40.0
-margin_bottom = 26.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/line_spacing = 0
-text = "STATS:
-"
-
-[node name="vit" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 26.0
-margin_right = 40.0
-margin_bottom = 39.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
-[node name="end" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 39.0
-margin_right = 40.0
-margin_bottom = 52.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
-[node name="def" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 52.0
-margin_right = 40.0
-margin_bottom = 65.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
-[node name="str" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 65.0
-margin_right = 40.0
-margin_bottom = 78.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
-[node name="dex" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 78.0
-margin_right = 40.0
-margin_bottom = 91.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
-[node name="spd" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 91.0
-margin_right = 40.0
-margin_bottom = 104.0
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
-[node name="Controls" parent="StatsDisplay" instance=ExtResource( 8 )]
-margin_left = 64.0
-margin_top = 38.0
-margin_right = 169.0
-margin_bottom = 163.0
 
 [node name="InventoryUI" type="Control" parent="."]
 anchor_right = 1.0

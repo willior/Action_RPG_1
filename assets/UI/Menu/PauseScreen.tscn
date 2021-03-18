@@ -1,0 +1,268 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/UI/Menu/PauseScreen.gd" type="Script" id=3]
+[ext_resource path="res://assets/UI/Menu/ButtonDefault.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=6]
+[ext_resource path="res://assets/UI/Dialog/Theme_LevelUpButton.tres" type="Theme" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="PauseScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuPanel" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.759
+margin_left = -128.0
+margin_right = -163.0
+margin_bottom = -0.0440063
+texture = ExtResource( 6 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="MenuPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = -8.0
+margin_bottom = -4.0
+theme = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonStatus" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
+margin_right = 77.0
+text = "STATUS"
+
+[node name="ButtonInventory" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
+margin_top = 21.0
+margin_right = 77.0
+margin_bottom = 38.0
+text = "INVENTORY"
+
+[node name="ButtonPouch" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
+margin_top = 42.0
+margin_right = 77.0
+margin_bottom = 59.0
+text = "POUCH"
+
+[node name="ButtonControls" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
+margin_top = 63.0
+margin_right = 77.0
+margin_bottom = 80.0
+text = "CONTROLS"
+
+[node name="StatsDisplay" type="NinePatchRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -28.0
+texture = ExtResource( 6 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vbox" type="VBoxContainer" parent="StatsDisplay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = -8.0
+margin_bottom = -4.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="Label" parent="StatsDisplay/Vbox"]
+visible = false
+margin_right = 120.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = 0
+text = "STATS:
+"
+
+[node name="vit" type="Label" parent="StatsDisplay/Vbox"]
+margin_right = 112.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="end" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 13.0
+margin_right = 112.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="def" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 26.0
+margin_right = 112.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="str" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 39.0
+margin_right = 112.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="dex" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 52.0
+margin_right = 112.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="spd" type="Label" parent="StatsDisplay/Vbox"]
+margin_top = 65.0
+margin_right = 112.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="InventoryDisplay" type="NinePatchRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -28.0
+texture = ExtResource( 6 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vbox" type="VBoxContainer" parent="InventoryDisplay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = -8.0
+margin_bottom = -4.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PouchDisplay" type="NinePatchRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -28.0
+texture = ExtResource( 6 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vbox" type="VBoxContainer" parent="PouchDisplay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = -8.0
+margin_bottom = -4.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlsDisplay" type="NinePatchRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -28.0
+texture = ExtResource( 6 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" parent="ControlsDisplay" instance=ExtResource( 2 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = -8.0
+margin_bottom = -4.0
+custom_fonts/font = SubResource( 2 )
+
+[node name="TimerDelaySelect" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="AudioMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+[connection signal="focus_entered" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_focus_entered"]
+[connection signal="focus_exited" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_focus_exited"]
+[connection signal="focus_entered" from="MenuPanel/Menu/ButtonInventory" to="." method="_on_ButtonInventory_focus_entered"]
+[connection signal="focus_exited" from="MenuPanel/Menu/ButtonInventory" to="." method="_on_ButtonInventory_focus_exited"]
+[connection signal="focus_entered" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_focus_entered"]
+[connection signal="focus_exited" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_focus_exited"]
+[connection signal="focus_entered" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_entered"]
+[connection signal="focus_exited" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_exited"]

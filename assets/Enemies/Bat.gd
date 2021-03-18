@@ -345,4 +345,4 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	
 func set_health(value):
 	stats.health = value
-	print(ENEMY_NAME, ' spawned, setting health to previous value: ', value)
+	# print(ENEMY_NAME, ' spawned, setting health to previous value: ', value)

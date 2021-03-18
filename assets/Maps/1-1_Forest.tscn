@@ -1,7 +1,7 @@
 [gd_scene load_steps=105 format=2]
 
 [ext_resource path="res://assets/Maps/1-1_Forest.gd" type="Script" id=1]
-[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Shaders/Night_CanvasModulate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Weather/LightningCanvas.tscn" type="PackedScene" id=5]
@@ -831,7 +831,6 @@ tile_data = PoolIntArray( 131107, 0, 4, 131117, 0, 0, 131119, 0, 4, 131121, 0, 1
 
 [node name="Exit_toHome" parent="Map" instance=ExtResource( 12 )]
 position = Vector2( 288, 0 )
-collision_layer = 2048
 map_file = "res://assets/Maps/0_Prologue/0-1_Home.tscn"
 selected_location = Vector2( 160, 168 )
 
@@ -840,7 +839,6 @@ shape = SubResource( 51 )
 
 [node name="Exit_toDesert" parent="Map" instance=ExtResource( 12 )]
 position = Vector2( 1024, 336 )
-collision_layer = 2048
 map_file = "res://assets/Maps/3-0_Desert.tscn"
 selected_location = Vector2( 160, 168 )
 

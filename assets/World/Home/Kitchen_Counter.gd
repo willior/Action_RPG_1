@@ -11,7 +11,7 @@ onready var sinkAnim = $AnimationTree.get("parameters/playback")
 var interactable = true
 var talkable = false
 var item_usable = true
-var item_needed = "Metal_Pot"
+var item_needed = "Metal Pot"
 var examined = false
 var examined_while_off = false
 var examined_while_on = false
@@ -75,7 +75,7 @@ func use_item_on_object():
 				}
 			]
 
-		GameManager.player.inventory.remove_item("Metal_Pot", 1)
+		GameManager.player.inventory.remove_item("Metal Pot", 1)
 		# PlayerLog.metal_pot_water_collected = true
 
 	get_node("/root/World/GUI").add_child(dialogBox)
@@ -84,7 +84,7 @@ func acquire_item():
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	itemCollectEffect.playSound(1)
-	GameManager.player.inventory.add_item("Metal_Pot_Water", 1)
+	GameManager.player.inventory.add_item("Metal Pot (Water)", 1)
 #	PlayerLog.metal_pot_collected = true
 #	queue_free()
 

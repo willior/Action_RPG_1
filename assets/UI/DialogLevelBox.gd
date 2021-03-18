@@ -193,7 +193,6 @@ func event_handler(event):
 # warning-ignore:return_value_discarded
 			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD.connect("pressed", self, "_on_level_selected", ["SPD"])
 			
-			
 		{'action', ..}:
 			if event['action'] == 'take_item':
 				advance_dialog(int(event['skip']))
@@ -375,7 +374,7 @@ func _on_TimerText_timeout():
 				waiting_for_input = true
 				
 			else:
-				print('not level flag')
+				print('not level flag: this should not happen')
 				get_child(1).get_child(0).get_child(0).grab_focus()
 				waiting_for_input = true
 		

@@ -2,6 +2,7 @@ extends Resource
 class_name Pouch
 
 signal pouch_changed
+signal ingredient_quantity_updated
 signal ingredient_quantity_zero
 
 export var _ingredients = Array() setget set_ingredients, get_ingredients
@@ -9,13 +10,13 @@ export var _ingredients = Array() setget set_ingredients, get_ingredients
 func set_ingredients(new_ingredients):
 	_ingredients = new_ingredients
 	emit_signal("pouch_changed", self)
-	
+
 func get_ingredients():
 	return _ingredients
-	
+
 func get_ingredient(index):
 	return _ingredients[index]
-	
+
 func check_ingredient(ingredient_name, quantity):
 	if quantity <= 0:
 		GameManager.player.audio.stream = load("res://assets/Audio/Bamboo.wav")
@@ -47,13 +48,11 @@ func remove_ingredient(ingredient_name, quantity):
 				emit_signal("ingredient_quantity_zero")
 				prints(str(inventory_ingredient.ingredient_reference.name) + " cleared from pouch")
 				
-				_ingredients.erase(get_ingredient(i))
-				
+				# _ingredients.erase(get_ingredient(i))
 				# _ingredients.erase(get_ingredient(current_selected_ingredient))
-
 			else:
 				# var updated_selected_ingredient = get_ingredient(current_selected_ingredient)
-				emit_signal("selected_ingredient_quantity_updated", get_ingredient(i))
+				emit_signal("ingredient_quantity_updated", get_ingredient(i))
 
 func add_ingredient(ingredient_name, quantity):
 	prints("adding " + str(quantity) + " " + str(ingredient_name))

@@ -60,6 +60,6 @@ func acquire_item():
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	itemCollectEffect.playSound(1)
-	GameManager.player.inventory.add_item("Metal_Pot", 1)
+	GameManager.player.inventory.add_item("Metal Pot", 1)
 	PlayerLog.metal_pot_collected = true
 	queue_free()

@@ -22,6 +22,7 @@ __meta__ = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
+pause_mode = 1
 position = Vector2( 216, 72 )
 offset = Vector2( 0, -8 )
 current = true
@@ -96,5 +97,8 @@ pitch_scale = 0.8
 [node name="FadeIn" parent="." instance=ExtResource( 10 )]
 
 [node name="GUI" parent="." instance=ExtResource( 5 )]
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+layer = 4
 
 [editable path="Map/Exit"]

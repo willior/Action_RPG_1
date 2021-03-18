@@ -22,8 +22,8 @@ __meta__ = {
 [node name="ControlsDisplay" type="Node" parent="."]
 
 [node name="Controls" parent="ControlsDisplay" instance=ExtResource( 2 )]
-margin_left = 8.0
-margin_top = 8.0
+margin_left = 16.0
+margin_top = 40.0
 margin_right = 121.0
 margin_bottom = 133.0
 

@@ -2,9 +2,10 @@ extends Node2D
 
 onready var music = $Music
 onready var player = $YSort/Player
-onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
-onready var stats = $GUI/StatsDisplay
 onready var dim = $GUI/Dim
+onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
+onready var PauseScreen = load("res://assets/UI/Menu/PauseScreen.tscn")
+# onready var stats = $GUI/StatsDisplay
 
 func _ready():
 	$SFX.play()
@@ -15,7 +16,6 @@ func _ready():
 	if Global.chapter_name != null:
 		$FadeIn.free()
 		var chapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn").instance()
-		
 		add_child(chapterDisplay)
 		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
 		Global.chapter_name = null
@@ -99,6 +99,10 @@ func _input(event):
 		# load_game()
 		pass
 	
+	if event.is_action_pressed("test4"): # O
+		player.pouch.remove_ingredient("Rock", 3)
+		print(player.pouch._ingredients)
+	
 	if event.is_action_pressed("pause"): # P
 		print(player.pouch._ingredients)
 		# save_game()
@@ -129,11 +133,16 @@ func _input(event):
 			$SFX2.stream_paused = true
 			get_tree().paused = true
 			dim.visible = true
-			stats.visible = true
+			# stats.visible = true
+			var pauseScreen = PauseScreen.instance()
+			$GUI.add_child(pauseScreen)
+
 		else:
 			music.stream_paused = false
 			$SFX.stream_paused = false
 			$SFX2.stream_paused = false
 			get_tree().paused = false
 			dim.visible = false
-			stats.visible = false
+			# stats.visible = false
+			$GUI/PauseScreen.queue_free()
+
