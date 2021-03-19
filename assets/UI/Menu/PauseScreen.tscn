@@ -217,13 +217,26 @@ __meta__ = {
 }
 
 [node name="Vbox" type="VBoxContainer" parent="PouchDisplay"]
+anchor_left = 0.164
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
+margin_left = 0.00799942
 margin_top = 4.0
 margin_right = -8.0
 margin_bottom = -4.0
 custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxIcons" type="VBoxContainer" parent="PouchDisplay"]
+anchor_left = 0.062
+anchor_right = 0.164
+anchor_bottom = 1.0
+margin_left = 0.0639997
+margin_top = 7.0
+margin_right = 0.00799942
+margin_bottom = -4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

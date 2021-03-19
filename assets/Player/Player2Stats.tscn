@@ -12,14 +12,8 @@ var speed_mod = 0 setget set_speed_mod
 var roll_speed = 200
 var shade_speed = 420
 var friction = 800
-var shade_friction = 1600
+var shade_friction = 840
 var dir_vector = Vector2.DOWN
-
-var experience_required = 100 setget set_max_experience
-var experience = 82 setget set_experience
-var level = 40 setget set_level
-var experience_total = 82
-var cash = 0 setget set_cash
 
 var vitality = 20 setget set_vitality
 var endurance = 20 setget set_endurance
@@ -37,6 +31,7 @@ var dead = false setget set_dead
 
 var max_stamina = endurance*15 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
+var stamina_regen_rate = 0.5 setget set_stamina_regen_rate
 
 var strength_mod = 0 setget set_strength_mod
 
@@ -55,6 +50,12 @@ var charge = 0 setget set_charge
 var max_charge_level = 2 setget set_max_charge_level
 var charge_level = 0 setget set_charge_level
 
+var experience_required = 100 setget set_max_experience
+var experience = 82 setget set_experience
+var level = 40 setget set_level
+var experience_total = 82
+var cash = 0 setget set_cash
+
 var status = \"fine\" setget set_status
 var sweating = false
 var is_poisoned = false
@@ -70,6 +71,7 @@ signal player_dying(value)
 signal endurance_changed(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
+signal stamina_regen_rate_changed(value)
 signal strength_changed(value)
 signal strength_mod_changed(value)
 signal dexterity_changed(value)
@@ -151,13 +153,14 @@ func set_vitality(value):
 	if vitality > 30:
 		health_increase = 1
 	elif vitality > 20:
-		health_increase = 4
+		health_increase = 3
 	elif vitality > 10:
-		health_increase = 7
+		health_increase = 6
 	elif vitality <= 10:
-		health_increase = 10
+		health_increase = 9
 
 	self.max_health += health_increase
+	self.health += health_increase
 	print('vitality changed: health increased by ', health_increase)
 	emit_signal(\"vitality_changed\", vitality)
 
@@ -185,9 +188,9 @@ func set_final_health(value):
 func set_dying(value):
 	dying = value
 	if value:
-		self.stamina = 0
+		# self.stamina = 0
 		self.status = \"slow\"
-		self.status = \"sweating\"
+		# self.status = \"sweating\"
 	else:
 		self.status = \"default_speed\"
 	
@@ -222,6 +225,10 @@ func set_stamina(value):
 	stamina = clamp(value, -max_stamina, max_stamina)
 	emit_signal(\"stamina_changed\", stamina)
 	
+func set_stamina_regen_rate(value):
+	stamina_regen_rate = value
+	emit_signal(\"stamina_regen_rate_changed\", stamina_regen_rate)
+	
 func set_defense(value):
 	defense = value
 	emit_signal(\"defense_changed\", defense)
@@ -253,7 +260,7 @@ func set_speed(value):
 	
 func set_attack_speed(value):
 	attack_speed = value
-	print('setting attack speed: ', attack_speed)
+	print('setting player2 attack speed: ', attack_speed)
 	emit_signal(\"attack_speed_changed\", attack_speed)
 	
 func set_iframes(value):

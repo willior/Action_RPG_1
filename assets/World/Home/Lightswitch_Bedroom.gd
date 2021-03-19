@@ -17,7 +17,8 @@ extends Sprite
 # switch will turn off the examine permanently notice for both.
 
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-
+var on_audio = load("res://assets/Audio/Lightswitch_On.wav")
+var off_audio = load("res://assets/Audio/Lightswitch_Off.wav")
 var interactable = true
 var talkable = false
 var examined = false
@@ -111,7 +112,7 @@ func examine():
 # if not, sets examined to false, which displays the "?!" notice
 func interact():
 	if !$Light2D.visible: # turn on light
-		$AudioStreamPlayer.stream = load("res://assets/Audio/Lightswitch_On.wav")
+		$AudioStreamPlayer.stream = on_audio
 		$AudioStreamPlayer.play()
 		$Light2D.show()
 		PlayerLog.home_lightswitch_bedroom_on = true
@@ -123,7 +124,7 @@ func interact():
 		frame = 1
 		
 	elif $Light2D.visible: # turn off light
-		$AudioStreamPlayer.stream = load("res://assets/Audio/Lightswitch_Off.wav")
+		$AudioStreamPlayer.stream = off_audio
 		$AudioStreamPlayer.play()
 		$Light2D.hide()
 		PlayerLog.home_lightswitch_bedroom_on = false

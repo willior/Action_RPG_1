@@ -45,21 +45,31 @@ func initialize_player():
 	print('player successfully initialized.')
 	
 	if !ResourceLoader.exists("user://inventory.tres"):
+		print("inventory resource not found. creating...")
 		player.inventory.add_item("Potion", 3)
-		player.pouch.add_ingredient("Rock", 10)
-		player.pouch.add_ingredient("Clay", 20)
-# warning-ignore:return_value_discarded
+		# warning-ignore:return_value_discarded
 		ResourceSaver.save("user://inventory.tres", player.inventory)
-# warning-ignore:return_value_discarded
-		ResourceSaver.save("user://pouch.tres", player.pouch)
 		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
 	else:
 		var loaded_inventory = load("user://inventory.tres")
-		var loaded_pouch = load("user://pouch.tres")
 		if loaded_inventory:
 			player.inventory.set_items(loaded_inventory.get_items())
+			print("inventory loaded from disk.")
+	
+	if !ResourceLoader.exists("user://pouch.tres"):
+		print("pouch resource not found. creating...")
+		player.pouch.add_ingredient("Rock", 16)
+		player.pouch.add_ingredient("Clay", 12)
+		player.pouch.add_ingredient("Salt", 8)
+		player.pouch.add_ingredient("Water", 4)
+		# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://pouch.tres", player.pouch)
+		prints("saved pouch resource to " + str(OS.get_user_data_dir()))
+	else:
+		var loaded_pouch = load("user://pouch.tres")
+		if loaded_pouch:
 			player.pouch.set_ingredients(loaded_pouch.get_ingredients())
-			print("inventory loaded")
+			print("pouch loaded from disk.")
 		
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):

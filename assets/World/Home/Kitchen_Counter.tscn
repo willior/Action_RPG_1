@@ -293,6 +293,7 @@ animation = "Run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=47]
 switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=48]
 

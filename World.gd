@@ -104,7 +104,7 @@ func _input(event):
 		print(player.pouch._ingredients)
 	
 	if event.is_action_pressed("pause"): # P
-		print(player.pouch._ingredients)
+		player.pouch.add_ingredient("Salt", 2)
 		# save_game()
 		pass
 	

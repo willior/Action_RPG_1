@@ -28,9 +28,14 @@ func _ready():
 
 	for n in player.pouch.get_ingredients().size():
 		var pouch_ingredient = player.pouch.get_ingredient(n)
+		
 		var label_ingredient = Label_Item.instance()
 		label_ingredient.set_text(str(pouch_ingredient.ingredient_reference.name) + " x" + str(pouch_ingredient.quantity))
 		$PouchDisplay/Vbox.add_child(label_ingredient)
+		
+		var icon_ingredient = TextureRect.new()
+		icon_ingredient.set_texture(pouch_ingredient.ingredient_reference.texture)
+		$PouchDisplay/VBoxIcons.add_child(icon_ingredient)
 		
 	$TimerDelaySelect.start()
 	yield($TimerDelaySelect, "timeout")
