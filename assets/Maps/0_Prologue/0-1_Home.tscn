@@ -168,12 +168,15 @@ texture = ExtResource( 12 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 496, 49 )
+frame = 3
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 139, 17 )
+frame = 3
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 278, 17 )
+frame = 3
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
 

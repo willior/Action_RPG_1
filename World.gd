@@ -100,7 +100,7 @@ func _input(event):
 		pass
 	
 	if event.is_action_pressed("test4"): # O
-		player.pouch.remove_ingredient("Rock", 3)
+		player.pouch.remove_ingredient("Salt", 2)
 		print(player.pouch._ingredients)
 	
 	if event.is_action_pressed("pause"): # P

@@ -1,16 +1,16 @@
 extends Node
 
 onready var audio = $AudioStreamPlayer
-onready var miss = load("res://assets/Audio/SFX/Miss.wav")
+onready var miss = preload("res://assets/Audio/SFX/Miss.wav")
 # onready var level_up = load("res://assets/Audio/Player/Level_Up_Hit.wav")
-onready var crit = load("res://assets/Audio/Player/Crit.wav")
+onready var crit = preload("res://assets/Audio/Player/Crit.wav")
 
-onready var awesome = load("res://assets/Audio/Gene/Awesome!.wav")
-onready var great = load("res://assets/Audio/Gene/Great!.wav")
-onready var iloveit = load("res://assets/Audio/Gene/I love it!.wav")
-onready var nice = load("res://assets/Audio/Gene/Nice!.wav")
-onready var whistle = load("res://assets/Audio/Gene/Whistle.wav")
-onready var wow = load("res://assets/Audio/Gene/Wow!.wav")
+onready var awesome = preload("res://assets/Audio/Gene/Awesome!.wav")
+onready var great = preload("res://assets/Audio/Gene/Great!.wav")
+onready var iloveit = preload("res://assets/Audio/Gene/I love it!.wav")
+onready var nice = preload("res://assets/Audio/Gene/Nice!.wav")
+onready var whistle = preload("res://assets/Audio/Gene/Whistle.wav")
+onready var wow = preload("res://assets/Audio/Gene/Wow!.wav")
 
 # onready var level_up_BGM = load("res://assets/Audio/Music/LevelUp.ogg")
 
