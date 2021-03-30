@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/CollisionBoxes/CollectBox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Ingredients/Clay.png" type="Texture" id=4]
+[ext_resource path="res://assets/Ingredients/Rock.png" type="Texture" id=4]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -18,15 +18,15 @@ var examined = false
 func examine():
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog_script = [
-		{'text': \"A piece of clay.\"},
-		{'text': \"It's easy to mold, but otherwise unremarkable.\"}
+		{'text': \"An ounce of regular salt.\"},
+		{'text': \"There's nothing particularly unique about it.\"}
 	]
 	get_node(\"/root/World/GUI\").add_child(dialogBox)
 	if !examined: examined = true
 
 # warning-ignore:unused_argument
 func _on_CollectBox_area_entered(area):
-	GameManager.player.pouch.add_ingredient(\"Clay\", 1)
+	GameManager.player.pouch.add_ingredient(\"Rock\", 1)
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	# argument determines sound effect; 0 = heartCollect
@@ -34,7 +34,7 @@ func _on_CollectBox_area_entered(area):
 	queue_free()
 "
 
-[node name="ClayPickup" type="Node2D"]
+[node name="RockPickup" type="Node2D"]
 script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/swirl.png-da5e9b6c13378c10014406e99b47fcab.stex"
+path="res://.import/Wolf_spritesheet.png-f3612a7198df28a4102d662026625689.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/swirl.png"
-dest_files=[ "res://.import/swirl.png-da5e9b6c13378c10014406e99b47fcab.stex" ]
+source_file="res://assets/Enemies/Wolf/Wolf_spritesheet.png"
+dest_files=[ "res://.import/Wolf_spritesheet.png-f3612a7198df28a4102d662026625689.stex" ]
 
 [params]
 

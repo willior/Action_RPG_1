@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Enemies/Wolf.gd" type="Script" id=2]
@@ -12,9 +12,8 @@
 [ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/Enemies/Wolf_eye.png" type="Texture" id=13]
+[ext_resource path="res://assets/Enemies/Wolf/Wolf_spritesheet.png" type="Texture" id=13]
 [ext_resource path="res://assets/Enemies/WolfStats.gd" type="Script" id=14]
-[ext_resource path="res://assets/Andrew/Enemies/wolf_edit_wag_spritesheet.png" type="Texture" id=15]
 [ext_resource path="res://assets/UI/Popups/DamageContainer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=17]
 
@@ -23,24 +22,28 @@ resource_local_to_scene = true
 shader = ExtResource( 7 )
 shader_param/active = false
 
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 13 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ SubResource( 28 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 6.0
 
+[sub_resource type="Animation" id=3]
+resource_name = "IdleDown"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 12 ]
+}
+
 [sub_resource type="Animation" id=4]
-resource_name = "Idle"
-length = 1.7
+resource_name = "IdleRight"
+length = 0.1
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -50,25 +53,80 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.85, 0.9, 0.95, 1, 1.05, 1.1, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55, 1.6, 1.65 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=5]
+resource_name = "IdleUp"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "MoveDown"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 13, 14, 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "MoveRight"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "MoveUp"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=6]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -84,7 +142,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -99,113 +157,154 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "Fly"
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "IdleDown"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
-animation = "Idle"
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "IdleUp"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "Landing"
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "IdleRight"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
-animation = "Peck"
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "IdleRight"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
-animation = "Takeoff"
+[sub_resource type="AnimationNodeBlendSpace2D" id=28]
+blend_point_0/node = SubResource( 24 )
+blend_point_0/pos = Vector2( 0, 1.1 )
+blend_point_1/node = SubResource( 25 )
+blend_point_1/pos = Vector2( 0, -1.1 )
+blend_point_2/node = SubResource( 26 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 27 )
+blend_point_3/pos = Vector2( -1, 0 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=12]
-switch_mode = 2
+[sub_resource type="AnimationNodeTimeScale" id=29]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+[sub_resource type="AnimationNodeBlendTree" id=30]
+graph_offset = Vector2( 0, 97.5 )
+nodes/BlendSpace2D/node = SubResource( 28 )
+nodes/BlendSpace2D/position = Vector2( 380, 140 )
+nodes/TimeScale/node = SubResource( 29 )
+nodes/TimeScale/position = Vector2( 580, 140 )
+nodes/output/position = Vector2( 740, 140 )
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
-switch_mode = 2
+[sub_resource type="AnimationNodeAnimation" id=31]
+animation = "MoveDown"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
-switch_mode = 2
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "MoveUp"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
-switch_mode = 1
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "MoveRight"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+[sub_resource type="AnimationNodeAnimation" id=34]
+animation = "MoveRight"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
-switch_mode = 2
+[sub_resource type="AnimationNodeBlendSpace2D" id=35]
+blend_point_0/node = SubResource( 31 )
+blend_point_0/pos = Vector2( 0, 1.1 )
+blend_point_1/node = SubResource( 32 )
+blend_point_1/pos = Vector2( 0, -1.1 )
+blend_point_2/node = SubResource( 33 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 34 )
+blend_point_3/pos = Vector2( -1, 0 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
-switch_mode = 2
+[sub_resource type="AnimationNodeTimeScale" id=36]
 
-[sub_resource type="AnimationNodeStateMachine" id=20]
-states/Fly/node = SubResource( 7 )
-states/Fly/position = Vector2( 632, 110.606 )
-states/Idle/node = SubResource( 8 )
-states/Idle/position = Vector2( 438.75, 112 )
-states/Landing/node = SubResource( 9 )
-states/Landing/position = Vector2( 437.5, 199.713 )
-states/Peck/node = SubResource( 10 )
-states/Peck/position = Vector2( 265.5, 113.303 )
-states/Takeoff/node = SubResource( 11 )
-states/Takeoff/position = Vector2( 440, 31 )
-transitions = [ "Landing", "Idle", SubResource( 12 ), "Idle", "Takeoff", SubResource( 13 ), "Takeoff", "Fly", SubResource( 14 ), "Fly", "Landing", SubResource( 15 ), "Idle", "Peck", SubResource( 16 ), "Peck", "Takeoff", SubResource( 17 ), "Landing", "Peck", SubResource( 18 ), "Peck", "Idle", SubResource( 19 ) ]
+[sub_resource type="AnimationNodeBlendTree" id=37]
+nodes/BlendSpace2D/node = SubResource( 35 )
+nodes/BlendSpace2D/position = Vector2( 80, 60 )
+nodes/TimeScale/node = SubResource( 36 )
+nodes/TimeScale/position = Vector2( 300, 60 )
+nodes/output/position = Vector2( 460, 60 )
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachine" id=13]
+states/Idle/node = SubResource( 30 )
+states/Idle/position = Vector2( 626.94, 74.194 )
+states/Move/node = SubResource( 37 )
+states/Move/position = Vector2( 626.94, 186.194 )
+transitions = [ "Idle", "Move", SubResource( 38 ), "Move", "Idle", SubResource( 39 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 31.9396, 14.194 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=21]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
 
-[sub_resource type="CircleShape2D" id=22]
+[sub_resource type="CircleShape2D" id=15]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id=23]
+[sub_resource type="CircleShape2D" id=16]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id=24]
+[sub_resource type="CircleShape2D" id=17]
 radius = 32.0
 
-[sub_resource type="CircleShape2D" id=25]
+[sub_resource type="CircleShape2D" id=18]
 
-[sub_resource type="CircleShape2D" id=26]
+[sub_resource type="CircleShape2D" id=19]
 radius = 9.0
 
-[sub_resource type="CircleShape2D" id=27]
+[sub_resource type="CircleShape2D" id=20]
 radius = 6.0
 
 [node name="Wolf" type="KinematicBody2D"]
 collision_layer = 16
+collision_mask = 3
 script = ExtResource( 2 )
+
+[node name="ShadowSprite" type="Sprite" parent="."]
+z_index = -1
+texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( 0, -2 )
-texture = ExtResource( 15 )
+texture = ExtResource( 13 )
 offset = Vector2( 0, -12 )
-hframes = 17
-frame = 16
+vframes = 3
+hframes = 6
+frame = 12
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
-frames = SubResource( 2 )
 offset = Vector2( 0, -12 )
-
-[node name="ShadowSprite" type="Sprite" parent="."]
-texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -3 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="WolfStats" parent="." instance=ExtResource( 12 )]
 script = ExtResource( 14 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Idle"
-anims/Idle = SubResource( 4 )
-anims/StartFlashing = SubResource( 5 )
-anims/StopFlashing = SubResource( 6 )
+autoplay = "IdleDown"
+anims/IdleDown = SubResource( 3 )
+anims/IdleRight = SubResource( 4 )
+anims/IdleUp = SubResource( 5 )
+anims/MoveDown = SubResource( 21 )
+anims/MoveRight = SubResource( 22 )
+anims/MoveUp = SubResource( 23 )
+anims/StartFlashing = SubResource( 6 )
+anims/StopFlashing = SubResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 20 )
+tree_root = SubResource( 13 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 21 )
+parameters/playback = SubResource( 14 )
+parameters/Idle/BlendSpace2D/blend_position = Vector2( 0, 0 )
+parameters/Idle/TimeScale/scale = 1.0
+parameters/Move/BlendSpace2D/blend_position = Vector2( 0, 0 )
+parameters/Move/TimeScale/scale = 1.0
 
 [node name="Talkbox" type="Area2D" parent="."]
 visible = false
@@ -214,7 +313,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
 position = Vector2( 0, -12 )
-shape = SubResource( 22 )
+shape = SubResource( 15 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 4 )
@@ -223,7 +322,7 @@ script = ExtResource( 17 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -16 )
-shape = SubResource( 23 )
+shape = SubResource( 16 )
 
 [node name="WanderController" parent="." instance=ExtResource( 4 )]
 visible = false
@@ -233,7 +332,7 @@ visible = false
 scale = Vector2( 3, 3 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-shape = SubResource( 24 )
+shape = SubResource( 17 )
 
 [node name="ChaseTimer" type="Timer" parent="PlayerDetectionZone"]
 wait_time = 0.75
@@ -249,7 +348,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 25 )
+shape = SubResource( 18 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8
@@ -262,14 +361,14 @@ damage = 21.0
 accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 26 )
+shape = SubResource( 19 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 11 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 position = Vector2( 0, -1 )
-shape = SubResource( 27 )
+shape = SubResource( 20 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -286,8 +385,8 @@ max_distance = 320.0
 attenuation = 0.659754
 
 [node name="EnemyHealth" parent="." instance=ExtResource( 9 )]
-margin_top = 3.0
-margin_bottom = 3.0
+margin_top = 3.5968
+margin_bottom = 3.5968
 
 [node name="DamageContainer" parent="." instance=ExtResource( 16 )]
 margin_top = 1.0

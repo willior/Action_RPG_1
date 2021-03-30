@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Enemies/Wolf.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=2]
@@ -6,9 +6,11 @@
 [ext_resource path="res://assets/Ingredients/ClayPickup.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Ingredients/RockPickup.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World.gd" type="Script" id=8]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/Audio/Music/Celesta_BGM_slow.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/Ingredients/SaltPickup.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/World/Trees/Tree_2_pine.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/World/Doodads/Rock_Group_10.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/World/Air_SFX.wav" type="AudioStream" id=14]
@@ -19,6 +21,7 @@
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/Ingredients/WaterPickup.tscn" type="PackedScene" id=22]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type particles;
@@ -260,12 +263,12 @@ smoothing_speed = 8.0
 
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
+z_index = -1
 
 [node name="Sprite" type="Sprite" parent="Map"]
 modulate = Color( 0.882353, 0.882353, 0.882353, 1 )
 position = Vector2( -320, -180 )
 scale = Vector2( 1280, 720 )
-z_index = -1
 texture = ExtResource( 3 )
 centered = false
 region_enabled = true
@@ -365,19 +368,16 @@ position = Vector2( 16, 80 )
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 1 )]
-position = Vector2( -177, 44 )
+position = Vector2( -111.139, 6.27951 )
 
 [node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 1 )]
-position = Vector2( -90, 189 )
+position = Vector2( -34.5004, 167.939 )
 
 [node name="Wolf3" parent="YSort/Enemies" instance=ExtResource( 1 )]
-position = Vector2( 147, 160 )
+position = Vector2( 154.701, 149.378 )
 
 [node name="Wolf4" parent="YSort/Enemies" instance=ExtResource( 1 )]
-position = Vector2( -5, -71 )
-
-[node name="Wolf5" parent="YSort/Enemies" instance=ExtResource( 1 )]
-position = Vector2( 239, -16 )
+position = Vector2( 207.39, -38.0271 )
 
 [node name="Items" type="YSort" parent="YSort"]
 
@@ -392,6 +392,18 @@ position = Vector2( 81.6725, 89.7935 )
 
 [node name="Healing_Potion3" parent="YSort/Items" instance=ExtResource( 21 )]
 position = Vector2( 45.5703, 110.875 )
+
+[node name="ClayPickup" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 38.5837, -21.0475 )
+
+[node name="SaltPickup" parent="YSort/Items" instance=ExtResource( 11 )]
+position = Vector2( 65.8428, -33.4965 )
+
+[node name="WaterPickup" parent="YSort/Items" instance=ExtResource( 22 )]
+position = Vector2( 100.829, -24.6963 )
+
+[node name="RockPickup" parent="YSort/Items" instance=ExtResource( 7 )]
+position = Vector2( 47.8131, 0.416458 )
 
 [node name="NPCs" type="YSort" parent="YSort"]
 
@@ -414,6 +426,3 @@ volume_db = -48.0
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 layer = 4
-
-[node name="ClayPickup" parent="." instance=ExtResource( 4 )]
-position = Vector2( 34, -18 )

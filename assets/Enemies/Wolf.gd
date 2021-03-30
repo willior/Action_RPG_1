@@ -7,11 +7,14 @@ const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
 const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
 const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
 var EnemySpawner = load("res://assets/Spawners/EnemySpawner.tscn")
+var attackSFX = preload("res://assets/Audio/Enemies/Wolf_Attack_1.wav")
+var detectSFX = preload("res://assets/Audio/Enemies/Wolf_Growl_1.wav")
+var hitSFX = preload("res://assets/Audio/Enemies/Wolf_Hit_1.wav")
 
 const ENEMY_NAME = "Wolf"
 export var ACCELERATION = 800
-export var MAX_SPEED = 40
-export var WANDER_SPEED = 40
+export var MAX_SPEED = 48
+export var WANDER_SPEED = 48
 export var ATTACK_SPEED = 3200
 export var FRICTION = 1600
 export var WANDER_TARGET_RANGE = 4
@@ -75,14 +78,20 @@ func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
 	knockback = move_and_slide(knockback)
 	
+	if velocity != Vector2.ZERO:
+		animationTree.set("parameters/Idle/BlendSpace2D/blend_position", velocity)
+		animationTree.set("parameters/Move/BlendSpace2D/blend_position", velocity)
+	
 	match state:
 		IDLE:
+			animationState.travel("Idle")
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek_player()
 			if wanderController.get_time_left() == 0 && !seeking:
 				update_wander_state()
 				
 		WANDER:
+			animationState.travel("Move")
 			seek_player()
 			if wanderController.get_time_left() == 0:
 				update_wander_state()
@@ -90,10 +99,10 @@ func _physics_process(delta):
 			accelerate_towards_point(wanderController.target_position, WANDER_SPEED, delta)
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
-
 				
 		CHASE:
 			if playerDetectionZone.player != null:
+				animationState.travel("Move")
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
 			else:
@@ -106,7 +115,6 @@ func _physics_process(delta):
 			if attacking:
 				attacking = false
 				audio_attack()
-				# attack_animation()
 				
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
@@ -126,7 +134,6 @@ func h_flip_handler():
 	else:
 		sprite.flip_h = false
 		eye.flip_h = false
-	idle_animation()
 
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -222,12 +229,20 @@ func _on_Hurtbox_area_entered(area):
 		SoundPlayer.play_sound("miss")
 		hurtbox.display_damage_popup("Miss!", false)
 	else:
+		audio_hit()
 		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
 		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		if is_crit:
 			damage *= 2
 		stats.health -= damage
-		audio_hit()
+		
+		var damage_count = min(damage/2, 32)
+		while damage_count > 0:
+			# create_hit_effect(damage_count)
+			Global.create_blood_effect(damage_count, global_position)
+			Global.create_blood_effect(damage_count, global_position)
+			damage_count -= 4
+		
 		hurtbox.display_damage_popup(str(damage), is_crit)
 		hurtbox.create_hit_effect()
 		#hurtbox.start_invincibility(0.3)
@@ -282,6 +297,22 @@ func _on_WolfStats_no_health():
 	get_parent().add_child(enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
 	enemyDeathEffect.global_position = global_position
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(40, global_position)
+	Global.create_blood_effect(32, global_position)
+	Global.create_blood_effect(32, global_position)
+	Global.create_blood_effect(32, global_position)
+	Global.create_blood_effect(32, global_position)
 	Global.distribute_exp(stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
@@ -303,25 +334,18 @@ func _on_WolfStats_no_health():
 		var pennyPickup = PennyPickup.instance()
 		get_node("/root/World/YSort/Items").call_deferred("add_child", pennyPickup)
 		pennyPickup.global_position = global_position
-
 	queue_free()
-
-func idle_animation():
-	animationState.travel("Idle")
-
-func fly_animation():
-	animationState.travel("Fly")
-
+	
 func audio_detect():
-	audio.stream = load("res://assets/Audio/Enemies/Wolf_Growl_1.wav")
+	audio.stream = detectSFX
 	audio.play()
 
 func audio_attack():
-	audio.stream = load("res://assets/Audio/Enemies/Wolf_Attack_1.wav")
+	audio.stream = attackSFX
 	audio.play()
 
 func audio_hit():
-	audio.stream = load("res://assets/Audio/Enemies/Wolf_Hit_1.wav")
+	audio.stream = hitSFX
 	audio.play()
 
 func _on_VisibilityNotifier2D_screen_exited():
