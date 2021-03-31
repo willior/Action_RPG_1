@@ -355,7 +355,7 @@ one_shot = true
 [node name="Hitbox" parent="." instance=ExtResource( 8 )]
 position = Vector2( 0, -4 )
 collision_mask = 4
-damage = 21.0
+damage = 16.0
 accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]

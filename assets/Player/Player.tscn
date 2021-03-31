@@ -1,4 +1,4 @@
-[gd_scene load_steps=143 format=2]
+[gd_scene load_steps=145 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/UI/TalkNotice.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.gd" type="Script" id=5]
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=6]
-[ext_resource path="res://assets/Audio/Swipe.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/Audio/Evade.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 [ext_resource path="res://assets/Audio/SFX/Miss.wav" type="AudioStream" id=10]
@@ -14,7 +13,10 @@
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/UI/Sweat.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/Audio/Bamboo.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/Audio/Player/Sword_Attack_1.wav" type="AudioStream" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -679,7 +681,7 @@ tracks/2/keys = {
 "values": [ -90.0 ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/path = NodePath("AttackAudio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -688,7 +690,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 7 )
+"stream": ExtResource( 18 )
 } ],
 "times": PoolRealArray( 0.2 )
 }
@@ -707,7 +709,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AudioStreamPlayer:bus")
+tracks/5/path = NodePath("AttackAudio:bus")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -779,7 +781,7 @@ tracks/2/keys = {
 "values": [ 180.0 ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/path = NodePath("AttackAudio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -788,7 +790,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 7 )
+"stream": ExtResource( 18 )
 } ],
 "times": PoolRealArray( 0.2 )
 }
@@ -807,7 +809,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AudioStreamPlayer:bus")
+tracks/5/path = NodePath("AttackAudio:bus")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -879,7 +881,7 @@ tracks/2/keys = {
 "values": [ 0.0 ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/path = NodePath("AttackAudio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -888,7 +890,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 7 )
+"stream": ExtResource( 18 )
 } ],
 "times": PoolRealArray( 0.2 )
 }
@@ -907,7 +909,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AudioStreamPlayer:bus")
+tracks/5/path = NodePath("AttackAudio:bus")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -979,7 +981,7 @@ tracks/2/keys = {
 "values": [ -90.0 ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/path = NodePath("AttackAudio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -988,7 +990,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 7 )
+"stream": ExtResource( 18 )
 } ],
 "times": PoolRealArray( 0.2 )
 }
@@ -1007,7 +1009,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AudioStreamPlayer:bus")
+tracks/5/path = NodePath("AttackAudio:bus")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -1352,7 +1354,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/path = NodePath("AttackAudio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1402,7 +1404,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/path = NodePath("AttackAudio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1451,7 +1453,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/path = NodePath("AttackAudio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1500,7 +1502,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/path = NodePath("AttackAudio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -2053,7 +2055,7 @@ tracks/0/keys = {
 ]]
 process_priority = -1
 collision_layer = 2
-collision_mask = 3601
+collision_mask = 3585
 script = ExtResource( 1 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -2066,7 +2068,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 60
-frame = 60
+frame = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2152,7 +2154,7 @@ margin_bottom = -11.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 3.14159
+rotation = -1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 11, 0 )
@@ -2166,7 +2168,7 @@ position = Vector2( -9.53674e-07, 0 )
 shape = SubResource( 119 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitboxPivot/SwordHitbox"]
-stream = ExtResource( 7 )
+stream = ExtResource( 18 )
 
 [node name="InteractHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
@@ -2210,8 +2212,14 @@ collision_mask = 1536
 rotation = 1.5708
 shape = SubResource( 123 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+[node name="AttackAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+
+[node name="BambooAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+
+[node name="NoticeAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
 
 [node name="HurtAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
@@ -2243,9 +2251,9 @@ one_shot = true
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]

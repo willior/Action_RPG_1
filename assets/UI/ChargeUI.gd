@@ -40,6 +40,7 @@ func set_stamina(value):
 	currentStamina = value
 	staminaProgress.value = currentStamina
 	staminaPercent = currentStamina / currentMaxStamina
+	# fade in stamina progress (not sweating)
 	if !staminaProgress.visible && staminaPercent < 1 && !PlayerStats.status == "sweating":
 		staminaProgress.visible = true
 		$Tween.interpolate_property(staminaProgress,
@@ -51,8 +52,9 @@ func set_stamina(value):
 		Tween.EASE_IN
 		)
 		$Tween.start()
+	# fade in stamina progress (sweating)
 	elif !staminaProgress.visible && staminaPercent >= 0 && PlayerStats.status == "sweating":
-		sweatFlag = false
+		# sweatFlag = false
 		staminaProgress.visible = true
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
@@ -63,6 +65,7 @@ func set_stamina(value):
 		Tween.EASE_IN
 		)
 		$Tween.start()
+	# fade out stamina progress (100% stamina)
 	elif staminaProgress.visible && (staminaPercent == 1):
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
@@ -75,6 +78,7 @@ func set_stamina(value):
 		$Tween.start()
 		yield($Tween, "tween_all_completed")
 		staminaProgress.visible = false
+	# fade out stamina progress (0% stamina)
 	elif sweatFlag && (staminaPercent <= 0 && PlayerStats.status == "sweating"):
 		sweatFlag = false
 		$Tween.interpolate_property(staminaProgress,
@@ -88,7 +92,7 @@ func set_stamina(value):
 		$Tween.start()
 		yield($Tween, "tween_all_completed")
 		staminaProgress.visible = false
-
+	
 	if staminaPercent < 0.25 && staminaPercent != 0 && !staminaWarning:
 		toggle_stamina_warning(true)
 	elif staminaPercent > 0.25 && staminaWarning:

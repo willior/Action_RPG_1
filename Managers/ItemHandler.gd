@@ -20,5 +20,6 @@ func item_handler(item_used, player):
 					else:
 						Player2Stats.health += item_used.healing
 			
-			GameManager.player.audio.stream = load("res://assets/Audio/Slither_02.wav")
-			GameManager.player.audio.play()
+#			GameManager.player.audio.stream = load("res://assets/Audio/Slither_02.wav")
+#			GameManager.player.audio.play()
+			SoundPlayer.play_sound("slither")

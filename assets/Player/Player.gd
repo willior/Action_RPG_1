@@ -11,6 +11,9 @@ const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 
+#const BambooAudio = preload("res://assets/Audio/Bamboo.wav")
+#const CursLo = preload("res://assets/Audio/cursLo.wav")
+
 var inventory_resource = load("res://assets/Player/Inventory.gd")
 var inventory = inventory_resource.new()
 var pouch_resource = load("res://assets/Player/Pouch.gd")
@@ -95,7 +98,6 @@ onready var notice = $ExamineNotice
 onready var talkNotice = $TalkNotice
 onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
-onready var audio = $AudioStreamPlayer
 
 func _ready():
 	if Global.get_attribute("location") != null:
@@ -268,7 +270,7 @@ func move_state(delta):
 func stamina_regeneration():
 	if sweating:
 		stats.stamina += (stats.stamina_regen_rate * 0.6) # sweating rate
-		if stats.stamina > 30:
+		if stats.stamina > 0:
 			sweating = false
 			$Sweat.visible = false
 			$ChargeUI.sweatFlag = false
@@ -292,18 +294,16 @@ func stamina_regeneration():
 				timer.start()
 			return
 		elif stamina_regen_level < 4 && timer.is_stopped():
-			# print('starting stamina regen level timer...')
-			timer.start(0.6)
+			print('starting stamina regen level timer...')
+			timer.start(0.5)
 			yield(timer, "timeout")
 			stamina_regen_level += 1
-			# print('stam regen timeout: stamina_regen_level = ', stamina_regen_level)
+			print('stamina_regen_level = ', stamina_regen_level)
 
 func stamina_regen_reset():
-	# print('regen reset')
 	if stamina_regen_level > 0:
-		# print('resetting while stamina_regen_level > 0 = ', stamina_regen_level)
 		stamina_regen_level = 0
-	timer.start(1.4)
+	timer.start(1.5)
 
 func apply_status(status):
 	match status:
@@ -350,16 +350,13 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func noStamina():
-	audio.stream = load("res://assets/Audio/Bamboo.wav")
-	audio.play()
+	$BambooAudio.play()
 
 func set_sweating():
 	$Sweat.visible = true
 	sweating = true
-	# stats.status = "sweating"
-	# $ChargeUI/StaminaProgress.visible = false
-	print('set_sweating: sweatFlag becomes true')
 	$ChargeUI.sweatFlag = true
+	print('set sweating')
 
 func set_attack_timescale(value):
 	animationTree.set("parameters/Attack1/TimeScale/scale", value)
@@ -431,21 +428,21 @@ func charge_state(_delta):
 		stamina_regen_reset()
 	# stamina drain
 	stats.stamina -= 0.55
-	# if either attack is charged and the player runs out of stamina
+	
 	if stats.stamina <= 0:
-		if !sweating:
-			#set_sweating()
-			stats.status = "sweating"
-			noStamina()
 		charge.stop_charge()
 		charge_reset()
+		if !sweating:
+			stats.status = "sweating"
+			noStamina()
+		return
 		
 	# if the current charge is less than the max charge
 	if charge_count < stats.max_charge:
-		charge_count += 1
+		charge_count += stats.charge_rate
 		stats.charge = charge_count
 	# if the charge count reaches 50%
-	if charge_count == stats.max_charge/2:
+	if charge_count >= stats.max_charge/2:
 		attack_1_charged = true
 	# if the charge count reaches 100%
 	elif charge_count == stats.max_charge && attack_charging:
@@ -845,24 +842,24 @@ func _on_TalkTimer_timeout():
 			
 func set_notice(value):
 	if value:
-		audio.stream = load("res://assets/Audio/cursHi.wav")
-		audio.play()
+		#$NoticeAudio.stream = CursLo
+		$NoticeAudio.play()
 		notice.visible = true
 	elif !value:
 		notice.visible = false
 		
 func set_talk_notice(value):
 	if value:
-		audio.stream = load("res://assets/Audio/cursLo.wav")
-		audio.play()
+		#$NoticeAudio.stream = CursLo
+		$NoticeAudio.play()
 		talkNotice.visible = true
 	elif !value:
 		talkNotice.visible = false
 		
 func set_interact_notice(value):
 	if value:
-		audio.stream = load("res://assets/Audio/cursLo.wav")
-		audio.play()
+		#$NoticeAudio.stream = CursLo
+		$NoticeAudio.play()
 		interactNotice.visible = true
 	elif !value:
 		interactNotice.visible = false

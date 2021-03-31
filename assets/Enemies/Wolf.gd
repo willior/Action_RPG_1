@@ -106,7 +106,7 @@ func _physics_process(delta):
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
 			else:
-				print('wolf lost sight of player.')
+				#print('wolf lost sight of player.')
 				eye.modulate = Color(0,0,0)
 				eye.frame = sprite.frame
 				state = IDLE
@@ -159,7 +159,7 @@ func seek_player():
 	if hitbox.monitorable:
 		hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking && !seeking:
-		print('wolf sees player...')
+		#print('wolf sees player...')
 		seeking = true
 		state = IDLE
 		audio_detect()
@@ -167,7 +167,7 @@ func seek_player():
 		eye.frame = sprite.frame
 		chaseTimer.start()
 		yield(chaseTimer, "timeout")
-		print('... and begins chasing')
+		#print('... and begins chasing')
 		seeking = false
 		state = CHASE
 
