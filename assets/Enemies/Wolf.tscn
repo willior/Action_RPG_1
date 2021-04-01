@@ -96,6 +96,7 @@ tracks/0/keys = {
 resource_name = "MoveRight"
 length = 0.7
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -273,7 +274,7 @@ texture = ExtResource( 13 )
 offset = Vector2( 0, -12 )
 vframes = 3
 hframes = 6
-frame = 5
+frame = 1
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 offset = Vector2( 0, -12 )

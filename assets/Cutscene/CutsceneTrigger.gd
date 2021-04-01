@@ -52,7 +52,7 @@ func cutscene3():
 		{
 			'text': 'Can you hear me?'
 		},
-				{
+		{
 			'text': 'That is no ordinary pot of water...'
 		}
 	]
