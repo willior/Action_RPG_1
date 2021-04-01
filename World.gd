@@ -100,8 +100,7 @@ func _input(event):
 		pass
 	
 	if event.is_action_pressed("test4"): # O
-		player.pouch.remove_ingredient("Salt", 2)
-		print(player.pouch._ingredients)
+		get_node("/root/World/Camera2D/ScreenShake").start(0.1, 64, 10, 0)
 	
 	if event.is_action_pressed("pause"): # P
 		player.pouch.add_ingredient("Salt", 2)

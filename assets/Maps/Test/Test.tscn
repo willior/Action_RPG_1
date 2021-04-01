@@ -367,16 +367,24 @@ position = Vector2( 16, 80 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
-[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 1 )]
+[node name="Wolf" parent="YSort/Enemies" groups=[
+"Enemies",
+] instance=ExtResource( 1 )]
 position = Vector2( -111.139, 6.27951 )
 
-[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 1 )]
+[node name="Wolf2" parent="YSort/Enemies" groups=[
+"Enemies",
+] instance=ExtResource( 1 )]
 position = Vector2( -34.5004, 167.939 )
 
-[node name="Wolf3" parent="YSort/Enemies" instance=ExtResource( 1 )]
+[node name="Wolf3" parent="YSort/Enemies" groups=[
+"Enemies",
+] instance=ExtResource( 1 )]
 position = Vector2( 154.701, 149.378 )
 
-[node name="Wolf4" parent="YSort/Enemies" instance=ExtResource( 1 )]
+[node name="Wolf4" parent="YSort/Enemies" groups=[
+"Enemies",
+] instance=ExtResource( 1 )]
 position = Vector2( 207.39, -38.0271 )
 
 [node name="Items" type="YSort" parent="YSort"]

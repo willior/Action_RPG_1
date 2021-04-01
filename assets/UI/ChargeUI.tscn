@@ -80,10 +80,10 @@ z_index = 4
 script = ExtResource( 3 )
 
 [node name="ChargeSound1" type="AudioStreamPlayer" parent="."]
-pitch_scale = 2.0
 
 [node name="ChargeSound2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+pitch_scale = 0.4
 
 [node name="ChargeBeep1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

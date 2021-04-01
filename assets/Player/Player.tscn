@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=2]
+[gd_scene load_steps=154 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -1319,6 +1319,40 @@ tracks/0/keys = {
 "values": [ 6 ]
 }
 
+[sub_resource type="Animation" id=128]
+resource_name = "PickupCutscene"
+length = 19.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.6, 4, 18.1, 18.35, 18.4, 18.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 240, 241, 242, 243, 244, 245, 246, 247, 248, 247, 249, 251 ]
+}
+
+[sub_resource type="Animation" id=136]
+resource_name = "PickupDown"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.5, 0.55 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 251 ]
+}
+
 [sub_resource type="Animation" id=30]
 length = 0.5
 tracks/0/type = "value"
@@ -1800,6 +1834,30 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=129]
+animation = "PickupDown"
+
+[sub_resource type="AnimationNodeAnimation" id=130]
+animation = "PickupDown"
+
+[sub_resource type="AnimationNodeAnimation" id=131]
+animation = "PickupDown"
+
+[sub_resource type="AnimationNodeAnimation" id=132]
+animation = "PickupDown"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=133]
+blend_point_0/node = SubResource( 129 )
+blend_point_0/pos = Vector2( 0, 1.1 )
+blend_point_1/node = SubResource( 130 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 131 )
+blend_point_2/pos = Vector2( 0, -1.1 )
+blend_point_3/node = SubResource( 132 )
+blend_point_3/pos = Vector2( -1, 0 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+
 [sub_resource type="AnimationNodeAnimation" id=72]
 animation = "RollLeft"
 
@@ -1947,6 +2005,10 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=116]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=134]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=135]
+
 [sub_resource type="AnimationNodeStateMachine" id=117]
 states/Attack1/node = SubResource( 44 )
 states/Attack1/position = Vector2( -180.039, 226.119 )
@@ -1960,15 +2022,17 @@ states/Hit/node = SubResource( 66 )
 states/Hit/position = Vector2( -191.5, 84 )
 states/Idle/node = SubResource( 71 )
 states/Idle/position = Vector2( 111.5, -5.87167 )
+states/Pickup/node = SubResource( 133 )
+states/Pickup/position = Vector2( 111.876, -121.715 )
 states/Roll/node = SubResource( 76 )
 states/Roll/position = Vector2( 383.148, 0.5 )
 states/Run/node = SubResource( 83 )
 states/Run/position = Vector2( -191.625, -5.74334 )
 states/Shade/node = SubResource( 88 )
 states/Shade/position = Vector2( 218.03, 200.973 )
-transitions = [ "Idle", "Roll", SubResource( 89 ), "Roll", "Idle", SubResource( 90 ), "Idle", "Hit", SubResource( 91 ), "Hit", "Idle", SubResource( 92 ), "Roll", "Hit", SubResource( 93 ), "Idle", "Shade", SubResource( 94 ), "Shade", "Idle", SubResource( 95 ), "Shade", "Hit", SubResource( 96 ), "Idle", "Flash", SubResource( 97 ), "Flash", "Idle", SubResource( 98 ), "Flash", "Hit", SubResource( 99 ), "Idle", "Backstep", SubResource( 100 ), "Backstep", "Idle", SubResource( 101 ), "Backstep", "Hit", SubResource( 102 ), "Backstep", "Shade", SubResource( 103 ), "Backstep", "Flash", SubResource( 104 ), "Idle", "Run", SubResource( 105 ), "Run", "Idle", SubResource( 106 ), "Run", "Hit", SubResource( 107 ), "Attack1", "Hit", SubResource( 108 ), "Idle", "Attack1", SubResource( 109 ), "Backstep", "Attack1", SubResource( 110 ), "Attack2", "Attack1", SubResource( 111 ), "Attack1", "Attack2", SubResource( 112 ), "Shade", "Attack2", SubResource( 113 ), "Attack2", "Idle", SubResource( 114 ), "Attack2", "Hit", SubResource( 115 ), "Attack1", "Idle", SubResource( 116 ) ]
+transitions = [ "Idle", "Roll", SubResource( 89 ), "Roll", "Idle", SubResource( 90 ), "Idle", "Hit", SubResource( 91 ), "Hit", "Idle", SubResource( 92 ), "Roll", "Hit", SubResource( 93 ), "Idle", "Shade", SubResource( 94 ), "Shade", "Idle", SubResource( 95 ), "Shade", "Hit", SubResource( 96 ), "Idle", "Flash", SubResource( 97 ), "Flash", "Idle", SubResource( 98 ), "Flash", "Hit", SubResource( 99 ), "Idle", "Backstep", SubResource( 100 ), "Backstep", "Idle", SubResource( 101 ), "Backstep", "Hit", SubResource( 102 ), "Backstep", "Shade", SubResource( 103 ), "Backstep", "Flash", SubResource( 104 ), "Idle", "Run", SubResource( 105 ), "Run", "Idle", SubResource( 106 ), "Run", "Hit", SubResource( 107 ), "Attack1", "Hit", SubResource( 108 ), "Idle", "Attack1", SubResource( 109 ), "Backstep", "Attack1", SubResource( 110 ), "Attack2", "Attack1", SubResource( 111 ), "Attack1", "Attack2", SubResource( 112 ), "Shade", "Attack2", SubResource( 113 ), "Attack2", "Idle", SubResource( 114 ), "Attack2", "Hit", SubResource( 115 ), "Attack1", "Idle", SubResource( 116 ), "Idle", "Pickup", SubResource( 134 ), "Pickup", "Idle", SubResource( 135 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -255.039, -46.2004 )
+graph_offset = Vector2( -384.124, -187.715 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=118]
 
@@ -2055,7 +2119,7 @@ tracks/0/keys = {
 ]]
 process_priority = -1
 collision_layer = 2
-collision_mask = 3585
+collision_mask = 3601
 script = ExtResource( 1 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -2066,9 +2130,9 @@ texture = ExtResource( 6 )
 material = SubResource( 1 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
-vframes = 4
+vframes = 5
 hframes = 60
-frame = 129
+frame = 247
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2103,6 +2167,8 @@ anims/IdleDown = SubResource( 26 )
 anims/IdleLeft = SubResource( 27 )
 anims/IdleRight = SubResource( 28 )
 anims/IdleUp = SubResource( 29 )
+anims/PickupCutscene = SubResource( 128 )
+anims/PickupDown = SubResource( 136 )
 anims/RollDown = SubResource( 30 )
 anims/RollLeft = SubResource( 31 )
 anims/RollRight = SubResource( 32 )
@@ -2124,6 +2190,7 @@ parameters/Backstep/blend_position = Vector2( 0.00119328, 0.0167301 )
 parameters/Flash/blend_position = Vector2( -0.00122851, 1.09371 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
 parameters/Idle/blend_position = Vector2( -0.00124067, 1.01963 )
+parameters/Pickup/blend_position = Vector2( 0, 0 )
 parameters/Roll/blend_position = Vector2( -0.000606418, -0.00604391 )
 parameters/Run/BlendSpace2D/blend_position = Vector2( 0.000634074, 0.974286 )
 parameters/Run/TimeScale/scale = 1.0
@@ -2154,7 +2221,7 @@ margin_bottom = -11.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = -1.5708
+rotation = 1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 11, 0 )

@@ -1,0 +1,133 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/UI/DialogBox_272.png" type="Texture" id=1]
+[ext_resource path="res://assets/Audio/UI/InnerDialog.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/UI/DialogBox_160.png" type="Texture" id=4]
+[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://assets/UI/DialogNext.png" type="Texture" id=6]
+[ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/UI/Dialog/InnerDialogBox.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 5 )
+
+[node name="DialogBox" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1.52588e-05
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -59.0 ],
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_top = -60.0
+margin_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Text"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 272.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Text"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -55.0
+margin_right = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_clip_content = false
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+text = "That is no ordinary pot of water..."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameLabel" type="RichTextLabel" parent="Text"]
+margin_left = 6.0
+margin_top = -14.0
+margin_right = 266.0
+margin_bottom = 2.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Text"]
+visible = false
+position = Vector2( 265, 43 )
+texture = ExtResource( 6 )
+
+[node name="OptionsRect" type="TextureRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="VBoxContainer" parent="OptionsRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerNextDialog" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="TimerText" type="Timer" parent="."]
+wait_time = 0.08
+autostart = true
+
+[node name="TimerDelaySelect" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = 12.0
+
+[node name="AudioSelect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="AudioMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+[connection signal="timeout" from="TimerText" to="." method="_on_TimerText_timeout"]

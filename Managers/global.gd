@@ -11,6 +11,7 @@ var dialogOpen = false
 var changingScene = false
 var _attributes = null
 var current_scene = null
+var in_cutscene = false
 var rng = RandomNumberGenerator.new()
 
 func _ready():

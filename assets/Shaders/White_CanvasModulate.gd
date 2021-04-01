@@ -1,5 +1,7 @@
 extends ColorRect
 
+export var end_color : Color 
+
 func _ready():
 	flash()
 

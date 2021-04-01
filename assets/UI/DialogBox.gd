@@ -14,6 +14,13 @@ var waiting_for_input = false
 var dialog_object_path
 var dialog_script
 
+func _ready():
+#	if extenal_file != '':
+#		dialog_script = file(extenal_file)
+	event_handler(dialog_script[dialog_index])
+	get_tree().paused = true
+	Global.dialogOpen = true
+
 func _process(_delta):
 	if waiting_for_answer:
 		$OptionsRect.visible = finished
@@ -52,13 +59,6 @@ func parse_text(text):
 			else:
 				end_text = end_text.replace('[' + g + ']', c_variable)
 	return end_text
-
-func _ready():
-#	if extenal_file != '':
-#		dialog_script = file(extenal_file)
-	event_handler(dialog_script[dialog_index])
-	get_tree().paused = true
-	Global.dialogOpen = true
 	
 func _input(event):
 #	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):

@@ -27,7 +27,8 @@ enum {
 	ATTACK2,
 	FLASH,
 	SHADE,
-	HIT
+	HIT,
+	CUTSCENE
 }
 
 enum {
@@ -131,6 +132,7 @@ func _process(delta):
 		SHADE: shade_state(delta)
 		FLASH: flash_state(delta)
 		HIT: hit_state(delta)
+		CUTSCENE: cutscene_state(delta)
 
 func _input(event):
 	match state:
@@ -180,6 +182,8 @@ func _input(event):
 					noStamina()
 				else:
 					attack1_queued = true
+		CUTSCENE:
+			print('input in cutscene state')
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -825,6 +829,16 @@ func game_over():
 	get_node("/root/World/GUI/StaminaBar1").visible = false
 	self.visible = false
 	get_tree().paused = true
+	
+func cutscene_state(_delta):
+	if examining:
+		self.noticeDisplay = false
+	if talking:
+		# talking = false
+		self.talkNoticeDisplay = false
+	if interacting:
+		# interacting = false
+		self.interactNoticeDisplay = false
 
 # when the Player interacts with something, their interactHitbox is disabled
 # the TalkTimer is started lasting for 0.5 seconds (default)
@@ -839,10 +853,9 @@ func _on_TalkTimer_timeout():
 		# if the Object is not fully examined, sets the notice
 		if examining && !interactObject.examined:
 			self.noticeDisplay = true
-			
+
 func set_notice(value):
 	if value:
-		#$NoticeAudio.stream = CursLo
 		$NoticeAudio.play()
 		notice.visible = true
 	elif !value:
@@ -850,7 +863,6 @@ func set_notice(value):
 		
 func set_talk_notice(value):
 	if value:
-		#$NoticeAudio.stream = CursLo
 		$NoticeAudio.play()
 		talkNotice.visible = true
 	elif !value:
@@ -858,7 +870,6 @@ func set_talk_notice(value):
 		
 func set_interact_notice(value):
 	if value:
-		#$NoticeAudio.stream = CursLo
 		$NoticeAudio.play()
 		interactNotice.visible = true
 	elif !value:

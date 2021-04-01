@@ -34,7 +34,7 @@ anchor_bottom = 1.0
 margin_left = -136.0
 margin_top = -60.0
 margin_right = 136.0
-margin_bottom = -12.0
+margin_bottom = -12.0001
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -56,8 +56,6 @@ margin_right = -6.0
 margin_bottom = -1.90735e-05
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "asdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdjfkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjaksdfjaskd??"
-text = "asdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdjfkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjkasdfjaksdfjaskd??"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
