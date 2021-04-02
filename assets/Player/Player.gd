@@ -99,6 +99,7 @@ onready var notice = $ExamineNotice
 onready var talkNotice = $TalkNotice
 onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
+onready var bamboo = $BambooAudio
 
 func _ready():
 	if Global.get_attribute("location") != null:
