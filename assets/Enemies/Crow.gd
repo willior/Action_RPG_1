@@ -65,7 +65,7 @@ func _ready():
 	PlayerLog.connect("crow_complete", self, "examine_complete")
 	if PlayerLog.crow_examined:
 		examined = true
-	add_to_group("enemies")
+	add_to_group("Enemies")
 	# rng.randomize()
 	# random_number = rng.randi_range(0, 4)
 	animationTree.active = true

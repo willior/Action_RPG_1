@@ -59,7 +59,7 @@ func _ready():
 	PlayerLog.connect("bat_complete", self, "examine_complete")
 	if PlayerLog.bat_examined:
 		examined = true
-	add_to_group("enemies")
+	add_to_group("Enemies")
 	rng.randomize()
 	random_number = rng.randi_range(0, 4)
 	sprite.frame = random_number

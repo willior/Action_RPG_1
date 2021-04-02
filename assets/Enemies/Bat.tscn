@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://assets/Enemies/Bat.png" type="Texture" id=1]
 [ext_resource path="res://assets/Shadows/SmallShadow.png" type="Texture" id=2]
@@ -17,7 +17,6 @@
 [ext_resource path="res://assets/Audio/Bat.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/Enemies/EnemyHealth.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=17]
-[ext_resource path="res://assets/UI/Popups/DamageContainer.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -227,9 +226,7 @@ one_shot = true
 stream = ExtResource( 15 )
 
 [node name="EnemyHealth" parent="." instance=ExtResource( 16 )]
-grow_horizontal = 0
-
-[node name="DamageContainer" parent="." instance=ExtResource( 18 )]
+visible = false
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0, -16 )

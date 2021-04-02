@@ -10,9 +10,6 @@ var count
 
 onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
 
-func _ready():
-	pass
-	
 func examine():
 	var dialog = DialogBox.instance()
 	dialog.dialog_script = [
@@ -23,13 +20,22 @@ func examine():
 	get_node("/root/World/GUI").add_child(dialog)
 	
 func interact():
+	var enemies = get_tree().get_nodes_in_group("Enemies")
+	for i in enemies:
+		var dialog = DialogBox.instance()
+		dialog.dialog_script = [
+			{
+				'text': 'Might want to take care of that there wolf first, buddy boy.'
+			}
+		]
+		get_node("/root/World/GUI").add_child(dialog)
+		return
+# warning-ignore:unreachable_code
 	count = 0
 	$Timer.wait_time = 1.2
 	$AnimationPlayer.play("Cutscene")
 	Global.in_cutscene = true
-	var enemies = get_tree().get_nodes_in_group("Enemies")
-	for i in enemies:
-		pass
+	
 
 func cutscene1():
 	player.state = 8
@@ -82,7 +88,6 @@ func play_music():
 		)
 		
 func drain_hp():
-	print(count)
 	if count > 18:
 		return
 	$Timer.start()

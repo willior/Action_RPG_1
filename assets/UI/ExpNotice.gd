@@ -11,10 +11,7 @@ func _ready():
 	text.set_text(str(expDisplay) + " XP")
 	
 	animation.play("Flash")
-	
-	# tween.interpolate_property(damageText, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	# tween.start()
-	
+
 	timer.start()
 	yield(timer, "timeout")
 	animation.stop()

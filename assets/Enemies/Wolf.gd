@@ -69,7 +69,7 @@ func _ready():
 	PlayerLog.connect("wolf_complete", self, "examine_complete")
 	if PlayerLog.wolf_examined:
 		examined = true
-	add_to_group("enemies")
+	add_to_group("Enemies")
 	# rng.randomize()
 	# random_number = rng.randi_range(0, 4)
 	animationTree.active = true
@@ -112,6 +112,7 @@ func _physics_process(delta):
 				state = IDLE
 
 		ATTACK:
+			animationState.travel("Leap")
 			if attacking:
 				attacking = false
 				audio_attack()
@@ -126,6 +127,9 @@ func _physics_process(delta):
 		velocity += softCollision.get_push_vector() * delta * 400
 		
 	velocity = move_and_slide(velocity)
+	
+func reset_state():
+	state = IDLE
 	
 func h_flip_handler():
 	if velocity.x < 0:
