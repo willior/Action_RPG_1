@@ -3,9 +3,10 @@ extends KinematicBody2D
 const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
-const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
-const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
+#const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
+#const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
+#const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
+const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
 var EnemySpawner = load("res://assets/Spawners/EnemySpawner.tscn")
 var attackSFX = preload("res://assets/Audio/Enemies/Wolf_Attack_1.wav")
 var detectSFX = preload("res://assets/Audio/Enemies/Wolf_Growl_1.wav")
@@ -326,19 +327,33 @@ func _on_WolfStats_no_health():
 	get_node("/root/World").add_child(expNotice)
 	
 	if randi() % 2 == 1:
-		var healingPotion = HealingPotion.instance()
-		get_node("/root/World/YSort/Items").call_deferred("add_child", healingPotion)
-		healingPotion.global_position = global_position
-	
-	elif player.stats.health < player.stats.max_health && randi() % 2 == 1:
-		var heartPickup = HeartPickup.instance()
-		get_node("/root/World/YSort/Items").call_deferred("add_child", heartPickup)
-		heartPickup.global_position = global_position
+		var ingredientPickup = IngredientPickup.instance()
+		match randi() % 4: # random number between 0 & 3
+			0:
+				ingredientPickup.ingredient_name = "Rock"
+			1:
+				ingredientPickup.ingredient_name = "Clay"
+			2:
+				ingredientPickup.ingredient_name = "Salt"
+			3:
+				ingredientPickup.ingredient_name = "Water"
 		
-	elif randi() % 2 == 1:
-		var pennyPickup = PennyPickup.instance()
-		get_node("/root/World/YSort/Items").call_deferred("add_child", pennyPickup)
-		pennyPickup.global_position = global_position
+		get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
+		ingredientPickup.global_position = global_position
+		
+#		var healingPotion = HealingPotion.instance()
+#		get_node("/root/World/YSort/Items").call_deferred("add_child", healingPotion)
+#		healingPotion.global_position = global_position
+#
+#	elif player.stats.health < player.stats.max_health && randi() % 2 == 1:
+#		var heartPickup = HeartPickup.instance()
+#		get_node("/root/World/YSort/Items").call_deferred("add_child", heartPickup)
+#		heartPickup.global_position = global_position
+#
+#	elif randi() % 2 == 1:
+#		var pennyPickup = PennyPickup.instance()
+#		get_node("/root/World/YSort/Items").call_deferred("add_child", pennyPickup)
+#		pennyPickup.global_position = global_position
 	queue_free()
 	
 func audio_detect():
