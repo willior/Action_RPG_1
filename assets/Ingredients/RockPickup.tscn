@@ -2,7 +2,6 @@
 
 [ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/CollisionBoxes/CollectBox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Ingredients/Rock.png" type="Texture" id=4]
 
 [sub_resource type="GDScript" id=1]
@@ -11,7 +10,7 @@ script/source = "extends Node2D
 const DialogBox = preload(\"res://assets/UI/DialogBox.tscn\")
 const ItemCollectEffect = preload(\"res://assets/Effects/ItemCollectEffect.tscn\")
 
-var interactable = false
+var interactable = true
 var talkable = false
 var examined = false
 	
@@ -24,8 +23,13 @@ func examine():
 	get_node(\"/root/World/GUI\").add_child(dialogBox)
 	if !examined: examined = true
 
-# warning-ignore:unused_argument
-func _on_CollectBox_area_entered(area):
+func interact():
+	GameManager.player.state = 8
+	var timer = Timer.new()
+	timer.wait_time = 0.3
+	add_child(timer)
+	timer.start()
+	yield(timer, \"timeout\")
 	GameManager.player.pouch.add_ingredient(\"Rock\", 1)
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
@@ -33,6 +37,9 @@ func _on_CollectBox_area_entered(area):
 	itemCollectEffect.playSound(0)
 	queue_free()
 "
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 2.0
 
 [node name="RockPickup" type="Node2D"]
 script = SubResource( 1 )
@@ -43,8 +50,10 @@ texture = ExtResource( 4 )
 [node name="TalkBox" parent="." instance=ExtResource( 2 )]
 scale = Vector2( 2, 2 )
 
-[node name="CollectBox" parent="." instance=ExtResource( 3 )]
+[node name="CollisionShape2D" parent="TalkBox" index="0"]
+shape = SubResource( 2 )
 
 [node name="AudioCursHi" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-[connection signal="area_entered" from="CollectBox" to="." method="_on_CollectBox_area_entered"]
+
+[editable path="TalkBox"]

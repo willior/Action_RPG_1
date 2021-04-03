@@ -1353,6 +1353,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 251 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "pickup_finished"
+} ]
+}
 
 [sub_resource type="Animation" id=32]
 length = 0.5
@@ -2033,7 +2047,7 @@ states/Shade/node = SubResource( 95 )
 states/Shade/position = Vector2( 218.03, 200.973 )
 transitions = [ "Idle", "Roll", SubResource( 96 ), "Roll", "Idle", SubResource( 97 ), "Idle", "Hit", SubResource( 98 ), "Hit", "Idle", SubResource( 99 ), "Roll", "Hit", SubResource( 100 ), "Idle", "Shade", SubResource( 101 ), "Shade", "Idle", SubResource( 102 ), "Shade", "Hit", SubResource( 103 ), "Idle", "Flash", SubResource( 104 ), "Flash", "Idle", SubResource( 105 ), "Flash", "Hit", SubResource( 106 ), "Idle", "Backstep", SubResource( 107 ), "Backstep", "Idle", SubResource( 108 ), "Backstep", "Hit", SubResource( 109 ), "Backstep", "Shade", SubResource( 110 ), "Backstep", "Flash", SubResource( 111 ), "Idle", "Run", SubResource( 112 ), "Run", "Idle", SubResource( 113 ), "Run", "Hit", SubResource( 114 ), "Attack1", "Hit", SubResource( 115 ), "Idle", "Attack1", SubResource( 116 ), "Backstep", "Attack1", SubResource( 117 ), "Attack2", "Attack1", SubResource( 118 ), "Attack1", "Attack2", SubResource( 119 ), "Shade", "Attack2", SubResource( 120 ), "Attack2", "Idle", SubResource( 121 ), "Attack2", "Hit", SubResource( 122 ), "Attack1", "Idle", SubResource( 123 ), "Idle", "Pickup", SubResource( 124 ), "Pickup", "Idle", SubResource( 125 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -384.124, -187.715 )
+graph_offset = Vector2( -384.124, -20.754 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=127]
 
@@ -2133,7 +2147,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 60
-frame = 247
+frame = 251
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2325,9 +2339,9 @@ margin_bottom = 0.0
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]

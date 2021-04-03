@@ -9,8 +9,8 @@
 [ext_resource path="res://assets/Tilesets/grassBasic_lightInner/tileset_grassBasic_lightInner.tres" type="TileSet" id=7]
 [ext_resource path="res://assets/System/ScreenShake.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/Enemies/Wolf.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/ItemsInventory/Healing_Potion.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/Ingredients/ClayPickup.tscn" type="PackedScene" id=11]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -60,42 +60,18 @@ remote_path = NodePath("../../../Camera2D")
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 155.647, 136.49 )
-
-[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat8" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 10 )]
-position = Vector2( 212.018, 145.615 )
-
-[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 11 )]
-position = Vector2( 250.337, 55.2055 )
+position = Vector2( 248, 144 )
 
 [node name="Items" type="YSort" parent="YSort"]
+
+[node name="Healing_Potion" parent="YSort/Items" instance=ExtResource( 10 )]
+position = Vector2( 232, 48 )
+
+[node name="Healing_Potion2" parent="YSort/Items" instance=ExtResource( 10 )]
+position = Vector2( 232, 64 )
+
+[node name="ClayPickup" parent="YSort/Items" instance=ExtResource( 11 )]
+position = Vector2( 168, 40 )
 
 [node name="Doodads" type="YSort" parent="YSort"]
 

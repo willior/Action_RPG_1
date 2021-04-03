@@ -17,6 +17,12 @@ func examine():
 	if !examined: examined = true
 	
 func interact():
+	GameManager.player.state = 8
+	var timer = Timer.new()
+	timer.wait_time = 0.3
+	add_child(timer)
+	timer.start()
+	yield(timer, "timeout")
 	GameManager.player.inventory.add_item("Potion", 1)
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)

@@ -28,7 +28,8 @@ enum {
 	FLASH,
 	SHADE,
 	HIT,
-	CUTSCENE
+	PICKUP,
+	ACTION
 }
 
 enum {
@@ -133,7 +134,8 @@ func _process(delta):
 		SHADE: shade_state(delta)
 		FLASH: flash_state(delta)
 		HIT: hit_state(delta)
-		CUTSCENE: cutscene_state(delta)
+		PICKUP: pickup_state(delta)
+		ACTION: action_state(delta)
 
 func _input(event):
 	match state:
@@ -183,8 +185,8 @@ func _input(event):
 					noStamina()
 				else:
 					attack1_queued = true
-		CUTSCENE:
-			print('input in cutscene state')
+		ACTION:
+			print('input in ACTION state')
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -831,7 +833,24 @@ func game_over():
 	self.visible = false
 	get_tree().paused = true
 	
-func cutscene_state(_delta):
+func pickup_state(_delta):
+	if examining:
+		self.noticeDisplay = false
+	if talking:
+		# talking = false
+		self.talkNoticeDisplay = false
+	if interacting:
+		# interacting = false
+		self.interactNoticeDisplay = false
+	animationState.travel("Pickup")
+
+func pickup_finished():
+	if Input.is_action_pressed("attack"):
+		charge_reset()
+		attack_charging = true
+	state = MOVE
+	
+func action_state(_delta):
 	if examining:
 		self.noticeDisplay = false
 	if talking:

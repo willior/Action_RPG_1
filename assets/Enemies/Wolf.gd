@@ -81,6 +81,7 @@ func _physics_process(delta):
 	if velocity != Vector2.ZERO:
 		animationTree.set("parameters/Idle/BlendSpace2D/blend_position", velocity)
 		animationTree.set("parameters/Move/BlendSpace2D/blend_position", velocity)
+		animationTree.set("parameters/Leap/BlendSpace2D/blend_position", velocity)
 	
 	match state:
 		IDLE:
