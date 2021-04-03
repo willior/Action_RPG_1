@@ -283,6 +283,7 @@ test4={
 2d_physics/layer_15="WorldUpper"
 2d_physics/layer_16="WorldLower"
 2d_physics/layer_17="WorldBottom"
+2d_physics/layer_18="Flying"
 
 [rendering]
 

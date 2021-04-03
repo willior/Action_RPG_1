@@ -25,7 +25,7 @@ func interact():
 		var dialog = DialogBox.instance()
 		dialog.dialog_script = [
 			{
-				'text': 'Might want to take care of that there wolf first, buddy boy.'
+				'text': 'Might want to take care of that there enemy first, buddy boy.'
 			}
 		]
 		get_node("/root/World/GUI").add_child(dialog)

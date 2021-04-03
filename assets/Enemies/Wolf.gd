@@ -379,6 +379,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 		newEnemySpawner.ENEMY = load("res://assets/Enemies/Wolf.tscn")
 		newEnemySpawner.health = stats.health
 		newEnemySpawner.global_position = global_position
+		newEnemySpawner.z_index = z_index
 	
 func set_health(value):
 	stats.health = value

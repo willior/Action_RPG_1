@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/Will/LayerTest/Bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/System/ScreenShake.tscn" type="PackedScene" id=2]
@@ -31,6 +31,9 @@ extents = Vector2( 3, 30 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 2, 15 )
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 25, 28 )
+
 [node name="World" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 10 )
@@ -56,11 +59,11 @@ drag_margin_top = 0.1
 pause_mode = 1
 script = ExtResource( 12 )
 
-[node name="Lower" type="Sprite" parent="Map"]
+[node name="LowerFloor" type="Sprite" parent="Map"]
 texture = ExtResource( 1 )
 centered = false
 
-[node name="Upper" type="Sprite" parent="Map"]
+[node name="UpperFloor" type="Sprite" parent="Map"]
 z_index = 1
 texture = ExtResource( 3 )
 centered = false
@@ -93,7 +96,7 @@ position = Vector2( 184, 110 )
 shape = SubResource( 2 )
 
 [node name="UpperTransition" type="Area2D" parent="Map"]
-position = Vector2( -1, -1 )
+position = Vector2( -1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/UpperTransition"]
 position = Vector2( 184, 116 )
@@ -141,6 +144,14 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/LowerRidgeR"]
 shape = SubResource( 6 )
 
+[node name="FlyingZ-1" type="Area2D" parent="Map"]
+position = Vector2( 183, 86 )
+collision_layer = 0
+collision_mask = 131072
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/FlyingZ-1"]
+shape = SubResource( 7 )
+
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
@@ -157,7 +168,8 @@ remote_path = NodePath("../../../Camera2D")
 
 [node name="Bat" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 197, 28 )
-collision_mask = 32769
+z_index = 1
+collision_mask = 16385
 
 [node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 167, 22 )
@@ -166,13 +178,19 @@ collision_mask = 32769
 [node name="Crow" parent="YSort/Enemies" instance=ExtResource( 9 )]
 position = Vector2( 327, 38 )
 
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 89, 22 )
+
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 65, 151 )
+
 [node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 23, 72 )
+position = Vector2( 11, 78 )
 z_index = 1
 collision_mask = 16385
 
 [node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 213, 200 )
+position = Vector2( 261, 180 )
 z_index = 1
 collision_mask = 16385
 
@@ -205,3 +223,5 @@ stream = ExtResource( 11 )
 layer = 4
 [connection signal="body_entered" from="Map/LowerTransition" to="Map" method="_on_LowerTransition_body_entered"]
 [connection signal="body_entered" from="Map/UpperTransition" to="Map" method="_on_UpperTransition_body_entered"]
+[connection signal="body_entered" from="Map/FlyingZ-1" to="Map" method="_on_FlyingZ1_body_entered"]
+[connection signal="body_exited" from="Map/FlyingZ-1" to="Map" method="_on_FlyingZ1_body_exited"]
