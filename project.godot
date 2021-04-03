@@ -279,6 +279,10 @@ test4={
 2d_physics/layer_11="Despawners"
 2d_physics/layer_12="Exits"
 2d_physics/layer_13="ExitBlock"
+2d_physics/layer_14="WorldTop"
+2d_physics/layer_15="WorldUpper"
+2d_physics/layer_16="WorldLower"
+2d_physics/layer_17="WorldBottom"
 
 [rendering]
 

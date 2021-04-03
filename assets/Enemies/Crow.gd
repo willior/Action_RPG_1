@@ -215,6 +215,7 @@ func create_hit_effect(damage_count):
 	var randX = int(rand_range(-damage_count, damage_count))
 	var randY = int(rand_range(-damage_count/2, damage_count))
 	hit_effect.global_position = global_position
+	hit_effect.z_index = z_index
 	# hit_effect.global_position += Vector2(randX, randY)
 	hit_effect.target_position = global_position + Vector2(randX, randY)
 	get_parent().add_child(hit_effect)
@@ -238,8 +239,8 @@ func _on_Hurtbox_area_entered(area):
 		var damage_count = min(damage/2, 32)
 		while damage_count > 0:
 			create_hit_effect(damage_count)
-			Global.create_blood_effect(damage_count, global_position)
-			Global.create_blood_effect(damage_count, global_position)
+			Global.create_blood_effect(damage_count, global_position, z_index)
+			Global.create_blood_effect(damage_count, global_position, z_index)
 			damage_count -= 4
 			
 		hurtbox.display_damage_popup(str(damage), is_crit)
@@ -309,26 +310,27 @@ func _on_CrowStats_no_health():
 	get_parent().add_child(enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
 	enemyDeathEffect.global_position = global_position
+	enemyDeathEffect.z_index = z_index
 	create_hit_effect(32)
 	create_hit_effect(32)
 	create_hit_effect(32)
 	create_hit_effect(32)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(40, global_position)
-	Global.create_blood_effect(32, global_position)
-	Global.create_blood_effect(32, global_position)
-	Global.create_blood_effect(32, global_position)
-	Global.create_blood_effect(32, global_position)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(40, global_position, z_index)
+	Global.create_blood_effect(32, global_position, z_index)
+	Global.create_blood_effect(32, global_position, z_index)
+	Global.create_blood_effect(32, global_position, z_index)
+	Global.create_blood_effect(32, global_position, z_index)
 	Global.distribute_exp(stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position
@@ -375,6 +377,7 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 		newEnemySpawner.ENEMY = load("res://assets/Enemies/Crow.tscn")
 		newEnemySpawner.health = stats.health
 		newEnemySpawner.global_position = global_position
+		newEnemySpawner.z_index = z_index
 	
 func set_health(value):
 	stats.health = value

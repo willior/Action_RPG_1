@@ -233,8 +233,8 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		
 		var damage_count = min(damage/2, 32)
 		while damage_count > 0:
-			Global.create_blood_effect(damage_count, global_position)
-			Global.create_blood_effect(damage_count, global_position)
+			Global.create_blood_effect(damage_count, global_position, z_index)
+			Global.create_blood_effect(damage_count, global_position, z_index)
 			damage_count -= 4
 		
 		hurtbox.display_damage_popup(str(damage), is_crit)
@@ -299,14 +299,15 @@ func _on_BatStats_no_health():
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
-	Global.create_blood_effect(16, global_position)
-	Global.create_blood_effect(12, global_position)
-	Global.create_blood_effect(8, global_position)
-	Global.create_blood_effect(6, global_position)
-	Global.create_blood_effect(4, global_position)
-	Global.create_blood_effect(4, global_position)
-	Global.create_blood_effect(2, global_position)
-	Global.create_blood_effect(2, global_position)
+	enemyDeathEffect.z_index = z_index
+	Global.create_blood_effect(16, global_position, z_index)
+	Global.create_blood_effect(12, global_position, z_index)
+	Global.create_blood_effect(8, global_position, z_index)
+	Global.create_blood_effect(6, global_position, z_index)
+	Global.create_blood_effect(4, global_position, z_index)
+	Global.create_blood_effect(4, global_position, z_index)
+	Global.create_blood_effect(2, global_position, z_index)
+	Global.create_blood_effect(2, global_position, z_index)
 	Global.distribute_exp(stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = global_position

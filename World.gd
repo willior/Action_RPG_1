@@ -144,4 +144,3 @@ func _input(event):
 			dim.visible = false
 			# stats.visible = false
 			$GUI/PauseScreen.queue_free()
-
