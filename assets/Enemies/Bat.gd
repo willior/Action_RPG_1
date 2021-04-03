@@ -218,6 +218,7 @@ func pick_random_state(state_list):
 #	get_parent().add_child(blood_effect)
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
+	$EnemyHealth.show_health()
 	var evasion_mod = 0
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
@@ -243,7 +244,6 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		if state == ATTACK:
 			state = IDLE
 			
-		$EnemyHealth.show_health()
 		
 		sprite.modulate = Color(1,1,0)
 		if stats.health > 0:
