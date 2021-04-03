@@ -220,6 +220,7 @@ func create_hit_effect(damage_count):
 	get_parent().add_child(hit_effect)
 
 func _on_Hurtbox_area_entered(area):
+	$EnemyHealth.show_health()
 	var evasion_mod = 0
 	if flying:
 		evasion_mod = 32
@@ -244,7 +245,6 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.display_damage_popup(str(damage), is_crit)
 		hurtbox.create_hit_effect()
 		#hurtbox.start_invincibility(0.3)
-		$EnemyHealth.show_health()
 		if state == ATTACK:
 			state = IDLE
 		if attacking:

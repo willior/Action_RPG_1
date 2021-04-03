@@ -10,7 +10,7 @@
 [ext_resource path="res://assets/System/ScreenShake.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/Enemies/Wolf.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/Ingredients/ClayPickup.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/Ingredients/IngredientPickup.tscn" type="PackedScene" id=12]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -70,8 +70,21 @@ position = Vector2( 232, 48 )
 [node name="Healing_Potion2" parent="YSort/Items" instance=ExtResource( 10 )]
 position = Vector2( 232, 64 )
 
-[node name="ClayPickup" parent="YSort/Items" instance=ExtResource( 11 )]
-position = Vector2( 168, 40 )
+[node name="IngredientPickup" parent="YSort/Items" instance=ExtResource( 12 )]
+position = Vector2( 144, 112 )
+ingredient_name = "Rock"
+
+[node name="IngredientPickup2" parent="YSort/Items" instance=ExtResource( 12 )]
+position = Vector2( 160, 112 )
+ingredient_name = "Clay"
+
+[node name="IngredientPickup3" parent="YSort/Items" instance=ExtResource( 12 )]
+position = Vector2( 144, 128 )
+ingredient_name = "Salt"
+
+[node name="IngredientPickup4" parent="YSort/Items" instance=ExtResource( 12 )]
+position = Vector2( 160, 128 )
+ingredient_name = "Water"
 
 [node name="Doodads" type="YSort" parent="YSort"]
 

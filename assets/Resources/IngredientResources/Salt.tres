@@ -9,3 +9,8 @@ name = "Salt"
 stackable = true
 max_stack_size = 20
 texture = ExtResource( 1 )
+description = [ {
+"text": "An ounce of regular salt."
+}, {
+"text": "There's nothing particularly unique about it."
+} ]

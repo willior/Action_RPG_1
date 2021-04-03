@@ -4,7 +4,7 @@ const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
 
 var player1
 var player2
-# var chapter_display = true
+var chapter_display
 var chapter_name
 var custom_variables = {}
 var dialogOpen = false

@@ -1984,3 +1984,7 @@ layer = 4
 [editable path="Map/Exit_toHome"]
 
 [editable path="Map/Exit_toDesert"]
+
+[editable path="Map/ParallaxOverlay"]
+
+[editable path="Map/ParallaxOverlay/ParallaxLayerBackground/Rain"]
