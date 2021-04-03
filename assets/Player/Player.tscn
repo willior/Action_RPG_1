@@ -2331,7 +2331,11 @@ one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="DamageContainer" parent="." instance=ExtResource( 7 )]
+[node name="Node2D" type="Node2D" parent="."]
+z_index = 3
+
+[node name="DamageContainer" parent="Node2D" instance=ExtResource( 7 )]
+show_behind_parent = false
 margin_left = 11.0
 margin_top = 0.0
 margin_right = 11.0

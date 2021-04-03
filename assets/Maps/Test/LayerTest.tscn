@@ -13,20 +13,20 @@
 [ext_resource path="res://assets/Audio/World/Bird_Ambience.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/Maps/Test/LayerTest.gd" type="Script" id=12]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 31, 2 )
-
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 2 )
 
 [sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 31, 2 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 28, 2 )
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 28, 2 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 28, 2 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3, 30 )
+extents = Vector2( 5.12399, 30 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 2, 15 )
@@ -76,7 +76,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/BridgeTop"]
 position = Vector2( 150, 55 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="BridgeBottom" type="StaticBody2D" parent="Map"]
 position = Vector2( -31, -3 )
@@ -86,21 +86,21 @@ collision_mask = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/BridgeBottom"]
 position = Vector2( 214, 54 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="LowerTransition" type="Area2D" parent="Map"]
 position = Vector2( -1, -9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/LowerTransition"]
 position = Vector2( 184, 110 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="UpperTransition" type="Area2D" parent="Map"]
 position = Vector2( -1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/UpperTransition"]
 position = Vector2( 184, 116 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="RidgeL" type="StaticBody2D" parent="Map"]
 position = Vector2( 0, 24 )
@@ -108,12 +108,12 @@ collision_layer = 49152
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/RidgeL"]
-position = Vector2( 153, 59 )
-shape = SubResource( 1 )
+position = Vector2( 150, 59 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/RidgeL"]
-position = Vector2( 153, -30 )
-shape = SubResource( 1 )
+position = Vector2( 150, -30 )
+shape = SubResource( 5 )
 
 [node name="RidgeR" type="StaticBody2D" parent="Map"]
 position = Vector2( -1, 24 )
@@ -121,12 +121,12 @@ collision_layer = 49152
 collision_mask = 0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/RidgeR"]
-position = Vector2( 213, 59 )
-shape = SubResource( 1 )
+position = Vector2( 216, 59 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Map/RidgeR"]
-position = Vector2( 215, -30 )
-shape = SubResource( 1 )
+position = Vector2( 216.252, -30 )
+shape = SubResource( 5 )
 
 [node name="LowerRidgeL" type="StaticBody2D" parent="Map"]
 position = Vector2( 153, 39 )
@@ -142,10 +142,11 @@ collision_layer = 32768
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/LowerRidgeR"]
+position = Vector2( -1, 0 )
 shape = SubResource( 6 )
 
 [node name="FlyingZ-1" type="Area2D" parent="Map"]
-position = Vector2( 183, 86 )
+position = Vector2( 182.249, 84.9986 )
 collision_layer = 0
 collision_mask = 131072
 
@@ -197,7 +198,7 @@ collision_mask = 16385
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="CutsceneTrigger" parent="YSort/Items" instance=ExtResource( 5 )]
-position = Vector2( 269, 111 )
+position = Vector2( 846, 456 )
 z_index = 1
 
 [node name="Doodads" type="YSort" parent="YSort"]

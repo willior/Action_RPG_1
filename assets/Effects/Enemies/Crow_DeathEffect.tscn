@@ -148,7 +148,6 @@ script = ExtResource( 6 )
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 17 )
-z_index = -1
 frames = SubResource( 19 )
 animation = "1"
 
