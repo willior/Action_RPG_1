@@ -2099,7 +2099,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 60
-frame = 71
+frame = 55
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2248,7 +2248,6 @@ shape = SubResource( 132 )
 
 [node name="AttackAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
-bus = "Delay"
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )

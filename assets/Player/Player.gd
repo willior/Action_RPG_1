@@ -456,7 +456,7 @@ func charge_state(_delta):
 		attack_1_charged = false
 		attack_2_charged = true
 		attack_charging = false
-		
+
 func charge_reset():
 	charge_level_count = 0
 	stats.charge_level = charge_level_count
@@ -465,7 +465,7 @@ func charge_reset():
 	if attack_charging: attack_charging = false
 	if attack_1_charged: attack_1_charged = false
 	if attack_2_charged: attack_2_charged = false
-		
+
 func shade_state(delta):
 	if shade_moving:
 # warning-ignore:integer_division
@@ -485,7 +485,7 @@ func shade_start():
 	swordHitbox.shade_begin()
 	# stats.strength_mod = 4
 	velocity = dir_vector * stats.shade_speed
-	
+
 func shade_stop():
 	set_collision_mask_bit(4, true)
 	$Tween.interpolate_property(
@@ -501,7 +501,7 @@ func shade_stop():
 	yield($Tween, "tween_all_completed")
 	swordHitbox.shade_end()
 	shade_moving = false
-	
+
 func flash_state(delta):
 	if base_enemy_accuracy > 25:
 		base_enemy_accuracy = 25
@@ -509,7 +509,7 @@ func flash_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	animationState.travel("Flash")
 	move()
-	
+
 func flash_start():
 	stats.stamina -= 25
 	PlayerStats.dexterity_mod = 4
@@ -774,6 +774,10 @@ func backstep_animation_finished():
 		attack_animation_finished()
 
 func _on_Hurtbox_area_entered(area):
+	if z_index != area.z_index:
+		$DodgeAudio.play()
+		hurtbox.display_damage_popup("Miss!", false)
+		return
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
 		if attack2_queued:
@@ -950,3 +954,6 @@ func save():
 		"pouch": pouch._ingredients
 	}
 	return save_dict
+	
+func set_z_index(value):
+	z_index = value

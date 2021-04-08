@@ -219,6 +219,10 @@ func pick_random_state(state_list):
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
 	$EnemyHealth.show_health()
+	if z_index != area.get_parent().get_parent().z_index:
+		SoundPlayer.play_sound("miss")
+		hurtbox.display_damage_popup("Miss!", false)
+		return
 	var evasion_mod = 0
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
