@@ -2134,7 +2134,7 @@ tracks/0/keys = {
 ]]
 process_priority = -1
 collision_layer = 32770
-collision_mask = 3601
+collision_mask = 3585
 script = ExtResource( 1 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -2147,7 +2147,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 60
-frame = 251
+frame = 122
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2236,7 +2236,6 @@ margin_bottom = -11.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 11, 0 )
@@ -2296,6 +2295,7 @@ shape = SubResource( 132 )
 
 [node name="AttackAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
+bus = "Delay"
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )

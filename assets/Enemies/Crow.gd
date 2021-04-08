@@ -215,10 +215,11 @@ func create_hit_effect(damage_count):
 	var randX = int(rand_range(-damage_count, damage_count))
 	var randY = int(rand_range(-damage_count/2, damage_count))
 	hit_effect.global_position = global_position
-	hit_effect.z_index = z_index
+	hit_effect.z_index = z_index -1
 	# hit_effect.global_position += Vector2(randX, randY)
 	hit_effect.target_position = global_position + Vector2(randX, randY)
-	get_parent().add_child(hit_effect)
+	#get_parent().add_child(hit_effect)
+	get_node("/root/World/Map").add_child(hit_effect)
 
 func _on_Hurtbox_area_entered(area):
 	$EnemyHealth.show_health()
