@@ -124,3 +124,23 @@ func create_blood_effect(damage_count, location, z_index):
 func reset_input_after_dialog():
 	update_player()
 	player1.check_attack_input()
+	
+func change_floor(body, destination_z_index, target_collision):
+	if body.z_index == destination_z_index:
+		return
+	print(body, " changing floor: z_index changed from ", body.z_index, " to ", destination_z_index)
+	# 13 bottom
+	# 14 lower
+	# 15 upper
+	# 16 top
+	body.z_index = destination_z_index
+	body.set_collision_mask_bit(target_collision, true)
+	body.set_collision_layer_bit(target_collision, true)
+	
+	for i in range(13,17):
+		if i != target_collision:
+			body.set_collision_mask_bit(i, false)
+			body.set_collision_layer_bit(i, false)
+			print('setting mask bit ', i, ' to false')
+		else:
+			print('setting mask bit ', i, ' to true')

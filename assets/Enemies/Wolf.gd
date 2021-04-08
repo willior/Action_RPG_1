@@ -161,7 +161,7 @@ func accelerate_towards_point(point, speed, delta):
 	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
 	h_flip_handler()
 
-func seek_player():
+func seek_player(): # runs every frame of the IDLE and WANDER states
 	if hitbox.monitorable:
 		hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking && !seeking:

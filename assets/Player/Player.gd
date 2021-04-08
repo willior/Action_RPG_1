@@ -257,7 +257,7 @@ func move_state(delta):
 		if attack_2_charged or stats.charge_level == 2:
 			attack_2_charged = false
 			state = SHADE
-		if attack_1_charged and stats.charge_level == 1:
+		elif attack_1_charged and stats.charge_level == 1:
 			attack_1_charged = false
 			state = FLASH
 		charge.stop_charge()
@@ -449,10 +449,10 @@ func charge_state(_delta):
 		charge_count += stats.charge_rate
 		stats.charge = charge_count
 	# if the charge count reaches 50%
-	if charge_count >= stats.max_charge/2:
+	if charge_count >= stats.max_charge/2 && !attack_1_charged && !attack_2_charged:
 		attack_1_charged = true
 	# if the charge count reaches 100%
-	elif charge_count == stats.max_charge && attack_charging:
+	elif charge_count >= stats.max_charge && attack_charging:
 		attack_1_charged = false
 		attack_2_charged = true
 		attack_charging = false
@@ -473,13 +473,12 @@ func shade_state(delta):
 	else:
 		if Input.is_action_just_released("attack"):
 			attack2_queued = true
-			print('attack released during shade: attack2_queued')
 	animationState.travel("Shade")
 	move()
 	
 func shade_start():
-	print('shade attack')
-	#set_collision_mask_bit(4, false)
+	set_collision_mask_bit(4, false)
+	yield(get_tree().create_timer(0.05), "timeout")
 	stats.stamina -= 35
 	PlayerStats.dexterity_mod = 8
 	charge.stop_charge()
@@ -725,10 +724,12 @@ func backstep_state(delta):
 			charge.stop_charge()
 		else:
 			if attack_2_charged:
+				print('attack 2 charged: released during backstep')
 				attack_1_charged = false # getting rid of this stores the charge for next backstep - mite b cool
 				attack_2_charged = false
 				shade_queued = true
 			elif attack_1_charged:
+				print('attack 1 charged: released during backstep')
 				attack_1_charged = false
 				flash_queued = true
 			else:

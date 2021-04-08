@@ -23,6 +23,7 @@ tracks/0/keys = {
 }
 
 [node name="ExpNotice" type="Node2D"]
+z_index = 8
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
