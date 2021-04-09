@@ -22,7 +22,7 @@ shader = ExtResource( 7 )
 shader_param/active = false
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 6.0
+radius = 4.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "IdleDown"
@@ -329,7 +329,7 @@ radius = 16.0
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id=45]
-radius = 40.0
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id=46]
 
@@ -340,7 +340,7 @@ radius = 12.0
 radius = 6.0
 
 [node name="Wolf" type="KinematicBody2D"]
-collision_layer = 16
+collision_layer = 16400
 script = ExtResource( 2 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -412,8 +412,8 @@ shape = SubResource( 44 )
 visible = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
-visible = false
 scale = Vector2( 3, 3 )
+input_pickable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 shape = SubResource( 45 )

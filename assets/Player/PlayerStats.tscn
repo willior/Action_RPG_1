@@ -51,7 +51,7 @@ var charge_rate = 0.5
 var max_charge_level = 2 setget set_max_charge_level
 var charge_level = 0 setget set_charge_level
 
-var experience_required = 100 setget set_max_experience
+var experience_required = 10000 setget set_max_experience
 var experience = 82 setget set_experience
 var level = 1 setget set_level
 var experience_total = 82

@@ -161,7 +161,7 @@ func accelerate_towards_point(point, speed, delta):
 	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
 	h_flip_handler()
 
-func seek_player():
+func seek_player(): # runs every frame of the IDLE and WANDER states
 	if hitbox.monitorable:
 		hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking && !seeking:
@@ -189,7 +189,7 @@ func attack_player():
 		# eye.frame = sprite.frame
 		attackTimer.start()
 		state = ATTACK
-		
+
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
 	eye.modulate = Color(0,0,0)
@@ -200,11 +200,11 @@ func _on_AttackTimer_timeout():
 	if attack_on_cooldown:
 		attack_on_cooldown = false
 		enable_detection()
-	
+
 func disable_detection():
 	attackPlayerZone.set_deferred("monitoring", false)
 	playerDetectionZone.set_deferred("monitoring", false)
-	
+
 func enable_detection():
 	attackPlayerZone.set_deferred("monitoring", true)
 	playerDetectionZone.set_deferred("monitoring", true)
@@ -230,6 +230,10 @@ func pick_random_state(state_list):
 
 func _on_Hurtbox_area_entered(area):
 	$EnemyHealth.show_health()
+	if z_index != area.get_parent().get_parent().z_index:
+		SoundPlayer.play_sound("miss")
+		hurtbox.display_damage_popup("Miss!", false)
+		return
 	var evasion_mod = 0
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
@@ -341,6 +345,7 @@ func _on_WolfStats_no_health():
 		
 		get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
 		ingredientPickup.global_position = global_position
+		ingredientPickup.z_index = z_index
 		
 #		var healingPotion = HealingPotion.instance()
 #		get_node("/root/World/YSort/Items").call_deferred("add_child", healingPotion)

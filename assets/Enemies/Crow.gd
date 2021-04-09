@@ -215,14 +215,17 @@ func create_hit_effect(damage_count):
 	var randX = int(rand_range(-damage_count, damage_count))
 	var randY = int(rand_range(-damage_count/2, damage_count))
 	hit_effect.global_position = global_position
-	hit_effect.z_index = z_index -1
+	hit_effect.z_index = z_index
 	# hit_effect.global_position += Vector2(randX, randY)
 	hit_effect.target_position = global_position + Vector2(randX, randY)
-	#get_parent().add_child(hit_effect)
-	get_node("/root/World/Map").add_child(hit_effect)
+	get_node("/root/World/Map").call_deferred("add_child", hit_effect)
 
 func _on_Hurtbox_area_entered(area):
 	$EnemyHealth.show_health()
+	if z_index != area.get_parent().get_parent().z_index:
+		SoundPlayer.play_sound("miss")
+		hurtbox.display_damage_popup("Miss!", false)
+		return
 	var evasion_mod = 0
 	if flying:
 		evasion_mod = 32
@@ -308,7 +311,7 @@ func _on_CrowStats_no_health():
 	yield(tween, "tween_all_completed")
 	# player.enemy_killed(stats.experience_pool)
 	var enemyDeathEffect = EnemyDeathEffect.instance()
-	get_parent().add_child(enemyDeathEffect)
+	get_node("/root/World/Map").call_deferred("add_child", enemyDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
 	enemyDeathEffect.global_position = global_position
 	enemyDeathEffect.z_index = z_index
@@ -341,14 +344,17 @@ func _on_CrowStats_no_health():
 		var healingPotion = HealingPotion.instance()
 		get_node("/root/World/YSort/Items").call_deferred("add_child", healingPotion)
 		healingPotion.global_position = global_position
+		healingPotion.z_index = z_index
 	elif player.stats.health < player.stats.max_health && randi() % 2 == 1:
 		var heartPickup = HeartPickup.instance()
 		get_node("/root/World/YSort/Items").call_deferred("add_child", heartPickup)
 		heartPickup.global_position = global_position
+		heartPickup.z_index = z_index
 	elif randi() % 2 == 1:
 		var pennyPickup = PennyPickup.instance()
 		get_node("/root/World/YSort/Items").call_deferred("add_child", pennyPickup)
 		pennyPickup.global_position = global_position
+		pennyPickup.z_index = z_index
 	queue_free()
 
 func idle_animation():

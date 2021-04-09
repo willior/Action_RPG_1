@@ -119,8 +119,38 @@ func create_blood_effect(damage_count, location, z_index):
 	blood_effect.z_index = z_index
 	blood_effect.target_position = location + Vector2(randX, randY)
 	# get_parent().add_child(blood_effect)
-	get_node("/root/World/Map").add_child(blood_effect)
+	# get_node("/root/World/Map").add_child(blood_effect)
+	get_node("/root/World/Map").call_deferred("add_child", blood_effect)
 	
 func reset_input_after_dialog():
 	update_player()
 	player1.check_attack_input()
+	
+func change_floor(body, destination_z_index, target_collision):
+	if body.z_index == destination_z_index:
+		return
+	print(body, " changing floor: z_index changed from ", body.z_index, " to ", destination_z_index)
+	# 13 bottom
+	# 14 lower
+	# 15 upper
+	# 16 top
+	body.set_z_index(destination_z_index)
+	body.set_collision_mask_bit(target_collision, true)
+	body.set_collision_layer_bit(target_collision, true)
+	
+	for i in range(13,17):
+		if i != target_collision:
+			body.set_collision_mask_bit(i, false)
+			body.set_collision_layer_bit(i, false)
+	
+	set_enemy_collision_mask()
+
+func set_enemy_collision_mask():
+	update_player()
+	for e in get_tree().get_nodes_in_group("Enemies"):
+		if e.z_index == player1.z_index:
+			e.set_collision_layer_bit(4, true)
+			e.disable_detection()
+			e.enable_detection()
+		else:
+			e.set_collision_layer_bit(4, false)

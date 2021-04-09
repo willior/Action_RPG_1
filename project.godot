@@ -40,7 +40,7 @@ _global_script_class_icons={
 
 config/name="Action_RPG_1"
 config/description="unfinished action rpg by will graham-simpkins"
-run/main_scene="res://assets/Maps/Template.tscn"
+run/main_scene="res://assets/Maps/Test/LayerTest.tscn"
 boot_splash/use_filter=false
 config/icon="res://icon.png"
 config/windows_native_icon="res://game_icon.ico"
@@ -279,10 +279,10 @@ test4={
 2d_physics/layer_11="Despawners"
 2d_physics/layer_12="Exits"
 2d_physics/layer_13="ExitBlock"
-2d_physics/layer_14="WorldTop"
-2d_physics/layer_15="WorldUpper"
-2d_physics/layer_16="WorldLower"
-2d_physics/layer_17="WorldBottom"
+2d_physics/layer_14="WorldBottom"
+2d_physics/layer_15="WorldLower"
+2d_physics/layer_16="WorldUpper"
+2d_physics/layer_17="WorldTop"
 2d_physics/layer_18="Flying"
 
 [rendering]

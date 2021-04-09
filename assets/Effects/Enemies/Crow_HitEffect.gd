@@ -1,4 +1,4 @@
-extends AnimatedSprite
+extends Area2D
 
 var speed = 200
 var target_position : Vector2
@@ -6,10 +6,10 @@ var target_position : Vector2
 func _ready():
 	randomize()
 	var rng = randi()%4+1
-	play(str(rng))
+	$CrowHitAnimation.play(str(rng))
 	rng = randi()%2+1
 	if rng == 2:
-		flip_h = true
+		$CrowHitAnimation.flip_h = true
 
 func _process(delta):
 	global_position = global_position.move_toward(target_position, delta*speed)

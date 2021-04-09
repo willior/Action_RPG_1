@@ -129,7 +129,7 @@ radius = 5.0
 radius = 5.0
 
 [node name="Bat" type="KinematicBody2D"]
-collision_layer = 16
+collision_layer = 16400
 script = ExtResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
