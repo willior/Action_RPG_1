@@ -301,11 +301,9 @@ func stamina_regeneration():
 				timer.start()
 			return
 		elif stamina_regen_level < 4 && timer.is_stopped():
-			print('starting stamina regen level timer...')
 			timer.start(0.5)
 			yield(timer, "timeout")
 			stamina_regen_level += 1
-			print('stamina_regen_level = ', stamina_regen_level)
 
 func stamina_regen_reset():
 	if stamina_regen_level > 0:

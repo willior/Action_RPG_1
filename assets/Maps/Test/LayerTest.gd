@@ -23,3 +23,9 @@ func _on_FlyingZ1_body_entered(body):
 
 func _on_FlyingZ1_body_exited(body):
 	body.z_index = 3
+
+func _on_Area2D_area_entered(area):
+	print(area, " entered with z_index ", area.z_index)
+	if area.z_index == 5:
+		area.z_index = 3
+		print("changed ", area.z_index, " z_index to 3")

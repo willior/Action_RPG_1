@@ -119,7 +119,8 @@ func create_blood_effect(damage_count, location, z_index):
 	blood_effect.z_index = z_index
 	blood_effect.target_position = location + Vector2(randX, randY)
 	# get_parent().add_child(blood_effect)
-	get_node("/root/World/Map").add_child(blood_effect)
+	# get_node("/root/World/Map").add_child(blood_effect)
+	get_node("/root/World/Map").call_deferred("add_child", blood_effect)
 	
 func reset_input_after_dialog():
 	update_player()
