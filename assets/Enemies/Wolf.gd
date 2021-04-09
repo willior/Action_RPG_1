@@ -189,7 +189,7 @@ func attack_player():
 		# eye.frame = sprite.frame
 		attackTimer.start()
 		state = ATTACK
-		
+
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
 	eye.modulate = Color(0,0,0)
@@ -200,11 +200,11 @@ func _on_AttackTimer_timeout():
 	if attack_on_cooldown:
 		attack_on_cooldown = false
 		enable_detection()
-	
+
 func disable_detection():
 	attackPlayerZone.set_deferred("monitoring", false)
 	playerDetectionZone.set_deferred("monitoring", false)
-	
+
 func enable_detection():
 	attackPlayerZone.set_deferred("monitoring", true)
 	playerDetectionZone.set_deferred("monitoring", true)
@@ -345,6 +345,7 @@ func _on_WolfStats_no_health():
 		
 		get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
 		ingredientPickup.global_position = global_position
+		ingredientPickup.z_index = z_index
 		
 #		var healingPotion = HealingPotion.instance()
 #		get_node("/root/World/YSort/Items").call_deferred("add_child", healingPotion)

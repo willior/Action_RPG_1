@@ -1,11 +1,11 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/Effects/Enemies/Crow_DeathEffect.png" type="Texture" id=1]
 [ext_resource path="res://assets/Audio/EnemyDie.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/Audio/Crow_Death.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/Effects/EnemyDeathEffect.png" type="Texture" id=4]
 [ext_resource path="res://assets/Effects/Effect.gd" type="Script" id=5]
-[ext_resource path="res://assets/Effects/Enemies/DeathEffect.gd" type="Script" id=6]
+[ext_resource path="res://assets/Effects/Enemies/Crow_DeathEffect.gd" type="Script" id=6]
 [ext_resource path="res://assets/Effects/Blood_DeathEffect.png" type="Texture" id=7]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -140,28 +140,41 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[node name="Crow_DeathEffect" type="AnimatedSprite"]
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 31, 14 )
+
+[node name="Crow_DeathEffect" type="Area2D"]
+collision_mask = 131073
+script = ExtResource( 6 )
+
+[node name="Crow_DeathAnimation" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -24 )
 frames = SubResource( 14 )
 animation = "Animate"
-script = ExtResource( 6 )
 
-[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="Crow_DeathAnimation"]
+show_behind_parent = true
 position = Vector2( 0, 17 )
 frames = SubResource( 19 )
 animation = "1"
+frame = 3
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Crow_DeathAnimation"]
 position = Vector2( 0, 8 )
 frames = SubResource( 30 )
 animation = "Animate"
 script = ExtResource( 5 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimatedSprite"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Crow_DeathAnimation/AnimatedSprite"]
 stream = ExtResource( 2 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Crow_DeathAnimation"]
 stream = ExtResource( 3 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Crow_DeathAnimation"]
+position = Vector2( 0, 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -6 )
+shape = SubResource( 31 )
+[connection signal="screen_exited" from="Crow_DeathAnimation/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -18,14 +18,18 @@ func _on_LowerTransition_body_entered(body):
 	target_collision = 14
 	Global.change_floor(body, destination_z, target_collision)
 
-func _on_FlyingZ1_body_entered(body):
-	body.z_index = 1
-
-func _on_FlyingZ1_body_exited(body):
-	body.z_index = 3
-
 func _on_Area2D_area_entered(area):
-	print(area, " entered with z_index ", area.z_index)
+	#print(area, " entered with z_index ", area.z_index)
 	if area.z_index == 5:
 		area.z_index = 3
-		print("changed ", area.z_index, " z_index to 3")
+		#print("changed ", area.z_index, " z_index to 3")
+
+func _on_Area2D_body_entered(body):
+	print('flier entered')
+	if body.flying && z_index == 5:
+		body.z_index = 3
+
+func _on_Area2D_body_exited(body):
+	print('flier exited')
+	if body.flying && z_index == 3:
+		body.z_index = 5
