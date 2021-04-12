@@ -10,6 +10,7 @@ radius = 7.99996
 height = 12.0001
 
 [node name="Tree_1_green" type="StaticBody2D"]
+collision_mask = 0
 
 [node name="ShadowSprite" type="Sprite" parent="."]
 material = ExtResource( 4 )

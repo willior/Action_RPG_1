@@ -134,16 +134,14 @@ func change_floor(body, destination_z_index, target_collision):
 	# 14 lower
 	# 15 upper
 	# 16 top
-	body.set_z_index(destination_z_index)
+	body.set_z_index(destination_z_index) # sets the intended z_index for the body enterred
 	body.set_collision_mask_bit(target_collision, true)
 	body.set_collision_layer_bit(target_collision, true)
-	
+	set_enemy_collision_mask()
 	for i in range(13,17):
 		if i != target_collision:
 			body.set_collision_mask_bit(i, false)
 			body.set_collision_layer_bit(i, false)
-	
-	set_enemy_collision_mask()
 
 func set_enemy_collision_mask():
 	update_player()

@@ -209,10 +209,14 @@ collision_mask = 32769
 [node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 150, 205 )
 z_index = 5
+collision_layer = 32784
+collision_mask = 32769
 
 [node name="Wolf3" parent="YSort/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 294, 120 )
 z_index = 5
+collision_layer = 32784
+collision_mask = 32769
 
 [node name="Items" type="YSort" parent="YSort"]
 

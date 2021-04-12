@@ -102,6 +102,8 @@ onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
 onready var bamboo = $BambooAudio
 
+signal player_saved
+
 func _ready():
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
@@ -800,7 +802,7 @@ func _on_Hurtbox_invincibility_ended():
 func dying_effect(value):
 	if value && !dying:
 		Engine.time_scale = 0.6
-		set_collision_mask_bit(12, true)
+		set_collision_mask_bit(11, false)
 		var heartbeat = Heartbeat.instance()
 		var greyscale = Greyscale.instance()
 		var redFlash = RedFlash.instance()
@@ -813,7 +815,7 @@ func dying_effect(value):
 		dying = true
 	elif !value && dying:
 		Engine.time_scale = 1
-		set_collision_mask_bit(12, false)
+		set_collision_mask_bit(11, true)
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 		get_node("/root/World/GUI/Greyscale").queue_free()
 		get_node("/root/World/GUI/Red").queue_free()
@@ -822,6 +824,7 @@ func dying_effect(value):
 		get_node("/root/World/SFX").stream_paused = false
 		get_node("/root/World/SFX2").stream_paused = false
 		dying = false
+		emit_signal("player_saved")
 	
 func game_over():
 	# dying = true

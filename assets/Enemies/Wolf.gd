@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
+const BloodDeathEffect = preload("res://assets/Effects/Enemies/BloodDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 #const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
@@ -303,11 +303,11 @@ func _on_WolfStats_no_health():
 	)
 	tween.start()
 	yield(tween, "tween_all_completed")
-	var enemyDeathEffect = EnemyDeathEffect.instance()
-	get_parent().add_child(enemyDeathEffect)
+	var bloodDeathEffect = BloodDeathEffect.instance()
+	get_node("/root/World/Map").call_deferred("add_child", bloodDeathEffect)
 	# enemyDeathEffect.enemy = ENEMY_NAME
-	enemyDeathEffect.global_position = global_position
-	enemyDeathEffect.z_index = z_index
+	bloodDeathEffect.global_position = global_position
+	bloodDeathEffect.z_index = z_index
 	Global.create_blood_effect(40, global_position, z_index)
 	Global.create_blood_effect(40, global_position, z_index)
 	Global.create_blood_effect(40, global_position, z_index)
