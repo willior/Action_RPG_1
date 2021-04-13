@@ -2081,8 +2081,8 @@ tracks/0/keys = {
 "Persist",
 ]]
 process_priority = -1
-collision_layer = 16386
-collision_mask = 18433
+collision_layer = 2
+collision_mask = 18449
 script = ExtResource( 1 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]

@@ -264,7 +264,40 @@ position = Vector2( 239, 188 )
 position = Vector2( 93, 250 )
 
 [node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 326, 293 )
+position = Vector2( 367, 293 )
+
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow7" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow9" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow10" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow11" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow12" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow13" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
+
+[node name="Crow14" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 367, 293 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

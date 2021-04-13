@@ -297,12 +297,14 @@ func stamina_regeneration():
 				stats.stamina += stats.stamina_regen_rate * 8
 			4:
 				stats.stamina += stats.stamina_regen_rate * 16
+			5:
+				stats.stamina += stats.stamina_regen_rate * 32
 		
 		if Input.is_action_pressed("attack") || Input.is_action_pressed("roll"):
 			if timer.is_stopped():
 				timer.start()
 			return
-		elif stamina_regen_level < 4 && timer.is_stopped():
+		elif stamina_regen_level < 5 && timer.is_stopped():
 			timer.start(0.5)
 			yield(timer, "timeout")
 			stamina_regen_level += 1
