@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/Enemies/Crow.png" type="Texture" id=12]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Enemies/Crow_eye.png" type="Texture" id=14]
-[ext_resource path="res://assets/Audio/Crow_caw.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/Audio/Enemies/Crow/Crow_caw.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/Enemies/EnemyHealth.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=17]
 
@@ -562,7 +562,7 @@ shape = SubResource( 51 )
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -4 )
 collision_mask = 4
-damage = 1600.0
+damage = 16.0
 accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]

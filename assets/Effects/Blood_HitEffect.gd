@@ -1,8 +1,6 @@
 extends Area2D
-
 var speed = 200
 var target_position : Vector2
-
 func _ready():
 	randomize()
 	var rng = randi()%4+1

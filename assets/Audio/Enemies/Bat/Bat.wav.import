@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Crow_caw.wav-bf51858a145c9dafc3f08019d3c79898.sample"
+path="res://.import/Bat.wav-7572bec1b086fbe5303f8d4a4853c702.sample"
 
 [deps]
 
-source_file="res://assets/Audio/Crow_caw.wav"
-dest_files=[ "res://.import/Crow_caw.wav-bf51858a145c9dafc3f08019d3c79898.sample" ]
+source_file="res://assets/Audio/Enemies/Bat/Bat.wav"
+dest_files=[ "res://.import/Bat.wav-7572bec1b086fbe5303f8d4a4853c702.sample" ]
 
 [params]
 

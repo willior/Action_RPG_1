@@ -340,21 +340,22 @@ graph_offset = Vector2( 364.604, 14.194 )
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id=44]
-radius = 16.0
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id=45]
-radius = 32.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id=46]
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id=47]
-radius = 12.0
 
 [sub_resource type="CircleShape2D" id=48]
 radius = 6.0
 
 [node name="Wolf" type="KinematicBody2D"]
-collision_layer = 16400
+collision_layer = 16
+collision_mask = 4097
 script = ExtResource( 2 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -413,6 +414,15 @@ collision_mask = 0
 position = Vector2( 0, -12 )
 shape = SubResource( 43 )
 
+[node name="Hitbox" parent="." instance=ExtResource( 8 )]
+position = Vector2( 0, -8 )
+collision_mask = 4
+damage = 16.0
+accuracy = 4.0
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 44 )
+
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, 4 )
 collision_layer = 8
@@ -420,7 +430,7 @@ script = ExtResource( 17 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -16 )
-shape = SubResource( 44 )
+shape = SubResource( 45 )
 
 [node name="WanderController" parent="." instance=ExtResource( 4 )]
 visible = false
@@ -431,7 +441,7 @@ scale = Vector2( 3, 3 )
 input_pickable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-shape = SubResource( 45 )
+shape = SubResource( 46 )
 
 [node name="ChaseTimer" type="Timer" parent="PlayerDetectionZone"]
 wait_time = 0.75
@@ -447,20 +457,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 46 )
+shape = SubResource( 47 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8
 one_shot = true
-
-[node name="Hitbox" parent="." instance=ExtResource( 8 )]
-position = Vector2( 0, -8 )
-collision_mask = 4
-damage = 16.0
-accuracy = 4.0
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 47 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 11 )]
 visible = false
@@ -495,12 +496,12 @@ position = Vector2( 0, 5 )
 [connection signal="timeout" from="AttackPlayerZone/AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
+[editable path="Hitbox"]
+
 [editable path="Hurtbox"]
 
 [editable path="PlayerDetectionZone"]
 
 [editable path="AttackPlayerZone"]
-
-[editable path="Hitbox"]
 
 [editable path="SoftCollision"]

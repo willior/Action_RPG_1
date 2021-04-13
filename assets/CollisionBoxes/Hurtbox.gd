@@ -31,7 +31,7 @@ func display_damage_popup(value, crit):
 	# damagePopup.global_position = global_position
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
-	get_parent().get_node("Node2D/DamageContainer").add_child(damagePopup)
+	get_parent().get_node("DamageDisplay/DamageContainer").add_child(damagePopup)
 	# get_parent().add_child(damagePopup)
 
 func _on_Timer_timeout():

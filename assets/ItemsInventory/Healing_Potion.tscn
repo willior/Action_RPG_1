@@ -8,8 +8,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8, 8 )
+[sub_resource type="CircleShape2D" id=2]
+radius = 4.0
 
 [node name="Healing_Potion" type="StaticBody2D"]
 script = ExtResource( 4 )
@@ -26,6 +26,7 @@ shape = SubResource( 1 )
 stream = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
 shape = SubResource( 2 )
 
 [editable path="TalkBox"]

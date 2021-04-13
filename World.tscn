@@ -1,28 +1,18 @@
-[gd_scene load_steps=111 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://assets/Background/water_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/UI/StatsDisplay.gd" type="Script" id=3]
+[ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_green_1_sheet.png" type="Texture" id=4]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://assets/World/Grass.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/Spawners/CrowSpawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Audio/World/Bird_Ambience.ogg" type="AudioStream" id=7]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=8]
-[ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World.gd" type="Script" id=12]
-[ext_resource path="res://assets/UI/StaminaBar.gd" type="Script" id=13]
-[ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=14]
-[ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=15]
-[ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=16]
-[ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=17]
 [ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=18]
 [ext_resource path="res://assets/ItemDrops/HeartPickup.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=20]
-[ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=21]
-[ext_resource path="res://assets/Audio/HeartCollect.wav" type="AudioStream" id=22]
-[ext_resource path="res://assets/Audio/CoinCollect.wav" type="AudioStream" id=23]
 [ext_resource path="res://assets/World/Trees/Tree_1_fuschia.tscn" type="PackedScene" id=24]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_orange_1_sheet.png" type="Texture" id=25]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=26]
@@ -36,7 +26,6 @@
 [ext_resource path="res://assets/World/Trees/Tree_2_pine.tscn" type="PackedScene" id=34]
 [ext_resource path="res://assets/World/Trees/Tree_1_yellow.tscn" type="PackedScene" id=35]
 [ext_resource path="res://assets/World/Plants/Plant_4_green.tscn" type="PackedScene" id=36]
-[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=37]
 [ext_resource path="res://assets/World/Trees/Tree_1_orange.tscn" type="PackedScene" id=38]
 [ext_resource path="res://assets/World/Trees/Tree_1_green.tscn" type="PackedScene" id=39]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_green.tscn" type="PackedScene" id=40]
@@ -764,9 +753,6 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
-
-[sub_resource type="DynamicFont" id=51]
-font_data = ExtResource( 37 )
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -1931,24 +1917,6 @@ position = Vector2( -245, -156 )
 [node name="Enemies" type="YSort" parent="YSort"]
 position = Vector2( -360, -200 )
 
-[node name="CrowSpawner" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 88, 64 )
-
-[node name="CrowSpawner2" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 296, 144 )
-
-[node name="CrowSpawner3" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 120, 240 )
-
-[node name="CrowSpawner4" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 336, 368 )
-
-[node name="CrowSpawner5" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 168, 752 )
-
-[node name="CrowSpawner6" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 336, 752 )
-
 [node name="Items" type="YSort" parent="YSort"]
 position = Vector2( -360, -200 )
 
@@ -2288,115 +2256,12 @@ position = Vector2( 288, 88 )
 [node name="Skeleton" parent="YSort" instance=ExtResource( 11 )]
 position = Vector2( 352, -120 )
 
-[node name="GUI" type="CanvasLayer" parent="."]
-pause_mode = 2
-
-[node name="HealthUI" parent="GUI" instance=ExtResource( 9 )]
-pause_mode = 2
-show_behind_parent = true
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 64.0
-margin_bottom = 16.0
-
-[node name="StaminaBar" parent="GUI" instance=ExtResource( 14 )]
-margin_left = 4.0
-margin_top = 16.0
-margin_right = 64.0
-margin_bottom = 28.0
-script = ExtResource( 13 )
-
-[node name="StaminaBarTexture" type="TextureProgress" parent="GUI/StaminaBar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = -5.0
-value = 100.0
-allow_lesser = true
-texture_under = ExtResource( 16 )
-texture_over = ExtResource( 17 )
-texture_progress = ExtResource( 15 )
-tint_progress = Color( 0.0246666, 0.74, 0, 0.784314 )
-nine_patch_stretch = true
-stretch_margin_left = 2
-stretch_margin_top = 1
-stretch_margin_right = 2
-stretch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ExpBar" parent="GUI" instance=ExtResource( 10 )]
-margin_left = 4.0
-margin_right = 164.0
-
-[node name="CashUI" parent="GUI" instance=ExtResource( 21 )]
-
-[node name="Dim" type="ColorRect" parent="GUI"]
-visible = false
-modulate = Color( 0, 0, 0, 0.505882 )
-margin_right = 320.0
-margin_bottom = 180.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="StatsDisplay" type="Control" parent="GUI"]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Vbox" type="VBoxContainer" parent="GUI/StatsDisplay"]
-margin_left = 200.0
-margin_top = 32.0
-margin_right = 240.0
-margin_bottom = 96.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="str" type="Label" parent="GUI/StatsDisplay/Vbox"]
-margin_right = 40.0
-margin_bottom = 13.0
-custom_fonts/font = SubResource( 51 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
-[node name="end" type="Label" parent="GUI/StatsDisplay/Vbox"]
-margin_top = 17.0
-margin_right = 40.0
-margin_bottom = 30.0
-custom_fonts/font = SubResource( 51 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
-[node name="spd" type="Label" parent="GUI/StatsDisplay/Vbox"]
-margin_top = 34.0
-margin_right = 40.0
-margin_bottom = 47.0
-custom_fonts/font = SubResource( 51 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
 
-[node name="HeartSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 22 )
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 
-[node name="CoinSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 23 )
+[node name="SFX2" type="AudioStreamPlayer" parent="."]
+
+[node name="GUI" parent="." instance=ExtResource( 3 )]

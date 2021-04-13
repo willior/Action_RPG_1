@@ -5,10 +5,10 @@ const EnemyHitEffect = preload("res://assets/Effects/Enemies/Crow_HitEffect.tscn
 const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-const HeartPickup = preload("res://assets/ItemDrops/HeartPickup.tscn")
-const PennyPickup = preload("res://assets/ItemDrops/PennyPickup.tscn")
-const HealingPotion = preload("res://assets/ItemsInventory/Healing_Potion.tscn")
-var EnemySpawner = load("res://assets/Spawners/EnemySpawner.tscn")
+const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
+var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
+const attackSFX = preload("res://assets/Audio/Enemies/Crow/Crow_cawcawcaw.wav")
+const hitSFX = preload("res://assets/Audio/Enemies/Crow/Crow_caw.wav")
 
 export var ACCELERATION = 200
 export var MAX_SPEED = 400
@@ -222,10 +222,10 @@ func create_hit_effect(damage_count):
 
 func _on_Hurtbox_area_entered(area):
 	$EnemyHealth.show_health()
-	if z_index != area.get_parent().get_parent().z_index:
-		SoundPlayer.play_sound("miss")
-		hurtbox.display_damage_popup("Miss!", false)
-		return
+#	if z_index != area.get_parent().get_parent().z_index:
+#		SoundPlayer.play_sound("miss")
+#		hurtbox.display_damage_popup("Miss!", false)
+#		return
 	var evasion_mod = 0
 	if flying:
 		evasion_mod = 32
@@ -340,21 +340,19 @@ func _on_CrowStats_no_health():
 	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool
 	get_node("/root/World").add_child(expNotice)
-	if randi() % 2 == 1:
-		var healingPotion = HealingPotion.instance()
-		get_node("/root/World/YSort/Items").call_deferred("add_child", healingPotion)
-		healingPotion.global_position = global_position
-		healingPotion.z_index = z_index
-	elif player.stats.health < player.stats.max_health && randi() % 2 == 1:
-		var heartPickup = HeartPickup.instance()
-		get_node("/root/World/YSort/Items").call_deferred("add_child", heartPickup)
-		heartPickup.global_position = global_position
-		heartPickup.z_index = z_index
-	elif randi() % 2 == 1:
-		var pennyPickup = PennyPickup.instance()
-		get_node("/root/World/YSort/Items").call_deferred("add_child", pennyPickup)
-		pennyPickup.global_position = global_position
-		pennyPickup.z_index = z_index
+	var ingredientPickup = IngredientPickup.instance()
+	match randi() % 4: # random number between 0 & 3
+		0:
+			ingredientPickup.ingredient_name = "Rock"
+		1:
+			ingredientPickup.ingredient_name = "Clay"
+		2:
+			ingredientPickup.ingredient_name = "Salt"
+		3:
+			ingredientPickup.ingredient_name = "Water"
+	get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
+	ingredientPickup.global_position = global_position
+	ingredientPickup.z_index = z_index
 	queue_free()
 
 func idle_animation():
@@ -367,11 +365,11 @@ func set_flying(value):
 	flying = value
 	
 func audio_caw():
-	audio.stream = load("res://assets/Audio/Crow_caw.wav")
+	audio.stream = hitSFX
 	audio.play()
 	
 func audio_cawcawcaw():
-	audio.stream = load("res://assets/Audio/Crow_cawcawcaw.wav")
+	audio.stream = attackSFX
 	audio.play()
 
 func _on_VisibilityNotifier2D_viewport_exited(_viewport):

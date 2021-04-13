@@ -777,6 +777,7 @@ func _on_Hurtbox_area_entered(area):
 	if z_index != area.z_index:
 		$DodgeAudio.play()
 		hurtbox.display_damage_popup("Miss!", false)
+		print('missed Player due to altitude difference')
 		return
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
@@ -930,23 +931,33 @@ func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false
 	self.talkNoticeDisplay = false
 	self.interactNoticeDisplay = false
-	examining = false
-	talking = false
-	interacting = false
-	using_item = false
-	interactObject = null
+	if examining:
+		examining = false
+	if talking:
+		talking = false
+	if interacting:
+		interacting = false
+	if using_item:
+		using_item = false
+	if interactObject:
+		interactObject = null
+	reset_interaction()
+	
+func reset_interaction():
+	interactHitbox.set_deferred("disabled", true)
+	interactHitbox.set_deferred("disabled", false)
 
 func reset_animation():
 	get_tree().paused = false
 	animationTree.set("parameters/Idle/blend_position", dir_vector)
 	# animationState.travel("Idle")
-	
+
 func check_attack_input():
 	if !Input.is_action_pressed("attack"):
 		charge.stop_charge()
 		charge_reset()
 	get_node("/root/World/Music").stream_paused = false
-	
+
 func save():
 	# instead of saving a REFERENCE to the inventory's _items array, the array data itself should be gotten
 	# this requires parsing through the array
@@ -955,6 +966,6 @@ func save():
 		"pouch": pouch._ingredients
 	}
 	return save_dict
-	
+
 func set_z_index(value):
 	z_index = value

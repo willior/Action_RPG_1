@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Enemies/Bat_eye.png" type="Texture" id=14]
-[ext_resource path="res://assets/Audio/Bat.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/Audio/Enemies/Bat/Bat.wav" type="AudioStream" id=15]
 [ext_resource path="res://assets/Enemies/EnemyHealth.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=17]
 

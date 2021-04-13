@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
@@ -12,6 +12,7 @@ func _ready():
 	var ingredient = check_ingredient(ingredient_name)
 	$Sprite.texture = ingredient.texture
 	ingredient_description = ingredient.description
+	global_position = global_position.round()
 
 func examine():
 	var dialogBox = DialogBox.instance()

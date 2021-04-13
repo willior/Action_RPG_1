@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Wolf_Attack_1.wav-25c3b993a562ce6361b859c3b75766ce.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Enemies/Wolf/Wolf_Attack_1.wav"
+dest_files=[ "res://.import/Wolf_Attack_1.wav-25c3b993a562ce6361b859c3b75766ce.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

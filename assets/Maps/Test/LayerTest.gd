@@ -1,35 +1,33 @@
 extends Node2D
 # collision mask bits // z_index:
-# 13 bottom // 1
-# 14 lower // 3
-# 15 upper // 5
-# 16 top // 7
+# 11 below // -2
+# 12 middle // 0
+# 13 above // 2
 var destination_z
 var target_collision
-var other_collisions
 
 func _on_UpperTransition_body_entered(body):
-	destination_z = 5
-	target_collision = 15
+	destination_z = 0
+	target_collision = 12
 	Global.change_floor(body, destination_z, target_collision)
 
 func _on_LowerTransition_body_entered(body):
-	destination_z = 3
-	target_collision = 14
+	destination_z = -2
+	target_collision = 11
 	Global.change_floor(body, destination_z, target_collision)
 
-func _on_Area2D_area_entered(area):
-	#print(area, " entered with z_index ", area.z_index)
-	if area.z_index == 5:
-		area.z_index = 3
-		#print("changed ", area.z_index, " z_index to 3")
+func _on_FlyZone_area_entered(area):
+	if area.z_index == 0:
+		area.z_index = -2
 
-func _on_Area2D_body_entered(body):
-	print('flier entered')
-	if body.flying && z_index == 5:
-		body.z_index = 3
+func _on_FlyZone_body_entered(body):
+	print('fly zone entered: ', body)
+	if !body.flying && body.z_index == 0:
+		print('lowering altitude')
+		# body.z_index = -2
 
-func _on_Area2D_body_exited(body):
-	print('flier exited')
-	if body.flying && z_index == 3:
-		body.z_index = 5
+func _on_FlyZone_body_exited(body):
+	print('fly zone exited: ', body)
+	if body.flying && body.z_index == -2:
+		print('raising altitude')
+		# body.z_index = 0

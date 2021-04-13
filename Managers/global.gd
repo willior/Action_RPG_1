@@ -130,20 +130,17 @@ func change_floor(body, destination_z_index, target_collision):
 	if body.z_index == destination_z_index:
 		return
 	print(body, " changing floor: z_index changed from ", body.z_index, " to ", destination_z_index)
-	# 13 bottom
-	# 14 lower
-	# 15 upper
-	# 16 top
+	# 11 below
+	# 12 middle
+	# 13 above
 	body.set_z_index(destination_z_index) # sets the intended z_index for the body enterred
 	body.set_collision_mask_bit(target_collision, true)
-	body.set_collision_layer_bit(target_collision, true)
-	set_enemy_collision_mask()
-	for i in range(13,17):
+	# body.set_collision_layer_bit(target_collision, true)
+	for i in range(11,13):
 		if i != target_collision:
 			body.set_collision_mask_bit(i, false)
-			body.set_collision_layer_bit(i, false)
-
-func set_enemy_collision_mask():
+			# body.set_collision_layer_bit(i, false)
+	
 	update_player()
 	for e in get_tree().get_nodes_in_group("Enemies"):
 		if e.z_index == player1.z_index:

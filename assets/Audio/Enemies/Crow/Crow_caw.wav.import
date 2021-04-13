@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/Crow_Death.wav-8ddda12d6e737745e229a6c38205cf49.sample"
+path="res://.import/Crow_caw.wav-2365e610ee9647161a9504df5d5f4a96.sample"
 
 [deps]
 
-source_file="res://assets/Audio/Crow_Death.wav"
-dest_files=[ "res://.import/Crow_Death.wav-8ddda12d6e737745e229a6c38205cf49.sample" ]
+source_file="res://assets/Audio/Enemies/Crow/Crow_caw.wav"
+dest_files=[ "res://.import/Crow_caw.wav-2365e610ee9647161a9504df5d5f4a96.sample" ]
 
 [params]
 

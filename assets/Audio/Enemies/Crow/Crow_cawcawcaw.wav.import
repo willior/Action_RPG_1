@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Crow_cawcawcaw.wav-67f9151c81dda3e3d961c0537fd99b7d.sample"
+
+[deps]
+
+source_file="res://assets/Audio/Enemies/Crow/Crow_cawcawcaw.wav"
+dest_files=[ "res://.import/Crow_cawcawcaw.wav-67f9151c81dda3e3d961c0537fd99b7d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
