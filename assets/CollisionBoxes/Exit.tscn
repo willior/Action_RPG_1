@@ -5,7 +5,7 @@
 [node name="Exit" type="Area2D"]
 pause_mode = 2
 monitorable = false
-collision_layer = 2048
+collision_layer = 1024
 collision_mask = 0
 script = ExtResource( 1 )
 

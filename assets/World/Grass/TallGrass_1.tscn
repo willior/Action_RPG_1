@@ -86,7 +86,6 @@ script = ExtResource( 3 )
 position = Vector2( -16, -16 )
 frames = SubResource( 14 )
 animation = "Uncut"
-frame = 5
 playing = true
 centered = false
 

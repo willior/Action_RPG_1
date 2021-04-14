@@ -17,6 +17,7 @@ func create_effect():
 	var effect = EFFECT.instance()
 	get_parent().add_child(effect)
 	effect.global_position = global_position
+	effect.z_index = z_index
 	if sprite.flip_h:
 		effect.flip_h = true
 	if cutCount == 1:

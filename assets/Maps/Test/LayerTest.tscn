@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/Will/LayerTest/Bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/System/ScreenShake.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://assets/Audio/World/Bird_Ambience.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/Maps/Test/LayerTest.gd" type="Script" id=12]
 [ext_resource path="res://assets/Shadows/PixelShadow.png" type="Texture" id=13]
-[ext_resource path="res://assets/CollisionBoxes/FlyZone.gd" type="Script" id=14]
 [ext_resource path="res://assets/World/Flowers/Flowers_1.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Grass/TallGrass_1.tscn" type="PackedScene" id=16]
 
@@ -87,11 +86,13 @@ shape = SubResource( 1 )
 
 [node name="MiddleFloor" type="Sprite" parent="Map"]
 position = Vector2( 40, 16 )
-z_index = -1
+z_index = -3
 texture = ExtResource( 3 )
 centered = false
 
 [node name="Bridge" type="Sprite" parent="Map/MiddleFloor"]
+show_behind_parent = true
+z_index = 2
 texture = ExtResource( 5 )
 centered = false
 
@@ -147,45 +148,45 @@ shape = SubResource( 4 )
 
 [node name="Flowers_1" parent="Map/MiddleFloor" instance=ExtResource( 15 )]
 position = Vector2( -40, -16 )
+z_index = 2
 tile_data = PoolIntArray( 327691, 0, 3, 327696, 0, 5, 393226, 0, 5, 393227, 0, 5, 393232, 0, 4, 393233, 0, 2, 458761, 0, 0, 458762, 0, 0, 458769, 0, 3, 458770, 0, 3, 655369, 0, 5, 655370, 0, 5, 655371, 0, 0, 655376, 0, 4, 655377, 0, 4, 655378, 0, 0, 720906, 0, 0, 720907, 0, 1, 720912, 0, 1, 720913, 0, 0, 786443, 0, 4, 786448, 0, 1, 851979, 0, 2, 851984, 0, 5, 983052, 0, 5, 983055, 0, 5 )
 
-[node name="ToMiddleTransitionTop" type="Area2D" parent="Map"]
+[node name="MiddleTransitionTop" type="Area2D" parent="Map"]
 position = Vector2( 224, 88 )
 collision_layer = 2048
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/ToMiddleTransitionTop"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/MiddleTransitionTop"]
 shape = SubResource( 5 )
 
-[node name="ToBelowTransitionTop" type="Area2D" parent="Map"]
+[node name="BelowTransitionTop" type="Area2D" parent="Map"]
 position = Vector2( 224, 104 )
 collision_layer = 4096
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/ToBelowTransitionTop"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/BelowTransitionTop"]
 shape = SubResource( 5 )
 
-[node name="ToBelowTransitionBottom" type="Area2D" parent="Map"]
+[node name="BelowTransitionBottom" type="Area2D" parent="Map"]
 position = Vector2( 224, 216 )
 collision_layer = 4096
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/ToBelowTransitionBottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/BelowTransitionBottom"]
 shape = SubResource( 5 )
 
-[node name="ToMiddleTransitionBottom" type="Area2D" parent="Map"]
+[node name="MiddleTransitionBottom" type="Area2D" parent="Map"]
 position = Vector2( 224, 232 )
 collision_layer = 2048
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/ToMiddleTransitionBottom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/MiddleTransitionBottom"]
 shape = SubResource( 5 )
 
 [node name="FlyZone" type="Area2D" parent="Map"]
 position = Vector2( 224, 208 )
 collision_layer = 131072
 collision_mask = 0
-script = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/FlyZone"]
 shape = SubResource( 6 )
@@ -204,8 +205,6 @@ pause_mode = 1
 [node name="Player" parent="YSort" instance=ExtResource( 8 )]
 position = Vector2( 224, 216 )
 z_index = -2
-collision_layer = 2050
-collision_mask = 2049
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
@@ -214,6 +213,10 @@ remote_path = NodePath("../../../Camera2D")
 
 [node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 207, 144 )
+
+[node name="Wolf4" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 232, 168 )
+z_index = -2
 
 [node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 150, 205 )
@@ -258,46 +261,34 @@ position = Vector2( 359, 144 )
 position = Vector2( 359, 144 )
 
 [node name="Crow" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 239, 188 )
+position = Vector2( 239, 144 )
 
 [node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 93, 250 )
+position = Vector2( 239, 144 )
 
 [node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
+position = Vector2( 239, 144 )
 
 [node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
+position = Vector2( 239, 144 )
 
 [node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
+position = Vector2( 239, 144 )
 
 [node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
+position = Vector2( 239, 144 )
 
 [node name="Crow7" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
+position = Vector2( 239, 144 )
 
 [node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
+position = Vector2( 239, 144 )
 
 [node name="Crow9" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
+position = Vector2( 239, 144 )
 
 [node name="Crow10" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
-
-[node name="Crow11" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
-
-[node name="Crow12" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
-
-[node name="Crow13" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
-
-[node name="Crow14" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 367, 293 )
+position = Vector2( 239, 144 )
 
 [node name="Items" type="YSort" parent="YSort"]
 
@@ -346,10 +337,10 @@ stream = ExtResource( 11 )
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 layer = 4
-[connection signal="body_entered" from="Map/ToMiddleTransitionTop" to="Map" method="_on_UpperTransition_body_entered"]
-[connection signal="body_entered" from="Map/ToBelowTransitionTop" to="Map" method="_on_LowerTransition_body_entered"]
-[connection signal="body_entered" from="Map/ToBelowTransitionBottom" to="Map" method="_on_LowerTransition_body_entered"]
-[connection signal="body_entered" from="Map/ToMiddleTransitionBottom" to="Map" method="_on_UpperTransition_body_entered"]
+[connection signal="body_entered" from="Map/MiddleTransitionTop" to="Map" method="_on_MiddleTransition_body_entered"]
+[connection signal="body_entered" from="Map/BelowTransitionTop" to="Map" method="_on_BelowTransition_body_entered"]
+[connection signal="body_entered" from="Map/BelowTransitionBottom" to="Map" method="_on_BelowTransition_body_entered"]
+[connection signal="body_entered" from="Map/MiddleTransitionBottom" to="Map" method="_on_MiddleTransition_body_entered"]
 [connection signal="area_entered" from="Map/FlyZone" to="Map" method="_on_FlyZone_area_entered"]
 [connection signal="body_entered" from="Map/FlyZone" to="Map" method="_on_FlyZone_body_entered"]
 [connection signal="body_exited" from="Map/FlyZone" to="Map" method="_on_FlyZone_body_exited"]

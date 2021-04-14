@@ -56,6 +56,7 @@ Global="*res://Managers/global.gd"
 GameManager="*res://Managers/GameManager.gd"
 ItemHandler="*res://Managers/ItemHandler.gd"
 SoundPlayer="*res://Managers/SoundPlayer.tscn"
+Enemy="*res://assets/Enemies/Enemy.gd"
 
 [display]
 
@@ -273,6 +274,7 @@ test4={
 2d_physics/layer_5="Enemy"
 2d_physics/layer_6="SoftCollisions"
 2d_physics/layer_8="InteractBox"
+2d_physics/layer_11="Exit"
 2d_physics/layer_12="WorldBelow"
 2d_physics/layer_13="WorldMiddle"
 2d_physics/layer_14="WorldAbove"

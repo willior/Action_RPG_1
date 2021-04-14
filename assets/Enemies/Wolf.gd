@@ -71,6 +71,8 @@ func _ready():
 	# rng.randomize()
 	# random_number = rng.randi_range(0, 4)
 	animationTree.active = true
+	Global.set_world_collision(self, z_index)
+	# Enemy.set_player_collision(self)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -84,6 +86,10 @@ func _physics_process(delta):
 	match state:
 		IDLE:
 			animationState.travel("Idle")
+			if stats.health <= 0:
+				print(self.name, ' dead in idle state.')
+				state = DEAD
+				return
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek_player()
 			if wanderController.get_time_left() == 0 && !seeking:
@@ -109,7 +115,6 @@ func _physics_process(delta):
 				eye.modulate = Color(0,0,0)
 				eye.frame = sprite.frame
 				state = IDLE
-
 		ATTACK:
 			animationState.travel("Leap")
 			if attacking:
@@ -119,6 +124,7 @@ func _physics_process(delta):
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				state = IDLE
+				
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
@@ -181,11 +187,12 @@ func attack_player():
 		attacking = true
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
-		hitbox.set_deferred("monitorable", true)
-		eye.modulate = Color(1,0,0)
-		# eye.frame = sprite.frame
-		attackTimer.start()
-		state = ATTACK
+		if stats.health > 0:
+			hitbox.set_deferred("monitorable", true)
+			eye.modulate = Color(1,0,0)
+			# eye.frame = sprite.frame
+			attackTimer.start()
+			state = ATTACK
 
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
@@ -268,6 +275,7 @@ func _on_Hurtbox_area_entered(area):
 			)
 			tween.start()
 		else:
+			FRICTION = 600
 			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
 
 func _on_Hurtbox_invincibility_started():
@@ -277,19 +285,12 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_WolfStats_no_health():
-	# sprite.playing = false # stop animation
+	disable_detection()
 	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
-	hitbox.set_deferred("monitoring", false)
+	#hitbox.set_deferred("monitorable", false)
+	$Hitbox/CollisionShape2D.queue_free()
 	animationPlayer.stop()
 	state = DEAD
-	tween.interpolate_property(eye,
-	"offset:y",
-	-16,
-	0,
-	0.5,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
 	tween.interpolate_property(sprite,
 	"modulate",
 	Color(1, 1, 0),

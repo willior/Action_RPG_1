@@ -95,9 +95,7 @@ func _input(event):
 			Global.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
-		print(player.inventory._items)
-		# load_game()
-		pass
+		PlayerStats.health -= 9999
 	
 	if event.is_action_pressed("test4"): # O
 		get_node("/root/World/Camera2D/ScreenShake").start(0.1, 64, 10, 0)

@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
 
-var acceleration = 1600
+var acceleration = 800
 var max_speed = 100
 var speed_mod = 0 setget set_speed_mod
 var roll_speed = 200
@@ -18,7 +18,7 @@ var dir_vector = Vector2.DOWN
 var vitality = 40 setget set_vitality
 var endurance = 40 setget set_endurance
 var defense = 40.0 setget set_defense
-var strength = 4.0 setget set_strength
+var strength = 8.0 setget set_strength
 var dexterity = 40.0 setget set_dexterity
 var speed = 4.0 setget set_speed
 

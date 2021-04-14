@@ -126,26 +126,26 @@ func reset_input_after_dialog():
 	update_player()
 	player1.check_attack_input()
 	
-func change_floor(body, destination_z_index, target_collision):
-	if body.z_index == destination_z_index:
-		return
-	print(body, " changing floor: z_index changed from ", body.z_index, " to ", destination_z_index)
-	# 11 below
-	# 12 middle
-	# 13 above
+func change_floor(body, destination_z_index):
+	# print(body.name, " z_index: ", body.z_index, " to ", destination_z_index)
 	body.set_z_index(destination_z_index) # sets the intended z_index for the body enterred
-	body.set_collision_mask_bit(target_collision, true)
-	# body.set_collision_layer_bit(target_collision, true)
+	set_world_collision(body, body.z_index)
+
+func set_world_collision(body, z_index):
+	var target_collision
+	match z_index: # matches the appropriate collision bit with input body's z_index
+		-2:
+			target_collision = 11
+		0:
+			target_collision = 12
+		2:
+			target_collision = 13
+	body.set_collision_mask_bit(target_collision, true) # sets the appropriate collision mask
 	for i in range(11,13):
 		if i != target_collision:
-			body.set_collision_mask_bit(i, false)
-			# body.set_collision_layer_bit(i, false)
-	
-	update_player()
-	for e in get_tree().get_nodes_in_group("Enemies"):
-		if e.z_index == player1.z_index:
-			e.set_collision_layer_bit(4, true)
-			e.disable_detection()
-			e.enable_detection()
-		else:
-			e.set_collision_layer_bit(4, false)
+			body.set_collision_mask_bit(i, false) # removes other collision masks
+	if body.name == "Player": # if the Player changes floors...
+		for e in get_tree().get_nodes_in_group("Enemies"):
+			Enemy.set_player_collision(e) # ...places enemies on "Enemy" collision layer if z_index matches player's
+	else: # if it wasn't the player that changed floors, update the body (the enemy) only
+		Enemy.set_player_collision(body)

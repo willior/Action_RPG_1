@@ -65,6 +65,7 @@ func _ready():
 	set_speed_scale(1)
 	sprite.playing = true
 	eye.playing = true
+	Global.set_world_collision(self, z_index)
 	
 func set_speed_scale(value):
 	sprite.speed_scale = value
@@ -191,12 +192,6 @@ func disable_detection():
 func enable_detection():
 	attackPlayerZone.set_deferred("monitoring", true)
 	playerDetectionZone.set_deferred("monitoring", true)
-		
-func attack_start():
-	pass
-		
-func attack_finished():
-	pass
 		
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument

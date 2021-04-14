@@ -15,13 +15,12 @@ func _ready():
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("strength_changed", self, "set_damage")
 # warning-ignore:return_value_discarded
-#	PlayerStats.connect("strength_mod_changed", self, "set_damage_mod")
 	orig_damage = damage
 	print('damage = ', damage)
 
 func set_damage(value):
 	damage = value*2
-	print('damage set = ', damage)
+	# print('damage set = ', damage)
 	
 func modify_damage(base, modulator):
 	return int(base * modulator)

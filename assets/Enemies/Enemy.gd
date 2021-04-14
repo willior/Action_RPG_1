@@ -7,5 +7,11 @@ extends Node2D
 # the “bat” & “crow” classes, after their shared code has been refactored,
 # should extend this generic “enemy” class.
 
-func _ready():
-	pass
+func set_player_collision(body):
+	var player = get_node("/root/World/YSort/Player")
+	if player.z_index == body.z_index:
+		body.set_collision_layer_bit(4, true)
+		body.disable_detection()
+		body.enable_detection()
+	else:
+		body.set_collision_layer_bit(4, false)

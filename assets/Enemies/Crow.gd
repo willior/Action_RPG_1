@@ -69,6 +69,7 @@ func _ready():
 	# rng.randomize()
 	# random_number = rng.randi_range(0, 4)
 	animationTree.active = true
+	Enemy.set_player_collision(self)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -222,10 +223,10 @@ func create_hit_effect(damage_count):
 
 func _on_Hurtbox_area_entered(area):
 	$EnemyHealth.show_health()
-#	if z_index != area.get_parent().get_parent().z_index:
-#		SoundPlayer.play_sound("miss")
-#		hurtbox.display_damage_popup("Miss!", false)
-#		return
+	if z_index != area.get_parent().get_parent().z_index:
+		SoundPlayer.play_sound("miss")
+		hurtbox.display_damage_popup("Miss!", false)
+		return
 	var evasion_mod = 0
 	if flying:
 		evasion_mod = 32
@@ -251,6 +252,7 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.create_hit_effect()
 		#hurtbox.start_invincibility(0.3)
 		if state == ATTACK:
+			wanderController.start_wander_timer(1)
 			state = IDLE
 		if attacking:
 			attacking = false

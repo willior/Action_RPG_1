@@ -105,7 +105,6 @@ func _ready():
 		GameManager.reinitialize_player(inventory, pouch)
 	else:
 		GameManager.initialize_player()
-
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector
 	collision.disabled = false
@@ -116,6 +115,7 @@ func _ready():
 	stats.connect("attack_speed_changed", self, "set_attack_timescale")
 	set_attack_timescale(PlayerStats.attack_speed)
 	PlayerStats.status = "default_speed"
+	Global.set_world_collision(self, z_index)
 
 func _process(delta):
 	match state:
@@ -299,7 +299,6 @@ func stamina_regeneration():
 			timer.start(0.5)
 			yield(timer, "timeout")
 			stamina_regen_level += 1
-			print(stamina_regen_level)
 
 func stamina_regen_reset():
 	if stamina_regen_level > 0:
@@ -564,28 +563,36 @@ func level_up():
 	elif stats.level >= 31:
 		stats_to_allocate += 5
 	print('Level ', stats.level, ' achieved. Current total stats_to_allocate: ', stats_to_allocate)
+	if dying:
+		return
+	else:
+		start_level_timer()
+
+func start_level_timer():
 	$LevelTimer.start()
 	yield($LevelTimer, "timeout")
 	if just_leveled:
-		# SoundPlayer.play_sound("level_up")
-		get_node("/root/World/Music").stream_paused = true
-		get_node("/root/World/SFX").stream_paused = true
-		get_node("/root/World/SFX2").stream_paused = true
-		print('LevelTimer timeout. Final total stats_to_allocate = ', stats_to_allocate)
-		just_leveled = false
-		var dialogLevelBox = DialogLevelBox.instance()
-		dialogLevelBox.stats_remaining = stats_to_allocate
-		stats_to_allocate = 0
-		get_node("/root/World/Overlay").add_child(dialogLevelBox)
-		var tweenGreyscale = TweenGreyscale.instance()
-		get_node("/root/World/GUI").add_child(tweenGreyscale)
+		show_level_up_screen()
+
+func show_level_up_screen():
+	get_node("/root/World/Music").stream_paused = true
+	get_node("/root/World/SFX").stream_paused = true
+	get_node("/root/World/SFX2").stream_paused = true
+	print('LevelTimer timeout. Final total stats_to_allocate = ', stats_to_allocate)
+	just_leveled = false
+	var dialogLevelBox = DialogLevelBox.instance()
+	dialogLevelBox.stats_remaining = stats_to_allocate
+	stats_to_allocate = 0
+	get_node("/root/World/Overlay").add_child(dialogLevelBox)
+	var tweenGreyscale = TweenGreyscale.instance()
+	get_node("/root/World/GUI").add_child(tweenGreyscale)
 
 func roll_stamina_drain():
 	stats.stamina -= 15
 	base_enemy_accuracy = 32
 	if hurtbox.timer.is_stopped(): 
 		hurtbox.start_invincibility(stats.iframes)
-		
+
 # warning-ignore:unused_argument
 func roll_state(delta):
 	if roll_moving:
@@ -712,10 +719,10 @@ func backstep_animation_finished():
 		attack_animation_finished()
 
 func _on_Hurtbox_area_entered(area):
-	if z_index != area.z_index:
+	if z_index != area.get_parent().z_index:
 		$DodgeAudio.play()
 		hurtbox.display_damage_popup("Miss!", false)
-		print('missed Player due to altitude difference')
+		print(area.get_parent().name, ' missed Player due to altitude difference')
 		return
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
@@ -741,7 +748,7 @@ func _on_Hurtbox_invincibility_ended():
 func dying_effect(value):
 	if value && !dying:
 		Engine.time_scale = 0.6
-		set_collision_mask_bit(11, false)
+		set_collision_mask_bit(10, false)
 		var heartbeat = Heartbeat.instance()
 		var greyscale = Greyscale.instance()
 		var redFlash = RedFlash.instance()
@@ -754,7 +761,7 @@ func dying_effect(value):
 		dying = true
 	elif !value && dying:
 		Engine.time_scale = 1
-		set_collision_mask_bit(11, true)
+		set_collision_mask_bit(10, true)
 		AudioServer.set_bus_effect_enabled(0, 0, false)
 		get_node("/root/World/GUI/Greyscale").queue_free()
 		get_node("/root/World/GUI/Red").queue_free()
@@ -764,7 +771,9 @@ func dying_effect(value):
 		get_node("/root/World/SFX2").stream_paused = false
 		dying = false
 		emit_signal("player_saved")
-	
+		if just_leveled:
+			start_level_timer()
+
 func game_over():
 	# dying = true
 	AudioServer.set_bus_effect_enabled(0, 0, false)
