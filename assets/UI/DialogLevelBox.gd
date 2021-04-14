@@ -27,28 +27,10 @@ var dialog_script = [
 					'level_up': '2',
 					'text': "LEVEL UP!!",
 				},
-#				{
-#					'question': "Are you sure about that?",
-#					'options': [
-#						{ 'label': 'Well... no...', 'value': '0'},
-#						{ 'label': 'Yup.', 'value': 'r'}
-#					],
-#					'checkpoint': '-2',
-#				},
-#				{
-#					'text': "You levelled successfully!",
-#					'action': 'apply_level'
-#				},
 				{
 					'action': 'end_dialog'
 				}
 			]
-
-#func _process(_delta):
-#	if waiting_for_answer:
-#		$OptionsRect.visible = finished
-#	else:
-#		$OptionsRect.visible = false
 
 func parse_text(text):
 	# This will parse the text and automatically format some of your available variables
