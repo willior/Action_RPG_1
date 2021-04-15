@@ -702,10 +702,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ 1 ],
+"args": [ 0.6 ],
 "method": "start_invincibility"
 } ]
 }
@@ -790,10 +790,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ 1 ],
+"args": [ 0.6 ],
 "method": "start_invincibility"
 } ]
 }
@@ -878,10 +878,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ 1 ],
+"args": [ 0.6 ],
 "method": "start_invincibility"
 } ]
 }
@@ -966,10 +966,10 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [ 1 ],
+"args": [ 0.6 ],
 "method": "start_invincibility"
 } ]
 }
@@ -1999,7 +1999,7 @@ states/Shade/node = SubResource( 95 )
 states/Shade/position = Vector2( 218.03, 200.973 )
 transitions = [ "Idle", "Roll", SubResource( 96 ), "Roll", "Idle", SubResource( 97 ), "Idle", "Hit", SubResource( 98 ), "Hit", "Idle", SubResource( 99 ), "Roll", "Hit", SubResource( 100 ), "Idle", "Shade", SubResource( 101 ), "Shade", "Idle", SubResource( 102 ), "Shade", "Hit", SubResource( 103 ), "Idle", "Flash", SubResource( 104 ), "Flash", "Idle", SubResource( 105 ), "Flash", "Hit", SubResource( 106 ), "Idle", "Backstep", SubResource( 107 ), "Backstep", "Idle", SubResource( 108 ), "Backstep", "Hit", SubResource( 109 ), "Backstep", "Shade", SubResource( 110 ), "Backstep", "Flash", SubResource( 111 ), "Idle", "Run", SubResource( 112 ), "Run", "Idle", SubResource( 113 ), "Run", "Hit", SubResource( 114 ), "Attack1", "Hit", SubResource( 115 ), "Idle", "Attack1", SubResource( 116 ), "Backstep", "Attack1", SubResource( 117 ), "Attack2", "Attack1", SubResource( 118 ), "Attack1", "Attack2", SubResource( 119 ), "Shade", "Attack2", SubResource( 120 ), "Attack2", "Idle", SubResource( 121 ), "Attack2", "Hit", SubResource( 122 ), "Attack1", "Idle", SubResource( 123 ), "Idle", "Pickup", SubResource( 124 ), "Pickup", "Idle", SubResource( 125 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -384.124, -20.754 )
+graph_offset = Vector2( -384.124, -95.0894 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=127]
 
@@ -2016,8 +2016,9 @@ radius = 5.0
 height = 5.43185
 
 [sub_resource type="Animation" id=132]
-length = 0.2
+length = 0.1
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
 tracks/0/interp = 1
@@ -2025,7 +2026,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = false
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.05 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -2095,7 +2096,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 60
-frame = 36
+frame = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2152,7 +2153,7 @@ parameters/Attack2/TimeScale/scale = 1.0
 parameters/Backstep/blend_position = Vector2( 0.00119328, 0.0167301 )
 parameters/Flash/blend_position = Vector2( -0.00122851, 1.09371 )
 parameters/Hit/blend_position = Vector2( 0.00990105, 0.415018 )
-parameters/Idle/blend_position = Vector2( -0.00124067, 1.01963 )
+parameters/Idle/blend_position = Vector2( -0.00205761, 1.01063 )
 parameters/Pickup/blend_position = Vector2( 0, 0 )
 parameters/Roll/blend_position = Vector2( -0.000606418, -0.00604391 )
 parameters/Run/BlendSpace2D/blend_position = Vector2( 0.000634074, 0.974286 )
@@ -2184,7 +2185,7 @@ margin_bottom = -11.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 1.5708
+rotation = -1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 11, 0 )
@@ -2234,6 +2235,7 @@ shape = SubResource( 131 )
 
 [node name="AttackAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
+bus = "Delay"
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )

@@ -1,14 +1,16 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
-[ext_resource path="res://assets/Enemies/Wolf.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=3]
-[ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/CollisionBoxes/Exit.gd" type="Script" id=4]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World.gd" type="Script" id=8]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/Audio/Music/Celesta_BGM_slow.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/Enemies/Wolf.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/World/Trees/Tree_2_pine.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/World/Doodads/Rock_Group_10.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/World/Air_SFX.wav" type="AudioStream" id=14]
@@ -19,6 +21,7 @@
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=22]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type particles;
@@ -244,6 +247,8 @@ shader_param/trail_divisor = 3
 shader_param/gravity = Vector3( 0, 12, 0 )
 shader_param/tangent_accel_texture = SubResource( 3 )
 
+[sub_resource type="RectangleShape2D" id=5]
+
 [node name="World" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 8 )
@@ -255,8 +260,6 @@ __meta__ = {
 pause_mode = 1
 smoothing_enabled = true
 smoothing_speed = 8.0
-
-[node name="FadeIn" parent="." instance=ExtResource( 19 )]
 
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
@@ -318,6 +321,33 @@ randomness = 1.0
 visibility_rect = Rect2( -160, -90, 320, 180 )
 process_material = SubResource( 4 )
 
+[node name="Exit" type="Area2D" parent="Map"]
+pause_mode = 2
+position = Vector2( 128.13, 0 )
+monitorable = false
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource( 4 )
+map_file = "res://assets/Maps/Test/LayerTest.tscn"
+selected_location = Vector2( 224, 216 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit"]
+shape = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="Map/Exit"]
+wait_time = 0.8
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Map/Exit"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit/StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="Map/Exit"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
@@ -364,61 +394,29 @@ position = Vector2( 16, 80 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
-[node name="Wolf" parent="YSort/Enemies" groups=[
-"Enemies",
-] instance=ExtResource( 1 )]
-position = Vector2( -111.139, 6.27951 )
+[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 152.486, 63.3547 )
 
-[node name="Wolf2" parent="YSort/Enemies" groups=[
-"Enemies",
-] instance=ExtResource( 1 )]
-position = Vector2( -34.5004, 167.939 )
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 114.96, 109.221 )
 
-[node name="Wolf3" parent="YSort/Enemies" groups=[
-"Enemies",
-] instance=ExtResource( 1 )]
-position = Vector2( 154.701, 149.378 )
+[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 11 )]
+position = Vector2( -74.376, -15.5819 )
 
-[node name="Wolf4" parent="YSort/Enemies" groups=[
-"Enemies",
-] instance=ExtResource( 1 )]
-position = Vector2( 207.39, -38.0271 )
+[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 11 )]
+position = Vector2( -90.542, 102.969 )
 
-[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 555, 161 )
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 208.229, -48.5126 )
 
-[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 520, 182 )
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 208.229, -48.5126 )
 
-[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 552, 197 )
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 208.229, -48.5126 )
 
-[node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 526, 199 )
-
-[node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 491, 220 )
-
-[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 523, 235 )
-
-[node name="Crow12" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 522, 119 )
-
-[node name="Crow11" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 487, 140 )
-
-[node name="Crow10" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 519, 155 )
-
-[node name="Crow9" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 493, 157 )
-
-[node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 458, 178 )
-
-[node name="Crow7" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 490, 193 )
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 208.229, -48.5126 )
 
 [node name="Items" type="YSort" parent="YSort"]
 
@@ -451,7 +449,10 @@ volume_db = -48.0
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
 volume_db = -48.0
 
+[node name="FadeIn" parent="." instance=ExtResource( 19 )]
+
 [node name="GUI" parent="." instance=ExtResource( 6 )]
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 layer = 4
+[connection signal="body_entered" from="Map/Exit" to="Map/Exit" method="_on_Exit_body_entered"]

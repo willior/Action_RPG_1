@@ -5,6 +5,7 @@ const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
 var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
+
 export var ACCELERATION = 240
 export var MAX_SPEED = 40
 export var WANDER_SPEED = 20
@@ -21,6 +22,7 @@ enum {
 	DEAD
 }
 var state = IDLE
+var evasion_mod = 0
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
@@ -50,12 +52,13 @@ onready var wanderController = $WanderController
 onready var attackController = $AttackController
 onready var animationPlayer = $AnimationPlayer
 onready var audio = $AudioStreamPlayer
+onready var enemyHealth = $EnemyHealth
 onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
 # warning-ignore:return_value_discarded
-	PlayerLog.connect("bat_complete", self, "examine_complete")
-	if PlayerLog.bat_examined:
+	PlayerLog.connect("Bat_complete", self, "examine_complete")
+	if PlayerLog.enemies_examined[ENEMY_NAME]:
 		examined = true
 	add_to_group("Enemies")
 	rng.randomize()
@@ -99,7 +102,6 @@ func _physics_process(delta):
 				set_speed_scale(1)
 				eye.modulate = Color(0,0,0)
 				state = IDLE
-
 		ATTACK:
 			if attacking:
 				audio.play()
@@ -123,13 +125,8 @@ func examine():
 		{'text': "Bats are mammals of the Chiroptera order."},
 		{'text': "They are the only mammals capable of true and sustained flight."}
 	]
-	Enemy.examine(dialog_script)
-	
-	if !examined:
-		examined = true
-		PlayerLog.bat_examined = true
-		PlayerLog.set_examined("bat", true)
-	
+	Enemy.examine(dialog_script, examined, ENEMY_NAME)
+
 func examine_complete(value):
 	examined = value
 			
@@ -164,9 +161,9 @@ func attack_player():
 		target = attackPlayerZone.player.global_position
 		disable_detection()
 		attacking = true
-		# hitbox.set_deferred("monitorable", true)
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
+		# hitbox.set_deferred("monitorable", true)
 		set_speed_scale(4)
 		eye.modulate = Color(1,0,0)
 		attackTimer.start()
@@ -185,13 +182,11 @@ func _on_AttackTimer_timeout():
 		enable_detection()
 	
 func disable_detection():
-	attackPlayerZone.set_deferred("monitoring", false)
-	playerDetectionZone.set_deferred("monitoring", false)
-	
+	Enemy.disable_detection(self)
+
 func enable_detection():
-	attackPlayerZone.set_deferred("monitoring", true)
-	playerDetectionZone.set_deferred("monitoring", true)
-		
+	Enemy.enable_detection(self)
+
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 	wanderController.start_wander_timer(rand_range(1, 3)) # starts wander timer between 1s & 3s
@@ -200,61 +195,57 @@ func pick_random_state(state_list):
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
 	
-#func create_blood_effect(damage_count):
-#	randomize()
-#	var blood_effect = BloodHitEffect.instance()
-#	var randX = int(rand_range(-damage_count, damage_count))
-#	var randY = int(rand_range(-damage_count, damage_count/2))
-#	blood_effect.global_position = global_position
-#	blood_effect.target_position = global_position + Vector2(randX, randY)
-#	get_parent().add_child(blood_effect)
+func create_hit_effect(_damage_count):
+	pass
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
-	$EnemyHealth.show_health()
-	if z_index != area.get_parent().get_parent().z_index:
-		SoundPlayer.play_sound("miss")
-		hurtbox.display_damage_popup("Miss!", false)
-		return
-	var evasion_mod = 0
-	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
-	if !hit:
-		SoundPlayer.play_sound("miss")
-		hurtbox.display_damage_popup("Miss!", false)
-	else:
-		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
-		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-		if is_crit:
-			damage *= 2
-		stats.health -= damage
-		
-		var damage_count = min(damage/2, 32)
-		while damage_count > 0:
-			Global.create_blood_effect(damage_count, global_position, z_index)
-			Global.create_blood_effect(damage_count, global_position, z_index)
-			damage_count -= 4
-		
-		hurtbox.display_damage_popup(str(damage), is_crit)
-		hurtbox.create_hit_effect()
-		# hurtbox.start_invincibility(0.3)
-		
-		if state == ATTACK:
-			state = IDLE
-			
-		
-		sprite.modulate = Color(1,1,0)
-		if stats.health > 0:
-			knockback = area.knockback_vector * 120 # knockback velocity
-			tween.interpolate_property(sprite,
-			"modulate",
-			Color(1, 1, 0),
-			Color(1, 1, 1),
-			0.2,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_IN
-			)
-			tween.start()
-		else:
-			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
+	var hit = Enemy.hurtbox_entered(self, area)
+	if hit && state == ATTACK:
+		state = IDLE
+
+	#$EnemyHealth.show_health()
+#	if z_index != area.get_parent().get_parent().z_index:
+#		SoundPlayer.play_sound("miss")
+#		hurtbox.display_damage_popup("Miss!", false)
+#		return
+#	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
+#	if !hit:
+#		SoundPlayer.play_sound("miss")
+#		hurtbox.display_damage_popup("Miss!", false)
+#	else:
+#		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
+#		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+#		if is_crit:
+#			damage *= 2
+#		stats.health -= damage
+#
+#		var damage_count = min(damage/2, 32)
+#		while damage_count > 0:
+#			Global.create_blood_effect(damage_count, global_position, z_index)
+#			Global.create_blood_effect(damage_count, global_position, z_index)
+#			damage_count -= 4
+#
+#		hurtbox.display_damage_popup(str(damage), is_crit)
+#		hurtbox.create_hit_effect()
+#		# hurtbox.start_invincibility(0.3)
+
+#		if state == ATTACK:
+#			state = IDLE
+
+#		sprite.modulate = Color(1,1,0)
+#		if stats.health > 0:
+#			knockback = area.knockback_vector * 120 # knockback velocity
+#			tween.interpolate_property(sprite,
+#			"modulate",
+#			Color(1, 1, 0),
+#			Color(1, 1, 1),
+#			0.2,
+#			Tween.TRANS_LINEAR,
+#			Tween.EASE_IN
+#			)
+#			tween.start()
+#		else:
+#			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
 
 func _on_BatStats_no_health():
 	sprite.playing = false # stop animation

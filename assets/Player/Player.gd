@@ -611,12 +611,6 @@ func roll_state(delta):
 				attack_1_charged = false
 				flash_queued = true
 			else: attack1_queued = true
-	
-#	elif Input.is_action_just_pressed("attack"):
-#		if stats.stamina <= 0:
-#			noStamina()
-#		else:
-#			attack1_queued = true
 	move()
 
 func roll_stop():
@@ -897,7 +891,6 @@ func reset_interaction():
 func reset_animation():
 	get_tree().paused = false
 	animationTree.set("parameters/Idle/blend_position", dir_vector)
-	# animationState.travel("Idle")
 
 func check_attack_input():
 	if !Input.is_action_pressed("attack"):

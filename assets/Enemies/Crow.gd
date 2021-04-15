@@ -26,6 +26,7 @@ enum {
 	DEAD
 }
 var state = IDLE
+var evasion_mod = 0
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
@@ -58,12 +59,13 @@ onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var audio = $AudioStreamPlayer
+onready var enemyHealth = $EnemyHealth
 onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
 # warning-ignore:return_value_discarded
-	PlayerLog.connect("crow_complete", self, "examine_complete")
-	if PlayerLog.crow_examined:
+	PlayerLog.connect("Crow_complete", self, "examine_complete")
+	if PlayerLog.enemies_examined[ENEMY_NAME]:
 		examined = true
 	add_to_group("Enemies")
 	# rng.randomize()
@@ -125,12 +127,7 @@ func examine():
 		{'text': "A common crow."},
 		{'text': "Except that it's grossly over-sized."}
 	]
-	Enemy.examine(dialog_script)
-	
-	if !examined:
-		examined = true
-		PlayerLog.crow_examined = true
-		PlayerLog.set_examined("crow", true)
+	Enemy.examine(dialog_script, examined, ENEMY_NAME)
 
 func examine_complete(value):
 	examined = value
@@ -175,16 +172,12 @@ func _on_AttackTimer_timeout():
 		enable_detection()
 	
 func disable_detection():
-	attackPlayerZone.set_deferred("monitoring", false)
-	playerDetectionZone.set_deferred("monitoring", false)
-	
+	Enemy.disable_detection(self)
+
 func enable_detection():
-	attackPlayerZone.set_deferred("monitoring", true)
-	playerDetectionZone.set_deferred("monitoring", true)
+	Enemy.enable_detection(self)
 
 func update_wander_state():
-	#if abs(global_position.x - player.global_position.x) > 320 || abs(global_position.y - player.global_position.y) > 180:
-	#else:
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 	var state_rng = rand_range(2, 4)
 	if state == 0: # IDLE STATE
@@ -213,58 +206,64 @@ func create_hit_effect(damage_count):
 	get_node("/root/World/Map").call_deferred("add_child", hit_effect)
 
 func _on_Hurtbox_area_entered(area):
-	var evasion_mod = 0
-	if flying:
-		evasion_mod = 32
-	$EnemyHealth.show_health()
-	if z_index != area.get_parent().get_parent().z_index:
-		fly_animation()
-		SoundPlayer.play_sound("miss")
-		hurtbox.display_damage_popup("Miss!", false)
-		return
-	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
-	if !hit:
-		SoundPlayer.play_sound("miss")
-		hurtbox.display_damage_popup("Miss!", false)
-	else:
-		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
-		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-		if is_crit:
-			damage *= 2
-		stats.health -= damage
-		
-		var damage_count = min(damage/2, 32)
-		while damage_count > 0:
-			create_hit_effect(damage_count)
-			Global.create_blood_effect(damage_count, global_position, z_index)
-			Global.create_blood_effect(damage_count, global_position, z_index)
-			damage_count -= 4
-			
-		hurtbox.display_damage_popup(str(damage), is_crit)
-		hurtbox.create_hit_effect()
-		#hurtbox.start_invincibility(0.3)
+	var hit = Enemy.hurtbox_entered(self, area)
+	if hit:
 		if state == ATTACK:
 			wanderController.start_wander_timer(1)
-			state = IDLE
 		if attacking:
 			attacking = false
 		animationState.travel("Landing")
 		audio_caw()
-		
-		sprite.modulate = Color(1,1,0)
-		if stats.health > 0:
-			knockback = area.knockback_vector * 120 # knockback velocity
-			tween.interpolate_property(sprite,
-			"modulate",
-			Color(1, 1, 0),
-			Color(1, 1, 1),
-			0.2,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_IN
-			)
-			tween.start()
-		else:
-			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
+
+#	$EnemyHealth.show_health()
+#	if z_index != area.get_parent().get_parent().z_index:
+#		fly_animation()
+#		SoundPlayer.play_sound("miss")
+#		hurtbox.display_damage_popup("Miss!", false)
+#		return
+#	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
+#	if !hit:
+#		SoundPlayer.play_sound("miss")
+#		hurtbox.display_damage_popup("Miss!", false)
+#	else:
+#		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
+#		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+#		if is_crit:
+#			damage *= 2
+#		stats.health -= damage
+#
+#		var damage_count = min(damage/2, 32)
+#		while damage_count > 0:
+#			create_hit_effect(damage_count)
+#			Global.create_blood_effect(damage_count, global_position, z_index)
+#			Global.create_blood_effect(damage_count, global_position, z_index)
+#			damage_count -= 4
+#
+#		hurtbox.display_damage_popup(str(damage), is_crit)
+#		hurtbox.create_hit_effect()
+#		#hurtbox.start_invincibility(0.3)
+#		if state == ATTACK:
+#			wanderController.start_wander_timer(1)
+#			state = IDLE
+#		if attacking:
+#			attacking = false
+#		animationState.travel("Landing")
+#		audio_caw()
+#
+#		sprite.modulate = Color(1,1,0)
+#		if stats.health > 0:
+#			knockback = area.knockback_vector * 120 # knockback velocity
+#			tween.interpolate_property(sprite,
+#			"modulate",
+#			Color(1, 1, 0),
+#			Color(1, 1, 1),
+#			0.2,
+#			Tween.TRANS_LINEAR,
+#			Tween.EASE_IN
+#			)
+#			tween.start()
+#		else:
+#			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")
@@ -358,9 +357,12 @@ func fly_animation():
 func set_flying(value):
 	flying = value
 	if !flying:
+		evasion_mod = 0
 		set_collision_mask_bit(17, true)
-	elif flying && z_index == 0:
-		set_collision_mask_bit(17, false)
+	elif flying:
+		evasion_mod = 32
+		if z_index == 0:
+			set_collision_mask_bit(17, false)
 
 func audio_caw():
 	audio.stream = hitSFX

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/Will/LayerTest/Bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/System/ScreenShake.tscn" type="PackedScene" id=2]
@@ -13,8 +13,11 @@
 [ext_resource path="res://assets/Audio/World/Bird_Ambience.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/Maps/Test/LayerTest.gd" type="Script" id=12]
 [ext_resource path="res://assets/Shadows/PixelShadow.png" type="Texture" id=13]
+[ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=14]
 [ext_resource path="res://assets/World/Flowers/Flowers_1.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Grass/TallGrass_1.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 32 )
@@ -39,6 +42,8 @@ extents = Vector2( 30, 26 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 34, 72 )
+
+[sub_resource type="RectangleShape2D" id=9]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -210,6 +215,22 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/FlyerArea"]
 shape = SubResource( 8 )
 
+[node name="Exit" parent="Map" instance=ExtResource( 17 )]
+position = Vector2( 305, 244 )
+map_file = "res://assets/Maps/Test/Test.tscn"
+selected_location = Vector2( 48, 48 )
+
+[node name="CollisionShape2D" parent="Map/Exit" index="0"]
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D" parent="Map/Exit/StaticBody2D" index="0"]
+shape = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Map/Exit"]
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
@@ -232,28 +253,13 @@ position = Vector2( 207, 148 )
 position = Vector2( 292, 149 )
 
 [node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 152, 151 )
+position = Vector2( 292, 149 )
 
 [node name="Bat" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 154, 202 )
 
 [node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 283, 200 )
-
-[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 205, 270 )
-
-[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 205, 270 )
-
-[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 246, 270 )
-
-[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 246, 270 )
-
-[node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 246, 270 )
+position = Vector2( 154, 202 )
 
 [node name="Items" type="YSort" parent="YSort"]
 
@@ -302,6 +308,8 @@ stream = ExtResource( 11 )
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 layer = 4
+
+[node name="FadeIn" parent="." instance=ExtResource( 18 )]
 [connection signal="body_entered" from="Map/MiddleTransitionTop" to="Map" method="_on_MiddleTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionTop" to="Map" method="_on_BelowTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionBottom" to="Map" method="_on_BelowTransition_body_entered"]
@@ -311,3 +319,5 @@ layer = 4
 [connection signal="area_entered" from="Map/FlyZone2" to="Map" method="_on_FlyZone_area_entered"]
 [connection signal="body_entered" from="Map/FlyZone2" to="Map" method="_on_FlyZone_body_entered"]
 [connection signal="body_exited" from="Map/FlyerArea" to="Map" method="_on_FlyerArea_body_exited"]
+
+[editable path="Map/Exit"]

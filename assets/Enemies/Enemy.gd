@@ -13,6 +13,14 @@ var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
 # the “bat” & “crow” classes, after their shared code has been refactored,
 # should extend this generic “enemy” class.
 
+enum {
+	IDLE,
+	WANDER,
+	CHASE,
+	ATTACK,
+	DEAD
+}
+
 func h_flip_handler(sprite, eye, velocity):
 	sprite.flip_h = velocity.x < 0
 	eye.flip_h = velocity.x < 0
@@ -26,12 +34,62 @@ func set_player_collision(body):
 	else:
 		body.set_collision_layer_bit(4, false)
 
-func examine(dialog_script):
+func examine(dialog_script, examined, enemy_name):
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog_script = dialog_script
 	get_node("/root/World/GUI").add_child(dialogBox)
+	if !examined:
+		examined = true
+		PlayerLog.set_examined(enemy_name, true)
+
+func disable_detection(enemy):
+	enemy.attackPlayerZone.set_deferred("monitoring", false)
+	enemy.playerDetectionZone.set_deferred("monitoring", false)
 	
-#	if !examined:
-#		examined = true
-#		PlayerLog.bat_examined = true
-#		PlayerLog.set_examined("bat", true)
+func enable_detection(enemy):
+	enemy.attackPlayerZone.set_deferred("monitoring", true)
+	enemy.playerDetectionZone.set_deferred("monitoring", true)
+
+func hurtbox_entered(enemy, hitbox):
+	enemy.enemyHealth.show_health()
+	if enemy.z_index != hitbox.get_parent().get_parent().z_index:
+		SoundPlayer.play_sound("miss")
+		enemy.hurtbox.display_damage_popup("Miss!", false)
+		return
+	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, enemy.stats.evasion+enemy.evasion_mod)
+	if !hit:
+		SoundPlayer.play_sound("miss")
+		enemy.hurtbox.display_damage_popup("Miss!", false)
+	else:
+		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
+		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
+		if is_crit:
+			damage *= 2
+		enemy.stats.health -= damage
+		
+		var damage_count = min(damage/2, 32)
+		while damage_count > 0:
+			enemy.create_hit_effect(damage_count)
+			Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
+			Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
+			damage_count -= 4
+		
+		enemy.hurtbox.display_damage_popup(str(damage), is_crit)
+		enemy.hurtbox.create_hit_effect()
+		enemy.hurtbox.start_invincibility(0.05)
+		
+		enemy.sprite.modulate = Color(1,1,0)
+		if enemy.stats.health > 0:
+			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
+			enemy.tween.interpolate_property(enemy.sprite,
+			"modulate",
+			Color(1, 0.8, 0),
+			Color(1, 1, 1),
+			0.2,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN
+			)
+			enemy.tween.start()
+		else:
+			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on killing blow
+	return hit

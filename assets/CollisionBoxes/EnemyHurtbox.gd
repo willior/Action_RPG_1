@@ -31,12 +31,14 @@ func display_damage_popup(value, crit):
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
 	get_parent().get_node("EnemyHealth/DamageContainer").add_child(damagePopup)
-	#move_child(damagePopup, 0)
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter
 
 func _on_Hurtbox_invincibility_started():
-	collision.set_deferred("disabled", true)
+	pass
+	# collision.set_deferred("disabled", true)
+	
 func _on_Hurtbox_invincibility_ended():
-	collision.set_deferred("disabled", false)
+	pass
+	# collision.set_deferred("disabled", false)

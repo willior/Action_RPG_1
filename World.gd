@@ -1,15 +1,16 @@
 extends Node2D
 
 onready var music = $Music
+onready var sfx1 = $SFX
+onready var sfx2 = $SFX2
 onready var player = $YSort/Player
 onready var dim = $GUI/Dim
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
 onready var PauseScreen = load("res://assets/UI/Menu/PauseScreen.tscn")
-# onready var stats = $GUI/StatsDisplay
 
 func _ready():
-	$SFX.play()
-	$SFX2.play()
+	sfx1.play()
+	sfx2.play()
 	if GameManager.on_title_screen:
 		GameManager.on_title_screen = false
 		
@@ -103,16 +104,15 @@ func _input(event):
 	if event.is_action_pressed("pause"): # P
 		player.pouch.add_ingredient("Salt", 2)
 		# save_game()
-		pass
 	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
+			print('start discarded: ', Global.changingScene)
 			return
 		if PlayerStats.dead:
 			print('resuming')
 			music.stream_paused = false
 			get_tree().paused = false
-			# get_node("/root/World/GUI/GameOver").visible = false
 			get_node("/root/World/GUI/GameOver").queue_free()
 			get_node("/root/World/GUI/HealthUI1").visible = true
 			get_node("/root/World/GUI/ExpBar1").visible = true
@@ -123,22 +123,18 @@ func _input(event):
 			PlayerStats.continue_count += 1
 			PlayerStats.dead = false
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
-			
 		elif get_tree().paused == false:
 			music.stream_paused = true
-			$SFX.stream_paused = true
-			$SFX2.stream_paused = true
+			sfx1.stream_paused = true
+			sfx2.stream_paused = true
 			get_tree().paused = true
 			dim.visible = true
-			# stats.visible = true
 			var pauseScreen = PauseScreen.instance()
 			$GUI.add_child(pauseScreen)
-
 		else:
 			music.stream_paused = false
-			$SFX.stream_paused = false
-			$SFX2.stream_paused = false
+			sfx1.stream_paused = false
+			sfx2.stream_paused = false
 			get_tree().paused = false
 			dim.visible = false
-			# stats.visible = false
 			$GUI/PauseScreen.queue_free()

@@ -4,23 +4,24 @@ onready var sword_attack = preload("res://assets/Audio/Player/Sword_Attack_1.wav
 onready var flash_whoosh = preload("res://assets/Audio/Player/Sword_Flash_Whoosh.wav")
 onready var flash_swing = preload("res://assets/Audio/Player/Sword_Flash_Swing.wav")
 onready var audio = $AudioStreamPlayer
-onready var damage = PlayerStats.strength*2 setget set_damage
 # onready var damage_mod = PlayerStats.strength_mod setget set_damage_mod
 # onready var shade_mod = PlayerStats.strength_mod setget set_shade_mod
-var knockback_vector = Vector2.ZERO
+onready var damage # setget set_damage
 var orig_damage
 var randomness = 0.25
+var knockback_vector = Vector2.ZERO
 
 func _ready():
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("strength_changed", self, "set_damage")
-# warning-ignore:return_value_discarded
+	damage = PlayerStats.strength*2
 	orig_damage = damage
 	print('damage = ', damage)
 
 func set_damage(value):
 	damage = value*2
-	# print('damage set = ', damage)
+	orig_damage = damage
+	print('damage set = ', damage)
 	
 func modify_damage(base, modulator):
 	return int(base * modulator)

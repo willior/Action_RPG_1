@@ -7,10 +7,17 @@ var heart_examined = false
 var penny_examined = false
 
 # Enemies
-var bat_examined = false
-var crow_examined = false
-var wolf_examined = false
-var tumbleweed_examined = false
+#var Bat_examined = false
+#var crow_examined = false
+#var wolf_examined = false
+#var tumbleweed_examined = false
+
+var enemies_examined = {
+	"Bat": false,
+	"Crow": false,
+	"Wolf": false,
+	"Tumbleweed": false
+}
 
 # Home
 var home_bed_examined = false
@@ -44,13 +51,13 @@ signal heart_complete()
 # warning-ignore:unused_signal
 signal penny_complete()
 # warning-ignore:unused_signal
-signal bat_complete()
+signal Bat_complete()
 # warning-ignore:unused_signal
-signal crow_complete()
+signal Crow_complete()
 # warning-ignore:unused_signal
-signal wolf_complete()
+signal Wolf_complete()
 # warning-ignore:unused_signal
-signal tumbleweed_complete()
+signal Tumbleweed_complete()
 # warning-ignore:unused_signal
 signal home_lightswitch_advance(value)
 # warning-ignore:unused_signal
@@ -67,8 +74,10 @@ signal home_sink_complete()
 # tells the PlayerLog which signal to emit. this signal then sets
 # the object's local examined variable to true.
 func set_examined(name, value):
-	print('examined ' + name)
+	enemies_examined[name] = value
 	emit_signal(str(name)+"_complete", value)
+	# print('examined ' + name)
+	print(enemies_examined[name])
 
 # the PlayerLog is now responsible for advancing the dialog index in the
 # function set_dialog_index(name, value) where 'name' is the name of the

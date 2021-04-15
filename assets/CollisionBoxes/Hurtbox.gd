@@ -28,16 +28,15 @@ func create_hit_effect():
 	
 func display_damage_popup(value, crit):
 	var damagePopup = DamagePopup.instance()
-	# damagePopup.global_position = global_position
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
 	get_parent().get_node("DamageDisplay/DamageContainer").add_child(damagePopup)
-	# get_parent().add_child(damagePopup)
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter
 
 func _on_Hurtbox_invincibility_started():
 	collision.set_deferred("disabled", true)
+
 func _on_Hurtbox_invincibility_ended():
 	collision.set_deferred("disabled", false)

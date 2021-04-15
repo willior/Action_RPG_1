@@ -18,7 +18,7 @@ var dir_vector = Vector2.DOWN
 var vitality = 40 setget set_vitality
 var endurance = 40 setget set_endurance
 var defense = 4.0 setget set_defense
-var strength = 10.0 setget set_strength
+var strength = 1.0 setget set_strength
 var dexterity = 10.0 setget set_dexterity
 var speed = 4.0 setget set_speed
 
@@ -43,7 +43,7 @@ var strength_mod = 0 setget set_strength_mod
 var defense_mod = 0 setget set_defense_mod
 
 var dexterity_mod = 0.0 setget set_dexterity_mod
-var base_accuracy = 75
+var base_accuracy = 750
 var base_crit_rate = 4
 
 var attack_speed = 1.0 setget set_attack_speed
@@ -243,6 +243,7 @@ func set_defense_mod(value):
 	emit_signal(\"defense_mod_changed\", defense_mod)
 	
 func set_strength(value):
+	print('strength set: ', value)
 	strength = value
 	emit_signal(\"strength_changed\", strength)
 	

@@ -48,7 +48,7 @@ centered = false
 [node name="Exit" parent="Map" instance=ExtResource( 7 )]
 position = Vector2( 144, 80 )
 map_file = "res://assets/Maps/Test/Template_2.tscn"
-selected_location = Vector2( 250, 64 )
+selected_location = Vector2( 250, 60 )
 
 [node name="CollisionShape2D" parent="Map/Exit" index="0"]
 shape = SubResource( 1 )
