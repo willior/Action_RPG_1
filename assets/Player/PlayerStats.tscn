@@ -22,6 +22,11 @@ var strength = 10.0 setget set_strength
 var dexterity = 10.0 setget set_dexterity
 var speed = 4.0 setget set_speed
 
+var experience_required = 3000 setget set_max_experience
+var experience = 82 setget set_experience
+var level = 1 setget set_level
+var experience_total = 82
+
 var max_health = vitality*15 setget set_max_health
 var health = max_health setget set_health
 var old_health = health
@@ -51,10 +56,6 @@ var charge_rate = 0.5
 var max_charge_level = 2 setget set_max_charge_level
 var charge_level = 0 setget set_charge_level
 
-var experience_required = 10000 setget set_max_experience
-var experience = 82 setget set_experience
-var level = 1 setget set_level
-var experience_total = 82
 var cash = 0 setget set_cash
 
 var status = \"fine\" setget set_status
