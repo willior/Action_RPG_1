@@ -96,7 +96,6 @@ show_behind_parent = true
 position = Vector2( 0, -7 )
 frames = SubResource( 6 )
 animation = "1"
-frame = 3
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -16 )

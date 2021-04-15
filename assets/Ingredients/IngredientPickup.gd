@@ -1,5 +1,6 @@
 extends Area2D
 
+const PickupPopup = preload("res://assets/UI/Popups/PickupPopup.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 export var ingredient_name : String
@@ -23,7 +24,7 @@ func examine():
 func interact():
 	GameManager.player.state = 8
 	var timer = Timer.new()
-	timer.wait_time = 0.3
+	timer.wait_time = 0.4
 	add_child(timer)
 	timer.start()
 	yield(timer, "timeout")
@@ -32,6 +33,8 @@ func interact():
 	get_parent().add_child(itemCollectEffect)
 	# argument determines sound effect; 0 = heartCollect
 	itemCollectEffect.playSound(0)
+	var displayMessage = "Found " + str(ingredient_name) + " x1"
+	display_pickup_message(displayMessage)
 	queue_free()
 # warning-ignore:shadowed_variable
 func check_ingredient(ingredient_name):
@@ -41,3 +44,8 @@ func check_ingredient(ingredient_name):
 		print("could not find ingredient")
 		return
 	return ingredient
+
+func display_pickup_message(value):
+	var pickupPopup = PickupPopup.instance()
+	pickupPopup.pickupDisplay = value
+	get_node("/root/World/GUI/PickupDisplay1/PickupContainer").add_child(pickupPopup)

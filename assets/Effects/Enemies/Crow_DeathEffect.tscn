@@ -8,8 +8,6 @@
 [ext_resource path="res://assets/Effects/Enemies/Crow_DeathEffect.gd" type="Script" id=6]
 [ext_resource path="res://assets/Effects/Blood_DeathEffect.png" type="Texture" id=7]
 
-
-
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 48, 48 )
@@ -159,7 +157,6 @@ show_behind_parent = true
 position = Vector2( 0, 17 )
 frames = SubResource( 19 )
 animation = "1"
-frame = 3
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Crow_DeathAnimation"]
 position = Vector2( 0, 8 )

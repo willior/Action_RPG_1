@@ -11,9 +11,6 @@ const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 
-#const BambooAudio = preload("res://assets/Audio/Bamboo.wav")
-#const CursLo = preload("res://assets/Audio/cursLo.wav")
-
 var inventory_resource = load("res://assets/Player/Inventory.gd")
 var inventory = inventory_resource.new()
 var pouch_resource = load("res://assets/Player/Pouch.gd")
@@ -787,7 +784,9 @@ func game_over():
 	self.visible = false
 	get_tree().paused = true
 	
-func pickup_state(_delta):
+func pickup_state(delta):
+	velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
+	move()
 	if examining:
 		self.noticeDisplay = false
 	if talking:
@@ -799,6 +798,7 @@ func pickup_state(_delta):
 	animationState.travel("Pickup")
 
 func pickup_finished():
+	reset_interaction()
 	if Input.is_action_pressed("attack"):
 		charge_reset()
 		attack_charging = true

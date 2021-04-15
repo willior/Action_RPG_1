@@ -275,10 +275,9 @@ __meta__ = {
 }
 
 [node name="InventoryUI" type="Control" parent="."]
-anchor_right = 1.0
 margin_left = 13.0
 margin_top = 141.0
-margin_right = -288.0
+margin_right = 32.0
 margin_bottom = 160.0
 __meta__ = {
 "_edit_group_": true,
@@ -313,6 +312,24 @@ margin_bottom = 10.0
 custom_fonts/font = SubResource( 3 )
 text = "?"
 align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PickupDisplay1" type="Control" parent="."]
+margin_left = 14.0
+margin_top = 126.0
+margin_right = 14.0
+margin_bottom = 126.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PickupContainer" type="VBoxContainer" parent="PickupDisplay1"]
+show_behind_parent = true
+grow_vertical = 0
+size_flags_vertical = 9
+alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

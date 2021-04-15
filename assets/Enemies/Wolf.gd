@@ -135,22 +135,14 @@ func _physics_process(delta):
 	
 func reset_state():
 	state = IDLE
-	
-func h_flip_handler():
-	if velocity.x < 0:
-		sprite.flip_h = true
-		eye.flip_h = true
-	else:
-		sprite.flip_h = false
-		eye.flip_h = false
 
 func examine():
-	var dialogBox = DialogBox.instance()
-	dialogBox.dialog_script = [
+	var dialog_script = [
 		{'text': "A common wolf. It looks friendly."},
 		{'text': "Though it's probably safe to assume that it isn't."}
 	]
-	get_node("/root/World/GUI").add_child(dialogBox)
+	Enemy.examine(dialog_script)
+	
 	if !examined:
 		examined = true
 		PlayerLog.wolf_examined = true
@@ -162,7 +154,7 @@ func examine_complete(value):
 func accelerate_towards_point(point, speed, delta):
 	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
 	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
-	h_flip_handler()
+	Enemy.h_flip_handler(sprite, eye, velocity)
 
 func seek_player(): # runs every frame of the IDLE and WANDER states
 	if hitbox.monitorable:
@@ -222,10 +214,7 @@ func update_wander_state():
 		else:
 			pass # otherwise plays the idle animation
 	elif state == 1: # WANDER STATE
-		pass
-		# fly_animation()
-		
-		h_flip_handler()
+		Enemy.h_flip_handler(sprite, eye, velocity)
 		wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
 		
 func pick_random_state(state_list): 

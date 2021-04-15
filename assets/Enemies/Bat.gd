@@ -111,21 +111,20 @@ func _physics_process(delta):
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 				
-	sprite.flip_h = velocity.x < 0
-	eye.flip_h = velocity.x < 0
+	Enemy.h_flip_handler(sprite, eye, velocity)
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
 		
 	velocity = move_and_slide(velocity)
-	
+
 func examine():
-	var dialogBox = DialogBox.instance()
-	dialogBox.dialog_script = [
+	var dialog_script = [
 		{'text': "Bats are mammals of the Chiroptera order."},
 		{'text': "They are the only mammals capable of true and sustained flight."}
 	]
-	get_node("/root/World/GUI").add_child(dialogBox)
+	Enemy.examine(dialog_script)
+	
 	if !examined:
 		examined = true
 		PlayerLog.bat_examined = true
