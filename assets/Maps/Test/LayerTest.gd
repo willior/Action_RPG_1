@@ -18,14 +18,17 @@ func _on_FlyZone_area_entered(area):
 	if area.z_index == 0:
 		area.z_index = -2
 
-# warning-ignore:unused_argument
-func _on_FlyZone_body_entered(body): pass
-#	if body.flying && body.z_index == 0:
-#		print('lowering altitude')
-#		body.z_index = -2
+func _on_FlyZone_body_entered(body):
+	if !body.flying && body.z_index == 0:
+		print(body.name, ' landed in flyzone. lowering altitude')
+		body.z_index = -2
+		Enemy.set_player_collision(body)
 
-# warning-ignore:unused_argument
-func _on_FlyZone_body_exited(body): pass
-#	if body.flying && body.z_index == -2:
-#		print('raising altitude')
-#		body.z_index = 0
+func _on_FlyerArea_body_exited(body):
+	if body.z_index == -2:
+		print(body.name, ' left flyzone or took off. raising altitude')
+		body.z_index = 0
+		body.set_collision_mask_bit(17, false)
+		Enemy.set_player_collision(body)
+
+

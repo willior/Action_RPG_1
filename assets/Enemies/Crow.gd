@@ -222,14 +222,15 @@ func create_hit_effect(damage_count):
 	get_node("/root/World/Map").call_deferred("add_child", hit_effect)
 
 func _on_Hurtbox_area_entered(area):
-	$EnemyHealth.show_health()
-	if z_index != area.get_parent().get_parent().z_index:
-		SoundPlayer.play_sound("miss")
-		hurtbox.display_damage_popup("Miss!", false)
-		return
 	var evasion_mod = 0
 	if flying:
 		evasion_mod = 32
+	$EnemyHealth.show_health()
+	if z_index != area.get_parent().get_parent().z_index:
+		fly_animation()
+		SoundPlayer.play_sound("miss")
+		hurtbox.display_damage_popup("Miss!", false)
+		return
 	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
 	if !hit:
 		SoundPlayer.play_sound("miss")
@@ -365,7 +366,11 @@ func fly_animation():
 	
 func set_flying(value):
 	flying = value
-	
+	if !flying:
+		set_collision_mask_bit(17, true)
+	elif flying && z_index == 0:
+		set_collision_mask_bit(17, false)
+
 func audio_caw():
 	audio.stream = hitSFX
 	audio.play()

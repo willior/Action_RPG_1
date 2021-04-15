@@ -2006,8 +2006,8 @@ graph_offset = Vector2( -384.124, -20.754 )
 [sub_resource type="CircleShape2D" id=128]
 radius = 17.0
 
-[sub_resource type="RectangleShape2D" id=129]
-extents = Vector2( 5, 7.99995 )
+[sub_resource type="CircleShape2D" id=136]
+radius = 10.0499
 
 [sub_resource type="CircleShape2D" id=130]
 radius = 5.0
@@ -2208,7 +2208,7 @@ collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/InteractHitbox"]
 position = Vector2( -2, -4.69685e-05 )
-shape = SubResource( 129 )
+shape = SubResource( 136 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
 visible = false

@@ -17,9 +17,9 @@ var dir_vector = Vector2.DOWN
 
 var vitality = 40 setget set_vitality
 var endurance = 40 setget set_endurance
-var defense = 40.0 setget set_defense
-var strength = 8.0 setget set_strength
-var dexterity = 40.0 setget set_dexterity
+var defense = 4.0 setget set_defense
+var strength = 10.0 setget set_strength
+var dexterity = 10.0 setget set_dexterity
 var speed = 4.0 setget set_speed
 
 var max_health = vitality*15 setget set_max_health

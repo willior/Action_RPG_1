@@ -719,7 +719,7 @@ func backstep_animation_finished():
 		attack_animation_finished()
 
 func _on_Hurtbox_area_entered(area):
-	if z_index != area.get_parent().z_index:
+	if z_index != area.get_parent().z_index: # automatic miss if z_index mismatch
 		$DodgeAudio.play()
 		hurtbox.display_damage_popup("Miss!", false)
 		print(area.get_parent().name, ' missed Player due to altitude difference')
