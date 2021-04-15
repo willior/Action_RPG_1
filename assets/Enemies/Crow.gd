@@ -120,21 +120,13 @@ func _physics_process(delta):
 		
 	velocity = move_and_slide(velocity)
 	
-func h_flip_handler():
-	if velocity.x < 0:
-		sprite.flip_h = true
-		eye.flip_h = true
-	else:
-		sprite.flip_h = false
-		eye.flip_h = false
-	
 func examine():
-	var dialogBox = DialogBox.instance()
-	dialogBox.dialog_script = [
+	var dialog_script = [
 		{'text': "A common crow."},
 		{'text': "Except that it's grossly over-sized."}
 	]
-	get_node("/root/World/GUI").add_child(dialogBox)
+	Enemy.examine(dialog_script)
+	
 	if !examined:
 		examined = true
 		PlayerLog.crow_examined = true
@@ -147,7 +139,7 @@ func accelerate_towards_point(point, speed, delta):
 	if flying:
 		var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
 		velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
-		h_flip_handler()
+		Enemy.h_flip_handler(sprite, eye, velocity)
 
 func seek_player():
 	hitbox.set_deferred("monitorable", false)
@@ -204,7 +196,6 @@ func update_wander_state():
 		# animationState.travel("Fly")
 		fly_animation()
 	
-	# h_flip_handler()
 	wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
 		
 func pick_random_state(state_list): 
