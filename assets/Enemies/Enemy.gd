@@ -54,7 +54,8 @@ func hurtbox_entered(enemy, hitbox):
 	enemy.enemyHealth.show_health()
 	if hitbox.spell:
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
-		deal_damage(enemy, damage, false)
+		var is_kill = enemy.stats.health - damage <= 0
+		deal_damage(enemy, damage, false, is_kill)
 		if enemy.stats.health > 0:
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
@@ -83,7 +84,8 @@ func hurtbox_entered(enemy, hitbox):
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
 		if is_crit:
 			damage *= 2
-		deal_damage(enemy, damage, is_crit)
+		var is_kill = enemy.stats.health - damage <= 0
+		deal_damage(enemy, damage, is_crit, is_kill)
 		if enemy.stats.health > 0:
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
@@ -96,10 +98,10 @@ func hurtbox_entered(enemy, hitbox):
 			)
 			enemy.tween.start()
 		else:
-			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on killing blow
+			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on kill
 	return hit
 
-func deal_damage(enemy, damage, is_crit):
+func deal_damage(enemy, damage, is_crit, is_kill):
 	damage = min(damage, 9999)
 	enemy.stats.health -= damage
 	var damage_count = min(damage/2, 32)
@@ -108,7 +110,6 @@ func deal_damage(enemy, damage, is_crit):
 		Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
 		Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
 		damage_count -= 4
-	
 	enemy.hurtbox.display_damage_popup(str(damage), is_crit)
 	enemy.hurtbox.create_hit_effect()
 	enemy.hurtbox.start_invincibility(0.05)
