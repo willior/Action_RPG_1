@@ -55,3 +55,7 @@ func _ready():
 	stats.connect("health_changed", self, "set_health")
 # warning-ignore:return_value_discarded
 	stats.connect("max_health_changed", self, "set_max_health")
+
+func _on_stats_no_health():
+	yield(get_tree().create_timer(1.0), "timeout")
+	queue_free()

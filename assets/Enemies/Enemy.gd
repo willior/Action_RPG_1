@@ -113,3 +113,58 @@ func deal_damage(enemy, damage, is_crit):
 	enemy.hurtbox.create_hit_effect()
 	enemy.hurtbox.start_invincibility(0.05)
 	enemy.sprite.modulate = Color(1,1,0)
+	
+func no_health(enemy):
+	enemy.hurtbox.set_deferred("monitoring", false) # turn off hurtbox
+	enemy.hitbox.set_deferred("monitorable", false)
+	enemy.state = DEAD
+	
+	enemy.tween.interpolate_property(enemy.sprite,
+	"offset:y",
+	-12,
+	0,
+	0.5,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
+	enemy.tween.interpolate_property(enemy.eye,
+	"offset:y",
+	-12,
+	0,
+	0.5,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
+	
+	enemy.tween.interpolate_property(enemy.sprite,
+	"modulate",
+	Color(1, 1, 0),
+	Color(1, 0, 0),
+	0.5,
+	Tween.TRANS_LINEAR,
+	Tween.EASE_IN
+	)
+	enemy.tween.start()
+	
+	enemy.timer.start(0.5)
+	yield(enemy.timer, "timeout")
+	
+	var enemyDeathEffect = EnemyDeathEffect.instance()
+	get_parent().add_child(enemyDeathEffect)
+	enemyDeathEffect.global_position = enemy.global_position
+	enemyDeathEffect.z_index = enemy.z_index
+	for i in range(16,0,-2):
+		Global.create_blood_effect(i, enemy.global_position, enemy.z_index)
+#	Global.create_blood_effect(12, global_position, z_index)
+#	Global.create_blood_effect(8, global_position, z_index)
+#	Global.create_blood_effect(6, global_position, z_index)
+#	Global.create_blood_effect(4, global_position, z_index)
+#	Global.create_blood_effect(4, global_position, z_index)
+#	Global.create_blood_effect(2, global_position, z_index)
+#	Global.create_blood_effect(2, global_position, z_index)
+	Global.distribute_exp(enemy.stats.experience_pool)
+	var expNotice = ExpNotice.instance()
+	expNotice.position = enemy.global_position
+	expNotice.expDisplay = enemy.stats.experience_pool
+	get_node("/root/World").add_child(expNotice)
+	enemy.queue_free()

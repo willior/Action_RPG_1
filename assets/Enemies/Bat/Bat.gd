@@ -204,59 +204,8 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		state = IDLE
 
 func _on_BatStats_no_health():
+	Enemy.no_health(self)
 	sprite.playing = false # stop animation
-	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
-	hitbox.set_deferred("monitorable", false)
-	state = DEAD
-	
-	tween.interpolate_property(sprite,
-	"offset:y",
-	-12,
-	0,
-	0.5,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
-	tween.interpolate_property(eye,
-	"offset:y",
-	-12,
-	0,
-	0.5,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
-	
-	tween.interpolate_property(sprite,
-	"modulate",
-	Color(1, 1, 0),
-	Color(1, 0, 0),
-	0.5,
-	Tween.TRANS_LINEAR,
-	Tween.EASE_IN
-	)
-	tween.start()
-	
-	timer.start(0.5)
-	yield(timer, "timeout")
-	
-	var enemyDeathEffect = EnemyDeathEffect.instance()
-	get_parent().add_child(enemyDeathEffect)
-	enemyDeathEffect.global_position = global_position
-	enemyDeathEffect.z_index = z_index
-	Global.create_blood_effect(16, global_position, z_index)
-	Global.create_blood_effect(12, global_position, z_index)
-	Global.create_blood_effect(8, global_position, z_index)
-	Global.create_blood_effect(6, global_position, z_index)
-	Global.create_blood_effect(4, global_position, z_index)
-	Global.create_blood_effect(4, global_position, z_index)
-	Global.create_blood_effect(2, global_position, z_index)
-	Global.create_blood_effect(2, global_position, z_index)
-	Global.distribute_exp(stats.experience_pool)
-	var expNotice = ExpNotice.instance()
-	expNotice.position = global_position
-	expNotice.expDisplay = stats.experience_pool
-	get_node("/root/World").add_child(expNotice)
-	
 	var ingredientPickup = IngredientPickup.instance()
 	match randi() % 4: # random number between 0 & 3
 		0:
@@ -270,8 +219,6 @@ func _on_BatStats_no_health():
 	get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
 	ingredientPickup.global_position = global_position
 	ingredientPickup.z_index = z_index
-	
-	queue_free()
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")
