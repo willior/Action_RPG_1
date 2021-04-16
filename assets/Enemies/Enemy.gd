@@ -54,8 +54,7 @@ func hurtbox_entered(enemy, hitbox):
 	enemy.enemyHealth.show_health()
 	if hitbox.spell:
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
-		var is_kill = enemy.stats.health - damage <= 0
-		deal_damage(enemy, damage, false, is_kill)
+		deal_damage(enemy, damage, false)
 		if enemy.stats.health > 0:
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
@@ -84,8 +83,7 @@ func hurtbox_entered(enemy, hitbox):
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
 		if is_crit:
 			damage *= 2
-		var is_kill = enemy.stats.health - damage <= 0
-		deal_damage(enemy, damage, is_crit, is_kill)
+		deal_damage(enemy, damage, is_crit)
 		if enemy.stats.health > 0:
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
@@ -101,7 +99,7 @@ func hurtbox_entered(enemy, hitbox):
 			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on kill
 	return hit
 
-func deal_damage(enemy, damage, is_crit, is_kill):
+func deal_damage(enemy, damage, is_crit):
 	damage = min(damage, 9999)
 	enemy.stats.health -= damage
 	var damage_count = min(damage/2, 32)
@@ -115,28 +113,10 @@ func deal_damage(enemy, damage, is_crit, is_kill):
 	enemy.hurtbox.start_invincibility(0.05)
 	enemy.sprite.modulate = Color(1,1,0)
 	
-func no_health(enemy):
+func no_health(enemy, death_effect):
 	enemy.hurtbox.set_deferred("monitoring", false) # turn off hurtbox
 	enemy.hitbox.set_deferred("monitorable", false)
 	enemy.state = DEAD
-	
-	enemy.tween.interpolate_property(enemy.sprite,
-	"offset:y",
-	-12,
-	0,
-	0.5,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
-	enemy.tween.interpolate_property(enemy.eye,
-	"offset:y",
-	-12,
-	0,
-	0.5,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
-	
 	enemy.tween.interpolate_property(enemy.sprite,
 	"modulate",
 	Color(1, 1, 0),
@@ -146,14 +126,11 @@ func no_health(enemy):
 	Tween.EASE_IN
 	)
 	enemy.tween.start()
-	
 	enemy.timer.start(0.5)
 	yield(enemy.timer, "timeout")
-	
-	var enemyDeathEffect = EnemyDeathEffect.instance()
-	get_parent().add_child(enemyDeathEffect)
-	enemyDeathEffect.global_position = enemy.global_position
-	enemyDeathEffect.z_index = enemy.z_index
+	death_effect.global_position = enemy.global_position
+	death_effect.z_index = enemy.z_index
+	get_node("/root/World/Map").call_deferred("add_child", death_effect)
 	for i in range(16,0,-2):
 		Global.create_blood_effect(i, enemy.global_position, enemy.z_index)
 #	Global.create_blood_effect(12, global_position, z_index)
@@ -168,4 +145,3 @@ func no_health(enemy):
 	expNotice.position = enemy.global_position
 	expNotice.expDisplay = enemy.stats.experience_pool
 	get_node("/root/World").add_child(expNotice)
-	enemy.queue_free()

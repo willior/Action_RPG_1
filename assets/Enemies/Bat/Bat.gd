@@ -204,8 +204,27 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		state = IDLE
 
 func _on_BatStats_no_health():
-	Enemy.no_health(self)
+	var death_effect = EnemyDeathEffect.instance()
+	Enemy.no_health(self, death_effect)
 	sprite.playing = false # stop animation
+	tween.interpolate_property(sprite,
+	"offset:y",
+	-12,
+	0,
+	0.5,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
+	tween.interpolate_property(eye,
+	"offset:y",
+	-12,
+	0,
+	0.5,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
+	tween.start()
+	yield(tween, "tween_all_completed")
 	var ingredientPickup = IngredientPickup.instance()
 	match randi() % 4: # random number between 0 & 3
 		0:
@@ -219,6 +238,7 @@ func _on_BatStats_no_health():
 	get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
 	ingredientPickup.global_position = global_position
 	ingredientPickup.z_index = z_index
+	queue_free()
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")

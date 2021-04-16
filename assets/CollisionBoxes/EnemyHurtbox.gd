@@ -31,14 +31,6 @@ func display_damage_popup(value, crit):
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
 	get_parent().get_node("EnemyHealth/DamageContainer").add_child(damagePopup)
-#	if !kill:
-#		get_parent().get_node("EnemyHealth/DamageContainer").add_child(damagePopup)
-#	else:
-#		var enemyHealth = get_parent().get_node("EnemyHealth")
-#		var enemyHealth_pos = enemyHealth.global_position
-#		get_parent().remove_child(enemyHealth)
-#		enemyHealth.global_position = enemyHealth_pos
-#		main.add_child(enemyHealth)
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter

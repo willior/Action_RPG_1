@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://World.gd" type="Script" id=8]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/Audio/Music/Celesta_BGM_slow.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/World/Trees/Tree_2_pine.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/World/Doodads/Rock_Group_10.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/World/Air_SFX.wav" type="AudioStream" id=14]
@@ -419,38 +420,11 @@ position = Vector2( 207.629, 50.8775 )
 [node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 207.629, 50.8775 )
 
-[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 11 )]
+position = Vector2( -93.5364, -8.99631 )
 
-[node name="Bat20" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat19" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat18" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat17" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat16" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat15" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat14" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat13" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat12" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
-
-[node name="Bat11" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 207.629, 50.8775 )
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 11 )]
+position = Vector2( 48.3645, -74.2587 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

@@ -217,10 +217,8 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_CrowStats_no_health():
-	# sprite.playing = false # stop animation
-	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
-	hitbox.set_deferred("monitorable", false)
-	state = DEAD
+	var enemyDeathEffect = EnemyDeathEffect.instance()
+	Enemy.no_health(self, enemyDeathEffect)
 	tween.interpolate_property(sprite,
 	"offset:y",
 	-16,
@@ -237,22 +235,8 @@ func _on_CrowStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
-	tween.interpolate_property(sprite,
-	"modulate",
-	Color(1, 1, 0),
-	Color(1, 0, 0),
-	0.5,
-	Tween.TRANS_LINEAR,
-	Tween.EASE_IN
-	)
 	tween.start()
 	yield(tween, "tween_all_completed")
-	# player.enemy_killed(stats.experience_pool)
-	var enemyDeathEffect = EnemyDeathEffect.instance()
-	get_node("/root/World/Map").call_deferred("add_child", enemyDeathEffect)
-	# enemyDeathEffect.enemy = ENEMY_NAME
-	enemyDeathEffect.global_position = global_position
-	enemyDeathEffect.z_index = z_index
 	create_hit_effect(32)
 	create_hit_effect(32)
 	create_hit_effect(32)
@@ -265,19 +249,6 @@ func _on_CrowStats_no_health():
 	Global.create_blood_effect(40, global_position, z_index)
 	Global.create_blood_effect(40, global_position, z_index)
 	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(32, global_position, z_index)
-	Global.create_blood_effect(32, global_position, z_index)
-	Global.create_blood_effect(32, global_position, z_index)
-	Global.create_blood_effect(32, global_position, z_index)
-	Global.distribute_exp(stats.experience_pool)
-	var expNotice = ExpNotice.instance()
-	expNotice.position = global_position
-	expNotice.expDisplay = stats.experience_pool
-	get_node("/root/World").add_child(expNotice)
 	var ingredientPickup = IngredientPickup.instance()
 	match randi() % 4: # random number between 0 & 3
 		0:
