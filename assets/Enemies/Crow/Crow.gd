@@ -68,8 +68,6 @@ func _ready():
 	if PlayerLog.enemies_examined[ENEMY_NAME]:
 		examined = true
 	add_to_group("Enemies")
-	# rng.randomize()
-	# random_number = rng.randi_range(0, 4)
 	animationTree.active = true
 	Enemy.set_player_collision(self)
 
@@ -106,7 +104,6 @@ func _physics_process(delta):
 
 		ATTACK:
 			if attacking:
-				# target = attackPlayerZone.player.global_position
 				attacking = false
 				audio_cawcawcaw()
 				fly_animation()
@@ -186,7 +183,6 @@ func update_wander_state():
 		else:
 			animationState.travel("Idle") # otherwise plays the idle animation
 	elif state == 1: # WANDER STATE
-		# animationState.travel("Fly")
 		fly_animation()
 	
 	wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
@@ -201,7 +197,6 @@ func create_hit_effect(damage_count):
 	var randY = int(rand_range(-damage_count/2, damage_count))
 	hit_effect.global_position = global_position
 	hit_effect.z_index = z_index
-	# hit_effect.global_position += Vector2(randX, randY)
 	hit_effect.target_position = global_position + Vector2(randX, randY)
 	get_node("/root/World/Map").call_deferred("add_child", hit_effect)
 
@@ -214,56 +209,6 @@ func _on_Hurtbox_area_entered(area):
 			attacking = false
 		animationState.travel("Landing")
 		audio_caw()
-
-#	$EnemyHealth.show_health()
-#	if z_index != area.get_parent().get_parent().z_index:
-#		fly_animation()
-#		SoundPlayer.play_sound("miss")
-#		hurtbox.display_damage_popup("Miss!", false)
-#		return
-#	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
-#	if !hit:
-#		SoundPlayer.play_sound("miss")
-#		hurtbox.display_damage_popup("Miss!", false)
-#	else:
-#		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
-#		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-#		if is_crit:
-#			damage *= 2
-#		stats.health -= damage
-#
-#		var damage_count = min(damage/2, 32)
-#		while damage_count > 0:
-#			create_hit_effect(damage_count)
-#			Global.create_blood_effect(damage_count, global_position, z_index)
-#			Global.create_blood_effect(damage_count, global_position, z_index)
-#			damage_count -= 4
-#
-#		hurtbox.display_damage_popup(str(damage), is_crit)
-#		hurtbox.create_hit_effect()
-#		#hurtbox.start_invincibility(0.3)
-#		if state == ATTACK:
-#			wanderController.start_wander_timer(1)
-#			state = IDLE
-#		if attacking:
-#			attacking = false
-#		animationState.travel("Landing")
-#		audio_caw()
-#
-#		sprite.modulate = Color(1,1,0)
-#		if stats.health > 0:
-#			knockback = area.knockback_vector * 120 # knockback velocity
-#			tween.interpolate_property(sprite,
-#			"modulate",
-#			Color(1, 1, 0),
-#			Color(1, 1, 1),
-#			0.2,
-#			Tween.TRANS_LINEAR,
-#			Tween.EASE_IN
-#			)
-#			tween.start()
-#		else:
-#			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")
@@ -379,11 +324,10 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 		queue_free()
 		var newEnemySpawner = EnemySpawner.instance()
 		get_parent().call_deferred("add_child", newEnemySpawner)
-		newEnemySpawner.ENEMY = load("res://assets/Enemies/Crow.tscn")
+		newEnemySpawner.ENEMY = load("res://assets/Enemies/Crow/Crow.tscn")
 		newEnemySpawner.health = stats.health
 		newEnemySpawner.global_position = global_position
 		newEnemySpawner.z_index = z_index
 	
 func set_health(value):
 	stats.health = value
-	# print(ENEMY_NAME, ' spawned, setting health to previous value: ', value)

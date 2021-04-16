@@ -35,11 +35,9 @@ func interact():
 	$Timer.wait_time = 1.2
 	$AnimationPlayer.play("Cutscene")
 	Global.in_cutscene = true
-	
 
 func cutscene1():
 	player.state = 8
-	# player.animationState.travel("PickupCutscene")
 	player.animationTree.active = false
 	player.animationPlayer.play("PickupCutscene")
 
@@ -64,7 +62,6 @@ func cutscene3():
 	]
 	dialog.rect_position.y -= 60
 	get_node("/root/World/GUI").add_child(dialog)
-	
 	
 func cutscene4():
 	$Music.stop()

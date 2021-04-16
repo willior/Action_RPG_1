@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Cutscene/CutsceneTrigger.tscn" type="PackedScene" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=6]
 [ext_resource path="res://assets/Tilesets/grassBasic_lightInner/tileset_grassBasic_lightInner.tres" type="TileSet" id=7]
 [ext_resource path="res://assets/System/ScreenShake.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/Enemies/Wolf.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/Ingredients/IngredientPickup.tscn" type="PackedScene" id=12]
 
@@ -58,9 +57,6 @@ position = Vector2( 97.6099, 73.9984 )
 remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
-
-[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 248, 144 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

@@ -3,12 +3,12 @@
 [ext_resource path="res://assets/Will/LayerTest/Bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/System/ScreenShake.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Will/LayerTest/Top.png" type="Texture" id=3]
-[ext_resource path="res://assets/Enemies/Wolf.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Will/LayerTest/Bridge.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/Enemies/Bat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/Enemies/Crow.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World.gd" type="Script" id=10]
 [ext_resource path="res://assets/Audio/World/Bird_Ambience.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/Maps/Test/LayerTest.gd" type="Script" id=12]
@@ -35,13 +35,13 @@ extents = Vector2( 8, 32 )
 extents = Vector2( 24, 4 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 28, 41 )
+extents = Vector2( 28, 31 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 30, 26 )
+extents = Vector2( 30, 18 )
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 34, 72 )
+extents = Vector2( 34, 74 )
 
 [sub_resource type="RectangleShape2D" id=9]
 
@@ -192,7 +192,7 @@ collision_mask = 0
 shape = SubResource( 5 )
 
 [node name="FlyZone" type="Area2D" parent="Map"]
-position = Vector2( 224, 208 )
+position = Vector2( 224, 205 )
 collision_layer = 131072
 collision_mask = 0
 
@@ -200,7 +200,7 @@ collision_mask = 0
 shape = SubResource( 6 )
 
 [node name="FlyZone2" type="Area2D" parent="Map"]
-position = Vector2( 224, 96 )
+position = Vector2( 224, 104 )
 collision_layer = 131072
 collision_mask = 0
 
@@ -243,23 +243,59 @@ remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
-[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 207, 148 )
+[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 217, 150 )
 
-[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 207, 148 )
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 240, 146 )
 
-[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 292, 149 )
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 288, 146 )
 
-[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 292, 149 )
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 171, 147 )
 
-[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 154, 202 )
+[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 198, 152 )
 
-[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 154, 202 )
+[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 260, 150 )
+
+[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 217, 282 )
+
+[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 240, 278 )
+
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 288, 278 )
+
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 171, 279 )
+
+[node name="Wolf4" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 198, 284 )
+
+[node name="Wolf3" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 260, 282 )
+
+[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 128, 212 )
+
+[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 343, 210 )
+
+[node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 147, 227 )
+
+[node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 342, 244 )
+
+[node name="Wolf6" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 147, 179 )
+
+[node name="Wolf5" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 300, 211 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

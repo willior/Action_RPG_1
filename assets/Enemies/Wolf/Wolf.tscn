@@ -1,24 +1,24 @@
 [gd_scene load_steps=64 format=2]
 
-[ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/Enemies/Wolf.gd" type="Script" id=2]
-[ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=3]
-[ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=7]
-[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/Enemies/EnemyHealth.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/Enemies/Wolf/Wolf_spritesheet.png" type="Texture" id=13]
-[ext_resource path="res://assets/Enemies/WolfStats.gd" type="Script" id=14]
-[ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=17]
+[ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=1]
+[ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Enemies/EnemyHealth.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=11]
+[ext_resource path="res://assets/Enemies/Wolf/Wolf.gd" type="Script" id=12]
+[ext_resource path="res://assets/Enemies/Wolf/WolfStats.gd" type="Script" id=13]
+[ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=14]
+[ext_resource path="res://assets/Enemies/Wolf/Wolf_spritesheet.png" type="Texture" id=15]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
-shader = ExtResource( 7 )
+shader = ExtResource( 1 )
 shader_param/active = false
 
 [sub_resource type="CircleShape2D" id=2]
@@ -355,15 +355,15 @@ radius = 6.0
 
 [node name="Wolf" type="KinematicBody2D"]
 collision_layer = 16
-script = ExtResource( 2 )
+script = ExtResource( 12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+texture = ExtResource( 14 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( 0, -2 )
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 offset = Vector2( 0, -12 )
 vframes = 3
 hframes = 19
@@ -376,8 +376,8 @@ offset = Vector2( 0, -12 )
 position = Vector2( 0, -3 )
 shape = SubResource( 2 )
 
-[node name="WolfStats" parent="." instance=ExtResource( 12 )]
-script = ExtResource( 14 )
+[node name="WolfStats" parent="." instance=ExtResource( 10 )]
+script = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "IdleDown"
@@ -413,7 +413,7 @@ collision_mask = 0
 position = Vector2( 0, -12 )
 shape = SubResource( 43 )
 
-[node name="Hitbox" parent="." instance=ExtResource( 8 )]
+[node name="Hitbox" parent="." instance=ExtResource( 6 )]
 position = Vector2( 0, -8 )
 collision_mask = 4
 damage = 16.0
@@ -422,19 +422,19 @@ accuracy = 4.0
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 44 )
 
-[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+[node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 4 )
 collision_layer = 8
-script = ExtResource( 17 )
+script = ExtResource( 11 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -16 )
 shape = SubResource( 45 )
 
-[node name="WanderController" parent="." instance=ExtResource( 4 )]
+[node name="WanderController" parent="." instance=ExtResource( 3 )]
 visible = false
 
-[node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
 visible = false
 scale = Vector2( 3, 3 )
 input_pickable = false
@@ -445,10 +445,10 @@ shape = SubResource( 46 )
 [node name="ChaseTimer" type="Timer" parent="PlayerDetectionZone"]
 wait_time = 0.75
 
-[node name="AttackController" parent="." instance=ExtResource( 1 )]
+[node name="AttackController" parent="." instance=ExtResource( 2 )]
 visible = false
 
-[node name="AttackPlayerZone" parent="." instance=ExtResource( 10 )]
+[node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
 visible = false
 scale = Vector2( 2, 2 )
 collision_layer = 0
@@ -462,7 +462,7 @@ shape = SubResource( 47 )
 wait_time = 0.8
 one_shot = true
 
-[node name="SoftCollision" parent="." instance=ExtResource( 11 )]
+[node name="SoftCollision" parent="." instance=ExtResource( 9 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
@@ -483,7 +483,7 @@ one_shot = true
 max_distance = 320.0
 attenuation = 0.659754
 
-[node name="EnemyHealth" parent="." instance=ExtResource( 9 )]
+[node name="EnemyHealth" parent="." instance=ExtResource( 7 )]
 visible = false
 position = Vector2( 0, 5 )
 

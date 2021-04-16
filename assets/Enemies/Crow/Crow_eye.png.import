@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Wolf_eye.png-838b5c22c3f577732703183f7c733142.stex"
+path="res://.import/Crow_eye.png-432b40ef8bddacab2faeec5a88fa40ec.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemies/Wolf_eye.png"
-dest_files=[ "res://.import/Wolf_eye.png-838b5c22c3f577732703183f7c733142.stex" ]
+source_file="res://assets/Enemies/Crow/Crow_eye.png"
+dest_files=[ "res://.import/Crow_eye.png-432b40ef8bddacab2faeec5a88fa40ec.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Crow.png-1cf4f078c8e8343e74728354013764a7.stex"
+path="res://.import/Bat.png-12304bf5a1b21ac2fca83ce4fcfa9ffa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemies/Crow.png"
-dest_files=[ "res://.import/Crow.png-1cf4f078c8e8343e74728354013764a7.stex" ]
+source_file="res://assets/Enemies/Bat/Bat.png"
+dest_files=[ "res://.import/Bat.png-12304bf5a1b21ac2fca83ce4fcfa9ffa.stex" ]
 
 [params]
 

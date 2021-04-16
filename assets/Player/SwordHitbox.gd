@@ -11,6 +11,8 @@ var orig_damage
 var randomness = 0.25
 var knockback_vector = Vector2.ZERO
 
+var spell = false
+
 func _ready():
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("strength_changed", self, "set_damage")

@@ -13,8 +13,9 @@
 [ext_resource path="res://assets/Audio/Desert_Music.ogg" type="AudioStream" id=12]
 [ext_resource path="res://assets/Misc/WhiteScreen.png" type="Texture" id=13]
 [ext_resource path="res://assets/Maps/Desert.gd" type="Script" id=14]
-[ext_resource path="res://assets/Enemies/TumbleweedNest.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/Enemies/Tumbleweed/TumbleweedNest.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=16]
+
 
 [sub_resource type="Shader" id=1]
 code = "shader_type particles;

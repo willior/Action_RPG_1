@@ -52,6 +52,24 @@ func enable_detection(enemy):
 
 func hurtbox_entered(enemy, hitbox):
 	enemy.enemyHealth.show_health()
+	if hitbox.spell:
+		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
+		deal_damage(enemy, damage, false)
+		if enemy.stats.health > 0:
+			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
+			enemy.tween.interpolate_property(enemy.sprite,
+			"modulate",
+			Color(1, 0.8, 0),
+			Color(1, 1, 1),
+			0.2,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN
+			)
+			enemy.tween.start()
+		else:
+			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on killing blow
+		return true
+	
 	if enemy.z_index != hitbox.get_parent().get_parent().z_index:
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)
@@ -65,20 +83,7 @@ func hurtbox_entered(enemy, hitbox):
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
 		if is_crit:
 			damage *= 2
-		enemy.stats.health -= damage
-		
-		var damage_count = min(damage/2, 32)
-		while damage_count > 0:
-			enemy.create_hit_effect(damage_count)
-			Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
-			Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
-			damage_count -= 4
-		
-		enemy.hurtbox.display_damage_popup(str(damage), is_crit)
-		enemy.hurtbox.create_hit_effect()
-		enemy.hurtbox.start_invincibility(0.05)
-		
-		enemy.sprite.modulate = Color(1,1,0)
+		deal_damage(enemy, damage, is_crit)
 		if enemy.stats.health > 0:
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
@@ -93,3 +98,18 @@ func hurtbox_entered(enemy, hitbox):
 		else:
 			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on killing blow
 	return hit
+
+func deal_damage(enemy, damage, is_crit):
+	damage = min(damage, 9999)
+	enemy.stats.health -= damage
+	var damage_count = min(damage/2, 32)
+	while damage_count > 0:
+		enemy.create_hit_effect(damage_count)
+		Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
+		Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
+		damage_count -= 4
+	
+	enemy.hurtbox.display_damage_popup(str(damage), is_crit)
+	enemy.hurtbox.create_hit_effect()
+	enemy.hurtbox.start_invincibility(0.05)
+	enemy.sprite.modulate = Color(1,1,0)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/Enemy.gd" type="Script" id=2]
-[ext_resource path="res://assets/Enemies/Bat.gd" type="Script" id=3]
+[ext_resource path="res://assets/Enemies/Bat/Bat.gd" type="Script" id=3]
 [ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=4]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=6]
@@ -13,11 +13,12 @@
 [ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/Enemies/BatStats.gd" type="Script" id=14]
-[ext_resource path="res://assets/Enemies/Bat.png" type="Texture" id=15]
+[ext_resource path="res://assets/Enemies/Bat/BatStats.gd" type="Script" id=14]
+[ext_resource path="res://assets/Enemies/Bat/Bat.png" type="Texture" id=15]
 [ext_resource path="res://assets/Shadows/SmallShadow.png" type="Texture" id=16]
-[ext_resource path="res://assets/Enemies/Bat_eye.png" type="Texture" id=17]
+[ext_resource path="res://assets/Enemies/Bat/Bat_eye.png" type="Texture" id=17]
 [ext_resource path="res://assets/Audio/Enemies/Bat/Bat.wav" type="AudioStream" id=18]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true

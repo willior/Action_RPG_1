@@ -113,7 +113,6 @@ func _physics_process(delta):
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
 			else:
-				#print('wolf lost sight of player.')
 				eye.modulate = Color(0,0,0)
 				eye.frame = sprite.frame
 				state = IDLE
@@ -230,51 +229,6 @@ func _on_Hurtbox_area_entered(area):
 		if stats.health <= 0:
 			FRICTION = 600
 
-#	$EnemyHealth.show_health()
-#	if z_index != area.get_parent().get_parent().z_index:
-#		SoundPlayer.play_sound("miss")
-#		hurtbox.display_damage_popup("Miss!", false)
-#		return
-#	evasion_mod = 0
-#	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, stats.evasion+evasion_mod)
-#	if !hit:
-#		SoundPlayer.play_sound("miss")
-#		hurtbox.display_damage_popup("Miss!", false)
-#	else:
-#		audio_hit()
-#		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
-#		var damage = Global.damage_calculation(area.damage, stats.defense, area.randomness)
-#		if is_crit:
-#			damage *= 2
-#		stats.health -= damage
-#
-#		var damage_count = min(damage/2, 32)
-#		while damage_count > 0:
-#			# create_hit_effect(damage_count)
-#			Global.create_blood_effect(damage_count, global_position, z_index)
-#			Global.create_blood_effect(damage_count, global_position, z_index)
-#			damage_count -= 4
-#
-#		hurtbox.display_damage_popup(str(damage), is_crit)
-#		hurtbox.create_hit_effect()
-#		#hurtbox.start_invincibility(0.3)
-#
-#		sprite.modulate = Color(1,1,0)
-#		if stats.health > 0:
-#			knockback = area.knockback_vector * 120 # knockback velocity
-#			tween.interpolate_property(sprite,
-#			"modulate",
-#			Color(1, 1, 0),
-#			Color(1, 1, 1),
-#			0.2,
-#			Tween.TRANS_LINEAR,
-#			Tween.EASE_IN
-#			)
-#			tween.start()
-#		else:
-#			FRICTION = 600
-#			knockback = area.knockback_vector * 180 # knockback velocity on killing blow
-
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")
 
@@ -358,11 +312,10 @@ func _on_VisibilityNotifier2D_screen_exited():
 		queue_free()
 		var newEnemySpawner = EnemySpawner.instance()
 		get_parent().call_deferred("add_child", newEnemySpawner)
-		newEnemySpawner.ENEMY = load("res://assets/Enemies/Wolf.tscn")
+		newEnemySpawner.ENEMY = load("res://assets/Enemies/Wolf/Wolf.tscn")
 		newEnemySpawner.health = stats.health
 		newEnemySpawner.global_position = global_position
 		newEnemySpawner.z_index = z_index
 	
 func set_health(value):
 	stats.health = value
-	# print(ENEMY_NAME, ' spawned, setting health to previous value: ', value)

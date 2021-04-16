@@ -30,5 +30,3 @@ func _on_FlyerArea_body_exited(body):
 		body.z_index = 0
 		body.set_collision_mask_bit(17, false)
 		Enemy.set_player_collision(body)
-
-

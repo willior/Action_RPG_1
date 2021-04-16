@@ -1,125 +1,126 @@
 [gd_scene load_steps=74 format=2]
 
-[ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=1]
-[ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=6]
-[ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/Enemies/CrowStats.gd" type="Script" id=9]
-[ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/Enemies/Crow.gd" type="Script" id=11]
-[ext_resource path="res://assets/Enemies/Crow.png" type="Texture" id=12]
-[ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/Enemies/Crow_eye.png" type="Texture" id=14]
-[ext_resource path="res://assets/Audio/Enemies/Crow/Crow_caw.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/Enemies/EnemyHealth.tscn" type="PackedScene" id=16]
-[ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=17]
+[ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=1]
+[ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Enemies/EnemyHealth.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/Enemies/Crow/Crow.gd" type="Script" id=10]
+[ext_resource path="res://assets/Enemies/Crow/CrowStats.gd" type="Script" id=11]
+[ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/Audio/Enemies/Crow/Crow_caw.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=14]
+[ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=15]
+[ext_resource path="res://assets/Enemies/Crow/Crow.png" type="Texture" id=16]
+[ext_resource path="res://assets/Enemies/Crow/Crow_eye.png" type="Texture" id=17]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
-shader = ExtResource( 6 )
+shader = ExtResource( 1 )
 shader_param/active = false
 
 [sub_resource type="CanvasItemMaterial" id=2]
 light_mode = 1
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 48, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 96, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 144, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 192, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 240, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 288, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 336, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 384, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 432, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 480, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 528, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 0, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 48, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 96, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 144, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 192, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 240, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 288, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 336, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 384, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 432, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 480, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 14 )
+atlas = ExtResource( 17 )
 region = Rect2( 528, 48, 48, 48 )
 
 [sub_resource type="SpriteFrames" id=27]
@@ -223,7 +224,7 @@ tracks/2/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 15 )
+"stream": ExtResource( 13 )
 } ],
 "times": PoolRealArray( 0.3 )
 }
@@ -507,12 +508,12 @@ radius = 5.0
 [node name="Crow" type="KinematicBody2D"]
 collision_layer = 16
 collision_mask = 0
-script = ExtResource( 11 )
+script = ExtResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( 0, -6 )
-texture = ExtResource( 12 )
+texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
 vframes = 2
 hframes = 12
@@ -528,14 +529,14 @@ frame = 12
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -3 )
 shape = SubResource( 28 )
 
-[node name="CrowStats" parent="." instance=ExtResource( 4 )]
-script = ExtResource( 9 )
+[node name="CrowStats" parent="." instance=ExtResource( 12 )]
+script = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fly = SubResource( 29 )
@@ -559,7 +560,7 @@ collision_mask = 0
 position = Vector2( 0, -9 )
 shape = SubResource( 51 )
 
-[node name="Hitbox" parent="." instance=ExtResource( 5 )]
+[node name="Hitbox" parent="." instance=ExtResource( 6 )]
 position = Vector2( 0, -10 )
 collision_mask = 4
 damage = 16.0
@@ -569,29 +570,29 @@ accuracy = 4.0
 position = Vector2( 0, 3 )
 shape = SubResource( 52 )
 
-[node name="Hurtbox" parent="." instance=ExtResource( 2 )]
+[node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 4 )
 collision_layer = 8
-script = ExtResource( 17 )
+script = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -20 )
 shape = SubResource( 53 )
 
-[node name="WanderController" parent="." instance=ExtResource( 7 )]
+[node name="WanderController" parent="." instance=ExtResource( 3 )]
 visible = false
 
-[node name="PlayerDetectionZone" parent="." instance=ExtResource( 3 )]
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
 visible = false
 scale = Vector2( 3, 3 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 shape = SubResource( 54 )
 
-[node name="AttackController" parent="." instance=ExtResource( 13 )]
+[node name="AttackController" parent="." instance=ExtResource( 2 )]
 visible = false
 
-[node name="AttackPlayerZone" parent="." instance=ExtResource( 10 )]
+[node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
 visible = false
 scale = Vector2( 2, 2 )
 collision_layer = 0
@@ -605,7 +606,7 @@ shape = SubResource( 55 )
 wait_time = 0.8
 one_shot = true
 
-[node name="SoftCollision" parent="." instance=ExtResource( 8 )]
+[node name="SoftCollision" parent="." instance=ExtResource( 9 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
@@ -626,11 +627,11 @@ wait_time = 0.4
 one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 15 )
+stream = ExtResource( 13 )
 max_distance = 320.0
 attenuation = 0.4
 
-[node name="EnemyHealth" parent="." instance=ExtResource( 16 )]
+[node name="EnemyHealth" parent="." instance=ExtResource( 7 )]
 visible = false
 position = Vector2( 0, 3 )
 

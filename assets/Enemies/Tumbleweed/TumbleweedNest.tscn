@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/Enemies/TumbleweedNest.gd" type="Script" id=1]
+[ext_resource path="res://assets/Enemies/Tumbleweed/TumbleweedNest.gd" type="Script" id=1]
+
 
 [node name="TumbleweedRepeatSpawner" type="Node2D"]
 pause_mode = 1

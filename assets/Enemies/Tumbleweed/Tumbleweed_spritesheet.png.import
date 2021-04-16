@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tumbleweed_spritesheet.png-4d9f88b02013168dad48d2c934937829.stex"
+path="res://.import/Tumbleweed_spritesheet.png-29d7a9774be2a74f46c3b8f4f3ac70de.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemies/Tumbleweed_spritesheet.png"
-dest_files=[ "res://.import/Tumbleweed_spritesheet.png-4d9f88b02013168dad48d2c934937829.stex" ]
+source_file="res://assets/Enemies/Tumbleweed/Tumbleweed_spritesheet.png"
+dest_files=[ "res://.import/Tumbleweed_spritesheet.png-29d7a9774be2a74f46c3b8f4f3ac70de.stex" ]
 
 [params]
 

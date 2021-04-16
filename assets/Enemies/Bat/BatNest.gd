@@ -1,6 +1,6 @@
 extends Node2D
 
-const BAT = preload("res://assets/Enemies/Bat.tscn")
+const BAT = preload("res://assets/Enemies/Bat/Bat.tscn")
 
 onready var timer = $Timer
 var enemies

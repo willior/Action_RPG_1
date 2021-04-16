@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Crow_eye.png-0af74fb4f8d2a5da66a5e4e988b429fa.stex"
+path="res://.import/Crow.png-3c23bc3171a2fec76e74772c7257525e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemies/Crow_eye.png"
-dest_files=[ "res://.import/Crow_eye.png-0af74fb4f8d2a5da66a5e4e988b429fa.stex" ]
+source_file="res://assets/Enemies/Crow/Crow.png"
+dest_files=[ "res://.import/Crow.png-3c23bc3171a2fec76e74772c7257525e.stex" ]
 
 [params]
 

@@ -15,6 +15,8 @@ var inventory_resource = load("res://assets/Player/Inventory.gd")
 var inventory = inventory_resource.new()
 var pouch_resource = load("res://assets/Player/Pouch.gd")
 var pouch = pouch_resource.new()
+var ingredient1_OK : bool
+var ingredient2_OK : bool
 
 enum {
 	MOVE,
@@ -145,23 +147,46 @@ func _input(event):
 					noStamina()
 					
 			if event.is_action_pressed("item"): # G
-				var item_used = inventory._items[inventory.current_selected_item]
-				match item_used.item_reference.type:
-					0: # CONSUMABLE
-						inventory.use_item(1)
-					1: # TOOL
-						pass
-					2: # QUEST
-						if talkTimer.is_stopped() && !dying:
-							if !using_item:
-								talkTimer.start()
-								var dialogBox = DialogBox.instance()
-								dialogBox.dialog_script = [{'text': "Can't use that here."}]
-								get_node("/root/World/GUI").add_child(dialogBox)
-								return
-							else:
-								talkTimer.start()
-								interactObject.use_item_on_object()
+#				var item_used = inventory._items[inventory.current_selected_item]
+#				match item_used.item_reference.type:
+#					0: # CONSUMABLE
+#						inventory.use_item(1)
+#					1: # TOOL
+#						pass
+#					2: # QUEST
+#						if talkTimer.is_stopped() && !dying:
+#							if !using_item:
+#								talkTimer.start()
+#								var dialogBox = DialogBox.instance()
+#								dialogBox.dialog_script = [{'text': "Can't use that here."}]
+#								get_node("/root/World/GUI").add_child(dialogBox)
+#								return
+#							else:
+#								talkTimer.start()
+#								interactObject.use_item_on_object()
+				
+				var ingredients = pouch.get_ingredients()
+				for i in range(ingredients.size()):
+					if ingredients[i].ingredient_reference.name == "Rock" && ingredients[i].quantity > 0:
+						ingredient1_OK = true
+						continue
+					if ingredients[i].ingredient_reference.name == "Clay" && ingredients[i].quantity > 0:
+						ingredient2_OK = true
+						continue
+				if ingredient1_OK && ingredient2_OK:
+					pouch.remove_ingredient("Rock", 1)
+					pouch.remove_ingredient("Clay", 1)
+					var HARDBALL = load("res://assets/Player/Abilities/Hardball.tscn")
+					var hardball = HARDBALL.instance()
+					hardball.global_position = global_position
+					get_node("/root/World").add_child(hardball)
+					ingredient1_OK = false
+					ingredient2_OK = false
+				else:
+					print('not enough ingredients to cast')
+					bamboo.play()
+					ingredient1_OK = false
+					ingredient2_OK = false
 		
 		ATTACK1:
 			if event.is_action_pressed("attack") && !event.is_echo():
@@ -176,7 +201,7 @@ func _input(event):
 				else:
 					attack1_queued = true
 		ACTION:
-			print('input in ACTION state')
+			pass
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -798,7 +823,9 @@ func pickup_finished():
 		attack_charging = true
 	state = MOVE
 	
-func action_state(_delta):
+func action_state(delta):
+	velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
+	move()
 	if examining:
 		self.noticeDisplay = false
 	if talking:
@@ -807,6 +834,14 @@ func action_state(_delta):
 	if interacting:
 		# interacting = false
 		self.interactNoticeDisplay = false
+		
+func action_finished():
+	animationTree.active = true
+	reset_interaction()
+	if Input.is_action_pressed("attack"):
+		charge_reset()
+		attack_charging = true
+	state = MOVE
 
 # when the Player interacts with something, their interactHitbox is disabled
 # the TalkTimer is started lasting for 0.5 seconds (default)
