@@ -1,6 +1,7 @@
 extends Node
 
 const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
+var IngredientPickup = load("res://assets/Ingredients/IngredientPickup.tscn")
 
 var player1
 var player2
@@ -121,7 +122,23 @@ func create_blood_effect(damage_count, location, z_index):
 	# get_parent().add_child(blood_effect)
 	# get_node("/root/World/Map").add_child(blood_effect)
 	get_node("/root/World/Map").call_deferred("add_child", blood_effect)
-	
+
+func ingredient_drop(i_1 , chance_1, i_2, chance_2, pos, z):
+	randomize()
+	var ingredientPickup = IngredientPickup.instance()
+	var check_1 = randf()
+	if check_1 <= chance_1:
+		var check_2 = randf()
+		if check_2 <= chance_2:
+			print('rare drop: ', i_2)
+			ingredientPickup.ingredient_name = i_2
+		else:
+			print('common drop: ', i_1)
+			ingredientPickup.ingredient_name = i_1
+		get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
+		ingredientPickup.global_position = pos
+		ingredientPickup.z_index = z
+
 func reset_input_after_dialog():
 	update_player()
 	player1.check_attack_input()

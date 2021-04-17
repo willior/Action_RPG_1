@@ -1,6 +1,6 @@
 extends Node2D
 
-const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
+# const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
@@ -133,13 +133,6 @@ func no_health(enemy, death_effect):
 	get_node("/root/World/Map").call_deferred("add_child", death_effect)
 	for i in range(16,0,-2):
 		Global.create_blood_effect(i, enemy.global_position, enemy.z_index)
-#	Global.create_blood_effect(12, global_position, z_index)
-#	Global.create_blood_effect(8, global_position, z_index)
-#	Global.create_blood_effect(6, global_position, z_index)
-#	Global.create_blood_effect(4, global_position, z_index)
-#	Global.create_blood_effect(4, global_position, z_index)
-#	Global.create_blood_effect(2, global_position, z_index)
-#	Global.create_blood_effect(2, global_position, z_index)
 	Global.distribute_exp(enemy.stats.experience_pool)
 	var expNotice = ExpNotice.instance()
 	expNotice.position = enemy.global_position

@@ -34,7 +34,6 @@ func remove_ingredient(ingredient_name, quantity):
 		var inventory_ingredient = _ingredients[i]
 		
 		if inventory_ingredient.ingredient_reference.name != ingredient_name:
-			print('next loop')
 			continue
 		
 		if (inventory_ingredient.quantity-quantity) < 0:

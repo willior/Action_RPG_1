@@ -3,7 +3,6 @@ extends KinematicBody2D
 const BloodDeathEffect = preload("res://assets/Effects/Enemies/BloodDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
 var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
 var attackSFX = preload("res://assets/Audio/Enemies/Wolf/Wolf_Attack_1.wav")
 var detectSFX = preload("res://assets/Audio/Enemies/Wolf/Wolf_Growl_1.wav")
@@ -278,19 +277,7 @@ func _on_WolfStats_no_health():
 	expNotice.position = global_position
 	expNotice.expDisplay = stats.experience_pool
 	get_node("/root/World").add_child(expNotice)
-	var ingredientPickup = IngredientPickup.instance()
-	match randi() % 4: # random number between 0 & 3
-		0:
-			ingredientPickup.ingredient_name = "Rock"
-		1:
-			ingredientPickup.ingredient_name = "Clay"
-		2:
-			ingredientPickup.ingredient_name = "Salt"
-		3:
-			ingredientPickup.ingredient_name = "Water"
-	get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
-	ingredientPickup.global_position = global_position
-	ingredientPickup.z_index = z_index
+	Global.ingredient_drop("Clay", 0.125, "Salt", 0.0625, global_position, z_index)
 	queue_free()
 	
 func audio_detect():

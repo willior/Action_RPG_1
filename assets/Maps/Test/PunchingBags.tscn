@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Tilesets/grassBasic_lightInner/tileset_grassBasic_lightInner.tres" type="TileSet" id=4]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/Enemies/Bat/BatNest.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node2D"]
 pause_mode = 2
@@ -59,8 +59,65 @@ remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
-[node name="BatNest" parent="YSort/Enemies" instance=ExtResource( 6 )]
-position = Vector2( 456, 128 )
+[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat8" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat20" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat19" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat18" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat17" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat16" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat15" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat14" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat13" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat12" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
+
+[node name="Bat11" parent="YSort/Enemies" instance=ExtResource( 6 )]
+position = Vector2( 472, 192 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

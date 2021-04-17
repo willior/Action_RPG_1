@@ -3,7 +3,6 @@ const ENEMY_NAME = "Bat"
 const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
 var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
 
 export var ACCELERATION = 240
@@ -225,19 +224,8 @@ func _on_BatStats_no_health():
 	)
 	tween.start()
 	yield(tween, "tween_all_completed")
-	var ingredientPickup = IngredientPickup.instance()
-	match randi() % 4: # random number between 0 & 3
-		0:
-			ingredientPickup.ingredient_name = "Rock"
-		1:
-			ingredientPickup.ingredient_name = "Clay"
-		2:
-			ingredientPickup.ingredient_name = "Salt"
-		3:
-			ingredientPickup.ingredient_name = "Water"
-	get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
-	ingredientPickup.global_position = global_position
-	ingredientPickup.z_index = z_index
+	# 12.5% chance to drop rock /// 6.25% chance to drop clay
+	Global.ingredient_drop("Rock", 0.125, "Clay", 0.0625, global_position, z_index)
 	queue_free()
 
 func _on_Hurtbox_invincibility_started():

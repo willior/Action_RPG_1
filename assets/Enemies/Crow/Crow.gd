@@ -5,7 +5,6 @@ const EnemyHitEffect = preload("res://assets/Effects/Enemies/Crow_HitEffect.tscn
 const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
 var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
 const attackSFX = preload("res://assets/Audio/Enemies/Crow/Crow_cawcawcaw.wav")
 const hitSFX = preload("res://assets/Audio/Enemies/Crow/Crow_caw.wav")
@@ -237,31 +236,11 @@ func _on_CrowStats_no_health():
 	)
 	tween.start()
 	yield(tween, "tween_all_completed")
-	create_hit_effect(32)
-	create_hit_effect(32)
-	create_hit_effect(32)
-	create_hit_effect(32)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	var ingredientPickup = IngredientPickup.instance()
-	match randi() % 4: # random number between 0 & 3
-		0:
-			ingredientPickup.ingredient_name = "Rock"
-		1:
-			ingredientPickup.ingredient_name = "Clay"
-		2:
-			ingredientPickup.ingredient_name = "Salt"
-		3:
-			ingredientPickup.ingredient_name = "Water"
-	get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
-	ingredientPickup.global_position = global_position
-	ingredientPickup.z_index = z_index
+	for _i in range(0, 4):
+		create_hit_effect(32)
+		Global.create_blood_effect(40, global_position, z_index)
+		Global.create_blood_effect(40, global_position, z_index)
+	Global.ingredient_drop("Water", 0.125, "Salt", 0.0625, global_position, z_index)
 	queue_free()
 
 func idle_animation():
