@@ -35,6 +35,10 @@ var attacking = false
 var attack_on_cooldown = false
 var target
 var facingLeft = false
+var common_drop_name = "Rock"
+var common_drop_chance = 0.125
+var rare_drop_name = "Clay"
+var rare_drop_chance = 0.0625
 
 onready var stats = $BatStats
 onready var timer = $Timer
@@ -158,7 +162,7 @@ func seek_player():
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
 		target = attackPlayerZone.player.global_position
-		disable_detection()
+		Enemy.disable_detection(self)
 		attacking = true
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
@@ -178,13 +182,7 @@ func _on_AttackTimer_timeout():
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
-		enable_detection()
-	
-func disable_detection():
-	Enemy.disable_detection(self)
-
-func enable_detection():
-	Enemy.enable_detection(self)
+		Enemy.enable_detection(self)
 
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
@@ -222,11 +220,9 @@ func _on_BatStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
-	tween.start()
-	yield(tween, "tween_all_completed")
-	# 12.5% chance to drop rock /// 6.25% chance to drop clay
-	Global.ingredient_drop("Rock", 0.125, "Clay", 0.0625, global_position, z_index)
-	queue_free()
+	yield(get_tree().create_timer(0.5), "timeout")
+	# Global.ingredient_drop("Rock", 0.125, "Clay", 0.0625, global_position, z_index)
+	# queue_free()
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")

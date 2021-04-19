@@ -40,6 +40,10 @@ var attack_on_cooldown = false
 var target
 var flying
 var currentAnim
+var common_drop_name = "Water"
+var common_drop_chance = 0.125
+var rare_drop_name = "Salt"
+var rare_drop_chance = 0.0625
 
 onready var stats = $CrowStats
 onready var timer = $Timer
@@ -73,14 +77,12 @@ func _ready():
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
 	knockback = move_and_slide(knockback)
-	
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 			seek_player()
 			if wanderController.get_time_left() == 0:
 				update_wander_state()
-				
 		WANDER:
 			seek_player()
 			if wanderController.get_time_left() == 0:
@@ -91,7 +93,6 @@ func _physics_process(delta):
 			
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
-				
 		CHASE:
 			if playerDetectionZone.player != null:
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
@@ -100,7 +101,6 @@ func _physics_process(delta):
 				eye.modulate = Color(0,0,0)
 				eye.frame = sprite.frame
 				state = IDLE
-
 		ATTACK:
 			if attacking:
 				attacking = false
@@ -117,7 +117,7 @@ func _physics_process(delta):
 		velocity += softCollision.get_push_vector() * delta * 400
 		
 	velocity = move_and_slide(velocity)
-	
+
 func examine():
 	var dialog_script = [
 		{'text': "A common crow."},
@@ -146,7 +146,7 @@ func seek_player():
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
 		target = attackPlayerZone.player.global_position
-		disable_detection()
+		Enemy.disable_detection(self)
 		attacking = true
 #		$DelayTimer.start()
 #		yield($DelayTimer, "timeout")
@@ -165,13 +165,7 @@ func _on_AttackTimer_timeout():
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
-		enable_detection()
-	
-func disable_detection():
-	Enemy.disable_detection(self)
-
-func enable_detection():
-	Enemy.enable_detection(self)
+		Enemy.enable_detection(self)
 
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
@@ -185,11 +179,11 @@ func update_wander_state():
 		fly_animation()
 	
 	wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
-		
+
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
-	
+
 func create_hit_effect(damage_count):
 	var hit_effect = EnemyHitEffect.instance()
 	var randX = int(rand_range(-damage_count, damage_count))
@@ -216,39 +210,39 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_CrowStats_no_health():
-	var enemyDeathEffect = EnemyDeathEffect.instance()
-	Enemy.no_health(self, enemyDeathEffect)
-	tween.interpolate_property(sprite,
-	"offset:y",
-	-16,
-	0,
-	0.5,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
-	tween.interpolate_property(eye,
-	"offset:y",
-	-16,
-	0,
-	0.5,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
-	tween.start()
-	yield(tween, "tween_all_completed")
+	var death_effect = EnemyDeathEffect.instance()
+	Enemy.no_health(self, death_effect)
+	if flying:
+		tween.interpolate_property(sprite,
+		"offset:y",
+		-16,
+		0,
+		0.5,
+		Tween.TRANS_QUART,
+		Tween.EASE_IN
+		)
+		tween.interpolate_property(eye,
+		"offset:y",
+		-16,
+		0,
+		0.5,
+		Tween.TRANS_QUART,
+		Tween.EASE_IN
+		)
+	yield(get_tree().create_timer(0.5), "timeout")
 	for _i in range(0, 4):
 		create_hit_effect(32)
 		Global.create_blood_effect(40, global_position, z_index)
 		Global.create_blood_effect(40, global_position, z_index)
 	Global.ingredient_drop("Water", 0.125, "Salt", 0.0625, global_position, z_index)
-	queue_free()
+	# queue_free()
 
 func idle_animation():
 	animationState.travel("Idle")
-	
+
 func fly_animation():
 	animationState.travel("Fly")
-	
+
 func set_flying(value):
 	flying = value
 	if !flying:
@@ -262,7 +256,7 @@ func set_flying(value):
 func audio_caw():
 	audio.stream = hitSFX
 	audio.play()
-	
+
 func audio_cawcawcaw():
 	audio.stream = attackSFX
 	audio.play()
@@ -278,6 +272,6 @@ func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 		newEnemySpawner.health = stats.health
 		newEnemySpawner.global_position = global_position
 		newEnemySpawner.z_index = z_index
-	
+
 func set_health(value):
 	stats.health = value

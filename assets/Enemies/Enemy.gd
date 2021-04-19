@@ -29,8 +29,10 @@ func set_player_collision(body):
 	var player = get_node("/root/World/YSort/Player")
 	if player.z_index == body.z_index:
 		body.set_collision_layer_bit(4, true)
-		body.disable_detection()
-		body.enable_detection()
+		Enemy.disable_detection(body)
+		Enemy.enable_detection(body)
+#		body.disable_detection()
+#		body.enable_detection()
 	else:
 		body.set_collision_layer_bit(4, false)
 
@@ -126,8 +128,7 @@ func no_health(enemy, death_effect):
 	Tween.EASE_IN
 	)
 	enemy.tween.start()
-	enemy.timer.start(0.5)
-	yield(enemy.timer, "timeout")
+	yield(get_tree().create_timer(0.5), "timeout")
 	death_effect.global_position = enemy.global_position
 	death_effect.z_index = enemy.z_index
 	get_node("/root/World/Map").call_deferred("add_child", death_effect)
@@ -138,3 +139,4 @@ func no_health(enemy, death_effect):
 	expNotice.position = enemy.global_position
 	expNotice.expDisplay = enemy.stats.experience_pool
 	get_node("/root/World").add_child(expNotice)
+	enemy.queue_free()

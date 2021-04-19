@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/ItemsInventory/Healing_Potion.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=22]
+[ext_resource path="res://assets/Cutscene/CutsceneTrigger.tscn" type="PackedScene" id=23]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type particles;
@@ -426,6 +428,12 @@ position = Vector2( -93.5364, -8.99631 )
 [node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 11 )]
 position = Vector2( 48.3645, -74.2587 )
 
+[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( -103, 100 )
+
+[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( -39, 151 )
+
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="Metal_Pot" parent="YSort/Items" instance=ExtResource( 9 )]
@@ -439,6 +447,8 @@ position = Vector2( 81, 90 )
 
 [node name="Healing_Potion3" parent="YSort/Items" instance=ExtResource( 21 )]
 position = Vector2( 45, 111 )
+
+[node name="CutsceneTrigger" parent="YSort/Items" instance=ExtResource( 23 )]
 
 [node name="NPCs" type="YSort" parent="YSort"]
 

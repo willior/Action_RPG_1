@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=1]
 [ext_resource path="res://assets/World/Rivers/River_1.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/System/Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/World/Doodads/Rock_Small_5.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Trees/Tree_1_green_alt.tscn" type="PackedScene" id=6]
@@ -130,26 +130,8 @@ __meta__ = {
 "_edit_vertical_guides_": [ 128.0 ]
 }
 
-[node name="CanvasModulate" parent="." instance=ExtResource( 25 )]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-pause_mode = 1
+[node name="Camera2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 352, 16 )
-offset = Vector2( 0, -8 )
-current = true
-limit_left = 0
-limit_top = 0
-limit_right = 100000
-limit_bottom = 100000
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 8.0
-drag_margin_left = 0.05
-drag_margin_top = 0.1
-drag_margin_right = 0.05
-drag_margin_bottom = 0.1
-script = ExtResource( 3 )
 
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
@@ -2031,6 +2013,8 @@ volume_db = -48.0
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 layer = 4
+
+[node name="CanvasModulate" parent="." instance=ExtResource( 25 )]
 
 [editable path="Map/Exit_toHome"]
 

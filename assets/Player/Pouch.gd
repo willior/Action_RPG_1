@@ -59,7 +59,6 @@ func add_ingredient(ingredient_name, quantity):
 	for i in range(_ingredients.size()):
 		var inventory_ingredient = _ingredients[i]
 		if inventory_ingredient.ingredient_reference.name != ingredient_name:
-			print('next loop')
 			continue
 		if inventory_ingredient.quantity+quantity > ingredient.max_stack_size:
 			print("max stack (", ingredient.max_stack_size, ") reached; discarding extras (", ingredient.max_stack_size-(inventory_ingredient.quantity+quantity), ")")

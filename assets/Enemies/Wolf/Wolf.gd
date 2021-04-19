@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const BloodDeathEffect = preload("res://assets/Effects/Enemies/BloodDeathEffect.tscn")
+const EnemyDeathEffect = preload("res://assets/Effects/Enemies/BloodDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
@@ -41,6 +41,10 @@ var attacking = false
 var attack_on_cooldown = false
 var target
 var currentAnim
+var common_drop_name = "Clay"
+var common_drop_chance = 0.125
+var rare_drop_name = "Salt"
+var rare_drop_chance = 0.0625
 
 onready var stats = $WolfStats
 onready var timer = $Timer
@@ -170,7 +174,7 @@ func seek_player(): # runs every frame of the IDLE and WANDER states
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
 		target = attackPlayerZone.player.global_position
-		disable_detection()
+		Enemy.disable_detection(self)
 		attacking = true
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
@@ -190,17 +194,7 @@ func _on_AttackTimer_timeout():
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
-		enable_detection()
-
-func disable_detection():
-	Enemy.disable_detection(self)
-#	attackPlayerZone.set_deferred("monitoring", false)
-#	playerDetectionZone.set_deferred("monitoring", false)
-
-func enable_detection():
-	Enemy.enable_detection(self)
-#	attackPlayerZone.set_deferred("monitoring", true)
-#	playerDetectionZone.set_deferred("monitoring", true)
+		Enemy.enable_detection(self)
 
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
@@ -235,49 +229,16 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_WolfStats_no_health():
-	disable_detection()
-	hurtbox.set_deferred("monitoring", false) # turn off hurtbox
-	#hitbox.set_deferred("monitorable", false)
+	var death_effect = EnemyDeathEffect.instance()
+	Enemy.no_health(self, death_effect)
 	$Hitbox/CollisionShape2D.queue_free()
 	animationPlayer.stop()
-	state = DEAD
-	tween.interpolate_property(sprite,
-	"modulate",
-	Color(1, 1, 0),
-	Color(1, 0, 0),
-	0.5,
-	Tween.TRANS_LINEAR,
-	Tween.EASE_IN
-	)
-	tween.start()
-	yield(tween, "tween_all_completed")
-	var bloodDeathEffect = BloodDeathEffect.instance()
-	get_node("/root/World/Map").call_deferred("add_child", bloodDeathEffect)
-	bloodDeathEffect.global_position = global_position
-	bloodDeathEffect.z_index = z_index
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(40, global_position, z_index)
-	Global.create_blood_effect(32, global_position, z_index)
-	Global.create_blood_effect(32, global_position, z_index)
-	Global.create_blood_effect(32, global_position, z_index)
-	Global.create_blood_effect(32, global_position, z_index)
-	Global.distribute_exp(stats.experience_pool)
-	var expNotice = ExpNotice.instance()
-	expNotice.position = global_position
-	expNotice.expDisplay = stats.experience_pool
-	get_node("/root/World").add_child(expNotice)
+	Enemy.disable_detection(self)
+	yield(get_tree().create_timer(0.5), "timeout")
+	for i in range (16, 32):
+		Global.create_blood_effect(i, global_position, z_index)
 	Global.ingredient_drop("Clay", 0.125, "Salt", 0.0625, global_position, z_index)
-	queue_free()
+	# queue_free()
 	
 func audio_detect():
 	audio.stream = detectSFX

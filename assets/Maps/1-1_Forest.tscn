@@ -769,8 +769,6 @@ __meta__ = {
 "_edit_vertical_guides_": [ 128.0 ]
 }
 
-[node name="FadeIn" parent="." instance=ExtResource( 4 )]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
 position = Vector2( 287.5, 71.75 )
@@ -1927,6 +1925,8 @@ position = Vector2( 115, 44 )
 
 [node name="Skeleton" parent="YSort" instance=ExtResource( 58 )]
 position = Vector2( 712, 80 )
+
+[node name="FadeIn" parent="." instance=ExtResource( 4 )]
 
 [node name="GUI" parent="." instance=ExtResource( 2 )]
 
