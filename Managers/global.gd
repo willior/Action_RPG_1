@@ -123,18 +123,21 @@ func create_blood_effect(damage_count, location, z_index):
 	# get_node("/root/World/Map").add_child(blood_effect)
 	get_node("/root/World/Map").call_deferred("add_child", blood_effect)
 
-func ingredient_drop(i_1 , chance_1, i_2, chance_2, pos, z):
+func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z):
+	# checks an argument (common_chance) against a randf
+	# if it passes, drop is guaranteed; then checks a second argument (rare_chance) against a second randf
+	# if it passes, the drop is rare; if it doesn't, the drop is common
 	randomize()
 	var ingredientPickup = IngredientPickup.instance()
-	var check_1 = randf()
-	if check_1 <= chance_1:
-		var check_2 = randf()
-		if check_2 <= chance_2:
-			print('rare drop: ', i_2)
-			ingredientPickup.ingredient_name = i_2
+	var check_common = randf()
+	if check_common <= common_chance:
+		var check_rare = randf()
+		if check_rare <= rare_chance:
+			print('rare drop: ', rare_drop)
+			ingredientPickup.ingredient_name = rare_drop
 		else:
-			print('common drop: ', i_1)
-			ingredientPickup.ingredient_name = i_1
+			print('common drop: ', common_drop)
+			ingredientPickup.ingredient_name = common_drop
 		get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
 		ingredientPickup.global_position = pos
 		ingredientPickup.z_index = z

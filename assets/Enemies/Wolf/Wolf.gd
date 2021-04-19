@@ -253,7 +253,6 @@ func _on_WolfStats_no_health():
 	yield(tween, "tween_all_completed")
 	var bloodDeathEffect = BloodDeathEffect.instance()
 	get_node("/root/World/Map").call_deferred("add_child", bloodDeathEffect)
-	# enemyDeathEffect.enemy = ENEMY_NAME
 	bloodDeathEffect.global_position = global_position
 	bloodDeathEffect.z_index = z_index
 	Global.create_blood_effect(40, global_position, z_index)
