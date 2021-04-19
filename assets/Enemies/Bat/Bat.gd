@@ -71,7 +71,7 @@ func _ready():
 	sprite.playing = true
 	eye.playing = true
 	Global.set_world_collision(self, z_index)
-	
+
 func set_speed_scale(value):
 	sprite.speed_scale = value
 	eye.speed_scale = sprite.speed_scale
@@ -80,7 +80,6 @@ func set_speed_scale(value):
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
 	knockback = move_and_slide(knockback)
-	
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -137,11 +136,12 @@ func accelerate_towards_point(point, speed, delta):
 	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
 
 func seek_player():
+	hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking:
 		set_speed_scale(2)
 		eye.modulate = Color(1,0.8,0)
 		state = CHASE
-		
+
 # attacking
 # the attack_player() function is run when the enemy is in the CHASE state
 # if that player enters the enemy's attackPlayerZone AND the attack is NOT on cooldown:
@@ -165,19 +165,19 @@ func attack_player():
 		attacking = true
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
-		# hitbox.set_deferred("monitorable", true)
+		hitbox.set_deferred("monitorable", true)
 		set_speed_scale(4)
 		eye.modulate = Color(1,0,0)
 		attackTimer.start()
 		state = ATTACK
-		
+
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
-	# hitbox.set_deferred("monitorable", false)
+	hitbox.set_deferred("monitorable", false)
 	set_speed_scale(1)
 	eye.modulate = Color(0,0,0)
 	state = IDLE
-	timer.start(1)
+	timer.start()
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
@@ -186,11 +186,11 @@ func _on_AttackTimer_timeout():
 func update_wander_state():
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 	wanderController.start_wander_timer(rand_range(1, 3)) # starts wander timer between 1s & 3s
-		
+
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
-	
+
 func create_hit_effect(_damage_count):
 	pass
 

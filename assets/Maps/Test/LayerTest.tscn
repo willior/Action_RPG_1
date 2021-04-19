@@ -232,59 +232,14 @@ remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
-[node name="Bat12" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 216, 149 )
-
-[node name="Bat11" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 239, 145 )
-
-[node name="Crow12" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 287, 145 )
-
-[node name="Crow11" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 170, 146 )
-
-[node name="Wolf12" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 197, 151 )
-
-[node name="Wolf11" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 259, 149 )
-
-[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 216, 281 )
-
-[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 239, 277 )
-
-[node name="Crow10" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 287, 277 )
-
-[node name="Crow9" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 170, 278 )
-
-[node name="Wolf10" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 197, 283 )
-
-[node name="Wolf9" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 259, 281 )
-
-[node name="Bat8" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 127, 211 )
-
-[node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 342, 209 )
-
-[node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 146, 226 )
-
-[node name="Crow7" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 341, 243 )
-
-[node name="Wolf8" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 146, 178 )
-
 [node name="Wolf7" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 299, 210 )
+position = Vector2( 273, 266 )
+
+[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 134, 206 )
+
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 385, 110 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

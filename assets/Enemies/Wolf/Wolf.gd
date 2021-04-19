@@ -48,7 +48,7 @@ var rare_drop_chance = 0.0625
 onready var stats = $WolfStats
 onready var timer = $Timer
 onready var sprite = $Sprite
-onready var eye = $Sprite/AnimatedSpriteEye
+onready var eye = $Sprite/SpriteEye
 onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
@@ -72,11 +72,8 @@ func _ready():
 	if PlayerLog.enemies_examined[ENEMY_NAME]:
 		examined = true
 	add_to_group("Enemies")
-	# rng.randomize()
-	# random_number = rng.randi_range(0, 4)
 	animationTree.active = true
 	Global.set_world_collision(self, z_index)
-	# Enemy.set_player_collision(self)
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -91,7 +88,6 @@ func _physics_process(delta):
 		IDLE:
 			animationState.travel("Idle")
 			if stats.health <= 0:
-				print(self.name, ' dead in idle state.')
 				state = DEAD
 				return
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -115,8 +111,10 @@ func _physics_process(delta):
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
 			else:
-				eye.modulate = Color(0,0,0)
-				eye.frame = sprite.frame
+				if attacking:
+					eye.modulate = Color(1,0,0,1)
+				else:
+					eye.modulate = Color(0,0,0,0)
 				state = IDLE
 		ATTACK:
 			animationState.travel("Leap")
@@ -133,9 +131,9 @@ func _physics_process(delta):
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
-		
+
 	velocity = move_and_slide(velocity)
-	
+
 func reset_state():
 	state = IDLE
 
@@ -148,25 +146,21 @@ func examine():
 
 func examine_complete(value):
 	examined = value
-			
+
 func accelerate_towards_point(point, speed, delta):
 	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
 	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
 	Enemy.h_flip_handler(sprite, eye, velocity)
 
 func seek_player(): # runs every frame of the IDLE and WANDER states
-	if hitbox.monitorable:
-		hitbox.set_deferred("monitorable", false)
+	hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking && !seeking:
-		#print('wolf sees player...')
 		seeking = true
 		state = IDLE
 		audio_detect()
-		eye.modulate = Color(1,0.8,0)
-		eye.frame = sprite.frame
+		eye.modulate = Color(1,0.8,0,1)
 		chaseTimer.start()
 		yield(chaseTimer, "timeout")
-		#print('... and begins chasing')
 		seeking = false
 		state = CHASE
 
@@ -175,19 +169,17 @@ func attack_player():
 		target = attackPlayerZone.player.global_position
 		Enemy.disable_detection(self)
 		attacking = true
+		eye.modulate = Color(1,0,0,1)
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
 		if stats.health > 0:
 			hitbox.set_deferred("monitorable", true)
-			eye.modulate = Color(1,0,0)
-			# eye.frame = sprite.frame
 			attackTimer.start()
 			state = ATTACK
 
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
-	eye.modulate = Color(0,0,0)
-	eye.frame = sprite.frame
+	eye.modulate = Color(0,0,0,0)
 	state = IDLE
 	timer.start()
 	yield(timer, "timeout")
@@ -206,7 +198,7 @@ func update_wander_state():
 	elif state == 1: # WANDER STATE
 		Enemy.h_flip_handler(sprite, eye, velocity)
 		wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
-		
+
 func pick_random_state(state_list): 
 	state_list.shuffle() # shuffles the order of the list of states recieved
 	return state_list.pop_front() # spits one out
@@ -236,7 +228,7 @@ func _on_WolfStats_no_health():
 	yield(get_tree().create_timer(0.5), "timeout")
 	for i in range (16, 32):
 		Global.create_blood_effect(i, global_position, z_index)
-	
+
 func audio_detect():
 	audio.stream = detectSFX
 	audio.play()

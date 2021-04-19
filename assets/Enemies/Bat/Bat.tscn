@@ -213,11 +213,11 @@ visible = false
 shape = SubResource( 22 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 
 [node name="DelayTimer" type="Timer" parent="."]
-wait_time = 0.33
+wait_time = 0.3
 one_shot = true
 
 [node name="Tween" type="Tween" parent="."]

@@ -151,7 +151,7 @@ func attack_player():
 		eye.frame = sprite.frame
 		attackTimer.start()
 		state = ATTACK
-		
+
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
 	eye.modulate = Color(0,0,0)
