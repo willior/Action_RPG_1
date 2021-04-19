@@ -25,8 +25,7 @@ func _on_FlyZone_body_entered(body):
 		Enemy.set_player_collision(body)
 
 func _on_FlyerArea_body_exited(body):
-	if body.z_index < 0:
-		print(body.name, ' left flyzone or took off. raising altitude')
-		body.z_index = 0
-		body.set_collision_mask_bit(17, false)
-		Enemy.set_player_collision(body)
+	print(body.name, ' left flyzone or took off. raising altitude')
+	body.z_index = 0
+	body.set_collision_mask_bit(17, false)
+	Enemy.set_player_collision(body)

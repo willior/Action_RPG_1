@@ -1,9 +1,8 @@
 extends KinematicBody2D
 const ENEMY_NAME = "Bat"
 const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
-const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
+const EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
 
 export var ACCELERATION = 240
 export var MAX_SPEED = 40
@@ -132,7 +131,7 @@ func examine():
 
 func examine_complete(value):
 	examined = value
-			
+
 func accelerate_towards_point(point, speed, delta):
 	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
 	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
@@ -220,9 +219,6 @@ func _on_BatStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
-	yield(get_tree().create_timer(0.5), "timeout")
-	# Global.ingredient_drop("Rock", 0.125, "Clay", 0.0625, global_position, z_index)
-	# queue_free()
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")
@@ -230,17 +226,5 @@ func _on_Hurtbox_invincibility_started():
 func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
-func _on_VisibilityNotifier2D_viewport_exited(_viewport):
-	if stats.health <= 0:
-		return
-	else:
-		queue_free()
-		var newEnemySpawner = EnemySpawner.instance()
-		get_parent().call_deferred("add_child", newEnemySpawner)
-		newEnemySpawner.ENEMY = load("res://assets/Enemies/Bat/Bat.tscn")
-		newEnemySpawner.health = stats.health
-		newEnemySpawner.global_position = global_position
-		newEnemySpawner.z_index = z_index
-	
-func set_health(value):
-	stats.health = value
+func _on_VisibilityNotifier2D_screen_exited():
+	Enemy.despawn_offscreen(self)

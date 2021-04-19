@@ -2,10 +2,9 @@ extends KinematicBody2D
 const ENEMY_NAME = "Crow"
 const EnemyDeathEffect = preload("res://assets/Effects/Enemies/Crow_DeathEffect.tscn")
 const EnemyHitEffect = preload("res://assets/Effects/Enemies/Crow_HitEffect.tscn")
-const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
-const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
+const EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
+
 const attackSFX = preload("res://assets/Audio/Enemies/Crow/Crow_cawcawcaw.wav")
 const hitSFX = preload("res://assets/Audio/Enemies/Crow/Crow_caw.wav")
 
@@ -137,7 +136,6 @@ func accelerate_towards_point(point, speed, delta):
 func seek_player():
 	hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking:
-		# animationState.travel("Fly")
 		fly_animation()
 		eye.modulate = Color(1,0.8,0)
 		eye.frame = sprite.frame
@@ -148,8 +146,6 @@ func attack_player():
 		target = attackPlayerZone.player.global_position
 		Enemy.disable_detection(self)
 		attacking = true
-#		$DelayTimer.start()
-#		yield($DelayTimer, "timeout")
 		hitbox.set_deferred("monitorable", true)
 		eye.modulate = Color(1,0,0)
 		eye.frame = sprite.frame
@@ -200,6 +196,7 @@ func _on_Hurtbox_area_entered(area):
 			wanderController.start_wander_timer(1)
 		if attacking:
 			attacking = false
+		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
 		animationState.travel("Landing")
 		audio_caw()
 
@@ -234,8 +231,6 @@ func _on_CrowStats_no_health():
 		create_hit_effect(32)
 		Global.create_blood_effect(40, global_position, z_index)
 		Global.create_blood_effect(40, global_position, z_index)
-	Global.ingredient_drop("Water", 0.125, "Salt", 0.0625, global_position, z_index)
-	# queue_free()
 
 func idle_animation():
 	animationState.travel("Idle")
@@ -261,17 +256,5 @@ func audio_cawcawcaw():
 	audio.stream = attackSFX
 	audio.play()
 
-func _on_VisibilityNotifier2D_viewport_exited(_viewport):
-	if stats.health <= 0:
-		return
-	else:
-		queue_free()
-		var newEnemySpawner = EnemySpawner.instance()
-		get_parent().call_deferred("add_child", newEnemySpawner)
-		newEnemySpawner.ENEMY = load("res://assets/Enemies/Crow/Crow.tscn")
-		newEnemySpawner.health = stats.health
-		newEnemySpawner.global_position = global_position
-		newEnemySpawner.z_index = z_index
-
-func set_health(value):
-	stats.health = value
+func _on_VisibilityNotifier2D_screen_exited():
+	Enemy.despawn_offscreen(self)

@@ -1,14 +1,13 @@
 extends KinematicBody2D
-
-const EnemyDeathEffect = preload("res://assets/Effects/Enemies/BloodDeathEffect.tscn")
-const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
-const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
-var attackSFX = preload("res://assets/Audio/Enemies/Wolf/Wolf_Attack_1.wav")
-var detectSFX = preload("res://assets/Audio/Enemies/Wolf/Wolf_Growl_1.wav")
-var hitSFX = preload("res://assets/Audio/Enemies/Wolf/Wolf_Hit_1.wav")
-
 const ENEMY_NAME = "Wolf"
+const EnemyDeathEffect = preload("res://assets/Effects/Enemies/BloodDeathEffect.tscn")
+const DialogBox = preload("res://assets/UI/DialogBox.tscn")
+const EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
+
+const attackSFX = preload("res://assets/Audio/Enemies/Wolf/Wolf_Attack_1.wav")
+const detectSFX = preload("res://assets/Audio/Enemies/Wolf/Wolf_Growl_1.wav")
+const hitSFX = preload("res://assets/Audio/Enemies/Wolf/Wolf_Hit_1.wav")
+
 export var ACCELERATION = 800
 export var MAX_SPEED = 48
 export var WANDER_SPEED = 48
@@ -237,8 +236,6 @@ func _on_WolfStats_no_health():
 	yield(get_tree().create_timer(0.5), "timeout")
 	for i in range (16, 32):
 		Global.create_blood_effect(i, global_position, z_index)
-	Global.ingredient_drop("Clay", 0.125, "Salt", 0.0625, global_position, z_index)
-	# queue_free()
 	
 func audio_detect():
 	audio.stream = detectSFX
@@ -253,16 +250,4 @@ func audio_hit():
 	audio.play()
 
 func _on_VisibilityNotifier2D_screen_exited():
-	if stats.health <= 0:
-		return
-	else:
-		queue_free()
-		var newEnemySpawner = EnemySpawner.instance()
-		get_parent().call_deferred("add_child", newEnemySpawner)
-		newEnemySpawner.ENEMY = load("res://assets/Enemies/Wolf/Wolf.tscn")
-		newEnemySpawner.health = stats.health
-		newEnemySpawner.global_position = global_position
-		newEnemySpawner.z_index = z_index
-	
-func set_health(value):
-	stats.health = value
+	Enemy.despawn_offscreen(self)

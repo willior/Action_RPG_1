@@ -4,7 +4,7 @@ extends Node2D
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
-var EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
+const EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
 
 # GENERIC ENEMY CLASS / REFACTOR PROJECT
 
@@ -139,4 +139,20 @@ func no_health(enemy, death_effect):
 	expNotice.position = enemy.global_position
 	expNotice.expDisplay = enemy.stats.experience_pool
 	get_node("/root/World").add_child(expNotice)
+	Global.ingredient_drop(enemy.common_drop_name, enemy.common_drop_chance, enemy.rare_drop_name, enemy.rare_drop_chance, enemy.global_position, enemy.z_index)
 	enemy.queue_free()
+
+func despawn_offscreen(enemy):
+	if enemy.stats.health <= 0:
+		return
+	else:
+		enemy.queue_free()
+		var newEnemySpawner = EnemySpawner.instance()
+		enemy.get_parent().call_deferred("add_child", newEnemySpawner)
+		newEnemySpawner.ENEMY = enemy.filename
+		newEnemySpawner.health = enemy.stats.health
+		newEnemySpawner.global_position = enemy.global_position
+		newEnemySpawner.z_index = enemy.z_index
+
+func set_health(enemy, health):
+	enemy.stats.health = health

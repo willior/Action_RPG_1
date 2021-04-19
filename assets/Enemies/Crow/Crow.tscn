@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=2]
+[gd_scene load_steps=75 format=2]
 
 [ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=15]
 [ext_resource path="res://assets/Enemies/Crow/Crow.png" type="Texture" id=16]
 [ext_resource path="res://assets/Enemies/Crow/Crow_eye.png" type="Texture" id=17]
+[ext_resource path="res://assets/Enemies/PlayerDetectionZoneFlyer.gd" type="Script" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -531,6 +532,7 @@ offset = Vector2( 0, -12 )
 texture = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -3 )
 shape = SubResource( 28 )
 
@@ -552,6 +554,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 50 )
 
 [node name="Talkbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 128
 collision_mask = 0
 
@@ -560,6 +563,7 @@ position = Vector2( 0, -9 )
 shape = SubResource( 51 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 0, -10 )
 collision_mask = 4
 damage = 16.0
@@ -570,6 +574,7 @@ position = Vector2( 0, 3 )
 shape = SubResource( 52 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 0, 4 )
 collision_layer = 8
 script = ExtResource( 14 )
@@ -584,6 +589,7 @@ visible = false
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
 visible = false
 scale = Vector2( 3, 3 )
+script = ExtResource( 18 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 shape = SubResource( 54 )
@@ -641,7 +647,7 @@ rect = Rect2( -4, -4, 8, 8 )
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="AttackPlayerZone/AttackTimer" to="." method="_on_AttackTimer_timeout"]
-[connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 [editable path="Hitbox"]
 
