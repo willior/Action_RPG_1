@@ -46,8 +46,6 @@ func initialize_player():
 	player.formulabook.connect("formulabook_changed", self, "_on_player_formulabook_changed")
 	print('player successfully initialized.')
 	
-	
-	
 	if !ResourceLoader.exists("user://inventory.tres"):
 		print("inventory resource not found. creating...")
 		player.inventory.add_item("Potion", 3)
@@ -60,14 +58,12 @@ func initialize_player():
 			player.inventory.set_items(loaded_inventory.get_items())
 			print("inventory loaded from disk.")
 	
-	
-	
 	if !ResourceLoader.exists("user://pouch.tres"):
 		print("pouch resource not found. creating...")
-		player.pouch.add_ingredient("Rock", 16)
-		player.pouch.add_ingredient("Clay", 12)
+		player.pouch.add_ingredient("Rock", 9)
+		player.pouch.add_ingredient("Clay",18)
 		player.pouch.add_ingredient("Salt", 8)
-		player.pouch.add_ingredient("Water", 4)
+		player.pouch.add_ingredient("Water", 16)
 		# warning-ignore:return_value_discarded
 		ResourceSaver.save("user://pouch.tres", player.pouch)
 		prints("saved pouch resource to " + str(OS.get_user_data_dir()))
@@ -77,12 +73,10 @@ func initialize_player():
 			player.pouch.set_ingredients(loaded_pouch.get_ingredients())
 			print("pouch loaded from disk.")
 	
-	
-	
 	if !ResourceLoader.exists("user://formulabook.tres"):
 		print("formulabook resource not found. creating...")
-		player.formulabook.add_formula("Heal")
 		player.formulabook.add_formula("Flash")
+		player.formulabook.add_formula("Heal")
 		# warning-ignore:return_value_discarded
 		ResourceSaver.save("user://formulabook.tres", player.formulabook)
 		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))

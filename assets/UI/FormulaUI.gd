@@ -13,7 +13,7 @@ func _on_player_initialized(player):
 	player.formulabook.connect("current_selected_formula_changed", self, "_on_current_selected_formula_changed")
 
 func _on_current_selected_formula_changed(new_selected_formula):
-	print('current selected formula changed: ', new_selected_formula)
 	for n in get_children():
 		if !n.visible: n.visible = true
 	$Icon.frames = new_selected_formula.formula_reference.icon
+	$Icon.frame = 0

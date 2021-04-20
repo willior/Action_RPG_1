@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://assets/Player/Abilities/Flash.gd" type="Script" id=1]
+[ext_resource path="res://assets/Player/Abilities/Heal.gd" type="Script" id=1]
 [ext_resource path="res://assets/Shaders/White_Flash_CanvasMod.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Player/Abilities/SpellHitbox.gd" type="Script" id=3]
-[ext_resource path="res://assets/Audio/Player/Tinnitus_1s.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/Audio/SFX/Synth1.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/Player/Abilities/HealFlash.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Ability"
 length = 1.55
-step = 0.05
+step = 0.025
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -16,27 +17,24 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.35, 0.65, 0.95, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0.375, 0.95, 1.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
-"method": "ability_1"
+"method": "ability_start"
 }, {
 "args": [  ],
-"method": "ability_2"
+"method": "heal"
 }, {
 "args": [  ],
-"method": "ability_3"
-}, {
-"args": [  ],
-"method": "ability_4"
+"method": "ability_end"
 } ]
 }
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 320, 180 )
 
-[node name="FlashAbility" type="Node2D"]
+[node name="HealAbility" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 1 )
 
@@ -45,14 +43,15 @@ anims/Ability = SubResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="White" parent="CanvasLayer" instance=ExtResource( 2 )]
-color = Color( 1, 1, 1, 0 )
+[node name="Cyan" parent="CanvasLayer" instance=ExtResource( 2 )]
+color = Color( 0, 1, 1, 0 )
+script = ExtResource( 5 )
 
 [node name="SpellHitbox" type="Area2D" parent="."]
 monitoring = false
 monitorable = false
 collision_layer = 0
-collision_mask = 8
+collision_mask = 0
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpellHitbox"]

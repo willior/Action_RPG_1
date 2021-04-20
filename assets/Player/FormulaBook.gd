@@ -12,15 +12,17 @@ var current_selected_formula = 0
 func set_formulas(new_formulas):
 	_formulas = new_formulas
 	emit_signal("formulabook_changed", self)
+	if _formulas.size() <= 0:
+		return
 	var new_selected_formula = get_formula(current_selected_formula)
 	emit_signal("current_selected_formula_changed", new_selected_formula)
 
 func get_formulas():
 	return _formulas
-	
+
 func get_formula(index):
 	return _formulas[index]
-	
+
 func advance_selected_formula():
 	if _formulas.size() == 1:
 		GameManager.player.bamboo.play()
@@ -36,7 +38,7 @@ func advance_selected_formula():
 		emit_signal("current_selected_formula_changed", new_selected_formula)
 		
 func previous_selected_formula():
-	if _formulas.size() == 1:
+	if _formulas.size() <= 1:
 		GameManager.player.bamboo.play()
 
 	else:
@@ -87,3 +89,8 @@ func add_formula(formula_name):
 			return
 	_formulas.append(new_formula)
 	print('added ', formula_name, ' to book.')
+	current_selected_formula = _formulas.size()
+	if current_selected_formula >= _formulas.size():
+		current_selected_formula = 0
+	var new_selected_formula = get_formula(current_selected_formula)
+	emit_signal("current_selected_formula_changed", new_selected_formula)

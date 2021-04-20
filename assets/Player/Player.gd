@@ -150,6 +150,9 @@ func _input(event):
 					noStamina()
 					
 			if event.is_action_pressed("item"): # G
+				if formulabook._formulas.size() <= 0:
+					bamboo.play()
+					return
 				var formula_used = formulabook._formulas[formulabook.current_selected_formula]
 				var ingredients = pouch.get_ingredients()
 				var ingredients_needed = formula_used.formula_reference.cost.keys()

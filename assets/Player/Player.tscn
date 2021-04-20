@@ -1,4 +1,4 @@
-[gd_scene load_steps=167 format=2]
+[gd_scene load_steps=168 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/Audio/Player/Sword_Attack_1.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/Player/Abilities/Cast.tres" type="Animation" id=19]
 [ext_resource path="res://assets/Audio/Player/Clap.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/Audio/Player/Clap2.wav" type="AudioStream" id=21]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -1100,7 +1101,7 @@ tracks/2/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 20 )
+"stream": ExtResource( 21 )
 } ],
 "times": PoolRealArray( 0.37 )
 }
@@ -2196,7 +2197,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 60
-frame = 252
+frame = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2290,7 +2291,7 @@ margin_bottom = -11.0
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = -1.5708
+rotation = 1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 11, 0 )

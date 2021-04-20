@@ -1,7 +1,8 @@
-[gd_resource type="Resource" load_steps=28 format=2]
+[gd_resource type="Resource" load_steps=29 format=2]
 
 [ext_resource path="res://assets/Resources/Formula.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Abilities/Hea-Sheetl.png" type="Texture" id=2]
+[ext_resource path="res://assets/Player/Abilities/Heal.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
@@ -109,6 +110,7 @@ animations = [ {
 
 [resource]
 script = ExtResource( 1 )
+scene = ExtResource( 3 )
 name = "Heal"
 icon = SubResource( 1 )
 description = [  ]
