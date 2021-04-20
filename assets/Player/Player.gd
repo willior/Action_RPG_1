@@ -253,14 +253,16 @@ func move_state(delta):
 				interactObject.examine()
 			
 	if Input.is_action_just_pressed("next_item"): # R
-		inventory.advance_selected_item()
-		interactHitbox.disabled = true
-		interactHitbox.disabled = false
+		formulabook.advance_selected_formula()
+#		inventory.advance_selected_item()
+#		interactHitbox.disabled = true
+#		interactHitbox.disabled = false
 		
 	if Input.is_action_just_pressed("previous_item"): # E
-		inventory.previous_selected_item()
-		interactHitbox.disabled = true
-		interactHitbox.disabled = false
+		formulabook.previous_selected_formula()
+#		inventory.previous_selected_item()
+#		interactHitbox.disabled = true
+#		interactHitbox.disabled = false
 
 	if Input.is_action_pressed("attack"):
 		if !talkTimer.is_stopped():

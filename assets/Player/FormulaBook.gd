@@ -12,8 +12,8 @@ var current_selected_formula = 0
 func set_formulas(new_formulas):
 	_formulas = new_formulas
 	emit_signal("formulabook_changed", self)
-#	var new_selected_formula = get_formula(current_selected_formula)
-#	emit_signal("current_selected_formula_changed", new_selected_formula)
+	var new_selected_formula = get_formula(current_selected_formula)
+	emit_signal("current_selected_formula_changed", new_selected_formula)
 
 func get_formulas():
 	return _formulas
