@@ -134,7 +134,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=28]
 radius = 6.0
 
-[sub_resource type="Animation" id=57]
+[sub_resource type="Animation" id=29]
 resource_name = "Dead"
 length = 0.5
 tracks/0/type = "value"
@@ -150,7 +150,7 @@ tracks/0/keys = {
 "values": [ 11, 10, 9, 3, 10 ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=30]
 length = 0.5
 loop = true
 step = 0.05
@@ -203,7 +203,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, -10 ), Vector2( 0, -18 ) ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=31]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -244,7 +244,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.3 )
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=32]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -309,7 +309,7 @@ tracks/4/keys = {
 "values": [ Vector2( 0, -10 ), Vector2( 0, -4 ) ]
 }
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id=33]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -351,7 +351,7 @@ tracks/2/keys = {
 "values": [ 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=34]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -367,7 +367,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=35]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -382,7 +382,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=36]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -448,91 +448,91 @@ tracks/4/keys = {
 "values": [ Vector2( 0, -4 ), Vector2( 0, -10 ) ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=58]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "Dead"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=38]
 animation = "Fly"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=39]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeAnimation" id=38]
+[sub_resource type="AnimationNodeAnimation" id=40]
 animation = "Landing"
 
-[sub_resource type="AnimationNodeAnimation" id=39]
+[sub_resource type="AnimationNodeAnimation" id=41]
 animation = "Peck"
 
-[sub_resource type="AnimationNodeAnimation" id=40]
+[sub_resource type="AnimationNodeAnimation" id=42]
 animation = "Takeoff"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=43]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=44]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=45]
-switch_mode = 1
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=46]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=47]
-switch_mode = 2
+switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=48]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
 
-[sub_resource type="AnimationNodeStateMachine" id=49]
-states/Dead/node = SubResource( 58 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+
+[sub_resource type="AnimationNodeStateMachine" id=56]
+states/Dead/node = SubResource( 37 )
 states/Dead/position = Vector2( 626, 20 )
-states/Fly/node = SubResource( 36 )
+states/Fly/node = SubResource( 38 )
 states/Fly/position = Vector2( 626, 153.606 )
-states/Idle/node = SubResource( 37 )
+states/Idle/node = SubResource( 39 )
 states/Idle/position = Vector2( 362.5, 113.303 )
-states/Landing/node = SubResource( 38 )
+states/Landing/node = SubResource( 40 )
 states/Landing/position = Vector2( 362.5, 207.713 )
-states/Peck/node = SubResource( 39 )
+states/Peck/node = SubResource( 41 )
 states/Peck/position = Vector2( 151.5, 113.303 )
-states/Takeoff/node = SubResource( 40 )
+states/Takeoff/node = SubResource( 42 )
 states/Takeoff/position = Vector2( 348, 20 )
-transitions = [ "Landing", "Idle", SubResource( 41 ), "Idle", "Takeoff", SubResource( 42 ), "Takeoff", "Fly", SubResource( 43 ), "Fly", "Landing", SubResource( 44 ), "Idle", "Peck", SubResource( 45 ), "Peck", "Takeoff", SubResource( 46 ), "Landing", "Peck", SubResource( 47 ), "Peck", "Idle", SubResource( 48 ), "Idle", "Dead", SubResource( 59 ), "Takeoff", "Dead", SubResource( 60 ), "Peck", "Dead", SubResource( 61 ), "Fly", "Dead", SubResource( 62 ), "Landing", "Dead", SubResource( 63 ) ]
+transitions = [ "Landing", "Idle", SubResource( 43 ), "Idle", "Takeoff", SubResource( 44 ), "Takeoff", "Fly", SubResource( 45 ), "Fly", "Landing", SubResource( 46 ), "Idle", "Peck", SubResource( 47 ), "Peck", "Takeoff", SubResource( 48 ), "Landing", "Peck", SubResource( 49 ), "Peck", "Idle", SubResource( 50 ), "Idle", "Dead", SubResource( 51 ), "Takeoff", "Dead", SubResource( 52 ), "Peck", "Dead", SubResource( 53 ), "Fly", "Dead", SubResource( 54 ), "Landing", "Dead", SubResource( 55 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 31.9396, -21.6686 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=50]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=57]
 
-[sub_resource type="CircleShape2D" id=51]
+[sub_resource type="CircleShape2D" id=58]
 radius = 14.0
 
-[sub_resource type="CircleShape2D" id=52]
+[sub_resource type="CircleShape2D" id=59]
 radius = 15.0
 
-[sub_resource type="CircleShape2D" id=53]
+[sub_resource type="CircleShape2D" id=60]
 radius = 15.0
 
-[sub_resource type="CircleShape2D" id=54]
+[sub_resource type="CircleShape2D" id=61]
 radius = 28.0
 
-[sub_resource type="CircleShape2D" id=55]
+[sub_resource type="CircleShape2D" id=62]
 radius = 12.0
 
-[sub_resource type="CircleShape2D" id=56]
+[sub_resource type="CircleShape2D" id=63]
 radius = 5.0
 
 [node name="Crow" type="KinematicBody2D"]
@@ -553,7 +553,7 @@ frame = 10
 modulate = Color( 0, 0, 0, 1 )
 light_mask = 0
 material = SubResource( 2 )
-z_index = 2
+z_index = 1
 frames = SubResource( 27 )
 frame = 13
 offset = Vector2( 0, -12 )
@@ -570,19 +570,19 @@ shape = SubResource( 28 )
 script = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Dead = SubResource( 57 )
-anims/Fly = SubResource( 29 )
-anims/Idle = SubResource( 30 )
-anims/Landing = SubResource( 31 )
-anims/Peck = SubResource( 32 )
-anims/StartFlashing = SubResource( 33 )
-anims/StopFlashing = SubResource( 34 )
-anims/Takeoff = SubResource( 35 )
+anims/Dead = SubResource( 29 )
+anims/Fly = SubResource( 30 )
+anims/Idle = SubResource( 31 )
+anims/Landing = SubResource( 32 )
+anims/Peck = SubResource( 33 )
+anims/StartFlashing = SubResource( 34 )
+anims/StopFlashing = SubResource( 35 )
+anims/Takeoff = SubResource( 36 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 49 )
+tree_root = SubResource( 56 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 50 )
+parameters/playback = SubResource( 57 )
 
 [node name="Talkbox" type="Area2D" parent="."]
 visible = false
@@ -591,7 +591,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
 position = Vector2( 0, -9 )
-shape = SubResource( 51 )
+shape = SubResource( 58 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -602,7 +602,7 @@ accuracy = 4.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 52 )
+shape = SubResource( 59 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 visible = false
@@ -612,7 +612,7 @@ script = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -24 )
-shape = SubResource( 53 )
+shape = SubResource( 60 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
 visible = false
@@ -623,7 +623,7 @@ scale = Vector2( 3, 3 )
 script = ExtResource( 18 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-shape = SubResource( 54 )
+shape = SubResource( 61 )
 
 [node name="AttackController" parent="." instance=ExtResource( 2 )]
 visible = false
@@ -636,7 +636,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 55 )
+shape = SubResource( 62 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8
@@ -646,7 +646,7 @@ one_shot = true
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 56 )
+shape = SubResource( 63 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
