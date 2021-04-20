@@ -150,6 +150,29 @@ func _input(event):
 					noStamina()
 					
 			if event.is_action_pressed("item"): # G
+				var formula_used = formulabook._formulas[formulabook.current_selected_formula]
+				var ingredients = pouch.get_ingredients()
+				var ingredients_needed = formula_used.formula_reference.cost.keys()
+				var quantity_needed = formula_used.formula_reference.cost.values()
+				for i in range(ingredients.size()):
+					if ingredients[i].ingredient_reference.name == ingredients_needed[0] && ingredients[i].quantity >= quantity_needed[0]:
+						ingredient1_OK = true
+						continue
+					if ingredients[i].ingredient_reference.name == ingredients_needed[1] && ingredients[i].quantity >= quantity_needed[1]:
+						ingredient2_OK = true
+						continue
+				if ingredient1_OK && ingredient2_OK:
+					for i in range(0,2):
+						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
+					var FORMULA = formula_used.formula_reference.scene
+					var formula = FORMULA.instance()
+					formula.global_position = global_position
+					get_node("/root/World").add_child(formula)
+					ingredient1_OK = false
+					ingredient2_OK = false
+				else:
+					bamboo.play()
+				
 #				var item_used = inventory._items[inventory.current_selected_item]
 #				match item_used.item_reference.type:
 #					0: # CONSUMABLE
@@ -167,29 +190,6 @@ func _input(event):
 #							else:
 #								talkTimer.start()
 #								interactObject.use_item_on_object()
-				
-				var ingredients = pouch.get_ingredients()
-				for i in range(ingredients.size()):
-					if ingredients[i].ingredient_reference.name == "Rock" && ingredients[i].quantity >= 1:
-						ingredient1_OK = true
-						continue
-					if ingredients[i].ingredient_reference.name == "Clay" && ingredients[i].quantity >= 2:
-						ingredient2_OK = true
-						continue
-				if ingredient1_OK && ingredient2_OK:
-					pouch.remove_ingredient("Rock", 1)
-					pouch.remove_ingredient("Clay", 2)
-					var SPELL = load("res://assets/Player/Abilities/Flash.tscn")
-					var spell = SPELL.instance()
-					spell.global_position = global_position
-					get_node("/root/World").add_child(spell)
-					ingredient1_OK = false
-					ingredient2_OK = false
-				else:
-					print('not enough ingredients to cast')
-					bamboo.play()
-					ingredient1_OK = false
-					ingredient2_OK = false
 		
 		ATTACK1:
 			if event.is_action_pressed("attack") && !event.is_echo():

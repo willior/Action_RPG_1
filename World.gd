@@ -96,7 +96,8 @@ func _input(event):
 			Global.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
-		player.formulabook.add_formula("Flash")
+		player.pouch.remove_ingredient("Rock", 1)
+		player.pouch.remove_ingredient("Clay", 2)
 	
 	if event.is_action_pressed("test4"): # O
 		for f in player.formulabook.get_formulas().size():
