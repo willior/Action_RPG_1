@@ -4,7 +4,6 @@ class_name Pouch
 signal pouch_changed
 signal ingredient_quantity_updated
 signal ingredient_quantity_zero
-
 export var _ingredients = Array() setget set_ingredients, get_ingredients
 
 func set_ingredients(new_ingredients):
