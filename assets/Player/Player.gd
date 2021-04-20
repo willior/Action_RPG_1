@@ -167,19 +167,19 @@ func _input(event):
 				
 				var ingredients = pouch.get_ingredients()
 				for i in range(ingredients.size()):
-					if ingredients[i].ingredient_reference.name == "Rock" && ingredients[i].quantity > 0:
+					if ingredients[i].ingredient_reference.name == "Rock" && ingredients[i].quantity >= 1:
 						ingredient1_OK = true
 						continue
-					if ingredients[i].ingredient_reference.name == "Clay" && ingredients[i].quantity > 0:
+					if ingredients[i].ingredient_reference.name == "Clay" && ingredients[i].quantity >= 2:
 						ingredient2_OK = true
 						continue
 				if ingredient1_OK && ingredient2_OK:
 					pouch.remove_ingredient("Rock", 1)
-					pouch.remove_ingredient("Clay", 1)
-					var HARDBALL = load("res://assets/Player/Abilities/Hardball.tscn")
-					var hardball = HARDBALL.instance()
-					hardball.global_position = global_position
-					get_node("/root/World").add_child(hardball)
+					pouch.remove_ingredient("Clay", 2)
+					var SPELL = load("res://assets/Player/Abilities/Ability_MultiDamage_Template.tscn")
+					var spell = SPELL.instance()
+					spell.global_position = global_position
+					get_node("/root/World").add_child(spell)
 					ingredient1_OK = false
 					ingredient2_OK = false
 				else:
@@ -750,7 +750,9 @@ func _on_Hurtbox_area_entered(area):
 		var is_crit = false # enemies currently do not crit
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		hurtbox.display_damage_popup(str(damageTaken), is_crit)
-		state = HIT
+		hit_damage()
+		if state != ACTION:
+			state = HIT
 	else:
 		$DodgeAudio.play()
 		hurtbox.display_damage_popup("Miss!", false)

@@ -49,12 +49,19 @@ func red_screen():
 	$Tween.start()
 	
 func screen_shake1():
-	get_node("/root/World/Camera2D/ScreenShake").start(0.1, 32, 1, 0)
+	# get_node("/root/World/Camera2D/ScreenShake").start(0.1, 32, 1, 0)
+	get_node("/root/World/Camera2D").decay = 0
+	get_node("/root/World/Camera2D").add_trauma(0.15)
 func screen_shake2():
-	get_node("/root/World/Camera2D/ScreenShake").start(0.1, 64, 2, 0)
+	# get_node("/root/World/Camera2D/ScreenShake").start(0.1, 64, 2, 0)
+	get_node("/root/World/Camera2D").add_trauma(0.15)
 func screen_shake3():
-	get_node("/root/World/Camera2D/ScreenShake").start(0.1, 80, 3, 0)
+	# get_node("/root/World/Camera2D/ScreenShake").start(0.1, 80, 3, 0)
+	get_node("/root/World/Camera2D").add_trauma(0.15)
 func screen_shake4():
-	get_node("/root/World/Camera2D/ScreenShake").start(0.1, 88, 6, 0)
+	# get_node("/root/World/Camera2D/ScreenShake").start(0.1, 88, 6, 0)
+	get_node("/root/World/Camera2D").add_trauma(0.15)
 func screen_shake5():
-	get_node("/root/World/Camera2D/ScreenShake").start(0.1, 96, 9, 0)
+	# get_node("/root/World/Camera2D/ScreenShake").start(0.1, 96, 9, 0)
+	get_node("/root/World/Camera2D").decay = 1
+	get_node("/root/World/Camera2D").add_trauma(0.15)

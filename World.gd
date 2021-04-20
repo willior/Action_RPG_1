@@ -102,7 +102,7 @@ func _input(event):
 		get_node("/root/World/Camera2D/ScreenShake").start(0.1, 64, 10, 0)
 	
 	if event.is_action_pressed("pause"): # P
-		player.pouch.add_ingredient("Salt", 2)
+		get_node("/root/World/Camera2D").add_trauma(0.2)
 		# save_game()
 	
 	if event.is_action_pressed("start"): # SPACEBAR

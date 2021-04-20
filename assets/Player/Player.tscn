@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=2]
+[gd_scene load_steps=167 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/Audio/Bamboo.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/Audio/Player/Sword_Attack_1.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/Player/Abilities/Cast.tres" type="Animation" id=19]
+[ext_resource path="res://assets/Audio/Player/Clap.wav" type="AudioStream" id=20]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 9 )
@@ -683,7 +684,7 @@ tracks/2/keys = {
 "values": [ -90.0 ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AttackAudio")
+tracks/3/path = NodePath("Audio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -711,7 +712,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AttackAudio:bus")
+tracks/5/path = NodePath("Audio:bus")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -771,7 +772,7 @@ tracks/2/keys = {
 "values": [ 180.0 ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AttackAudio")
+tracks/3/path = NodePath("Audio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -799,7 +800,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AttackAudio:bus")
+tracks/5/path = NodePath("Audio:bus")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -859,7 +860,7 @@ tracks/2/keys = {
 "values": [ 0.0 ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AttackAudio")
+tracks/3/path = NodePath("Audio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -887,7 +888,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AttackAudio:bus")
+tracks/5/path = NodePath("Audio:bus")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -947,7 +948,7 @@ tracks/2/keys = {
 "values": [ -90.0 ]
 }
 tracks/3/type = "audio"
-tracks/3/path = NodePath("AttackAudio")
+tracks/3/path = NodePath("Audio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -975,7 +976,7 @@ tracks/4/keys = {
 } ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AttackAudio:bus")
+tracks/5/path = NodePath("Audio:bus")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -1062,6 +1063,79 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=145]
+resource_name = "Cast_1"
+length = 0.6
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.35, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 252, 253, 254, 255, 256, 257, 258 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"values": [  ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("Audio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 20 )
+} ],
+"times": PoolRealArray( 0.37 )
+}
+
+[sub_resource type="Animation" id=146]
+resource_name = "Cast_2"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.34, 0.38, 0.43, 0.47 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 259, 258, 256, 253, 252 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "action_finished"
+} ]
+}
+
 [sub_resource type="Animation" id=21]
 length = 0.5
 tracks/0/type = "value"
@@ -1099,12 +1173,9 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "hit_damage"
-}, {
 "args": [  ],
 "method": "hit_animation_finished"
 } ]
@@ -1132,12 +1203,9 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "hit_damage"
-}, {
 "args": [  ],
 "method": "hit_animation_finished"
 } ]
@@ -1165,12 +1233,9 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "hit_damage"
-}, {
 "args": [  ],
 "method": "hit_animation_finished"
 } ]
@@ -1198,12 +1263,9 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
-"args": [  ],
-"method": "hit_damage"
-}, {
 "args": [  ],
 "method": "hit_animation_finished"
 } ]
@@ -1356,7 +1418,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AttackAudio")
+tracks/2/path = NodePath("Audio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1406,7 +1468,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AttackAudio")
+tracks/2/path = NodePath("Audio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1455,7 +1517,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AttackAudio")
+tracks/2/path = NodePath("Audio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -1504,7 +1566,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AttackAudio")
+tracks/2/path = NodePath("Audio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -2136,7 +2198,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 60
-frame = 73
+frame = 252
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2163,6 +2225,8 @@ anims/AttackShadeUp = SubResource( 18 )
 anims/BackstepLeft = SubResource( 19 )
 anims/BackstepRight = SubResource( 20 )
 anims/Cast = ExtResource( 19 )
+anims/Cast_1 = SubResource( 145 )
+anims/Cast_2 = SubResource( 146 )
 anims/Death = SubResource( 21 )
 anims/HitDown = SubResource( 22 )
 anims/HitLeft = SubResource( 23 )
@@ -2276,8 +2340,8 @@ collision_mask = 768
 position = Vector2( -0.488346, -7.73805 )
 shape = SubResource( 140 )
 
-[node name="AttackAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 18 )
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
@@ -2325,9 +2389,9 @@ margin_bottom = 0.0
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]

@@ -129,8 +129,7 @@ func examine_complete(value):
 			
 func accelerate_towards_point(point, speed, delta):
 	if flying:
-		var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
-		velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
+		Enemy.accelerate_towards_point(self, point, speed, delta)
 		Enemy.h_flip_handler(sprite, eye, velocity)
 
 func seek_player():
@@ -197,7 +196,7 @@ func _on_Hurtbox_area_entered(area):
 		if attacking:
 			attacking = false
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
-		animationState.travel("Landing")
+		# animationState.travel("Landing")
 		audio_caw()
 
 func _on_Hurtbox_invincibility_started():
@@ -207,6 +206,7 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_CrowStats_no_health():
+	animationState.travel("Dead")
 	var death_effect = EnemyDeathEffect.instance()
 	Enemy.no_health(self, death_effect)
 	if flying:

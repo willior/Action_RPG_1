@@ -43,6 +43,10 @@ func examine(dialog_script, examined, enemy_name):
 	if !examined:
 		examined = true
 		PlayerLog.set_examined(enemy_name, true)
+		
+func accelerate_towards_point(enemy, point, speed, delta):
+	var direction = enemy.global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
+	enemy.velocity = enemy.velocity.move_toward(direction * speed, enemy.ACCELERATION * delta) # multiplies that by the speed argument
 
 func disable_detection(enemy):
 	enemy.attackPlayerZone.set_deferred("monitoring", false)

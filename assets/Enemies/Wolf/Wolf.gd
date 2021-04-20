@@ -148,8 +148,7 @@ func examine_complete(value):
 	examined = value
 
 func accelerate_towards_point(point, speed, delta):
-	var direction = global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
-	velocity = velocity.move_toward(direction * speed, ACCELERATION * delta) # multiplies that by the speed argument
+	Enemy.accelerate_towards_point(self, point, speed, delta)
 	Enemy.h_flip_handler(sprite, eye, velocity)
 
 func seek_player(): # runs every frame of the IDLE and WANDER states
