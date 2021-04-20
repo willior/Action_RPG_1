@@ -1,7 +1,7 @@
 extends Resource
 class_name FormulaResource
 # Formula
-
+export var scene : PackedScene
 export var name : String
 export var icon : SpriteFrames
 export var description : Array

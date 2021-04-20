@@ -96,13 +96,18 @@ func _input(event):
 			Global.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
-		PlayerStats.health -= 9999
+		player.formulabook.add_formula("Flash")
 	
 	if event.is_action_pressed("test4"): # O
-		get_node("/root/World/Camera2D/ScreenShake").start(0.1, 64, 10, 0)
+		for f in player.formulabook.get_formulas().size():
+			print(player.formulabook.get_formula(f))
 	
 	if event.is_action_pressed("pause"): # P
-		get_node("/root/World/Camera2D").add_trauma(0.2)
+		for i in player.pouch.get_ingredients().size():
+			print(player.pouch.get_ingredient(i))
+		
+		print(player.pouch)
+		# get_node("/root/World/Camera2D").add_trauma(0.2)
 		# save_game()
 	
 	if event.is_action_pressed("start"): # SPACEBAR

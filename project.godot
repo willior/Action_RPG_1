@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "FormulaBook",
+"language": "GDScript",
+"path": "res://assets/Player/FormulaBook.gd"
+}, {
+"base": "Resource",
 "class": "FormulaResource",
 "language": "GDScript",
 "path": "res://assets/Resources/Formula.gd"
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://assets/Player/Pouch.gd"
 } ]
 _global_script_class_icons={
+"FormulaBook": "",
 "FormulaResource": "",
 "IngredientResource": "",
 "Inventory": "",
@@ -53,6 +59,7 @@ config/windows_native_icon="res://game_icon.ico"
 
 [autoload]
 
+FormulaDatabase="*res://Managers/FormulaDatabase.gd"
 ItemDatabase="*res://Managers/ItemDatabase.gd"
 IngredientDatabase="*res://Managers/IngredientDatabase.gd"
 PlayerStats="*res://assets/Player/PlayerStats.tscn"

@@ -23,7 +23,7 @@ func _ready():
 	pass
 	
 # warning-ignore:unused_argument
-func reinitialize_player(inventory, pouch):
+func reinitialize_player(inventory, pouch, formulabook):
 	print('attempting to reinitialize player...')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	if not player:
@@ -31,6 +31,7 @@ func reinitialize_player(inventory, pouch):
 	emit_signal("player_reinitialized", player) 
 	player.inventory.set_items(inventory.get_items())
 	player.pouch.set_ingredients(pouch.get_ingredients())
+	player.formulabook.set_formulas(formulabook.get_formulas())
 	print('player reinitialized.')
 	
 func initialize_player():
@@ -42,7 +43,10 @@ func initialize_player():
 	emit_signal("player_initialized", player)
 	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
 	player.pouch.connect("pouch_changed", self, "_on_player_pouch_changed")
+	player.formulabook.connect("formulabook_changed", self, "_on_player_formulabook_changed")
 	print('player successfully initialized.')
+	
+	
 	
 	if !ResourceLoader.exists("user://inventory.tres"):
 		print("inventory resource not found. creating...")
@@ -55,6 +59,8 @@ func initialize_player():
 		if loaded_inventory:
 			player.inventory.set_items(loaded_inventory.get_items())
 			print("inventory loaded from disk.")
+	
+	
 	
 	if !ResourceLoader.exists("user://pouch.tres"):
 		print("pouch resource not found. creating...")
@@ -70,14 +76,33 @@ func initialize_player():
 		if loaded_pouch:
 			player.pouch.set_ingredients(loaded_pouch.get_ingredients())
 			print("pouch loaded from disk.")
-		
+	
+	
+	
+	if !ResourceLoader.exists("user://formulabook.tres"):
+		print("formulabook resource not found. creating...")
+		player.formulabook.add_formula("Heal")
+		player.formulabook.add_formula("Flash")
+		# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://formulabook.tres", player.formulabook)
+		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))
+	else:
+		var loaded_formulabook = load("user://formulabook.tres")
+		if loaded_formulabook:
+			player.formulabook.set_formulas(loaded_formulabook.get_formulas())
+			print("formulabook loaded from disk.")
+
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):
 # warning-ignore:return_value_discarded
 	# ResourceSaver.save("user://inventory.tres", inventory)
 	# prints(str(inventory) + str(OS.get_user_data_dir()))
 	pass
-	
+
 # warning-ignore:unused_argument
 func _on_player_pouch_changed(pouch):
+	pass
+
+# warning-ignore:unused_argument
+func _on_player_formulabook_changed(formulabook):
 	pass

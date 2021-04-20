@@ -15,6 +15,8 @@ var inventory_resource = load("res://assets/Player/Inventory.gd")
 var inventory = inventory_resource.new()
 var pouch_resource = load("res://assets/Player/Pouch.gd")
 var pouch = pouch_resource.new()
+var formulabook_resource = load("res://assets/Player/FormulaBook.gd")
+var formulabook = formulabook_resource.new()
 var ingredient1_OK : bool
 var ingredient2_OK : bool
 
@@ -101,7 +103,8 @@ func _ready():
 		# var new_inventory = Global.get_attribute("inventory").get_items()
 		inventory.set_items(Global.get_attribute("inventory")[0].get_items())
 		pouch.set_ingredients(Global.get_attribute("inventory")[1].get_ingredients())
-		GameManager.reinitialize_player(inventory, pouch)
+		formulabook.set_formulas(Global.get_attribute("inventory")[2].get_formulas())
+		GameManager.reinitialize_player(inventory, pouch, formulabook)
 	else:
 		GameManager.initialize_player()
 	animationTree.active = true # animation not active until game starts
@@ -176,7 +179,7 @@ func _input(event):
 				if ingredient1_OK && ingredient2_OK:
 					pouch.remove_ingredient("Rock", 1)
 					pouch.remove_ingredient("Clay", 2)
-					var SPELL = load("res://assets/Player/Abilities/Ability_MultiDamage_Template.tscn")
+					var SPELL = load("res://assets/Player/Abilities/Flash.tscn")
 					var spell = SPELL.instance()
 					spell.global_position = global_position
 					get_node("/root/World").add_child(spell)
