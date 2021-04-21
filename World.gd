@@ -89,7 +89,7 @@ func _input(event):
 	if event.is_action_pressed("test1"): # T
 		print('test2: applying frenzy')
 		PlayerStats.status = "frenzy"
-		
+	
 	if event.is_action_pressed("test2"): # Y
 		player.level_up()
 		if GameManager.multiplayer_2:
@@ -97,18 +97,13 @@ func _input(event):
 	
 	if event.is_action_pressed("test3"): # U
 		player.formulabook.add_formula("Heal")
+		player.formulabook.add_formula("Flash")
 	
 	if event.is_action_pressed("test4"): # O
-		for f in player.formulabook.get_formulas().size():
-			print(player.formulabook.get_formula(f))
+		player.formulabook.remove_formula("Flash")
 	
 	if event.is_action_pressed("pause"): # P
-		for i in player.pouch.get_ingredients().size():
-			print(player.pouch.get_ingredient(i))
-		
-		print(player.pouch)
-		# get_node("/root/World/Camera2D").add_trauma(0.2)
-		# save_game()
+		player.formulabook.remove_formula("Heal")
 	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:

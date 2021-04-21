@@ -71,10 +71,14 @@ func remove_formula(formula_name):
 			continue
 		else: 
 			prints(str(formulabook_formula.formula_reference.name) + " cleared from formulabook")
-			_formulas.erase(get_formula(current_selected_formula))
-			current_selected_formula = 1
-# warning-ignore:unused_variable
-			var updated_selected_formula = get_formula(current_selected_formula)
+			if current_selected_formula == i:
+				previous_selected_formula()
+			_formulas.erase(get_formula(i))
+			if _formulas.size() <= 0:
+				emit_signal("current_selected_formula_changed", null)
+			return
+		# warning-ignore:unused_variable
+		# var updated_selected_formula = get_formula(current_selected_formula)
 
 func add_formula(formula_name):
 	prints("adding formula: " + str(formula_name))
