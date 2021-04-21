@@ -1,6 +1,6 @@
 extends Node2D
 
-const TUMBLEWEED = preload("res://assets/Enemies/Tumbleweed.tscn")
+const TUMBLEWEED = preload("res://assets/Enemies/Tumbleweed/Tumbleweed.tscn")
 onready var player = get_parent().get_parent().get_node("Player")
 onready var map = get_parent().get_parent().get_parent().get_node("Map")
 onready var timer = $Timer

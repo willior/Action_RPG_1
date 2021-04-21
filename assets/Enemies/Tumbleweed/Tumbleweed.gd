@@ -1,5 +1,5 @@
 extends KinematicBody2D
-
+const ENEMY_NAME = "Tumbleweed"
 const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
@@ -45,7 +45,7 @@ onready var map = get_parent().get_parent().get_parent().get_node("Map")
 func _ready():
 # warning-ignore:return_value_discarded
 	PlayerLog.connect("tumbleweed_complete", self, "examine_complete")
-	if PlayerLog.tumbleweed_examined:
+	if PlayerLog.enemies_examined[ENEMY_NAME]:
 		examined = true
 	add_to_group("enemies")
 	animationPlayer.play("Animate")

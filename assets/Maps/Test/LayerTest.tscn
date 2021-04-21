@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/Will/LayerTest/Bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/Cutscene/CutsceneTrigger.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/Will/LayerTest/Background2.png" type="Texture" id=20]
 [ext_resource path="res://assets/World/Trees/Tree_1_green_alt.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_green.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/World/Trees/Tree_1_orange.tscn" type="PackedScene" id=23]
@@ -30,6 +31,10 @@
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_orange.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_red.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_pink.tscn" type="PackedScene" id=31]
+[ext_resource path="res://assets/Will/LayerTest/Background1.png" type="Texture" id=32]
+[ext_resource path="res://assets/Will/LayerTest/Background3.png" type="Texture" id=33]
+[ext_resource path="res://assets/Will/LayerTest/Background0.png" type="Texture" id=34]
+[ext_resource path="res://assets/Will/LayerTest/Background_trees.png" type="Texture" id=35]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 32 )
@@ -42,6 +47,17 @@ extents = Vector2( 8, 16 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 8, 32 )
+
+[sub_resource type="SegmentShape2D" id=10]
+a = Vector2( -1, -24 )
+b = Vector2( 28, 17 )
+
+[sub_resource type="SegmentShape2D" id=11]
+a = Vector2( -2, -1 )
+b = Vector2( 37, 15 )
+
+[sub_resource type="SegmentShape2D" id=12]
+b = Vector2( 62.2181, 8.48325 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 24, 4 )
@@ -66,10 +82,14 @@ __meta__ = {
 }
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 224, 216 )
+position = Vector2( 305, 94 )
 limit_left = 40
-limit_right = 440
+limit_right = 832
 limit_bottom = 320
+drag_margin_left = 0.08
+drag_margin_top = 0.16
+drag_margin_right = 0.08
+drag_margin_bottom = 0.16
 
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
@@ -164,6 +184,76 @@ position = Vector2( -40, -16 )
 z_index = 1
 tile_data = PoolIntArray( 327691, 0, 3, 327696, 0, 5, 393226, 0, 5, 393227, 0, 5, 393232, 0, 4, 393233, 0, 2, 458761, 0, 0, 458762, 0, 0, 458769, 0, 3, 458770, 0, 3, 655369, 0, 5, 655370, 0, 5, 655371, 0, 0, 655376, 0, 4, 655377, 0, 4, 655378, 0, 0, 720906, 0, 0, 720907, 0, 1, 720912, 0, 1, 720913, 0, 0, 786443, 0, 4, 786448, 0, 1, 851979, 0, 2, 851984, 0, 5, 983052, 0, 5, 983055, 0, 5 )
 
+[node name="Cliff" type="StaticBody2D" parent="Map/MiddleFloor"]
+position = Vector2( 309, 41 )
+collision_layer = 131073
+collision_mask = 17
+
+[node name="CollisionShade2D" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff"]
+position = Vector2( -46, -22 )
+shape = SubResource( 10 )
+
+[node name="CollisionShade2D2" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff"]
+position = Vector2( -17, -5 )
+shape = SubResource( 11 )
+
+[node name="CollisionShade2D3" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff"]
+position = Vector2( 19, 10 )
+shape = SubResource( 12 )
+
+[node name="Cliff2" type="StaticBody2D" parent="Map/MiddleFloor"]
+position = Vector2( 472, 65 )
+rotation = -3.28122
+collision_layer = 131073
+collision_mask = 17
+
+[node name="CollisionShade2D" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff2"]
+position = Vector2( -46, -22 )
+shape = SubResource( 10 )
+
+[node name="CollisionShade2D2" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff2"]
+position = Vector2( -17, -5 )
+shape = SubResource( 11 )
+
+[node name="CollisionShade2D3" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff2"]
+position = Vector2( 19, 10 )
+shape = SubResource( 12 )
+
+[node name="Cliff4" type="StaticBody2D" parent="Map/MiddleFloor"]
+position = Vector2( 570, 148 )
+collision_layer = 131073
+collision_mask = 17
+
+[node name="CollisionShade2D" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff4"]
+position = Vector2( -46, -22 )
+shape = SubResource( 10 )
+
+[node name="CollisionShade2D2" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff4"]
+position = Vector2( -17, -5 )
+shape = SubResource( 11 )
+
+[node name="CollisionShade2D3" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff4"]
+position = Vector2( 19, 10 )
+shape = SubResource( 12 )
+
+[node name="Cliff3" type="StaticBody2D" parent="Map/MiddleFloor"]
+position = Vector2( 733, 172 )
+rotation = -3.28122
+collision_layer = 131073
+collision_mask = 17
+
+[node name="CollisionShade2D" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff3"]
+position = Vector2( -46, -22 )
+shape = SubResource( 10 )
+
+[node name="CollisionShade2D2" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff3"]
+position = Vector2( -17, -5 )
+shape = SubResource( 11 )
+
+[node name="CollisionShade2D3" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff3"]
+position = Vector2( 19, 10 )
+shape = SubResource( 12 )
+
 [node name="MiddleTransitionTop" type="Area2D" parent="Map"]
 position = Vector2( 224, 84 )
 collision_layer = 2048
@@ -221,7 +311,7 @@ collision_mask = 0
 shape = SubResource( 8 )
 
 [node name="Exit" parent="Map" instance=ExtResource( 17 )]
-position = Vector2( 440, 150 )
+position = Vector2( 840, 265 )
 z_index = 1
 map_file = "res://assets/Maps/Test/Test.tscn"
 selected_location = Vector2( 48, 48 )
@@ -238,12 +328,66 @@ texture = ExtResource( 14 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Map"]
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+z_index = 3
+motion_scale = Vector2( 0.3, 0.3 )
+motion_offset = Vector2( 0, 20 )
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 0, -128 )
+texture = ExtResource( 33 )
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+z_index = 3
+motion_scale = Vector2( 0.35, 0.35 )
+motion_offset = Vector2( 0, 20 )
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 0, -128 )
+texture = ExtResource( 20 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+z_index = 3
+motion_scale = Vector2( 0.45, 0.45 )
+motion_offset = Vector2( 0, 25 )
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 0, -128 )
+texture = ExtResource( 32 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+z_index = 3
+motion_scale = Vector2( 0.6, 0.6 )
+motion_offset = Vector2( 0, 20 )
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 199, 6 )
+texture = ExtResource( 34 )
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+z_index = 3
+motion_scale = Vector2( 0.8, 0.8 )
+motion_offset = Vector2( 0, 55 )
+motion_mirroring = Vector2( 400, 0 )
+
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer1"]
+position = Vector2( 199, 6 )
+texture = ExtResource( 35 )
+
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
 [node name="Player" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 224, 216 )
-z_index = -2
+position = Vector2( 305, 94 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
@@ -257,28 +401,28 @@ position = Vector2( 273, 266 )
 position = Vector2( 134, 206 )
 
 [node name="Crow" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 301, 79 )
+position = Vector2( 96, 44 )
 
 [node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 349, 78 )
+position = Vector2( 144, 43 )
 
 [node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 349, 114 )
+position = Vector2( 144, 79 )
 
 [node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 313, 120 )
+position = Vector2( 108, 85 )
 
 [node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 319, 160 )
+position = Vector2( 114, 125 )
 
 [node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 305, 222 )
+position = Vector2( 100, 187 )
 
 [node name="Crow7" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 349, 210 )
+position = Vector2( 144, 175 )
 
 [node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 361, 151 )
+position = Vector2( 156, 116 )
 
 [node name="Items" type="YSort" parent="YSort"]
 
@@ -364,7 +508,7 @@ position = Vector2( 248, 337 )
 position = Vector2( 442, 182 )
 
 [node name="Tree_3_tall_green2" parent="YSort/Trees" instance=ExtResource( 22 )]
-position = Vector2( 440, 119 )
+position = Vector2( 471, 243 )
 
 [node name="Tree_1_orange" parent="YSort/Trees" instance=ExtResource( 23 )]
 position = Vector2( 160, 104 )
@@ -541,16 +685,16 @@ position = Vector2( 276, 0 )
 position = Vector2( 285, 18 )
 
 [node name="Tree_2_pine16" parent="YSort/Trees" instance=ExtResource( 24 )]
-position = Vector2( 437, 58 )
+position = Vector2( 468, 182 )
 
 [node name="Tree_2_pine17" parent="YSort/Trees" instance=ExtResource( 24 )]
-position = Vector2( 431, 73 )
+position = Vector2( 462, 197 )
 
 [node name="Tree_2_pine18" parent="YSort/Trees" instance=ExtResource( 24 )]
-position = Vector2( 437, 85 )
+position = Vector2( 468, 209 )
 
 [node name="Tree_2_pine19" parent="YSort/Trees" instance=ExtResource( 24 )]
-position = Vector2( 442, 100 )
+position = Vector2( 473, 224 )
 
 [node name="Tree_3_tall_yellow" parent="YSort/Trees" instance=ExtResource( 26 )]
 position = Vector2( 152, 311 )
