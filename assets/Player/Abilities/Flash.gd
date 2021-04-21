@@ -27,5 +27,4 @@ func ability_4():
 	player.animationPlayer.play("Cast_2")
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
-	print('flash over: deleting')
 	queue_free()

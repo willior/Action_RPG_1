@@ -35,10 +35,8 @@ func display_damage_popup(value, crit):
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter
 
-func _on_Hurtbox_invincibility_started():
-	pass
+func _on_Hurtbox_invincibility_started(): pass
 	# collision.set_deferred("disabled", true)
 	
-func _on_Hurtbox_invincibility_ended():
-	pass
+func _on_Hurtbox_invincibility_ended(): pass
 	# collision.set_deferred("disabled", false)

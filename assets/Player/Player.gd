@@ -148,7 +148,7 @@ func _input(event):
 					interactObject.talk()
 				elif stats.stamina <= 0:
 					noStamina()
-					
+			
 			if event.is_action_pressed("item"): # G
 				if formulabook._formulas.size() <= 0:
 					bamboo.play()
@@ -174,6 +174,8 @@ func _input(event):
 					ingredient1_OK = false
 					ingredient2_OK = false
 				else:
+					ingredient1_OK = false
+					ingredient2_OK = false
 					bamboo.play()
 				
 #				var item_used = inventory._items[inventory.current_selected_item]

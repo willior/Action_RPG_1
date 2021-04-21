@@ -60,22 +60,22 @@ b = Vector2( 37, 15 )
 [sub_resource type="SegmentShape2D" id=7]
 b = Vector2( 62.2181, 8.48325 )
 
-[sub_resource type="SegmentShape2D" id=13]
+[sub_resource type="SegmentShape2D" id=8]
 b = Vector2( -337, 0 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 24, 4 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 28, 31 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 30, 18 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 34, 74 )
 
-[sub_resource type="RectangleShape2D" id=12]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 10, 30 )
 
 [node name="World" type="Node2D"]
@@ -86,7 +86,7 @@ __meta__ = {
 }
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 305, 94 )
+position = Vector2( 305, 45 )
 limit_left = 40
 limit_right = 832
 limit_bottom = 320
@@ -207,7 +207,7 @@ shape = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/MiddleFloor/Cliff"]
 position = Vector2( -44, -41 )
-shape = SubResource( 13 )
+shape = SubResource( 8 )
 
 [node name="Cliff2" type="StaticBody2D" parent="Map/MiddleFloor"]
 position = Vector2( 472, 65 )
@@ -268,7 +268,7 @@ collision_layer = 2048
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/MiddleTransitionTop"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="BelowTransitionTop" type="Area2D" parent="Map"]
 position = Vector2( 224, 100 )
@@ -276,7 +276,7 @@ collision_layer = 4096
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/BelowTransitionTop"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="BelowTransitionBottom" type="Area2D" parent="Map"]
 position = Vector2( 224, 220 )
@@ -284,7 +284,7 @@ collision_layer = 4096
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/BelowTransitionBottom"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="MiddleTransitionBottom" type="Area2D" parent="Map"]
 position = Vector2( 224, 236 )
@@ -292,7 +292,7 @@ collision_layer = 2048
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/MiddleTransitionBottom"]
-shape = SubResource( 8 )
+shape = SubResource( 9 )
 
 [node name="FlyZone" type="Area2D" parent="Map"]
 position = Vector2( 224, 205 )
@@ -300,7 +300,7 @@ collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/FlyZone"]
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="FlyZone2" type="Area2D" parent="Map"]
 position = Vector2( 224, 104 )
@@ -308,7 +308,7 @@ collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/FlyZone2"]
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="FlyerArea" type="Area2D" parent="Map"]
 position = Vector2( 224, 162 )
@@ -316,7 +316,7 @@ collision_layer = 131072
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/FlyerArea"]
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 
 [node name="Exit" parent="Map" instance=ExtResource( 17 )]
 position = Vector2( 840, 265 )
@@ -325,10 +325,10 @@ map_file = "res://assets/Maps/Test/Test.tscn"
 selected_location = Vector2( 48, 48 )
 
 [node name="CollisionShape2D" parent="Map/Exit" index="0"]
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="CollisionShape2D" parent="Map/Exit/StaticBody2D" index="0"]
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="Map/Exit"]
 visible = false
@@ -395,7 +395,7 @@ texture = ExtResource( 35 )
 pause_mode = 1
 
 [node name="Player" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 305, 94 )
+position = Vector2( 305, 45 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
@@ -431,6 +431,51 @@ position = Vector2( 144, 175 )
 
 [node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 4 )]
 position = Vector2( 156, 116 )
+
+[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 467, 267 )
+
+[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 493, 269 )
+
+[node name="Wolf3" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 511, 280 )
+
+[node name="Wolf4" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 546, 280 )
+
+[node name="Wolf5" parent="YSort/Enemies" instance=ExtResource( 7 )]
+position = Vector2( 561, 252 )
+
+[node name="Crow9" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 770, 280 )
+
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 678, 240 )
+
+[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 685, 214 )
+
+[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 715, 228 )
+
+[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 293, 157 )
+
+[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 331, 142 )
+
+[node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 373, 166 )
+
+[node name="Bat8" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 284, 211 )
+
+[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 333, 227 )
+
+[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 376, 205 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

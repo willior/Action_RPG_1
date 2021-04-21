@@ -34,10 +34,10 @@ var attacking = false
 var attack_on_cooldown = false
 var target
 var facingLeft = false
-var common_drop_name = "Rock"
-var common_drop_chance = 0.125
+var common_drop_name = "Water"
+var common_drop_chance = 0.50
 var rare_drop_name = "Clay"
-var rare_drop_chance = 0.0625
+var rare_drop_chance = 0.125
 
 onready var stats = $BatStats
 onready var timer = $Timer

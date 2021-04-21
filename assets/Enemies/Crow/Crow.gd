@@ -40,9 +40,9 @@ var target
 var flying
 var currentAnim
 var common_drop_name = "Water"
-var common_drop_chance = 0.125
+var common_drop_chance = 0.50
 var rare_drop_name = "Salt"
-var rare_drop_chance = 0.0625
+var rare_drop_chance = 0.125
 
 onready var stats = $CrowStats
 onready var timer = $Timer
