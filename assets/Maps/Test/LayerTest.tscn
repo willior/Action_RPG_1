@@ -86,7 +86,7 @@ __meta__ = {
 }
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 305, 45 )
+position = Vector2( 814, 238 )
 limit_left = 40
 limit_right = 832
 limit_bottom = 320
@@ -395,7 +395,7 @@ texture = ExtResource( 35 )
 pause_mode = 1
 
 [node name="Player" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 305, 45 )
+position = Vector2( 814, 238 )
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
@@ -448,7 +448,10 @@ position = Vector2( 546, 280 )
 position = Vector2( 561, 252 )
 
 [node name="Crow9" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 770, 280 )
+position = Vector2( 729, 327 )
+
+[node name="Crow10" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 625, 291 )
 
 [node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 9 )]
 position = Vector2( 678, 240 )
