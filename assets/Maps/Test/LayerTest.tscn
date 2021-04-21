@@ -448,10 +448,10 @@ position = Vector2( 546, 280 )
 position = Vector2( 561, 252 )
 
 [node name="Crow9" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 729, 327 )
+position = Vector2( 556, 279 )
 
 [node name="Crow10" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 625, 291 )
+position = Vector2( 452, 243 )
 
 [node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 9 )]
 position = Vector2( 678, 240 )
@@ -483,7 +483,7 @@ position = Vector2( 376, 205 )
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="CutsceneTrigger" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( 138, 285 )
+position = Vector2( 118, 237 )
 
 [node name="Doodads" type="YSort" parent="YSort"]
 

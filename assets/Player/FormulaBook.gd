@@ -24,10 +24,10 @@ func get_formula(index):
 	return _formulas[index]
 
 func advance_selected_formula():
-	if _formulas.size() == 1:
+	if _formulas.size() <= 1:
 		GameManager.player.bamboo.play()
-		var new_selected_formula = get_formula(current_selected_formula)
-		emit_signal("current_selected_formula_changed", new_selected_formula)
+#		var new_selected_formula = get_formula(current_selected_formula)
+#		emit_signal("current_selected_formula_changed", new_selected_formula)
 
 	else:
 		SoundPlayer.play_sound("miss")

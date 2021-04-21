@@ -42,6 +42,7 @@ func remove_ingredient(ingredient_name, quantity):
 		else: 
 			inventory_ingredient.quantity -= quantity
 			if inventory_ingredient.quantity <= 0:
+				emit_signal("ingredient_quantity_updated", get_ingredient(i))
 				emit_signal("ingredient_quantity_zero", inventory_ingredient.ingredient_reference.name)
 				prints(str(inventory_ingredient.ingredient_reference.name) + " cleared from pouch")
 				_ingredients.erase(get_ingredient(i))
@@ -65,6 +66,7 @@ func add_ingredient(ingredient_name, quantity):
 		else: 
 			inventory_ingredient.quantity += quantity
 			quantity = 0
+		emit_signal("ingredient_quantity_updated", get_ingredient(i))
 	
 	if quantity > 0:
 		var new_ingredient = {

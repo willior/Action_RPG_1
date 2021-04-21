@@ -165,14 +165,16 @@ func _input(event):
 						ingredient2_OK = true
 						continue
 				if ingredient1_OK && ingredient2_OK:
-					for i in range(0,2):
-						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
 					var FORMULA = formula_used.formula_reference.scene
 					var formula = FORMULA.instance()
 					formula.global_position = global_position
 					get_node("/root/World").add_child(formula)
 					ingredient1_OK = false
 					ingredient2_OK = false
+					$CastTimer.start()
+					yield($CastTimer, "timeout")
+					for i in range(0,2):
+						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
 				else:
 					ingredient1_OK = false
 					ingredient2_OK = false
