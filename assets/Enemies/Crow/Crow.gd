@@ -196,7 +196,7 @@ func _on_Hurtbox_area_entered(area):
 		if attacking:
 			attacking = false
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
-		# animationState.travel("Landing")
+		animationState.travel("Landing")
 		audio_caw()
 
 func _on_Hurtbox_invincibility_started():

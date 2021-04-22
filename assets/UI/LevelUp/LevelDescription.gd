@@ -5,8 +5,8 @@ var description : String
 
 func update_description(text):
 	label.bbcode_text = text
-	#label.set_visible_characters(0)
-	#$TimerText.start()
+#	label.set_visible_characters(0)
+#	$TimerText.start()
 
 func _on_ButtonVIT_focus_entered(stat_color):
 	# show()
@@ -46,7 +46,7 @@ func _on_ButtonMAG_focus_entered(stat_color):
 	
 func _on_TimerText_timeout():
 	if label.get_visible_characters() <= label.get_total_character_count():
-		#$AudioStreamPlayer.play()
+		# $AudioStreamPlayer.play()
 		label.set_visible_characters(label.get_visible_characters()+1)
 	else:
 		#$AudioStreamPlayer.stop()

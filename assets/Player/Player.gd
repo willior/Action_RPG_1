@@ -769,10 +769,12 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.display_damage_popup("Miss!", false)
 
 func _on_Hurtbox_invincibility_started():
-	blinkAnimationPlayer.play("Start")
+	pass
+	# blinkAnimationPlayer.play("Start")
 
 func _on_Hurtbox_invincibility_ended():
-	blinkAnimationPlayer.play("Stop")
+	pass
+	# blinkAnimationPlayer.play("Stop")
 	
 func dying_effect(value):
 	if value && !dying:

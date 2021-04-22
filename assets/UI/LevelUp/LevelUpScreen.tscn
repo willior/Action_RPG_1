@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=2]
@@ -15,10 +15,11 @@
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=13]
 [ext_resource path="res://assets/Audio/Player/Level_Up_Hit.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/Audio/Music/LevelUp.ogg" type="AudioStream" id=15]
+[ext_resource path="res://assets/Shaders/LightBlueColor.shader" type="Shader" id=16]
+[ext_resource path="res://assets/UI/LevelUp/StatPreview.gd" type="Script" id=17]
 
-[sub_resource type="DynamicFont" id=1]
-size = 32
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="DynamicFont" id=2]
 extra_spacing_top = 1
@@ -39,6 +40,58 @@ Label/styles/normal = null
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 16 )
+shader_param/active = false
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Off"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true, false ]
+}
+
 [node name="LevelUpScreen" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
@@ -50,43 +103,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelText" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -56.0
-margin_top = -143.0
-margin_right = 58.0
-margin_bottom = -109.0
+[node name="PanelTop" type="Panel" parent="."]
+anchor_right = 1.0
+margin_top = -45.0
+margin_bottom = 3.8147e-06
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="NinePatchRect" parent="LevelText"]
+[node name="PanelBottom" type="Panel" parent="."]
 anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 12 )
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="LevelText"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = 2.0
-margin_right = -6.0
-margin_bottom = -1.90735e-05
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-bbcode_text = "bbcode"
-text = "bbcode"
-scroll_active = false
+margin_top = 180.0
+margin_bottom = 225.0
+rect_min_size = Vector2( 0, 45 )
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -95,8 +126,13 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -6.0
+margin_right = -6.0
 grow_horizontal = 2
 grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LevelUp_Rect" type="NinePatchRect" parent="OptionsRect"]
 margin_left = 36.0
@@ -359,9 +395,9 @@ stream = ExtResource( 2 )
 
 [node name="LevelDescription" type="Control" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 166.0
+margin_left = 160.0
 margin_top = 75.0
-margin_right = 306.0
+margin_right = 291.0
 margin_bottom = 167.0
 script = ExtResource( 7 )
 __meta__ = {
@@ -393,6 +429,85 @@ __meta__ = {
 [node name="TimerText" type="Timer" parent="LevelDescription"]
 wait_time = 0.001
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LevelDescription"]
+
+[node name="StatPreview" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 160.0
+margin_top = 18.0
+margin_right = 291.0
+margin_bottom = 66.0
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="StatPreview"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 13 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatPreview"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 2.0
+margin_right = -6.0
+margin_bottom = -2.0
+custom_fonts/normal_font = SubResource( 4 )
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelText" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -57.0
+margin_top = -127.0
+margin_right = 57.0
+margin_bottom = -93.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="NinePatchRect" parent="LevelText"]
+material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 12 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelText"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = 2.0
+margin_right = -1.99999
+size_flags_horizontal = 3
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LevelText"]
+anims/Off = SubResource( 7 )
+anims/On = SubResource( 8 )
+
 [node name="TimerText" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
@@ -420,24 +535,31 @@ stream = ExtResource( 15 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="StatPreview" method="_on_ButtonVIT_focus_entered" binds= [ Color( 0.8, 0.466667, 0, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="LevelDescription" method="_on_ButtonVIT_focus_entered" binds= [ Color( 0.8, 0.466667, 0, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonVIT_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="StatPreview" method="_on_ButtonEND_focus_entered" binds= [ Color( 0.368627, 0.752941, 0.411765, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="LevelDescription" method="_on_ButtonEND_focus_entered" binds= [ Color( 0.368627, 0.752941, 0.411765, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonEND_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="StatPreview" method="_on_ButtonDEF_focus_entered" binds= [ Color( 0.278431, 0.278431, 1, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="LevelDescription" method="_on_ButtonDEF_focus_entered" binds= [ Color( 0.278431, 0.278431, 1, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEF_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="StatPreview" method="_on_ButtonSTR_focus_entered" binds= [ Color( 0.721569, 0.152941, 0.12549, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="LevelDescription" method="_on_ButtonSTR_focus_entered" binds= [ Color( 0.721569, 0.152941, 0.12549, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSTR_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="StatPreview" method="_on_ButtonDEX_focus_entered" binds= [ Color( 0.321569, 0.619608, 0.701961, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="LevelDescription" method="_on_ButtonDEX_focus_entered" binds= [ Color( 0.321569, 0.619608, 0.701961, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEX_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="StatPreview" method="_on_ButtonSPD_focus_entered" binds= [ Color( 1, 1, 0.752941, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="LevelDescription" method="_on_ButtonSPD_focus_entered" binds= [ Color( 1, 1, 0.752941, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSPD_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="StatPreview" method="_on_ButtonMAG_focus_entered" binds= [ Color( 0.662745, 0, 1, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="LevelDescription" method="_on_ButtonMAG_focus_entered" binds= [ Color( 0.662745, 0, 1, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonMAG_pressed"]

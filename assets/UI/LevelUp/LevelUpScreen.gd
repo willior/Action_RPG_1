@@ -70,7 +70,7 @@ func update_text(text):
 		
 func load_dialog():
 	if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog_script.size()-1):
-		print('hi')
+		print('hi this should not be here')
 		end_dialog()
 	elif label.get_visible_characters() > label.get_total_character_count():
 		if dialog_index < dialog_script.size()-1:
@@ -78,23 +78,43 @@ func load_dialog():
 			event_handler(dialog_script[dialog_index])
 			$TimerText.start()
 	else:
+		print('hi this should not be here')
 		label.set_visible_characters(label.get_total_character_count())
 		finished = true
 
 func event_handler(event):
 	match event:
 		{'level_up', 'text'}:
+			$LevelText/AnimationPlayer.play("On")
 			$Tween.interpolate_property($OptionsRect, "modulate",
 			Color(1, 1, 1, 0),
 			Color(1, 1, 1, 1),
-			1,
-			Tween.TRANS_QUINT, Tween.EASE_IN
+			1.2,
+			Tween.TRANS_QUINT, Tween.EASE_IN_OUT
 			)
 			$Tween.interpolate_property($LevelDescription, "modulate",
 			Color(1, 1, 1, 0),
 			Color(1, 1, 1, 1),
-			1,
-			Tween.TRANS_QUINT, Tween.EASE_IN
+			1.2,
+			Tween.TRANS_QUINT, Tween.EASE_IN_OUT
+			)
+			$Tween.interpolate_property($StatPreview, "modulate",
+			Color(1, 1, 1, 0),
+			Color(1, 1, 1, 1),
+			1.2,
+			Tween.TRANS_QUINT, Tween.EASE_IN_OUT
+			)
+			$Tween.interpolate_property($PanelTop, "rect_position",
+			Vector2(0, -45),
+			Vector2(0, 0),
+			1.2,
+			Tween.TRANS_QUINT, Tween.EASE_IN_OUT
+			)
+			$Tween.interpolate_property($PanelBottom, "rect_position",
+			Vector2(0, 180),
+			Vector2(0, 135),
+			1.2,
+			Tween.TRANS_QUINT, Tween.EASE_IN_OUT
 			)
 			$Tween.start()
 			finished = false
@@ -121,6 +141,18 @@ func event_handler(event):
 			if event['action'] == 'apply_level':
 				apply_level_stats()
 			if event['action'] == 'end_dialog':
+				$Tween.interpolate_property($PanelTop, "rect_position",
+				Vector2(0, 0),
+				Vector2(0, -45),
+				0.6,
+				Tween.TRANS_QUINT, Tween.EASE_IN_OUT
+				)
+				$Tween.interpolate_property($PanelBottom, "rect_position",
+				Vector2(0, 135),
+				Vector2(0, 180),
+				0.6,
+				Tween.TRANS_QUINT, Tween.EASE_IN_OUT
+				)
 				get_node("/root/World/GUI/TweenGreyscale").fade_out_greyscale()
 				$Music.stop()
 				$TimerDelaySelect.start()
@@ -161,7 +193,13 @@ func _on_level_selected(value):
 		waiting_for_input = false
 		for x in $OptionsRect/LevelUp_Rect/LevelUp_Container/Options.get_children():
 			x.focus_mode = 0
-		$Tween.interpolate_property($LevelText, "modulate",
+#		$Tween.interpolate_property($LevelText, "modulate",
+#			Color(1, 1, 1, 1),
+#			Color(1, 1, 1, 0),
+#			0.6,
+#			Tween.TRANS_QUINT, Tween.EASE_IN
+#			)
+		$Tween.interpolate_property($OptionsRect, "modulate",
 			Color(1, 1, 1, 1),
 			Color(1, 1, 1, 0),
 			0.6,
@@ -173,7 +211,7 @@ func _on_level_selected(value):
 			0.6,
 			Tween.TRANS_QUINT, Tween.EASE_IN
 			)
-		$Tween.interpolate_property($OptionsRect, "modulate",
+		$Tween.interpolate_property($StatPreview, "modulate",
 			Color(1, 1, 1, 1),
 			Color(1, 1, 1, 0),
 			0.6,
@@ -226,19 +264,26 @@ func _on_TimerText_timeout():
 		$AudioStreamPlayer.stop()
 		$TimerText.stop()
 		finished = true
-		$Tween.interpolate_property($LevelText, "modulate",
-		Color(1, 1, 1, 1),
-		Color(1, 1, 1, 0),
-		0.6,
-		Tween.TRANS_QUART, Tween.EASE_IN_OUT
-		)
-		$Tween.start()
 		if waiting_for_answer:
+#			$Tween.interpolate_property($LevelText, "modulate",
+#			Color(1, 1, 1, 1),
+#			Color(1, 1, 1, 0),
+#			0.6,
+#			Tween.TRANS_QUART, Tween.EASE_IN_OUT
+#			)
+			# yield($Tween, "tween_all_completed")
+			$Tween.interpolate_property($LevelText, "rect_position",
+			Vector2(103, 53),
+			Vector2(320, 53),
+			0.6,
+			Tween.TRANS_QUINT, Tween.EASE_IN
+			)
+			$Tween.start()
 			$TimerDelaySelect.start()
 			yield($TimerDelaySelect, "timeout")
 			if level_flag:
 				$Music.play()
-				get_child(1).get_child(0).get_child(0).get_child(0).get_child(0).grab_focus()
+				get_child(2).get_child(0).get_child(0).get_child(0).get_child(0).grab_focus()
 				print('level flag')
 				level_flag = false
 				waiting_for_input = true
@@ -246,5 +291,3 @@ func _on_TimerText_timeout():
 				print('not level flag: this should not happen')
 				get_child(1).get_child(0).get_child(0).grab_focus()
 				waiting_for_input = true
-		yield($Tween, "tween_all_completed")
-		$LevelText.hide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=2]
+[gd_scene load_steps=166 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=6]
 [ext_resource path="res://assets/UI/Popups/DamageContainer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/Audio/Evade.wav" type="AudioStream" id=8]
-[ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=9]
 [ext_resource path="res://assets/Audio/SFX/Miss.wav" type="AudioStream" id=10]
 [ext_resource path="res://assets/UI/InteractNotice.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
@@ -21,10 +20,6 @@
 [ext_resource path="res://assets/Player/Abilities/Cast.tres" type="Animation" id=19]
 [ext_resource path="res://assets/Audio/Player/Clap.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/Audio/Player/Clap2.wav" type="AudioStream" id=21]
-
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 9 )
-shader_param/active = false
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 4.0
@@ -2192,12 +2187,11 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 1 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 60
-frame = 256
+frame = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2289,6 +2283,16 @@ margin_top = -11.0
 margin_right = -8.0
 margin_bottom = -11.0
 
+[node name="DamageDisplay" type="Node2D" parent="."]
+z_index = 3
+
+[node name="DamageContainer" parent="DamageDisplay" instance=ExtResource( 7 )]
+show_behind_parent = false
+margin_left = 11.0
+margin_top = 0.0
+margin_right = 11.0
+margin_bottom = 0.0
+
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
 rotation = 1.5708
@@ -2379,22 +2383,12 @@ wait_time = 0.4
 one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="DamageDisplay" type="Node2D" parent="."]
-z_index = 3
-
-[node name="DamageContainer" parent="DamageDisplay" instance=ExtResource( 7 )]
-show_behind_parent = false
-margin_left = 11.0
-margin_top = 0.0
-margin_right = 11.0
-margin_bottom = 0.0
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]

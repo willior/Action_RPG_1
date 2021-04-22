@@ -1,6 +1,6 @@
 [gd_scene load_steps=65 format=2]
 
-[ext_resource path="res://assets/WhiteColor.shader" type="Shader" id=1]
+[ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=4]
