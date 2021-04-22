@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6.png" type="Texture" id=1]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://assets/UI/DialogNext.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/DialogLevelBox.gd" type="Script" id=4]
 [ext_resource path="res://assets/Audio/dialogue.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=6]
@@ -17,10 +16,8 @@
 [ext_resource path="res://assets/UI/Dialog/Font_LevelUp_Button.tres" type="DynamicFont" id=15]
 [ext_resource path="res://assets/UI/LevelDescription.gd" type="Script" id=16]
 
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=5]
+size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -39,6 +36,9 @@ Label/constants/shadow_offset_y = 1
 Label/fonts/font = SubResource( 3 )
 Label/styles/normal = null
 
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
 [node name="DialogLevelBox" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
@@ -55,10 +55,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -32.0
-margin_top = -167.0
-margin_right = 32.0
-margin_bottom = -147.0
+margin_left = -56.0
+margin_top = -143.0
+margin_right = 58.0
+margin_bottom = -109.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -82,7 +82,7 @@ margin_left = 6.0
 margin_top = 2.0
 margin_right = -6.0
 margin_bottom = -1.90735e-05
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "bbcode"
 text = "bbcode"
@@ -91,29 +91,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NameLabel" type="RichTextLabel" parent="LevelText"]
-margin_left = 6.0
-margin_top = -14.0
-margin_right = 266.0
-margin_bottom = 2.0
-custom_fonts/normal_font = SubResource( 2 )
-bbcode_enabled = true
-scroll_active = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="Sprite" parent="LevelText"]
-visible = false
-position = Vector2( 265, 43 )
-texture = ExtResource( 3 )
-
 [node name="OptionsRect" type="TextureRect" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 5.0
-margin_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 __meta__ = {
@@ -131,11 +111,10 @@ __meta__ = {
 }
 
 [node name="LevelUp_Rect" type="NinePatchRect" parent="OptionsRect"]
-margin_left = 33.0
-margin_top = 32.0
-margin_right = 287.0
-margin_bottom = 99.0
-rect_pivot_offset = Vector2( 64, 36 )
+margin_left = 36.0
+margin_top = 18.0
+margin_right = 156.0
+margin_bottom = 167.0
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -155,12 +134,11 @@ __meta__ = {
 }
 
 [node name="Options" type="VBoxContainer" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
-margin_left = 15.0
-margin_right = 105.0
-margin_bottom = 67.0
-grow_horizontal = 0
-grow_vertical = 2
+margin_left = 4.0
+margin_right = 94.0
+margin_bottom = 149.0
 rect_min_size = Vector2( 90, 0 )
+size_flags_horizontal = 0
 theme = ExtResource( 12 )
 alignment = 1
 __meta__ = {
@@ -169,9 +147,9 @@ __meta__ = {
 
 [node name="ButtonVIT" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
 modulate = Color( 0.8, 0.466667, 0, 1 )
-margin_top = 4.0
+margin_top = 3.0
 margin_right = 90.0
-margin_bottom = 21.0
+margin_bottom = 20.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 13 )
@@ -181,16 +159,15 @@ custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 button_mask = 0
 text = "WILLPOWER"
-align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ButtonEND" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
 modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
-margin_top = 25.0
+margin_top = 24.0
 margin_right = 90.0
-margin_bottom = 42.0
+margin_bottom = 41.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 13 )
@@ -200,16 +177,15 @@ custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 button_mask = 0
 text = "LUNG CAPACITY"
-align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ButtonDEF" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
 modulate = Color( 0.28, 0.28, 1, 1 )
-margin_top = 46.0
+margin_top = 45.0
 margin_right = 90.0
-margin_bottom = 63.0
+margin_bottom = 62.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 13 )
@@ -219,113 +195,15 @@ custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 button_mask = 0
 text = "RESILIENCE"
-align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Stats" type="VBoxContainer" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
-margin_left = 109.0
-margin_right = 125.0
-margin_bottom = 67.0
-rect_min_size = Vector2( 16, 67 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = SubResource( 4 )
-custom_constants/separation = 4
-alignment = 1
-
-[node name="LabelVIT" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
-margin_top = 4.0
-margin_bottom = 21.0
-rect_min_size = Vector2( 0, 17 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-valign = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelEND" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
-margin_top = 25.0
-margin_right = 16.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 0, 17 )
-valign = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelDEF" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
-margin_top = 46.0
-margin_right = 16.0
-margin_bottom = 63.0
-rect_min_size = Vector2( 0, 17 )
-valign = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Stats2" type="VBoxContainer" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
-margin_left = 129.0
-margin_right = 145.0
-margin_bottom = 67.0
-rect_min_size = Vector2( 16, 67 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = SubResource( 4 )
-alignment = 1
-
-[node name="LabelSTR" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats2"]
-margin_top = 4.0
-margin_right = 16.0
-margin_bottom = 21.0
-rect_min_size = Vector2( 0, 17 )
-align = 2
-valign = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelDEX" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats2"]
-margin_top = 25.0
-margin_right = 16.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 0, 17 )
-align = 2
-valign = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LabelSPD" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats2"]
-margin_top = 46.0
-margin_right = 16.0
-margin_bottom = 63.0
-rect_min_size = Vector2( 0, 17 )
-align = 2
-valign = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Options2" type="VBoxContainer" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
-margin_left = 149.0
-margin_right = 239.0
-margin_bottom = 67.0
-grow_vertical = 2
-rect_min_size = Vector2( 90, 0 )
-theme = ExtResource( 12 )
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ButtonSTR" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2"]
+[node name="ButtonSTR" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
 modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
-margin_top = 4.0
+margin_top = 66.0
 margin_right = 90.0
-margin_bottom = 21.0
+margin_bottom = 83.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 13 )
@@ -335,16 +213,15 @@ custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 button_mask = 0
 text = "VIOLENT NATURE"
-align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonDEX" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2"]
+[node name="ButtonDEX" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
 modulate = Color( 0.32, 0.62, 0.7, 1 )
-margin_top = 25.0
+margin_top = 87.0
 margin_right = 90.0
-margin_bottom = 42.0
+margin_bottom = 104.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 13 )
@@ -354,16 +231,15 @@ custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 button_mask = 0
 text = "PATIENCE"
-align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonSPD" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2"]
+[node name="ButtonSPD" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
 modulate = Color( 1, 1, 0.752941, 1 )
-margin_top = 46.0
+margin_top = 108.0
 margin_right = 90.0
-margin_bottom = 63.0
+margin_bottom = 125.0
 mouse_filter = 2
 custom_styles/hover = ExtResource( 14 )
 custom_styles/pressed = ExtResource( 13 )
@@ -373,7 +249,117 @@ custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 button_mask = 0
 text = "SWIFTNESS"
-align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonMAG" type="Button" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Options"]
+modulate = Color( 0.662745, 0, 1, 1 )
+margin_top = 129.0
+margin_right = 90.0
+margin_bottom = 146.0
+mouse_filter = 2
+custom_styles/hover = ExtResource( 14 )
+custom_styles/pressed = ExtResource( 13 )
+custom_fonts/font = ExtResource( 15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.215686, 0.215686, 0.215686, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "SPIRITUALITY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="VBoxContainer" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
+margin_left = 98.0
+margin_right = 116.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 18, 67 )
+theme = SubResource( 4 )
+custom_constants/separation = 4
+alignment = 1
+
+[node name="LabelVIT" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
+margin_top = 3.0
+margin_right = 18.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 17 )
+text = "4"
+align = 1
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelEND" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
+margin_top = 24.0
+margin_right = 18.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 0, 17 )
+text = "4"
+align = 1
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelDEF" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
+margin_top = 45.0
+margin_right = 18.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 0, 17 )
+text = "4"
+align = 1
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelSTR" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
+margin_top = 66.0
+margin_right = 18.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 0, 17 )
+text = "4"
+align = 1
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelDEX" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
+margin_top = 87.0
+margin_right = 18.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 17 )
+text = "4"
+align = 1
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelSPD" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
+margin_top = 108.0
+margin_right = 18.0
+margin_bottom = 125.0
+rect_min_size = Vector2( 0, 17 )
+text = "4"
+align = 1
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelMAG" type="Label" parent="OptionsRect/LevelUp_Rect/LevelUp_Container/Stats"]
+margin_top = 129.0
+margin_right = 18.0
+margin_bottom = 146.0
+rect_min_size = Vector2( 0, 17 )
+text = "4"
+align = 1
+valign = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -384,11 +370,11 @@ stream = ExtResource( 8 )
 [node name="Tween" type="Tween" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
 
 [node name="LevelDescription" type="Control" parent="."]
-visible = false
-margin_left = 33.0
-margin_top = 108.0
-margin_right = 287.0
-margin_bottom = 156.0
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 166.0
+margin_top = 75.0
+margin_right = 306.0
+margin_bottom = 167.0
 script = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -418,10 +404,6 @@ __meta__ = {
 
 [node name="TimerText" type="Timer" parent="LevelDescription"]
 wait_time = 0.001
-
-[node name="TimerNext" type="Timer" parent="."]
-wait_time = 0.08
-autostart = true
 
 [node name="TimerText" type="Timer" parent="."]
 wait_time = 0.05
@@ -459,15 +441,16 @@ stream = ExtResource( 10 )
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="LevelDescription" method="_on_ButtonDEF_focus_entered"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEF_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSTR" to="LevelDescription" method="_on_ButtonSTR_focus_entered"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
-[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSTR_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonDEX" to="LevelDescription" method="_on_ButtonDEX_focus_entered"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
-[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEX_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD" to="LevelDescription" method="_on_ButtonSPD_focus_entered"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
-[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options2/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSPD_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="LevelDescription" method="_on_ButtonSTR_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSTR_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="LevelDescription" method="_on_ButtonDEX_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEX_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="LevelDescription" method="_on_ButtonSPD_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSPD_pressed"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="LevelDescription" method="_on_ButtonMAG_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
 [connection signal="timeout" from="LevelDescription/TimerText" to="LevelDescription" method="_on_TimerText_timeout"]
-[connection signal="timeout" from="TimerNext" to="." method="_on_TimerNext_timeout"]
 [connection signal="timeout" from="TimerText" to="." method="_on_TimerText_timeout"]

@@ -4,9 +4,9 @@ func _ready():
 	$Stats/LabelVIT.text = str(PlayerStats.vitality)
 	$Stats/LabelEND.text = str(PlayerStats.endurance)
 	$Stats/LabelDEF.text = str(PlayerStats.defense)
-	$Stats2/LabelSTR.text = str(PlayerStats.strength)
-	$Stats2/LabelDEX.text = str(PlayerStats.dexterity)
-	$Stats2/LabelSPD.text = str(PlayerStats.speed)
+	$Stats/LabelSTR.text = str(PlayerStats.strength)
+	$Stats/LabelDEX.text = str(PlayerStats.dexterity)
+	$Stats/LabelSPD.text = str(PlayerStats.speed)
 
 func _on_focus_entered():
 	$AudioMenu.play()
@@ -50,8 +50,8 @@ func _on_ButtonDEF_pressed():
 func _on_ButtonSTR_pressed():
 	PlayerStats.strength += 1
 	SoundPlayer.play_sound("awesome")
-	$Stats2/LabelSTR.text = str(PlayerStats.strength)
-	$Tween.interpolate_property($Stats2/LabelSTR, "modulate",
+	$Stats/LabelSTR.text = str(PlayerStats.strength)
+	$Tween.interpolate_property($Stats/LabelSTR, "modulate",
 	Color(0.25, 1, 1, 1),
 	Color(1, 1, 1, 1),
 	0.3,
@@ -62,8 +62,8 @@ func _on_ButtonSTR_pressed():
 func _on_ButtonDEX_pressed():
 	PlayerStats.dexterity += 1
 	SoundPlayer.play_sound("whistle")
-	$Stats2/LabelDEX.text = str(PlayerStats.dexterity)
-	$Tween.interpolate_property($Stats2/LabelDEX, "modulate",
+	$Stats/LabelDEX.text = str(PlayerStats.dexterity)
+	$Tween.interpolate_property($Stats/LabelDEX, "modulate",
 	Color(0.25, 1, 1, 1),
 	Color(1, 1, 1, 1),
 	0.3,
@@ -74,8 +74,8 @@ func _on_ButtonDEX_pressed():
 func _on_ButtonSPD_pressed():
 	PlayerStats.speed += 1
 	SoundPlayer.play_sound("nice")
-	$Stats2/LabelSPD.text = str(PlayerStats.speed)
-	$Tween.interpolate_property($Stats2/LabelSPD, "modulate",
+	$Stats/LabelSPD.text = str(PlayerStats.speed)
+	$Tween.interpolate_property($Stats/LabelSPD, "modulate",
 	Color(0.25, 1, 1, 1),
 	Color(1, 1, 1, 1),
 	0.3,
