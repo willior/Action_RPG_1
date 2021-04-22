@@ -1,8 +1,5 @@
 extends Control
-
-const BUTTON = preload("Dialog/Dialog_Button.tscn")
 onready var label = $LevelText/RichTextLabel
-
 var default_stats_remaining = 2
 var stats_remaining = default_stats_remaining
 var VIT_to_add = 0
@@ -73,6 +70,7 @@ func update_text(text):
 		
 func load_dialog():
 	if (label.get_visible_characters() > label.get_total_character_count() && dialog_index >= dialog_script.size()-1):
+		print('hi')
 		end_dialog()
 	elif label.get_visible_characters() > label.get_total_character_count():
 		if dialog_index < dialog_script.size()-1:
@@ -117,20 +115,18 @@ func event_handler(event):
 # warning-ignore:return_value_discarded
 			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD.connect("pressed", self, "_on_level_selected", ["SPD"])
 # warning-ignore:return_value_discarded
-			# $OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG.connect("pressed", self, "_on_level_selected", ["MAG"])
+			$OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG.connect("pressed", self, "_on_level_selected", ["MAG"])
 			
 		{'action', ..}:
 			if event['action'] == 'apply_level':
-				#update_text(event['text'])
 				apply_level_stats()
 			if event['action'] == 'end_dialog':
 				get_node("/root/World/GUI/TweenGreyscale").fade_out_greyscale()
-				#SoundPlayer.stop_music()
 				$Music.stop()
 				$TimerDelaySelect.start()
 				yield($TimerDelaySelect, "timeout")
 				end_dialog()
-				
+
 func end_dialog():
 	get_tree().paused = false
 	Global.dialogOpen = false

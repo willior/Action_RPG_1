@@ -16,16 +16,16 @@
 [ext_resource path="res://assets/UI/Dialog/Font_LevelUp_Button.tres" type="DynamicFont" id=15]
 [ext_resource path="res://assets/UI/LevelDescription.gd" type="Script" id=16]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 extra_spacing_top = 1
 extra_spacing_char = 1
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=4]
+[sub_resource type="Theme" id=3]
 Label/colors/font_color = Color( 1, 1, 1, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
 Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
@@ -33,10 +33,10 @@ Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
-Label/fonts/font = SubResource( 3 )
+Label/fonts/font = SubResource( 2 )
 Label/styles/normal = null
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 2 )
 
 [node name="DialogLevelBox" type="Control"]
@@ -82,7 +82,7 @@ margin_left = 6.0
 margin_top = 2.0
 margin_right = -6.0
 margin_bottom = -1.90735e-05
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "bbcode"
 text = "bbcode"
@@ -276,7 +276,7 @@ margin_left = 98.0
 margin_right = 116.0
 margin_bottom = 149.0
 rect_min_size = Vector2( 18, 67 )
-theme = SubResource( 4 )
+theme = SubResource( 3 )
 custom_constants/separation = 4
 alignment = 1
 
@@ -370,7 +370,6 @@ stream = ExtResource( 8 )
 [node name="Tween" type="Tween" parent="OptionsRect/LevelUp_Rect/LevelUp_Container"]
 
 [node name="LevelDescription" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 margin_left = 166.0
 margin_top = 75.0
 margin_right = 306.0
@@ -383,7 +382,7 @@ __meta__ = {
 [node name="NinePatchRect" type="NinePatchRect" parent="LevelDescription"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 1 )
+texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
 patch_margin_right = 2
@@ -396,7 +395,7 @@ margin_left = 6.0
 margin_top = 2.0
 margin_right = -6.0
 margin_bottom = -2.0
-custom_fonts/normal_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 4 )
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -432,25 +431,26 @@ stream = ExtResource( 10 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Tween" type="Tween" parent="."]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="LevelDescription" method="_on_ButtonVIT_focus_entered"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="LevelDescription" method="_on_ButtonVIT_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonVIT_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="LevelDescription" method="_on_ButtonEND_focus_entered"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="LevelDescription" method="_on_ButtonEND_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonEND_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="LevelDescription" method="_on_ButtonDEF_focus_entered"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="LevelDescription" method="_on_ButtonDEF_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEF_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="LevelDescription" method="_on_ButtonSTR_focus_entered"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="LevelDescription" method="_on_ButtonSTR_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSTR_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="LevelDescription" method="_on_ButtonDEX_focus_entered"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="LevelDescription" method="_on_ButtonDEX_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEX_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="LevelDescription" method="_on_ButtonSPD_focus_entered"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="LevelDescription" method="_on_ButtonSPD_focus_entered"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSPD_pressed"]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="LevelDescription" method="_on_ButtonMAG_focus_entered"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="LevelDescription" method="_on_ButtonMAG_focus_entered"]
+[connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonMAG_pressed"]
 [connection signal="timeout" from="LevelDescription/TimerText" to="LevelDescription" method="_on_TimerText_timeout"]
 [connection signal="timeout" from="TimerText" to="." method="_on_TimerText_timeout"]

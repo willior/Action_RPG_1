@@ -12,6 +12,7 @@ func _on_ButtonVIT_focus_entered():
 	# show()
 	description = "Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand."
 	update_description(description)
+	print(get_parent().get_node("OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT").modulate)
 
 func _on_ButtonEND_focus_entered():
 	description = "Lung Capacity determines how many physical actions you can perform in a short period of time."

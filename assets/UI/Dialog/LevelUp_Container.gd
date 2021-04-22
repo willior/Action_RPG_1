@@ -82,3 +82,18 @@ func _on_ButtonSPD_pressed():
 	Tween.TRANS_QUAD, Tween.EASE_IN
 	)
 	$Tween.start()
+
+func _on_ButtonMAG_pressed():
+	PlayerStats.magic += 1
+	SoundPlayer.play_sound("cool")
+	$Stats/LabelMAG.text = str(PlayerStats.magic)
+	$Tween.interpolate_property($Stats/LabelMAG, "modulate",
+	Color(0.25, 1, 1, 1),
+	Color(1, 1, 1, 1),
+	0.3,
+	Tween.TRANS_QUAD, Tween.EASE_IN
+	)
+	$Tween.start()
+
+func _on_ButtonVIT_focus_entered():
+	pass # Replace with function body.
