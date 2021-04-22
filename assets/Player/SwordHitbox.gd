@@ -18,7 +18,7 @@ func _ready():
 	PlayerStats.connect("strength_changed", self, "set_damage")
 	damage = PlayerStats.strength*2
 	orig_damage = damage
-	print('damage = ', damage)
+	# print('damage = ', damage)
 
 func set_damage(value):
 	damage = value*2

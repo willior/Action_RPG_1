@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/UI/FormulaUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/UI/18x18_Container.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/UI/InventoryUI.gd" type="Script" id=7]
+[ext_resource path="res://assets/UI/3x3_Container.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/HealthUI.gd" type="Script" id=11]
 [ext_resource path="res://assets/UI/ExpBar2.tscn" type="PackedScene" id=12]
@@ -74,6 +75,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [node name="GUI" type="CanvasLayer"]
@@ -134,12 +137,17 @@ one_shot = true
 
 [node name="hp" type="Label" parent="HealthUI1"]
 material = ExtResource( 19 )
-margin_left = 1.0
-margin_top = -13.0
-margin_right = 47.0
+anchor_left = -0.00833333
+anchor_top = -0.25
+anchor_right = -0.00833333
+anchor_bottom = -0.25
+margin_left = 2.0
+margin_top = -12.0
+margin_right = 48.0
+margin_bottom = 1.0
 custom_fonts/font = ExtResource( 18 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "###/###"
+text = "##/##"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -151,9 +159,19 @@ margin_right = 93.0
 margin_bottom = 176.0
 
 [node name="ExpBar1" parent="." instance=ExtResource( 4 )]
+margin_top = -40.0
 
 [node name="ExpBarTexture" parent="ExpBar1" index="0"]
-margin_right = 43.0
+margin_left = 9.0
+margin_right = 50.0
+
+[node name="TextureRect" parent="ExpBar1" index="1"]
+margin_left = 14.0
+margin_top = -20.0
+
+[node name="Label" parent="ExpBar1/TextureRect" index="0"]
+margin_top = 0.0
+margin_bottom = 0.0
 
 [node name="HealthUI2" type="Control" parent="."]
 pause_mode = 2
@@ -274,6 +292,120 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="FormulaUI" type="Control" parent="."]
+visible = false
+margin_left = 33.0
+margin_top = 139.0
+margin_right = 51.0
+margin_bottom = 157.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="FormulaRect" type="NinePatchRect" parent="FormulaUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -2.0
+margin_right = 8.0
+texture = ExtResource( 8 )
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="AnimatedSprite" parent="FormulaUI/FormulaRect"]
+position = Vector2( 10, 10 )
+playing = true
+
+[node name="Label" type="Label" parent="FormulaUI/FormulaRect"]
+material = ExtResource( 19 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -17.0
+margin_top = -14.0
+margin_right = -2.0
+margin_bottom = -1.0
+custom_fonts/font = SubResource( 3 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IngredientsRect" type="NinePatchRect" parent="FormulaUI"]
+margin_left = -19.0
+margin_top = -4.0
+margin_right = -1.0
+margin_bottom = 20.0
+texture = ExtResource( 8 )
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ingredient1" type="Sprite" parent="FormulaUI/IngredientsRect"]
+position = Vector2( 2, 2 )
+centered = false
+
+[node name="Ingredient2" type="Sprite" parent="FormulaUI/IngredientsRect"]
+position = Vector2( 2, 13 )
+centered = false
+
+[node name="Quantity1" type="Label" parent="FormulaUI/IngredientsRect"]
+material = ExtResource( 19 )
+anchor_right = 1.0
+margin_top = -1.0
+margin_right = -2.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 3 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quantity2" type="Label" parent="FormulaUI/IngredientsRect"]
+material = ExtResource( 19 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_top = -14.0
+margin_right = -2.0
+margin_bottom = -1.0
+custom_fonts/font = SubResource( 3 )
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PickupDisplay1" type="Control" parent="."]
+margin_left = 16.0
+margin_top = 126.0
+margin_right = 16.0
+margin_bottom = 126.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PickupContainer" type="VBoxContainer" parent="PickupDisplay1"]
+show_behind_parent = true
+grow_vertical = 0
+size_flags_vertical = 9
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="InventoryUI" type="Control" parent="."]
 visible = false
 margin_left = 13.0
@@ -312,60 +444,6 @@ margin_bottom = 10.0
 custom_fonts/font = SubResource( 3 )
 text = "?"
 align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="FormulaUI" type="Control" parent="."]
-margin_left = 13.0
-margin_top = 141.0
-margin_right = 32.0
-margin_bottom = 160.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="TextureRect" parent="FormulaUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 1
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="AnimatedSprite" parent="FormulaUI/Panel"]
-position = Vector2( 9.5, 9.5 )
-playing = true
-
-[node name="Label" type="Label" parent="FormulaUI/Panel"]
-margin_left = 2.0
-margin_top = -3.0
-margin_right = 18.0
-margin_bottom = 10.0
-custom_fonts/font = SubResource( 3 )
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PickupDisplay1" type="Control" parent="."]
-margin_left = 14.0
-margin_top = 126.0
-margin_right = 14.0
-margin_bottom = 126.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PickupContainer" type="VBoxContainer" parent="PickupDisplay1"]
-show_behind_parent = true
-grow_vertical = 0
-size_flags_vertical = 9
-alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
