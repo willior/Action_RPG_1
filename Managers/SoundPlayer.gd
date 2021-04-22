@@ -12,6 +12,7 @@ var iloveit = preload("res://assets/Audio/Gene/I love it!.wav")
 var nice = preload("res://assets/Audio/Gene/Nice!.wav")
 var whistle = preload("res://assets/Audio/Gene/Whistle.wav")
 var wow = preload("res://assets/Audio/Gene/Wow!.wav")
+var cool = preload("res://assets/Audio/Gene/Cool!.wav")
 
 func play_sound(value):
 	if audio.bus != "Master":
@@ -34,16 +35,14 @@ func play_sound(value):
 			audio.stream = whistle
 		"wow":
 			audio.stream = wow
+		"cool":
+			audio.stream = cool
 		"slither":
 			audio.stream = slither
 	audio.play()
 
 func play_music(value):
 	print('playing music: ', value)
-	#$Music.bus = "Reverb"
-#	match value:
-#		"level_up":
-#			audio.stream = level_up_BGM
 	$Music.play()
 	
 func stop_music():
