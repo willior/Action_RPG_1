@@ -547,19 +547,19 @@ func flash_stop():
 	base_enemy_accuracy = 66
 	swordHitbox.flash_end()
 	# stats.strength_mod = 0
-	
+
 func hit_damage():
 	stats.health -= damageTaken
 	$HurtAudio.play()
 	hurtbox.start_invincibility(1)
 	hurtbox.create_hit_effect()
-	
+
 func hit_state(_delta):
 # warning-ignore:integer_division
 	velocity = -dir_vector * (stats.roll_speed/2)
 	animationState.travel("Hit")
 	move()
-	
+
 func hit_animation_finished():
 	stamina_regen_reset()
 	player_state_reset()
@@ -567,23 +567,22 @@ func hit_animation_finished():
 		charge_reset()
 		attack_charging = true
 	state = MOVE
-	
+
 func player_state_reset():
 	base_enemy_accuracy = 66
 	charge.stop_charge()
 	swordHitbox.set_deferred("monitorable", false)
-	swordHitbox.damage = swordHitbox.orig_damage
+	# swordHitbox.damage = swordHitbox.orig_damage
 	swordHitbox.reset_damage()
 	
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
 	stats.experience_total += experience_from_kill
-	
 	while stats.experience >= stats.experience_required:
 		level_up()
 		stats.experience -= stats.experience_required
 		stats.experience_required *= 1.618034
-		
+
 func level_up():
 	just_leveled = true
 	stats.level += 1

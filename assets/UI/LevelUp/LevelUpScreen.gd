@@ -52,7 +52,7 @@ func _input(event):
 			get_tree().set_input_as_handled()
 			return
 		elif waiting_for_input:
-			print('waiting_for_input: stats remaining = ', stats_remaining)
+			print('stats remaining = ', stats_remaining)
 			if stats_remaining == 0:
 				waiting_for_input = false
 				return
@@ -284,7 +284,6 @@ func _on_TimerText_timeout():
 			if level_flag:
 				$Music.play()
 				get_child(2).get_child(0).get_child(0).get_child(0).get_child(0).grab_focus()
-				print('level flag')
 				level_flag = false
 				waiting_for_input = true
 			else:

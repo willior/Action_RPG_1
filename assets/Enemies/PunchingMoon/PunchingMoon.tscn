@@ -1,0 +1,210 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.png" type="Texture" id=1]
+[ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.gd" type="Script" id=2]
+[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Enemies/EnemyHealth.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=12]
+[ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoonStats.gd" type="Script" id=13]
+[ext_resource path="res://assets/Shadows/ExtraLargeShadow.png" type="Texture" id=14]
+[ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=17]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 17 )
+shader_param/active = false
+
+[sub_resource type="CapsuleShape2D" id=23]
+radius = 13.1029
+height = 21.7253
+
+[sub_resource type="Animation" id=15]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=16]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CircleShape2D" id=17]
+
+[sub_resource type="CircleShape2D" id=18]
+radius = 26.7014
+
+[sub_resource type="CircleShape2D" id=19]
+
+[sub_resource type="CircleShape2D" id=20]
+
+[sub_resource type="CircleShape2D" id=21]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id=22]
+radius = 5.0
+
+[node name="PunchingMoon" type="KinematicBody2D"]
+collision_layer = 16400
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 0, -3 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -12 )
+
+[node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
+modulate = Color( 0, 0, 0, 1 )
+offset = Vector2( 0, -12 )
+
+[node name="ShadowSprite" type="Sprite" parent="."]
+show_behind_parent = true
+texture = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, -5.36449 )
+rotation = 1.5708
+shape = SubResource( 23 )
+
+[node name="PunchingMoonStats" parent="." instance=ExtResource( 11 )]
+script = ExtResource( 13 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/StartFlashing = SubResource( 15 )
+anims/StopFlashing = SubResource( 16 )
+
+[node name="Talkbox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
+position = Vector2( 0, -14 )
+shape = SubResource( 17 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 6 )]
+collision_layer = 8
+script = ExtResource( 12 )
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -14 )
+shape = SubResource( 18 )
+
+[node name="WanderController" parent="." instance=ExtResource( 5 )]
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+scale = Vector2( 4, 4 )
+shape = SubResource( 19 )
+
+[node name="AttackController" parent="." instance=ExtResource( 4 )]
+
+[node name="AttackPlayerZone" parent="." instance=ExtResource( 9 )]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 20 )
+
+[node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
+wait_time = 0.8
+one_shot = true
+
+[node name="Hitbox" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -3 )
+collision_mask = 4
+damage = 8.0
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 21 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 22 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="DelayTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="EnemyHealth" parent="." instance=ExtResource( 8 )]
+position = Vector2( 0, 10 )
+
+[node name="HealthBack" parent="EnemyHealth" index="0"]
+margin_left = -24.0
+margin_right = 24.0
+
+[node name="HealthTexture" parent="EnemyHealth" index="1"]
+margin_left = -24.0
+margin_right = 24.0
+
+[node name="DamageContainer" parent="EnemyHealth" index="5"]
+margin_left = 25.0
+margin_right = 25.0
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, -16 )
+scale = Vector2( 1, 2.75 )
+rect = Rect2( -1, -1, 2, 8 )
+__meta__ = {
+"_editor_description_": "	"
+}
+[connection signal="no_health" from="PunchingMoonStats" to="EnemyHealth" method="_on_stats_no_health"]
+[connection signal="no_health" from="PunchingMoonStats" to="." method="_on_BatStats_no_health"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="timeout" from="AttackPlayerZone/AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+
+[editable path="Hurtbox"]
+
+[editable path="PlayerDetectionZone"]
+
+[editable path="AttackPlayerZone"]
+
+[editable path="Hitbox"]
+
+[editable path="SoftCollision"]
+
+[editable path="EnemyHealth"]

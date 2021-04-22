@@ -18,7 +18,6 @@ func _on_player_initialized(player):
 	player.pouch.connect("ingredient_quantity_updated", self, "_on_ingredient_quantity_updated")
 
 func _on_current_selected_formula_changed(new_selected_formula):
-	print(new_selected_formula)
 	current_formula = new_selected_formula
 	if new_selected_formula == null:
 		hide()

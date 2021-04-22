@@ -55,7 +55,7 @@ func _deferred_goto_scene(path):
 	get_tree().get_root().add_child(current_scene)
 	# optional, to make it compatible with the SceneTree.change_scene() API
 	get_tree().set_current_scene( current_scene )
-	
+
 func player_hit_calculation(base_accuracy, dexterity, modifier, evasion):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
@@ -66,7 +66,7 @@ func player_hit_calculation(base_accuracy, dexterity, modifier, evasion):
 		return true
 	elif final_hit_rate < random_value:
 		return false
-		
+
 func enemy_hit_calculation(base_accuracy, accuracy, evasion):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
@@ -77,7 +77,7 @@ func enemy_hit_calculation(base_accuracy, accuracy, evasion):
 		return true
 	elif final_hit_rate < random_value:
 		return false
-		
+
 func crit_calculation(base_crit_rate, dexterity, dexterity_mod):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
@@ -88,13 +88,13 @@ func crit_calculation(base_crit_rate, dexterity, dexterity_mod):
 		return true
 	elif final_crit_rate < random_value:
 		return false
-	
+
 func damage_calculation(attack, defense, random):
 	var base_damage = 2 * (attack*attack / (attack+defense))
 #	print('[[[ attack = ', attack, " vs. ", "defense = ", defense)
 #	print("base damage = ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage, " ]]]")
 	return random_variance(base_damage, random)
-	
+
 func random_variance(base_damage, random):
 	rng.randomize()
 	var random_value = rng.randf_range(1-random, 1+random)
@@ -110,7 +110,7 @@ func distribute_exp(value):
 		get_node("/root/World/YSort/Player2").enemy_killed(experience_gained)
 	else:
 		get_node("/root/World/YSort/Player").enemy_killed(experience_gained)
-		
+
 func create_blood_effect(damage_count, location, z_index):
 	randomize()
 	var blood_effect = BloodHitEffect.instance()
@@ -145,7 +145,7 @@ func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z
 func reset_input_after_dialog():
 	update_player()
 	player1.check_attack_input()
-	
+
 func change_floor(body, destination_z_index):
 	# print(body.name, " z_index: ", body.z_index, " to ", destination_z_index)
 	body.set_z_index(destination_z_index) # sets the intended z_index for the body enterred

@@ -96,14 +96,14 @@ func _input(event):
 			Global.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
-		player.formulabook.add_formula("Heal")
-		player.formulabook.add_formula("Flash")
+		player.pouch.add_ingredient("Rock", 1)
+		player.pouch.add_ingredient("Clay", 2)
 	
 	if event.is_action_pressed("test4"): # O
-		player.formulabook.remove_formula("Flash")
+		pass
 	
 	if event.is_action_pressed("pause"): # P
-		player.formulabook.remove_formula("Heal")
+		pass
 	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:

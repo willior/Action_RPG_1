@@ -40,23 +40,17 @@ var stamina = max_stamina setget set_stamina
 var stamina_regen_rate = 0.2 setget set_stamina_regen_rate
 
 var strength_mod = 0 setget set_strength_mod
-
 var defense_mod = 0 setget set_defense_mod
-
 var dexterity_mod = 0.0 setget set_dexterity_mod
 var base_accuracy = 75
 var base_crit_rate = 4
-
 var attack_speed = 1.0 setget set_attack_speed
 var iframes = 0.1 setget set_iframes
-
 var max_charge = 100 setget set_max_charge
 var charge = 0 setget set_charge
 var charge_rate = 0.5
-
 var max_charge_level = 2 setget set_max_charge_level
 var charge_level = 0 setget set_charge_level
-
 var magic_mod = 1.0 setget set_magic_mod
 var drop_rate_mod = 1.0
 
@@ -121,15 +115,15 @@ func _ready():
 	self.strength = strength
 	self.dexterity = dexterity
 	self.speed = speed
+	self.magic = magic
 	self.iframes = iframes
 	# self.attack_speed = attack_speed
-	
 	self.experience = experience_total
 	self.cash = cash
 	self.status = status
 	self.charge = charge
 	self.charge_level = charge_level
-	
+
 func set_status(value):
 	status = value
 	match status:
@@ -157,7 +151,7 @@ func set_status(value):
 
 func set_speed_mod(value):
 	speed_mod = value
-	
+
 func set_vitality(value):
 	vitality = value
 	var health_increase
@@ -212,7 +206,7 @@ func set_dead(value):
 	if dead:
 		emit_signal(\"no_health\")
 		print('setting dead')
-		
+
 func set_endurance(value):
 	endurance = value
 	var stamina_increase
@@ -226,33 +220,33 @@ func set_endurance(value):
 		stamina_increase = 9
 	self.max_stamina += stamina_increase
 	emit_signal(\"endurance_changed\", endurance)
-		
+
 func set_max_stamina(value):
 	max_stamina = value
 	emit_signal(\"max_stamina_changed\", max_stamina)
-	
+
 func set_stamina(value):
 	stamina = value
 	stamina = clamp(value, -15, max_stamina)
 	emit_signal(\"stamina_changed\", stamina)
-	
+
 func set_stamina_regen_rate(value):
 	stamina_regen_rate = value
 	emit_signal(\"stamina_regen_rate_changed\", stamina_regen_rate)
-	
+
 func set_defense(value):
 	defense = value
 	emit_signal(\"defense_changed\", defense)
-	
+
 func set_defense_mod(value):
 	defense_mod = value
 	emit_signal(\"defense_mod_changed\", defense_mod)
-	
+
 func set_strength(value):
 	print('strength set: ', value)
 	strength = value
 	emit_signal(\"strength_changed\", strength)
-	
+
 func set_strength_mod(value):
 	strength_mod = value
 	emit_signal(\"strength_mod_changed\", strength_mod)
@@ -260,61 +254,69 @@ func set_strength_mod(value):
 func set_dexterity(value):
 	dexterity = value
 	emit_signal(\"dexterity_changed\", dexterity)
-	
+
 func set_dexterity_mod(value):
 	dexterity_mod = value
 	emit_signal(\"dexterity_mod_changed\", dexterity_mod)
-	
+
 func set_speed(value):
 	speed = value
 	self.attack_speed = 1 + (speed / 120)
 	charge_rate = 0.5 + (speed / 120)
 	emit_signal(\"speed_changed\", speed)
-	
+
 func set_attack_speed(value):
 	attack_speed = value
 	emit_signal(\"attack_speed_changed\", attack_speed)
-	
+
 func set_iframes(value):
 	iframes = value
 	emit_signal(\"iframes_changed\", iframes)
-	
+
 func set_max_charge(value):
 	max_charge = value
 	emit_signal(\"max_charge_changed\", max_charge)
-	
+
 func set_charge(value):
 	charge = value
 	emit_signal(\"charge_changed\", charge)
-	
+
 func set_max_charge_level(value):
 	max_charge_level = value
 	emit_signal(\"max_charge_level_changed\", max_charge_level)
-	
+
 func set_charge_level(value):
 	charge_level = value
 	emit_signal(\"charge_level_changed\", charge_level)
-	
+
 func set_magic(value):
 	magic = value
+	self.magic_mod = 1 + (magic / 32) # + ~3.125% per point
+	self.drop_rate_mod = 1 + (magic / 64) # + ~1.5625% per point
 	emit_signal(\"magic_changed\", magic)
-	
+
 func set_magic_mod(value):
 	magic_mod = value
+	print('magic mod set: ', magic_mod)
 	emit_signal(\"magic_mod_changed\", magic_mod)
-		
+
+func set_drop_rate_mod(value):
+	drop_rate_mod = value
+	print('luck bonus set: ', drop_rate_mod)
+	emit_signal(\"drop_rate_mod_changed\")
+
 func set_max_experience(value):
 	experience_required = value
 	emit_signal(\"max_experience_changed\", experience_required)
-	
+
 func set_experience(value):
 	experience = value
 	emit_signal(\"experience_changed\", experience)
-	
+
 func set_level(value):
 	level = value
 	emit_signal(\"level_changed\", level)
-	
+
 func set_cash(value):
 	cash = value
 	emit_signal(\"cash_changed\", cash)

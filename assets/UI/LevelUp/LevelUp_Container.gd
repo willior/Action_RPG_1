@@ -7,6 +7,7 @@ func _ready():
 	$Stats/LabelSTR.text = str(PlayerStats.strength)
 	$Stats/LabelDEX.text = str(PlayerStats.dexterity)
 	$Stats/LabelSPD.text = str(PlayerStats.speed)
+	$Stats/LabelMAG.text = str(PlayerStats.magic)
 
 func _on_focus_entered():
 	$AudioMenu.play()

@@ -16,7 +16,8 @@ var enemies_examined = {
 	"Bat": false,
 	"Crow": false,
 	"Wolf": false,
-	"Tumbleweed": false
+	"Tumbleweed": false,
+	"PunchingMoon": false
 }
 
 # Home
@@ -58,6 +59,8 @@ signal Crow_complete()
 signal Wolf_complete()
 # warning-ignore:unused_signal
 signal Tumbleweed_complete()
+# warning-ignore:unused_signal
+signal PunchingMoon_complete()
 # warning-ignore:unused_signal
 signal home_lightswitch_advance(value)
 # warning-ignore:unused_signal
