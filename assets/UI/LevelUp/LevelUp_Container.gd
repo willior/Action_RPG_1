@@ -94,6 +94,3 @@ func _on_ButtonMAG_pressed():
 	Tween.TRANS_QUAD, Tween.EASE_IN
 	)
 	$Tween.start()
-
-func _on_ButtonVIT_focus_entered():
-	pass # Replace with function body.

@@ -6,7 +6,8 @@
 [ext_resource path="res://assets/UI/Menu/ButtonDefault.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=6]
-[ext_resource path="res://assets/UI/Dialog/Theme_LevelUpButton.tres" type="Theme" id=10]
+[ext_resource path="res://assets/UI/LevelUp/Theme_LevelUpButton.tres" type="Theme" id=10]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )

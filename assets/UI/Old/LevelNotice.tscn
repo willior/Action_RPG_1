@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/UI/LevelNotice.gd" type="Script" id=2]
-[ext_resource path="res://assets/Shaders/pixel_text_outline.shader" type="Shader" id=3]
-[ext_resource path="res://assets/Shaders/pixel_text_outline_tres.tres" type="Material" id=4]
+[ext_resource path="res://assets/Shaders/pixel_text_outline.shader" type="Shader" id=2]
+[ext_resource path="res://assets/Shaders/pixel_text_outline_tres.tres" type="Material" id=3]
+[ext_resource path="res://assets/UI/Old/LevelNotice.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
@@ -12,14 +12,14 @@ extra_spacing_char = 2
 font_data = ExtResource( 1 )
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 3 )
+shader = ExtResource( 2 )
 
 [sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 3 )
+shader = ExtResource( 2 )
 
 [node name="LevelNotice" type="Node2D"]
 z_index = 4
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -35,7 +35,7 @@ __meta__ = {
 }
 
 [node name="LabelLevel" type="Label" parent="VBoxContainer"]
-material = ExtResource( 4 )
+material = ExtResource( 3 )
 margin_right = 224.0
 margin_bottom = 13.0
 grow_horizontal = 0

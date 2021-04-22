@@ -117,6 +117,7 @@ func _input(event):
 			get_node("/root/World/GUI/HealthUI1").visible = true
 			get_node("/root/World/GUI/ExpBar1").visible = true
 			get_node("/root/World/GUI/StaminaBar1").visible = true
+			get_node("/root/World/GUI/FormulaUI1").visible = true
 			get_node("/root/World/YSort/Player").visible = true
 			PlayerStats.health += PlayerStats.max_health
 			get_node("/root/World/GUI/HealthUI1/HealthBack").value = PlayerStats.health

@@ -9,8 +9,8 @@ func flash():
 	$Tween.interpolate_property(
 	self,
 	"color",
-	Color(1, 0, 0, 1),
-	Color(1, 0, 0, 0.2),
+	Color(1, 0, 0, 0.7),
+	Color(1, 0, 0, 0.3),
 	1,
 	Tween.TRANS_LINEAR,
 	Tween.EASE_IN

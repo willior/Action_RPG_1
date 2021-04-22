@@ -1,13 +1,14 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=1]
-[ext_resource path="res://assets/UI/Dialog/LevelUp_Container.gd" type="Script" id=2]
+[ext_resource path="res://assets/UI/LevelUp/LevelUp_Container.gd" type="Script" id=2]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/UI/Dialog/Pressed_StyleBoxTex_LevelUp_Button.tres" type="StyleBox" id=4]
-[ext_resource path="res://assets/UI/Dialog/Theme_LevelUpButton.tres" type="Theme" id=5]
-[ext_resource path="res://assets/UI/Dialog/Hover_StyleBoxTex_LevelUp_Button.tres" type="StyleBox" id=6]
-[ext_resource path="res://assets/UI/Dialog/Font_LevelUp_Button.tres" type="DynamicFont" id=7]
+[ext_resource path="res://assets/UI/LevelUp/Pressed_StyleBoxTex_LevelUp_Button.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/UI/LevelUp/Theme_LevelUpButton.tres" type="Theme" id=5]
+[ext_resource path="res://assets/UI/LevelUp/Hover_StyleBoxTex_LevelUp_Button.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/UI/LevelUp/Font_LevelUp_Button.tres" type="DynamicFont" id=7]
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=8]
+
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 3 )

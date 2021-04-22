@@ -292,7 +292,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FormulaUI" type="Control" parent="."]
+[node name="FormulaUI1" type="Control" parent="."]
 visible = false
 margin_left = 33.0
 margin_top = 139.0
@@ -304,7 +304,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FormulaRect" type="NinePatchRect" parent="FormulaUI"]
+[node name="FormulaRect" type="NinePatchRect" parent="FormulaUI1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -2.0
@@ -318,12 +318,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Icon" type="AnimatedSprite" parent="FormulaUI/FormulaRect"]
+[node name="Icon" type="AnimatedSprite" parent="FormulaUI1/FormulaRect"]
 pause_mode = 1
 position = Vector2( 10, 10 )
 playing = true
 
-[node name="Label" type="Label" parent="FormulaUI/FormulaRect"]
+[node name="Label" type="Label" parent="FormulaUI1/FormulaRect"]
 material = ExtResource( 19 )
 anchor_left = 1.0
 anchor_top = 1.0
@@ -339,7 +339,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IngredientsRect" type="NinePatchRect" parent="FormulaUI"]
+[node name="IngredientsRect" type="NinePatchRect" parent="FormulaUI1"]
 margin_left = -19.0
 margin_top = -4.0
 margin_right = -1.0
@@ -353,15 +353,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Ingredient1" type="Sprite" parent="FormulaUI/IngredientsRect"]
+[node name="Ingredient1" type="Sprite" parent="FormulaUI1/IngredientsRect"]
 position = Vector2( 2, 2 )
 centered = false
 
-[node name="Ingredient2" type="Sprite" parent="FormulaUI/IngredientsRect"]
+[node name="Ingredient2" type="Sprite" parent="FormulaUI1/IngredientsRect"]
 position = Vector2( 2, 13 )
 centered = false
 
-[node name="Quantity1" type="Label" parent="FormulaUI/IngredientsRect"]
+[node name="Quantity1" type="Label" parent="FormulaUI1/IngredientsRect"]
 material = ExtResource( 19 )
 anchor_right = 1.0
 margin_top = -1.0
@@ -373,7 +373,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Quantity2" type="Label" parent="FormulaUI/IngredientsRect"]
+[node name="Quantity2" type="Label" parent="FormulaUI1/IngredientsRect"]
 material = ExtResource( 19 )
 anchor_top = 1.0
 anchor_right = 1.0

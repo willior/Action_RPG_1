@@ -238,7 +238,7 @@ func _on_TimerText_timeout():
 			yield($TimerDelaySelect, "timeout")
 			if level_flag:
 				$Music.play()
-				get_child(1).get_child(1).get_child(0).get_child(0).get_child(0).grab_focus()
+				get_child(1).get_child(0).get_child(0).get_child(0).get_child(0).grab_focus()
 				print('level flag')
 				level_flag = false
 				waiting_for_input = true

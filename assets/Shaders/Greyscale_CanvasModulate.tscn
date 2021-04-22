@@ -6,10 +6,10 @@
 shader = ExtResource( 1 )
 
 [node name="Greyscale" type="ColorRect"]
+modulate = Color( 1, 1, 1, 0.75 )
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 1, 1, 1, 0.478431 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -2,10 +2,9 @@ extends KinematicBody2D
 
 const Notice = preload("res://assets/UI/Notice.tscn")
 const Poison = preload("res://assets/UI/Status/PoisonNotice.tscn")
-const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-const DialogLevelBox = preload("res://assets/UI/DialogLevelBox.tscn")
+const LevelUpScreen = preload("res://assets/UI/LevelUp/LevelUpScreen.tscn")
 const TweenGreyscale = preload("res://assets/Shaders/Greyscale_TweenCanvasModulate.tscn")
 const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
@@ -614,10 +613,10 @@ func show_level_up_screen():
 	get_node("/root/World/SFX2").stream_paused = true
 	print('LevelTimer timeout. Final total stats_to_allocate = ', stats_to_allocate)
 	just_leveled = false
-	var dialogLevelBox = DialogLevelBox.instance()
-	dialogLevelBox.stats_remaining = stats_to_allocate
+	var levelUpScreen = LevelUpScreen.instance()
+	levelUpScreen.stats_remaining = stats_to_allocate
 	stats_to_allocate = 0
-	get_node("/root/World/Overlay").add_child(dialogLevelBox)
+	get_node("/root/World/Overlay").add_child(levelUpScreen)
 	var tweenGreyscale = TweenGreyscale.instance()
 	get_node("/root/World/GUI").add_child(tweenGreyscale)
 
@@ -805,7 +804,7 @@ func dying_effect(value):
 			start_level_timer()
 
 func game_over():
-	# dying = true
+	Engine.time_scale = 1
 	AudioServer.set_bus_effect_enabled(0, 0, false)
 	get_node("/root/World/Heartbeat").stream_paused = true
 	get_node("/root/World/Music").stream_paused = true
@@ -814,6 +813,7 @@ func game_over():
 	get_node("/root/World/GUI/HealthUI1").visible = false
 	get_node("/root/World/GUI/ExpBar1").visible = false
 	get_node("/root/World/GUI/StaminaBar1").visible = false
+	get_node("/root/World/GUI/FormulaUI1").visible = false
 	self.visible = false
 	get_tree().paused = true
 	
