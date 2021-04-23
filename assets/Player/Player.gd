@@ -174,6 +174,7 @@ func _input(event):
 					yield($CastTimer, "timeout")
 					for i in range(0,2):
 						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
+						
 					FormulaStats.formula_used(formula_used.formula_reference.name)
 				else:
 					ingredient1_OK = false
