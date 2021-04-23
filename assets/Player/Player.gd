@@ -164,6 +164,7 @@ func _input(event):
 						ingredient2_OK = true
 						continue
 				if ingredient1_OK && ingredient2_OK:
+					FormulaStats.apply_xp_to_formula(formula_used.formula_reference.name)
 					var FORMULA = formula_used.formula_reference.scene
 					var formula = FORMULA.instance()
 					formula.global_position = global_position
@@ -174,8 +175,6 @@ func _input(event):
 					yield($CastTimer, "timeout")
 					for i in range(0,2):
 						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
-						
-					FormulaStats.formula_used(formula_used.formula_reference.name)
 				else:
 					ingredient1_OK = false
 					ingredient2_OK = false

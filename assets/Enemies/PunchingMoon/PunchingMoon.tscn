@@ -21,11 +21,11 @@ resource_local_to_scene = true
 shader = ExtResource( 17 )
 shader_param/active = false
 
-[sub_resource type="CapsuleShape2D" id=23]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 13.1029
 height = 21.7253
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=3]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -41,7 +41,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -56,19 +56,19 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="CircleShape2D" id=17]
+[sub_resource type="CircleShape2D" id=5]
 
-[sub_resource type="CircleShape2D" id=18]
+[sub_resource type="CircleShape2D" id=6]
 radius = 26.7014
 
-[sub_resource type="CircleShape2D" id=19]
+[sub_resource type="CircleShape2D" id=7]
 
-[sub_resource type="CircleShape2D" id=20]
+[sub_resource type="CircleShape2D" id=8]
 
-[sub_resource type="CircleShape2D" id=21]
+[sub_resource type="CircleShape2D" id=9]
 radius = 5.0
 
-[sub_resource type="CircleShape2D" id=22]
+[sub_resource type="CircleShape2D" id=10]
 radius = 5.0
 
 [node name="PunchingMoon" type="KinematicBody2D"]
@@ -92,14 +92,14 @@ texture = ExtResource( 14 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, -5.36449 )
 rotation = 1.5708
-shape = SubResource( 23 )
+shape = SubResource( 2 )
 
 [node name="PunchingMoonStats" parent="." instance=ExtResource( 11 )]
 script = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/StartFlashing = SubResource( 15 )
-anims/StopFlashing = SubResource( 16 )
+anims/StartFlashing = SubResource( 3 )
+anims/StopFlashing = SubResource( 4 )
 
 [node name="Talkbox" type="Area2D" parent="."]
 collision_layer = 128
@@ -107,7 +107,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
 position = Vector2( 0, -14 )
-shape = SubResource( 17 )
+shape = SubResource( 5 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 6 )]
 collision_layer = 8
@@ -115,7 +115,7 @@ script = ExtResource( 12 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -14 )
-shape = SubResource( 18 )
+shape = SubResource( 6 )
 
 [node name="WanderController" parent="." instance=ExtResource( 5 )]
 
@@ -124,7 +124,7 @@ visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 scale = Vector2( 4, 4 )
-shape = SubResource( 19 )
+shape = SubResource( 7 )
 
 [node name="AttackController" parent="." instance=ExtResource( 4 )]
 
@@ -135,7 +135,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 20 )
+shape = SubResource( 8 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8
@@ -147,13 +147,13 @@ collision_mask = 4
 damage = 8.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 21 )
+shape = SubResource( 9 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 10 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 22 )
+shape = SubResource( 10 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

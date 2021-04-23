@@ -10,7 +10,7 @@ var knockback_vector = Vector2.ZERO
 var spell = true
 
 func _ready():
-	spell_level_mod = FormulaStats.flash_level
+	spell_level_mod = FormulaStats.Flash[1]
 	damage = base_damage * (magic_mod*magic_mod) * spell_level_mod
 	
 	# maybe: (base_damage*spell_level_mod) * (magic_mod*magic_mod)

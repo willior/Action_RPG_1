@@ -3,7 +3,7 @@ extends Node2D
 onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
 
 var hp_to_heal = 0
-var heal_amount = (10*FormulaStats.heal_level) * PlayerStats.magic_mod*PlayerStats.magic_mod
+var heal_amount = (10*FormulaStats.Heal[1]) * PlayerStats.magic_mod*PlayerStats.magic_mod
 var heal_rate = 1
 var total_healed = 0
 

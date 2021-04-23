@@ -1,6 +1,6 @@
 extends Node
 
-var max_health = 999999 setget set_max_health
+var max_health = 9999 setget set_max_health
 var health = max_health setget set_health
 var defense = 0.0 setget set_defense
 var evasion = 8
