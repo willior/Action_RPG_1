@@ -130,6 +130,9 @@ func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z
 	randomize()
 	var ingredientPickup = IngredientPickup.instance()
 	var check_common = randf()
+	common_chance *= PlayerStats.drop_rate_mod
+	rare_chance *= PlayerStats.drop_rate_mod
+	print("common chance: ", common_chance*100, "% /// rare chance: ", rare_chance*100, "%")
 	if check_common <= common_chance:
 		var check_rare = randf()
 		if check_rare <= rare_chance:

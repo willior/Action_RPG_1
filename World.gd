@@ -98,6 +98,8 @@ func _input(event):
 	if event.is_action_pressed("test3"): # U
 		player.pouch.add_ingredient("Rock", 1)
 		player.pouch.add_ingredient("Clay", 2)
+		player.pouch.add_ingredient("Water", 2)
+		player.pouch.add_ingredient("Salt", 1)
 	
 	if event.is_action_pressed("test4"): # O
 		pass

@@ -23,9 +23,9 @@ var dexterity = 4.0 setget set_dexterity
 var speed = 4.0 setget set_speed
 var magic = 4.0 setget set_magic
 
-var experience_required = 100 setget set_max_experience
-var experience = 82 setget set_experience
 var level = 1 setget set_level
+var experience = 82 setget set_experience
+var experience_required = 100 setget set_max_experience
 var experience_total = 82
 
 var max_health = vitality*15 setget set_max_health
@@ -52,7 +52,7 @@ var charge_rate = 0.5
 var max_charge_level = 2 setget set_max_charge_level
 var charge_level = 0 setget set_charge_level
 var magic_mod = 1.0 setget set_magic_mod
-var drop_rate_mod = 1.0
+var drop_rate_mod = 1.0 setget set_drop_rate_mod
 
 var cash = 0 setget set_cash
 
@@ -85,7 +85,7 @@ signal iframes_changed(value)
 signal speed_changed(value)
 signal attack_speed_changed(value)
 signal magic_changed(value)
-signal magic_mod_changed(value)
+# signal magic_mod_changed(value)
 signal status_changed(value)
 
 signal max_charge_changed(value)
@@ -298,12 +298,12 @@ func set_magic(value):
 func set_magic_mod(value):
 	magic_mod = value
 	print('magic mod set: ', magic_mod)
-	emit_signal(\"magic_mod_changed\", magic_mod)
+	# emit_signal(\"magic_mod_changed\", magic_mod)
 
 func set_drop_rate_mod(value):
 	drop_rate_mod = value
 	print('luck bonus set: ', drop_rate_mod)
-	emit_signal(\"drop_rate_mod_changed\")
+	# emit_signal(\"drop_rate_mod_changed\")
 
 func set_max_experience(value):
 	experience_required = value
