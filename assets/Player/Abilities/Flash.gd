@@ -23,7 +23,7 @@ func ability_4():
 	get_node("/root/World/Camera2D").stop_shake()
 	get_node("/root/World/Camera2D").decay = 1
 	$CanvasLayer/White.flash()
-	$SpellHitbox.set_deferred("monitorable", true)
+	$FormulaHitbox.set_deferred("monitorable", true)
 	player.animationPlayer.play("Cast_2")
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

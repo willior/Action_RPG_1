@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/Player/Abilities/Heal.gd" type="Script" id=1]
 [ext_resource path="res://assets/Shaders/White_Flash_CanvasMod.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Player/Abilities/HealAll_FormulaHitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/Audio/SFX/Synth1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/Player/Abilities/HealFlash.gd" type="Script" id=5]
 
@@ -30,10 +31,10 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 320, 180 )
+[sub_resource type="CircleShape2D" id=2]
+radius = 320.0
 
-[node name="HealAbility" type="Node2D"]
+[node name="Heal" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 1 )
 
@@ -46,13 +47,17 @@ anims/Ability = SubResource( 1 )
 color = Color( 0, 1, 1, 0 )
 script = ExtResource( 5 )
 
-[node name="SpellHitbox" type="Area2D" parent="."]
+[node name="FormulaHitbox" type="Area2D" parent="."]
 monitoring = false
 monitorable = false
 collision_layer = 0
 collision_mask = 0
+script = ExtResource( 3 )
+formula_name = "Heal"
+base_potency = 10.0
+randomness = 0.1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpellHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
 shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

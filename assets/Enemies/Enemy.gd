@@ -58,8 +58,8 @@ func enable_detection(enemy):
 
 func hurtbox_entered(enemy, hitbox):
 	enemy.enemyHealth.show_health()
-	if hitbox.spell:
-		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
+	if hitbox.formula:
+		var damage = Global.damage_calculation(hitbox.potency, enemy.stats.defense, hitbox.randomness)
 		deal_damage(enemy, damage, false)
 		if enemy.stats.health > 0:
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity

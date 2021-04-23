@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Player/Abilities/Flash.gd" type="Script" id=1]
 [ext_resource path="res://assets/Shaders/White_Flash_CanvasMod.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/Player/Abilities/SpellHitbox.gd" type="Script" id=3]
+[ext_resource path="res://assets/Player/Abilities/DamageAll_FormulaHitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/Audio/Player/Tinnitus_1s.wav" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
@@ -33,10 +33,10 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 320, 180 )
+[sub_resource type="CircleShape2D" id=2]
+radius = 320.0
 
-[node name="FlashAbility" type="Node2D"]
+[node name="Flash" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 1 )
 
@@ -48,14 +48,17 @@ anims/Ability = SubResource( 1 )
 [node name="White" parent="CanvasLayer" instance=ExtResource( 2 )]
 color = Color( 1, 1, 1, 0 )
 
-[node name="SpellHitbox" type="Area2D" parent="."]
+[node name="FormulaHitbox" type="Area2D" parent="."]
 monitoring = false
 monitorable = false
 collision_layer = 0
 collision_mask = 8
 script = ExtResource( 3 )
+formula_name = "Flash"
+base_potency = 4.0
+randomness = 0.1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpellHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
 shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

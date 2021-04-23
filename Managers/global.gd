@@ -132,14 +132,14 @@ func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z
 	var check_common = randf()
 	common_chance *= PlayerStats.drop_rate_mod
 	rare_chance *= PlayerStats.drop_rate_mod
-	print("common chance: ", common_chance*100, "% /// rare chance: ", rare_chance*100, "%")
+	# print("common chance: ", common_chance*100, "% /// rare chance: ", rare_chance*100, "%")
 	if check_common <= common_chance:
 		var check_rare = randf()
 		if check_rare <= rare_chance:
-			print('rare drop: ', rare_drop)
+			# print('rare drop: ', rare_drop)
 			ingredientPickup.ingredient_name = rare_drop
 		else:
-			print('common drop: ', common_drop)
+			# print('common drop: ', common_drop)
 			ingredientPickup.ingredient_name = common_drop
 		get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
 		ingredientPickup.global_position = pos
