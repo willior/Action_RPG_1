@@ -21,14 +21,12 @@ func _on_current_selected_formula_changed(new_selected_formula):
 	current_formula = new_selected_formula
 	if new_selected_formula == null:
 		hide()
-#		$FormulaRect/Icon.frames = null
-#		$FormulaRect/Label.hide()
 		return
 	if !visible: show()
 	$FormulaRect/Icon.frames = new_selected_formula.formula_reference.icon
 	$FormulaRect/Icon.frame = 0
 	update_formula_quantity(current_formula)
-	
+
 func _on_ingredient_quantity_updated(_ingredient):
 	update_formula_quantity(current_formula)
 

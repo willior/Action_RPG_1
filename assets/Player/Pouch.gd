@@ -31,14 +31,11 @@ func check_ingredient(ingredient_name, quantity):
 func remove_ingredient(ingredient_name, quantity):
 	for i in range(_ingredients.size()):
 		var inventory_ingredient = _ingredients[i]
-		
 		if inventory_ingredient.ingredient_reference.name != ingredient_name:
 			continue
-		
 		if (inventory_ingredient.quantity-quantity) < 0:
 			print("none left / not enough ingredients")
 			return
-		
 		else: 
 			inventory_ingredient.quantity -= quantity
 			if inventory_ingredient.quantity <= 0:
@@ -47,9 +44,7 @@ func remove_ingredient(ingredient_name, quantity):
 				prints(str(inventory_ingredient.ingredient_reference.name) + " cleared from pouch")
 				_ingredients.erase(get_ingredient(i))
 				return
-				# _ingredients.erase(get_ingredient(current_selected_ingredient))
 			else:
-				# var updated_selected_ingredient = get_ingredient(current_selected_ingredient)
 				emit_signal("ingredient_quantity_updated", get_ingredient(i))
 
 func add_ingredient(ingredient_name, quantity):
@@ -75,3 +70,8 @@ func add_ingredient(ingredient_name, quantity):
 		}
 		_ingredients.append(new_ingredient)
 		quantity = 0
+		for i in range(_ingredients.size()):
+			var inventory_ingredient = _ingredients[i]
+			if inventory_ingredient.ingredient_reference.name != ingredient_name:
+				continue
+			emit_signal("ingredient_quantity_updated", get_ingredient(i))

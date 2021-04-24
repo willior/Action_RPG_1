@@ -96,13 +96,17 @@ func _input(event):
 			Global.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
+		print('adding ingredients...')
 		player.pouch.add_ingredient("Rock", 1)
 		player.pouch.add_ingredient("Clay", 2)
 		player.pouch.add_ingredient("Water", 2)
 		player.pouch.add_ingredient("Salt", 1)
 	
 	if event.is_action_pressed("test4"): # O
-		pass
+		player.pouch.remove_ingredient("Rock", 1)
+		player.pouch.remove_ingredient("Clay", 2)
+		player.pouch.remove_ingredient("Water", 2)
+		player.pouch.remove_ingredient("Salt", 1)
 	
 	if event.is_action_pressed("pause"): # P
 		pass
