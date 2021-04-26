@@ -40,7 +40,7 @@ Label/styles/normal = null
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 16 )
 shader_param/active = false
 
@@ -432,7 +432,6 @@ wait_time = 0.001
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LevelDescription"]
 
 [node name="StatPreview" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 margin_left = 160.0
 margin_top = 18.0
 margin_right = 291.0
@@ -459,6 +458,7 @@ margin_top = 2.0
 margin_right = -6.0
 margin_bottom = -2.0
 custom_fonts/normal_font = SubResource( 4 )
+text = "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -478,7 +478,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="NinePatchRect" parent="LevelText"]
-material = SubResource( 9 )
+material = SubResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 12 )

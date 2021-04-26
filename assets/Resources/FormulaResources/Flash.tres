@@ -117,8 +117,8 @@ name = "Flash"
 icon = SubResource( 25 )
 description = [  ]
 cost = {
-"Clay": 2,
-"Rock": 1
+"Clay": 1,
+"Rock": 2
 }
 ing_1_icon = ExtResource( 4 )
 ing_2_icon = ExtResource( 5 )
