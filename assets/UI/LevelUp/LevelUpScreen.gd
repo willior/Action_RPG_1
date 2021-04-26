@@ -1,6 +1,6 @@
 extends Control
 onready var label = $LevelText/RichTextLabel
-onready var stats_remaining_label = $StatPreview/RichTextLabel
+onready var stats_remaining_label = $StatPreview/VBoxContainer/RichTextLabel
 var default_stats_remaining = 2
 var stats_remaining = default_stats_remaining
 var VIT_to_add = 0
@@ -48,7 +48,7 @@ func _ready():
 	Global.dialogOpen = true
 	
 func _input(event):
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("attack"):
 		if !$TimerDelaySelect.is_stopped() || !waiting_for_input:
 			get_tree().set_input_as_handled()
 			return
@@ -180,7 +180,7 @@ func _on_option_selected(option, variable, value):
 	
 func _on_level_selected(value):
 	stats_remaining -= 1
-	# stats_remaining_label.set_visible_characters(stats_remaining)
+	$StatPreview.update_stats_remaining(stats_remaining)
 	match value:
 		"VIT": VIT_to_add += 1
 		"END": END_to_add += 1
@@ -281,7 +281,7 @@ func _on_TimerText_timeout():
 				get_child(2).get_child(0).get_child(0).get_child(0).get_child(0).grab_focus()
 				level_flag = false
 				waiting_for_input = true
-				# stats_remaining_label.set_visible_characters(1)
+				$StatPreview.update_stats_remaining(stats_remaining)
 			else:
 				print('not level flag: this should not happen')
 				get_child(1).get_child(0).get_child(0).grab_focus()
