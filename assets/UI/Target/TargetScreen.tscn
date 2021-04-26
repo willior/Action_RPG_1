@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/UI/Target/TargetScreen.gd" type="Script" id=1]
+[ext_resource path="res://assets/UI/Target/Ring_64.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 32.0
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="TargetScreen" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="TargetScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -160.0
+margin_top = -90.0
+margin_right = 160.0
+margin_bottom = 90.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TargetArea" type="Area2D" parent="TargetScreen"]
+collision_layer = 0
+collision_mask = 272
+
+[node name="Sprite" type="Sprite" parent="TargetScreen/TargetArea"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetScreen/TargetArea"]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="TargetScreen/TargetArea" to="TargetScreen" method="_on_TargetArea_body_entered"]

@@ -81,7 +81,7 @@ font_data = ExtResource( 2 )
 
 [node name="GUI" type="CanvasLayer"]
 pause_mode = 2
-layer = 3
+layer = 2
 
 [node name="HealthUI1" type="Control" parent="."]
 pause_mode = 2
@@ -280,18 +280,6 @@ margin_top = -18.0
 margin_right = -36.0
 margin_bottom = -18.0
 
-[node name="Dim" type="ColorRect" parent="."]
-visible = false
-modulate = Color( 0, 0, 0, 0.505882 )
-margin_right = 320.0
-margin_bottom = 180.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
 [node name="FormulaUI1" type="Control" parent="."]
 visible = false
 margin_left = 33.0
@@ -404,6 +392,19 @@ grow_vertical = 0
 size_flags_vertical = 9
 alignment = 2
 __meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dim" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 0.505882 )
+show_behind_parent = true
+margin_right = 320.0
+margin_bottom = 180.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=6]
 [ext_resource path="res://assets/UI/LevelUp/Theme_LevelUpButton.tres" type="Theme" id=10]
 
-
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 
@@ -203,6 +202,7 @@ __meta__ = {
 }
 
 [node name="PouchDisplay" type="NinePatchRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
