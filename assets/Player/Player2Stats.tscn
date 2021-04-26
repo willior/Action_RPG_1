@@ -260,7 +260,6 @@ func set_speed(value):
 	
 func set_attack_speed(value):
 	attack_speed = value
-	print('setting player2 attack speed: ', attack_speed)
 	emit_signal(\"attack_speed_changed\", attack_speed)
 	
 func set_iframes(value):
