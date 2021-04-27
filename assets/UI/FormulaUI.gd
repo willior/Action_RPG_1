@@ -52,7 +52,9 @@ func update_formula_quantity(selected_formula):
 	$FormulaRect/Label.text = str(formula_quantity)
 	$IngredientsRect/Ingredient1.texture = selected_formula.formula_reference.ing_1_icon
 	$IngredientsRect/Ingredient2.texture = selected_formula.formula_reference.ing_2_icon
-	$IngredientsRect/Quantity1.text = str(ingredient_1_quantity)
-	$IngredientsRect/Quantity2.text = str(ingredient_2_quantity)
+	if ingredient_1_quantity: $IngredientsRect/Quantity1.text = str(ingredient_1_quantity)
+	else: $IngredientsRect/Quantity1.text = str(0)
+	if ingredient_2_quantity: $IngredientsRect/Quantity2.text = str(ingredient_2_quantity)
+	else: $IngredientsRect/Quantity2.text = str(0)
 	ingredient_1_quantity = 0
 	ingredient_2_quantity = 0

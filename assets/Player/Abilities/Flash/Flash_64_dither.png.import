@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Flash_64_dither.png-3748f331c32a084e76fe825bbe0fbd8b.stex"
+path="res://.import/Flash_64_dither.png-99c8249446e443b85c8ea661556e2d4a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/Abilities/Flash_64_dither.png"
-dest_files=[ "res://.import/Flash_64_dither.png-3748f331c32a084e76fe825bbe0fbd8b.stex" ]
+source_file="res://assets/Player/Abilities/Flash/Flash_64_dither.png"
+dest_files=[ "res://.import/Flash_64_dither.png-99c8249446e443b85c8ea661556e2d4a.stex" ]
 
 [params]
 

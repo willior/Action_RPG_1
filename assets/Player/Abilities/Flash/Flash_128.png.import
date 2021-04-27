@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Flash-Sheet.png-dd2bfc09f096bbdd1026be86975954dd.stex"
+path="res://.import/Flash_128.png-ad18ec1c2b2fd4ec9558739ad3e494f4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/Abilities/Flash-Sheet.png"
-dest_files=[ "res://.import/Flash-Sheet.png-dd2bfc09f096bbdd1026be86975954dd.stex" ]
+source_file="res://assets/Player/Abilities/Flash/Flash_128.png"
+dest_files=[ "res://.import/Flash_128.png-ad18ec1c2b2fd4ec9558739ad3e494f4.stex" ]
 
 [params]
 

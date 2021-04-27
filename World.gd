@@ -7,7 +7,6 @@ onready var player = $YSort/Player
 onready var dim = $GUI/Dim
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
 onready var PauseScreen = load("res://assets/UI/Menu/PauseScreen.tscn")
-onready var FormulaTarget = load("res://assets/UI/Target/FormulaTarget.tscn")
 
 func _ready():
 	sfx1.play()
@@ -98,10 +97,10 @@ func _input(event):
 	
 	if event.is_action_pressed("test3"): # U
 		print('adding ingredients...')
-		player.pouch.add_ingredient("Rock", 1)
-		player.pouch.add_ingredient("Clay", 2)
-		player.pouch.add_ingredient("Water", 2)
-		player.pouch.add_ingredient("Salt", 1)
+		player.pouch.add_ingredient("Rock", 20)
+		player.pouch.add_ingredient("Clay", 10)
+		player.pouch.add_ingredient("Water", 20)
+		player.pouch.add_ingredient("Salt", 10)
 	
 	if event.is_action_pressed("test4"): # O
 		player.pouch.remove_ingredient("Rock", 1)
@@ -110,9 +109,7 @@ func _input(event):
 		player.pouch.remove_ingredient("Salt", 1)
 	
 	if event.is_action_pressed("pause"): # P
-		var formulaTarget = FormulaTarget.instance()
-		formulaTarget.position = player.position
-		add_child(formulaTarget)
+		pass
 	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:

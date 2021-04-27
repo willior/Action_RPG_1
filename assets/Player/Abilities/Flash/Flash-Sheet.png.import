@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Hea-Sheetl.png-4250fd8e5a95e6a9454c27d2f45ed578.stex"
+path="res://.import/Flash-Sheet.png-26da54ae27a25a791a9579394c8329fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Player/Abilities/Hea-Sheetl.png"
-dest_files=[ "res://.import/Hea-Sheetl.png-4250fd8e5a95e6a9454c27d2f45ed578.stex" ]
+source_file="res://assets/Player/Abilities/Flash/Flash-Sheet.png"
+dest_files=[ "res://.import/Flash-Sheet.png-26da54ae27a25a791a9579394c8329fa.stex" ]
 
 [params]
 

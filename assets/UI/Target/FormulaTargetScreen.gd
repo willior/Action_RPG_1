@@ -5,6 +5,9 @@ onready var sfx1 = get_tree().get_root().get_node("World/SFX")
 onready var sfx2 = get_tree().get_root().get_node("World/SFX2")
 var enemies
 var count
+export var formula_range : int
+export var formula_shape : Shape2D
+export var formula_size : int
 
 func _ready():
 	sfx1.stream_paused = true

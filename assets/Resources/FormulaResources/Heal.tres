@@ -1,8 +1,8 @@
 [gd_resource type="Resource" load_steps=31 format=2]
 
 [ext_resource path="res://assets/Resources/Formula.gd" type="Script" id=1]
-[ext_resource path="res://assets/Player/Abilities/Hea-Sheetl.png" type="Texture" id=2]
-[ext_resource path="res://assets/Player/Abilities/Heal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Player/Abilities/Heal/Heal-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://assets/Player/Abilities/Heal/Heal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Ingredients/Water.png" type="Texture" id=4]
 [ext_resource path="res://assets/Ingredients/Salt.png" type="Texture" id=5]
 
