@@ -307,7 +307,6 @@ __meta__ = {
 }
 
 [node name="Icon" type="AnimatedSprite" parent="FormulaUI1/FormulaRect"]
-pause_mode = 1
 position = Vector2( 10, 10 )
 playing = true
 

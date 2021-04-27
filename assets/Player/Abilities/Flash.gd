@@ -1,8 +1,9 @@
 extends Node2D
 
 onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
+var cancelled = false
 
-func _ready():
+func start():
 	player.state = 9
 	player.animationTree.active = false
 	player.animationPlayer.play("Cast_1")
@@ -23,8 +24,22 @@ func ability_4():
 	get_node("/root/World/Camera2D").stop_shake()
 	get_node("/root/World/Camera2D").decay = 1
 	$CanvasLayer/White.flash()
+	sprite_flash()
 	$FormulaHitbox.set_deferred("monitorable", true)
 	player.animationPlayer.play("Cast_2")
+	
+func sprite_flash():
+	$FormulaHitbox/Sprite.show()
+	$Tween.interpolate_property(
+		$FormulaHitbox/Sprite,
+		"modulate",
+		Color(1, 1, 1, 1),
+		Color(1, 1, 1, 0),
+		0.2,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_OUT
+	)
+	$Tween.start()
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	queue_free()

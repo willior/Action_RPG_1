@@ -60,10 +60,10 @@ func initialize_player():
 	
 	if !ResourceLoader.exists("user://pouch.tres"):
 		print("pouch resource not found. creating...")
-		player.pouch.add_ingredient("Rock", 9)
-		player.pouch.add_ingredient("Clay",18)
-		player.pouch.add_ingredient("Salt", 8)
-		player.pouch.add_ingredient("Water", 16)
+		player.pouch.add_ingredient("Rock", 20)
+		player.pouch.add_ingredient("Clay", 20)
+		player.pouch.add_ingredient("Salt", 20)
+		player.pouch.add_ingredient("Water", 20)
 		# warning-ignore:return_value_discarded
 		ResourceSaver.save("user://pouch.tres", player.pouch)
 		prints("saved pouch resource to " + str(OS.get_user_data_dir()))

@@ -98,5 +98,3 @@ stream = ExtResource( 5 )
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 layer = 4
-
-[node name="Targets" type="Node" parent="."]

@@ -67,6 +67,7 @@ var examining = false
 var talking = false
 var interacting = false
 var using_item = false
+var casting = false
 
 var noticeDisplay = false setget set_notice
 var talkNoticeDisplay = false setget set_talk_notice
@@ -148,10 +149,11 @@ func _input(event):
 				elif stats.stamina <= 0:
 					noStamina()
 			
-			if event.is_action_pressed("item"): # G
+			if event.is_action_pressed("alchemy"): # G
 				if formulabook._formulas.size() <= 0:
 					bamboo.play()
 					return
+				casting = true
 				var formula_used = formulabook._formulas[formulabook.current_selected_formula]
 				var ingredients = pouch.get_ingredients()
 				var ingredients_needed = formula_used.formula_reference.cost.keys()
@@ -164,18 +166,23 @@ func _input(event):
 						ingredient2_OK = true
 						continue
 				if ingredient1_OK && ingredient2_OK:
-					FormulaStats.apply_xp_to_formula(formula_used.formula_reference.name)
 					var FORMULA = formula_used.formula_reference.scene
 					var formula = FORMULA.instance()
-					formula.global_position = global_position
-					get_node("/root/World").add_child(formula)
 					ingredient1_OK = false
 					ingredient2_OK = false
+					formula.global_position = global_position
+					get_node("/root/World").add_child(formula)
 					$CastTimer.start()
 					yield($CastTimer, "timeout")
+					casting = false
+					if !is_instance_valid(formula):
+						return
 					for i in range(0,2):
 						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
+					FormulaStats.apply_xp_to_formula(formula_used.formula_reference.name)
+					
 				else:
+					casting = false
 					ingredient1_OK = false
 					ingredient2_OK = false
 					bamboo.play()
@@ -218,9 +225,7 @@ func move_state(delta):
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
-	
 	stamina_regeneration()
-
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		dir_vector = input_vector
@@ -249,7 +254,7 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("examine"): # F
-		if !dying:
+		if !dying and !casting:
 			if !examining && talkTimer.is_stopped():
 				talkTimer.start()
 				var dialogBox = DialogBox.instance()
@@ -259,13 +264,13 @@ func move_state(delta):
 				talkTimer.start()
 				interactObject.examine()
 			
-	if Input.is_action_just_pressed("next_item"): # R
+	if Input.is_action_just_pressed("next"): # R
 		formulabook.advance_selected_formula()
 #		inventory.advance_selected_item()
 #		interactHitbox.disabled = true
 #		interactHitbox.disabled = false
 		
-	if Input.is_action_just_pressed("previous_item"): # E
+	if Input.is_action_just_pressed("previous"): # E
 		formulabook.previous_selected_formula()
 #		inventory.previous_selected_item()
 #		interactHitbox.disabled = true
@@ -279,7 +284,7 @@ func move_state(delta):
 		elif charge_count == stats.max_charge/2 && charge_level_count == 1:
 			charge.begin_charge_2()
 		charge_state(delta)
-			
+		
 	if Input.is_action_just_released("attack"): # V
 		if attack_2_charged or stats.charge_level == 2:
 			attack_2_charged = false
@@ -290,7 +295,7 @@ func move_state(delta):
 		charge.stop_charge()
 		charge_reset()
 		
-	if Input.is_action_just_pressed("roll"): # B
+	if Input.is_action_pressed("roll"): # B
 		if stats.stamina > 0:
 			if input_vector != Vector2.ZERO:
 				roll_moving = true

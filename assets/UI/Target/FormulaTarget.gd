@@ -1,19 +1,23 @@
 extends Node2D
 onready var EnemyTarget = load("res://assets/UI/Target/EnemyTarget.tscn")
+onready var music = get_tree().get_root().get_node("World/Music")
 onready var sfx1 = get_tree().get_root().get_node("World/SFX")
 onready var sfx2 = get_tree().get_root().get_node("World/SFX2")
 var enemies
 var count
 
 func _ready():
-	# self.position = Vector2(160, 90)
 	sfx1.stream_paused = true
 	sfx2.stream_paused = true
+	AudioServer.set_bus_effect_enabled(0, 0, true)
+#	Engine.time_scale = 0.1
 	get_tree().paused = true
 	Physics2DServer.set_active(true)
 	count = 0
-	
 	enemies = get_tree().get_nodes_in_group("Enemies")
+	var targets = Node.new()
+	targets.set_name("Targets")
+	get_tree().get_root().get_node("World").add_child(targets)
 	for e in range(0, enemies.size()):
 		var enemy_target = EnemyTarget.instance()
 		enemy_target.global_position = enemies[e].global_position
@@ -35,29 +39,34 @@ func _process(_delta):
 		$TargetArea.position.y = -90
 
 func _input(event):
-	if event.is_action_pressed("pause"): # P
+	get_tree().set_input_as_handled()
+	if event.is_action_pressed("ui_accept") or event.is_action_pressed("alchemy"):
+		get_parent().start()
+		get_parent().get_node("FormulaHitbox").position = $TargetArea.position
 		end_target_screen()
-	
-	if event.is_action_pressed("attack"):
-		end_target_screen()
-	
-	if event.is_action_pressed("next_item"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("examine"):
+		cancel_target_screen()
+	if event.is_action_pressed("next"):
 		if enemies.size() <= 0:
 			return
 		if count >= enemies.size():
 			count = 0
 		$TargetArea.global_position = enemies[count].global_position
 		count += 1
-	
-	get_tree().set_input_as_handled()
+
+func cancel_target_screen():
+	get_parent().cancelled = true
+	get_parent().queue_free()
+	end_target_screen()
 
 func end_target_screen():
-		sfx1.stream_paused = false
-		sfx2.stream_paused = false
-		get_tree().paused = false
-		for c in get_tree().get_root().get_node("World/Targets").get_children():
-			c.queue_free()
-		queue_free()
+	sfx1.stream_paused = false
+	sfx2.stream_paused = false
+	AudioServer.set_bus_effect_enabled(0, 0, false)
+#	Engine.time_scale = 1
+	get_tree().paused = false
+	get_tree().get_root().get_node("World/Targets").queue_free()
+	queue_free()
 
 func _on_TargetArea_body_entered(body):
 	$TargetArea.modulate = Color(1,0,0,0.5)
