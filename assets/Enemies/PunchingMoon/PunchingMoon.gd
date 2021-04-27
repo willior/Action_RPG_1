@@ -189,7 +189,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 func _on_BatStats_no_health():
 	var death_effect = EnemyDeathEffect.instance()
 	Enemy.no_health(self, death_effect)
-	sprite.playing = false # stop animation
+	# sprite.playing = false # stop animation
 	tween.interpolate_property(sprite,
 	"offset:y",
 	-12,
