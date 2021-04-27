@@ -168,7 +168,9 @@ one_shot = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="EnemyHealth" parent="." instance=ExtResource( 8 )]
+visible = false
 position = Vector2( 0, 10 )
+z_index = 2
 
 [node name="HealthBack" parent="EnemyHealth" index="0"]
 margin_left = -24.0
@@ -189,8 +191,8 @@ rect = Rect2( -1, -1, 2, 8 )
 __meta__ = {
 "_editor_description_": "	"
 }
-[connection signal="no_health" from="PunchingMoonStats" to="EnemyHealth" method="_on_stats_no_health"]
 [connection signal="no_health" from="PunchingMoonStats" to="." method="_on_BatStats_no_health"]
+[connection signal="no_health" from="PunchingMoonStats" to="EnemyHealth" method="_on_stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

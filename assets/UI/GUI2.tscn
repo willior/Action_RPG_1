@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/UI/FormulaUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=2]
@@ -79,9 +79,10 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
+[sub_resource type="CanvasItemMaterial" id=4]
+
 [node name="GUI" type="CanvasLayer"]
 pause_mode = 2
-layer = 2
 
 [node name="HealthUI1" type="Control" parent="."]
 pause_mode = 2
@@ -398,6 +399,7 @@ __meta__ = {
 visible = false
 modulate = Color( 0, 0, 0, 0.505882 )
 show_behind_parent = true
+material = SubResource( 4 )
 margin_right = 320.0
 margin_bottom = 180.0
 color = Color( 0, 0, 0, 1 )

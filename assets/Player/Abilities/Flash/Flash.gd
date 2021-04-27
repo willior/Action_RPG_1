@@ -1,7 +1,6 @@
 extends Node2D
 
 onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
-var cancelled = false
 
 func start():
 	player.state = 9
@@ -27,7 +26,7 @@ func ability_4():
 	sprite_flash()
 	$FormulaHitbox.set_deferred("monitorable", true)
 	player.animationPlayer.play("Cast_2")
-	
+
 func sprite_flash():
 	$FormulaHitbox/Sprite.show()
 	$Tween.interpolate_property(

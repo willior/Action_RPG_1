@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 onready var EnemyTarget = load("res://assets/UI/Target/EnemyTarget.tscn")
 onready var music = get_tree().get_root().get_node("World/Music")
 onready var sfx1 = get_tree().get_root().get_node("World/SFX")
@@ -43,24 +43,36 @@ func _process(_delta):
 
 func _input(event):
 	get_tree().set_input_as_handled()
-	if event.is_action_pressed("ui_accept") or event.is_action_pressed("alchemy"):
+	if event.is_action_pressed("ui_accept"): # or event.is_action_pressed("alchemy"):
 		get_parent().start()
 		get_parent().get_node("FormulaHitbox").position = $TargetArea.position
 		end_target_screen()
 	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("examine"):
 		cancel_target_screen()
 	if event.is_action_pressed("next"):
-		if enemies.size() <= 0:
-			return
-		if count >= enemies.size():
-			count = 0
-		$TargetArea.global_position = enemies[count].global_position
-		count += 1
+		next_enemy()
+
+func next_enemy():
+	if enemies.size() <= 0:
+		print('no enemies detected')
+		return
+	count += 1
+	if count >= enemies.size():
+		count = 0
+	if enemy_out_of_range():
+		print(enemies[count], ' enemy out of range; skipping')
+		enemies.remove(count)
+		next_enemy()
+		return
+	$TargetArea.global_position = enemies[count].global_position
+
+func enemy_out_of_range():
+	if get_tree().get_root().get_node("World/YSort/Player").position.distance_to(enemies[count].position) > 184:
+		return true
 
 func cancel_target_screen():
-	get_parent().cancelled = true
-	get_parent().queue_free()
 	end_target_screen()
+	get_parent().queue_free()
 
 func end_target_screen():
 	sfx1.stream_paused = false
@@ -72,10 +84,10 @@ func end_target_screen():
 	queue_free()
 
 func _on_TargetArea_body_entered(body):
-	$TargetArea.modulate = Color(1,0,0,0.5)
-	body.modulate = Color(1,0,0,0.5)
+	$TargetArea.modulate = Color(1,0,0,1)
+	body.modulate = Color(1,0,0,1)
 
 func _on_TargetArea_body_exited(body):
-	body.modulate = Color(1,1,1,0.5)
+	body.modulate = Color(1,1,1,1)
 	if $TargetArea.get_overlapping_bodies().size() == 1:
-		$TargetArea.modulate = Color(1,1,1,0.5)
+		$TargetArea.modulate = Color(1,1,1,1)

@@ -20,4 +20,4 @@ func apply_xp_to_formula(formula_name):
 		var pickupPopup = PickupPopup.instance()
 		pickupPopup.pickupDisplay = str(formula_data[0], " is now level " + str(formula_data[1]))
 		get_node("/root/World/GUI/PickupDisplay1/PickupContainer").add_child(pickupPopup)
-	print(formula_data[0], ' xp: ', formula_data[2], "/", formula_data[3])
+	# print(formula_data[0], ' xp: ', formula_data[2], "/", formula_data[3])

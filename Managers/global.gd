@@ -172,6 +172,3 @@ func set_world_collision(body, z_index):
 			Enemy.set_player_collision(e) # ...places enemies on "Enemy" collision layer if z_index matches player's
 	else: # if it wasn't the player that changed floors, update the body (the enemy) only
 		Enemy.set_player_collision(body)
-
-func set_timescale(value):
-	Engine.time_scale = value

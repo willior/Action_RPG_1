@@ -150,7 +150,7 @@ func _input(event):
 					noStamina()
 			
 			if event.is_action_pressed("alchemy"): # G
-				if formulabook._formulas.size() <= 0:
+				if formulabook._formulas.size() <= 0 or casting:
 					bamboo.play()
 					return
 				casting = true
@@ -172,15 +172,14 @@ func _input(event):
 					ingredient2_OK = false
 					formula.global_position = global_position
 					get_node("/root/World").add_child(formula)
+					formula.connect("tree_exited", self, "set", ["formula", null])
 					$CastTimer.start()
 					yield($CastTimer, "timeout")
 					casting = false
-					if !is_instance_valid(formula):
-						return
-					for i in range(0,2):
-						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
-					FormulaStats.apply_xp_to_formula(formula_used.formula_reference.name)
-					
+					if get_node("/root/World").has_node(formula_used.formula_reference.name):
+						FormulaStats.apply_xp_to_formula(formula_used.formula_reference.name)
+						for i in range(0,2):
+							pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
 				else:
 					casting = false
 					ingredient1_OK = false
@@ -295,7 +294,7 @@ func move_state(delta):
 		charge.stop_charge()
 		charge_reset()
 		
-	if Input.is_action_pressed("roll"): # B
+	if Input.is_action_just_pressed("roll"): # B
 		if stats.stamina > 0:
 			if input_vector != Vector2.ZERO:
 				roll_moving = true
