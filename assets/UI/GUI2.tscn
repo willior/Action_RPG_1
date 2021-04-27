@@ -379,9 +379,9 @@ __meta__ = {
 
 [node name="PickupDisplay1" type="Control" parent="."]
 margin_left = 16.0
-margin_top = 126.0
+margin_top = 112.0
 margin_right = 16.0
-margin_bottom = 126.0
+margin_bottom = 112.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

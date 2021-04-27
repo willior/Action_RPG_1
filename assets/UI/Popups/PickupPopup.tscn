@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/Font/small_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/Font/large_dynamicFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=2]
 [ext_resource path="res://assets/UI/Popups/PickupPopup.gd" type="Script" id=3]
 

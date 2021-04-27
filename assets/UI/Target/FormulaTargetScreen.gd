@@ -62,6 +62,7 @@ func next_enemy():
 	if enemy_out_of_range():
 		print(enemies[count], ' enemy out of range; skipping')
 		enemies.remove(count)
+		count -= 1
 		next_enemy()
 		return
 	$TargetArea.global_position = enemies[count].global_position

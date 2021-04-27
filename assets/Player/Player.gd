@@ -172,7 +172,7 @@ func _input(event):
 					ingredient2_OK = false
 					formula.global_position = global_position
 					get_node("/root/World").add_child(formula)
-					formula.connect("tree_exited", self, "set", ["formula", null])
+					# formula.connect("tree_exited", self, "set", ["formula", null])
 					$CastTimer.start()
 					yield($CastTimer, "timeout")
 					casting = false
