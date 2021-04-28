@@ -1,0 +1,193 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
+[ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Enemies/WanderController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/CollisionBoxes/Hurtbox.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/UI/BossHealth.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/CollisionBoxes/BossHurtbox.gd" type="Script" id=10]
+[ext_resource path="res://assets/Enemies/Boss/PunchingMoon_Boss.gd" type="Script" id=11]
+[ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoonStats.gd" type="Script" id=12]
+[ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/Shadows/ExtraLargeShadow.png" type="Texture" id=14]
+[ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.png" type="Texture" id=15]
+
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
+shader = ExtResource( 1 )
+shader_param/active = false
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 13.1029
+height = 21.7253
+
+[sub_resource type="Animation" id=3]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 26.7014
+
+[sub_resource type="CircleShape2D" id=7]
+
+[sub_resource type="CircleShape2D" id=8]
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id=10]
+radius = 5.0
+
+[node name="BossPunchingMoon" type="KinematicBody2D"]
+collision_layer = 16400
+script = ExtResource( 11 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 0, -3 )
+texture = ExtResource( 15 )
+offset = Vector2( 0, -12 )
+
+[node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
+modulate = Color( 0, 0, 0, 1 )
+offset = Vector2( 0, -12 )
+
+[node name="ShadowSprite" type="Sprite" parent="."]
+show_behind_parent = true
+texture = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, -5.36449 )
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Stats" parent="." instance=ExtResource( 13 )]
+script = ExtResource( 12 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/StartFlashing = SubResource( 3 )
+anims/StopFlashing = SubResource( 4 )
+
+[node name="Talkbox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
+position = Vector2( 0, -14 )
+shape = SubResource( 5 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+collision_layer = 8
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 0, -14 )
+shape = SubResource( 6 )
+
+[node name="WanderController" parent="." instance=ExtResource( 4 )]
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+scale = Vector2( 4, 4 )
+shape = SubResource( 7 )
+
+[node name="AttackController" parent="." instance=ExtResource( 3 )]
+
+[node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 8 )
+
+[node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
+wait_time = 0.8
+one_shot = true
+
+[node name="Hitbox" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, -3 )
+collision_mask = 4
+damage = 8.0
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 9 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 10 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="DelayTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="BossHealth" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[connection signal="no_health" from="Stats" to="." method="_on_BatStats_no_health"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="timeout" from="AttackPlayerZone/AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+
+[editable path="Hurtbox"]
+
+[editable path="PlayerDetectionZone"]
+
+[editable path="AttackPlayerZone"]
+
+[editable path="Hitbox"]
+
+[editable path="SoftCollision"]

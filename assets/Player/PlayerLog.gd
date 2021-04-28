@@ -17,7 +17,8 @@ var enemies_examined = {
 	"Crow": false,
 	"Wolf": false,
 	"Tumbleweed": false,
-	"PunchingMoon": false
+	"PunchingMoon": false,
+	"The Moon": false
 }
 
 # Home

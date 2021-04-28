@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/UI/Popups/DamageContainer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/3x6_Progress.png" type="Texture" id=3]
+[ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=4]
+[ext_resource path="res://assets/UI/BossHealth.gd" type="Script" id=5]
+[ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=6]
+[ext_resource path="res://assets/Font/large_dynamicFont.tres" type="DynamicFont" id=7]
+[ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=8]
+
+[node name="BossHealth" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 80.0
+margin_top = 144.0
+margin_right = -80.0
+margin_bottom = -32.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBack" type="TextureProgress" parent="."]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -12.0
+margin_right = 12.0
+margin_bottom = 3.0
+rect_min_size = Vector2( 24, 3 )
+max_value = 15.0
+value = 15.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 3 )
+tint_progress = Color( 1, 0.833333, 0, 0.784314 )
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 1
+stretch_margin_right = 2
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthTexture" type="TextureProgress" parent="."]
+use_parent_material = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -12.0
+margin_right = 12.0
+margin_bottom = 3.0
+rect_min_size = Vector2( 24, 3 )
+max_value = 15.0
+value = 15.0
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 8 )
+tint_progress = Color( 0.784314, 0, 0, 0.784314 )
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 1
+stretch_margin_right = 2
+stretch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="DrainTimer" type="Timer" parent="."]
+wait_time = 0.06
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="DamageContainer" parent="." instance=ExtResource( 1 )]
+margin_left = 176.0
+margin_top = 1.0
+margin_right = 176.0
+margin_bottom = 1.0
+
+[node name="Label" type="Label" parent="."]
+material = ExtResource( 6 )
+margin_left = -9.0
+margin_top = -14.0
+margin_right = 47.0
+custom_fonts/font = ExtResource( 7 )
+text = "The Moon"
