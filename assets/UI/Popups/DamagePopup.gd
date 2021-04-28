@@ -18,7 +18,6 @@ func _ready():
 		$AnimationPlayer.play("On")
 		text.add_font_override("font", load("res://assets/Font/large_dynamicFont.tres"))
 		rect_min_size.y = 6
-		
 		damageDisplay = damageDisplay + "!"
 		visible = false
 		call_deferred("set_visible", true)
