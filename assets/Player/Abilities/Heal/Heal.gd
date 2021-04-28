@@ -19,17 +19,16 @@ func _process(_delta):
 		player.stats.health += heal_rate
 	else:
 		return
-		
+
 func ability_start():
 	$AudioStreamPlayer.play()
 
 func heal():
-	heal_amount = (8*FormulaStats.Heal[1]) * (PlayerStats.magic_mod*PlayerStats.magic_mod)
+	heal_amount = $FormulaHitbox.amount
 	$CanvasLayer/Cyan.flash()
 
 func ability_end():
-	# $SpellHitbox.set_deferred("monitorable", true)
-	player.hurtbox.display_damage_popup(str(-total_healed), false)
+	$FormulaHitbox.set_deferred("monitorable", true)
 	player.animationPlayer.play("Cast_2")
 
 func _on_AnimationPlayer_animation_finished(_anim_name):

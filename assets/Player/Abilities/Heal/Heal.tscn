@@ -54,7 +54,7 @@ collision_layer = 0
 collision_mask = 4
 script = ExtResource( 3 )
 formula_name = "Heal"
-base_potency = 10.0
+base_potency = 4.0
 randomness = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]

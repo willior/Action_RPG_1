@@ -109,7 +109,7 @@ func _input(event):
 		player.pouch.remove_ingredient("Salt", 1)
 	
 	if event.is_action_pressed("pause"): # P
-		pass
+		PlayerStats.health = 1
 	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
