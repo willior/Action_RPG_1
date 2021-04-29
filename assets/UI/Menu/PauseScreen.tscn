@@ -444,6 +444,7 @@ __meta__ = {
 }
 
 [node name="AlchemyDisplay" type="NinePatchRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0

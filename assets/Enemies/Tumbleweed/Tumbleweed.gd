@@ -110,7 +110,6 @@ func play_sound():
 			$AudioStreamPlayer.stream = load("res://assets/Audio/Enemies/Tumbleweed_Sound_3.wav")
 			
 	$AudioStreamPlayer.play()
-		
-func _on_Area2D_area_exited(_area):
-	# print('deleting tumbleweed')
+	
+func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
