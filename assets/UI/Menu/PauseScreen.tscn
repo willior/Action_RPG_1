@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=6]
 [ext_resource path="res://assets/UI/pixelBlack.png" type="Texture" id=7]
-[ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=8]
+[ext_resource path="res://assets/UI/1x2_XPprogress.png" type="Texture" id=9]
 [ext_resource path="res://assets/UI/LevelUp/Theme_LevelUpButton.tres" type="Theme" id=10]
 
 [sub_resource type="DynamicFont" id=1]
@@ -155,7 +155,7 @@ max_value = 64.0
 value = 4.0
 rounded = true
 texture_under = ExtResource( 7 )
-texture_progress = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="HBox2" type="HBoxContainer" parent="StatsDisplay/VBox"]
@@ -198,7 +198,7 @@ size_flags_horizontal = 3
 max_value = 64.0
 value = 4.0
 texture_under = ExtResource( 7 )
-texture_progress = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="HBox3" type="HBoxContainer" parent="StatsDisplay/VBox"]
@@ -241,7 +241,7 @@ size_flags_horizontal = 3
 max_value = 64.0
 value = 4.0
 texture_under = ExtResource( 7 )
-texture_progress = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="HBox4" type="HBoxContainer" parent="StatsDisplay/VBox"]
@@ -284,7 +284,7 @@ size_flags_horizontal = 3
 max_value = 64.0
 value = 4.0
 texture_under = ExtResource( 7 )
-texture_progress = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="HBox5" type="HBoxContainer" parent="StatsDisplay/VBox"]
@@ -327,7 +327,7 @@ size_flags_horizontal = 3
 max_value = 64.0
 value = 4.0
 texture_under = ExtResource( 7 )
-texture_progress = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="HBox6" type="HBoxContainer" parent="StatsDisplay/VBox"]
@@ -370,7 +370,7 @@ size_flags_horizontal = 3
 max_value = 64.0
 value = 4.0
 texture_under = ExtResource( 7 )
-texture_progress = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="HBox7" type="HBoxContainer" parent="StatsDisplay/VBox"]
@@ -413,7 +413,7 @@ size_flags_horizontal = 3
 max_value = 64.0
 value = 4.0
 texture_under = ExtResource( 7 )
-texture_progress = ExtResource( 8 )
+texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="InventoryDisplay" type="NinePatchRect" parent="."]
@@ -464,11 +464,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = 4.0
-margin_right = -3.0
+margin_right = -8.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 4
+custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

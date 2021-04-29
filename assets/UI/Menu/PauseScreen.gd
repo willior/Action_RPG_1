@@ -1,6 +1,7 @@
 extends Control
 var Label_Item = load("res://assets/UI/Menu/LabelItem.tscn")
 var Formula_Item = load("res://assets/UI/Menu/FormulaItem.tscn")
+var Formula_XP = load("res://assets/UI/Menu/FormulaXP.tscn")
 onready var healthBox = $StatsDisplay/VBox/HBox/vit
 onready var enduranceBox = $StatsDisplay/VBox/HBox2/end
 onready var defenseBox = $StatsDisplay/VBox/HBox3/def
@@ -43,18 +44,23 @@ func _ready():
 	
 	for f in player.formulabook.get_formulas().size():
 		var alchemy_formula = player.formulabook.get_formula(f)
+		var formula_data = FormulaStats.get(alchemy_formula.formula_reference.name)
 		var formula_item = Formula_Item.instance()
 		var ingredients_needed = alchemy_formula.formula_reference.cost.values()
 		formula_item.formula_name = alchemy_formula.formula_reference.name
+		formula_item.formula_level = formula_data[1]
 		formula_item.ing_1_icon = alchemy_formula.formula_reference.ing_1_icon
 		formula_item.ing_1_cost = ingredients_needed[0]
 		formula_item.ing_2_icon = alchemy_formula.formula_reference.ing_2_icon
 		formula_item.ing_2_cost = ingredients_needed[1]
 		formula_item.formula_icon = alchemy_formula.formula_reference.icon
-		
 		$AlchemyDisplay/Vbox.add_child(formula_item)
 		
-		
+		var formula_xp = Formula_XP.instance()
+		formula_xp.current_xp = formula_data[2]
+		formula_xp.required_xp = formula_data[3]
+		$AlchemyDisplay/Vbox.add_child(formula_xp)
+		$AlchemyDisplay/Vbox.add_child(Control.new())
 #		var label_formula = Label_Item.instance()
 #		label_formula.set_text(str(alchemy_formula.formula_reference.name))
 #		$AlchemyDisplay/Vbox.add_child(label_formula)

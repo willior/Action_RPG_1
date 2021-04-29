@@ -182,6 +182,7 @@ func create_hit_effect(_damage_count):
 	pass
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
+	if area.formula: return
 	var facing_direction = area.get_parent().get_parent().dir_vector
 	get_node("/root/World/").fade_out()
 	$Timer.start(0.8)
@@ -189,9 +190,9 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 	print('changing scene')
 	var new_inventory = [get_node("/root/World/YSort/Player").inventory, get_node("/root/World/YSort/Player").pouch, get_node("/root/World/YSort/Player").formulabook]
 	Global.goto_scene("res://assets/Maps/Test/Space.tscn", {"direction": facing_direction, "location":Vector2(320,580), "inventory":new_inventory})
-#	var hit = Enemy.hurtbox_entered(self, area)
-#	if hit && state == ATTACK:
-#		state = IDLE
+	var hit = Enemy.hurtbox_entered(self, area)
+	if hit && state == ATTACK:
+		state = IDLE
 
 func _on_BatStats_no_health():
 	var death_effect = EnemyDeathEffect.instance()

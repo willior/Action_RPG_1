@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/UI/pixelBlack.png" type="Texture" id=1]
+[ext_resource path="res://assets/UI/1x2_XPprogress.png" type="Texture" id=2]
+[ext_resource path="res://assets/UI/Menu/FormulaXP.gd" type="Script" id=3]
+
+[node name="FormulaXP" type="TextureProgress"]
+modulate = Color( 1, 0.654902, 0, 0.784314 )
+margin_right = 128.0
+rect_min_size = Vector2( 110, 2 )
+rounded = true
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+nine_patch_stretch = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="."]
+margin_right = 128.0
+margin_bottom = 8.0

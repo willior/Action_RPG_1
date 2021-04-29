@@ -9,6 +9,7 @@ var formula_icon : SpriteFrames
 
 func _ready():
 	$Name.set_text(formula_name)
+	$Level.set_text(" Lv." + str(formula_level))
 	$Ingredient1.texture = ing_1_icon
 	$Cost1.set_text(str(ing_1_cost))
 	$Ingredient2.texture = ing_2_icon
