@@ -30,3 +30,6 @@ func _ready():
 	tween.start()
 	yield(tween, "tween_all_completed")
 	queue_free()
+	
+func level_flash():
+	$AnimationPlayer.play('level_flash')

@@ -6,8 +6,8 @@ func flash():
 	"color",
 	Color(0, 1, 1, 0),
 	Color(0, 1, 1, 0.25),
-	0.15,
-	Tween.TRANS_LINEAR,
+	0.75,
+	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
 	$Tween.start()

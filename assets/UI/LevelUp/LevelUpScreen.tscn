@@ -46,7 +46,7 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 16 )
-shader_param/active = false
+shader_param/active = true
 
 [sub_resource type="Animation" id=7]
 resource_name = "Off"

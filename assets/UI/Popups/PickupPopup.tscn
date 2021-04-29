@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Font/large_dynamicFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=2]
@@ -20,6 +20,22 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "level_flash"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 3.84028e-11, 0, 3.84028e-11, 0, 3.84028e-11, 0, 3.84028e-11, 0, 3.84028e-11 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0.784314 ), Color( 1, 0.654902, 0, 0.784314 ), Color( 1, 1, 1, 0.784314 ), Color( 1, 0.654902, 0, 0.784314 ), Color( 1, 1, 1, 0.784314 ), Color( 1, 0.654902, 0, 0.784314 ), Color( 1, 1, 1, 0.784314 ), Color( 1, 0.654902, 0, 0.784314 ), Color( 1, 1, 1, 0.784314 ) ]
+}
+
 [node name="PickupPopup" type="Control"]
 margin_bottom = 5.0
 rect_min_size = Vector2( 0, 5 )
@@ -29,6 +45,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.784314 )
 material = ExtResource( 2 )
 margin_right = 20.0
 margin_bottom = 13.0
@@ -37,6 +54,7 @@ size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.976471, 0.976471, 0.976471, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+text = "asdf"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -49,3 +67,4 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/On = SubResource( 1 )
+anims/level_flash = SubResource( 2 )

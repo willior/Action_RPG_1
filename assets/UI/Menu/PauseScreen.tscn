@@ -118,6 +118,7 @@ __meta__ = {
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBox"]
 margin_right = 128.0
 margin_bottom = 13.0
+focus_mode = 2
 
 [node name="Label" type="Label" parent="StatsDisplay/VBox/HBox"]
 margin_right = 58.0
@@ -551,6 +552,7 @@ one_shot = true
 stream = ExtResource( 5 )
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_focus_exited"]
+[connection signal="pressed" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_pressed"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonInventory" to="." method="_on_ButtonInventory_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonInventory" to="." method="_on_ButtonInventory_focus_exited"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonAlchemy" to="." method="_on_ButtonAlchemy_focus_entered"]

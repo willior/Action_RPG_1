@@ -17,7 +17,16 @@ func apply_xp_to_formula(formula_name):
 		formula_data[1] += 1
 		formula_data[2] -= formula_data[3]
 		formula_data[3] *= 1.2
-		var pickupPopup = PickupPopup.instance()
-		pickupPopup.pickupDisplay = str(formula_data[0], " is now level " + str(formula_data[1]))
-		get_node("/root/World/GUI/PickupDisplay1/PickupContainer").add_child(pickupPopup)
+#		var pickupPopup = PickupPopup.instance()
+#		pickupPopup.pickupDisplay = str(formula_data[0], " is now level " + str(formula_data[1]))
+		show_formula_level_notice(formula_data)
+#		get_node("/root/World/GUI/PickupDisplay1/PickupContainer").add_child(pickupPopup)
 	# print(formula_data[0], ' xp: ', formula_data[2], "/", formula_data[3])
+
+func show_formula_level_notice(formula_data):
+	var pickupPopup = PickupPopup.instance()
+	pickupPopup.pickupDisplay = str(formula_data[0], " is now level " + str(formula_data[1]))
+	
+	yield(get_tree().create_timer(1), "timeout")
+	get_node("/root/World/GUI/PickupDisplay1/PickupContainer").add_child(pickupPopup)
+	pickupPopup.level_flash()

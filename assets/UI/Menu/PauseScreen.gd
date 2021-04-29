@@ -108,4 +108,5 @@ func _on_ButtonControls_focus_entered():
 func _on_ButtonControls_focus_exited():
 	$ControlsDisplay.hide()
 
-
+func _on_ButtonStatus_pressed():
+	pass # Replace with function body.

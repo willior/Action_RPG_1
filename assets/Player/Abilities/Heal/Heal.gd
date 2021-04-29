@@ -22,10 +22,10 @@ func _process(_delta):
 
 func ability_start():
 	$AudioStreamPlayer.play()
+	$CanvasLayer/Cyan.flash()
 
 func heal():
 	heal_amount = $FormulaHitbox.amount
-	$CanvasLayer/Cyan.flash()
 
 func ability_end():
 	$FormulaHitbox.set_deferred("monitorable", true)
