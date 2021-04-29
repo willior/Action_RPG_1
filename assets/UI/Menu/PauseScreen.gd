@@ -55,21 +55,12 @@ func _ready():
 		formula_item.ing_2_cost = ingredients_needed[1]
 		formula_item.formula_icon = alchemy_formula.formula_reference.icon
 		$AlchemyDisplay/Vbox.add_child(formula_item)
-		
 		var formula_xp = Formula_XP.instance()
 		formula_xp.current_xp = formula_data[2]
 		formula_xp.required_xp = formula_data[3]
 		$AlchemyDisplay/Vbox.add_child(formula_xp)
 		$AlchemyDisplay/Vbox.add_child(Control.new())
-#		var label_formula = Label_Item.instance()
-#		label_formula.set_text(str(alchemy_formula.formula_reference.name))
-#		$AlchemyDisplay/Vbox.add_child(label_formula)
-#		var icon_formula = AnimatedSprite.new()
-#		icon_formula.play()
-#		icon_formula.frames = alchemy_formula.formula_reference.icon
-#		$AlchemyDisplay/Vbox.add_child(icon_formula)
-
-		
+	
 	for n in player.pouch.get_ingredients().size():
 		var pouch_ingredient = player.pouch.get_ingredient(n)
 		var label_ingredient = Label_Item.instance()
