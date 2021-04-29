@@ -267,11 +267,22 @@ func _on_TimerText_timeout():
 		$TimerText.stop()
 		finished = true
 		if waiting_for_answer:
-			$Tween.interpolate_property($LevelText, "rect_position",
-			Vector2(103, 53),
-			Vector2(320, 53),
+			$StatPreview.update_stats_remaining(stats_remaining)
+			$Tween.interpolate_property($LevelText,
+#			"rect_position",
+#			Vector2(103, 53),
+#			Vector2(320, 53),
+			"modulate",
+			Color(1,1,1,1),
+			Color(1,1,1,0),
 			0.6,
-			Tween.TRANS_QUINT, Tween.EASE_IN
+			Tween.TRANS_QUINT, Tween.EASE_OUT
+			)
+			$Tween.interpolate_property($StatPreview/VBoxContainer/RichTextLabel, "visible_characters",
+			0,
+			stats_remaining,
+			0.6,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 			)
 			$Tween.start()
 			$TimerDelaySelect.start()
@@ -281,7 +292,6 @@ func _on_TimerText_timeout():
 				get_child(2).get_child(0).get_child(0).get_child(0).get_child(0).grab_focus()
 				level_flag = false
 				waiting_for_input = true
-				$StatPreview.update_stats_remaining(stats_remaining)
 			else:
 				print('not level flag: this should not happen')
 				get_child(1).get_child(0).get_child(0).grab_focus()

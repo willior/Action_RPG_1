@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/UI/Menu/ButtonDefault.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/UI/Dialog/DialogBox_6x6_mono_fill.png" type="Texture" id=6]
+[ext_resource path="res://assets/UI/pixelBlack.png" type="Texture" id=7]
+[ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/LevelUp/Theme_LevelUpButton.tres" type="Theme" id=10]
 
 [sub_resource type="DynamicFont" id=1]
@@ -59,10 +61,17 @@ margin_right = 77.0
 text = "STATUS"
 
 [node name="ButtonInventory" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
+visible = false
 margin_top = 21.0
 margin_right = 77.0
 margin_bottom = 38.0
 text = "INVENTORY"
+
+[node name="ButtonAlchemy" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
+margin_top = 21.0
+margin_right = 77.0
+margin_bottom = 38.0
+text = "ALCHEMY"
 
 [node name="ButtonPouch" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
 margin_top = 42.0
@@ -81,7 +90,10 @@ visible = false
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -28.0
+margin_left = -8.0
+margin_top = -12.0
+margin_right = 8.0
+margin_bottom = -12.0
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -91,7 +103,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Vbox" type="VBoxContainer" parent="StatsDisplay"]
+[node name="VBox" type="VBoxContainer" parent="StatsDisplay"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -103,20 +115,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Stats" type="Label" parent="StatsDisplay/Vbox"]
-visible = false
-margin_right = 120.0
-margin_bottom = 26.0
+[node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBox"]
+margin_right = 128.0
+margin_bottom = 13.0
+
+[node name="Label" type="Label" parent="StatsDisplay/VBox/HBox"]
+margin_right = 58.0
+margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/line_spacing = 0
-text = "STATS:
-"
+text = "WILLPOWER"
 
-[node name="vit" type="Label" parent="StatsDisplay/Vbox"]
-margin_right = 112.0
+[node name="Control" type="Control" parent="StatsDisplay/VBox/HBox"]
+margin_left = 62.0
+margin_right = 96.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+
+[node name="vit" type="Label" parent="StatsDisplay/VBox/HBox"]
+margin_left = 100.0
+margin_right = 128.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -124,55 +144,277 @@ custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
-[node name="end" type="Label" parent="StatsDisplay/Vbox"]
+[node name="ColorRect1" type="TextureProgress" parent="StatsDisplay/VBox"]
+modulate = Color( 0.8, 0.466667, 0, 1 )
 margin_top = 13.0
-margin_right = 112.0
-margin_bottom = 26.0
+margin_right = 128.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 2, 2 )
+size_flags_horizontal = 3
+max_value = 64.0
+value = 4.0
+rounded = true
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="HBox2" type="HBoxContainer" parent="StatsDisplay/VBox"]
+margin_top = 15.0
+margin_right = 128.0
+margin_bottom = 28.0
+
+[node name="Label" type="Label" parent="StatsDisplay/VBox/HBox2"]
+margin_right = 77.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "LUNG CAPACITY"
+
+[node name="Control" type="Control" parent="StatsDisplay/VBox/HBox2"]
+margin_left = 81.0
+margin_right = 96.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+
+[node name="end" type="Label" parent="StatsDisplay/VBox/HBox2"]
+margin_left = 100.0
+margin_right = 128.0
+margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
-[node name="def" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 26.0
-margin_right = 112.0
-margin_bottom = 39.0
+[node name="ColorRect2" type="TextureProgress" parent="StatsDisplay/VBox"]
+modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
+margin_top = 28.0
+margin_right = 128.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 2, 2 )
+size_flags_horizontal = 3
+max_value = 64.0
+value = 4.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="HBox3" type="HBoxContainer" parent="StatsDisplay/VBox"]
+margin_top = 30.0
+margin_right = 128.0
+margin_bottom = 43.0
+
+[node name="Label" type="Label" parent="StatsDisplay/VBox/HBox3"]
+margin_right = 60.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "RESILIENCE"
+
+[node name="Control" type="Control" parent="StatsDisplay/VBox/HBox3"]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+
+[node name="def" type="Label" parent="StatsDisplay/VBox/HBox3"]
+margin_left = 100.0
+margin_right = 128.0
+margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
-[node name="str" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 39.0
-margin_right = 112.0
-margin_bottom = 52.0
+[node name="ColorRect3" type="TextureProgress" parent="StatsDisplay/VBox"]
+modulate = Color( 0.278431, 0.278431, 1, 1 )
+margin_top = 43.0
+margin_right = 128.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 2, 2 )
+size_flags_horizontal = 3
+max_value = 64.0
+value = 4.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="HBox4" type="HBoxContainer" parent="StatsDisplay/VBox"]
+margin_top = 45.0
+margin_right = 128.0
+margin_bottom = 58.0
+
+[node name="Label" type="Label" parent="StatsDisplay/VBox/HBox4"]
+margin_right = 83.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "VIOLENT NATURE"
+
+[node name="Control" type="Control" parent="StatsDisplay/VBox/HBox4"]
+margin_left = 87.0
+margin_right = 96.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+
+[node name="str" type="Label" parent="StatsDisplay/VBox/HBox4"]
+margin_left = 100.0
+margin_right = 128.0
+margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
-[node name="dex" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 52.0
-margin_right = 112.0
-margin_bottom = 65.0
+[node name="ColorRect4" type="TextureProgress" parent="StatsDisplay/VBox"]
+modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
+margin_top = 58.0
+margin_right = 128.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 2, 2 )
+size_flags_horizontal = 3
+max_value = 64.0
+value = 4.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="HBox5" type="HBoxContainer" parent="StatsDisplay/VBox"]
+margin_top = 60.0
+margin_right = 128.0
+margin_bottom = 73.0
+
+[node name="Label" type="Label" parent="StatsDisplay/VBox/HBox5"]
+margin_right = 48.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "PATIENCE"
+
+[node name="Control" type="Control" parent="StatsDisplay/VBox/HBox5"]
+margin_left = 52.0
+margin_right = 96.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+
+[node name="dex" type="Label" parent="StatsDisplay/VBox/HBox5"]
+margin_left = 100.0
+margin_right = 128.0
+margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
 
-[node name="spd" type="Label" parent="StatsDisplay/Vbox"]
-margin_top = 65.0
-margin_right = 112.0
-margin_bottom = 78.0
+[node name="ColorRect5" type="TextureProgress" parent="StatsDisplay/VBox"]
+modulate = Color( 0.321569, 0.619608, 0.701961, 1 )
+margin_top = 73.0
+margin_right = 128.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 2, 2 )
+size_flags_horizontal = 3
+max_value = 64.0
+value = 4.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="HBox6" type="HBoxContainer" parent="StatsDisplay/VBox"]
+margin_top = 75.0
+margin_right = 128.0
+margin_bottom = 88.0
+
+[node name="Label" type="Label" parent="StatsDisplay/VBox/HBox6"]
+margin_right = 56.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "SWIFTNESS"
+
+[node name="Control" type="Control" parent="StatsDisplay/VBox/HBox6"]
+margin_left = 60.0
+margin_right = 96.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+
+[node name="spd" type="Label" parent="StatsDisplay/VBox/HBox6"]
+margin_left = 100.0
+margin_right = 128.0
+margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "stats"
+
+[node name="ColorRect6" type="TextureProgress" parent="StatsDisplay/VBox"]
+modulate = Color( 1, 1, 0.752941, 1 )
+margin_top = 88.0
+margin_right = 128.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 2, 2 )
+size_flags_horizontal = 3
+max_value = 64.0
+value = 4.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
+
+[node name="HBox7" type="HBoxContainer" parent="StatsDisplay/VBox"]
+margin_top = 90.0
+margin_right = 128.0
+margin_bottom = 103.0
+
+[node name="Label" type="Label" parent="StatsDisplay/VBox/HBox7"]
+margin_right = 72.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "SPIRITUALITY"
+
+[node name="Control" type="Control" parent="StatsDisplay/VBox/HBox7"]
+margin_left = 76.0
+margin_right = 96.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+
+[node name="mag" type="Label" parent="StatsDisplay/VBox/HBox7"]
+margin_left = 100.0
+margin_right = 128.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "stats"
+
+[node name="ColorRect7" type="TextureProgress" parent="StatsDisplay/VBox"]
+modulate = Color( 0.662745, 0, 1, 1 )
+margin_top = 103.0
+margin_right = 128.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 2, 2 )
+size_flags_horizontal = 3
+max_value = 64.0
+value = 4.0
+texture_under = ExtResource( 7 )
+texture_progress = ExtResource( 8 )
+nine_patch_stretch = true
 
 [node name="InventoryDisplay" type="NinePatchRect" parent="."]
 visible = false
@@ -197,6 +439,36 @@ margin_top = 4.0
 margin_right = -8.0
 margin_bottom = -4.0
 custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AlchemyDisplay" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_right = 8.0
+margin_bottom = -28.0
+texture = ExtResource( 6 )
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Vbox" type="VBoxContainer" parent="AlchemyDisplay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = -3.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -264,6 +536,12 @@ margin_top = 4.0
 margin_right = -8.0
 margin_bottom = -4.0
 custom_fonts/font = SubResource( 2 )
+text = "WASD : movement
+V : attack / interact
+B : evade / roll
+F : examine / cancel
+G : use formula
+R : next formula"
 
 [node name="TimerDelaySelect" type="Timer" parent="."]
 wait_time = 0.2
@@ -275,6 +553,8 @@ stream = ExtResource( 5 )
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_focus_exited"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonInventory" to="." method="_on_ButtonInventory_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonInventory" to="." method="_on_ButtonInventory_focus_exited"]
+[connection signal="focus_entered" from="MenuPanel/Menu/ButtonAlchemy" to="." method="_on_ButtonAlchemy_focus_entered"]
+[connection signal="focus_exited" from="MenuPanel/Menu/ButtonAlchemy" to="." method="_on_ButtonAlchemy_focus_exited"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_focus_exited"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_entered"]

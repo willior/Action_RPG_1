@@ -469,7 +469,7 @@ __meta__ = {
 
 [node name="RichTextLabel" type="RichTextLabel" parent="StatPreview/VBoxContainer"]
 margin_right = 123.0
-margin_bottom = 18.0
+margin_bottom = 22.0
 size_flags_vertical = 3
 custom_fonts/normal_font = SubResource( 5 )
 scroll_active = false
@@ -478,74 +478,16 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="StatPreview/VBoxContainer"]
-margin_top = 22.0
-margin_right = 4.0
+margin_top = 26.0
 margin_bottom = 48.0
 size_flags_horizontal = 0
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StatPreview/VBoxContainer/HBoxContainer"]
-margin_right = 4.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 4, 24 )
-custom_constants/separation = 2
-
-[node name="ColorRect1" type="ColorRect" parent="StatPreview/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 4.0
-margin_bottom = 2.0
-rect_min_size = Vector2( 1, 2 )
-size_flags_horizontal = 3
-color = Color( 0.8, 0.466667, 0, 1 )
-
-[node name="ColorRect2" type="ColorRect" parent="StatPreview/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 4.0
-margin_right = 4.0
-margin_bottom = 6.0
-rect_min_size = Vector2( 1, 2 )
-size_flags_horizontal = 9
-color = Color( 0.368627, 0.752941, 0.411765, 1 )
-
-[node name="ColorRect3" type="ColorRect" parent="StatPreview/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 8.0
-margin_right = 4.0
-margin_bottom = 10.0
-rect_min_size = Vector2( 1, 2 )
-size_flags_horizontal = 9
-color = Color( 0.278431, 0.278431, 1, 1 )
-
-[node name="ColorRect4" type="ColorRect" parent="StatPreview/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 12.0
-margin_right = 4.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 1, 2 )
-size_flags_horizontal = 9
-color = Color( 0.721569, 0.152941, 0.12549, 1 )
-
-[node name="ColorRect5" type="ColorRect" parent="StatPreview/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 16.0
-margin_right = 4.0
-margin_bottom = 18.0
-rect_min_size = Vector2( 1, 2 )
-size_flags_horizontal = 9
-color = Color( 0.321569, 0.619608, 0.701961, 1 )
-
-[node name="ColorRect6" type="ColorRect" parent="StatPreview/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 20.0
-margin_right = 4.0
 margin_bottom = 22.0
-rect_min_size = Vector2( 1, 2 )
-size_flags_horizontal = 9
-color = Color( 1, 1, 0.752941, 1 )
 
-[node name="ColorRect7" type="ColorRect" parent="StatPreview/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 4.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 1, 2 )
+[node name="ColorRect" type="ColorRect" parent="StatPreview/VBoxContainer/HBoxContainer/VBoxContainer"]
 size_flags_horizontal = 9
-color = Color( 0.662745, 0, 1, 1 )
-
-[node name="Tween" type="Tween" parent="StatPreview"]
 
 [node name="LevelText" type="Control" parent="."]
 anchor_left = 0.5
@@ -620,44 +562,44 @@ stream = ExtResource( 15 )
 [node name="Tween" type="Tween" parent="."]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="StatPreview" method="_on_Button_focus_entered" binds= [ Color( 0.8, 0.466667, 0, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="StatPreview" method="_on_ButtonVIT_focus_entered" binds= [ Color( 0.8, 0.466667, 0, 1 ) ]]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="LevelDescription" method="_on_ButtonVIT_focus_entered" binds= [ Color( 0.8, 0.466667, 0, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="LevelDescription" method="_on_ButtonVIT_focus_entered" binds= [ Color( 0.8, 0.466667, 0, 1 ) ]]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="StatPreview" method="_on_ButtonVIT_pressed"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonVIT" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonVIT_pressed"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="StatPreview" method="_on_Button_focus_entered" binds= [ Color( 0.368627, 0.752941, 0.411765, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="StatPreview" method="_on_ButtonEND_focus_entered" binds= [ Color( 0.368627, 0.752941, 0.411765, 1 ) ]]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="LevelDescription" method="_on_ButtonEND_focus_entered" binds= [ Color( 0.368627, 0.752941, 0.411765, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="LevelDescription" method="_on_ButtonEND_focus_entered" binds= [ Color( 0.368627, 0.752941, 0.411765, 1 ) ]]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="StatPreview" method="_on_ButtonEND_pressed"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonEND" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonEND_pressed"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="StatPreview" method="_on_Button_focus_entered" binds= [ Color( 0.278431, 0.278431, 1, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="StatPreview" method="_on_ButtonDEF_focus_entered" binds= [ Color( 0.278431, 0.278431, 1, 1 ) ]]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="LevelDescription" method="_on_ButtonDEF_focus_entered" binds= [ Color( 0.278431, 0.278431, 1, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="LevelDescription" method="_on_ButtonDEF_focus_entered" binds= [ Color( 0.278431, 0.278431, 1, 1 ) ]]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="StatPreview" method="_on_ButtonDEF_pressed"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEF" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEF_pressed"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="StatPreview" method="_on_Button_focus_entered" binds= [ Color( 0.721569, 0.152941, 0.12549, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="StatPreview" method="_on_ButtonSTR_focus_entered" binds= [ Color( 0.721569, 0.152941, 0.12549, 1 ) ]]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="LevelDescription" method="_on_ButtonSTR_focus_entered" binds= [ Color( 0.721569, 0.152941, 0.12549, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="LevelDescription" method="_on_ButtonSTR_focus_entered" binds= [ Color( 0.721569, 0.152941, 0.12549, 1 ) ]]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="StatPreview" method="_on_ButtonSTR_pressed"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSTR" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSTR_pressed"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="StatPreview" method="_on_Button_focus_entered" binds= [ Color( 0.321569, 0.619608, 0.701961, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="StatPreview" method="_on_ButtonDEX_focus_entered" binds= [ Color( 0.321569, 0.619608, 0.701961, 1 ) ]]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="LevelDescription" method="_on_ButtonDEX_focus_entered" binds= [ Color( 0.321569, 0.619608, 0.701961, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="LevelDescription" method="_on_ButtonDEX_focus_entered" binds= [ Color( 0.321569, 0.619608, 0.701961, 1 ) ]]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="StatPreview" method="_on_ButtonDEX_pressed"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonDEX" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonDEX_pressed"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="StatPreview" method="_on_Button_focus_entered" binds= [ Color( 1, 1, 0.752941, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="StatPreview" method="_on_ButtonSPD_focus_entered" binds= [ Color( 1, 1, 0.752941, 1 ) ]]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="LevelDescription" method="_on_ButtonSPD_focus_entered" binds= [ Color( 1, 1, 0.752941, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="LevelDescription" method="_on_ButtonSPD_focus_entered" binds= [ Color( 1, 1, 0.752941, 1 ) ]]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="StatPreview" method="_on_ButtonSPD_pressed"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonSPD" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonSPD_pressed"]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="StatPreview" method="_on_Button_focus_entered" binds= [ Color( 0.662745, 0, 1, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="StatPreview" method="_on_ButtonMAG_focus_entered" binds= [ Color( 0.662745, 0, 1, 1 ) ]]
-[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="LevelDescription" method="_on_ButtonMAG_focus_entered" binds= [ Color( 0.662745, 0, 1, 1 ) ]]
 [connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_focus_entered"]
+[connection signal="focus_entered" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="LevelDescription" method="_on_ButtonMAG_focus_entered" binds= [ Color( 0.662745, 0, 1, 1 ) ]]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="StatPreview" method="_on_ButtonMAG_pressed"]
 [connection signal="pressed" from="OptionsRect/LevelUp_Rect/LevelUp_Container/Options/ButtonMAG" to="OptionsRect/LevelUp_Rect/LevelUp_Container" method="_on_ButtonMAG_pressed"]
 [connection signal="timeout" from="LevelDescription/TimerText" to="LevelDescription" method="_on_TimerText_timeout"]
