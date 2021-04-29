@@ -2,6 +2,8 @@ extends Control
 var Label_Item = load("res://assets/UI/Menu/LabelItem.tscn")
 var Formula_Item = load("res://assets/UI/Menu/FormulaItem.tscn")
 var Formula_XP = load("res://assets/UI/Menu/FormulaXP.tscn")
+const AudioMove = preload("res://assets/Audio/cursLo.wav")
+const AudioSelect = preload("res://assets/Audio/cursHi.wav")
 onready var healthBox = $StatsDisplay/VBox/HBox/vit
 onready var enduranceBox = $StatsDisplay/VBox/HBox2/end
 onready var defenseBox = $StatsDisplay/VBox/HBox3/def
@@ -16,6 +18,7 @@ onready var strBar = $StatsDisplay/VBox/ColorRect4
 onready var dexBar = $StatsDisplay/VBox/ColorRect5
 onready var spdBar = $StatsDisplay/VBox/ColorRect6
 onready var magBar = $StatsDisplay/VBox/ColorRect7
+var status = false
 
 func _ready():
 	healthBox.set_text(str(PlayerStats.vitality)) # + " (" + str(PlayerStats.health) + "/" + str(PlayerStats.max_health) + "HP)")
@@ -75,27 +78,35 @@ func _ready():
 
 func _on_ButtonStatus_focus_entered():
 	$StatsDisplay.show()
+	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
 
 func _on_ButtonStatus_focus_exited():
-	$StatsDisplay.hide()
+	if !status:
+		$StatsDisplay.hide()
 	
 func _on_ButtonAlchemy_focus_entered():
 	$AlchemyDisplay.show()
+	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
 
 func _on_ButtonAlchemy_focus_exited():
 	$AlchemyDisplay.hide()
 
-#func _on_ButtonInventory_focus_entered():
-#	$InventoryDisplay.show()
-#	$AudioMenu.play()
-#
-#func _on_ButtonInventory_focus_exited():
-#	$InventoryDisplay.hide()
+func _on_ButtonInventory_focus_entered():
+	return
+# warning-ignore:unreachable_code
+	$InventoryDisplay.show()
+	$AudioMenu.play()
+
+func _on_ButtonInventory_focus_exited():
+	return
+# warning-ignore:unreachable_code
+	$InventoryDisplay.hide()
 
 func _on_ButtonPouch_focus_entered():
 	$PouchDisplay.show()
+	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
 
 func _on_ButtonPouch_focus_exited():
@@ -103,10 +114,24 @@ func _on_ButtonPouch_focus_exited():
 
 func _on_ButtonControls_focus_entered():
 	$ControlsDisplay.show()
+	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
 
 func _on_ButtonControls_focus_exited():
 	$ControlsDisplay.hide()
 
 func _on_ButtonStatus_pressed():
-	pass # Replace with function body.
+	$AudioMenu.stream = AudioSelect
+	$AudioMenu.play()
+
+func _on_ButtonAlchemy_pressed():
+	$AudioMenu.stream = AudioSelect
+	$AudioMenu.play()
+
+func _on_ButtonPouch_pressed():
+	$AudioMenu.stream = AudioSelect
+	$AudioMenu.play()
+
+func _on_ButtonControls_pressed():
+	$AudioMenu.stream = AudioSelect
+	$AudioMenu.play()

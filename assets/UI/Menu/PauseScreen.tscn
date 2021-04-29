@@ -58,6 +58,7 @@ __meta__ = {
 
 [node name="ButtonStatus" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
 margin_right = 77.0
+focus_neighbour_right = NodePath("../../../StatsDisplay/VBox/HBox")
 text = "STATUS"
 
 [node name="ButtonInventory" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
@@ -557,7 +558,10 @@ stream = ExtResource( 5 )
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonInventory" to="." method="_on_ButtonInventory_focus_exited"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonAlchemy" to="." method="_on_ButtonAlchemy_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonAlchemy" to="." method="_on_ButtonAlchemy_focus_exited"]
+[connection signal="pressed" from="MenuPanel/Menu/ButtonAlchemy" to="." method="_on_ButtonAlchemy_pressed"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_focus_exited"]
+[connection signal="pressed" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_pressed"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_exited"]
+[connection signal="pressed" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_pressed"]
