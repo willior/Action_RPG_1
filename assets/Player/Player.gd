@@ -750,7 +750,7 @@ func backstep_animation_finished():
 		attack_animation_finished()
 
 func _on_Hurtbox_area_entered(area):
-	if area.formula:
+	if area.get("formula"):
 		hurtbox.display_heal_popup(str(area.amount))
 		return
 	if z_index != area.get_parent().z_index: # automatic miss if z_index mismatch
@@ -771,7 +771,6 @@ func _on_Hurtbox_area_entered(area):
 		if charge_count > 0 && played_staggered:
 			charge.stop_charge()
 			charge_reset()
-		
 		hurtbox.display_damage_popup(str(damageTaken), is_crit)
 		hit_damage()
 		if state != ACTION && played_staggered:

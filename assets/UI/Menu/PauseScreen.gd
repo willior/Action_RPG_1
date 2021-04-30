@@ -2,6 +2,7 @@ extends Control
 var Label_Item = load("res://assets/UI/Menu/LabelItem.tscn")
 var Formula_Item = load("res://assets/UI/Menu/FormulaItem.tscn")
 var Formula_XP = load("res://assets/UI/Menu/FormulaXP.tscn")
+var Formula_Button = load("res://assets/UI/Menu/FormulaButton.tscn")
 const AudioMove = preload("res://assets/Audio/cursLo.wav")
 const AudioSelect = preload("res://assets/Audio/cursHi.wav")
 onready var healthBox = $StatsDisplay/VBox/HBox/vit
@@ -58,10 +59,14 @@ func _ready():
 		formula_item.ing_2_cost = ingredients_needed[1]
 		formula_item.formula_icon = alchemy_formula.formula_reference.icon
 		$AlchemyDisplay/Vbox.add_child(formula_item)
+		
 		var formula_xp = Formula_XP.instance()
 		formula_xp.current_xp = formula_data[2]
 		formula_xp.required_xp = formula_data[3]
 		$AlchemyDisplay/Vbox.add_child(formula_xp)
+		
+		var formula_button = Formula_Button.instance()
+		$AlchemyDisplay/VBoxButtons.add_child(formula_button)
 		$AlchemyDisplay/Vbox.add_child(Control.new())
 	
 	for n in player.pouch.get_ingredients().size():
@@ -78,37 +83,9 @@ func _ready():
 
 func _on_ButtonStatus_focus_entered():
 	$StatsDisplay.show()
-	$AudioMenu.stream = AudioMove
-	$AudioMenu.play()
-
-func _on_ButtonStatus_focus_exited():
-	pass
-	
-func _on_ButtonAlchemy_focus_entered():
-	$StatsDisplay.hide()
-	
-	$AlchemyDisplay.show()
-	$AudioMenu.stream = AudioMove
-	$AudioMenu.play()
-
-func _on_ButtonAlchemy_focus_exited():
 	$AlchemyDisplay.hide()
-
-func _on_ButtonPouch_focus_entered():
-	$PouchDisplay.show()
 	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
-
-func _on_ButtonPouch_focus_exited():
-	$PouchDisplay.hide()
-
-func _on_ButtonControls_focus_entered():
-	$ControlsDisplay.show()
-	$AudioMenu.stream = AudioMove
-	$AudioMenu.play()
-
-func _on_ButtonControls_focus_exited():
-	$ControlsDisplay.hide()
 
 func _on_ButtonStatus_pressed():
 	$AudioMenu.stream = AudioSelect
@@ -116,32 +93,68 @@ func _on_ButtonStatus_pressed():
 	status = true
 	$StatsDisplay/VBoxButtons/ButtonVIT.grab_focus()
 
-func _on_ButtonAlchemy_pressed():
-	$AudioMenu.stream = AudioSelect
-	$AudioMenu.play()
-
-func _on_ButtonPouch_pressed():
-	$AudioMenu.stream = AudioSelect
-	$AudioMenu.play()
-
-func _on_ButtonControls_pressed():
-	$AudioMenu.stream = AudioSelect
-	$AudioMenu.play()
+func _on_ButtonStatus_focus_exited():
+	pass
 
 func _on_ButtonSTAT_gui_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		$MenuPanel/Menu/ButtonStatus.grab_focus()
 	if event.is_action_pressed("ui_select"):
-		$AudioMenu.stream = AudioSelect
-		$AudioMenu.play()
+		audio_menu_select()
 
-func _on_ButtonInventory_focus_entered():
-	return
-# warning-ignore:unreachable_code
-	$InventoryDisplay.show()
+func _on_ButtonAlchemy_focus_entered():
+	$StatsDisplay.hide()
+	$AlchemyDisplay.show()
+	audio_menu_move()
+
+func _on_ButtonAlchemy_pressed():
+	$AudioMenu.stream = AudioSelect
+	$AudioMenu.play()
+	if $AlchemyDisplay/VBoxButtons.get_child_count() < 1:
+		return
+	else:
+		$AlchemyDisplay/VBoxButtons.get_child(0).grab_focus()
+
+func _on_ButtonAlchemy_focus_exited():
+	pass
+
+func _on_ButtonPouch_focus_entered():
+	$PouchDisplay.show()
+	$AlchemyDisplay.hide()
+	audio_menu_move()
+
+func _on_ButtonPouch_focus_exited():
+	$PouchDisplay.hide()
+
+func _on_ButtonControls_focus_entered():
+	$ControlsDisplay.show()
+	audio_menu_move()
+
+func _on_ButtonControls_focus_exited():
+	$ControlsDisplay.hide()
+
+func _on_ButtonPouch_pressed():
+	audio_menu_select()
+
+func _on_ButtonControls_pressed():
+	audio_menu_select()
+	
+func audio_menu_move():
+	$AudioMenu.stream = AudioMove
+	$AudioMenu.play()
+	
+func audio_menu_select():
+	$AudioMenu.stream = AudioSelect
 	$AudioMenu.play()
 
-func _on_ButtonInventory_focus_exited():
-	return
-# warning-ignore:unreachable_code
-	$InventoryDisplay.hide()
+#func _on_ButtonInventory_focus_entered():
+#	return
+## warning-ignore:unreachable_code
+#	$InventoryDisplay.show()
+#	audio_menu_move()
+#
+#func _on_ButtonInventory_focus_exited():
+#	return
+## warning-ignore:unreachable_code
+#	$InventoryDisplay.hide()
+	

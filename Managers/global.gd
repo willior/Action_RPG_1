@@ -96,8 +96,6 @@ func enemy_crit_calculation(crit_chance):
 		return false
 
 func player_stagger_calculation(player_max_hp, enemy_damage, is_crit):
-#	rng.randomize()
-#	var random_value = rng.randf_range(0, 100)
 	if (enemy_damage / (player_max_hp/10.0) > 1) or is_crit:
 		return true
 	else:

@@ -103,10 +103,7 @@ func _input(event):
 		player.pouch.add_ingredient("Salt", 10)
 	
 	if event.is_action_pressed("test4"): # O
-		player.pouch.remove_ingredient("Rock", 1)
-		player.pouch.remove_ingredient("Clay", 2)
-		player.pouch.remove_ingredient("Water", 2)
-		player.pouch.remove_ingredient("Salt", 1)
+		player.formulabook.remove_formula("Flash")
 	
 	if event.is_action_pressed("pause"): # P
 		PlayerStats.health = 1
