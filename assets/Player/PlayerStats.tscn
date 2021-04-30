@@ -16,7 +16,7 @@ var shade_friction = 840
 var dir_vector = Vector2.DOWN
 
 var vitality = 4 setget set_vitality
-var endurance = 4 setget set_endurance
+var endurance = 40 setget set_endurance
 var defense = 4.0 setget set_defense
 var strength = 4.0 setget set_strength
 var dexterity = 4.0 setget set_dexterity
@@ -30,6 +30,7 @@ var experience_total = 82
 
 var max_health = vitality*15 setget set_max_health
 var health = max_health setget set_health
+var poise setget set_poise
 var old_health = health
 var final_health setget set_final_health
 var dying = false setget set_dying
@@ -163,7 +164,6 @@ func set_vitality(value):
 		health_increase = 6
 	elif vitality <= 10:
 		health_increase = 9
-
 	self.max_health += health_increase
 	self.health += health_increase
 	print('vitality changed: health increased by ', health_increase)
@@ -172,6 +172,7 @@ func set_vitality(value):
 func set_max_health(value):
 	max_health = value
 	self.health = min(health, max_health)
+	set_poise(50)
 	emit_signal(\"max_health_changed\", max_health)
 
 func set_health(value):
@@ -185,6 +186,9 @@ func set_health(value):
 		set_dying(false)
 		
 	emit_signal(\"health_changed\", health) # every time the health is set, emits a signal \"health_changed\" along with an argument, our new health value
+
+func set_poise(value):
+	poise = value
 
 func set_final_health(value):
 	final_health = value

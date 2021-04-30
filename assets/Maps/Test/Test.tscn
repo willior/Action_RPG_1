@@ -427,6 +427,12 @@ position = Vector2( -93.5364, -8.99631 )
 [node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 11 )]
 position = Vector2( 48.3645, -74.2587 )
 
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 11 )]
+position = Vector2( -0.267963, -62.3708 )
+
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 11 )]
+position = Vector2( -70.8412, -18.1824 )
+
 [node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 22 )]
 position = Vector2( -103, 100 )
 

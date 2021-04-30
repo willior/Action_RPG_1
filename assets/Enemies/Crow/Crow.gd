@@ -105,7 +105,7 @@ func _physics_process(delta):
 				attacking = false
 				audio_cawcawcaw()
 				fly_animation()
-				
+			
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				state = IDLE
@@ -126,7 +126,7 @@ func examine():
 
 func examine_complete(value):
 	examined = value
-			
+
 func accelerate_towards_point(point, speed, delta):
 	if flying:
 		Enemy.accelerate_towards_point(self, point, speed, delta)

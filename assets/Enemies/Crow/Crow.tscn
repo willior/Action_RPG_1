@@ -510,10 +510,10 @@ states/Landing/position = Vector2( 362.5, 207.713 )
 states/Peck/node = SubResource( 41 )
 states/Peck/position = Vector2( 151.5, 113.303 )
 states/Takeoff/node = SubResource( 42 )
-states/Takeoff/position = Vector2( 348, 20 )
+states/Takeoff/position = Vector2( 362.5, -9 )
 transitions = [ "Landing", "Idle", SubResource( 43 ), "Idle", "Takeoff", SubResource( 44 ), "Takeoff", "Fly", SubResource( 45 ), "Fly", "Landing", SubResource( 46 ), "Idle", "Peck", SubResource( 47 ), "Peck", "Takeoff", SubResource( 48 ), "Landing", "Peck", SubResource( 49 ), "Peck", "Idle", SubResource( 50 ), "Idle", "Dead", SubResource( 51 ), "Takeoff", "Dead", SubResource( 52 ), "Peck", "Dead", SubResource( 53 ), "Fly", "Dead", SubResource( 54 ), "Landing", "Dead", SubResource( 55 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 31.9396, -21.6686 )
+graph_offset = Vector2( 31.9396, -29.5519 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=57]
 
@@ -547,7 +547,7 @@ texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
 vframes = 2
 hframes = 12
-frame = 10
+frame = 12
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
@@ -555,7 +555,7 @@ light_mask = 0
 material = SubResource( 2 )
 z_index = 1
 frames = SubResource( 27 )
-frame = 10
+frame = 13
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -595,10 +595,11 @@ shape = SubResource( 58 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
-position = Vector2( 0, -8.5 )
+position = Vector2( 0, -4 )
 collision_mask = 4
 damage = 16.0
 accuracy = 4.0
+crit_chance = 10
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 3 )
@@ -611,14 +612,13 @@ collision_layer = 8
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -18.5 )
+position = Vector2( 0, -14 )
 shape = SubResource( 60 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
 visible = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
-visible = false
 scale = Vector2( 3, 3 )
 script = ExtResource( 18 )
 
@@ -629,7 +629,6 @@ shape = SubResource( 61 )
 visible = false
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
-visible = false
 scale = Vector2( 2, 2 )
 collision_layer = 0
 collision_mask = 2

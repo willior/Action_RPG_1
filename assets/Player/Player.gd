@@ -579,7 +579,7 @@ func player_state_reset():
 	swordHitbox.set_deferred("monitorable", false)
 	# swordHitbox.damage = swordHitbox.orig_damage
 	swordHitbox.reset_damage()
-	
+
 func enemy_killed(experience_from_kill):
 	stats.experience += experience_from_kill
 	stats.experience_total += experience_from_kill
@@ -760,16 +760,21 @@ func _on_Hurtbox_area_entered(area):
 		return
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
-		if attack2_queued:
+		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+		var is_crit = Global.enemy_crit_calculation(area.crit_chance)
+		if is_crit:
+			damageTaken *= 2
+		var played_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
+		print('stagger = ', played_staggered)
+		if attack2_queued && played_staggered:
 			attack2_queued = false
-		if charge_count > 0:
+		if charge_count > 0 && played_staggered:
 			charge.stop_charge()
 			charge_reset()
-		var is_crit = false # enemies currently do not crit
-		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+		
 		hurtbox.display_damage_popup(str(damageTaken), is_crit)
 		hit_damage()
-		if state != ACTION:
+		if state != ACTION && played_staggered:
 			state = HIT
 	else:
 		$DodgeAudio.play()
@@ -893,7 +898,7 @@ func set_talk_notice(value):
 		talkNotice.visible = true
 	elif !value:
 		talkNotice.visible = false
-		
+
 func set_interact_notice(value):
 	if value:
 		$NoticeAudio.play()

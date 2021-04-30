@@ -113,7 +113,6 @@ layer = 0
 color = Color( 1, 1, 1, 0 )
 
 [node name="FormulaHitbox" type="Area2D" parent="."]
-visible = false
 monitoring = false
 monitorable = false
 collision_layer = 0
@@ -124,6 +123,7 @@ base_potency = 4.0
 randomness = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
+visible = false
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="FormulaHitbox"]

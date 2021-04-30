@@ -82,27 +82,17 @@ func _on_ButtonStatus_focus_entered():
 	$AudioMenu.play()
 
 func _on_ButtonStatus_focus_exited():
-	if !status:
-		$StatsDisplay.hide()
+	pass
 	
 func _on_ButtonAlchemy_focus_entered():
+	$StatsDisplay.hide()
+	
 	$AlchemyDisplay.show()
 	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
 
 func _on_ButtonAlchemy_focus_exited():
 	$AlchemyDisplay.hide()
-
-func _on_ButtonInventory_focus_entered():
-	return
-# warning-ignore:unreachable_code
-	$InventoryDisplay.show()
-	$AudioMenu.play()
-
-func _on_ButtonInventory_focus_exited():
-	return
-# warning-ignore:unreachable_code
-	$InventoryDisplay.hide()
 
 func _on_ButtonPouch_focus_entered():
 	$PouchDisplay.show()
@@ -123,6 +113,8 @@ func _on_ButtonControls_focus_exited():
 func _on_ButtonStatus_pressed():
 	$AudioMenu.stream = AudioSelect
 	$AudioMenu.play()
+	status = true
+	$StatsDisplay/VBoxButtons/ButtonVIT.grab_focus()
 
 func _on_ButtonAlchemy_pressed():
 	$AudioMenu.stream = AudioSelect
@@ -135,3 +127,21 @@ func _on_ButtonPouch_pressed():
 func _on_ButtonControls_pressed():
 	$AudioMenu.stream = AudioSelect
 	$AudioMenu.play()
+
+func _on_ButtonSTAT_gui_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		$MenuPanel/Menu/ButtonStatus.grab_focus()
+	if event.is_action_pressed("ui_select"):
+		$AudioMenu.stream = AudioSelect
+		$AudioMenu.play()
+
+func _on_ButtonInventory_focus_entered():
+	return
+# warning-ignore:unreachable_code
+	$InventoryDisplay.show()
+	$AudioMenu.play()
+
+func _on_ButtonInventory_focus_exited():
+	return
+# warning-ignore:unreachable_code
+	$InventoryDisplay.hide()

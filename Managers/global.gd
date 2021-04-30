@@ -86,6 +86,23 @@ func crit_calculation(base_crit_rate, dexterity, dexterity_mod):
 	elif final_crit_rate < random_value:
 		return false
 
+func enemy_crit_calculation(crit_chance):
+	rng.randomize()
+	var random_value = rng.randf_range(0, 100)
+	if crit_chance > random_value:
+		SoundPlayer.play_sound("crit")
+		return true
+	else:
+		return false
+
+func player_stagger_calculation(player_max_hp, enemy_damage, is_crit):
+#	rng.randomize()
+#	var random_value = rng.randf_range(0, 100)
+	if (enemy_damage / (player_max_hp/10.0) > 1) or is_crit:
+		return true
+	else:
+		return false
+
 func damage_calculation(attack, defense, random):
 	var base_damage = 2 * (attack*attack / (attack+defense))
 #	print('[[[ attack = ', attack, " vs. ", "defense = ", defense)
