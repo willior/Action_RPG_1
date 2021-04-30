@@ -3,6 +3,7 @@ var Label_Item = load("res://assets/UI/Menu/LabelItem.tscn")
 var Formula_Item = load("res://assets/UI/Menu/FormulaItem.tscn")
 var Formula_XP = load("res://assets/UI/Menu/FormulaXP.tscn")
 var Formula_Button = load("res://assets/UI/Menu/FormulaButton.tscn")
+const DialogBox = preload("res://assets/UI/Dialog/PopupDialogBox.tscn")
 const AudioMove = preload("res://assets/Audio/cursLo.wav")
 const AudioSelect = preload("res://assets/Audio/cursHi.wav")
 onready var healthBox = $StatsDisplay/VBox/HBox/vit
@@ -66,7 +67,7 @@ func _ready():
 		$AlchemyDisplay/Vbox.add_child(formula_xp)
 		
 		var formula_button = Formula_Button.instance()
-		
+		formula_button.description = alchemy_formula.formula_reference.description_string
 		$AlchemyDisplay/VBoxButtons.add_child(formula_button)
 		if player.formulabook.get_formulas().size()-1 == f:
 			formula_button.focus_neighbour_bottom = formula_button.get_path()
@@ -88,23 +89,37 @@ func _ready():
 func _on_ButtonStatus_focus_entered():
 	$StatsDisplay.show()
 	$AlchemyDisplay.hide()
-	$AudioMenu.stream = AudioMove
-	$AudioMenu.play()
+	audio_menu_move()
 
 func _on_ButtonStatus_pressed():
-	$AudioMenu.stream = AudioSelect
-	$AudioMenu.play()
+	audio_menu_select()
 	status = true
 	$StatsDisplay/VBoxButtons/ButtonVIT.grab_focus()
 
 func _on_ButtonStatus_focus_exited():
 	pass
 
-func _on_ButtonSTAT_gui_input(event):
+func _on_ButtonSTAT_gui_input(event, description):
 	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_left"):
 		$MenuPanel/Menu/ButtonStatus.grab_focus()
 	if event.is_action_pressed("ui_select"):
 		audio_menu_select()
+		var stat_description
+		match description:
+			0: stat_description = PlayerStats.vitality_description
+			1: stat_description = PlayerStats.endurance_description
+			2: stat_description = PlayerStats.defense_description
+			3: stat_description = PlayerStats.strength_description
+			4: stat_description = PlayerStats.dexterity_description
+			5: stat_description = PlayerStats.speed_description
+			6: stat_description = PlayerStats.magic_description
+		var dialogBox = DialogBox.instance()
+		dialogBox.dialog_script = [
+			{
+				"text": stat_description
+			}
+		]
+		get_node("/root/World/GUI").add_child(dialogBox)
 
 func _on_ButtonAlchemy_focus_entered():
 	$StatsDisplay.hide()
@@ -112,8 +127,7 @@ func _on_ButtonAlchemy_focus_entered():
 	audio_menu_move()
 
 func _on_ButtonAlchemy_pressed():
-	$AudioMenu.stream = AudioSelect
-	$AudioMenu.play()
+	audio_menu_select()
 	if $AlchemyDisplay/VBoxButtons.get_child_count() < 1:
 		return
 	else:
@@ -151,14 +165,14 @@ func audio_menu_select():
 	$AudioMenu.stream = AudioSelect
 	$AudioMenu.play()
 
-#func _on_ButtonInventory_focus_entered():
-#	return
-## warning-ignore:unreachable_code
-#	$InventoryDisplay.show()
-#	audio_menu_move()
-#
-#func _on_ButtonInventory_focus_exited():
-#	return
-## warning-ignore:unreachable_code
-#	$InventoryDisplay.hide()
-	
+func _on_ButtonInventory_focus_entered():
+	return
+# warning-ignore:unreachable_code
+	$InventoryDisplay.show()
+	audio_menu_move()
+
+func _on_ButtonInventory_focus_exited():
+	return
+# warning-ignore:unreachable_code
+	$InventoryDisplay.hide()
+

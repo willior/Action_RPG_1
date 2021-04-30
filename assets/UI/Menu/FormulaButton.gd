@@ -1,6 +1,7 @@
 extends Button
-
+const DialogBox = preload("res://assets/UI/Dialog/PopupDialogBox.tscn")
 onready var alchemyButton = get_parent().get_parent().get_parent().get_node("MenuPanel/Menu/ButtonAlchemy")
+var description
 
 func _ready():
 	self.focus_neighbour_left = alchemyButton.get_path()
@@ -12,4 +13,10 @@ func _on_Button_gui_input(event):
 		get_parent().get_parent().get_parent().audio_menu_select()
 
 func _on_Button_pressed():
-	pass # Replace with function body.
+	var dialogBox = DialogBox.instance()
+	dialogBox.dialog_script = [
+		{
+			"text": description
+		}
+	]
+	get_node("/root/World/GUI").add_child(dialogBox)

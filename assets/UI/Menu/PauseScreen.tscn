@@ -89,6 +89,7 @@ margin_bottom = 80.0
 text = "CONTROLS"
 
 [node name="StatsDisplay" type="NinePatchRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -465,6 +466,7 @@ texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="AlchemyDisplay" type="NinePatchRect" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -622,10 +624,10 @@ __meta__ = {
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_exited"]
 [connection signal="pressed" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_pressed"]
-[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonVIT" to="." method="_on_ButtonSTAT_gui_input"]
-[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonEND" to="." method="_on_ButtonSTAT_gui_input"]
-[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonDEF" to="." method="_on_ButtonSTAT_gui_input"]
-[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonSTR" to="." method="_on_ButtonSTAT_gui_input"]
-[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonDEX" to="." method="_on_ButtonSTAT_gui_input"]
-[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonSPD" to="." method="_on_ButtonSTAT_gui_input"]
-[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonMAG" to="." method="_on_ButtonSTAT_gui_input"]
+[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonVIT" to="." method="_on_ButtonSTAT_gui_input" binds= [ 0 ]]
+[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonEND" to="." method="_on_ButtonSTAT_gui_input" binds= [ 1 ]]
+[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonDEF" to="." method="_on_ButtonSTAT_gui_input" binds= [ 2 ]]
+[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonSTR" to="." method="_on_ButtonSTAT_gui_input" binds= [ 3 ]]
+[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonDEX" to="." method="_on_ButtonSTAT_gui_input" binds= [ 4 ]]
+[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonSPD" to="." method="_on_ButtonSTAT_gui_input" binds= [ 5 ]]
+[connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonMAG" to="." method="_on_ButtonSTAT_gui_input" binds= [ 6 ]]

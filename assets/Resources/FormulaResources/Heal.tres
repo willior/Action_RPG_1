@@ -116,6 +116,7 @@ scene = ExtResource( 3 )
 name = "Heal"
 icon = SubResource( 25 )
 description = [  ]
+description_string = "Heals the user's HP."
 cost = {
 "Salt": 1,
 "Water": 2

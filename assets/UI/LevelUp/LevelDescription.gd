@@ -10,37 +10,37 @@ func update_description(text):
 
 func _on_ButtonVIT_focus_entered(stat_color):
 	# show()
-	description = "Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand."
+	description = PlayerStats.vitality_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonEND_focus_entered(stat_color):
-	description = "Lung Capacity determines how many physical actions you can perform in a short period of time."
+	description = PlayerStats.endurance_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonDEF_focus_entered(stat_color):
-	description = "Resilience makes things easier for you when hardship is inevitable, as well as helps in maintaining your composure."
+	description = PlayerStats.defense_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonSTR_focus_entered(stat_color):
-	description = "Violent Nature is a measure of how much pain you are willing to inflict on others, for survival or otherwise."
+	description = PlayerStats.strength_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonDEX_focus_entered(stat_color):
-	description = "Patience allows for careful observation of threats, augmenting accuracy and the frequency of critical strikes."
+	description = PlayerStats.dexterity_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonSPD_focus_entered(stat_color):
-	description = "Swiftness aids in reflexive maneuvers like evasion, as well as the speed with which certain actions are performed."
+	description = PlayerStats.speed_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 	
 func _on_ButtonMAG_focus_entered(stat_color):
-	description = "Spirituality governs the amount of aid received from higher planes, as well as one's grasp of the incomprehensible."
+	description = PlayerStats.magic_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 	
