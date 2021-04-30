@@ -89,7 +89,6 @@ margin_bottom = 80.0
 text = "CONTROLS"
 
 [node name="StatsDisplay" type="NinePatchRect" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -466,7 +465,6 @@ texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
 
 [node name="AlchemyDisplay" type="NinePatchRect" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -486,9 +484,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 6.0
-margin_top = 4.0
+margin_top = 6.0
 margin_right = -6.0
-margin_bottom = -4.0
+margin_bottom = -2.0
 custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -498,9 +496,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
-margin_top = 4.0
+margin_top = 6.0
 margin_right = -8.0
-margin_bottom = -4.0
+margin_bottom = -2.0
 size_flags_horizontal = 3
 custom_constants/separation = 1
 __meta__ = {

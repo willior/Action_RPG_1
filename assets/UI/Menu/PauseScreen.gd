@@ -66,7 +66,11 @@ func _ready():
 		$AlchemyDisplay/Vbox.add_child(formula_xp)
 		
 		var formula_button = Formula_Button.instance()
+		
 		$AlchemyDisplay/VBoxButtons.add_child(formula_button)
+		if player.formulabook.get_formulas().size()-1 == f:
+			formula_button.focus_neighbour_bottom = formula_button.get_path()
+		
 		$AlchemyDisplay/Vbox.add_child(Control.new())
 	
 	for n in player.pouch.get_ingredients().size():
@@ -97,7 +101,7 @@ func _on_ButtonStatus_focus_exited():
 	pass
 
 func _on_ButtonSTAT_gui_input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_left"):
 		$MenuPanel/Menu/ButtonStatus.grab_focus()
 	if event.is_action_pressed("ui_select"):
 		audio_menu_select()
