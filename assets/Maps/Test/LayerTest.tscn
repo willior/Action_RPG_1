@@ -17,7 +17,6 @@
 [ext_resource path="res://assets/World/Flowers/Flowers_1.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Grass/TallGrass_1.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/Cutscene/CutsceneTrigger.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/Will/LayerTest/Background2.png" type="Texture" id=20]
 [ext_resource path="res://assets/World/Trees/Tree_1_green_alt.tscn" type="PackedScene" id=21]
@@ -37,6 +36,7 @@
 [ext_resource path="res://assets/Will/LayerTest/Background_trees.png" type="Texture" id=35]
 [ext_resource path="res://assets/World/Plants/Plant_16_green_alt.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.tscn" type="PackedScene" id=37]
+[ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=38]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 32 )
@@ -1143,19 +1143,14 @@ position = Vector2( 524, 107 )
 position = Vector2( 542, 106 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-bus = "Reverb"
+stream = ExtResource( 38 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
 
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
 
-[node name="FadeIn" parent="." instance=ExtResource( 18 )]
-
 [node name="GUI" parent="." instance=ExtResource( 6 )]
-
-[node name="Overlay" type="CanvasLayer" parent="."]
-layer = 2
 [connection signal="body_entered" from="Map/MiddleTransitionTop" to="Map" method="_on_MiddleTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionTop" to="Map" method="_on_BelowTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionBottom" to="Map" method="_on_BelowTransition_body_entered"]

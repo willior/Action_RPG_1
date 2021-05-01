@@ -62,7 +62,7 @@ func _input(event):
 #		get_tree().set_input_as_handled()
 #		load_dialog()
 	get_tree().set_input_as_handled()
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_cancel"):
 		if !$TimerDelaySelect.is_stopped():
 			return
 		elif waiting_for_input:

@@ -34,7 +34,7 @@ func sprite_flash():
 		"modulate",
 		Color(1, 1, 1, 1),
 		Color(1, 1, 1, 0),
-		0.2,
+		0.1,
 		Tween.TRANS_LINEAR,
 		Tween.EASE_OUT
 	)

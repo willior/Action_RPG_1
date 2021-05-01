@@ -1,9 +1,5 @@
 extends CanvasLayer
 
-# FadeIn scene
-
-#onready var player = get_node("root/World/YSort/Player")
-
 func _ready():
 	$Sprite.show()
 	Global.changingScene = false

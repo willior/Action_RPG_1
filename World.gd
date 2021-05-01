@@ -5,31 +5,31 @@ onready var sfx1 = $SFX
 onready var sfx2 = $SFX2
 onready var player = $YSort/Player
 onready var dim = $GUI/Dim
+onready var FadeIn = load("res://assets/Misc/FadeIn.tscn")
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
 onready var PauseScreen = load("res://assets/UI/Menu/PauseScreen.tscn")
 
 func _ready():
+	var fade_in = FadeIn.instance()
+	add_child(fade_in)
 	sfx1.play()
 	sfx2.play()
 	if GameManager.on_title_screen:
 		GameManager.on_title_screen = false
-		
 	if Global.chapter_name != null:
 		$FadeIn.free()
 		var chapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn").instance()
 		add_child(chapterDisplay)
 		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
 		Global.chapter_name = null
-
 	if GameManager.multiplayer_2:
 		var player2 = load("res://assets/Player/Player2.tscn").instance()
 		player2.global_position = player.global_position
-		get_node("YSort").add_child(player2)
-		
+
 func fade_out():
 	var fadeout = FadeOut.instance()
 	add_child(fadeout)
-	
+
 #func save_game():
 #	print('save_game')
 #	var save_game = File.new()
@@ -128,17 +128,24 @@ func _input(event):
 			PlayerStats.dead = false
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
 		elif get_tree().paused == false:
-			music.stream_paused = true
-			sfx1.stream_paused = true
-			sfx2.stream_paused = true
-			get_tree().paused = true
-			dim.visible = true
-			var pauseScreen = PauseScreen.instance()
-			$GUI.add_child(pauseScreen)
+			open_pause_menu()
 		else:
-			music.stream_paused = false
-			sfx1.stream_paused = false
-			sfx2.stream_paused = false
-			get_tree().paused = false
-			dim.visible = false
-			$GUI/PauseScreen.queue_free()
+			close_pause_menu()
+
+func open_pause_menu():
+	music.stream_paused = true
+	sfx1.stream_paused = true
+	sfx2.stream_paused = true
+	get_tree().paused = true
+	dim.visible = true
+	var pauseScreen = PauseScreen.instance()
+	$GUI.add_child(pauseScreen)
+
+func close_pause_menu():
+	music.stream_paused = false
+	sfx1.stream_paused = false
+	sfx2.stream_paused = false
+	get_tree().paused = false
+	dim.visible = false
+	$GUI/PauseScreen.queue_free()
+	player.talkTimer.start()

@@ -1,9 +1,8 @@
-[gd_scene load_steps=103 format=2]
+[gd_scene load_steps=102 format=2]
 
 [ext_resource path="res://assets/Maps/1-1_Forest.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Shaders/Night_CanvasModulate.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Weather/LightningCanvas.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=6]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=7]
@@ -1926,10 +1925,6 @@ position = Vector2( 115, 44 )
 [node name="Skeleton" parent="YSort" instance=ExtResource( 58 )]
 position = Vector2( 712, 80 )
 
-[node name="FadeIn" parent="." instance=ExtResource( 4 )]
-
-[node name="GUI" parent="." instance=ExtResource( 2 )]
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 bus = "Reverb"
@@ -1941,8 +1936,7 @@ volume_db = -48.0
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
 volume_db = -48.0
 
-[node name="Overlay" type="CanvasLayer" parent="."]
-layer = 4
+[node name="GUI" parent="." instance=ExtResource( 2 )]
 [connection signal="timeout" from="Map/Timer" to="Map" method="_on_Timer_timeout"]
 [connection signal="tween_all_completed" from="Map/Tween" to="Map" method="_on_Tween_tween_all_completed"]
 

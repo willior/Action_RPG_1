@@ -176,3 +176,7 @@ func _on_ButtonInventory_focus_exited():
 # warning-ignore:unreachable_code
 	$InventoryDisplay.hide()
 
+func _on_PauseScreen_gui_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().set_input_as_handled()
+		get_tree().get_root().get_node("World").close_pause_menu()

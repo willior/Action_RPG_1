@@ -1,8 +1,7 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/Tilesets/Desert/Sand_Light_Tileset/tileset_Sand_Light_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
-[ext_resource path="res://assets/Misc/FadeIn.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=6]
@@ -435,8 +434,6 @@ stream = ExtResource( 11 )
 volume_db = -48.0
 
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
-
-[node name="FadeIn" parent="." instance=ExtResource( 3 )]
 
 [node name="GUI" parent="." instance=ExtResource( 4 )]
 [connection signal="timeout" from="Map/Timer" to="Map" method="_on_Timer_timeout"]

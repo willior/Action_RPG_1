@@ -615,14 +615,14 @@ func show_level_up_screen():
 	get_node("/root/World/Music").stream_paused = true
 	get_node("/root/World/SFX").stream_paused = true
 	get_node("/root/World/SFX2").stream_paused = true
-	print('LevelTimer timeout. Final total stats_to_allocate = ', stats_to_allocate)
+	print('Instancing LevelUp. Final total stats_to_allocate = ', stats_to_allocate)
 	just_leveled = false
+	var tweenGreyscale = TweenGreyscale.instance()
+	get_node("/root/World/GUI").add_child(tweenGreyscale)
 	var levelUpScreen = LevelUpScreen.instance()
 	levelUpScreen.stats_remaining = stats_to_allocate
 	stats_to_allocate = 0
-	get_node("/root/World/Overlay").add_child(levelUpScreen)
-	var tweenGreyscale = TweenGreyscale.instance()
-	get_node("/root/World/GUI").add_child(tweenGreyscale)
+	get_node("/root/World/GUI").add_child(levelUpScreen)
 
 func roll_stamina_drain():
 	stats.stamina -= 15

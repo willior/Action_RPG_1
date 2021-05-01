@@ -44,7 +44,7 @@ onready var map = get_parent().get_parent().get_parent().get_node("Map")
 
 func _ready():
 # warning-ignore:return_value_discarded
-	PlayerLog.connect("tumbleweed_complete", self, "examine_complete")
+	PlayerLog.connect("Tumbleweed_complete", self, "examine_complete")
 	if PlayerLog.enemies_examined[ENEMY_NAME]:
 		examined = true
 	add_to_group("enemies")
@@ -63,7 +63,6 @@ func _ready():
 		# prints("randomizing tumbleweed y_velocity: " + str(y_velocity))
 
 func _physics_process(delta):
-
 	match state:
 		IDLE:
 			velocity = velocity.move_toward(Vector2(x_velocity, y_velocity), ACCELERATION * delta)
@@ -81,24 +80,18 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	sprite.flip_h = velocity.x < 0
-	
 	velocity = move_and_slide(velocity)
 
 func examine():
-	var dialogBox = DialogBox.instance()
-	dialogBox.dialog_script = [
+	var dialog_script = [
 		{'text': "Unsatisfied with sedentary life, the tumbleweed breaks away form its roots and rides the wind."},
 		{'text': "Its structure degrades gradually, allowing seeds to be sewn. An example of functional death."}
 	]
-	get_node("/root/World/GUI").add_child(dialogBox)
-	if !examined:
-		examined = true
-		PlayerLog.tumbleweed_examined = true
-		PlayerLog.set_examined("tumbleweed", true)
+	Enemy.examine(dialog_script, examined, ENEMY_NAME)
 
 func examine_complete(value):
 	examined = value
-	
+
 func play_sound():
 	var sound_choice = randi() % 3
 	match sound_choice:
