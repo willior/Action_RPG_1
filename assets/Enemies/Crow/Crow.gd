@@ -39,7 +39,7 @@ var attack_on_cooldown = false
 var target
 var flying
 var currentAnim
-var common_drop_name = "Water"
+var common_drop_name = "Rock"
 var common_drop_chance = 0.50
 var rare_drop_name = "Salt"
 var rare_drop_chance = 0.125

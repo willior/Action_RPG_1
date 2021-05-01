@@ -1,5 +1,8 @@
 extends Node2D
 
+onready var FallingLeaf = load("res://assets/Effects/Environment/FallingLeaf_BrightGreen.tscn")
+onready var leaf_layer = $ParallaxOverlay/ParallaxLayer
+onready var player = get_tree().get_root().get_node("World/YSort/Player")
 var above_z = 2
 var middle_z = 0
 var below_z = -2
@@ -29,3 +32,11 @@ func _on_FlyerArea_body_exited(body):
 	body.z_index = 0
 	body.set_collision_mask_bit(17, false)
 	Enemy.set_player_collision(body)
+
+func generate_leaf():
+	var falling_leaf = FallingLeaf.instance()
+	falling_leaf.position = player.position + Vector2(-320, rand_range(-130,0))
+	leaf_layer.add_child(falling_leaf)
+
+func _on_Timer_timeout():
+	generate_leaf()

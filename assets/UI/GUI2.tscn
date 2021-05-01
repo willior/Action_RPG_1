@@ -165,7 +165,6 @@ margin_top = -40.0
 [node name="ExpBarTexture" parent="ExpBar1" index="0"]
 margin_left = 9.0
 margin_right = 50.0
-tint_progress = Color( 1, 0.654902, 0, 0.784314 )
 
 [node name="TextureRect" parent="ExpBar1" index="1"]
 margin_left = 14.0
@@ -391,6 +390,7 @@ __meta__ = {
 show_behind_parent = true
 grow_vertical = 0
 size_flags_vertical = 9
+custom_constants/separation = 1
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false

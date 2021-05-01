@@ -37,7 +37,8 @@ tracks/0/keys = {
 }
 
 [node name="PickupPopup" type="Control"]
-margin_bottom = 5.0
+margin_right = 16.0
+margin_bottom = 13.0
 rect_min_size = Vector2( 0, 5 )
 script = ExtResource( 3 )
 __meta__ = {
@@ -47,14 +48,15 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0.784314 )
 material = ExtResource( 2 )
-margin_right = 20.0
+margin_top = -1.0
+margin_right = 27.0
 margin_bottom = 13.0
 grow_vertical = 0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.976471, 0.976471, 0.976471, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "asdf"
+text = "ASDF"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false

@@ -3,6 +3,7 @@ var Label_Item = load("res://assets/UI/Menu/LabelItem.tscn")
 var Formula_Item = load("res://assets/UI/Menu/FormulaItem.tscn")
 var Formula_XP = load("res://assets/UI/Menu/FormulaXP.tscn")
 var Formula_Button = load("res://assets/UI/Menu/FormulaButton.tscn")
+var Ingredient_Button = load("res://assets/UI/Menu/IngredientButton.tscn")
 const DialogBox = preload("res://assets/UI/Dialog/PopupDialogBox.tscn")
 const AudioMove = preload("res://assets/Audio/cursLo.wav")
 const AudioSelect = preload("res://assets/Audio/cursHi.wav")
@@ -82,6 +83,10 @@ func _ready():
 		var icon_ingredient = TextureRect.new()
 		icon_ingredient.set_texture(pouch_ingredient.ingredient_reference.texture)
 		$PouchDisplay/VBoxIcons.add_child(icon_ingredient)
+		
+		var ingredient_button = Ingredient_Button.instance()
+		ingredient_button.description = pouch_ingredient.ingredient_reference.description
+	
 	$TimerDelaySelect.start()
 	yield($TimerDelaySelect, "timeout")
 	$MenuPanel/Menu/ButtonStatus.grab_focus()

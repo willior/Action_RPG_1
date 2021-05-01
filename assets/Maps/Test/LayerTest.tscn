@@ -392,6 +392,16 @@ motion_mirroring = Vector2( 400, 0 )
 position = Vector2( 199, 6 )
 texture = ExtResource( 35 )
 
+[node name="ParallaxOverlay" type="ParallaxBackground" parent="Map"]
+layer = 0
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Map/ParallaxOverlay"]
+motion_scale = Vector2( 1.2, 1.2 )
+
+[node name="Timer" type="Timer" parent="Map"]
+wait_time = 0.4
+autostart = true
+
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
@@ -1160,5 +1170,6 @@ stream = ExtResource( 11 )
 [connection signal="area_entered" from="Map/FlyZone2" to="Map" method="_on_FlyZone_area_entered"]
 [connection signal="body_entered" from="Map/FlyZone2" to="Map" method="_on_FlyZone_body_entered"]
 [connection signal="body_exited" from="Map/FlyerArea" to="Map" method="_on_FlyerArea_body_exited"]
+[connection signal="timeout" from="Map/Timer" to="Map" method="_on_Timer_timeout"]
 
 [editable path="Map/Exit"]
