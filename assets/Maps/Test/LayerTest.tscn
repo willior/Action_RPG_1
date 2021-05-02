@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/World/Flowers/Flowers_1.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Grass/TallGrass_1.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/Will/LayerTest/Background_3.png" type="Texture" id=18]
 [ext_resource path="res://assets/Cutscene/CutsceneTrigger.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/Will/LayerTest/Background2.png" type="Texture" id=20]
 [ext_resource path="res://assets/World/Trees/Tree_1_green_alt.tscn" type="PackedScene" id=21]
@@ -30,10 +31,9 @@
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_orange.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_red.tscn" type="PackedScene" id=30]
 [ext_resource path="res://assets/World/Trees/Tree_3_tall_pink.tscn" type="PackedScene" id=31]
-[ext_resource path="res://assets/Will/LayerTest/Background1.png" type="Texture" id=32]
-[ext_resource path="res://assets/Will/LayerTest/Background3.png" type="Texture" id=33]
-[ext_resource path="res://assets/Will/LayerTest/Background0.png" type="Texture" id=34]
-[ext_resource path="res://assets/Will/LayerTest/Background_trees.png" type="Texture" id=35]
+[ext_resource path="res://assets/Will/LayerTest/Background_5.png" type="Texture" id=32]
+[ext_resource path="res://assets/Will/LayerTest/Background_4.png" type="Texture" id=33]
+[ext_resource path="res://assets/Will/LayerTest/Background_1.png" type="Texture" id=34]
 [ext_resource path="res://assets/World/Plants/Plant_16_green_alt.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.tscn" type="PackedScene" id=37]
 [ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=38]
@@ -95,6 +95,9 @@ limit_bottom = 320
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
 script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BelowFloor" type="Sprite" parent="Map"]
 position = Vector2( 40, 16 )
@@ -336,58 +339,55 @@ region_rect = Rect2( 0, 0, 16, 16 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Map"]
 scroll_base_offset = Vector2( 200, 0 )
 
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 z_index = 3
 motion_scale = Vector2( 0.3, 0.3 )
-motion_offset = Vector2( 0, 20 )
-motion_mirroring = Vector2( 400, 0 )
+motion_mirroring = Vector2( 480, 0 )
 
-[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer5"]
-position = Vector2( 0, -128 )
-texture = ExtResource( 33 )
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer"]
+position = Vector2( 0, -300 )
+texture = ExtResource( 34 )
 centered = false
 
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 z_index = 3
 motion_scale = Vector2( 0.35, 0.35 )
-motion_offset = Vector2( 0, 20 )
-motion_mirroring = Vector2( 400, 0 )
+motion_mirroring = Vector2( 480, 0 )
 
-[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer4"]
-position = Vector2( 0, -128 )
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 0, -120 )
 texture = ExtResource( 20 )
 centered = false
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 z_index = 3
 motion_scale = Vector2( 0.45, 0.45 )
-motion_offset = Vector2( 0, 25 )
-motion_mirroring = Vector2( 400, 0 )
+motion_mirroring = Vector2( 480, 0 )
 
 [node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer3"]
-position = Vector2( 0, -128 )
-texture = ExtResource( 32 )
+position = Vector2( 0, -110 )
+texture = ExtResource( 18 )
 centered = false
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 z_index = 3
 motion_scale = Vector2( 0.6, 0.6 )
-motion_offset = Vector2( 0, 20 )
-motion_mirroring = Vector2( 400, 0 )
+motion_mirroring = Vector2( 480, 0 )
 
-[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer2"]
-position = Vector2( 199, 6 )
-texture = ExtResource( 34 )
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 0, -120 )
+texture = ExtResource( 33 )
+centered = false
 
-[node name="ParallaxLayer1" type="ParallaxLayer" parent="Map/ParallaxBackground"]
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 z_index = 3
 motion_scale = Vector2( 0.8, 0.8 )
-motion_offset = Vector2( 0, 55 )
-motion_mirroring = Vector2( 400, 0 )
+motion_mirroring = Vector2( 480, 0 )
 
-[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer1"]
-position = Vector2( 199, 6 )
-texture = ExtResource( 35 )
+[node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 0, -80 )
+texture = ExtResource( 32 )
+centered = false
 
 [node name="ParallaxOverlay" type="ParallaxBackground" parent="Map"]
 layer = 0
@@ -503,9 +503,6 @@ position = Vector2( 118, 237 )
 [node name="Plant_16_green_alt" parent="YSort/Plants" instance=ExtResource( 36 )]
 position = Vector2( 296, 32 )
 
-[node name="Plant_16_green_alt2" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 625, 184 )
-
 [node name="Plant_16_green_alt3" parent="YSort/Plants" instance=ExtResource( 36 )]
 position = Vector2( 613, 195 )
 
@@ -526,9 +523,6 @@ position = Vector2( 617, 264 )
 
 [node name="Plant_16_green_alt9" parent="YSort/Plants" instance=ExtResource( 36 )]
 position = Vector2( 619, 277 )
-
-[node name="Plant_16_green_alt17" parent="YSort/Plants" instance=ExtResource( 36 )]
-position = Vector2( 640, 188 )
 
 [node name="Plant_16_green_alt16" parent="YSort/Plants" instance=ExtResource( 36 )]
 position = Vector2( 628, 199 )
@@ -1158,6 +1152,7 @@ stream = ExtResource( 11 )
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
 
 [node name="GUI" parent="." instance=ExtResource( 6 )]
+
 [connection signal="body_entered" from="Map/MiddleTransitionTop" to="Map" method="_on_MiddleTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionTop" to="Map" method="_on_BelowTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionBottom" to="Map" method="_on_BelowTransition_body_entered"]
