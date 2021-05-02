@@ -7,9 +7,10 @@ onready var audio = $AudioStreamPlayer
 
 # onready var damage_mod = PlayerStats.strength_mod setget set_damage_mod
 # onready var shade_mod = PlayerStats.strength_mod setget set_shade_mod
+var base_damage = 4
 onready var damage # setget set_damage
 var orig_damage
-var randomness = 0.25
+var randomness = 0.16
 var knockback_vector = Vector2.ZERO
 
 var formula = false
@@ -17,12 +18,12 @@ var formula = false
 func _ready():
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("strength_changed", self, "set_damage")
-	damage = PlayerStats.strength*2
+	damage = base_damage + PlayerStats.strength
 	orig_damage = damage
 	# print('damage = ', damage)
 
 func set_damage(value):
-	damage = value*2
+	damage = base_damage + value
 	orig_damage = damage
 	print('STR increased. new damage set = ', damage)
 
@@ -57,7 +58,7 @@ func flash_begin():
 	audio.play()
 	$CollisionShape2D.scale.x = 2
 	set_deferred("monitorable", true)
-	knockback_vector *= 1.33
+	knockback_vector *= 1.5
 	orig_damage = damage
 	damage = modify_damage(damage, 2)
 

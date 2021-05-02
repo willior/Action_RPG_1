@@ -492,7 +492,7 @@ position = Vector2( 333, 227 )
 position = Vector2( 376, 205 )
 
 [node name="PunchingMoon" parent="YSort/Enemies" instance=ExtResource( 37 )]
-position = Vector2( 736, 193 )
+position = Vector2( 507, 88 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

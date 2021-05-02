@@ -182,7 +182,7 @@ func create_hit_effect(_damage_count):
 	pass
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
-	if area.formula: return
+	if area.formula or area.get_parent().get_parent().dying: return
 	var facing_direction = area.get_parent().get_parent().dir_vector
 	get_node("/root/World/").fade_out()
 	$Timer.start(0.8)
