@@ -843,6 +843,15 @@ shape = SubResource( 52 )
 
 [node name="ParallaxOverlay" parent="Map" instance=ExtResource( 8 )]
 
+[node name="ParallaxLayerBackground" parent="Map/ParallaxOverlay" index="0"]
+motion_mirroring = Vector2( 480, 270 )
+
+[node name="Particle2D" parent="Map/ParallaxOverlay/ParallaxLayerBackground/Rain" index="0"]
+visibility_rect = Rect2( -160, -90, 480, 270 )
+
+[node name="Particle2D2" parent="Map/ParallaxOverlay/ParallaxLayerBackground/Rain" index="1"]
+visibility_rect = Rect2( -160, -90, 480, 270 )
+
 [node name="WeatherCanvas" parent="Map" instance=ExtResource( 5 )]
 
 [node name="Timer" type="Timer" parent="Map"]

@@ -2,6 +2,7 @@
 
 [ext_resource path="res://assets/Tilesets/Desert/Sand_Light_Tileset/tileset_Sand_Light_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://World.gd" type="Script" id=2]
+[ext_resource path="res://assets/Misc/WhitePixel.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=6]
@@ -11,7 +12,6 @@
 [ext_resource path="res://assets/World/Desert/Desert_Parallax2.png" type="Texture" id=10]
 [ext_resource path="res://assets/Audio/Desert_SFX_hicut.ogg" type="AudioStream" id=11]
 [ext_resource path="res://assets/Audio/Desert_Music.ogg" type="AudioStream" id=12]
-[ext_resource path="res://assets/Misc/WhiteScreen.png" type="Texture" id=13]
 [ext_resource path="res://assets/Maps/Desert.gd" type="Script" id=14]
 [ext_resource path="res://assets/Enemies/Tumbleweed/TumbleweedNest.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=16]
@@ -266,7 +266,7 @@ shader_param/scale_random = 0.0
 shader_param/hue_variation_random = 0.0
 shader_param/anim_speed_random = 0.0
 shader_param/anim_offset_random = 0.0
-shader_param/emission_box_extents = Vector3( 320, 180, 0 )
+shader_param/emission_box_extents = Vector3( 480, 270, 0 )
 shader_param/color_value = Color( 0.615686, 0.54902, 0.368627, 1 )
 shader_param/trail_divisor = 1
 shader_param/gravity = Vector3( 0, 20, 0 )
@@ -338,12 +338,13 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 1, 2, 0, 1, 3, 0, 1, 4, 0, 1, 5, 0, 1, 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Map"]
 
 [node name="ParallaxLayerSky" type="ParallaxLayer" parent="Map/ParallaxBackground"]
-motion_scale = Vector2( 0.5, 0.5 )
 motion_mirroring = Vector2( 320, 180 )
 
 [node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayerSky"]
-position = Vector2( 160, 90 )
 texture = ExtResource( 9 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 270 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 motion_scale = Vector2( 0.3, 0.3 )
@@ -356,7 +357,7 @@ offset = Vector2( 0, -180 )
 
 [node name="ParallaxLayer1" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 motion_scale = Vector2( 0.6, 0.6 )
-motion_mirroring = Vector2( 320, 180 )
+motion_mirroring = Vector2( 320, 0 )
 
 [node name="Sprite" type="Sprite" parent="Map/ParallaxBackground/ParallaxLayer1"]
 position = Vector2( 160, 90 )
@@ -367,22 +368,24 @@ offset = Vector2( 0, -180 )
 layer = 0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Map/ParallaxOverlay"]
-motion_mirroring = Vector2( 320, 180 )
+motion_mirroring = Vector2( 480, 270 )
 
 [node name="Sprite" type="Sprite" parent="Map/ParallaxOverlay/ParallaxLayer"]
 modulate = Color( 0.776471, 0.705882, 0.478431, 0.25098 )
-texture = ExtResource( 13 )
+texture = ExtResource( 3 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 270 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Map/ParallaxOverlay"]
 position = Vector2( 104, 96 )
-motion_mirroring = Vector2( 320, 180 )
+motion_mirroring = Vector2( 480, 270 )
 
 [node name="Particles2D" type="Particles2D" parent="Map/ParallaxOverlay/ParallaxLayer2"]
 modulate = Color( 0.615686, 0.54902, 0.368627, 1 )
 position = Vector2( 160, 90 )
 amount = 6000
-visibility_rect = Rect2( -100, -100, 320, 180 )
+visibility_rect = Rect2( -100, -100, 480, 270 )
 process_material = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="Map"]

@@ -7,11 +7,10 @@
 pause_mode = 2
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Black" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 180 )
-
-[node name="Tween" type="Tween" parent="."]
+region_rect = Rect2( 0, 0, 480, 270 )

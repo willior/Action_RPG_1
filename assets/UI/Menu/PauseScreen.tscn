@@ -20,22 +20,18 @@ font_data = ExtResource( 1 )
 [node name="PauseScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 32.0
-margin_right = -32.0
-margin_bottom = -32.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MenuPanel" type="NinePatchRect" parent="."]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.759
-margin_left = -128.0
-margin_right = -163.0
-margin_bottom = -0.0440063
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 129.0
+margin_top = -57.0
+margin_right = 224.0
+margin_bottom = 31.0
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -58,7 +54,7 @@ __meta__ = {
 }
 
 [node name="ButtonStatus" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
-margin_right = 77.0
+margin_right = 79.0
 margin_bottom = 17.0
 focus_neighbour_right = NodePath("../../../StatsDisplay/VBoxButtons/ButtonVIT")
 text = "STATUS"
@@ -72,31 +68,32 @@ text = "INVENTORY"
 
 [node name="ButtonAlchemy" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
 margin_top = 21.0
-margin_right = 77.0
+margin_right = 79.0
 margin_bottom = 38.0
 text = "ALCHEMY"
 
 [node name="ButtonPouch" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
 margin_top = 42.0
-margin_right = 77.0
+margin_right = 79.0
 margin_bottom = 59.0
 text = "POUCH"
 
 [node name="ButtonControls" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
 margin_top = 63.0
-margin_right = 77.0
+margin_right = 79.0
 margin_bottom = 80.0
 text = "CONTROLS"
 
 [node name="StatsDisplay" type="NinePatchRect" parent="."]
 visible = false
-anchor_left = 0.5
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -8.0
-margin_top = -12.0
-margin_right = 8.0
-margin_bottom = -12.0
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -57.0
+margin_right = -63.0
+margin_bottom = 59.0
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -119,36 +116,36 @@ __meta__ = {
 }
 
 [node name="ButtonVIT" parent="StatsDisplay/VBoxButtons" instance=ExtResource( 8 )]
-margin_right = 132.0
+margin_right = 149.0
 
 [node name="ButtonEND" parent="StatsDisplay/VBoxButtons" instance=ExtResource( 8 )]
 margin_top = 15.0
-margin_right = 132.0
+margin_right = 149.0
 margin_bottom = 29.0
 
 [node name="ButtonDEF" parent="StatsDisplay/VBoxButtons" instance=ExtResource( 8 )]
 margin_top = 30.0
-margin_right = 132.0
+margin_right = 149.0
 margin_bottom = 44.0
 
 [node name="ButtonSTR" parent="StatsDisplay/VBoxButtons" instance=ExtResource( 8 )]
 margin_top = 45.0
-margin_right = 132.0
+margin_right = 149.0
 margin_bottom = 59.0
 
 [node name="ButtonDEX" parent="StatsDisplay/VBoxButtons" instance=ExtResource( 8 )]
 margin_top = 60.0
-margin_right = 132.0
+margin_right = 149.0
 margin_bottom = 74.0
 
 [node name="ButtonSPD" parent="StatsDisplay/VBoxButtons" instance=ExtResource( 8 )]
 margin_top = 75.0
-margin_right = 132.0
+margin_right = 149.0
 margin_bottom = 89.0
 
 [node name="ButtonMAG" parent="StatsDisplay/VBoxButtons" instance=ExtResource( 8 )]
 margin_top = 90.0
-margin_right = 132.0
+margin_right = 149.0
 margin_bottom = 104.0
 
 [node name="VBox" type="VBoxContainer" parent="StatsDisplay"]
@@ -164,7 +161,7 @@ __meta__ = {
 }
 
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBox"]
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 13.0
 focus_mode = 2
 
@@ -179,13 +176,13 @@ text = "WILLPOWER"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBox/HBox"]
 margin_left = 62.0
-margin_right = 96.0
+margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="vit" type="Label" parent="StatsDisplay/VBox/HBox"]
-margin_left = 100.0
-margin_right = 128.0
+margin_left = 117.0
+margin_right = 145.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -196,7 +193,7 @@ text = "stats"
 [node name="ColorRect1" type="TextureProgress" parent="StatsDisplay/VBox"]
 modulate = Color( 0.8, 0.466667, 0, 1 )
 margin_top = 13.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -209,7 +206,7 @@ nine_patch_stretch = true
 
 [node name="HBox2" type="HBoxContainer" parent="StatsDisplay/VBox"]
 margin_top = 15.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 28.0
 
 [node name="Label" type="Label" parent="StatsDisplay/VBox/HBox2"]
@@ -223,13 +220,13 @@ text = "LUNG CAPACITY"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBox/HBox2"]
 margin_left = 81.0
-margin_right = 96.0
+margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="end" type="Label" parent="StatsDisplay/VBox/HBox2"]
-margin_left = 100.0
-margin_right = 128.0
+margin_left = 117.0
+margin_right = 145.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -240,7 +237,7 @@ text = "stats"
 [node name="ColorRect2" type="TextureProgress" parent="StatsDisplay/VBox"]
 modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
 margin_top = 28.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -252,7 +249,7 @@ nine_patch_stretch = true
 
 [node name="HBox3" type="HBoxContainer" parent="StatsDisplay/VBox"]
 margin_top = 30.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 43.0
 
 [node name="Label" type="Label" parent="StatsDisplay/VBox/HBox3"]
@@ -266,13 +263,13 @@ text = "RESILIENCE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBox/HBox3"]
 margin_left = 64.0
-margin_right = 96.0
+margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="def" type="Label" parent="StatsDisplay/VBox/HBox3"]
-margin_left = 100.0
-margin_right = 128.0
+margin_left = 117.0
+margin_right = 145.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -283,7 +280,7 @@ text = "stats"
 [node name="ColorRect3" type="TextureProgress" parent="StatsDisplay/VBox"]
 modulate = Color( 0.278431, 0.278431, 1, 1 )
 margin_top = 43.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 45.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -295,7 +292,7 @@ nine_patch_stretch = true
 
 [node name="HBox4" type="HBoxContainer" parent="StatsDisplay/VBox"]
 margin_top = 45.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 58.0
 
 [node name="Label" type="Label" parent="StatsDisplay/VBox/HBox4"]
@@ -309,13 +306,13 @@ text = "VIOLENT NATURE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBox/HBox4"]
 margin_left = 87.0
-margin_right = 96.0
+margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="str" type="Label" parent="StatsDisplay/VBox/HBox4"]
-margin_left = 100.0
-margin_right = 128.0
+margin_left = 117.0
+margin_right = 145.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -326,7 +323,7 @@ text = "stats"
 [node name="ColorRect4" type="TextureProgress" parent="StatsDisplay/VBox"]
 modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
 margin_top = 58.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -338,7 +335,7 @@ nine_patch_stretch = true
 
 [node name="HBox5" type="HBoxContainer" parent="StatsDisplay/VBox"]
 margin_top = 60.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 73.0
 
 [node name="Label" type="Label" parent="StatsDisplay/VBox/HBox5"]
@@ -352,13 +349,13 @@ text = "PATIENCE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBox/HBox5"]
 margin_left = 52.0
-margin_right = 96.0
+margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="dex" type="Label" parent="StatsDisplay/VBox/HBox5"]
-margin_left = 100.0
-margin_right = 128.0
+margin_left = 117.0
+margin_right = 145.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -369,7 +366,7 @@ text = "stats"
 [node name="ColorRect5" type="TextureProgress" parent="StatsDisplay/VBox"]
 modulate = Color( 0.321569, 0.619608, 0.701961, 1 )
 margin_top = 73.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 75.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -381,7 +378,7 @@ nine_patch_stretch = true
 
 [node name="HBox6" type="HBoxContainer" parent="StatsDisplay/VBox"]
 margin_top = 75.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 88.0
 
 [node name="Label" type="Label" parent="StatsDisplay/VBox/HBox6"]
@@ -395,13 +392,13 @@ text = "SWIFTNESS"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBox/HBox6"]
 margin_left = 60.0
-margin_right = 96.0
+margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="spd" type="Label" parent="StatsDisplay/VBox/HBox6"]
-margin_left = 100.0
-margin_right = 128.0
+margin_left = 117.0
+margin_right = 145.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -412,7 +409,7 @@ text = "stats"
 [node name="ColorRect6" type="TextureProgress" parent="StatsDisplay/VBox"]
 modulate = Color( 1, 1, 0.752941, 1 )
 margin_top = 88.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -424,7 +421,7 @@ nine_patch_stretch = true
 
 [node name="HBox7" type="HBoxContainer" parent="StatsDisplay/VBox"]
 margin_top = 90.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 103.0
 
 [node name="Label" type="Label" parent="StatsDisplay/VBox/HBox7"]
@@ -438,13 +435,13 @@ text = "SPIRITUALITY"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBox/HBox7"]
 margin_left = 76.0
-margin_right = 96.0
+margin_right = 113.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="mag" type="Label" parent="StatsDisplay/VBox/HBox7"]
-margin_left = 100.0
-margin_right = 128.0
+margin_left = 117.0
+margin_right = 145.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -455,7 +452,7 @@ text = "stats"
 [node name="ColorRect7" type="TextureProgress" parent="StatsDisplay/VBox"]
 modulate = Color( 0.662745, 0, 1, 1 )
 margin_top = 103.0
-margin_right = 128.0
+margin_right = 145.0
 margin_bottom = 105.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -467,12 +464,14 @@ nine_patch_stretch = true
 
 [node name="AlchemyDisplay" type="NinePatchRect" parent="."]
 visible = false
-anchor_left = 0.5
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -8.0
-margin_right = 8.0
-margin_bottom = -28.0
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -57.0
+margin_right = -63.0
+margin_bottom = 59.0
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -509,10 +508,14 @@ __meta__ = {
 
 [node name="PouchDisplay" type="NinePatchRect" parent="."]
 visible = false
-anchor_left = 0.5
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = -28.0
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -57.0
+margin_right = -63.0
+margin_bottom = 59.0
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -561,10 +564,14 @@ __meta__ = {
 
 [node name="ControlsDisplay" type="NinePatchRect" parent="."]
 visible = false
-anchor_left = 0.5
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = -28.0
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -57.0
+margin_right = -95.0
+margin_bottom = 31.0
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2

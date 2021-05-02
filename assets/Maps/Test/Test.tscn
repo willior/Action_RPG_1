@@ -291,7 +291,7 @@ layer = 1
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 motion_scale = Vector2( 1.2, 1.2 )
-motion_mirroring = Vector2( 320, 180 )
+motion_mirroring = Vector2( 480, 270 )
 
 [node name="Snow" type="Node2D" parent="Map/ParallaxBackground/ParallaxLayer"]
 position = Vector2( 160, 0 )
@@ -307,7 +307,7 @@ process_material = SubResource( 4 )
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 motion_scale = Vector2( 1.3, 1.3 )
 motion_offset = Vector2( 0, 90 )
-motion_mirroring = Vector2( 320, 160 )
+motion_mirroring = Vector2( 480, 240 )
 
 [node name="Snow" type="Node2D" parent="Map/ParallaxBackground/ParallaxLayer2"]
 position = Vector2( 160, 48 )

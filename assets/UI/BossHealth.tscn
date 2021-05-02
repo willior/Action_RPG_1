@@ -12,10 +12,10 @@
 [node name="BossHealth" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 80.0
-margin_top = 144.0
-margin_right = -80.0
-margin_bottom = -32.0
+margin_left = 108.0
+margin_top = 216.0
+margin_right = -108.0
+margin_bottom = -49.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -75,9 +75,9 @@ wait_time = 0.06
 [node name="Tween" type="Tween" parent="."]
 
 [node name="DamageContainer" parent="." instance=ExtResource( 1 )]
-margin_left = 176.0
+margin_left = 277.0
 margin_top = 1.0
-margin_right = 176.0
+margin_right = 277.0
 margin_bottom = 1.0
 
 [node name="Label" type="Label" parent="."]

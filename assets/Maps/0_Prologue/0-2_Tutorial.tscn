@@ -214,7 +214,6 @@ position = Vector2( 1706, 870 )
 [node name="WeatherCanvas" parent="Map" instance=ExtResource( 23 )]
 
 [node name="ParallaxOverlay" parent="Map" instance=ExtResource( 19 )]
-scroll_base_scale = Vector2( 2, 2 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1

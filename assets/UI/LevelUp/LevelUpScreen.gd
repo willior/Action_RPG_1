@@ -112,8 +112,8 @@ func event_handler(event):
 			Tween.TRANS_QUINT, Tween.EASE_IN_OUT
 			)
 			$Tween.interpolate_property($PanelBottom, "rect_position",
-			Vector2(0, 180),
-			Vector2(0, 135),
+			Vector2(0, 270),
+			Vector2(0, 225),
 			1.2,
 			Tween.TRANS_QUINT, Tween.EASE_IN_OUT
 			)
@@ -149,8 +149,8 @@ func event_handler(event):
 				Tween.TRANS_QUINT, Tween.EASE_IN_OUT
 				)
 				$Tween.interpolate_property($PanelBottom, "rect_position",
-				Vector2(0, 135),
-				Vector2(0, 180),
+				Vector2(0, 225),
+				Vector2(0, 270),
 				0.6,
 				Tween.TRANS_QUINT, Tween.EASE_IN_OUT
 				)

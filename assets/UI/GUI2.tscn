@@ -18,8 +18,12 @@
 [ext_resource path="res://assets/Font/small_dynamicfont.tres" type="DynamicFont" id=18]
 [ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=19]
 
-[sub_resource type="Animation" id=1]
-resource_name = "Stop"
+[sub_resource type="DynamicFont" id=5]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=6]
 tracks/0/type = "value"
 tracks/0/path = NodePath("StaminaBarTexture:tint_progress")
 tracks/0/interp = 1
@@ -45,8 +49,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Sweating"
+[sub_resource type="Animation" id=3]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -74,11 +77,6 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.67451, 0.282353, 0.282353, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=3]
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 2 )
-
 [sub_resource type="CanvasItemMaterial" id=4]
 
 [node name="GUI" type="CanvasLayer"]
@@ -87,10 +85,12 @@ pause_mode = 2
 [node name="HealthUI1" type="Control" parent="."]
 pause_mode = 2
 show_behind_parent = true
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 33.0
-margin_top = 167.0
+margin_top = -13.0
 margin_right = 153.0
-margin_bottom = 171.0
+margin_bottom = -9.0
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -154,10 +154,12 @@ __meta__ = {
 }
 
 [node name="StaminaBar1" parent="." instance=ExtResource( 6 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 33.0
-margin_top = 172.0
+margin_top = -8.0
 margin_right = 93.0
-margin_bottom = 176.0
+margin_bottom = -4.0
 
 [node name="ExpBar1" parent="." instance=ExtResource( 4 )]
 margin_top = -40.0
@@ -174,13 +176,135 @@ margin_top = -20.0
 margin_top = 0.0
 margin_bottom = 0.0
 
+[node name="FormulaUI1" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 33.0
+margin_top = -41.0
+margin_right = 51.0
+margin_bottom = -23.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="FormulaRect" type="NinePatchRect" parent="FormulaUI1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -2.0
+margin_right = 8.0
+texture = ExtResource( 8 )
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon" type="AnimatedSprite" parent="FormulaUI1/FormulaRect"]
+position = Vector2( 10, 10 )
+playing = true
+
+[node name="Label" type="Label" parent="FormulaUI1/FormulaRect"]
+material = ExtResource( 19 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -17.0
+margin_top = -14.0
+margin_right = -2.0
+margin_bottom = -1.0
+custom_fonts/font = SubResource( 5 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IngredientsRect" type="NinePatchRect" parent="FormulaUI1"]
+margin_left = -19.0
+margin_top = -4.0
+margin_right = -1.0
+margin_bottom = 20.0
+texture = ExtResource( 8 )
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ingredient1" type="Sprite" parent="FormulaUI1/IngredientsRect"]
+position = Vector2( 2, 2 )
+centered = false
+
+[node name="Ingredient2" type="Sprite" parent="FormulaUI1/IngredientsRect"]
+position = Vector2( 2, 13 )
+centered = false
+
+[node name="Quantity1" type="Label" parent="FormulaUI1/IngredientsRect"]
+material = ExtResource( 19 )
+anchor_right = 1.0
+margin_top = -1.0
+margin_right = -2.0
+margin_bottom = 12.0
+custom_fonts/font = SubResource( 5 )
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quantity2" type="Label" parent="FormulaUI1/IngredientsRect"]
+material = ExtResource( 19 )
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_top = -14.0
+margin_right = -2.0
+margin_bottom = -1.0
+custom_fonts/font = SubResource( 5 )
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PickupDisplay1" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = -78.0
+margin_right = 16.0
+margin_bottom = -78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PickupContainer" type="VBoxContainer" parent="PickupDisplay1"]
+show_behind_parent = true
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HealthUI2" type="Control" parent="."]
 pause_mode = 2
 show_behind_parent = true
-margin_left = 246.0
-margin_top = 167.0
-margin_right = 292.818
-margin_bottom = 171.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -78.0
+margin_top = -13.0
+margin_right = -31.182
+margin_bottom = -9.0
 grow_horizontal = 0
 rect_min_size = Vector2( 46.818, 0 )
 script = ExtResource( 14 )
@@ -233,10 +357,14 @@ wait_time = 0.1
 one_shot = true
 
 [node name="StaminaBar2" type="Control" parent="."]
-margin_left = 233.0
-margin_top = 172.0
-margin_right = 293.0
-margin_bottom = 176.0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -91.0
+margin_top = -8.0
+margin_right = -31.0
+margin_bottom = -4.0
 grow_horizontal = 0
 rect_min_size = Vector2( 60, 0 )
 script = ExtResource( 13 )
@@ -265,10 +393,18 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StaminaBar2"]
-anims/Stop = SubResource( 1 )
-anims/Sweating = SubResource( 2 )
+anims/Stop = SubResource( 6 )
+anims/Sweating = SubResource( 3 )
 
 [node name="ExpBar2" parent="." instance=ExtResource( 12 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -30.0
+margin_top = -20.0
+margin_right = -14.0
+margin_bottom = -4.0
 
 [node name="CashUI" parent="." instance=ExtResource( 10 )]
 visible = false
@@ -280,135 +416,6 @@ margin_left = -36.0
 margin_top = -18.0
 margin_right = -36.0
 margin_bottom = -18.0
-
-[node name="FormulaUI1" type="Control" parent="."]
-visible = false
-margin_left = 33.0
-margin_top = 139.0
-margin_right = 51.0
-margin_bottom = 157.0
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="FormulaRect" type="NinePatchRect" parent="FormulaUI1"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -2.0
-margin_right = 8.0
-texture = ExtResource( 8 )
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Icon" type="AnimatedSprite" parent="FormulaUI1/FormulaRect"]
-position = Vector2( 10, 10 )
-playing = true
-
-[node name="Label" type="Label" parent="FormulaUI1/FormulaRect"]
-material = ExtResource( 19 )
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -17.0
-margin_top = -14.0
-margin_right = -2.0
-margin_bottom = -1.0
-custom_fonts/font = SubResource( 3 )
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="IngredientsRect" type="NinePatchRect" parent="FormulaUI1"]
-margin_left = -19.0
-margin_top = -4.0
-margin_right = -1.0
-margin_bottom = 20.0
-texture = ExtResource( 8 )
-patch_margin_left = 1
-patch_margin_top = 1
-patch_margin_right = 1
-patch_margin_bottom = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Ingredient1" type="Sprite" parent="FormulaUI1/IngredientsRect"]
-position = Vector2( 2, 2 )
-centered = false
-
-[node name="Ingredient2" type="Sprite" parent="FormulaUI1/IngredientsRect"]
-position = Vector2( 2, 13 )
-centered = false
-
-[node name="Quantity1" type="Label" parent="FormulaUI1/IngredientsRect"]
-material = ExtResource( 19 )
-anchor_right = 1.0
-margin_top = -1.0
-margin_right = -2.0
-margin_bottom = 12.0
-custom_fonts/font = SubResource( 3 )
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Quantity2" type="Label" parent="FormulaUI1/IngredientsRect"]
-material = ExtResource( 19 )
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -1.0
-margin_top = -14.0
-margin_right = -2.0
-margin_bottom = -1.0
-custom_fonts/font = SubResource( 3 )
-align = 2
-valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PickupDisplay1" type="Control" parent="."]
-margin_left = 16.0
-margin_top = 112.0
-margin_right = 16.0
-margin_bottom = 112.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PickupContainer" type="VBoxContainer" parent="PickupDisplay1"]
-show_behind_parent = true
-grow_vertical = 0
-size_flags_vertical = 9
-custom_constants/separation = 1
-alignment = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Dim" type="ColorRect" parent="."]
-visible = false
-modulate = Color( 0, 0, 0, 0.505882 )
-show_behind_parent = true
-material = SubResource( 4 )
-margin_right = 320.0
-margin_bottom = 180.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
 
 [node name="InventoryUI" type="Control" parent="."]
 visible = false
@@ -445,10 +452,24 @@ margin_left = 2.0
 margin_top = -3.0
 margin_right = 18.0
 margin_bottom = 10.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 5 )
 text = "?"
 align = 2
 __meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dim" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 0.505882 )
+show_behind_parent = true
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

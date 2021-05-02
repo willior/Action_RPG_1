@@ -23,7 +23,7 @@ func _ready():
 		"modulate",
 		Color(1,1,1,1),
 		fade,
-		2.8,
+		4,
 		Tween.TRANS_QUINT,
 		Tween.EASE_IN
 		)

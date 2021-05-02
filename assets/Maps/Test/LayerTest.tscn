@@ -91,10 +91,6 @@ position = Vector2( 814, 238 )
 limit_left = 40
 limit_right = 832
 limit_bottom = 320
-drag_margin_left = 0.08
-drag_margin_top = 0.16
-drag_margin_right = 0.08
-drag_margin_bottom = 0.16
 
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
@@ -338,6 +334,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Map"]
+scroll_base_offset = Vector2( 200, 0 )
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="Map/ParallaxBackground"]
 z_index = 3

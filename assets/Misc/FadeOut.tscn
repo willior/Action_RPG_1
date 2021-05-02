@@ -6,11 +6,11 @@
 [node name="FadeOut" type="CanvasLayer"]
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Black" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 180 )
+region_rect = Rect2( 0, 0, 480, 270 )
 
 [node name="Tween" type="Tween" parent="."]
