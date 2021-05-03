@@ -48,5 +48,6 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="gui_input" from="." to="." method="_on_Button_gui_input"]
 [connection signal="pressed" from="." to="." method="_on_Button_pressed"]

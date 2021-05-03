@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/Font/large_dynamicFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=3]
+[ext_resource path="res://assets/Ingredients/Clay.png" type="Texture" id=4]
+[ext_resource path="res://assets/UI/Menu/MenuIngredient.gd" type="Script" id=5]
+[ext_resource path="res://assets/UI/Menu/IngredientButton.gd" type="Script" id=6]
+[ext_resource path="res://assets/UI/3x3_Container_White_1px.png" type="Texture" id=7]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 3, 3 )
+margin_left = 1.0
+margin_right = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 3, 3 )
+margin_left = 1.0
+margin_right = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+modulate_color = Color( 0.25, 1, 1, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="DynamicFont" id=5]
+extra_spacing_top = -3
+extra_spacing_bottom = -2
+font_data = ExtResource( 2 )
+
+[node name="MenuIngredient" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.0
+margin_right = -352.0
+margin_bottom = -256.0
+rect_min_size = Vector2( 80, 14 )
+size_flags_horizontal = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IngredientButton" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 0, 14 )
+mouse_filter = 2
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = -1.0
+margin_right = 70.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+margin_bottom = 15.0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+margin_left = 4.0
+margin_top = 3.0
+margin_right = 12.0
+margin_bottom = 12.0
+size_flags_vertical = 4
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+material = ExtResource( 3 )
+margin_left = 16.0
+margin_right = 70.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+text = "ASDF X20"
+
+[connection signal="gui_input" from="IngredientButton" to="IngredientButton" method="_on_Button_gui_input"]
+[connection signal="pressed" from="IngredientButton" to="IngredientButton" method="_on_Button_pressed"]

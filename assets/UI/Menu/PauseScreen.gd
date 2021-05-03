@@ -4,6 +4,7 @@ var Formula_Item = load("res://assets/UI/Menu/FormulaItem.tscn")
 var Formula_XP = load("res://assets/UI/Menu/FormulaXP.tscn")
 var Formula_Button = load("res://assets/UI/Menu/FormulaButton.tscn")
 var Ingredient_Button = load("res://assets/UI/Menu/IngredientButton.tscn")
+var MenuIngredient = load("res://assets/UI/Menu/MenuIngredient.tscn")
 const DialogBox = preload("res://assets/UI/Dialog/PopupDialogBox.tscn")
 const AudioMove = preload("res://assets/Audio/cursLo.wav")
 const AudioSelect = preload("res://assets/Audio/cursHi.wav")
@@ -72,20 +73,28 @@ func _ready():
 		$AlchemyDisplay/VBoxButtons.add_child(formula_button)
 		if player.formulabook.get_formulas().size()-1 == f:
 			formula_button.focus_neighbour_bottom = formula_button.get_path()
-		
 		$AlchemyDisplay/Vbox.add_child(Control.new())
 	
 	for n in player.pouch.get_ingredients().size():
 		var pouch_ingredient = player.pouch.get_ingredient(n)
-		var label_ingredient = Label_Item.instance()
-		label_ingredient.set_text(str(pouch_ingredient.ingredient_reference.name) + " x" + str(pouch_ingredient.quantity))
-		$PouchDisplay/Vbox.add_child(label_ingredient)
-		var icon_ingredient = TextureRect.new()
-		icon_ingredient.set_texture(pouch_ingredient.ingredient_reference.texture)
-		$PouchDisplay/VBoxIcons.add_child(icon_ingredient)
+		var menu_ingredient = MenuIngredient.instance()
+		menu_ingredient.pouch_ingredient = pouch_ingredient
 		
-		var ingredient_button = Ingredient_Button.instance()
-		ingredient_button.description = pouch_ingredient.ingredient_reference.description
+		$PouchDisplay/VBox.add_child(menu_ingredient)
+		if n == 0:
+			$MenuPanel/Menu/ButtonPouch.focus_neighbour_right = $PouchDisplay/VBox.get_child(0).get_child(0).get_path()
+		
+#		var label_ingredient = Label_Item.instance()
+#		label_ingredient.set_text(str(pouch_ingredient.ingredient_reference.name) + " x" + str(pouch_ingredient.quantity))
+#		$PouchDisplay/Vbox.add_child(label_ingredient)
+#
+#		var icon_ingredient = TextureRect.new()
+#		icon_ingredient.set_texture(pouch_ingredient.ingredient_reference.texture)
+#		$PouchDisplay/VBoxIcons.add_child(icon_ingredient)
+#
+#		var ingredient_button = Ingredient_Button.instance()
+#		ingredient_button.description = pouch_ingredient.ingredient_reference.description
+#		$PouchDisplay/VBoxButtons.add_child(ingredient_button)
 	
 	$TimerDelaySelect.start()
 	yield($TimerDelaySelect, "timeout")
@@ -127,6 +136,7 @@ func _on_ButtonSTAT_gui_input(event, description):
 		get_node("/root/World/GUI").add_child(dialogBox)
 
 func _on_ButtonAlchemy_focus_entered():
+	$PouchDisplay.hide()
 	$StatsDisplay.hide()
 	$AlchemyDisplay.show()
 	audio_menu_move()
@@ -146,18 +156,23 @@ func _on_ButtonPouch_focus_entered():
 	$AlchemyDisplay.hide()
 	audio_menu_move()
 
+func _on_ButtonPouch_pressed():
+	audio_menu_select()
+	if $PouchDisplay/VBox.get_child_count() < 1:
+		return
+	else:
+		$PouchDisplay/VBox.get_child(0).get_child(0).grab_focus()
+
 func _on_ButtonPouch_focus_exited():
-	$PouchDisplay.hide()
+	pass
 
 func _on_ButtonControls_focus_entered():
+	$PouchDisplay.hide()
 	$ControlsDisplay.show()
 	audio_menu_move()
 
 func _on_ButtonControls_focus_exited():
 	$ControlsDisplay.hide()
-
-func _on_ButtonPouch_pressed():
-	audio_menu_select()
 
 func _on_ButtonControls_pressed():
 	audio_menu_select()
