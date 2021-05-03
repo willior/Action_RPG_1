@@ -69,34 +69,45 @@ func _ready():
 		var formula_button = Formula_Button.instance()
 		formula_button.description = alchemy_formula.formula_reference.description_string
 		$AlchemyDisplay/VBoxButtons.add_child(formula_button)
+#		if f == 0:
+#			formula_button.focus_neighbour_top = $AlchemyDisplay/VBoxButtons.get_child(player.formulabook.get_formulas().size()-1).get_path()
 		if player.formulabook.get_formulas().size()-1 == f:
-			formula_button.focus_neighbour_bottom = formula_button.get_path()
+			formula_button.focus_neighbour_bottom = $AlchemyDisplay/VBoxButtons.get_child(0).get_path()
+			$AlchemyDisplay/VBoxButtons.get_child(0).focus_neighbour_top = formula_button.get_path()
 		$AlchemyDisplay/Vbox.add_child(Control.new())
 	
 	for n in player.pouch.get_ingredients().size():
+		print(n)
+		print(player.pouch.get_ingredients().size()-1)
 		var pouch_ingredient = player.pouch.get_ingredient(n)
 		var menu_ingredient = MenuIngredient.instance()
 		menu_ingredient.pouch_ingredient = pouch_ingredient
 		$PouchDisplay/VBox.add_child(menu_ingredient)
-		if n == 0:
-			$MenuPanel/Menu/ButtonPouch.focus_neighbour_right = $PouchDisplay/VBox.get_child(0).get_child(0).get_path()
+#		if n == 0:
+#			$MenuPanel/Menu/ButtonPouch.focus_neighbour_right = $PouchDisplay/VBox.get_child(0).get_child(0).get_path()
+		if player.pouch.get_ingredients().size()-1 == n:
+			menu_ingredient.get_child(0).focus_neighbour_bottom = $PouchDisplay/VBox.get_child(0).get_child(0).get_path()
+			$PouchDisplay/VBox.get_child(0).get_child(0).focus_neighbour_top = menu_ingredient.get_child(0).get_path()
 	
 	$TimerDelaySelect.start()
 	yield($TimerDelaySelect, "timeout")
 	$MenuPanel/Menu/ButtonStatus.grab_focus()
 
 func _on_PauseScreen_gui_input(event):
+	get_tree().set_input_as_handled()
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().set_input_as_handled()
 		get_tree().get_root().get_node("World").close_pause_menu()
+	if event.is_action_pressed("ui_right"):
+		accept_event()
 
 func _on_ButtonStatus_focus_entered():
 	$ControlsDisplay.hide()
 	$AlchemyDisplay.hide()
-	$StatsDisplay.show()
+	$StatsDisplay.hide()
 	audio_menu_move()
 
 func _on_ButtonStatus_pressed():
+	$StatsDisplay.show()
 	audio_menu_select()
 	$StatsDisplay/VBoxButtons/ButtonVIT.grab_focus()
 
@@ -130,11 +141,12 @@ func _on_ButtonSTAT_gui_input(event, description_index):
 func _on_ButtonAlchemy_focus_entered():
 	$StatsDisplay.hide()
 	$PouchDisplay.hide()
-	$AlchemyDisplay.show()
+	$AlchemyDisplay.hide()
 	audio_menu_move()
 
 func _on_ButtonAlchemy_pressed():
 	audio_menu_select()
+	$AlchemyDisplay.show()
 	if $AlchemyDisplay/VBoxButtons.get_child_count() < 1:
 		return
 	else:
@@ -146,11 +158,12 @@ func _on_ButtonAlchemy_focus_exited():
 func _on_ButtonPouch_focus_entered():
 	$AlchemyDisplay.hide()
 	$ControlsDisplay.hide()
-	$PouchDisplay.show()
+	$PouchDisplay.hide()
 	audio_menu_move()
 
 func _on_ButtonPouch_pressed():
 	audio_menu_select()
+	$PouchDisplay.show()
 	if $PouchDisplay/VBox.get_child_count() < 1:
 		return
 	else:
@@ -162,16 +175,16 @@ func _on_ButtonPouch_focus_exited():
 func _on_ButtonControls_focus_entered():
 	$PouchDisplay.hide()
 	$StatsDisplay.hide()
-	$ControlsDisplay.show()
+	$ControlsDisplay.hide()
 	audio_menu_move()
 
 func _on_ButtonControls_pressed():
 	audio_menu_select()
+	$ControlsDisplay.show()
 
 func _on_ButtonControls_focus_exited():
 	pass
-	#$ControlsDisplay.hide()
-
+	
 func audio_menu_move():
 	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()

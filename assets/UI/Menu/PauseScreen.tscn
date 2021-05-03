@@ -115,6 +115,7 @@ focus_next = NodePath("../ButtonStatus")
 text = "CONTROLS"
 
 [node name="StatsDisplay" type="NinePatchRect" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -146,6 +147,8 @@ __meta__ = {
 margin_right = 149.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
+focus_neighbour_top = NodePath("../ButtonMAG")
+focus_previous = NodePath("../ButtonMAG")
 mouse_filter = 2
 size_flags_vertical = 8
 custom_styles/hover = SubResource( 1 )
@@ -543,6 +546,8 @@ margin_top = 102.0
 margin_right = 149.0
 margin_bottom = 118.0
 rect_min_size = Vector2( 0, 16 )
+focus_neighbour_bottom = NodePath("../ButtonVIT")
+focus_next = NodePath("../ButtonVIT")
 mouse_filter = 2
 size_flags_vertical = 8
 custom_styles/hover = SubResource( 1 )
@@ -733,6 +738,7 @@ margin_left = 8.0
 margin_top = 4.0
 margin_right = -8.0
 margin_bottom = -4.0
+focus_mode = 2
 custom_fonts/font = SubResource( 7 )
 text = "WASD : movement
 V : attack / interact
