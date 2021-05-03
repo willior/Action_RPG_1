@@ -3,26 +3,24 @@ var Label_Item = load("res://assets/UI/Menu/LabelItem.tscn")
 var Formula_Item = load("res://assets/UI/Menu/FormulaItem.tscn")
 var Formula_XP = load("res://assets/UI/Menu/FormulaXP.tscn")
 var Formula_Button = load("res://assets/UI/Menu/FormulaButton.tscn")
-var Ingredient_Button = load("res://assets/UI/Menu/IngredientButton.tscn")
 var MenuIngredient = load("res://assets/UI/Menu/MenuIngredient.tscn")
 const DialogBox = preload("res://assets/UI/Dialog/PopupDialogBox.tscn")
 const AudioMove = preload("res://assets/Audio/cursLo.wav")
 const AudioSelect = preload("res://assets/Audio/cursHi.wav")
-onready var healthBox = $StatsDisplay/VBox/HBox/vit
-onready var enduranceBox = $StatsDisplay/VBox/HBox2/end
-onready var defenseBox = $StatsDisplay/VBox/HBox3/def
-onready var strengthBox = $StatsDisplay/VBox/HBox4/str
-onready var dexterityBox = $StatsDisplay/VBox/HBox5/dex
-onready var speedBox = $StatsDisplay/VBox/HBox6/spd
-onready var magicBox = $StatsDisplay/VBox/HBox7/mag
-onready var vitBar = $StatsDisplay/VBox/ColorRect1
-onready var endBar = $StatsDisplay/VBox/ColorRect2
-onready var defBar = $StatsDisplay/VBox/ColorRect3
-onready var strBar = $StatsDisplay/VBox/ColorRect4
-onready var dexBar = $StatsDisplay/VBox/ColorRect5
-onready var spdBar = $StatsDisplay/VBox/ColorRect6
-onready var magBar = $StatsDisplay/VBox/ColorRect7
-var status = false
+onready var healthBox = $StatsDisplay/VBoxButtons/ButtonVIT/HBox/VIT
+onready var enduranceBox = $StatsDisplay/VBoxButtons/ButtonEND/HBox/END
+onready var defenseBox = $StatsDisplay/VBoxButtons/ButtonDEF/HBox/DEF
+onready var strengthBox = $StatsDisplay/VBoxButtons/ButtonSTR/HBox/STR
+onready var dexterityBox = $StatsDisplay/VBoxButtons/ButtonDEX/HBox/DEX
+onready var speedBox = $StatsDisplay/VBoxButtons/ButtonSPD/HBox/SPD
+onready var magicBox = $StatsDisplay/VBoxButtons/ButtonMAG/HBox/MAG
+onready var vitBar = $StatsDisplay/VBoxButtons/ButtonVIT/ColorRect
+onready var endBar = $StatsDisplay/VBoxButtons/ButtonEND/ColorRect
+onready var defBar = $StatsDisplay/VBoxButtons/ButtonDEF/ColorRect
+onready var strBar = $StatsDisplay/VBoxButtons/ButtonSTR/ColorRect
+onready var dexBar = $StatsDisplay/VBoxButtons/ButtonDEX/ColorRect
+onready var spdBar = $StatsDisplay/VBoxButtons/ButtonSPD/ColorRect
+onready var magBar = $StatsDisplay/VBoxButtons/ButtonMAG/ColorRect
 
 func _ready():
 	healthBox.set_text(str(PlayerStats.vitality)) # + " (" + str(PlayerStats.health) + "/" + str(PlayerStats.max_health) + "HP)")
@@ -79,47 +77,41 @@ func _ready():
 		var pouch_ingredient = player.pouch.get_ingredient(n)
 		var menu_ingredient = MenuIngredient.instance()
 		menu_ingredient.pouch_ingredient = pouch_ingredient
-		
 		$PouchDisplay/VBox.add_child(menu_ingredient)
 		if n == 0:
 			$MenuPanel/Menu/ButtonPouch.focus_neighbour_right = $PouchDisplay/VBox.get_child(0).get_child(0).get_path()
-		
-#		var label_ingredient = Label_Item.instance()
-#		label_ingredient.set_text(str(pouch_ingredient.ingredient_reference.name) + " x" + str(pouch_ingredient.quantity))
-#		$PouchDisplay/Vbox.add_child(label_ingredient)
-#
-#		var icon_ingredient = TextureRect.new()
-#		icon_ingredient.set_texture(pouch_ingredient.ingredient_reference.texture)
-#		$PouchDisplay/VBoxIcons.add_child(icon_ingredient)
-#
-#		var ingredient_button = Ingredient_Button.instance()
-#		ingredient_button.description = pouch_ingredient.ingredient_reference.description
-#		$PouchDisplay/VBoxButtons.add_child(ingredient_button)
 	
 	$TimerDelaySelect.start()
 	yield($TimerDelaySelect, "timeout")
 	$MenuPanel/Menu/ButtonStatus.grab_focus()
 
+func _on_PauseScreen_gui_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().set_input_as_handled()
+		get_tree().get_root().get_node("World").close_pause_menu()
+
 func _on_ButtonStatus_focus_entered():
-	$StatsDisplay.show()
+	$ControlsDisplay.hide()
 	$AlchemyDisplay.hide()
+	$StatsDisplay.show()
 	audio_menu_move()
 
 func _on_ButtonStatus_pressed():
 	audio_menu_select()
-	status = true
 	$StatsDisplay/VBoxButtons/ButtonVIT.grab_focus()
 
 func _on_ButtonStatus_focus_exited():
 	pass
 
-func _on_ButtonSTAT_gui_input(event, description):
+func _on_ButtonSTAT_gui_input(event, description_index):
+	if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down"):
+		audio_menu_move()
 	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_left"):
 		$MenuPanel/Menu/ButtonStatus.grab_focus()
 	if event.is_action_pressed("ui_select"):
 		audio_menu_select()
 		var stat_description
-		match description:
+		match description_index:
 			0: stat_description = PlayerStats.vitality_description
 			1: stat_description = PlayerStats.endurance_description
 			2: stat_description = PlayerStats.defense_description
@@ -136,8 +128,8 @@ func _on_ButtonSTAT_gui_input(event, description):
 		get_node("/root/World/GUI").add_child(dialogBox)
 
 func _on_ButtonAlchemy_focus_entered():
-	$PouchDisplay.hide()
 	$StatsDisplay.hide()
+	$PouchDisplay.hide()
 	$AlchemyDisplay.show()
 	audio_menu_move()
 
@@ -152,8 +144,9 @@ func _on_ButtonAlchemy_focus_exited():
 	pass
 
 func _on_ButtonPouch_focus_entered():
-	$PouchDisplay.show()
 	$AlchemyDisplay.hide()
+	$ControlsDisplay.hide()
+	$PouchDisplay.show()
 	audio_menu_move()
 
 func _on_ButtonPouch_pressed():
@@ -168,15 +161,17 @@ func _on_ButtonPouch_focus_exited():
 
 func _on_ButtonControls_focus_entered():
 	$PouchDisplay.hide()
+	$StatsDisplay.hide()
 	$ControlsDisplay.show()
 	audio_menu_move()
 
-func _on_ButtonControls_focus_exited():
-	$ControlsDisplay.hide()
-
 func _on_ButtonControls_pressed():
 	audio_menu_select()
-	
+
+func _on_ButtonControls_focus_exited():
+	pass
+	#$ControlsDisplay.hide()
+
 func audio_menu_move():
 	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
@@ -195,8 +190,3 @@ func _on_ButtonInventory_focus_exited():
 	return
 # warning-ignore:unreachable_code
 	$InventoryDisplay.hide()
-
-func _on_PauseScreen_gui_input(event):
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().set_input_as_handled()
-		get_tree().get_root().get_node("World").close_pause_menu()
