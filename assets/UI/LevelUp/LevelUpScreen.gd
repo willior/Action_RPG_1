@@ -1,6 +1,7 @@
 extends Control
 onready var label = $LevelText/RichTextLabel
 onready var stats_remaining_label = $StatPreview/VBoxContainer/RichTextLabel
+var CanvasColorMod = load("res://assets/UI/LevelUp/CanvasColorMod.tscn")
 var default_stats_remaining = 2
 var stats_remaining = default_stats_remaining
 var VIT_to_add = 0
@@ -63,6 +64,10 @@ func _input(event):
 			print('ending level screen')
 			get_tree().set_input_as_handled()
 			load_dialog()
+	elif event.is_action_pressed("start"):
+		get_tree().set_input_as_handled()
+		print('start discarded from level screen')
+		return
 
 func update_text(text):
 	label.bbcode_text = parse_text(text)
@@ -181,14 +186,31 @@ func _on_option_selected(option, variable, value):
 func _on_level_selected(value):
 	stats_remaining -= 1
 	$StatPreview.update_stats_remaining(stats_remaining)
+	var canvas_color_mod = CanvasColorMod.instance()
+	canvas_color_mod.duration = 1
 	match value:
-		"VIT": VIT_to_add += 1
-		"END": END_to_add += 1
-		"DEF": DEF_to_add += 1
-		"STR": STR_to_add += 1
-		"DEX": DEX_to_add += 1
-		"SPD": SPD_to_add += 1
-		"MAG": MAG_to_add += 1
+		"VIT":
+			canvas_color_mod.color_mod = Color(0.8, 0.47, 0, 0.1)
+			VIT_to_add += 1
+		"END":
+			canvas_color_mod.color_mod = Color(0.37, 0.75, 0.41, 0.1)
+			END_to_add += 1
+		"DEF":
+			canvas_color_mod.color_mod = Color(0.28, 0.28, 1, 0.1)
+			DEF_to_add += 1
+		"STR":
+			canvas_color_mod.color_mod = Color(0.72, 0.15, 0.13, 0.1)
+			STR_to_add += 1
+		"DEX":
+			canvas_color_mod.color_mod = Color(0.32, 0.62, 0.7, 0.1)
+			DEX_to_add += 1
+		"SPD":
+			canvas_color_mod.color_mod = Color(1, 1, 0.75, 0.1)
+			SPD_to_add += 1
+		"MAG":
+			canvas_color_mod.color_mod = Color(0.66, 0, 1, 0.1)
+			MAG_to_add += 1
+	add_child(canvas_color_mod)
 	if stats_remaining == 0:
 		waiting_for_answer = false
 		waiting_for_level = false

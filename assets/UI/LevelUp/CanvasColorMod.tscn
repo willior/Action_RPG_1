@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/UI/LevelUp/CanvasColorMod.gd" type="Script" id=1]
+
+[node name="ColorMod" type="ColorRect"]
+margin_right = 480.0
+margin_bottom = 270.0
+color = Color( 1, 1, 1, 0.1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
