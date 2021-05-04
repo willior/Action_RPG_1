@@ -59,7 +59,6 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=5]
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 26.7014
 
 [sub_resource type="CircleShape2D" id=7]
 
@@ -192,8 +191,9 @@ rect = Rect2( -1, -1, 2, 8 )
 __meta__ = {
 "_editor_description_": "	"
 }
-[connection signal="no_health" from="PunchingMoonStats" to="EnemyHealth" method="_on_stats_no_health"]
+
 [connection signal="no_health" from="PunchingMoonStats" to="." method="_on_BatStats_no_health"]
+[connection signal="no_health" from="PunchingMoonStats" to="EnemyHealth" method="_on_stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
@@ -201,13 +201,8 @@ __meta__ = {
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 [editable path="Hurtbox"]
-
 [editable path="PlayerDetectionZone"]
-
 [editable path="AttackPlayerZone"]
-
 [editable path="Hitbox"]
-
 [editable path="SoftCollision"]
-
 [editable path="EnemyHealth"]

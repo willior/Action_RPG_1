@@ -11,7 +11,7 @@ extends Node
 export var count = 0
 export var duration = 45 # number of ticks
 export var potency = 1 # damage per tick
-onready var body = get_parent()
+
 var active = false
 
 func activate():
