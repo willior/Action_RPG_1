@@ -20,8 +20,8 @@ func set_health(value):
 	var old_health = health
 	health = value
 	healthBar.value = health
-	$hp.set_text(str(health) + "/" + str(max_health))
 	if old_health < health:
+		$hp.set_text(str(health) + "/" + str(max_health))
 		reset_health_background()
 	else:
 		set_health_background(health)
@@ -51,6 +51,7 @@ func health_tick():
 	if healthBack.value > health:
 		healthBack.value -= 1
 		PlayerStats.final_health = healthBack.value
+		$hp.set_text(str(PlayerStats.final_health) + "/" + str(max_health))
 		$Timer.start()
 		yield($Timer, "timeout")
 		health_tick()
