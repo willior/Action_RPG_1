@@ -21,8 +21,36 @@ onready var strBar = $StatsDisplay/VBoxButtons/ButtonSTR/ColorRect
 onready var dexBar = $StatsDisplay/VBoxButtons/ButtonDEX/ColorRect
 onready var spdBar = $StatsDisplay/VBoxButtons/ButtonSPD/ColorRect
 onready var magBar = $StatsDisplay/VBoxButtons/ButtonMAG/ColorRect
+onready var GUI = get_tree().get_root().get_node("World/GUI")
+var closing = false
+var moving = false
 
 func _ready():
+	$Tween.interpolate_property($CanvasLayer/PanelTop, "rect_position",
+	Vector2(0, -45),
+	Vector2(0, 0),
+	0.4,
+	Tween.TRANS_QUINT, Tween.EASE_OUT
+	)
+	$Tween.interpolate_property($CanvasLayer/PanelBottom, "rect_position",
+	Vector2(0, 270),
+	Vector2(0, 225),
+	0.4,
+	Tween.TRANS_QUINT, Tween.EASE_OUT
+	)
+	$Tween.interpolate_property($CanvasLayer/ColorRect, "color",
+	Color(0,0,0,0),
+	Color(0,0,0,0.5),
+	0.4,
+	Tween.TRANS_QUINT, Tween.EASE_OUT
+	)
+	$Tween.interpolate_property($MenuPanel, "rect_position",
+	Vector2(-220, 60),
+	Vector2(130, 60),
+	0.4,
+	Tween.TRANS_QUART, Tween.EASE_OUT
+	)
+	$Tween.start()
 	healthBox.set_text(str(PlayerStats.vitality)) # + " (" + str(PlayerStats.health) + "/" + str(PlayerStats.max_health) + "HP)")
 	enduranceBox.set_text(str(PlayerStats.endurance))
 	defenseBox.set_text(str(PlayerStats.defense))
@@ -77,8 +105,6 @@ func _ready():
 		$AlchemyDisplay/Vbox.add_child(Control.new())
 	
 	for n in player.pouch.get_ingredients().size():
-		print(n)
-		print(player.pouch.get_ingredients().size()-1)
 		var pouch_ingredient = player.pouch.get_ingredient(n)
 		var menu_ingredient = MenuIngredient.instance()
 		menu_ingredient.pouch_ingredient = pouch_ingredient
@@ -93,23 +119,71 @@ func _ready():
 	yield($TimerDelaySelect, "timeout")
 	$MenuPanel/Menu/ButtonStatus.grab_focus()
 
+func disable_menu_focus():
+	for b in $MenuPanel/Menu.get_children().size():
+		$MenuPanel/Menu.get_child(b).set_focus_mode(0)
+		
+func enable_menu_focus():
+	for b in $MenuPanel/Menu.get_children().size():
+		$MenuPanel/Menu.get_child(b).set_focus_mode(2)
+
 func _on_PauseScreen_gui_input(event):
 	get_tree().set_input_as_handled()
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().get_root().get_node("World").close_pause_menu()
-	if event.is_action_pressed("ui_right"):
-		accept_event()
+	if closing or moving:
+		return
+	elif event.is_action_pressed("ui_cancel") or event.is_action_pressed("start"):
+		hide_status_display()
+		close_pause_menu()
+
+func close_pause_menu():
+#	$StatsDisplay.hide()
+#	$AlchemyDisplay.hide()
+#	$PouchDisplay.hide()
+#	$ConfigDisplay.hide()
+	for b in $MenuPanel/Menu.get_children().size():
+		$MenuPanel/Menu.get_child(b).set_focus_mode(0)
+	closing = true
+	$Tween.interpolate_property($MenuPanel, "rect_position",
+	Vector2(128, 60),
+	Vector2(480, 60),
+	0.4,
+	Tween.TRANS_QUINT, Tween.EASE_IN
+	)
+	$Tween.interpolate_property($CanvasLayer/PanelTop, "rect_position",
+	Vector2(0, 0),
+	Vector2(0, -45),
+	0.4,
+	Tween.TRANS_QUINT, Tween.EASE_IN
+	)
+	$Tween.interpolate_property($CanvasLayer/PanelBottom, "rect_position",
+	Vector2(0, 225),
+	Vector2(0, 270),
+	0.4,
+	Tween.TRANS_QUINT, Tween.EASE_IN
+	)
+	$Tween.interpolate_property($CanvasLayer/ColorRect, "color",
+	Color(0,0,0,0.5),
+	Color(0,0,0,0),
+	0.4,
+	Tween.TRANS_QUINT, Tween.EASE_IN
+	)
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	get_tree().get_root().get_node("World").close_pause_menu()
 
 func _on_ButtonStatus_focus_entered():
-	$ControlsDisplay.hide()
-	$AlchemyDisplay.hide()
-	$StatsDisplay.hide()
+	$MenuPanel/Menu/ButtonStatus.pressed = false
 	audio_menu_move()
 
 func _on_ButtonStatus_pressed():
-	$StatsDisplay.show()
 	audio_menu_select()
+	disable_menu_focus()
+	$Tween.interpolate_property($StatsDisplay, "rect_size", Vector2(220, 0), Vector2(220, 130), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.start()
+	$StatsDisplay.show()
+	yield($Tween, "tween_all_completed")
 	$StatsDisplay/VBoxButtons/ButtonVIT.grab_focus()
+	audio_menu_move()
 
 func _on_ButtonStatus_focus_exited():
 	pass
@@ -117,9 +191,11 @@ func _on_ButtonStatus_focus_exited():
 func _on_ButtonSTAT_gui_input(event, description_index):
 	if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down"):
 		audio_menu_move()
-	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_left"):
+	elif event.is_action_pressed("ui_cancel"):
+		hide_status_display()
+		enable_menu_focus()
 		$MenuPanel/Menu/ButtonStatus.grab_focus()
-	if event.is_action_pressed("ui_select"):
+	elif event.is_action_pressed("ui_select"):
 		audio_menu_select()
 		var stat_description
 		match description_index:
@@ -137,61 +213,127 @@ func _on_ButtonSTAT_gui_input(event, description_index):
 			}
 		]
 		get_node("/root/World/GUI").add_child(dialogBox)
+	elif event.is_action_pressed("start"):
+		hide_status_display()
+		close_pause_menu()
 
 func _on_ButtonAlchemy_focus_entered():
-	$StatsDisplay.hide()
-	$PouchDisplay.hide()
-	$AlchemyDisplay.hide()
+	$MenuPanel/Menu/ButtonAlchemy.pressed = false
 	audio_menu_move()
 
 func _on_ButtonAlchemy_pressed():
 	audio_menu_select()
+	$Tween.interpolate_property($AlchemyDisplay, "rect_size", Vector2(220, 0), Vector2(220, 130), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.start()
 	$AlchemyDisplay.show()
+	disable_menu_focus()
+	yield($Tween, "tween_all_completed")
 	if $AlchemyDisplay/VBoxButtons.get_child_count() < 1:
 		return
 	else:
 		$AlchemyDisplay/VBoxButtons.get_child(0).grab_focus()
+		audio_menu_move()
 
 func _on_ButtonAlchemy_focus_exited():
 	pass
 
 func _on_ButtonPouch_focus_entered():
-	$AlchemyDisplay.hide()
-	$ControlsDisplay.hide()
-	$PouchDisplay.hide()
+	$MenuPanel/Menu/ButtonPouch.pressed = false
 	audio_menu_move()
 
 func _on_ButtonPouch_pressed():
 	audio_menu_select()
+	$Tween.interpolate_property($PouchDisplay, "rect_size", Vector2(220, 0), Vector2(220, 130), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.start()
 	$PouchDisplay.show()
+	disable_menu_focus()
+	yield($Tween, "tween_all_completed")
 	if $PouchDisplay/VBox.get_child_count() < 1:
 		return
 	else:
 		$PouchDisplay/VBox.get_child(0).get_child(0).grab_focus()
+		audio_menu_move()
 
 func _on_ButtonPouch_focus_exited():
 	pass
 
-func _on_ButtonControls_focus_entered():
-	$PouchDisplay.hide()
-	$StatsDisplay.hide()
-	$ControlsDisplay.hide()
+func _on_ButtonConfig_focus_entered():
+	$MenuPanel/Menu/ButtonConfig.pressed = false
 	audio_menu_move()
 
-func _on_ButtonControls_pressed():
+func _on_ButtonConfig_pressed():
 	audio_menu_select()
-	$ControlsDisplay.show()
+	disable_menu_focus()
+	$Tween.interpolate_property($ConfigDisplay, "rect_size", Vector2(220, 0), Vector2(220, 130), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.start()
+	$ConfigDisplay.show()
+	yield($Tween, "tween_all_completed")
+	$ConfigDisplay/VBox/ButtonControls.grab_focus()
+	audio_menu_move()
 
-func _on_ButtonControls_focus_exited():
+func _on_ButtonConfig_focus_exited():
 	pass
-	
+
+func _on_ButtonControls_gui_input(event):
+	if event.is_action_pressed("ui_select") and !$CanvasLayer1/ControlsDisplay.visible:
+		$CanvasLayer1/ControlsDisplay.show()
+		$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(-480, 0), Vector2(0, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_OUT)
+		$Tween.start()
+		moving = true
+		yield($Tween, "tween_all_completed")
+		moving = false
+	elif (event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_select")) and $CanvasLayer1/ControlsDisplay.visible and !moving:
+		$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(0, 0), Vector2(480, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_IN)
+		$Tween.start()
+		moving = true
+		yield($Tween, "tween_all_completed")
+		moving = false
+		$CanvasLayer1/ControlsDisplay.hide()
+	elif event.is_action_pressed("ui_cancel"):
+		hide_config_display()
+		enable_menu_focus()
+		$MenuPanel/Menu/ButtonConfig.grab_focus()
+	elif event.is_action_pressed("start"):
+		if $CanvasLayer1/ControlsDisplay.visible and !moving:
+			$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(0, 0), Vector2(480, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_IN)
+			$Tween.start()
+			hide_config_display()
+			close_pause_menu()
+		elif !$CanvasLayer1/ControlsDisplay.visible:
+			hide_config_display()
+			close_pause_menu()
+
 func audio_menu_move():
 	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
-	
+
 func audio_menu_select():
 	$AudioMenu.stream = AudioSelect
 	$AudioMenu.play()
+
+func hide_status_display():
+	$Tween.interpolate_property($StatsDisplay, "rect_size", Vector2(220, 130), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	$StatsDisplay.hide()
+
+func hide_alchemy_display():
+	$Tween.interpolate_property($AlchemyDisplay, "rect_size", Vector2(220, 130), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	$AlchemyDisplay.hide()
+
+func hide_pouch_display():
+	$Tween.interpolate_property($PouchDisplay, "rect_size", Vector2(220, 130), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	$PouchDisplay.hide()
+	
+func hide_config_display():
+	$Tween.interpolate_property($ConfigDisplay, "rect_size", Vector2(220, 130), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
+	$Tween.start()
+	yield($Tween, "tween_all_completed")
+	$ConfigDisplay.hide()
 
 func _on_ButtonInventory_focus_entered():
 	return

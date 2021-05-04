@@ -129,15 +129,15 @@ func _input(event):
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
 		elif get_tree().paused == false:
 			open_pause_menu()
-		else:
-			close_pause_menu()
+#		else:
+#			close_pause_menu()
 
 func open_pause_menu():
 	music.stream_paused = true
 	sfx1.stream_paused = true
 	sfx2.stream_paused = true
 	get_tree().paused = true
-	dim.visible = true
+	# dim.visible = true
 	var pauseScreen = PauseScreen.instance()
 	$GUI.add_child(pauseScreen)
 
@@ -146,6 +146,6 @@ func close_pause_menu():
 	sfx1.stream_paused = false
 	sfx2.stream_paused = false
 	get_tree().paused = false
-	dim.visible = false
+	# dim.visible = false
 	$GUI/PauseScreen.queue_free()
 	player.talkTimer.start()

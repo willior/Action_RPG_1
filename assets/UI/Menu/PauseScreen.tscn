@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=2]
@@ -10,6 +10,11 @@
 [ext_resource path="res://assets/UI/3x3_Container_White_1px.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/1x2_XPprogress.png" type="Texture" id=9]
 [ext_resource path="res://assets/UI/LevelUp/Theme_LevelUpButton.tres" type="Theme" id=10]
+[ext_resource path="res://assets/UI/TalkNotice.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/UI/InteractNotice.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/Misc/BlackPixel.png" type="Texture" id=16]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 8 )
@@ -43,6 +48,9 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 1 )
 
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0, 0, 0, 1 )
+
 [node name="PauseScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -52,12 +60,12 @@ __meta__ = {
 }
 
 [node name="MenuPanel" type="NinePatchRect" parent="."]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 129.0
-margin_top = -57.0
-margin_right = 224.0
-margin_bottom = 31.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.0
+margin_top = 60.0
+margin_right = 110.0
+margin_bottom = 85.0
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -67,24 +75,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu" type="VBoxContainer" parent="MenuPanel"]
+[node name="Menu" type="HBoxContainer" parent="MenuPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
+margin_left = 4.0
 margin_top = 4.0
-margin_right = -8.0
-margin_bottom = -4.0
+margin_right = -4.0
+margin_bottom = -3.0
 theme = ExtResource( 10 )
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ButtonStatus" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
-margin_right = 79.0
-margin_bottom = 17.0
-focus_neighbour_top = NodePath("../ButtonControls")
-focus_neighbour_right = NodePath("../../../StatsDisplay/VBoxButtons/ButtonVIT")
-focus_previous = NodePath("../ButtonControls")
+margin_left = 15.0
+margin_right = 57.0
+margin_bottom = 18.0
+focus_neighbour_left = NodePath("../ButtonConfig")
+focus_previous = NodePath("../ButtonConfig")
+toggle_mode = true
 text = "STATUS"
 
 [node name="ButtonInventory" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
@@ -92,38 +102,41 @@ visible = false
 margin_top = 21.0
 margin_right = 77.0
 margin_bottom = 38.0
+toggle_mode = true
 text = "INVENTORY"
 
 [node name="ButtonAlchemy" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
-margin_top = 21.0
-margin_right = 79.0
-margin_bottom = 38.0
+margin_left = 61.0
+margin_right = 111.0
+margin_bottom = 18.0
+toggle_mode = true
 text = "ALCHEMY"
 
 [node name="ButtonPouch" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
-margin_top = 42.0
-margin_right = 79.0
-margin_bottom = 59.0
+margin_left = 115.0
+margin_right = 151.0
+margin_bottom = 18.0
+toggle_mode = true
 text = "POUCH"
 
-[node name="ButtonControls" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
-margin_top = 63.0
-margin_right = 79.0
-margin_bottom = 80.0
-focus_neighbour_bottom = NodePath("../ButtonStatus")
+[node name="ButtonConfig" parent="MenuPanel/Menu" instance=ExtResource( 4 )]
+margin_left = 155.0
+margin_right = 197.0
+margin_bottom = 18.0
+focus_neighbour_right = NodePath("../ButtonStatus")
 focus_next = NodePath("../ButtonStatus")
-text = "CONTROLS"
+toggle_mode = true
+text = "CONFIG"
 
 [node name="StatsDisplay" type="NinePatchRect" parent="."]
 visible = false
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -224.0
-margin_top = -57.0
-margin_right = -63.0
-margin_bottom = 73.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.0
+margin_top = 86.0
+margin_right = 110.0
+margin_bottom = 216.0
+rect_clip_content = true
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -136,7 +149,7 @@ __meta__ = {
 [node name="VBoxButtons" type="VBoxContainer" parent="StatsDisplay"]
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 155.0
+margin_right = 214.0
 margin_bottom = 124.0
 custom_constants/separation = 1
 __meta__ = {
@@ -144,12 +157,13 @@ __meta__ = {
 }
 
 [node name="ButtonVIT" type="Button" parent="StatsDisplay/VBoxButtons"]
-margin_right = 149.0
+margin_right = 208.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
 focus_neighbour_top = NodePath("../ButtonMAG")
 focus_previous = NodePath("../ButtonMAG")
 mouse_filter = 2
+size_flags_horizontal = 3
 size_flags_vertical = 8
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
@@ -166,8 +180,9 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBoxButtons/ButtonVIT"]
 margin_left = 2.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 13.0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -183,13 +198,13 @@ text = "WILLPOWER"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonVIT/HBox"]
 margin_left = 62.0
-margin_right = 113.0
+margin_right = 172.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="VIT" type="Label" parent="StatsDisplay/VBoxButtons/ButtonVIT/HBox"]
-margin_left = 117.0
-margin_right = 145.0
+margin_left = 176.0
+margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -201,7 +216,7 @@ text = "stats"
 modulate = Color( 0.8, 0.466667, 0, 1 )
 margin_left = 2.0
 margin_top = 13.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -217,7 +232,7 @@ __meta__ = {
 
 [node name="ButtonEND" type="Button" parent="StatsDisplay/VBoxButtons"]
 margin_top = 17.0
-margin_right = 149.0
+margin_right = 208.0
 margin_bottom = 33.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
@@ -237,7 +252,7 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBoxButtons/ButtonEND"]
 margin_left = 2.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 13.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -254,13 +269,13 @@ text = "LUNG CAPACITY"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonEND/HBox"]
 margin_left = 81.0
-margin_right = 113.0
+margin_right = 172.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="END" type="Label" parent="StatsDisplay/VBoxButtons/ButtonEND/HBox"]
-margin_left = 117.0
-margin_right = 145.0
+margin_left = 176.0
+margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -272,7 +287,7 @@ text = "stats"
 modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
 margin_left = 2.0
 margin_top = 13.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -284,7 +299,7 @@ nine_patch_stretch = true
 
 [node name="ButtonDEF" type="Button" parent="StatsDisplay/VBoxButtons"]
 margin_top = 34.0
-margin_right = 149.0
+margin_right = 208.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
@@ -304,7 +319,7 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBoxButtons/ButtonDEF"]
 margin_left = 2.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 13.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -321,13 +336,13 @@ text = "RESILIENCE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonDEF/HBox"]
 margin_left = 64.0
-margin_right = 113.0
+margin_right = 172.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="DEF" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEF/HBox"]
-margin_left = 117.0
-margin_right = 145.0
+margin_left = 176.0
+margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -339,7 +354,7 @@ text = "stats"
 modulate = Color( 0.278431, 0.278431, 1, 1 )
 margin_left = 2.0
 margin_top = 13.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -351,7 +366,7 @@ nine_patch_stretch = true
 
 [node name="ButtonSTR" type="Button" parent="StatsDisplay/VBoxButtons"]
 margin_top = 51.0
-margin_right = 149.0
+margin_right = 208.0
 margin_bottom = 67.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
@@ -371,7 +386,7 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBoxButtons/ButtonSTR"]
 margin_left = 2.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 13.0
 
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSTR/HBox"]
@@ -385,13 +400,13 @@ text = "VIOLENT NATURE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonSTR/HBox"]
 margin_left = 87.0
-margin_right = 113.0
+margin_right = 172.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="STR" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSTR/HBox"]
-margin_left = 117.0
-margin_right = 145.0
+margin_left = 176.0
+margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -403,7 +418,7 @@ text = "stats"
 modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
 margin_left = 2.0
 margin_top = 13.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -415,7 +430,7 @@ nine_patch_stretch = true
 
 [node name="ButtonDEX" type="Button" parent="StatsDisplay/VBoxButtons"]
 margin_top = 68.0
-margin_right = 149.0
+margin_right = 208.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
@@ -435,8 +450,11 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBoxButtons/ButtonDEX"]
 margin_left = 2.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEX/HBox"]
 margin_right = 48.0
@@ -449,13 +467,13 @@ text = "PATIENCE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonDEX/HBox"]
 margin_left = 52.0
-margin_right = 113.0
+margin_right = 172.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="DEX" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEX/HBox"]
-margin_left = 117.0
-margin_right = 145.0
+margin_left = 176.0
+margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -467,7 +485,7 @@ text = "stats"
 modulate = Color( 0.321569, 0.619608, 0.701961, 1 )
 margin_left = 2.0
 margin_top = 13.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -479,7 +497,7 @@ nine_patch_stretch = true
 
 [node name="ButtonSPD" type="Button" parent="StatsDisplay/VBoxButtons"]
 margin_top = 85.0
-margin_right = 149.0
+margin_right = 208.0
 margin_bottom = 101.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
@@ -499,8 +517,11 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBoxButtons/ButtonSPD"]
 margin_left = 2.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 13.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSPD/HBox"]
 margin_right = 56.0
@@ -513,13 +534,13 @@ text = "SWIFTNESS"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonSPD/HBox"]
 margin_left = 60.0
-margin_right = 113.0
+margin_right = 172.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="SPD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSPD/HBox"]
-margin_left = 117.0
-margin_right = 145.0
+margin_left = 176.0
+margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -531,7 +552,7 @@ text = "stats"
 modulate = Color( 1, 1, 0.752941, 1 )
 margin_left = 2.0
 margin_top = 13.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -540,10 +561,13 @@ value = 4.0
 texture_under = ExtResource( 7 )
 texture_progress = ExtResource( 9 )
 nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ButtonMAG" type="Button" parent="StatsDisplay/VBoxButtons"]
 margin_top = 102.0
-margin_right = 149.0
+margin_right = 208.0
 margin_bottom = 118.0
 rect_min_size = Vector2( 0, 16 )
 focus_neighbour_bottom = NodePath("../ButtonVIT")
@@ -565,7 +589,7 @@ __meta__ = {
 
 [node name="HBox" type="HBoxContainer" parent="StatsDisplay/VBoxButtons/ButtonMAG"]
 margin_left = 2.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 13.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -582,13 +606,13 @@ text = "SPIRITUALITY"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonMAG/HBox"]
 margin_left = 76.0
-margin_right = 113.0
+margin_right = 172.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="MAG" type="Label" parent="StatsDisplay/VBoxButtons/ButtonMAG/HBox"]
-margin_left = 117.0
-margin_right = 145.0
+margin_left = 176.0
+margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -600,7 +624,7 @@ text = "stats"
 modulate = Color( 0.662745, 0, 1, 1 )
 margin_left = 2.0
 margin_top = 13.0
-margin_right = 147.0
+margin_right = 206.0
 margin_bottom = 15.0
 rect_min_size = Vector2( 2, 2 )
 size_flags_horizontal = 3
@@ -615,14 +639,13 @@ __meta__ = {
 
 [node name="AlchemyDisplay" type="NinePatchRect" parent="."]
 visible = false
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -224.0
-margin_top = -57.0
-margin_right = -63.0
-margin_bottom = 59.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.0
+margin_top = 86.0
+margin_right = 110.0
+margin_bottom = 216.0
+rect_clip_content = true
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -663,10 +686,11 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -224.0
-margin_top = -57.0
-margin_right = -63.0
-margin_bottom = 59.0
+margin_left = -350.0
+margin_top = -49.0
+margin_right = -130.0
+margin_bottom = 81.0
+rect_clip_content = true
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -712,16 +736,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ControlsDisplay" type="NinePatchRect" parent="."]
+[node name="ConfigDisplay" type="NinePatchRect" parent="."]
 visible = false
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -224.0
-margin_top = -57.0
-margin_right = -95.0
-margin_bottom = 31.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.0
+margin_top = 86.0
+margin_right = 110.0
+margin_bottom = 216.0
+rect_clip_content = true
 texture = ExtResource( 6 )
 patch_margin_left = 2
 patch_margin_top = 2
@@ -731,7 +754,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Controls" parent="ControlsDisplay" instance=ExtResource( 2 )]
+[node name="Controls" parent="ConfigDisplay" instance=ExtResource( 2 )]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -746,9 +770,40 @@ B : evade / roll
 F : examine / cancel
 G : use formula
 R : next formula"
+align = 3
+
+[node name="VBox" type="VBoxContainer" parent="ConfigDisplay"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 214.0
+margin_bottom = 124.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonControls" type="Button" parent="ConfigDisplay/VBox"]
+margin_right = 208.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "How to Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TimerDelaySelect" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.4
 one_shot = true
 
 [node name="AudioMenu" type="AudioStreamPlayer" parent="."]
@@ -781,6 +836,97 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Tween" type="Tween" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="PanelTop" type="Panel" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_top = -45.0
+margin_bottom = 3.8147e-06
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelBottom" type="Panel" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_top = 270.0
+margin_bottom = 315.0
+rect_min_size = Vector2( 0, 45 )
+custom_styles/panel = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer1" type="CanvasLayer" parent="."]
+
+[node name="ControlsDisplay" type="Control" parent="CanvasLayer1"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -480.0
+margin_right = -480.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HowToPlay" type="Sprite" parent="CanvasLayer1/ControlsDisplay"]
+texture = ExtResource( 16 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 270 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Controls" parent="CanvasLayer1/ControlsDisplay" instance=ExtResource( 2 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 88.0
+margin_top = -46.0
+margin_right = 193.0
+margin_bottom = 32.0
+
+[node name="Information" parent="CanvasLayer1/ControlsDisplay" instance=ExtResource( 2 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -224.0
+margin_top = -46.0
+margin_right = -88.0
+margin_bottom = 32.0
+text = "object is interactable :
+
+object is examinable:
+
+Hold down the attack button to charge attacks."
+align = 2
+autowrap = true
+
+[node name="InteractNotice" parent="CanvasLayer1/ControlsDisplay/Information" instance=ExtResource( 13 )]
+position = Vector2( 127.282, 2.2928 )
+
+[node name="TalkNotice" parent="CanvasLayer1/ControlsDisplay/Information" instance=ExtResource( 12 )]
+position = Vector2( 132.418, 20.1831 )
+
+[node name="Notice" parent="CanvasLayer1/ControlsDisplay/Information" instance=ExtResource( 15 )]
+position = Vector2( 139.32, 63.7482 )
+
+[node name="ChargeUI" parent="CanvasLayer1/ControlsDisplay/Information" instance=ExtResource( 14 )]
+position = Vector2( 168.492, 94.0082 )
+script = null
+
 [connection signal="gui_input" from="." to="." method="_on_PauseScreen_gui_input"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_focus_entered"]
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_focus_exited"]
@@ -797,10 +943,10 @@ __meta__ = {
 [connection signal="focus_exited" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_focus_exited"]
 [connection signal="gui_input" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_PauseScreen_gui_input"]
 [connection signal="pressed" from="MenuPanel/Menu/ButtonPouch" to="." method="_on_ButtonPouch_pressed"]
-[connection signal="focus_entered" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_entered"]
-[connection signal="focus_exited" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_focus_exited"]
-[connection signal="gui_input" from="MenuPanel/Menu/ButtonControls" to="." method="_on_PauseScreen_gui_input"]
-[connection signal="pressed" from="MenuPanel/Menu/ButtonControls" to="." method="_on_ButtonControls_pressed"]
+[connection signal="focus_entered" from="MenuPanel/Menu/ButtonConfig" to="." method="_on_ButtonConfig_focus_entered"]
+[connection signal="focus_exited" from="MenuPanel/Menu/ButtonConfig" to="." method="_on_ButtonConfig_focus_exited"]
+[connection signal="gui_input" from="MenuPanel/Menu/ButtonConfig" to="." method="_on_PauseScreen_gui_input"]
+[connection signal="pressed" from="MenuPanel/Menu/ButtonConfig" to="." method="_on_ButtonConfig_pressed"]
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonVIT" to="." method="_on_ButtonSTAT_gui_input" binds= [ 0 ]]
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonEND" to="." method="_on_ButtonSTAT_gui_input" binds= [ 1 ]]
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonDEF" to="." method="_on_ButtonSTAT_gui_input" binds= [ 2 ]]
@@ -808,3 +954,4 @@ __meta__ = {
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonDEX" to="." method="_on_ButtonSTAT_gui_input" binds= [ 4 ]]
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonSPD" to="." method="_on_ButtonSTAT_gui_input" binds= [ 5 ]]
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonMAG" to="." method="_on_ButtonSTAT_gui_input" binds= [ 6 ]]
+[connection signal="gui_input" from="ConfigDisplay/VBox/ButtonControls" to="." method="_on_ButtonControls_gui_input"]

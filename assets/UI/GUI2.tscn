@@ -18,12 +18,12 @@
 [ext_resource path="res://assets/Font/small_dynamicfont.tres" type="DynamicFont" id=18]
 [ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=19]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=1]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("StaminaBarTexture:tint_progress")
 tracks/0/interp = 1
@@ -217,7 +217,7 @@ margin_left = -17.0
 margin_top = -14.0
 margin_right = -2.0
 margin_bottom = -1.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -251,7 +251,7 @@ anchor_right = 1.0
 margin_top = -1.0
 margin_right = -2.0
 margin_bottom = 12.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -266,7 +266,7 @@ margin_left = -1.0
 margin_top = -14.0
 margin_right = -2.0
 margin_bottom = -1.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 align = 2
 valign = 2
 __meta__ = {
@@ -393,7 +393,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StaminaBar2"]
-anims/Stop = SubResource( 6 )
+anims/Stop = SubResource( 2 )
 anims/Sweating = SubResource( 3 )
 
 [node name="ExpBar2" parent="." instance=ExtResource( 12 )]
@@ -452,7 +452,7 @@ margin_left = 2.0
 margin_top = -3.0
 margin_right = 18.0
 margin_bottom = 10.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 1 )
 text = "?"
 align = 2
 __meta__ = {
