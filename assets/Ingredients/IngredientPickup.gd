@@ -49,3 +49,4 @@ func display_pickup_message(value):
 	var pickupPopup = PickupPopup.instance()
 	pickupPopup.message = value
 	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(pickupPopup)
+	pickupPopup.pickup_flash()

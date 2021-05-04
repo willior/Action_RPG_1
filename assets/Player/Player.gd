@@ -9,6 +9,7 @@ const TweenGreyscale = preload("res://assets/Shaders/Greyscale_TweenCanvasModula
 const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
+const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 
 var inventory_resource = load("res://assets/Player/Inventory.gd")
 var inventory = inventory_resource.new()
@@ -766,6 +767,10 @@ func _on_Hurtbox_area_entered(area):
 		var is_crit = Global.enemy_crit_calculation(area.crit_chance)
 		if is_crit:
 			damageTaken *= 2
+			var critPopup = MessagePopup.instance()
+			critPopup.message = str(self.name, " gets whacked!")
+			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
+			critPopup.crit_flash()
 		var played_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
 		print('stagger = ', played_staggered)
 		if attack2_queued && played_staggered:

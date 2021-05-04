@@ -10,12 +10,12 @@ func apply_status(status, body):
 				print('poison already on ', body, '; returning.')
 				return
 			else:
-				print('poison not on ', body, '; running check.')
 				randomize()
-				if randf() < status[1]:
+				var status_check = randf()
+				if status_check <= status[1]-body.stats.status_resistance:
+					print('RNG ', status_check*100, '% was less than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
 					var poison = Poison.instance()
 					body.add_child(poison)
-					print('poison check success; applying.')
 				else:
-					print('poison check unsuccessful; returning.')
+					print('poison check unsuccessful; RNG ', status_check*100, '% was greater than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
 					return

@@ -1,18 +1,10 @@
 extends Node2D
 
-# const EnemyDeathEffect = preload("res://assets/Effects/EnemyDeathEffect.tscn")
 const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
 const EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
-
-# GENERIC ENEMY CLASS / REFACTOR PROJECT
-
-# common elements of the bat & crow go into a generic enemy class.
-# if their values need to be modified, export the appropriate variables.
-# the “bat” & “crow” classes, after their shared code has been refactored,
-# should extend this generic “enemy” class.
-
+const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 enum {
 	IDLE,
 	WANDER,
@@ -89,6 +81,10 @@ func hurtbox_entered(enemy, hitbox):
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
 		if is_crit:
 			damage *= 2
+			var critPopup = MessagePopup.instance()
+			critPopup.message = str(enemy.ENEMY_NAME, " gets whacked!")
+			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
+			critPopup.crit_flash()
 		deal_damage(enemy, damage, is_crit)
 		if enemy.stats.health > 0:
 			if hitbox.get("status"):

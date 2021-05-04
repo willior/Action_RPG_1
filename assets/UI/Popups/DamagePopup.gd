@@ -20,7 +20,7 @@ func _ready():
 	else:
 		fade = red_fade
 	if is_crit:
-		$AnimationPlayer.play("On")
+		$AnimationPlayer.play("crit_flash")
 		text.add_font_override("font", load("res://assets/Font/large_dynamicFont.tres"))
 		rect_min_size.y = 6
 		damageDisplay = damageDisplay + "!"

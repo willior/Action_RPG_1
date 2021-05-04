@@ -9,9 +9,12 @@ func _ready():
 	text.set_text(message)
 
 func crit_flash():
-	$AnimationPlayer.play("crit")
+	$AnimationPlayer.play("crit_flash")
 	fade = Color(1, 0, 0, 0)
-	
+
+func pickup_flash():
+	$AnimationPlayer.play("pickup_flash")
+
 func level_flash():
 	$AnimationPlayer.play('level_flash')
 
@@ -25,7 +28,7 @@ func _on_AnimationPlayer_animation_finished(_anim_name):
 	"modulate",
 	Color(1,1,1,1),
 	fade,
-	3.2,
+	2.4,
 	Tween.TRANS_QUINT,
 	Tween.EASE_IN
 	)

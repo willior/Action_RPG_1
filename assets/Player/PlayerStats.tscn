@@ -48,6 +48,7 @@ var stamina_regen_rate = 0.2 setget set_stamina_regen_rate
 
 var strength_mod = 0 setget set_strength_mod
 var defense_mod = 0 setget set_defense_mod
+var status_resistance setget set_status_resistance
 var dexterity_mod = 0.0 setget set_dexterity_mod
 var base_accuracy = 75
 var base_crit_rate = 4
@@ -244,11 +245,16 @@ func set_stamina_regen_rate(value):
 
 func set_defense(value):
 	defense = value
+	self.status_resistance = defense/128
 	emit_signal(\"defense_changed\", defense)
 
 func set_defense_mod(value):
 	defense_mod = value
 	emit_signal(\"defense_mod_changed\", defense_mod)
+
+func set_status_resistance(value):
+	status_resistance = value
+	print('status_resistance set: ', status_resistance)
 
 func set_strength(value):
 	print('strength set: ', value)
@@ -338,4 +344,5 @@ script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="Frenzy"]
 one_shot = true
+
 [connection signal="timeout" from="Frenzy/Timer" to="Frenzy" method="_on_Timer_timeout"]

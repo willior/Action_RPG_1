@@ -175,6 +175,7 @@ visible = false
 modulate = Color( 1, 1, 1, 0 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="no_health" from="Stats" to="." method="_on_BatStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
@@ -183,11 +184,7 @@ modulate = Color( 1, 1, 1, 0 )
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 
 [editable path="Hurtbox"]
-
 [editable path="PlayerDetectionZone"]
-
 [editable path="AttackPlayerZone"]
-
 [editable path="Hitbox"]
-
 [editable path="SoftCollision"]

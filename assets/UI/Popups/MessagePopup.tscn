@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/Font/large_dynamicFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=2]
 [ext_resource path="res://assets/UI/Popups/MessagePopup.gd" type="Script" id=3]
 
-[sub_resource type="Animation" id=1]
-resource_name = "crit"
+[sub_resource type="Animation" id=5]
+resource_name = "crit_flash"
 length = 0.8
 step = 0.05
 tracks/0/type = "value"
@@ -15,10 +15,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66, 0.72, 0.78 ),
+"transitions": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
 "update": 0,
-"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.329412, 0.329412, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0.67, 0.67, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -35,7 +35,24 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 1, 1, 0.78 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 0.65, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "pickup_flash"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -52,7 +69,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.8 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0.5, 0, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0.501961, 0, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="MessagePopup" type="Control"]
@@ -73,7 +90,6 @@ size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.976471, 0.976471, 0.976471, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "ASDF"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -85,8 +101,9 @@ one_shot = true
 [node name="Tween" type="Tween" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/crit = SubResource( 1 )
+anims/crit_flash = SubResource( 5 )
 anims/level_flash = SubResource( 2 )
+anims/pickup_flash = SubResource( 4 )
 anims/poison_flash = SubResource( 3 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

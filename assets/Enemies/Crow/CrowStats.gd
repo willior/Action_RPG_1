@@ -3,6 +3,7 @@ extends Node
 var max_health = 66 setget set_max_health
 var health = max_health setget set_health
 var defense = 2.0
+var status_resistance = 0.0
 var evasion = 12
 var experience_pool = 378
 

@@ -26,7 +26,7 @@ func create_hit_effect():
 	main.add_child(effect)
 	effect.global_position = global_position
 	
-func display_damage_popup(value, crit):
+func display_damage_popup(value, crit, kind="Normal"):
 	var damagePopup = DamagePopup.instance()
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit

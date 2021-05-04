@@ -843,7 +843,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
 
 [node name="PanelTop" type="Panel" parent="CanvasLayer"]
 anchor_right = 1.0
