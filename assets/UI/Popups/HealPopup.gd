@@ -10,18 +10,6 @@ var fade = Color(0, 1, 1, 0)
 var damageDisplay
 
 func _ready():
-#	if damageDisplay == "Miss!":
-#		fade = white_fade
-#	else:
-#		fade = red_fade
-#	if is_crit:
-#		$AnimationPlayer.play("On")
-#		text.add_font_override("font", load("res://assets/Font/large_dynamicFont.tres"))
-#		rect_min_size.y = 6
-#		damageDisplay = damageDisplay + "!"
-#		visible = false
-#		call_deferred("set_visible", true)
-	
 	text.set_text(damageDisplay)
 	tween.interpolate_property(
 		text,

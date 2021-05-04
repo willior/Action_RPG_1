@@ -31,8 +31,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 material = ExtResource( 3 )
 anchor_bottom = 1.0
-margin_left = -10.0
-margin_right = 10.0
+margin_right = 20.0
 margin_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 0

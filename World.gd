@@ -106,7 +106,8 @@ func _input(event):
 		player.formulabook.remove_formula("Flash")
 	
 	if event.is_action_pressed("pause"): # P
-		PlayerStats.health = 1
+		StatusHandler.apply_status("Poison", player)
+		# PlayerStats.health = 1
 	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
