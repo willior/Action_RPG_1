@@ -1,6 +1,6 @@
 extends Area2D
 
-const PickupPopup = preload("res://assets/UI/Popups/PickupPopup.tscn")
+const PickupPopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const ItemCollectEffect = preload("res://assets/Effects/ItemCollectEffect.tscn")
 export var ingredient_name : String
@@ -47,5 +47,5 @@ func check_ingredient(ingredient_name):
 
 func display_pickup_message(value):
 	var pickupPopup = PickupPopup.instance()
-	pickupPopup.pickupDisplay = value
-	get_node("/root/World/GUI/PickupDisplay1/PickupContainer").add_child(pickupPopup)
+	pickupPopup.message = value
+	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(pickupPopup)

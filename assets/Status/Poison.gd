@@ -1,19 +1,19 @@
 extends Node2D
-
-# Upon contracting poison, the count is set to 1, and the Timer (0.2s) starts
-# each Timeout (0.2s), the poison_tick function is run;
-# this function decrements the health by the potency amount,
-# and increments the count by 1.
-# Once the count reaches the duration amount,
-# the Poison is removed following the subsequent tick.
-# If the player contracts Poison while already Poisoned, the count is set to 0
-
+const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 export var count = 0
 export var duration = 45 # number of ticks
 export var potency = 1 # damage per tick
 onready var body = get_parent()
 
 func _ready():
+	print(body.name, ' is poisoned!')
+	var messagePopup = MessagePopup.instance()
+	if body.get("ENEMY_NAME"):
+		messagePopup.message = str(body.ENEMY_NAME, ' is poisoned!')
+	else:
+		messagePopup.message = "Poisoned!"
+	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
+	messagePopup.poison_flash()
 	activate()
 
 func activate():

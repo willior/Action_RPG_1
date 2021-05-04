@@ -85,14 +85,14 @@ func hurtbox_entered(enemy, hitbox):
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)
 	else:
-		if hitbox.get("status"):
-			StatusHandler.apply_status(hitbox.status, enemy)
 		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
 		if is_crit:
 			damage *= 2
 		deal_damage(enemy, damage, is_crit)
 		if enemy.stats.health > 0:
+			if hitbox.get("status"):
+				StatusHandler.apply_status(hitbox.status, enemy)
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
 			"modulate",

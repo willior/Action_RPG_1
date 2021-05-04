@@ -273,7 +273,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PickupDisplay1" type="Control" parent="."]
+[node name="MessageDisplay1" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -284,7 +284,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PickupContainer" type="VBoxContainer" parent="PickupDisplay1"]
+[node name="MessageContainer" type="VBoxContainer" parent="MessageDisplay1"]
 show_behind_parent = true
 grow_vertical = 0
 size_flags_horizontal = 3

@@ -157,6 +157,9 @@ func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z
 		ingredientPickup.global_position = pos
 		ingredientPickup.z_index = z
 
+func display_message_popup(message):
+	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(message)
+
 func reset_input_after_dialog():
 	update_player()
 	player1.check_attack_input()
