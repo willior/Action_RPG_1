@@ -189,9 +189,9 @@ func advance_dialog(skip_index):
 	dialog_index += skip_index
 
 func _on_TimerNext_timeout():
-	if $Text/Sprite.position.x == 316:
+	if $Text/Sprite.position.x == 284:
 		next_icon_modulator = -1
-	elif $Text/Sprite.position.x == 310:
+	elif $Text/Sprite.position.x == 280:
 		next_icon_modulator = 1
 	$Text/Sprite.position.x += next_icon_modulator
 

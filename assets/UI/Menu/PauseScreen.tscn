@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=2]
@@ -10,11 +10,12 @@
 [ext_resource path="res://assets/UI/3x3_Container_White_1px.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/1x2_XPprogress.png" type="Texture" id=9]
 [ext_resource path="res://assets/UI/LevelUp/Theme_LevelUpButton.tres" type="Theme" id=10]
+[ext_resource path="res://assets/UI/Charge_1_UI_innerOutline.png" type="Texture" id=11]
 [ext_resource path="res://assets/UI/TalkNotice.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/InteractNotice.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/UI/Charge_1_UI_noOutline.png" type="Texture" id=14]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=15]
-[ext_resource path="res://assets/Misc/BlackPixel.png" type="Texture" id=16]
+[ext_resource path="res://assets/UI/Charge_2_UI.png" type="Texture" id=16]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 8 )
@@ -50,6 +51,9 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=9]
+light_mode = 1
 
 [node name="PauseScreen" type="Control"]
 anchor_right = 1.0
@@ -880,11 +884,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HowToPlay" type="Sprite" parent="CanvasLayer1/ControlsDisplay"]
-texture = ExtResource( 16 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 480, 270 )
+[node name="HowToPlay" type="ColorRect" parent="CanvasLayer1/ControlsDisplay"]
+margin_top = 45.0
+margin_right = 480.0
+margin_bottom = 225.0
+color = Color( 0.12549, 0.12549, 0.12549, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -892,40 +896,110 @@ __meta__ = {
 [node name="Controls" parent="CanvasLayer1/ControlsDisplay" instance=ExtResource( 2 )]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 88.0
+margin_left = 65.0
 margin_top = -46.0
 margin_right = 193.0
 margin_bottom = 32.0
+text = "WASD : movement
+V : attack / interact
+B : evade / roll
+F : examine / cancel
+G : use formula
+R : next formula"
 
 [node name="Information" parent="CanvasLayer1/ControlsDisplay" instance=ExtResource( 2 )]
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -224.0
-margin_top = -46.0
-margin_right = -88.0
-margin_bottom = 32.0
+margin_left = -256.0
+margin_top = -77.0
+margin_right = -86.0
+margin_bottom = 92.0
 text = "object is interactable :
 
-object is examinable:
 
-Hold down the attack button to charge attacks."
+object can be examined :
+
+The outer green ring represents your  stamina. It recharges over time.
+
+Hold down the attack button to charge attacks. Charge is represented by the middle ring."
 align = 2
 autowrap = true
 
 [node name="InteractNotice" parent="CanvasLayer1/ControlsDisplay/Information" instance=ExtResource( 13 )]
-position = Vector2( 127.282, 2.2928 )
+position = Vector2( 174, 6 )
 
 [node name="TalkNotice" parent="CanvasLayer1/ControlsDisplay/Information" instance=ExtResource( 12 )]
-position = Vector2( 132.418, 20.1831 )
+position = Vector2( 179.136, 23.8903 )
 
 [node name="Notice" parent="CanvasLayer1/ControlsDisplay/Information" instance=ExtResource( 15 )]
-position = Vector2( 139.32, 63.7482 )
+position = Vector2( 179, 72 )
 
-[node name="ChargeUI" parent="CanvasLayer1/ControlsDisplay/Information" instance=ExtResource( 14 )]
-position = Vector2( 168.492, 94.0082 )
-script = null
+[node name="ChargeUI" type="Node2D" parent="CanvasLayer1/ControlsDisplay/Information"]
+material = SubResource( 9 )
+position = Vector2( 215, 115 )
+z_index = 4
+
+[node name="StaminaProgress" type="TextureProgress" parent="CanvasLayer1/ControlsDisplay/Information/ChargeUI"]
+modulate = Color( 1, 1, 1, 0.75 )
+light_mask = 0
+use_parent_material = true
+margin_left = -36.0
+margin_top = -36.0
+margin_right = -4.0
+margin_bottom = -4.0
+value = 75.0
+texture_under = ExtResource( 16 )
+texture_progress = ExtResource( 16 )
+fill_mode = 4
+tint_under = Color( 0, 0, 0, 0.501961 )
+tint_progress = Color( 0.231373, 0.737255, 0.211765, 0.784314 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress1" type="TextureProgress" parent="CanvasLayer1/ControlsDisplay/Information/ChargeUI"]
+process_priority = 1
+light_mask = 0
+use_parent_material = true
+anchor_left = -3.0
+anchor_top = 1.0
+anchor_bottom = 3.0
+margin_left = -28.0
+margin_top = -28.0
+margin_right = -12.0
+margin_bottom = -12.0
+max_value = 50.0
+value = 25.0
+texture_progress = ExtResource( 11 )
+fill_mode = 4
+tint_under = Color( 0, 0, 0, 0.501961 )
+tint_progress = Color( 1, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureProgress2" type="TextureProgress" parent="CanvasLayer1/ControlsDisplay/Information/ChargeUI"]
+process_priority = 1
+light_mask = 0
+use_parent_material = true
+anchor_left = -3.75
+anchor_top = 0.25
+anchor_right = -0.25
+anchor_bottom = 3.75
+margin_left = -28.0
+margin_top = -28.0
+margin_right = -12.0
+margin_bottom = -12.0
+min_value = 50.0
+value = 50.0
+texture_progress = ExtResource( 14 )
+fill_mode = 4
+tint_progress = Color( 1, 0.72549, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="gui_input" from="." to="." method="_on_PauseScreen_gui_input"]
 [connection signal="focus_entered" from="MenuPanel/Menu/ButtonStatus" to="." method="_on_ButtonStatus_focus_entered"]

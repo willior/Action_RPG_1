@@ -34,10 +34,10 @@ __meta__ = {
 [node name="Text" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 80.0
+margin_left = 96.0
 margin_top = 180.0
-margin_right = -80.0
-margin_bottom = -30.0
+margin_right = -96.0
+margin_bottom = -44.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -46,6 +46,7 @@ __meta__ = {
 [node name="TextureRect" type="NinePatchRect" parent="Text"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -0.0200005
 size_flags_vertical = 3
 texture = ExtResource( 8 )
 patch_margin_left = 2
@@ -84,7 +85,8 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Text"]
-position = Vector2( 316, 55 )
+visible = false
+position = Vector2( 284, 41 )
 texture = ExtResource( 4 )
 
 [node name="OptionsRect" type="TextureRect" parent="."]
@@ -138,5 +140,6 @@ stream = ExtResource( 7 )
 
 [node name="AudioMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+
 [connection signal="timeout" from="TimerNext" to="." method="_on_TimerNext_timeout"]
 [connection signal="timeout" from="TimerText" to="." method="_on_TimerText_timeout"]
