@@ -2189,8 +2189,8 @@ texture = ExtResource( 6 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
-vframes = 5
 hframes = 60
+vframes = 5
 frame = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -2383,6 +2383,7 @@ wait_time = 0.4
 one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

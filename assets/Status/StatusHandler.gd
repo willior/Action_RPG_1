@@ -5,5 +5,10 @@ onready var Poison = preload("res://assets/Status/Poison.tscn")
 func apply_status(status, body):
 	match status:
 		"Poison":
-			var poison = Poison.instance()
-			body.add_child(poison)
+			if body.has_node("Poison"):
+				print('poison already on ', body, '; returning.')
+				return
+			else:
+				print('poison not on ', body, '; instantiating.')
+				var poison = Poison.instance()
+				body.add_child(poison)

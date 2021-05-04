@@ -58,7 +58,7 @@ func enable_detection(enemy):
 
 func hurtbox_entered(enemy, hitbox):
 	enemy.enemyHealth.show_health()
-	if hitbox.formula:
+	if hitbox.get("formula"):
 		var damage = Global.damage_calculation(hitbox.potency, enemy.stats.defense, hitbox.randomness)
 		deal_damage(enemy, damage, false)
 		if enemy.stats.health > 0:
@@ -85,6 +85,8 @@ func hurtbox_entered(enemy, hitbox):
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)
 	else:
+		if hitbox.get("status"):
+			StatusHandler.apply_status(hitbox.status, enemy)
 		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
 		if is_crit:

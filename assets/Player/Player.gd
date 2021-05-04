@@ -760,6 +760,8 @@ func _on_Hurtbox_area_entered(area):
 		return
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
+		if area.get("status"):
+			StatusHandler.apply_status(area.status, self)
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		var is_crit = Global.enemy_crit_calculation(area.crit_chance)
 		if is_crit:

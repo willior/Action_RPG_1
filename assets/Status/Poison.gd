@@ -12,7 +12,6 @@ export var count = 0
 export var duration = 45 # number of ticks
 export var potency = 1 # damage per tick
 onready var body = get_parent()
-var active = false
 
 func _ready():
 	activate()
@@ -23,30 +22,19 @@ func activate():
 		count = 1
 	else:
 		count = 0
-#	if $Timer.is_stopped():
-#		count = 1
-#		$Timer.start()
-#	else:
-#		count = 0
-
-func poison_tick():
-	body.stats.health -= potency
-	body.hurtbox.display_damage_popup(str(potency), false, "Poison")
-
-func _on_Timer_timeout():
-	if count == duration:
-		poison_tick()
-		queue_free()
-	else:
-		count += 1
-		poison_tick()
-		# $Timer.start()
 
 func _on_PoisonNotice_animation_finished():
+	poison_tick()
 	if count == duration:
-		poison_tick()
 		queue_free()
 	else:
 		count += 1
-		poison_tick()
-		# $Timer.start()
+
+func poison_tick():
+	if body.stats.health <= 0:
+		queue_free()
+	else:
+		body.stats.health -= potency
+		if body.get("enemyHealth"):
+			body.enemyHealth.show_health()
+		body.hurtbox.display_damage_popup(str(potency), false, "Poison")

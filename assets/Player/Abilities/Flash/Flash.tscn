@@ -126,6 +126,7 @@ texture = ExtResource( 7 )
 stream = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="body_entered" from="FormulaTarget/TargetArea" to="FormulaTarget" method="_on_TargetArea_body_entered"]
 [connection signal="body_exited" from="FormulaTarget/TargetArea" to="FormulaTarget" method="_on_TargetArea_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
