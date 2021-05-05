@@ -9,7 +9,8 @@ func update_poison_progress(count):
 	self.value = count
 	print(value, "/", max_value)
 	if value >= max_value:
-		$AnimationPlayer.play("FadeOut")
+		queue_free()
+		# $AnimationPlayer.play("FadeOut")
 
 func delete_poison_progress():
 	queue_free()

@@ -102,7 +102,7 @@ func player_stagger_calculation(player_max_hp, enemy_damage, is_crit):
 		return false
 
 func damage_calculation(attack, defense, random):
-	var base_damage = 2 * (attack*attack / (attack+defense))
+	var base_damage = 2 * (attack*attack / (max(attack+defense, 1)))
 #	print('[[[ attack = ', attack, " vs. ", "defense = ", defense)
 #	print("base damage = ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage, " ]]]")
 	return random_variance(base_damage, random)

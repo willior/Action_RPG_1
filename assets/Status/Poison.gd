@@ -34,6 +34,7 @@ func _on_PoisonNotice_animation_finished():
 	if count == duration:
 		queue_free()
 	else:
+		$PoisonNotice.flip_h = false if $PoisonNotice.flip_h else true
 		count += 1
 
 func poison_tick():

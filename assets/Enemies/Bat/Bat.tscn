@@ -202,7 +202,7 @@ one_shot = true
 position = Vector2( 0, -3 )
 collision_mask = 4
 damage = 8.0
-status = [ "Poison", 0.5 ]
+status = [ "Poison", 1.0 ]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 21 )
@@ -237,8 +237,8 @@ __meta__ = {
 "_editor_description_": "	"
 }
 
-[connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
 [connection signal="no_health" from="BatStats" to="EnemyHealth" method="_on_stats_no_health"]
+[connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
