@@ -47,7 +47,7 @@ var rare_drop_name = "Salt"
 var rare_drop_chance = 0.125
 
 onready var stats = $WolfStats
-onready var timer = $Timer
+onready var cooldownTimer = $CooldownTimer
 onready var sprite = $Sprite
 onready var eye = $Sprite/SpriteEye
 onready var tween = $Tween
@@ -95,7 +95,7 @@ func _physics_process(delta):
 			seek_player()
 			if wanderController.get_time_left() == 0 && !seeking:
 				update_wander_state()
-				
+		
 		WANDER:
 			animationState.travel("Move")
 			seek_player()
@@ -105,18 +105,15 @@ func _physics_process(delta):
 			accelerate_towards_point(wanderController.target_position, WANDER_SPEED, delta)
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
-				
+		
 		CHASE:
 			if playerDetectionZone.player != null:
 				animationState.travel("Move")
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
 			else:
-				if attacking:
-					eye.modulate = Color(1,0,0,1)
-				else:
-					eye.modulate = Color(0,0,0,0)
 				state = IDLE
+		
 		ATTACK:
 			animationState.travel("Leap")
 			if attacking:
@@ -126,11 +123,12 @@ func _physics_process(delta):
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
 			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				state = IDLE
-				
+		
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 		STUN:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			animationState.travel("Idle")
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
@@ -138,7 +136,13 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func reset_state():
+	$DelayTimer.stop()
+	cooldownTimer.stop()
+	seeking = false
+	attacking = false
+	attack_on_cooldown = false
 	state = IDLE
+	Enemy.enable_detection(self)
 
 func examine():
 	var dialog_script = [
@@ -173,13 +177,14 @@ func attack_player():
 		target = attackPlayerZone.player.global_position
 		Enemy.disable_detection(self)
 		attacking = true
+		eye.modulate = Color(1,0,0,1)
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
 		if state == STUN:
+			eye.modulate = Color(0,0,0,0)
 			attacking = false
 			return
 		if stats.health > 0:
-			eye.modulate = Color(1,0,0,1)
 			hitbox.set_deferred("monitorable", true)
 			attackTimer.start()
 			state = ATTACK
@@ -189,11 +194,12 @@ func _on_AttackTimer_timeout():
 	eye.modulate = Color(0,0,0,0)
 	hitbox.set_deferred("monitorable", false)
 	if state == STUN:
+		attack_on_cooldown = false
 		attacking = false
 		return
 	state = IDLE
-	timer.start()
-	yield(timer, "timeout")
+	cooldownTimer.start()
+	yield(cooldownTimer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
 		if state == STUN:

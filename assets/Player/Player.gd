@@ -574,7 +574,8 @@ func hit_animation_finished():
 	if Input.is_action_pressed("attack"):
 		charge_reset()
 		attack_charging = true
-	if !self.has_node("Stun"):
+	if self.has_node("Stun"):
+		$Stun.hide()
 		state = MOVE
 
 func player_state_reset():
@@ -774,7 +775,6 @@ func _on_Hurtbox_area_entered(area):
 			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
 			critPopup.crit_flash()
 		var played_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
-		
 		if attack2_queued && played_staggered:
 			attack2_queued = false
 		if charge_count > 0 && played_staggered:
@@ -782,7 +782,7 @@ func _on_Hurtbox_area_entered(area):
 			charge_reset()
 		hurtbox.display_damage_popup(str(damageTaken), is_crit)
 		hit_damage()
-		if state != ACTION && played_staggered:
+		if state != ACTION && played_staggered or state == STUN:
 			state = HIT
 	else:
 		$DodgeAudio.play()

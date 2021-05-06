@@ -19,7 +19,7 @@ func apply_status(status, body):
 				else:
 					# print('poison check unsuccessful; RNG ', status_check*100, '% was greater than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
 					return
-					
+		
 		"Stun":
 			if body.has_node("Stun"):
 				print(body, ' is already stunned; returning')

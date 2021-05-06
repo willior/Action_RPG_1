@@ -588,7 +588,7 @@ visible = false
 position = Vector2( 0, -1 )
 shape = SubResource( 48 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
 

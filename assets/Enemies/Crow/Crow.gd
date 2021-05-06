@@ -121,6 +121,15 @@ func _physics_process(delta):
 		
 	velocity = move_and_slide(velocity)
 
+func reset_state():
+	$DelayTimer.stop()
+	timer.stop()
+	attackTimer.stop()
+	attacking = false
+	attack_on_cooldown = false
+	state = IDLE
+	Enemy.enable_detection(self)
+
 func examine():
 	var dialog_script = [
 		{'text': "A common crow."},
@@ -169,10 +178,8 @@ func _on_AttackTimer_timeout():
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
-		
 		if state == STUN:
 			return
-		
 		Enemy.enable_detection(self)
 
 func update_wander_state():

@@ -11,8 +11,15 @@ func _ready():
 	else:
 		body.animationState.travel("Hit")
 
+func interrupt_stun():
+	print('stun interrupted on ', body.name, '; deleting.')
+	body.state = 0 # body.get("IDLE")
+	if body.get("ENEMY_NAME"):
+		Enemy.enable_detection(body)
+	queue_free()
+
 func _on_Timer_timeout():
-	print(body.name, ' recovered from stun.')
+	print(body.name, ' recovered from stun; deleting.')
 	body.state = 0 # body.get("IDLE")
 	if body.get("ENEMY_NAME"):
 		Enemy.enable_detection(body)
