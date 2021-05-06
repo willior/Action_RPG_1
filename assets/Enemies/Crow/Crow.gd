@@ -112,6 +112,9 @@ func _physics_process(delta):
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		STUN:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+			animationState.travel("Idle")
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
@@ -134,7 +137,6 @@ func accelerate_towards_point(point, speed, delta):
 		Enemy.h_flip_handler(sprite, eye, velocity)
 
 func seek_player():
-	hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking:
 		fly_animation()
 		eye.modulate = Color(1,0.8,0)
@@ -154,23 +156,34 @@ func attack_player():
 
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
+	hitbox.set_deferred("monitorable", false)
 	eye.modulate = Color(0,0,0)
 	eye.frame = sprite.frame
+	
+	if state == STUN:
+		attack_on_cooldown = false
+		return
+	
 	state = IDLE
 	timer.start(1.2)
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
+		
+		if state == STUN:
+			return
+		
 		Enemy.enable_detection(self)
 
 func update_wander_state():
+	hitbox.set_deferred("monitorable", false)
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 	var state_rng = rand_range(2, 4)
 	if state == 0: # IDLE STATE
 		if state_rng > 3: # plays the "Peck" animation 25% of the time
 			animationState.travel("Peck")
 		else:
-			animationState.travel("Idle") # otherwise plays the idle animation
+			animationState.travel("Caw") # otherwise plays the caw animation
 	elif state == 1: # WANDER STATE
 		fly_animation()
 	
@@ -234,7 +247,7 @@ func _on_CrowStats_no_health():
 		Global.create_blood_effect(40, global_position, z_index)
 
 func idle_animation():
-	animationState.travel("Idle")
+	animationState.travel("Caw")
 
 func fly_animation():
 	animationState.travel("Fly")

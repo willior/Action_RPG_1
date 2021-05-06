@@ -30,7 +30,8 @@ enum {
 	SHADE,
 	HIT,
 	PICKUP,
-	ACTION
+	ACTION,
+	STUN
 }
 
 var state = MOVE
@@ -132,6 +133,7 @@ func _process(delta):
 		HIT: hit_state(delta)
 		PICKUP: pickup_state(delta)
 		ACTION: action_state(delta)
+		STUN: stun_state(delta)
 
 func _input(event):
 	match state:
@@ -572,7 +574,8 @@ func hit_animation_finished():
 	if Input.is_action_pressed("attack"):
 		charge_reset()
 		attack_charging = true
-	state = MOVE
+	if !self.has_node("Stun"):
+		state = MOVE
 
 func player_state_reset():
 	base_enemy_accuracy = 66
@@ -740,7 +743,6 @@ func backstep_animation_finished():
 		velocity = dir_vector * (stats.roll_speed)
 		charge.stop_charge()
 		charge_reset()
-		attack_charging = false
 		state = FLASH
 	elif Input.is_action_pressed("attack"):
 		attack_animation_finished()
@@ -772,7 +774,7 @@ func _on_Hurtbox_area_entered(area):
 			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
 			critPopup.crit_flash()
 		var played_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
-		print('stagger = ', played_staggered)
+		
 		if attack2_queued && played_staggered:
 			attack2_queued = false
 		if charge_count > 0 && played_staggered:
@@ -856,7 +858,7 @@ func pickup_finished():
 		charge_reset()
 		attack_charging = true
 	state = MOVE
-	
+
 func action_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
 	move()
@@ -868,7 +870,7 @@ func action_state(delta):
 	if interacting:
 		# interacting = false
 		self.interactNoticeDisplay = false
-		
+
 func action_finished():
 	animationTree.active = true
 	reset_interaction()
@@ -876,6 +878,18 @@ func action_finished():
 		charge_reset()
 		attack_charging = true
 	state = MOVE
+
+func stun_state(delta):
+	velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
+	move()
+	if examining:
+		self.noticeDisplay = false
+	if talking:
+		# talking = false
+		self.talkNoticeDisplay = false
+	if interacting:
+		# interacting = false
+		self.interactNoticeDisplay = false
 
 # when the Player interacts with something, their interactHitbox is disabled
 # the TalkTimer is started lasting for 0.5 seconds (default)

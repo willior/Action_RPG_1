@@ -11,17 +11,21 @@ var orig_damage
 var randomness = 0.16
 var knockback_vector = Vector2.ZERO
 
-var status = ["Stun", 1.0]
+var status = []
+var orig_status
+var status_two # = ["Poison", 0.5]
 
 func _ready():
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("strength_changed", self, "set_damage")
 	damage = base_damage + PlayerStats.strength
 	orig_damage = damage
+	orig_status = status
 
 func set_damage(value):
 	damage = base_damage + value
 	orig_damage = damage
+	orig_status = status
 	print('STR increased. new damage set = ', damage)
 
 func modify_damage(base, modulator):
@@ -29,6 +33,7 @@ func modify_damage(base, modulator):
 
 func reset_damage():
 	damage = orig_damage
+	status = orig_status
 	$CollisionShape2D.scale.x = 1
 	set_deferred("monitorable", false)
 
@@ -58,6 +63,7 @@ func flash_begin():
 	knockback_vector *= 1.5
 	orig_damage = damage
 	damage = modify_damage(damage, 2)
+	status = ["Stun", 1.0]
 
 func flash_end():
 	reset_damage()

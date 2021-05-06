@@ -57,6 +57,8 @@ func hurtbox_entered(enemy, hitbox):
 		if enemy.stats.health > 0:
 			if hitbox.get("status"):
 				StatusHandler.apply_status(hitbox.status, enemy)
+			if hitbox.get("status_two"):
+				StatusHandler.apply_status(hitbox.status_two, enemy)
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
 			"modulate",
@@ -93,6 +95,8 @@ func hurtbox_entered(enemy, hitbox):
 		if enemy.stats.health > 0:
 			if hitbox.get("status"):
 				StatusHandler.apply_status(hitbox.status, enemy)
+			if hitbox.get("status_two"):
+				StatusHandler.apply_status(hitbox.status_two, enemy)
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
 			"modulate",

@@ -137,27 +137,10 @@ func accelerate_towards_point(point, speed, delta):
 	Enemy.h_flip_handler(sprite, eye, velocity)
 
 func seek_player():
-	hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking:
 		set_speed_scale(2)
 		eye.modulate = Color(1,0.8,0)
 		state = CHASE
-
-# attacking
-# the attack_player() function is run when the enemy is in the CHASE state
-# if that player enters the enemy's attackPlayerZone AND the attack is NOT on cooldown:
-# 1. detection is disabled;
-# 2. attacking is set to true;
-# 3. enables the enemy's hitbox and quadruples the sprite animation speed
-# 4. changes the state to ATTACK and starts the attackTimer (0.8s)
-# 5. ATTACK state: gets the player's position point before setting attacking to false
-# 6. accelerates the enemy to the player's position point
-# 7A. if the enemy arrives at the point, resets the sprite animation speed and state to IDLE
-# 7B. on attackTimer_timeout, attack_on_cooldown becomes true
-#     disables hitbox
-#     resets sprite animation speed and state to IDLE
-#     starts a 1s timer, after which attack_on_cooldown becomes false
-#     enemy detection is re-enabled
 
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
@@ -165,18 +148,20 @@ func attack_player():
 		target = attackPlayerZone.player.global_position
 		Enemy.disable_detection(self)
 		attacking = true
+		
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
 		print('delay timer timeout...')
 		
 		if state == STUN:
-			print('... stunned during delay timer timeout. no attack.')
+			print('... stunned during delay timer timeout; no attack.')
 			attacking = false
 			return
 		
 		hitbox.set_deferred("monitorable", true)
 		set_speed_scale(4)
 		eye.modulate = Color(1,0,0)
+		
 		attackTimer.start()
 		state = ATTACK
 
@@ -189,23 +174,26 @@ func _on_AttackTimer_timeout():
 	
 	if state == STUN:
 		print('...while stunned; resetting cooldown')
+		attacking = false
 		attack_on_cooldown = false
 		return
 	
 	state = IDLE
 	timer.start()
 	yield(timer, "timeout")
+	
 	if attack_on_cooldown:
 		print('...resetting cooldown and re-enabling detection')
 		attack_on_cooldown = false
 		
 		if state == STUN:
-			('cooldown reset during stun; detection NOT enabled')
+			('cooldown reset during stun; detection NOT re-enabled')
 			return
 		
 		Enemy.enable_detection(self)
 
 func update_wander_state():
+	hitbox.set_deferred("monitorable", false)
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 	wanderController.start_wander_timer(rand_range(1, 3)) # starts wander timer between 1s & 3s
 

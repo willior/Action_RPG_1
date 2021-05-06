@@ -129,6 +129,8 @@ func _physics_process(delta):
 				
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
+		STUN:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
@@ -153,7 +155,6 @@ func accelerate_towards_point(point, speed, delta):
 	Enemy.h_flip_handler(sprite, eye, velocity)
 
 func seek_player(): # runs every frame of the IDLE and WANDER states
-	hitbox.set_deferred("monitorable", false)
 	if playerDetectionZone.can_see_player() && !attacking && !seeking:
 		seeking = true
 		state = IDLE
@@ -162,6 +163,9 @@ func seek_player(): # runs every frame of the IDLE and WANDER states
 		chaseTimer.start()
 		yield(chaseTimer, "timeout")
 		seeking = false
+		if state == STUN:
+			eye.modulate = Color(0,0,0,0)
+			return
 		state = CHASE
 
 func attack_player():
@@ -169,10 +173,13 @@ func attack_player():
 		target = attackPlayerZone.player.global_position
 		Enemy.disable_detection(self)
 		attacking = true
-		eye.modulate = Color(1,0,0,1)
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
+		if state == STUN:
+			attacking = false
+			return
 		if stats.health > 0:
+			eye.modulate = Color(1,0,0,1)
 			hitbox.set_deferred("monitorable", true)
 			attackTimer.start()
 			state = ATTACK
@@ -180,14 +187,21 @@ func attack_player():
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
 	eye.modulate = Color(0,0,0,0)
+	hitbox.set_deferred("monitorable", false)
+	if state == STUN:
+		attacking = false
+		return
 	state = IDLE
 	timer.start()
 	yield(timer, "timeout")
 	if attack_on_cooldown:
 		attack_on_cooldown = false
+		if state == STUN:
+			return
 		Enemy.enable_detection(self)
 
 func update_wander_state():
+	hitbox.set_deferred("monitorable", false)
 	state = pick_random_state([IDLE, WANDER]) # feeds an array with the IDLE and WANDER states as its argument
 	var state_rng = rand_range(2, 4)
 	if state == 0: # IDLE STATE
