@@ -452,7 +452,7 @@ graph_offset = Vector2( 364.604, 14.194 )
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id=44]
-radius = 12.0
+radius = 18.0
 
 [sub_resource type="CircleShape2D" id=45]
 radius = 16.0
@@ -477,15 +477,14 @@ material = SubResource( 1 )
 position = Vector2( 0, -2 )
 texture = ExtResource( 15 )
 offset = Vector2( 0, -12 )
-hframes = 19
 vframes = 3
-frame = 38
+hframes = 19
 
 [node name="SpriteEye" type="Sprite" parent="Sprite"]
 texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
-hframes = 19
 vframes = 3
+hframes = 19
 frame = 38
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -530,7 +529,6 @@ position = Vector2( 0, -12 )
 shape = SubResource( 43 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
-visible = false
 position = Vector2( 0, -8 )
 collision_mask = 4
 damage = 16.0
@@ -607,7 +605,6 @@ visible = false
 position = Vector2( 0, 5 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-
 [connection signal="no_health" from="WolfStats" to="." method="_on_WolfStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
@@ -616,7 +613,11 @@ position = Vector2( 0, 5 )
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 [editable path="Hitbox"]
+
 [editable path="Hurtbox"]
+
 [editable path="PlayerDetectionZone"]
+
 [editable path="AttackPlayerZone"]
+
 [editable path="SoftCollision"]

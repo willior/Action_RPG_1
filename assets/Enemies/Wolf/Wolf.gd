@@ -111,7 +111,8 @@ func _physics_process(delta):
 				animationState.travel("Move")
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
 				attack_player()
-			else:
+			elif !attacking:
+				eye.modulate = Color(0,0,0,0)
 				state = IDLE
 		
 		ATTACK:

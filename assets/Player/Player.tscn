@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=2]
+[gd_scene load_steps=171 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -1686,6 +1686,22 @@ tracks/1/keys = {
 "values": [ 270.0 ]
 }
 
+[sub_resource type="Animation" id=146]
+resource_name = "Stun"
+length = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 188 ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=41]
 animation = "Attack1Down"
 
@@ -2001,6 +2017,9 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=147]
+animation = "Stun"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=104]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=105]
@@ -2070,6 +2089,12 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=135]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=148]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=149]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=150]
+
 [sub_resource type="AnimationNodeStateMachine" id=136]
 states/Attack1/node = SubResource( 47 )
 states/Attack1/position = Vector2( -180.039, 226.119 )
@@ -2093,9 +2118,11 @@ states/Run/node = SubResource( 98 )
 states/Run/position = Vector2( -191.625, -5.74334 )
 states/Shade/node = SubResource( 103 )
 states/Shade/position = Vector2( 218.03, 200.973 )
-transitions = [ "Idle", "Roll", SubResource( 104 ), "Roll", "Idle", SubResource( 105 ), "Idle", "Hit", SubResource( 106 ), "Hit", "Idle", SubResource( 107 ), "Roll", "Hit", SubResource( 108 ), "Idle", "Shade", SubResource( 109 ), "Shade", "Idle", SubResource( 110 ), "Shade", "Hit", SubResource( 111 ), "Idle", "Flash", SubResource( 112 ), "Flash", "Idle", SubResource( 113 ), "Flash", "Hit", SubResource( 114 ), "Idle", "Backstep", SubResource( 115 ), "Backstep", "Idle", SubResource( 116 ), "Backstep", "Hit", SubResource( 117 ), "Backstep", "Shade", SubResource( 118 ), "Backstep", "Flash", SubResource( 119 ), "Idle", "Run", SubResource( 120 ), "Run", "Idle", SubResource( 121 ), "Run", "Hit", SubResource( 122 ), "Attack1", "Hit", SubResource( 123 ), "Idle", "Attack1", SubResource( 124 ), "Backstep", "Attack1", SubResource( 125 ), "Attack2", "Attack1", SubResource( 126 ), "Attack1", "Attack2", SubResource( 127 ), "Shade", "Attack2", SubResource( 128 ), "Attack2", "Idle", SubResource( 129 ), "Attack2", "Hit", SubResource( 130 ), "Attack1", "Idle", SubResource( 131 ), "Idle", "Pickup", SubResource( 132 ), "Pickup", "Idle", SubResource( 133 ), "Idle", "Cast", SubResource( 134 ), "Cast", "Idle", SubResource( 135 ) ]
+states/Stun/node = SubResource( 147 )
+states/Stun/position = Vector2( -408.171, 56.937 )
+transitions = [ "Idle", "Roll", SubResource( 104 ), "Roll", "Idle", SubResource( 105 ), "Idle", "Hit", SubResource( 106 ), "Hit", "Idle", SubResource( 107 ), "Roll", "Hit", SubResource( 108 ), "Idle", "Shade", SubResource( 109 ), "Shade", "Idle", SubResource( 110 ), "Shade", "Hit", SubResource( 111 ), "Idle", "Flash", SubResource( 112 ), "Flash", "Idle", SubResource( 113 ), "Flash", "Hit", SubResource( 114 ), "Idle", "Backstep", SubResource( 115 ), "Backstep", "Idle", SubResource( 116 ), "Backstep", "Hit", SubResource( 117 ), "Backstep", "Shade", SubResource( 118 ), "Backstep", "Flash", SubResource( 119 ), "Idle", "Run", SubResource( 120 ), "Run", "Idle", SubResource( 121 ), "Run", "Hit", SubResource( 122 ), "Attack1", "Hit", SubResource( 123 ), "Idle", "Attack1", SubResource( 124 ), "Backstep", "Attack1", SubResource( 125 ), "Attack2", "Attack1", SubResource( 126 ), "Attack1", "Attack2", SubResource( 127 ), "Shade", "Attack2", SubResource( 128 ), "Attack2", "Idle", SubResource( 129 ), "Attack2", "Hit", SubResource( 130 ), "Attack1", "Idle", SubResource( 131 ), "Idle", "Pickup", SubResource( 132 ), "Pickup", "Idle", SubResource( 133 ), "Idle", "Cast", SubResource( 134 ), "Cast", "Idle", SubResource( 135 ), "Stun", "Idle", SubResource( 148 ), "Stun", "Hit", SubResource( 149 ), "Run", "Stun", SubResource( 150 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -384.124, -167.524 )
+graph_offset = Vector2( -518.368, -38.0369 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=137]
 
@@ -2189,9 +2216,9 @@ texture = ExtResource( 6 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
-hframes = 60
 vframes = 5
-frame = 188
+hframes = 60
+frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2239,6 +2266,7 @@ anims/RunDown = SubResource( 37 )
 anims/RunLeft = SubResource( 38 )
 anims/RunRight = SubResource( 39 )
 anims/RunUp = SubResource( 40 )
+anims/Stun = SubResource( 146 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 136 )
@@ -2385,7 +2413,6 @@ wait_time = 0.4
 one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
-
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

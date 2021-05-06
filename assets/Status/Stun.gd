@@ -8,8 +8,6 @@ func _ready():
 	body.state = body.get("STUN")
 	if body.get("ENEMY_NAME"):
 		Enemy.disable_detection(body)
-	else:
-		body.animationState.travel("Hit")
 
 func interrupt_stun():
 	print('stun interrupted on ', body.name, '; deleting.')
@@ -24,6 +22,9 @@ func _on_Timer_timeout():
 	if body.get("ENEMY_NAME"):
 		Enemy.enable_detection(body)
 	queue_free()
+
+func get_stun_time_remaining():
+	return $Timer.get_time_left()
 
 # STUN requires additional 3 condition checks on each enemy to occur.
 # 1a. EITHER : during attack_player() function which called every frame of the CHASE states;

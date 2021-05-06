@@ -1153,7 +1153,6 @@ stream = ExtResource( 11 )
 
 [node name="GUI" parent="." instance=ExtResource( 6 )]
 layer = 2
-
 [connection signal="body_entered" from="Map/MiddleTransitionTop" to="Map" method="_on_MiddleTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionTop" to="Map" method="_on_BelowTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionBottom" to="Map" method="_on_BelowTransition_body_entered"]

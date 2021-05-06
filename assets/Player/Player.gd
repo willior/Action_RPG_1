@@ -556,33 +556,10 @@ func flash_stop():
 	swordHitbox.flash_end()
 	# stats.strength_mod = 0
 
-func hit_damage():
-	stats.health -= damageTaken
-	$HurtAudio.play()
-	hurtbox.start_invincibility(1)
-	hurtbox.create_hit_effect()
-
-func hit_state(_delta):
-# warning-ignore:integer_division
-	velocity = -dir_vector * (stats.roll_speed/2)
-	animationState.travel("Hit")
-	move()
-
-func hit_animation_finished():
-	stamina_regen_reset()
-	player_state_reset()
-	if Input.is_action_pressed("attack"):
-		charge_reset()
-		attack_charging = true
-	if self.has_node("Stun"):
-		$Stun.hide()
-		state = MOVE
-
 func player_state_reset():
 	base_enemy_accuracy = 66
 	charge.stop_charge()
 	swordHitbox.set_deferred("monitorable", false)
-	# swordHitbox.damage = swordHitbox.orig_damage
 	swordHitbox.reset_damage()
 
 func enemy_killed(experience_from_kill):
@@ -764,8 +741,6 @@ func _on_Hurtbox_area_entered(area):
 		return
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
-		if area.get("status"):
-			StatusHandler.apply_status(area.status, self)
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		var is_crit = Global.enemy_crit_calculation(area.crit_chance)
 		if is_crit:
@@ -774,19 +749,63 @@ func _on_Hurtbox_area_entered(area):
 			critPopup.message = str(self.name, " gets whacked!")
 			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
 			critPopup.crit_flash()
-		var played_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
-		if attack2_queued && played_staggered:
+		var player_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
+		if attack2_queued && player_staggered:
 			attack2_queued = false
-		if charge_count > 0 && played_staggered:
+		if charge_count > 0 && player_staggered:
 			charge.stop_charge()
 			charge_reset()
 		hurtbox.display_damage_popup(str(damageTaken), is_crit)
+		if area.get("status"):
+			StatusHandler.apply_status(area.status, self)
 		hit_damage()
-		if state != ACTION && played_staggered or state == STUN:
-			state = HIT
+		if state != ACTION:
+			if state == STUN:
+				print('hit in stun state.')
+				velocity = -dir_vector * (stats.roll_speed/2)
+				animationState.travel("Stun")
+				return
+			elif player_staggered:
+				print('hit not in stun state; staggered')
+				state = HIT
 	else:
 		$DodgeAudio.play()
 		hurtbox.display_damage_popup("Miss!", false)
+
+func hit_damage():
+	if self.has_node("Stun") and get_node("Stun").get_stun_time_remaining() < 2:
+		print('interrupting stun...')
+		get_node("Stun").interrupt_stun()
+	stats.health -= damageTaken
+	$HurtAudio.play()
+	hurtbox.start_invincibility(1)
+	hurtbox.create_hit_effect()
+
+func stun_state(delta):
+	velocity = velocity.move_toward(Vector2.ZERO, stats.friction/4 * delta)
+	move()
+	if examining:
+		self.noticeDisplay = false
+	if talking:
+		# talking = false
+		self.talkNoticeDisplay = false
+	if interacting:
+		# interacting = false
+		self.interactNoticeDisplay = false
+
+func hit_state(_delta):
+# warning-ignore:integer_division
+	velocity = -dir_vector * (stats.roll_speed/2)
+	animationState.travel("Hit")
+	move()
+
+func hit_animation_finished():
+	stamina_regen_reset()
+	player_state_reset()
+	if Input.is_action_pressed("attack"):
+		charge_reset()
+		attack_charging = true
+	state = MOVE
 
 func _on_Hurtbox_invincibility_started():
 	pass
@@ -878,18 +897,6 @@ func action_finished():
 		charge_reset()
 		attack_charging = true
 	state = MOVE
-
-func stun_state(delta):
-	velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
-	move()
-	if examining:
-		self.noticeDisplay = false
-	if talking:
-		# talking = false
-		self.talkNoticeDisplay = false
-	if interacting:
-		# interacting = false
-		self.interactNoticeDisplay = false
 
 # when the Player interacts with something, their interactHitbox is disabled
 # the TalkTimer is started lasting for 0.5 seconds (default)

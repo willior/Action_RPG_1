@@ -144,52 +144,36 @@ func seek_player():
 
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
-		print('attacking player')
 		target = attackPlayerZone.player.global_position
 		Enemy.disable_detection(self)
 		attacking = true
-		
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
-		print('delay timer timeout...')
-		
 		if state == STUN:
-			print('... stunned during delay timer timeout; no attack.')
 			attacking = false
 			return
-		
 		hitbox.set_deferred("monitorable", true)
 		set_speed_scale(4)
 		eye.modulate = Color(1,0,0)
-		
 		attackTimer.start()
 		state = ATTACK
 
 func _on_AttackTimer_timeout():
-	print('attack timer timeout...')
 	attack_on_cooldown = true
 	hitbox.set_deferred("monitorable", false)
 	set_speed_scale(1)
 	eye.modulate = Color(0,0,0)
-	
 	if state == STUN:
-		print('...while stunned; resetting cooldown')
 		attacking = false
 		attack_on_cooldown = false
 		return
-	
 	state = IDLE
 	timer.start()
 	yield(timer, "timeout")
-	
 	if attack_on_cooldown:
-		print('...resetting cooldown and re-enabling detection')
 		attack_on_cooldown = false
-		
 		if state == STUN:
-			('cooldown reset during stun; detection NOT re-enabled')
 			return
-		
 		Enemy.enable_detection(self)
 
 func update_wander_state():

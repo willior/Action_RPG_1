@@ -14,9 +14,9 @@ var friction = 800
 var shade_friction = 840
 var dir_vector = Vector2.DOWN
 
-var vitality = 40 setget set_vitality
+var vitality = 12 setget set_vitality
 var vitality_description = \"Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand.\"
-var endurance = 40 setget set_endurance
+var endurance = 12 setget set_endurance
 var endurance_description = \"Lung Capacity determines how many physical actions you can perform in a short period of time.\"
 var defense = 4.0 setget set_defense
 var defense_description = \"Resilience makes things easier for you when hardship is inevitable, as well as helps in maintaining your composure.\"
@@ -344,5 +344,4 @@ script = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="Frenzy"]
 one_shot = true
-
 [connection signal="timeout" from="Frenzy/Timer" to="Frenzy" method="_on_Timer_timeout"]
