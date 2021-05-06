@@ -21,7 +21,8 @@ enum {
 	WANDER,
 	CHASE,
 	ATTACK,
-	DEAD
+	DEAD,
+	STUN
 }
 var state = IDLE
 var evasion_mod = 0

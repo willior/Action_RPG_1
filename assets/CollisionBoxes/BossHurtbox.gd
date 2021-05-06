@@ -30,6 +30,7 @@ func display_damage_popup(value, crit, kind="Normal"):
 	var damagePopup = DamagePopup.instance()
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
+	damagePopup.kind = kind
 	get_parent().get_node("CanvasLayer/BossHealth/DamageContainer").add_child(damagePopup)
 
 func _on_Timer_timeout():

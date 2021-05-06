@@ -10,7 +10,8 @@ enum {
 	WANDER,
 	CHASE,
 	ATTACK,
-	DEAD
+	DEAD,
+	STUN
 }
 
 func h_flip_handler(sprite, eye, velocity):
@@ -54,6 +55,8 @@ func hurtbox_entered(enemy, hitbox):
 		var damage = Global.damage_calculation(hitbox.potency, enemy.stats.defense, hitbox.randomness)
 		deal_damage(enemy, damage, false)
 		if enemy.stats.health > 0:
+			if hitbox.get("status"):
+				StatusHandler.apply_status(hitbox.status, enemy)
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
 			"modulate",
@@ -86,6 +89,7 @@ func hurtbox_entered(enemy, hitbox):
 			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
 			critPopup.crit_flash()
 		deal_damage(enemy, damage, is_crit)
+
 		if enemy.stats.health > 0:
 			if hitbox.get("status"):
 				StatusHandler.apply_status(hitbox.status, enemy)
@@ -116,7 +120,11 @@ func deal_damage(enemy, damage, is_crit):
 	enemy.hurtbox.create_hit_effect()
 	enemy.hurtbox.start_invincibility(0.05)
 	enemy.sprite.modulate = Color(1,1,0)
-	
+
+func stun_enemy(enemy):
+	enemy.state = STUN
+	disable_detection(enemy)
+
 func no_health(enemy, death_effect):
 	enemy.hurtbox.set_deferred("monitoring", false) # turn off hurtbox
 	enemy.hitbox.set_deferred("monitorable", false)

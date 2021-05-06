@@ -166,6 +166,7 @@ position = Vector2( 0, -14 )
 shape = SubResource( 17 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
+pause_mode = 2
 visible = false
 collision_layer = 8
 script = ExtResource( 12 )
@@ -178,6 +179,7 @@ shape = SubResource( 18 )
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
 visible = false
+monitorable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 scale = Vector2( 4, 4 )
@@ -187,6 +189,7 @@ shape = SubResource( 19 )
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
 visible = false
+monitorable = false
 collision_layer = 0
 collision_mask = 2
 
@@ -202,7 +205,7 @@ one_shot = true
 position = Vector2( 0, -3 )
 collision_mask = 4
 damage = 8.0
-status = [ "Poison", 1.0 ]
+status = [ "Poison", 0.0 ]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 21 )

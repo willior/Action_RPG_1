@@ -1,15 +1,19 @@
 extends Node2D
+
 const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 const PoisonIcon = preload("res://assets/UI/Status/PoisonIcon.tscn")
+
 export var count = 0
 export var duration = 16 # number of ticks
 export var potency = 1 # damage per tick
+
 onready var body = get_parent()
 
 signal poison_progress_updated(value)
 
 func _ready():
 	print(body.name, ' is poisoned!')
+	body.hurtbox.display_damage_popup("Poisoned!", false, "Poison")
 	var messagePopup = MessagePopup.instance()
 	if body.get("ENEMY_NAME"):
 		messagePopup.message = str(body.ENEMY_NAME, ' is poisoned!')

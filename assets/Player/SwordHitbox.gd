@@ -10,7 +10,8 @@ onready var damage # setget set_damage
 var orig_damage
 var randomness = 0.16
 var knockback_vector = Vector2.ZERO
-var status = ["Poison", 0.25]
+
+var status = ["Stun", 1.0]
 
 func _ready():
 # warning-ignore:return_value_discarded

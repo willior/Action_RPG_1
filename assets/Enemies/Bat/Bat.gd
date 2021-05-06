@@ -17,7 +17,8 @@ enum {
 	WANDER,
 	CHASE,
 	ATTACK,
-	DEAD
+	DEAD,
+	STUN
 }
 var state = IDLE
 var evasion_mod = 0
@@ -113,7 +114,8 @@ func _physics_process(delta):
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-				
+		STUN:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * 400
@@ -159,11 +161,19 @@ func seek_player():
 
 func attack_player():
 	if attackPlayerZone.can_attack_player() && !attack_on_cooldown:
+		print('attacking player')
 		target = attackPlayerZone.player.global_position
 		Enemy.disable_detection(self)
 		attacking = true
 		$DelayTimer.start()
 		yield($DelayTimer, "timeout")
+		print('delay timer timeout...')
+		
+		if state == STUN:
+			print('... stunned during delay timer timeout. no attack.')
+			attacking = false
+			return
+		
 		hitbox.set_deferred("monitorable", true)
 		set_speed_scale(4)
 		eye.modulate = Color(1,0,0)
@@ -171,15 +181,28 @@ func attack_player():
 		state = ATTACK
 
 func _on_AttackTimer_timeout():
+	print('attack timer timeout...')
 	attack_on_cooldown = true
 	hitbox.set_deferred("monitorable", false)
 	set_speed_scale(1)
 	eye.modulate = Color(0,0,0)
+	
+	if state == STUN:
+		print('...while stunned; resetting cooldown')
+		attack_on_cooldown = false
+		return
+	
 	state = IDLE
 	timer.start()
 	yield(timer, "timeout")
 	if attack_on_cooldown:
+		print('...resetting cooldown and re-enabling detection')
 		attack_on_cooldown = false
+		
+		if state == STUN:
+			('cooldown reset during stun; detection NOT enabled')
+			return
+		
 		Enemy.enable_detection(self)
 
 func update_wander_state():
@@ -195,7 +218,7 @@ func create_hit_effect(_damage_count):
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
 	var hit = Enemy.hurtbox_entered(self, area)
-	if hit && state == ATTACK:
+	if hit && state == ATTACK && state != STUN:
 		state = IDLE
 
 func _on_BatStats_no_health():

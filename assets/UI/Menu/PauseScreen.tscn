@@ -872,6 +872,7 @@ __meta__ = {
 }
 
 [node name="CanvasLayer1" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="ControlsDisplay" type="Control" parent="CanvasLayer1"]
 visible = false

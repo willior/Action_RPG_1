@@ -419,20 +419,20 @@ func attack2_state(delta):
 	animationState.travel("Attack2")
 
 func attack1_stamina_drain():
+	swordHitbox.set_deferred("monitorable", true)
 	if PlayerStats.frenzy.active:
 		stats.stamina -= 3
 	else:
 		stats.stamina -= 15
 	swordHitbox.sword_attack_audio()
-	swordHitbox.set_deferred("monitorable", true)
 
 func attack2_stamina_drain():
+	swordHitbox.set_deferred("monitorable", true)
 	if PlayerStats.frenzy.active:
 		stats.stamina -= 2
 	else:
 		stats.stamina -= 10
 	swordHitbox.sword_attack_audio()
-	swordHitbox.set_deferred("monitorable", true)
 
 func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
@@ -507,7 +507,7 @@ func shade_state(delta):
 			attack2_queued = true
 	animationState.travel("Shade")
 	move()
-	
+
 func shade_start():
 	set_collision_mask_bit(4, false)
 	yield(get_tree().create_timer(0.05), "timeout")

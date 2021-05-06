@@ -379,7 +379,7 @@ max_space = Vector2( 1, 1.1 )
 [sub_resource type="AnimationNodeTimeScale" id=26]
 
 [sub_resource type="AnimationNodeBlendTree" id=27]
-graph_offset = Vector2( -67.995, 81.8812 )
+graph_offset = Vector2( -67.995, 14.1312 )
 nodes/BlendSpace2D/node = SubResource( 25 )
 nodes/BlendSpace2D/position = Vector2( 240, 80 )
 nodes/TimeScale/node = SubResource( 26 )
