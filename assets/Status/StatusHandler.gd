@@ -1,11 +1,19 @@
 extends Node
 
 onready var MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
-onready var Poison = preload("res://assets/Status/Poison.tscn")
-onready var Stun = preload("res://assets/Status/Stun.tscn")
+onready var Regen = preload("res://assets/Status/Buffs/Regen.tscn")
+onready var Poison = preload("res://assets/Status/Debuffs/Poison.tscn")
+onready var Stun = preload("res://assets/Status/Debuffs/Stun.tscn")
 
 func apply_status(status, body):
 	match status[0]:
+		"Regen":
+			if body.has_node("Regen"):
+				print(body, ' is already regened; returning')
+				return
+			else:
+				var regen = Regen.instance()
+				body.add_child(regen)
 		"Poison":
 			if body.has_node("Poison"):
 				return

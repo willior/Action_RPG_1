@@ -15,6 +15,8 @@ func _ready():
 	match kind:
 		"Poison":
 			popup_color = Color(0.5, 0, 1, 1)
+		"Heal":
+			popup_color = Color(0, 1, 1, 1)
 	if damageDisplay == "Miss!":
 		fade = white_fade
 	else:

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Stun.png-a29de262a8da6cc42a990f80d77e2689.stex"
+path="res://.import/Poison.png-2dcac7e9e73c0f2afa605b73f4a5aef5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Status/Stun.png"
-dest_files=[ "res://.import/Stun.png-a29de262a8da6cc42a990f80d77e2689.stex" ]
+source_file="res://assets/Status/Debuffs/Poison.png"
+dest_files=[ "res://.import/Poison.png-2dcac7e9e73c0f2afa605b73f4a5aef5.stex" ]
 
 [params]
 

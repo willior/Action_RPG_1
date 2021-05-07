@@ -6,6 +6,7 @@ var hp_to_heal = 0
 var heal_amount = 0
 var heal_rate = 1
 var total_healed = 0
+var status = ["Regen"]
 
 func _ready():
 	player.state = 9
@@ -26,6 +27,7 @@ func ability_start():
 
 func heal():
 	heal_amount = $FormulaHitbox.amount
+	StatusHandler.apply_status(status, player)
 
 func ability_end():
 	$FormulaHitbox.set_deferred("monitorable", true)

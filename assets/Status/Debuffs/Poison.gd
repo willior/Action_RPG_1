@@ -1,15 +1,12 @@
 extends Node2D
 
 const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
-const PoisonIcon = preload("res://assets/UI/Status/PoisonIcon.tscn")
-
+const Icon = preload("res://assets/UI/Status/PoisonIcon.tscn")
 export var count = 0
 export var duration = 16 # number of ticks
 export var potency = 1 # damage per tick
-
 onready var body = get_parent()
-
-signal poison_progress_updated(value)
+signal poison_removed()
 
 func _ready():
 	print(body.name, ' is poisoned!')
@@ -19,35 +16,28 @@ func _ready():
 		messagePopup.message = str(body.ENEMY_NAME, ' is poisoned!')
 	else:
 		messagePopup.message = "Poisoned!"
-		var poison_icon = PoisonIcon.instance()
-		poison_icon.max_value = duration
-		get_node("/root/World/GUI/StatusDisplay1/StatusContainer").add_child(poison_icon)
+		var icon = Icon.instance()
+		icon.max_value = duration
+		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").add_child(icon)
 	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
 	messagePopup.poison_flash()
-	activate()
+	$Timer.start(duration)
+	$PoisonIndicator.play()
 
-func activate():
-	if !$PoisonNotice.playing:
-		$PoisonNotice.play()
-		count = 1
-	else:
-		count = 0
-
-func _on_PoisonNotice_animation_finished():
-	poison_tick()
-	if count == duration:
-		emit_signal("poison_progress_updated", duration)
-		queue_free()
-	else:
-		$PoisonNotice.flip_h = false if $PoisonNotice.flip_h else true
-		count += 1
-
-func poison_tick():
+func _on_PoisonIndicator_animation_finished():
 	if body.stats.health <= 0:
+		print('poison tick at 0 health: deleting poison')
 		queue_free()
 	else:
 		body.stats.health -= potency
 		if body.get("enemyHealth"):
 			body.enemyHealth.show_health()
 		body.hurtbox.display_damage_popup(str(potency), false, "Poison")
-		emit_signal("poison_progress_updated", count)
+
+func _on_Timer_timeout():
+	print('poison timer timeout')
+	queue_free()
+
+func _on_PoisonNotice_tree_exiting():
+	print('poison exiting tree')
+	emit_signal("poison_removed")

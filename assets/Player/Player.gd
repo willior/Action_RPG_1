@@ -842,6 +842,10 @@ func game_over():
 	get_node("/root/World/GUI/ExpBar1").visible = false
 	get_node("/root/World/GUI/StaminaBar1").visible = false
 	get_node("/root/World/GUI/FormulaUI1").visible = false
+	for d in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").get_children():
+		d.queue_free()
+	for b in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").get_children():
+		b.queue_free()
 	self.visible = false
 	get_tree().paused = true
 	
