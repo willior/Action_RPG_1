@@ -458,18 +458,10 @@ func attack_animation_finished():
 		attack_charging = true
 		# charge_reset()
 
-# when an attack animation finishes, checks to see if the button is still held
-# if it is, changes the player state to "charging"
-# if the player releases the attack button, charging state ends
-# if the player holds the button for enough time, charge_level_1 is achieved
-# if the player continues to hold the button, charge_level_2 is achieved
-# releasing the attack button after achieving a charge level unleashes a special attack
 func charge_state(_delta):
 	if stamina_regen_level > 0:
 		stamina_regen_reset()
-	# stamina drain
 	stats.stamina -= 0.55
-	
 	if stats.stamina <= 0:
 		charge.stop_charge()
 		charge_reset()
@@ -477,15 +469,11 @@ func charge_state(_delta):
 			stats.status = "sweating"
 			noStamina()
 		return
-		
-	# if the current charge is less than the max charge
 	if charge_count < stats.max_charge:
 		charge_count += stats.charge_rate
 		stats.charge = charge_count
-	# if the charge count reaches 50%
 	if charge_count >= stats.max_charge/2 && !attack_1_charged && !attack_2_charged:
 		attack_1_charged = true
-	# if the charge count reaches 100%
 	elif charge_count >= stats.max_charge && attack_charging:
 		attack_1_charged = false
 		attack_2_charged = true
@@ -559,7 +547,6 @@ func flash_stop():
 func player_state_reset():
 	base_enemy_accuracy = 66
 	charge.stop_charge()
-	swordHitbox.set_deferred("monitorable", false)
 	swordHitbox.reset_damage()
 
 func enemy_killed(experience_from_kill):
