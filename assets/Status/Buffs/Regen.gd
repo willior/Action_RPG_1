@@ -1,6 +1,6 @@
 extends Node2D
 
-const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
+# const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 const Icon = preload("res://assets/UI/Status/Buffs/RegenIcon.tscn")
 export var count = 0
 export var duration = 16 # number of ticks
@@ -11,29 +11,30 @@ signal regen_removed()
 func _ready():
 	print(body.name, ' has Regen!')
 	body.hurtbox.display_damage_popup("Regen", false, "Heal")
-	var messagePopup = MessagePopup.instance()
+	# var messagePopup = MessagePopup.instance()
 	if body.get("ENEMY_NAME"):
-		messagePopup.message = str(body.ENEMY_NAME, ' is regened!')
+		pass
+		# messagePopup.message = str(body.ENEMY_NAME, ' is regened!')
 	else:
-		messagePopup.message = "Regened!"
+		# messagePopup.message = "Regened!"
 		var icon = Icon.instance()
 		icon.duration = duration
-		icon.max_value = duration
 		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").add_child(icon)
-	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
+	# get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
 	$Timer.start(duration)
 	$RegenIndicator.play()
 
 func refresh_status():
 	print(body.name, ' regen refreshed')
 	body.hurtbox.display_damage_popup("Regen", false, "Heal")
-	var messagePopup = MessagePopup.instance()
+	# var messagePopup = MessagePopup.instance()
 	if body.get("ENEMY_NAME"):
-		messagePopup.message = str(body.ENEMY_NAME, ' is regened!')
+		pass
+		# messagePopup.message = str(body.ENEMY_NAME, ' is regened!')
 	else:
-		messagePopup.message = "Regened!"
+		# messagePopup.message = "Regened!"
 		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/RegenIcon").refresh_status_icon()
-	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
+	# get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
 	$Timer.start(duration)
 	$RegenIndicator.play()
 

@@ -3,6 +3,7 @@ extends TextureProgress
 var duration
 
 func _ready():
+	self.max_value = duration
 # warning-ignore:return_value_discarded
 	get_node("/root/World/YSort/Player/Regen").connect("regen_removed", self, "delete_regen_progress")
 	start_status_icon()
