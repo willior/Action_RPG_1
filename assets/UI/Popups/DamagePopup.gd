@@ -7,20 +7,24 @@ var kind
 var is_miss
 var popup_color = Color(1, 1, 1, 1)
 var red_fade = Color(1, 0.1, 0, 0)
+var teal_fade = Color(0, 1, 1, 0)
 var white_fade = Color(1, 1, 1, 0)
 var fade
 var damageDisplay
 
 func _ready():
 	match kind:
+		"Normal":
+			fade = red_fade
 		"Poison":
 			popup_color = Color(0.5, 0, 1, 1)
+			fade = red_fade
 		"Heal":
 			popup_color = Color(0, 1, 1, 1)
+			fade = teal_fade
+	
 	if damageDisplay == "Miss!":
 		fade = white_fade
-	else:
-		fade = red_fade
 	if is_crit:
 		$AnimationPlayer.play("crit_flash")
 		text.add_font_override("font", load("res://assets/Font/large_dynamicFont.tres"))

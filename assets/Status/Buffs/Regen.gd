@@ -10,17 +10,30 @@ signal regen_removed()
 
 func _ready():
 	print(body.name, ' has Regen!')
-	body.hurtbox.display_damage_popup("Regen", false)
+	body.hurtbox.display_damage_popup("Regen", false, "Heal")
 	var messagePopup = MessagePopup.instance()
 	if body.get("ENEMY_NAME"):
 		messagePopup.message = str(body.ENEMY_NAME, ' is regened!')
 	else:
 		messagePopup.message = "Regened!"
 		var icon = Icon.instance()
+		icon.duration = duration
 		icon.max_value = duration
 		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").add_child(icon)
 	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
-	messagePopup.poison_flash()
+	$Timer.start(duration)
+	$RegenIndicator.play()
+
+func refresh_status():
+	print(body.name, ' regen refreshed')
+	body.hurtbox.display_damage_popup("Regen", false, "Heal")
+	var messagePopup = MessagePopup.instance()
+	if body.get("ENEMY_NAME"):
+		messagePopup.message = str(body.ENEMY_NAME, ' is regened!')
+	else:
+		messagePopup.message = "Regened!"
+		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/RegenIcon").refresh_status_icon()
+	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
 	$Timer.start(duration)
 	$RegenIndicator.play()
 

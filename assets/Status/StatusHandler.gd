@@ -9,7 +9,8 @@ func apply_status(status, body):
 	match status[0]:
 		"Regen":
 			if body.has_node("Regen"):
-				print(body, ' is already regened; returning')
+				print(body, ' is already regened; refreshing')
+				body.get_node("Regen").refresh_status()
 				return
 			else:
 				var regen = Regen.instance()

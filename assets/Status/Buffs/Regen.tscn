@@ -89,6 +89,8 @@ position = Vector2( 0, -28 )
 frames = SubResource( 18 )
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 16.0
+one_shot = true
 
 [connection signal="animation_finished" from="RegenIndicator" to="." method="_on_RegenIndicator_animation_finished"]
 [connection signal="tree_exiting" from="RegenIndicator" to="." method="_on_RegenIndicator_tree_exiting"]
