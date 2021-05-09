@@ -1,19 +1,23 @@
 extends KinematicBody2D
 
 const Notice = preload("res://assets/UI/Notice.tscn")
-const Poison = preload("res://assets/UI/Status/PoisonNotice.tscn")
-const LevelNotice = preload("res://assets/UI/LevelNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
-const DialogLevelBox = preload("res://assets/UI/DialogLevelBox.tscn")
+const LevelUpScreen = preload("res://assets/UI/LevelUp/LevelUpScreen.tscn")
+const TweenGreyscale = preload("res://assets/Shaders/Greyscale_TweenCanvasModulate.tscn")
 const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
-const WhiteFlash = preload("res://assets/Shaders/White_CanvasModulate.tscn")
+const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
+const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 
-#var inventory_resource = load("res://assets/Player/Inventory.gd")
-var pouch_resource = load("res://assets/Player/Pouch/Pouch.gd")
-#var inventory = inventory_resource.new()
+var inventory_resource = load("res://assets/Player/Inventory.gd")
+var inventory = inventory_resource.new()
+var pouch_resource = load("res://assets/Player/Pouch.gd")
 var pouch = pouch_resource.new()
+var formulabook_resource = load("res://assets/Player/FormulaBook.gd")
+var formulabook = formulabook_resource.new()
+var ingredient1_OK : bool
+var ingredient2_OK : bool
 
 enum {
 	MOVE,
@@ -23,27 +27,25 @@ enum {
 	ATTACK2,
 	FLASH,
 	SHADE,
-	HIT
-}
-
-enum {
-	LEVELHEALTH,
-	LEVELDEFENSE,
-	LEVELSTAMINA,
-	LEVELSTRENGTH,
-	LEVELDEXTERITY,
-	LEVELSPEED
+	HIT,
+	PICKUP,
+	ACTION,
+	STUN
 }
 
 var state = MOVE
 var velocity = Vector2.ZERO
-var dir_vector = Player2Stats.dir_vector
+var dir_vector = PlayerStats.dir_vector
 var damageTaken = 0
-var stats = Player2Stats
+var stats = PlayerStats
+var stamina_regen_level = 0
 var levelStats = [0, 1, 2, 3, 4, 5]
 var levelResult = 0
+
 var level_queued = false
 var queued_levels = 0
+var levels_to_add = 0
+var stats_to_allocate = 0
 
 var roll_moving = false
 var backstep_moving = false
@@ -66,12 +68,14 @@ var examining = false
 var talking = false
 var interacting = false
 var using_item = false
+var casting = false
 
 var noticeDisplay = false setget set_notice
 var talkNoticeDisplay = false setget set_talk_notice
 var interactNoticeDisplay = false setget set_interact_notice
 var sweating = false
 var dying = false
+var just_leveled = 0
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -89,9 +93,9 @@ onready var notice = $ExamineNotice
 onready var talkNotice = $TalkNotice
 onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
-onready var audio = $AudioStreamPlayer
-onready var sword_swipe = preload("res://assets/Audio/Swipe.wav")
-onready var player1 = get_node("/root/World/YSort/Player")
+onready var bamboo = $BambooAudio
+
+signal player_saved
 
 func _ready():
 	if Global.get_attribute("location") != null:
@@ -144,24 +148,24 @@ func _input(event):
 				elif stats.stamina <= 0:
 					noStamina()
 					
-			if event.is_action_pressed("item_2"): # G
-				var item_used = player1.inventory._items[player1.inventory.current_selected_item]
-				match item_used.item_reference.type:
-					0: # CONSUMABLE
-						player1.inventory.use_item(2)
-					1: # TOOL
-						pass
-					2: # QUEST
-						if talkTimer.is_stopped() && !dying:
-							if !using_item:
-								talkTimer.start()
-								var dialogBox = DialogBox.instance()
-								dialogBox.dialog_script = [{'text': "Can't use that here."}]
-								get_node("/root/World/GUI").add_child(dialogBox)
-								return
-							else:
-								talkTimer.start()
-								interactObject.use_item_on_object()
+#			if event.is_action_pressed("item_2"): # G
+#				var item_used = player1.inventory._items[player1.inventory.current_selected_item]
+#				match item_used.item_reference.type:
+#					0: # CONSUMABLE
+#						player1.inventory.use_item(2)
+#					1: # TOOL
+#						pass
+#					2: # QUEST
+#						if talkTimer.is_stopped() && !dying:
+#							if !using_item:
+#								talkTimer.start()
+#								var dialogBox = DialogBox.instance()
+#								dialogBox.dialog_script = [{'text': "Can't use that here."}]
+#								get_node("/root/World/GUI").add_child(dialogBox)
+#								return
+#							else:
+#								talkTimer.start()
+#								interactObject.use_item_on_object()
 		
 		ATTACK1:
 			if event.is_action_pressed("attack_2") && !event.is_echo():
@@ -224,15 +228,15 @@ func move_state(delta):
 				talkTimer.start()
 				interactObject.examine()
 			
-	if Input.is_action_just_pressed("next_item_2"):
-		player1.inventory.advance_selected_item()
-		interactHitbox.disabled = true
-		interactHitbox.disabled = false
-		
-	if Input.is_action_just_pressed("previous_item_2"): # E
-		player1.inventory.previous_selected_item()
-		interactHitbox.disabled = true
-		interactHitbox.disabled = false
+#	if Input.is_action_just_pressed("next_item_2"):
+#		player1.inventory.advance_selected_item()
+#		interactHitbox.disabled = true
+#		interactHitbox.disabled = false
+#
+#	if Input.is_action_just_pressed("previous_item_2"): # E
+#		player1.inventory.previous_selected_item()
+#		interactHitbox.disabled = true
+#		interactHitbox.disabled = false
 
 	if Input.is_action_pressed("attack_2"):
 		if !talkTimer.is_stopped():
@@ -273,15 +277,6 @@ func apply_status(status):
 			set_sweating()
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
-		"poison":
-			if !get_node_or_null("/root/World/YSort/Player/PoisonNotice"):
-				var poison = Poison.instance()
-				add_child(poison)
-			else:
-				return
-		"poison_end":
-			print('deleting poison notice')
-			get_node("/root/World/YSort/Player/PoisonNotice").queue_free()
 		"frenzy":
 			$FrenzyAnimationPlayer.play("Start")
 			# animationTree.set("parameters/Attack1/TimeScale/scale", Player2Stats.attack_speed)
@@ -307,8 +302,7 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func noStamina():
-	audio.stream = load("res://assets/Audio/Bamboo.wav")
-	audio.play()
+	$BambooAudio.play()
 
 func set_sweating():
 	$Sweat.visible = true
@@ -498,48 +492,82 @@ func enemy_killed(experience_from_kill):
 		level_up()
 		stats.experience -= stats.experience_required
 		stats.experience_required *= 1.618034
-	
+
 func level_up():
+	just_leveled = true
 	stats.level += 1
-	
-	# var dialogLevelBox = DialogLevelBox.instance()
-	# get_node("/root/World/GUI").add_child(dialogLevelBox)
-	
-	var levelNotice = LevelNotice.instance()
-	levelNotice.position = Vector2(233, 116)
-	levelNotice.levelDisplay = stats.level
-	
-	var choice = levelStats[randi() % levelStats.size()]
-	match choice:
-		LEVELHEALTH:
-#			stats.max_health += 15
-#			stats.health += 15
-			stats.vitality +=1
-			levelNotice.statDisplay = "WILLPOWER"
-			levelNotice.statColor = Color(0.666, 0.392549, 0)
-		LEVELDEFENSE:
-			stats.defense += 1
-			levelNotice.statDisplay = "HARDINESS"
-			levelNotice.statColor = Color(0.2, 0.2, 1)
-		LEVELSTAMINA:
-			stats.endurance += 1
-			# stats.max_stamina += 15
-			levelNotice.statDisplay = "LUNG CAPACITY"
-			levelNotice.statColor = Color(0.372549, 1, 0.415686)
-		LEVELSTRENGTH:
-			stats.strength += 1
-			levelNotice.statDisplay = "VIOLENT NATURE"
-			levelNotice.statColor = Color(1, 0.12, 0)
-		LEVELDEXTERITY:
-			stats.dexterity += 1
-			levelNotice.statDisplay = "PATIENCE"
-			levelNotice.statColor = Color(0.324902, 0.622549, 0.705686)
-		LEVELSPEED:
-			stats.iframes += 0.1
-			stats.speed += 1
-			levelNotice.statDisplay = "SWIFTNESS"
-			levelNotice.statColor = Color(1, 1, 0.665686)
-	get_node("/root/World/GUI").add_child(levelNotice)
+	if stats.level < 11:
+		stats_to_allocate += 2
+	elif stats.level < 21:
+		stats_to_allocate += 3
+	elif stats.level < 31:
+		stats_to_allocate += 4
+	elif stats.level >= 31:
+		stats_to_allocate += 5
+	print('Level ', stats.level, ' achieved. Current total stats_to_allocate: ', stats_to_allocate)
+	if dying:
+		return
+	else:
+		start_level_timer()
+
+func start_level_timer():
+	$LevelTimer.start()
+	yield($LevelTimer, "timeout")
+	if just_leveled:
+		show_level_up_screen()
+
+func show_level_up_screen():
+	get_node("/root/World/Music").stream_paused = true
+	get_node("/root/World/SFX").stream_paused = true
+	get_node("/root/World/SFX2").stream_paused = true
+	print('Instancing LevelUp. Final total stats_to_allocate = ', stats_to_allocate)
+	just_leveled = false
+	var tweenGreyscale = TweenGreyscale.instance()
+	get_node("/root/World/GUI").add_child(tweenGreyscale)
+	var levelUpScreen = LevelUpScreen.instance()
+	levelUpScreen.stats_remaining = stats_to_allocate
+	stats_to_allocate = 0
+	get_node("/root/World/GUI").add_child(levelUpScreen)
+
+#func old_level_up():
+#	stats.level += 1
+#	# var dialogLevelBox = DialogLevelBox.instance()
+#	# get_node("/root/World/GUI").add_child(dialogLevelBox)
+#	var levelNotice = LevelNotice.instance()
+#	levelNotice.position = Vector2(233, 116)
+#	levelNotice.levelDisplay = stats.level
+#
+#	var choice = levelStats[randi() % levelStats.size()]
+#	match choice:
+#		LEVELHEALTH:
+##			stats.max_health += 15
+##			stats.health += 15
+#			stats.vitality +=1
+#			levelNotice.statDisplay = "WILLPOWER"
+#			levelNotice.statColor = Color(0.666, 0.392549, 0)
+#		LEVELDEFENSE:
+#			stats.defense += 1
+#			levelNotice.statDisplay = "HARDINESS"
+#			levelNotice.statColor = Color(0.2, 0.2, 1)
+#		LEVELSTAMINA:
+#			stats.endurance += 1
+#			# stats.max_stamina += 15
+#			levelNotice.statDisplay = "LUNG CAPACITY"
+#			levelNotice.statColor = Color(0.372549, 1, 0.415686)
+#		LEVELSTRENGTH:
+#			stats.strength += 1
+#			levelNotice.statDisplay = "VIOLENT NATURE"
+#			levelNotice.statColor = Color(1, 0.12, 0)
+#		LEVELDEXTERITY:
+#			stats.dexterity += 1
+#			levelNotice.statDisplay = "PATIENCE"
+#			levelNotice.statColor = Color(0.324902, 0.622549, 0.705686)
+#		LEVELSPEED:
+#			stats.iframes += 0.1
+#			stats.speed += 1
+#			levelNotice.statDisplay = "SWIFTNESS"
+#			levelNotice.statColor = Color(1, 1, 0.665686)
+#	get_node("/root/World/GUI").add_child(levelNotice)
 
 func roll_stamina_drain():
 	stats.stamina -= 15
@@ -700,10 +728,10 @@ func dying_effect(value):
 		set_collision_mask_bit(12, true)
 		var heartbeat = Heartbeat.instance()
 		var greyscale = Greyscale.instance()
-		var whiteFlash = WhiteFlash.instance()
+		var redFlash = RedFlash.instance()
 		get_node("/root/World/").add_child(heartbeat)
 		get_node("/root/World/GUI").add_child(greyscale)
-		get_node("/root/World/GUI").add_child(whiteFlash)
+		get_node("/root/World/GUI").add_child(redFlash)
 		get_node("/root/World/Music").stream_paused = true
 		get_node("/root/World/SFX").stream_paused = true
 		dying = true
@@ -746,24 +774,21 @@ func _on_TalkTimer_timeout():
 			
 func set_notice(value):
 	if value:
-		audio.stream = load("res://assets/Audio/cursHi.wav")
-		audio.play()
+		$NoticeAudio.play()
 		notice.visible = true
 	elif !value:
 		notice.visible = false
 		
 func set_talk_notice(value):
 	if value:
-		audio.stream = load("res://assets/Audio/cursLo.wav")
-		audio.play()
+		$NoticeAudio.play()
 		talkNotice.visible = true
 	elif !value:
 		talkNotice.visible = false
-		
+
 func set_interact_notice(value):
 	if value:
-		audio.stream = load("res://assets/Audio/cursLo.wav")
-		audio.play()
+		$NoticeAudio.play()
 		interactNotice.visible = true
 	elif !value:
 		interactNotice.visible = false
@@ -786,11 +811,11 @@ func _on_InteractHitbox_area_entered(area):
 	if interactObject.interactable:
 		self.interactNoticeDisplay = true
 		interacting = true
-	if "item_usable" in interactObject:
-		var item_to_use = player1.inventory._items[player1.inventory.current_selected_item]
-		if item_to_use.item_reference.name == interactObject.item_needed:
-			using_item = true
-			print('using_item = true')
+#	if "item_usable" in interactObject:
+#		var item_to_use = player1.inventory._items[player1.inventory.current_selected_item]
+#		if item_to_use.item_reference.name == interactObject.item_needed:
+#			using_item = true
+#			print('using_item = true')
 
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false

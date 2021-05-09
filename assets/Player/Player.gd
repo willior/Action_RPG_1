@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 const Notice = preload("res://assets/UI/Notice.tscn")
-const Poison = preload("res://assets/UI/Status/PoisonNotice.tscn")
 const GameOver = preload("res://assets/UI/GameOver.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const LevelUpScreen = preload("res://assets/UI/LevelUp/LevelUpScreen.tscn")
@@ -363,15 +362,6 @@ func apply_status(status):
 			set_sweating()
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
-		"poison":
-			if !get_node_or_null("/root/World/YSort/Player/PoisonNotice"):
-				var poison = Poison.instance()
-				add_child(poison)
-			else:
-				return
-		"poison_end":
-			print('deleting poison notice')
-			get_node("/root/World/YSort/Player/PoisonNotice").queue_free()
 		"frenzy":
 			$FrenzyAnimationPlayer.play("Start")
 			swordHitbox.knockback_vector = dir_vector / 10

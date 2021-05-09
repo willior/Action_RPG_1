@@ -1,5 +1,6 @@
 extends Node2D
 
+const Icon = preload("res://assets/UI/Status/Debuffs/StunIcon.tscn")
 onready var body = get_parent()
 
 func _ready():

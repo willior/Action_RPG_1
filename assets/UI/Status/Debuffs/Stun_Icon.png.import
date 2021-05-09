@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Regen_Icon.png-ba2e4cd45d5ab5201c28e2ad345df15d.stex"
+path="res://.import/Stun_Icon.png-931ea40740ffc8aa4c52b2effdab4504.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Status/Regen_Icon.png"
-dest_files=[ "res://.import/Regen_Icon.png-ba2e4cd45d5ab5201c28e2ad345df15d.stex" ]
+source_file="res://assets/UI/Status/Debuffs/Stun_Icon.png"
+dest_files=[ "res://.import/Stun_Icon.png-931ea40740ffc8aa4c52b2effdab4504.stex" ]
 
 [params]
 
