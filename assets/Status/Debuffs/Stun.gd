@@ -3,21 +3,18 @@ extends Node2D
 onready var body = get_parent()
 
 func _ready():
-	print(body.name, ' is stunned!')
 	body.hurtbox.display_damage_popup("Stunned!", false)
 	body.state = body.get("STUN")
 	if body.get("ENEMY_NAME"):
 		Enemy.disable_detection(body)
 
 func interrupt_stun():
-	print('stun interrupted on ', body.name, '; deleting.')
 	body.state = 0 # body.get("IDLE")
 	if body.get("ENEMY_NAME"):
 		Enemy.enable_detection(body)
 	queue_free()
 
 func _on_Timer_timeout():
-	print(body.name, ' recovered from stun; deleting.')
 	body.state = 0 # body.get("IDLE")
 	if body.get("ENEMY_NAME"):
 		Enemy.enable_detection(body)

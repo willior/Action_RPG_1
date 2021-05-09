@@ -19,5 +19,5 @@ func refresh_status_icon():
 	$Tween.start()
 
 func delete_regen_progress():
-	print('regen removed signal recieved; deleting regen icon')
+	print('regen removed signal received; deleting regen icon')
 	queue_free()

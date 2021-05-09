@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=2]
+[gd_scene load_steps=170 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -18,7 +18,6 @@
 [ext_resource path="res://assets/Audio/Bamboo.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/Audio/Player/Sword_Attack_1.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/Player/Abilities/Cast.tres" type="Animation" id=19]
-[ext_resource path="res://assets/Audio/Player/Clap.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/Audio/Player/Clap2.wav" type="AudioStream" id=21]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -2218,7 +2217,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
 vframes = 5
-frame = 18
+frame = 258
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2374,7 +2373,7 @@ position = Vector2( -0.488346, -7.73805 )
 shape = SubResource( 146 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 20 )
+stream = ExtResource( 21 )
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )

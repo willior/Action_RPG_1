@@ -29,16 +29,15 @@ func apply_status(status, body):
 					if body.has_node("Regen"):
 						print('Poison overwriting ', body, "'s Regen")
 						body.get_node("Regen").queue_free()
-						# print('RNG ', status_check*100, '% was less than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
-						var poison = Poison.instance()
-						body.add_child(poison)
+					# print('RNG ', status_check*100, '% was less than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
+					var poison = Poison.instance()
+					body.add_child(poison)
 				else:
 					# print('poison check unsuccessful; RNG ', status_check*100, '% was greater than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
 					return
 		
 		"Stun":
 			if body.has_node("Stun"):
-				print(body, ' is already stunned; returning')
 				return
 			else:
 				randomize()

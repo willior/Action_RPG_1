@@ -221,6 +221,15 @@ func _input(event):
 					attack1_queued = true
 		ACTION:
 			pass
+		STUN:
+			if event.is_action_pressed("attack") or event.is_action_pressed("roll") or event.is_action_pressed("examine") or event.is_action_pressed("alchemy"):
+				get_tree().set_input_as_handled()
+				var new_time = get_node("Stun/Timer").get_time_left()-0.2
+				if new_time > 0:
+					get_node("Stun/Timer").start(new_time)
+				else:
+					get_node("Stun/Timer").emit_signal("timeout")
+					talkTimer.start()
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -748,8 +757,7 @@ func _on_Hurtbox_area_entered(area):
 		hit_damage()
 		if state != ACTION:
 			if state == STUN:
-				print('hit in stun state.')
-				velocity = -dir_vector * (stats.roll_speed/2)
+				velocity = -dir_vector * (stats.roll_speed/4)
 				animationState.travel("Stun")
 				return
 			elif player_staggered:
@@ -884,6 +892,10 @@ func action_state(delta):
 func action_finished():
 	animationTree.active = true
 	reset_interaction()
+	if has_node("Stun"):
+		state = STUN
+		animationState.travel("Stun")
+		return
 	if Input.is_action_pressed("attack"):
 		charge_reset()
 		attack_charging = true

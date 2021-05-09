@@ -477,14 +477,14 @@ material = SubResource( 1 )
 position = Vector2( 0, -2 )
 texture = ExtResource( 15 )
 offset = Vector2( 0, -12 )
-vframes = 3
 hframes = 19
+vframes = 3
 
 [node name="SpriteEye" type="Sprite" parent="Sprite"]
 texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
-vframes = 3
 hframes = 19
+vframes = 3
 frame = 38
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -605,6 +605,7 @@ visible = false
 position = Vector2( 0, 5 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="no_health" from="WolfStats" to="." method="_on_WolfStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
@@ -613,11 +614,7 @@ position = Vector2( 0, 5 )
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 [editable path="Hitbox"]
-
 [editable path="Hurtbox"]
-
 [editable path="PlayerDetectionZone"]
-
 [editable path="AttackPlayerZone"]
-
 [editable path="SoftCollision"]

@@ -11,5 +11,5 @@ func _ready():
 	$Tween.start()
 
 func delete_poison_progress():
-	print('poison removed signal recieved; deleting poison icon')
+	print('poison removed signal received; deleting poison icon')
 	queue_free()
