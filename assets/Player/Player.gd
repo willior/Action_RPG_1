@@ -239,10 +239,7 @@ func move_state(delta):
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		dir_vector = input_vector
-		if PlayerStats.frenzy.active:
-			swordHitbox.knockback_vector = input_vector / 10
-		else:
-			swordHitbox.knockback_vector = input_vector
+		swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/BlendSpace2D/blend_position", input_vector)
 		animationTree.set("parameters/Attack1/BlendSpace2D/blend_position", input_vector)
@@ -365,13 +362,9 @@ func apply_status(status):
 		"frenzy":
 			$FrenzyAnimationPlayer.play("Start")
 			swordHitbox.knockback_vector = dir_vector / 10
-			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
-			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
 		"frenzy_end":
 			$FrenzyAnimationPlayer.play("Stop")
 			swordHitbox.knockback_vector = dir_vector
-			# animationTree.set("parameters/Attack1/TimeScale/scale", PlayerStats.attack_speed)
-			# animationTree.set("parameters/Attack2/TimeScale/scale", PlayerStats.attack_speed)
 
 func move():
 	if GameManager.multiplayer_2:
@@ -421,18 +414,12 @@ func attack2_state(delta):
 
 func attack1_stamina_drain():
 	swordHitbox.set_deferred("monitorable", true)
-	if PlayerStats.frenzy.active:
-		stats.stamina -= 3
-	else:
-		stats.stamina -= 15
+	stats.stamina -= 15
 	swordHitbox.sword_attack_audio()
 
 func attack2_stamina_drain():
 	swordHitbox.set_deferred("monitorable", true)
-	if PlayerStats.frenzy.active:
-		stats.stamina -= 2
-	else:
-		stats.stamina -= 10
+	stats.stamina -= 10
 	swordHitbox.sword_attack_audio()
 
 func attack_animation_finished():

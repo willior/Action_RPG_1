@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://assets/Status/Frenzy.gd" type="Script" id=2]
+[gd_scene load_steps=2 format=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -15,18 +13,18 @@ var shade_friction = 840
 var dir_vector = Vector2.DOWN
 
 var vitality = 12 setget set_vitality
-var vitality_description = \"Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand.\"
 var endurance = 12 setget set_endurance
-var endurance_description = \"Lung Capacity determines how many physical actions you can perform in a short period of time.\"
 var defense = 4.0 setget set_defense
-var defense_description = \"Resilience makes things easier for you when hardship is inevitable, as well as helps in maintaining your composure.\"
 var strength = 4.0 setget set_strength
-var strength_description = \"Violent Nature is a measure of how much pain you are willing to inflict on others, for survival or otherwise.\"
 var dexterity = 4.0 setget set_dexterity
-var dexterity_description = \"Patience allows for careful observation of threats, augmenting accuracy and the frequency of critical strikes.\"
 var speed = 4.0 setget set_speed
-var speed_description = \"Swiftness aids in reflexive maneuvers like evasion, as well as the speed with which certain actions are performed.\"
 var magic = 4.0 setget set_magic
+var vitality_description = \"Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand.\"
+var endurance_description = \"Lung Capacity determines how many physical actions you can perform in a short period of time.\"
+var defense_description = \"Resilience makes things easier for you when hardship is inevitable, as well as helps in maintaining your composure.\"
+var strength_description = \"Violent Nature is a measure of how much pain you are willing to inflict on others, for survival or otherwise.\"
+var dexterity_description = \"Patience allows for careful observation of threats, augmenting accuracy and the frequency of critical strikes.\"
+var speed_description = \"Swiftness aids in reflexive maneuvers like evasion, as well as the speed with which certain actions are performed.\"
 var magic_description = \"Spirituality governs the amount of aid received from higher planes, as well as one's grasp of the incomprehensible.\"
 
 var level = 1 setget set_level
@@ -41,6 +39,7 @@ var old_health = health
 var final_health setget set_final_health
 var dying = false setget set_dying
 var dead = false setget set_dead
+var continue_count = 0
 
 var max_stamina = endurance*15 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
@@ -66,11 +65,6 @@ var cash = 0 setget set_cash
 
 var status = \"fine\" setget set_status
 var sweating = false
-var is_poisoned = false
-
-var continue_count = 0
-
-onready var frenzy = $Frenzy
 
 signal no_health
 signal vitality_changed(value)
@@ -338,10 +332,3 @@ func set_cash(value):
 
 [node name="PlayerStats" type="Node"]
 script = SubResource( 1 )
-
-[node name="Frenzy" type="Node" parent="."]
-script = ExtResource( 2 )
-
-[node name="Timer" type="Timer" parent="Frenzy"]
-one_shot = true
-[connection signal="timeout" from="Frenzy/Timer" to="Frenzy" method="_on_Timer_timeout"]
