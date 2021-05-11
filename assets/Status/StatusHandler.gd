@@ -7,50 +7,48 @@ onready var Frenzy = preload("res://assets/Status/Buffs/Frenzy.tscn")
 onready var Stun = preload("res://assets/Status/Debuffs/Stun.tscn")
 
 func apply_status(status, body):
+	var status_display = body.get_node("StatusDisplay")
 	match status[0]:
 		"Regen":
-			if body.has_node("Poison"):
-				print('Regen overwriting ', body, "'s Poison")
-				body.get_node("Poison").queue_free()
-			if body.has_node("Regen"):
-				print(body, ' is already regened; refreshing')
-				body.get_node("Regen").refresh_status()
+			if status_display.has_node("Poison"):
+				status_display.get_node("Poison").queue_free()
+			if status_display.has_node("Regen"):
+				status_display.get_node("Regen").refresh_status()
 				return
 			else:
 				var regen = Regen.instance()
-				body.add_child(regen)
+				status_display.add_child(regen)
 		"Poison":
-			if body.has_node("Poison"):
+			if status_display.has_node("Poison"):
 				return
 			else:
 				randomize()
 				var status_check = randf()
 				if status_check <= status[1] - body.stats.status_resistance:
-					if body.has_node("Regen"):
-						print('Poison overwriting ', body, "'s Regen")
-						body.get_node("Regen").queue_free()
+					if status_display.has_node("Regen"):
+						status_display.get_node("Regen").queue_free()
 					# print('RNG ', status_check*100, '% was less than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
 					var poison = Poison.instance()
-					body.add_child(poison)
+					status_display.add_child(poison)
 				else:
 					# print('poison check unsuccessful; RNG ', status_check*100, '% was greater than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
 					return
 		"Frenzy":
-			if body.has_node("Frenzy"):
-				body.get_node("Frenzy").refresh_status()
+			if status_display.has_node("Frenzy"):
+				status_display.get_node("Frenzy").refresh_status()
 				return
 			else:
 				var frenzy = Frenzy.instance()
-				body.add_child(frenzy)
+				status_display.add_child(frenzy)
 		"Stun":
-			if body.has_node("Stun"):
+			if status_display.has_node("Stun"):
 				return
 			else:
 				randomize()
 				var status_check = randf()
 				if status_check <= status[1] - body.stats.status_resistance:
 					var stun = Stun.instance()
-					body.add_child(stun)
+					status_display.add_child(stun)
 		"Slow":
 			pass
 		"Ablaze":

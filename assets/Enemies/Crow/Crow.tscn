@@ -243,6 +243,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ Vector2( 0, -10 ), Vector2( 0, -18 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("StatusDisplay:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -24 ), Vector2( 0, -32 ) ]
+}
 
 [sub_resource type="Animation" id=32]
 length = 0.1
@@ -335,6 +347,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -10 ), Vector2( 0, -4 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("StatusDisplay:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -24 ), Vector2( 0, -20 ) ]
 }
 
 [sub_resource type="Animation" id=34]
@@ -474,6 +498,18 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -4 ), Vector2( 0, -10 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("StatusDisplay:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.35 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -20 ), Vector2( 0, -24 ) ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=38]
@@ -671,7 +707,7 @@ texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
 hframes = 12
 vframes = 2
-frame = 12
+frame = 4
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
@@ -679,7 +715,7 @@ light_mask = 0
 material = SubResource( 2 )
 z_index = 1
 frames = SubResource( 27 )
-frame = 13
+frame = 4
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -727,7 +763,7 @@ shape = SubResource( 81 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
-position = Vector2( 0, -4 )
+position = Vector2( 0, -10 )
 collision_mask = 4
 damage = 16.0
 accuracy = 4.0
@@ -737,13 +773,12 @@ position = Vector2( 0, 3 )
 shape = SubResource( 82 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
-visible = false
 position = Vector2( 0, 4 )
 collision_layer = 8
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -14 )
+position = Vector2( 0, -20 )
 shape = SubResource( 83 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
@@ -800,6 +835,9 @@ attenuation = 0.4
 [node name="EnemyHealth" parent="." instance=ExtResource( 7 )]
 visible = false
 position = Vector2( 0, 3 )
+
+[node name="StatusDisplay" type="Node2D" parent="."]
+position = Vector2( 0, -24 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -4, -4, 8, 8 )

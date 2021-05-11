@@ -2289,6 +2289,9 @@ margin_top = 0.0
 margin_right = 11.0
 margin_bottom = 0.0
 
+[node name="StatusDisplay" type="Node2D" parent="."]
+position = Vector2( 0, -20 )
+
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
 rotation = 1.5708

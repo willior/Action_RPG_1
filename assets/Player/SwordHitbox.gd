@@ -11,7 +11,7 @@ var orig_damage
 var randomness = 0.16
 var knockback_vector = Vector2.ZERO
 
-var status = ["Stun", 1.0]
+var status
 var orig_status
 var status_two # = ["Poison", 0.5]
 

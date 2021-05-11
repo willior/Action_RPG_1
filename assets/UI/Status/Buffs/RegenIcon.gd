@@ -3,9 +3,8 @@ extends TextureProgress
 var duration
 
 func _ready():
-	self.max_value = duration
 # warning-ignore:return_value_discarded
-	get_node("/root/World/YSort/Player/Regen").connect("regen_removed", self, "delete_regen_progress")
+	get_node("/root/World/YSort/Player/StatusDisplay/Regen").connect("regen_removed", self, "delete_status_progress")
 	start_status_icon()
 
 func start_status_icon():
@@ -18,6 +17,5 @@ func refresh_status_icon():
 	$Tween.interpolate_property(self, "value", 0, max_value, duration, Tween.TRANS_LINEAR)
 	$Tween.start()
 
-func delete_regen_progress():
-	print('regen removed signal received; deleting regen icon')
+func delete_status_progress():
 	queue_free()

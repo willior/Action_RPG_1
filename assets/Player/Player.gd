@@ -61,6 +61,7 @@ var shade_moving = false
 var charge_count = 0
 var charge_level_count = 0
 var base_enemy_accuracy = 66
+var stamina_attack_cost = PlayerStats.stamina_attack_cost
 
 var interactObject
 var talkObject
@@ -223,11 +224,11 @@ func _input(event):
 		STUN:
 			if event.is_action_pressed("attack") or event.is_action_pressed("roll") or event.is_action_pressed("examine") or event.is_action_pressed("alchemy"):
 				get_tree().set_input_as_handled()
-				var new_time = get_node("Stun/Timer").get_time_left()-0.25
+				var new_time = get_node("StatusDisplay/Stun/Timer").get_time_left()-0.25
 				if new_time > 0:
-					get_node("Stun").advance_stun_time(new_time)
+					get_node("StatusDisplay/Stun").advance_stun_time(new_time)
 				else:
-					get_node("Stun/Timer").emit_signal("timeout")
+					get_node("StatusDisplay/Stun/Timer").emit_signal("timeout")
 					talkTimer.start()
 
 func move_state(delta):
@@ -360,10 +361,8 @@ func apply_status(status):
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"frenzy":
-			$FrenzyAnimationPlayer.play("Start")
 			swordHitbox.knockback_vector = dir_vector / 10
 		"frenzy_end":
-			$FrenzyAnimationPlayer.play("Stop")
 			swordHitbox.knockback_vector = dir_vector
 
 func move():
@@ -394,6 +393,9 @@ func set_attack_timescale(value):
 	animationTree.set("parameters/Attack1/TimeScale/scale", value)
 	animationTree.set("parameters/Attack2/TimeScale/scale", value)
 
+func set_stamina_attack_cost(value):
+	stamina_attack_cost = value
+
 # 1st attack pressed: state switches to attack1, plays attack1
 # 2nd attack pressed: attack2_queued becomes true
 # on attack1_animation_finished, checks attack2_queued
@@ -413,12 +415,12 @@ func attack2_state(delta):
 
 func attack1_stamina_drain():
 	swordHitbox.set_deferred("monitorable", true)
-	stats.stamina -= 15
+	stats.stamina -= stamina_attack_cost
 	swordHitbox.sword_attack_audio()
 
 func attack2_stamina_drain():
 	swordHitbox.set_deferred("monitorable", true)
-	stats.stamina -= 10
+	stats.stamina -= stamina_attack_cost/1.5
 	swordHitbox.sword_attack_audio()
 
 func attack_animation_finished():
@@ -770,7 +772,7 @@ func hit_state(_delta):
 
 func hit_animation_finished():
 	stamina_regen_reset()
-	# player_state_reset()
+	player_state_reset()
 	charge.stop_charge()
 	if Input.is_action_pressed("attack"):
 		charge_reset()

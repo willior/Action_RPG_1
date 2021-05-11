@@ -222,4 +222,5 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_VisibilityNotifier2D_screen_exited():
-	Enemy.despawn_offscreen(self)
+	pass
+	# Enemy.despawn_offscreen(self)

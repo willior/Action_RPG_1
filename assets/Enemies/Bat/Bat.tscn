@@ -232,6 +232,9 @@ stream = ExtResource( 17 )
 [node name="EnemyHealth" parent="." instance=ExtResource( 7 )]
 visible = false
 
+[node name="StatusDisplay" type="Node2D" parent="."]
+position = Vector2( 0, -22 )
+
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0, -16 )
 scale = Vector2( 1, 2.75 )

@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/UI/FormulaUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/UI/Status/Buffs.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/ExpBar1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/UI/18x18_Container.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=6]
@@ -297,9 +298,9 @@ __meta__ = {
 [node name="StatusDisplay1" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 70.0
+margin_left = 72.0
 margin_top = -33.0
-margin_right = 88.0
+margin_right = 90.0
 margin_bottom = -15.0
 size_flags_horizontal = 13
 __meta__ = {
@@ -309,19 +310,23 @@ __meta__ = {
 [node name="StatusContainer" type="HBoxContainer" parent="StatusDisplay1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 13
-custom_constants/separation = 0
+custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Buffs" type="HBoxContainer" parent="StatusDisplay1/StatusContainer"]
+visible = false
 margin_bottom = 18.0
-custom_constants/separation = 0
+size_flags_horizontal = 8
+custom_constants/separation = 1
+script = ExtResource( 3 )
 
 [node name="Debuffs" type="HBoxContainer" parent="StatusDisplay1/StatusContainer"]
 margin_bottom = 18.0
-custom_constants/separation = 0
+size_flags_horizontal = 8
+custom_constants/separation = 1
+alignment = 2
 
 [node name="HealthUI2" type="Control" parent="."]
 pause_mode = 2
@@ -501,5 +506,7 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[connection signal="sort_children" from="StatusDisplay1/StatusContainer/Buffs" to="StatusDisplay1/StatusContainer/Buffs" method="_on_Buffs_sort_children"]
 
 [editable path="ExpBar1"]

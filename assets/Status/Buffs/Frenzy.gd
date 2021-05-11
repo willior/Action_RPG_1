@@ -1,9 +1,9 @@
-extends Node
+extends Node2D
 
 const Icon = preload("res://assets/UI/Status/Buffs/FrenzyIcon.tscn")
 export var duration = 3 # duration in seconds
 export var potency = 2 # attack speed multiplier
-onready var body = get_parent()
+onready var body = get_parent().get_parent()
 signal frenzy_removed()
 
 func _ready():
@@ -11,19 +11,29 @@ func _ready():
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
+		body.set_attack_timescale(PlayerStats.attack_speed*2)
+		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost/5)
 		var icon = Icon.instance()
 		icon.duration = duration
 		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").add_child(icon)
 	$Timer.start(duration)
-	body.set_attack_timescale(PlayerStats.attack_speed*2)
+	$AnimatedSprite.play()
 
 func refresh_status():
 	get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon()
 	$Timer.start(duration)
-	body.set_attack_timescale(PlayerStats.attack_speed*2)
+	if body.get("ENEMY_NAME"):
+		pass
+	else:
+		body.set_attack_timescale(PlayerStats.attack_speed*2)
+		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost/5)
 
 func _on_Timer_timeout():
-	body.set_attack_timescale(PlayerStats.attack_speed)
+	if body.get("ENEMY_NAME"):
+		pass
+	else:
+		body.set_attack_timescale(PlayerStats.attack_speed)
+		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost)
 	queue_free()
 
 func _on_Frenzy_tree_exiting():

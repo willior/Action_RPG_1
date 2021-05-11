@@ -22,6 +22,9 @@ func _ready():
 		"Red":
 			popup_color = Color(1, 0, 0, 1)
 			fade = red_fade
+		"Yellow":
+			popup_color = Color(1, 1, 0, 1)
+			fade = red_fade
 		"Heal":
 			popup_color = Color(0, 1, 1, 1)
 			fade = teal_fade

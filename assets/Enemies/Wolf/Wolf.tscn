@@ -479,6 +479,7 @@ texture = ExtResource( 15 )
 offset = Vector2( 0, -12 )
 hframes = 19
 vframes = 3
+frame = 38
 
 [node name="SpriteEye" type="Sprite" parent="Sprite"]
 texture = ExtResource( 16 )
@@ -603,6 +604,9 @@ attenuation = 0.659754
 [node name="EnemyHealth" parent="." instance=ExtResource( 7 )]
 visible = false
 position = Vector2( 0, 5 )
+
+[node name="StatusDisplay" type="Node2D" parent="."]
+position = Vector2( 0, -24 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 

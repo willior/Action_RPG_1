@@ -1,7 +1,7 @@
 extends Node2D
 
 const Icon = preload("res://assets/UI/Status/Debuffs/StunIcon.tscn")
-onready var body = get_parent()
+onready var body = get_parent().get_parent()
 
 var duration = 2.0
 signal stun_advanced(value)
@@ -17,6 +17,7 @@ func _ready():
 		icon.duration = duration
 		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").add_child(icon)
 	$Timer.start(duration)
+	$AnimatedSprite.play()
 
 func interrupt_stun():
 	body.state = 0 # body.get("IDLE")
@@ -44,5 +45,4 @@ func advance_stun_time(new_time):
 # 3. after the attack cooldown reset timer times out.
 
 func _on_Stun_tree_exiting():
-	print('stun exiting tree')
 	emit_signal("stun_removed")

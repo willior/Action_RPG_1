@@ -34,7 +34,6 @@ var experience_total = 82
 
 var max_health = vitality*15 setget set_max_health
 var health = max_health setget set_health
-var poise setget set_poise
 var old_health = health
 var final_health setget set_final_health
 var dying = false setget set_dying
@@ -44,6 +43,7 @@ var continue_count = 0
 var max_stamina = endurance*15 setget set_max_stamina
 var stamina = max_stamina setget set_stamina
 var stamina_regen_rate = 0.2 setget set_stamina_regen_rate
+var stamina_attack_cost = 15
 
 var strength_mod = 0 setget set_strength_mod
 var defense_mod = 0 setget set_defense_mod
@@ -163,7 +163,6 @@ func set_vitality(value):
 func set_max_health(value):
 	max_health = value
 	self.health = min(health, max_health)
-	set_poise(50)
 	emit_signal(\"max_health_changed\", max_health)
 
 func set_health(value):
@@ -177,9 +176,6 @@ func set_health(value):
 		set_dying(false)
 		
 	emit_signal(\"health_changed\", health) # every time the health is set, emits a signal \"health_changed\" along with an argument, our new health value
-
-func set_poise(value):
-	poise = value
 
 func set_final_health(value):
 	final_health = value
