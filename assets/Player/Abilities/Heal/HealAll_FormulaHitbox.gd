@@ -15,4 +15,4 @@ func _ready():
 	formula_level_mod = FormulaStats.get(formula_name)[1]
 	potency = (base_potency*formula_level_mod) * (magic_mod*magic_mod)
 	amount = Global.random_variance(potency, randomness)
-	print('heal amount: ', base_potency, " * ", formula_level_mod, " * ", magic_mod*magic_mod, " = ", potency)
+	# print('heal amount: ', base_potency, " * ", formula_level_mod, " * ", magic_mod*magic_mod, " = ", potency)
