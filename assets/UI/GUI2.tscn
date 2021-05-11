@@ -317,9 +317,11 @@ __meta__ = {
 
 [node name="Buffs" type="HBoxContainer" parent="StatusDisplay1/StatusContainer"]
 margin_bottom = 18.0
+custom_constants/separation = 0
 
 [node name="Debuffs" type="HBoxContainer" parent="StatusDisplay1/StatusContainer"]
 margin_bottom = 18.0
+custom_constants/separation = 0
 
 [node name="HealthUI2" type="Control" parent="."]
 pause_mode = 2

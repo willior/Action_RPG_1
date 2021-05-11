@@ -223,9 +223,9 @@ func _input(event):
 		STUN:
 			if event.is_action_pressed("attack") or event.is_action_pressed("roll") or event.is_action_pressed("examine") or event.is_action_pressed("alchemy"):
 				get_tree().set_input_as_handled()
-				var new_time = get_node("Stun/Timer").get_time_left()-0.2
+				var new_time = get_node("Stun/Timer").get_time_left()-0.25
 				if new_time > 0:
-					get_node("Stun/Timer").start(new_time)
+					get_node("Stun").advance_stun_time(new_time)
 				else:
 					get_node("Stun/Timer").emit_signal("timeout")
 					talkTimer.start()
@@ -501,10 +501,8 @@ func shade_start():
 	set_collision_mask_bit(4, false)
 	yield(get_tree().create_timer(0.05), "timeout")
 	stats.stamina -= 35
-	PlayerStats.dexterity_mod = 8
 	charge.stop_charge()
 	swordHitbox.shade_begin()
-	# stats.strength_mod = 4
 	velocity = dir_vector * stats.shade_speed
 
 func shade_stop():
@@ -537,15 +535,13 @@ func flash_start():
 	charge.stop_charge()
 	swordHitbox.flash_begin()
 	# stats.strength_mod = 2
-	
+
 func flash_stop():
 	base_enemy_accuracy = 66
 	swordHitbox.flash_end()
-	# stats.strength_mod = 0
 
 func player_state_reset():
 	base_enemy_accuracy = 66
-	charge.stop_charge()
 	swordHitbox.reset_damage()
 
 func enemy_killed(experience_from_kill):
@@ -747,10 +743,12 @@ func _on_Hurtbox_area_entered(area):
 		hit_damage()
 		if state != ACTION:
 			if state == STUN:
+				player_state_reset()
 				velocity = -dir_vector * (stats.roll_speed/4)
 				animationState.travel("Stun")
 				return
 			elif player_staggered:
+				player_state_reset()
 				print('hit not in stun state; staggered')
 				state = HIT
 	else:
@@ -758,7 +756,7 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.display_damage_popup("Miss!", false)
 
 func hit_damage():
-	if self.has_node("Stun") and get_node("Stun").get_stun_time_remaining() < 2:
+	if self.has_node("Stun") and get_node("Stun").get_stun_time_remaining() < get_node("Stun").duration:
 		print('interrupting stun...')
 		get_node("Stun").interrupt_stun()
 	stats.health -= damageTaken
@@ -786,7 +784,8 @@ func hit_state(_delta):
 
 func hit_animation_finished():
 	stamina_regen_reset()
-	player_state_reset()
+	# player_state_reset()
+	charge.stop_charge()
 	if Input.is_action_pressed("attack"):
 		charge_reset()
 		attack_charging = true
@@ -840,10 +839,10 @@ func game_over():
 	get_node("/root/World/GUI/ExpBar1").visible = false
 	get_node("/root/World/GUI/StaminaBar1").visible = false
 	get_node("/root/World/GUI/FormulaUI1").visible = false
-	for d in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").get_children():
-		d.queue_free()
-	for b in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").get_children():
-		b.queue_free()
+#	for d in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").get_children():
+#		d.queue_free()
+#	for b in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").get_children():
+#		b.queue_free()
 	self.visible = false
 	get_tree().paused = true
 	

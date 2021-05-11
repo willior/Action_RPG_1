@@ -32,6 +32,7 @@ func modify_damage(base, modulator):
 	return int(base * modulator)
 
 func reset_damage():
+	PlayerStats.dexterity_mod = 0
 	damage = orig_damage
 	status = orig_status
 	$CollisionShape2D.scale.x = 1
@@ -45,6 +46,7 @@ func sword_attack_audio():
 func shade_begin():
 	set_deferred("monitorable", true)
 	knockback_vector = Vector2.ZERO
+	PlayerStats.dexterity_mod = 8
 	orig_damage = damage
 	damage = modify_damage(damage, 3)
 
@@ -61,6 +63,7 @@ func flash_begin():
 	$CollisionShape2D.scale.x = 2
 	set_deferred("monitorable", true)
 	knockback_vector *= 1.5
+	PlayerStats.dexterity_mod = 4
 	orig_damage = damage
 	damage = modify_damage(damage, 2)
 	status = ["Stun", 1.0]

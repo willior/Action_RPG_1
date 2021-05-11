@@ -136,13 +136,6 @@ func set_charge(value):
 	if currentCharge >= 100 && PlayerStats.charge_level == 1:
 		PlayerStats.charge_level = 2
 
-	# if currentCharge == PlayerStats.max_charge:
-		# if currentChargeLevel == 0:
-			# animation1.play("ChargeFlash")
-			
-		# elif currentChargeLevel == 1:
-			# animation2.play("ChargeFlash")
-		
 func set_charge_level(value):
 	currentChargeLevel = value
 	if currentChargeLevel == 1:
@@ -159,9 +152,3 @@ func stop_charge():
 	currentCharge = 0
 	progress1.value = currentCharge
 	progress2.value = currentCharge
-	
-	# currentChargeLevel = 0
-	# animation1.stop(true)
-	# animation1.seek(0, true)
-	# animation2.stop(true)
-	# animation2.seek(0, true)

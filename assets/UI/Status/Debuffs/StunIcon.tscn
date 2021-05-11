@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/UI/Status/Debuffs/PoisonIcon.gd" type="Script" id=1]
+[ext_resource path="res://assets/UI/Status/Debuffs/StunIcon.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/Status/Debuffs/Stun_Icon.png" type="Texture" id=2]
 [ext_resource path="res://assets/UI/3x3_Container.png" type="Texture" id=3]
+[ext_resource path="res://assets/Misc/Black_16.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "FadeIn"
@@ -56,12 +57,11 @@ margin_left = 1.0
 margin_top = 1.0
 margin_right = 17.0
 margin_bottom = 17.0
-value = 50.0
-rounded = true
+max_value = 16.0
 texture_under = ExtResource( 2 )
-texture_progress = ExtResource( 2 )
+texture_progress = ExtResource( 4 )
 fill_mode = 2
-tint_progress = Color( 0, 0, 0, 0.501961 )
+tint_progress = Color( 1, 1, 1, 0.5 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
