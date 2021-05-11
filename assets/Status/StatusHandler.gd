@@ -3,6 +3,7 @@ extends Node
 onready var MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 onready var Regen = preload("res://assets/Status/Buffs/Regen.tscn")
 onready var Poison = preload("res://assets/Status/Debuffs/Poison.tscn")
+onready var Frenzy = preload("res://assets/Status/Buffs/Frenzy.tscn")
 onready var Stun = preload("res://assets/Status/Debuffs/Stun.tscn")
 
 func apply_status(status, body):
@@ -18,7 +19,6 @@ func apply_status(status, body):
 			else:
 				var regen = Regen.instance()
 				body.add_child(regen)
-		
 		"Poison":
 			if body.has_node("Poison"):
 				return
@@ -35,7 +35,13 @@ func apply_status(status, body):
 				else:
 					# print('poison check unsuccessful; RNG ', status_check*100, '% was greater than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
 					return
-		
+		"Frenzy":
+			if body.has_node("Frenzy"):
+				body.get_node("Frenzy").refresh_status()
+				return
+			else:
+				var frenzy = Frenzy.instance()
+				body.add_child(frenzy)
 		"Stun":
 			if body.has_node("Stun"):
 				return

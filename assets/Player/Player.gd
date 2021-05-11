@@ -389,7 +389,6 @@ func set_sweating():
 	$Sweat.visible = true
 	sweating = true
 	$ChargeUI.sweatFlag = true
-	print('set sweating')
 
 func set_attack_timescale(value):
 	animationTree.set("parameters/Attack1/TimeScale/scale", value)

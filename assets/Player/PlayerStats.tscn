@@ -138,14 +138,6 @@ func set_status(value):
 			speed_mod = -max_speed/2
 		\"default_speed\":
 			speed_mod = 0
-#		\"poison\":
-#			$Poison.activate()
-#		\"poison_end\":
-#			print('poison ended.')
-		\"frenzy\":
-			$Frenzy.activate()
-		\"frenzy_end\":
-			print('frenzy ended.')
 			
 	emit_signal(\"status_changed\", status)
 

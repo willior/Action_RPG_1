@@ -1,21 +1,30 @@
 extends Node
 
+const Icon = preload("res://assets/UI/Status/Buffs/FrenzyIcon.tscn")
 export var duration = 3 # duration in seconds
 export var potency = 2 # attack speed multiplier
+onready var body = get_parent()
+signal frenzy_removed()
 
-var old_attack_speed
-var new_attack_speed
-var active = false
+func _ready():
+	body.hurtbox.display_damage_popup("Frenzy", false, "Red")
+	if body.get("ENEMY_NAME"):
+		pass
+	else:
+		var icon = Icon.instance()
+		icon.duration = duration
+		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").add_child(icon)
+	$Timer.start(duration)
+	body.set_attack_timescale(PlayerStats.attack_speed*2)
 
-func activate():
-	if !active:
-		active = true
-		old_attack_speed = PlayerStats.attack_speed
-		new_attack_speed = PlayerStats.attack_speed * potency
-		PlayerStats.attack_speed = new_attack_speed
-		$Timer.start(duration)
+func refresh_status():
+	get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon()
+	$Timer.start(duration)
+	body.set_attack_timescale(PlayerStats.attack_speed*2)
 
 func _on_Timer_timeout():
-	active = false
-	PlayerStats.attack_speed = old_attack_speed
-	PlayerStats.status = "frenzy_end"
+	body.set_attack_timescale(PlayerStats.attack_speed)
+	queue_free()
+
+func _on_Frenzy_tree_exiting():
+	emit_signal("frenzy_removed")

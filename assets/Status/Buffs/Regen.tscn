@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/Status/Buffs/Regen.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
-resource_name = "regen"
+resource_name = "animate"
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
@@ -82,7 +82,7 @@ animations = [ {
 script = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/regen = SubResource( 1 )
+anims/animate = SubResource( 1 )
 
 [node name="RegenIndicator" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -28 )

@@ -87,8 +87,7 @@ func _input(event):
 		get_tree().quit()
 	
 	if event.is_action_pressed("test1"): # T
-		print('test2: applying frenzy')
-		PlayerStats.status = "frenzy"
+		StatusHandler.apply_status(["Frenzy", 1.0], player)
 	
 	if event.is_action_pressed("test2"): # Y
 		player.level_up()
