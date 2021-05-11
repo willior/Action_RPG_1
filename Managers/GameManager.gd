@@ -77,6 +77,7 @@ func initialize_player():
 		print("formulabook resource not found. creating...")
 		player.formulabook.add_formula("Flash")
 		player.formulabook.add_formula("Heal")
+		player.formulabook.add_formula("Fury")
 		# warning-ignore:return_value_discarded
 		ResourceSaver.save("user://formulabook.tres", player.formulabook)
 		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))

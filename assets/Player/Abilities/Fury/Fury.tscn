@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Player/Abilities/Fury/Fury.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Abilities/ScreenTint.gd" type="Script" id=2]
+[ext_resource path="res://assets/Player/Abilities/Fury/FuryHitbox.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Ability"
@@ -58,6 +59,9 @@ monitoring = false
 monitorable = false
 collision_layer = 0
 collision_mask = 4
+script = ExtResource( 3 )
+formula_name = "Fury"
+base_potency = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
 shape = SubResource( 2 )

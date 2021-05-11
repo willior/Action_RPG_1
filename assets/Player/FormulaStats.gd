@@ -4,6 +4,7 @@ const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 var growth_rate = 50
 var Flash = ["Flash", 1, 0, 100, 0]
 var Heal = ["Heal", 1, 0, 100, 0]
+var Fury = ["Fury", 1, 0, 100, 0]
 # formula_data[0] = name
 # formula_data[1] = level
 # formula_data[2] = xp

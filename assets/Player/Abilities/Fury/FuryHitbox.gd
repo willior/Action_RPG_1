@@ -9,6 +9,7 @@ var potency
 var amount
 var knockback_vector = Vector2.ZERO
 var formula = true
+var buff = true
 
 func _ready():
 	formula_level_mod = FormulaStats.get(formula_name)[1]

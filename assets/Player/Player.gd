@@ -702,7 +702,9 @@ func backstep_animation_finished():
 
 func _on_Hurtbox_area_entered(area):
 	if area.get("healing"):
-		hurtbox.display_heal_popup(str(area.amount))
+		hurtbox.display_damage_popup(str(area.amount), false, "Heal")
+		return
+	if area.get("buff"):
 		return
 	if z_index != area.get_parent().z_index: # automatic miss if z_index mismatch
 		$DodgeAudio.play()
