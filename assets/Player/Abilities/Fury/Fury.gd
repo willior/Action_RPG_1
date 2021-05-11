@@ -2,7 +2,8 @@ extends Node2D
 
 onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
 
-var status = ["Frenzy"]
+var status = ["Frenzy", 1.0] # "Name", application chance, duration, potency
+# var duration = 3
 
 func _ready():
 	player.state = 9
@@ -16,6 +17,7 @@ func ability_start():
 
 func cast():
 	StatusHandler.apply_status(status, player)
+	print(status)
 
 func ability_end():
 	$FormulaHitbox.set_deferred("monitorable", true)

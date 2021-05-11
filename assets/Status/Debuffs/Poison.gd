@@ -2,9 +2,8 @@ extends Node2D
 
 # const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 const Icon = preload("res://assets/UI/Status/Debuffs/PoisonIcon.tscn")
-export var count = 0
-export var duration = 16 # number of ticks
-export var potency = 1 # damage per tick
+var duration = 16 # number of ticks
+var potency = 1 # damage per tick
 onready var body = get_parent().get_parent()
 signal poison_removed()
 

@@ -39,6 +39,8 @@ func apply_status(status, body):
 				return
 			else:
 				var frenzy = Frenzy.instance()
+				frenzy.duration = status[2]
+				frenzy.potency = status[3]
 				status_display.add_child(frenzy)
 		"Stun":
 			if status_display.has_node("Stun"):

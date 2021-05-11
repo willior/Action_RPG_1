@@ -1,8 +1,8 @@
 extends Node2D
 
 const Icon = preload("res://assets/UI/Status/Buffs/FrenzyIcon.tscn")
-export var duration = 3 # duration in seconds
-export var potency = 2 # attack speed multiplier
+var duration = 3.0
+var potency = 1.5
 onready var body = get_parent().get_parent()
 signal frenzy_removed()
 
@@ -11,7 +11,7 @@ func _ready():
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(PlayerStats.attack_speed*2)
+		body.set_attack_timescale(PlayerStats.attack_speed*potency)
 		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost/5)
 		var icon = Icon.instance()
 		icon.duration = duration
@@ -25,7 +25,7 @@ func refresh_status():
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(PlayerStats.attack_speed*2)
+		body.set_attack_timescale(PlayerStats.attack_speed*potency)
 		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost/5)
 
 func _on_Timer_timeout():
