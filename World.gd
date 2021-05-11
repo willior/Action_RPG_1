@@ -87,7 +87,7 @@ func _input(event):
 		get_tree().quit()
 	
 	if event.is_action_pressed("test1"): # T
-		pass
+		player.formulabook.add_formula("Fury")
 	
 	if event.is_action_pressed("test2"): # Y
 		player.level_up()
@@ -102,10 +102,11 @@ func _input(event):
 		player.pouch.add_ingredient("Salt", 10)
 	
 	if event.is_action_pressed("test4"): # O
-		player.formulabook.remove_formula("Flash")
+		player.formulabook.remove_formula("Fury")
 	
 	if event.is_action_pressed("pause"): # P
 		StatusHandler.apply_status(["Stun", 1.0], player)
+		player.animationState.travel("Stun")
 		# PlayerStats.health = 1
 	
 	if event.is_action_pressed("start"): # SPACEBAR

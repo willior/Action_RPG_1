@@ -746,9 +746,9 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.display_damage_popup("Miss!", false)
 
 func hit_damage():
-	if self.has_node("Stun") and get_node("Stun").get_stun_time_remaining() < get_node("Stun").duration:
+	if self.has_node("StatusDisplay/Stun") and get_node("StatusDisplay/Stun").get_stun_time_remaining() < get_node("StatusDisplay/Stun").duration:
 		print('interrupting stun...')
-		get_node("Stun").interrupt_stun()
+		get_node("StatusDisplay/Stun").interrupt_stun()
 	stats.health -= damageTaken
 	$HurtAudio.play()
 	hurtbox.start_invincibility(1)
