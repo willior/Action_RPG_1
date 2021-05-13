@@ -2010,7 +2010,5 @@ volume_db = -48.0
 [node name="CanvasModulate" parent="." instance=ExtResource( 25 )]
 
 [editable path="Map/Exit_toHome"]
-
 [editable path="Map/Exit"]
-
 [editable path="Map/Exit2"]

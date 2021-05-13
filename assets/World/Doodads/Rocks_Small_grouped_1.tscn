@@ -5,7 +5,6 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.99998
-height = 20.0
 
 [node name="Rocks_Small_grouped_1" type="StaticBody2D"]
 

@@ -61,6 +61,6 @@ animations = [ {
 
 [node name="FallingLeaf_BrightGreen" type="AnimatedSprite"]
 frames = SubResource( 13 )
-frame = 11
+frame = 7
 playing = true
 script = ExtResource( 2 )
