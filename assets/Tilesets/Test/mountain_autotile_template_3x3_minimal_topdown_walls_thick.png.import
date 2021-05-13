@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/autotile_template_3x3_minimal_topdown_floor.png-ca0590283b77d3c0e57ec21c8e996f63.stex"
+path="res://.import/mountain_autotile_template_3x3_minimal_topdown_walls_thick.png-081efd46b21ef234ea654555425e523a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tilesets/Test/autotile_template_3x3_minimal_topdown_floor.png"
-dest_files=[ "res://.import/autotile_template_3x3_minimal_topdown_floor.png-ca0590283b77d3c0e57ec21c8e996f63.stex" ]
+source_file="res://assets/Tilesets/Test/mountain_autotile_template_3x3_minimal_topdown_walls_thick.png"
+dest_files=[ "res://.import/mountain_autotile_template_3x3_minimal_topdown_walls_thick.png-081efd46b21ef234ea654555425e523a.stex" ]
 
 [params]
 
