@@ -46,13 +46,6 @@ texture = ExtResource( 8 )
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
-[node name="Player" parent="YSort" instance=ExtResource( 3 )]
-process_priority = 0
-position = Vector2( 216, 72 )
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
-remote_path = NodePath("../../../Camera2D")
-
 [node name="Doodads" type="YSort" parent="YSort"]
 
 [node name="Plants" type="YSort" parent="YSort"]
@@ -68,6 +61,13 @@ position = Vector2( 40, 96 )
 
 [node name="PennyPickup" parent="YSort/Items" instance=ExtResource( 2 )]
 position = Vector2( 120, 32 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+process_priority = 0
+position = Vector2( 216, 72 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 pitch_scale = 0.8
