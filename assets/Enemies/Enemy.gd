@@ -70,7 +70,7 @@ func hurtbox_entered(enemy, hitbox):
 			)
 			enemy.tween.start()
 		else:
-			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on killing blow
+			enemy.knockback = hitbox.knockback_vector * 160 # knockback velocity on killing blow
 		return true
 	
 	if enemy.z_index != hitbox.get_parent().get_parent().z_index:

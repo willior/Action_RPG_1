@@ -107,6 +107,21 @@ func damage_calculation(attack, defense, random):
 #	print("base damage = ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage, " ]]]")
 	return random_variance(base_damage, random)
 
+# damage calculation should be different for formulas. elemental weaknesses should be taken into account
+# fire > ice
+# lighting > water
+# water > fire
+# wind : earth
+# light : dark
+# verve : quietus
+
+func formula_damage_calculation(potency, defense, random):
+	var base_damage = 2 * (potency*potency / (max(potency+defense, 1)))
+	return random_variance(base_damage, random)
+
+func elemental_ratio_calculation(source_element, target_element):
+	pass
+
 func random_variance(base_damage, random):
 	rng.randomize()
 	var random_value = rng.randf_range(1-random, 1+random)

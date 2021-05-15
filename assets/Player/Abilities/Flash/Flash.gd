@@ -1,5 +1,5 @@
 extends Node2D
-
+# base_potency = 4
 onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
 
 func start():
