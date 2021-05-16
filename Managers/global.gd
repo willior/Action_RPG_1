@@ -117,6 +117,7 @@ func damage_calculation(attack, defense, random):
 
 func formula_damage_calculation(potency, defense, random):
 	var base_damage = 2 * (potency*potency / (max(potency+defense, 1)))
+	
 	return random_variance(base_damage, random)
 
 func elemental_ratio_calculation(source_element, target_element):

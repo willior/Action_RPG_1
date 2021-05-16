@@ -9,7 +9,7 @@ extends Node
 # 6 : light
 # 7 : dark
 # 8 : verve
-# 9 : death
+# 9 : entropy
 
 enum {
 	FIRE,
@@ -21,7 +21,7 @@ enum {
 	LIGHT,
 	DARK,
 	VERVE,
-	DEATH
+	ENTROPY
 }
 
 var FireMod = [0.5, 2, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -34,6 +34,7 @@ var LightMod = [1, 1, 1, 1, 1, 1, 0.5, 2, 1, 1]
 var DarkMod = [1, 1, 1, 1, 1, 1, 2, 0.5, 1, 1, ]
 var VerveMod = [-1, -1, -1, -1, -1, -1, -1, -1, -1, 1]
 var EntropyMod = [1, 1, 1, 1, 1, 1, 1, 1, 2, -1]
+var NoMod = [1,1,1,1,1,1,1,1,1,1]
 
 func _ready():
 	for a in range(0,10):

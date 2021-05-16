@@ -84,6 +84,8 @@ func hurtbox_entered(enemy, hitbox):
 	else:
 		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
+		if hitbox.get("element") and enemy.stats.get("affinity"):
+			var element_modifier = Element.calculate_element_ratio(hitbox.element, enemy.stats.get("affinity"))
 		if is_crit:
 			damage *= 2
 			var critPopup = MessagePopup.instance()
