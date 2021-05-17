@@ -6,7 +6,7 @@ var defense = 2.0 setget set_defense
 var status_resistance = 0.0
 var evasion = 8
 var experience_pool = 18
-var affinity
+var affinity = 8 # Dark
 
 signal no_health
 signal health_changed(value)

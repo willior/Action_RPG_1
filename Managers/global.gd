@@ -101,8 +101,11 @@ func player_stagger_calculation(player_max_hp, enemy_damage, is_crit):
 	else:
 		return false
 
-func damage_calculation(attack, defense, random):
-	var base_damage = 2 * (attack*attack / (max(attack+defense, 1)))
+func damage_calculation(attack, defense, random, element_mod):
+	# var base_damage = 2 * (attack*attack / (max(attack+defense, 1)))
+	var base_damage = (2*element_mod) * (attack*attack / (max(attack+defense, 1)))
+	print("base damage (2*element_mod) = ", base_damage)
+	print("base damage (old) = ", element_mod*(2 * (attack*attack / (max(attack+defense, 1)))))
 #	print('[[[ attack = ', attack, " vs. ", "defense = ", defense)
 #	print("base damage = ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage, " ]]]")
 	return random_variance(base_damage, random)
@@ -115,13 +118,12 @@ func damage_calculation(attack, defense, random):
 # light : dark
 # verve : quietus
 
-func formula_damage_calculation(potency, defense, random):
-	var base_damage = 2 * (potency*potency / (max(potency+defense, 1)))
-	
-	return random_variance(base_damage, random)
+#func formula_damage_calculation(potency, defense, random):
+#	var base_damage = 2 * (potency*potency / (max(potency+defense, 1)))
+#	return random_variance(base_damage, random)
 
-func elemental_ratio_calculation(source_element, target_element):
-	pass
+#func elemental_ratio_calculation(source_element, target_element):
+#	pass
 
 func random_variance(base_damage, random):
 	rng.randomize()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/Tilesets/GrassBasicLight.png" type="Texture" id=1]
 [ext_resource path="res://assets/Audio/Hello_drone.ogg" type="AudioStream" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://assets/World/Doodads/Rock_Large_3.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Doodads/Rock_Large_5.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/Tilesets/Mountain_TileMap64x88.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=19]
 
 [sub_resource type="TileSet" id=1]
 0/name = "GrassBasicDark.png 0"
@@ -125,6 +127,18 @@ remote_path = NodePath("../../../Camera2D")
 
 [node name="Bat" parent="YSort/Enemies" instance=ExtResource( 9 )]
 position = Vector2( 318.204, 154.261 )
+
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 213, 354 )
+
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 413, 361 )
+
+[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 195, 198 )
+
+[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 18 )]
+position = Vector2( 543, 259 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

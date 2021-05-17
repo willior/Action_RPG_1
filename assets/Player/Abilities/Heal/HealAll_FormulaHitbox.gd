@@ -8,6 +8,7 @@ var formula_level_mod
 var potency
 var amount
 var knockback_vector = Vector2.ZERO
+var element = 9
 var formula = true
 var healing = true
 

@@ -9,7 +9,7 @@ var potency
 var knockback_vector = Vector2.ZERO
 var formula = true
 var status = ["Stun", 1.0]
-var element = ["Light"]
+var element = 7
 
 func _ready():
 	formula_level_mod = FormulaStats.get(formula_name)[1]
