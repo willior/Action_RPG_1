@@ -24,6 +24,7 @@ onready var magBar = $StatsDisplay/VBoxButtons/ButtonMAG/ColorRect
 onready var GUI = get_tree().get_root().get_node("World/GUI")
 var closing = false
 var moving = false
+var player
 
 func _ready():
 	$Tween.interpolate_property($CanvasLayer/PanelTop, "rect_position",
@@ -65,7 +66,6 @@ func _ready():
 	dexBar.value = PlayerStats.dexterity
 	spdBar.value = PlayerStats.speed
 	magBar.value = PlayerStats.magic
-	var player = get_node("/root/World/YSort/Player")
 	for i in player.inventory.get_items().size():
 		var inventory_item = player.inventory.get_item(i)
 		var label_item = Label_Item.instance()

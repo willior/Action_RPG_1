@@ -1,6 +1,5 @@
 extends Camera2D
 
-
 var player1pos
 var player2pos
 var state

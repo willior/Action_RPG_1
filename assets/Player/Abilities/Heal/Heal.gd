@@ -1,12 +1,12 @@
 extends Node2D
 
-onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
-
+onready var player
 var hp_to_heal = 0
 var heal_amount = 0
 var heal_rate = 1
 var total_healed = 0
-var status = ["Regen"]
+var status = ["Regen", 1] # name, chance, duration, potency
+var element = 9
 
 func _ready():
 	player.state = 9

@@ -1,9 +1,7 @@
 extends Node2D
 
-onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
-
+onready var player
 var status = ["Frenzy", 1.0] # "Name", application chance, duration, potency
-# var duration = 3
 
 func _ready():
 	player.state = 9

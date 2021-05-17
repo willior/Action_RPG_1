@@ -140,6 +140,7 @@ func open_pause_menu():
 	get_tree().paused = true
 	# dim.visible = true
 	var pauseScreen = PauseScreen.instance()
+	pauseScreen.player = GameManager.player
 	$GUI.add_child(pauseScreen)
 
 func close_pause_menu():

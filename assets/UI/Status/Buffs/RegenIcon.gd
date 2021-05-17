@@ -12,9 +12,9 @@ func start_status_icon():
 	$Tween.interpolate_property(self, "value", 0, max_value, duration, Tween.TRANS_LINEAR)
 	$Tween.start()
 
-func refresh_status_icon():
+func refresh_status_icon(new_duration):
 	$AnimationPlayer.play("Flash")
-	$Tween.interpolate_property(self, "value", 0, max_value, duration, Tween.TRANS_LINEAR)
+	$Tween.interpolate_property(self, "value", 0, max_value, new_duration, Tween.TRANS_LINEAR)
 	$Tween.start()
 
 func delete_status_progress():

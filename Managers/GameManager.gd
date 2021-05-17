@@ -19,7 +19,6 @@ signal player_initialized
 signal player_reinitialized
 
 func _ready():
-	# Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	pass
 	
 # warning-ignore:unused_argument
@@ -89,9 +88,6 @@ func initialize_player():
 
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):
-# warning-ignore:return_value_discarded
-	# ResourceSaver.save("user://inventory.tres", inventory)
-	# prints(str(inventory) + str(OS.get_user_data_dir()))
 	pass
 
 # warning-ignore:unused_argument

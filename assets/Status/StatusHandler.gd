@@ -13,10 +13,12 @@ func apply_status(status, body):
 			if status_display.has_node("Poison"):
 				status_display.get_node("Poison").queue_free()
 			if status_display.has_node("Regen"):
-				status_display.get_node("Regen").refresh_status()
+				status_display.get_node("Regen").refresh_status(status[2], status[3])
 				return
 			else:
 				var regen = Regen.instance()
+				regen.duration = status[2]
+				regen.potency = status[3]
 				status_display.add_child(regen)
 		"Poison":
 			if status_display.has_node("Poison"):
@@ -35,7 +37,7 @@ func apply_status(status, body):
 					return
 		"Frenzy":
 			if status_display.has_node("Frenzy"):
-				status_display.get_node("Frenzy").refresh_status()
+				status_display.get_node("Frenzy").refresh_status(status[2], status[3])
 				return
 			else:
 				var frenzy = Frenzy.instance()

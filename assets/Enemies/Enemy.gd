@@ -19,7 +19,7 @@ func h_flip_handler(sprite, eye, velocity):
 	eye.flip_h = velocity.x < 0
 
 func set_player_collision(body):
-	var player = get_node("/root/World/YSort/Player")
+	var player = GameManager.player
 	if player.z_index == body.z_index:
 		body.set_collision_layer_bit(4, true)
 		Enemy.disable_detection(body)
@@ -125,6 +125,9 @@ func deal_damage(enemy, damage, is_crit):
 		Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
 		Global.create_blood_effect(damage_count, enemy.global_position, enemy.z_index)
 		damage_count -= 4
+	if damage < 0:
+		enemy.hurtbox.display_damage_popup(str(-damage), false, "Heal")
+		return
 	enemy.hurtbox.display_damage_popup(str(damage), is_crit)
 	enemy.hurtbox.create_hit_effect()
 	enemy.hurtbox.start_invincibility(0.05)

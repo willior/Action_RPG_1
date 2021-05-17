@@ -119,6 +119,7 @@ tracks/0/keys = {
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id=19]
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id=20]
 
@@ -178,7 +179,6 @@ shape = SubResource( 18 )
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
-visible = false
 monitorable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
@@ -243,8 +243,8 @@ __meta__ = {
 "_editor_description_": "	"
 }
 
-[connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
 [connection signal="no_health" from="BatStats" to="EnemyHealth" method="_on_stats_no_health"]
+[connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

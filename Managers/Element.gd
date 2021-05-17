@@ -13,30 +13,30 @@ extends Node
 # 10 : entropy
 
 enum {
-	NORMAL,
-	FIRE,
-	ICE,
-	LIGHTNING,
-	WATER,
-	WIND,
-	EARTH,
-	LIGHT,
-	DARK,
-	VERVE,
-	ENTROPY
+	NORMAL, 	# 0
+	FIRE, 		# 1
+	ICE,		# 2
+	LIGHTNING,	# 3
+	WATER,		# 4
+	WIND,		# 5
+	EARTH,		# 6
+	LIGHT,		# 7
+	DARK,		# 8
+	VERVE,		# 9
+	ENTROPY		# 10
 }
 
 var NoMod = [1,1,1,1,1,1,1,1,1,1,1]
-var FireMod = [1, 0.5, 2, 1, 1, 1, 1, 1, 1, 1, 1]
-var IceMod = [1, 2, 0.5, 1, 1, 1, 1, 1, 1, 1, 1]
-var LightningMod = [1, 1, 1, 0.5, 2, 1, 1, 1, 1, 1, 1]
-var WaterMod = [1, 2, 0.5, 2, 0.5, 1, 1, 1, 1, 1, 1]
-var WindMod = [1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1]
-var EarthMod = [1, 1, 1, 2, 1, 0.5, 0.5, 1, 1, 1, 1]
-var LightMod = [1, 1, 1, 1, 1, 1, 1, 0.5, 2, 1, 1]
-var DarkMod = [1, 1, 1, 1, 1, 1, 1, 2, 0.5, 1, 1, ]
+var FireMod = [1, 0.5, 1.5, 1, 1, 1, 1, 1, 1, 1, 1]
+var IceMod = [1, 1.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1]
+var LightningMod = [1, 1, 1, 0.5, 1.5, 1, 1, 1, 1, 1, 1]
+var WaterMod = [1, 1.5, 0.5, 1.5, 0.5, 1, 1, 1, 1, 1, 1]
+var WindMod = [1, 1, 1, 1, 1, 1.5, 1, 1, 1, 1, 1]
+var EarthMod = [1, 1, 1, 1.5, 1, 0.5, 0.5, 1, 1, 1, 1]
+var LightMod = [1, 1, 1, 1, 1, 1, 1, 0.5, 1.5, 1, 1]
+var DarkMod = [1, 1, 1, 1, 1, 1, 1, 1.5, 0.5, 1, 1, ]
 var VerveMod = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1]
-var EntropyMod = [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, -1]
+var EntropyMod = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1.5, -1]
 
 func calculate_element_ratio(source_element=0, target_element=0):
 	var elementRatio = Array()

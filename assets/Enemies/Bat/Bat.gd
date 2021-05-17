@@ -56,7 +56,7 @@ onready var attackController = $AttackController
 onready var animationPlayer = $AnimationPlayer
 onready var audio = $AudioStreamPlayer
 onready var enemyHealth = $EnemyHealth
-onready var player = get_parent().get_parent().get_node("Player")
+# onready var player = GameManager.player()
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -109,7 +109,7 @@ func _physics_process(delta):
 				audio.play()
 				attacking = false
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
-			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
+			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				set_speed_scale(1)
 				state = IDLE
 		DEAD:

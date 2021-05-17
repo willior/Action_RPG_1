@@ -1,8 +1,8 @@
 extends Node2D
 
 const Icon = preload("res://assets/UI/Status/Buffs/FrenzyIcon.tscn")
-var duration = 3.0
-var potency = 1.5
+var duration
+var potency
 onready var body = get_parent().get_parent()
 signal frenzy_removed()
 
@@ -19,14 +19,16 @@ func _ready():
 	$Timer.start(duration)
 	$AnimatedSprite.play()
 
-func refresh_status():
-	get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon()
-	$Timer.start(duration)
+func refresh_status(new_duration, new_potency):
+	body.hurtbox.display_damage_popup("Frenzy", false, "Red")
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(PlayerStats.attack_speed*potency)
+		body.set_attack_timescale(PlayerStats.attack_speed*new_potency)
 		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost/5)
+		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon(new_duration)
+	$Timer.start(new_duration)
+	$AnimatedSprite.play()
 
 func _on_Timer_timeout():
 	if body.get("ENEMY_NAME"):

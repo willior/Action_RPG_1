@@ -2092,11 +2092,11 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=139]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=140]
+[sub_resource type="AnimationNodeStateMachineTransition" id=149]
 
 [sub_resource type="AnimationNodeStateMachine" id=141]
 states/Attack1/node = SubResource( 48 )
-states/Attack1/position = Vector2( -180.039, 226.119 )
+states/Attack1/position = Vector2( -191.5, 226.294 )
 states/Attack2/node = SubResource( 55 )
 states/Attack2/position = Vector2( 37.9611, 226.294 )
 states/Backstep/node = SubResource( 60 )
@@ -2104,24 +2104,24 @@ states/Backstep/position = Vector2( 386.53, 85.4459 )
 states/Cast/node = SubResource( 67 )
 states/Cast/position = Vector2( 353.876, -98.5242 )
 states/Flash/node = SubResource( 72 )
-states/Flash/position = Vector2( 385.898, 201.486 )
+states/Flash/position = Vector2( 386.53, 226.294 )
 states/Hit/node = SubResource( 77 )
 states/Hit/position = Vector2( -191.5, 84 )
 states/Idle/node = SubResource( 82 )
-states/Idle/position = Vector2( 111.5, -5.87167 )
+states/Idle/position = Vector2( 37.9611, -2.37167 )
 states/Pickup/node = SubResource( 87 )
 states/Pickup/position = Vector2( 111.876, -121.715 )
 states/Roll/node = SubResource( 92 )
 states/Roll/position = Vector2( 383.148, 0.5 )
 states/Run/node = SubResource( 99 )
-states/Run/position = Vector2( -191.625, -5.74334 )
+states/Run/position = Vector2( -191.5, -127.743 )
 states/Shade/node = SubResource( 104 )
-states/Shade/position = Vector2( 218.03, 200.973 )
+states/Shade/position = Vector2( 218.03, 226.294 )
 states/Stun/node = SubResource( 105 )
-states/Stun/position = Vector2( -408.171, 56.937 )
-transitions = [ "Idle", "Roll", SubResource( 106 ), "Roll", "Idle", SubResource( 107 ), "Idle", "Hit", SubResource( 108 ), "Hit", "Idle", SubResource( 109 ), "Roll", "Hit", SubResource( 110 ), "Idle", "Shade", SubResource( 111 ), "Shade", "Idle", SubResource( 112 ), "Shade", "Hit", SubResource( 113 ), "Idle", "Flash", SubResource( 114 ), "Flash", "Idle", SubResource( 115 ), "Flash", "Hit", SubResource( 116 ), "Idle", "Backstep", SubResource( 117 ), "Backstep", "Idle", SubResource( 118 ), "Backstep", "Hit", SubResource( 119 ), "Backstep", "Shade", SubResource( 120 ), "Backstep", "Flash", SubResource( 121 ), "Idle", "Run", SubResource( 122 ), "Run", "Idle", SubResource( 123 ), "Run", "Hit", SubResource( 124 ), "Attack1", "Hit", SubResource( 125 ), "Idle", "Attack1", SubResource( 126 ), "Backstep", "Attack1", SubResource( 127 ), "Attack2", "Attack1", SubResource( 128 ), "Attack1", "Attack2", SubResource( 129 ), "Shade", "Attack2", SubResource( 130 ), "Attack2", "Idle", SubResource( 131 ), "Attack2", "Hit", SubResource( 132 ), "Attack1", "Idle", SubResource( 133 ), "Idle", "Pickup", SubResource( 134 ), "Pickup", "Idle", SubResource( 135 ), "Idle", "Cast", SubResource( 136 ), "Cast", "Idle", SubResource( 137 ), "Stun", "Idle", SubResource( 138 ), "Stun", "Hit", SubResource( 139 ), "Run", "Stun", SubResource( 140 ) ]
+states/Stun/position = Vector2( -345.171, 0.5 )
+transitions = [ "Idle", "Roll", SubResource( 106 ), "Roll", "Idle", SubResource( 107 ), "Idle", "Hit", SubResource( 108 ), "Hit", "Idle", SubResource( 109 ), "Roll", "Hit", SubResource( 110 ), "Idle", "Shade", SubResource( 111 ), "Shade", "Idle", SubResource( 112 ), "Shade", "Hit", SubResource( 113 ), "Idle", "Flash", SubResource( 114 ), "Flash", "Idle", SubResource( 115 ), "Flash", "Hit", SubResource( 116 ), "Idle", "Backstep", SubResource( 117 ), "Backstep", "Idle", SubResource( 118 ), "Backstep", "Hit", SubResource( 119 ), "Backstep", "Shade", SubResource( 120 ), "Backstep", "Flash", SubResource( 121 ), "Idle", "Run", SubResource( 122 ), "Run", "Idle", SubResource( 123 ), "Run", "Hit", SubResource( 124 ), "Attack1", "Hit", SubResource( 125 ), "Idle", "Attack1", SubResource( 126 ), "Backstep", "Attack1", SubResource( 127 ), "Attack2", "Attack1", SubResource( 128 ), "Attack1", "Attack2", SubResource( 129 ), "Shade", "Attack2", SubResource( 130 ), "Attack2", "Idle", SubResource( 131 ), "Attack2", "Hit", SubResource( 132 ), "Attack1", "Idle", SubResource( 133 ), "Idle", "Pickup", SubResource( 134 ), "Pickup", "Idle", SubResource( 135 ), "Idle", "Cast", SubResource( 136 ), "Cast", "Idle", SubResource( 137 ), "Stun", "Idle", SubResource( 138 ), "Stun", "Hit", SubResource( 139 ), "Idle", "Stun", SubResource( 149 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -518.368, -38.0369 )
+graph_offset = Vector2( -518.368, -198.407 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=142]
 
@@ -2186,7 +2186,7 @@ position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
 vframes = 5
-frame = 258
+frame = 252
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )

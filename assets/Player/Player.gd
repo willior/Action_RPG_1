@@ -173,6 +173,7 @@ func _input(event):
 					var formula = FORMULA.instance()
 					ingredient1_OK = false
 					ingredient2_OK = false
+					formula.player = self
 					formula.global_position = global_position
 					get_node("/root/World").add_child(formula)
 					# formula.connect("tree_exited", self, "set", ["formula", null])
@@ -876,7 +877,7 @@ func action_state(delta):
 func action_finished():
 	animationTree.active = true
 	reset_interaction()
-	if has_node("Stun"):
+	if has_node("StatusDisplay/Stun"):
 		state = STUN
 		animationState.travel("Stun")
 		return
