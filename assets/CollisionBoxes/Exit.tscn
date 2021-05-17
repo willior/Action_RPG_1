@@ -19,4 +19,5 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
 [connection signal="body_entered" from="." to="." method="_on_Exit_body_entered"]

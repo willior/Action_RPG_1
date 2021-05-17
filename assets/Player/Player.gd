@@ -33,18 +33,12 @@ enum {
 	STUN
 }
 
+var stats = PlayerStats
 var state = MOVE
 var velocity = Vector2.ZERO
-var dir_vector = PlayerStats.dir_vector
+var dir_vector = stats.dir_vector
 var damageTaken = 0
-var stats = PlayerStats
 var stamina_regen_level = 0
-var levelStats = [0, 1, 2, 3, 4, 5]
-var levelResult = 0
-
-var level_queued = false
-var queued_levels = 0
-var levels_to_add = 0
 var stats_to_allocate = 0
 
 var roll_moving = false
@@ -61,7 +55,7 @@ var shade_moving = false
 var charge_count = 0
 var charge_level_count = 0
 var base_enemy_accuracy = 66
-var stamina_attack_cost = PlayerStats.stamina_attack_cost
+var stamina_attack_cost = stats.stamina_attack_cost
 
 var interactObject
 var talkObject
@@ -117,8 +111,8 @@ func _ready():
 	stats.connect("player_dying", self, "dying_effect")
 	stats.connect("no_health", self, "game_over")
 	stats.connect("attack_speed_changed", self, "set_attack_timescale")
-	set_attack_timescale(PlayerStats.attack_speed)
-	PlayerStats.status = "default_speed"
+	set_attack_timescale(stats.attack_speed)
+	stats.status = "default_speed"
 	Global.set_world_collision(self, z_index)
 
 func _process(delta):
@@ -427,7 +421,7 @@ func attack2_stamina_drain():
 func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
 	base_enemy_accuracy = 66
-	PlayerStats.dexterity_mod = 0
+	stats.dexterity_mod = 0
 	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
@@ -520,7 +514,7 @@ func flash_state(delta):
 
 func flash_start():
 	stats.stamina -= 25
-	PlayerStats.dexterity_mod = 4
+	stats.dexterity_mod = 4
 	charge.stop_charge()
 	swordHitbox.flash_begin()
 	# stats.strength_mod = 2
@@ -573,6 +567,7 @@ func show_level_up_screen():
 	var tweenGreyscale = TweenGreyscale.instance()
 	get_node("/root/World/GUI").add_child(tweenGreyscale)
 	var levelUpScreen = LevelUpScreen.instance()
+	levelUpScreen.player_stats = stats
 	levelUpScreen.stats_remaining = stats_to_allocate
 	stats_to_allocate = 0
 	get_node("/root/World/GUI").add_child(levelUpScreen)

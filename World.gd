@@ -25,6 +25,7 @@ func _ready():
 	if GameManager.multiplayer_2:
 		var player2 = load("res://assets/Player/Player2.tscn").instance()
 		player2.global_position = player.global_position
+		get_node("YSort").add_child(player2)
 
 func fade_out():
 	var fadeout = FadeOut.instance()
@@ -103,11 +104,6 @@ func _input(event):
 	
 	if event.is_action_pressed("test4"): # O
 		player.formulabook.remove_formula("Fury")
-	
-	if event.is_action_pressed("pause"): # P
-		StatusHandler.apply_status(["Stun", 1.0], player)
-		player.animationState.travel("Stun")
-		# PlayerStats.health = 1
 	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:

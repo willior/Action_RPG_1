@@ -6,19 +6,20 @@ onready var flash_swing = preload("res://assets/Audio/Player/Sword_Flash_Swing.w
 onready var audio = $AudioStreamPlayer
 
 var base_damage = 4
-onready var damage # setget set_damage
+var damage
 var orig_damage
 var randomness = 0.16
 var knockback_vector = Vector2.ZERO
-
 var status
 var orig_status
 var status_two # = ["Poison", 0.5]
+var stats
 
 func _ready():
+	stats = get_parent().get_parent().stats
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("strength_changed", self, "set_damage")
-	damage = base_damage + PlayerStats.strength
+	stats.connect("strength_changed", self, "set_damage")
+	damage = base_damage + stats.strength
 	orig_damage = damage
 	orig_status = status
 
@@ -32,7 +33,7 @@ func modify_damage(base, modulator):
 	return int(base * modulator)
 
 func reset_damage():
-	PlayerStats.dexterity_mod = 0
+	stats.dexterity_mod = 0
 	damage = orig_damage
 	status = orig_status
 	$CollisionShape2D.scale.x = 1
@@ -46,7 +47,7 @@ func sword_attack_audio():
 func shade_begin():
 	set_deferred("monitorable", true)
 	knockback_vector = Vector2.ZERO
-	PlayerStats.dexterity_mod = 8
+	stats.dexterity_mod = 8
 	orig_damage = damage
 	damage = modify_damage(damage, 3)
 
@@ -63,7 +64,7 @@ func flash_begin():
 	$CollisionShape2D.scale.x = 2
 	set_deferred("monitorable", true)
 	knockback_vector *= 1.5
-	PlayerStats.dexterity_mod = 4
+	stats.dexterity_mod = 4
 	orig_damage = damage
 	damage = modify_damage(damage, 2)
 	status = ["Stun", 1.0]

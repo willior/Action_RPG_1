@@ -27,6 +27,7 @@ var dialog_script = [
 		'action': 'end_dialog'
 	}
 ]
+var player_stats
 
 func parse_text(text):
 	var end_text = text

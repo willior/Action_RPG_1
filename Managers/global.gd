@@ -183,7 +183,8 @@ func set_world_collision(body, z_index):
 	for i in range(11,13):
 		if i != target_collision:
 			body.set_collision_mask_bit(i, false) # removes other collision masks
-	if body.name == "Player": # if the Player changes floors...
+	
+	if body.name == "Player" or body.name == "Player2": # if the Player changes floors...
 		for e in get_tree().get_nodes_in_group("Enemies"):
 			Enemy.set_player_collision(e) # ...places enemies on "Enemy" collision layer if z_index matches player's
 	else: # if it wasn't the player that changed floors, update the body (the enemy) only

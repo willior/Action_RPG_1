@@ -9,17 +9,15 @@ signal poison_removed()
 
 func _ready():
 	body.hurtbox.display_damage_popup("Poisoned!", false, "Poison")
-	# var messagePopup = MessagePopup.instance()
 	if body.get("ENEMY_NAME"):
 		pass
-		# messagePopup.message = str(body.ENEMY_NAME, ' is poisoned!')
 	else:
-		# messagePopup.message = "Poisoned!"
-		var icon = Icon.instance()
-		icon.duration = duration
-		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").add_child(icon)
-	# get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
-	# messagePopup.poison_flash()
+		match body.name:
+			"Player":
+				var icon = Icon.instance()
+				icon.duration = duration
+				icon.status_nodepath = self.get_path()
+				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").add_child(icon)
 	$Timer.start(duration)
 	$AnimatedSprite.play()
 

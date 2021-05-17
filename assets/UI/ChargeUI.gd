@@ -11,37 +11,40 @@ onready var chargeBeep2 = $ChargeBeep2
 onready var chargeSound1 = $ChargeSound1
 onready var chargeSound2 = $ChargeSound2
 
+var stats
+
 var currentCharge = 0 setget set_charge
 var currentChargeLevel = 0 setget set_charge_level
 
-var currentStamina = PlayerStats.stamina setget set_stamina
-var currentMaxStamina = PlayerStats.max_stamina setget set_max_stamina
+var currentStamina setget set_stamina
+var currentMaxStamina setget set_max_stamina
 var staminaPercent = 1
 var staminaWarning = false
 var sweatFlag = false
 
 func _ready():
-	PlayerStats.charge = 0
-	PlayerStats.charge_level = 0
-	self.currentMaxStamina = PlayerStats.max_stamina
+	stats = get_parent().stats
+	stats.charge = 0
+	stats.charge_level = 0
+	self.currentMaxStamina = stats.max_stamina
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("max_stamina_changed", self, "set_max_stamina")
-	self.currentStamina = PlayerStats.stamina
+	stats.connect("max_stamina_changed", self, "set_max_stamina")
+	self.currentStamina = stats.stamina
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("stamina_changed", self, "set_stamina")
-	self.currentCharge = PlayerStats.charge
+	stats.connect("stamina_changed", self, "set_stamina")
+	self.currentCharge = stats.charge
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("charge_changed", self, "set_charge")
-	self.currentChargeLevel = PlayerStats.charge_level
+	stats.connect("charge_changed", self, "set_charge")
+	self.currentChargeLevel = stats.charge_level
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("charge_level_changed", self, "set_charge_level")
+	stats.connect("charge_level_changed", self, "set_charge_level")
 
 func set_stamina(value):
 	currentStamina = value
 	staminaProgress.value = currentStamina
 	staminaPercent = currentStamina / currentMaxStamina
 	# fade in stamina progress (not sweating)
-	if !staminaProgress.visible && staminaPercent < 1 && !PlayerStats.status == "sweating":
+	if !staminaProgress.visible && staminaPercent < 1 && !stats.status == "sweating":
 		staminaProgress.visible = true
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
@@ -53,7 +56,7 @@ func set_stamina(value):
 		)
 		$Tween.start()
 	# fade in stamina progress (sweating)
-	elif !staminaProgress.visible && staminaPercent >= 0 && PlayerStats.status == "sweating":
+	elif !staminaProgress.visible && staminaPercent >= 0 && stats.status == "sweating":
 		# sweatFlag = false
 		staminaProgress.visible = true
 		$Tween.interpolate_property(staminaProgress,
@@ -79,7 +82,7 @@ func set_stamina(value):
 		yield($Tween, "tween_all_completed")
 		staminaProgress.visible = false
 	# fade out stamina progress (0% stamina)
-	elif sweatFlag && (staminaPercent <= 0 && PlayerStats.status == "sweating"):
+	elif sweatFlag && (staminaPercent <= 0 && stats.status == "sweating"):
 		sweatFlag = false
 		$Tween.interpolate_property(staminaProgress,
 		"modulate",
@@ -129,12 +132,12 @@ func set_charge(value):
 	elif currentChargeLevel == 1:
 		progress2.value = currentCharge
 	
-	if currentCharge > 50 && PlayerStats.charge_level == 0:
-		PlayerStats.charge_level = 1
+	if currentCharge > 50 && stats.charge_level == 0:
+		stats.charge_level = 1
 		begin_charge_2()
 		
-	if currentCharge >= 100 && PlayerStats.charge_level == 1:
-		PlayerStats.charge_level = 2
+	if currentCharge >= 100 && stats.charge_level == 1:
+		stats.charge_level = 2
 
 func set_charge_level(value):
 	currentChargeLevel = value

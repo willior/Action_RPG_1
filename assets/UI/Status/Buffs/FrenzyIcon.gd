@@ -1,10 +1,11 @@
 extends TextureProgress
 
+var status_nodepath
 var duration
 
 func _ready():
 # warning-ignore:return_value_discarded
-	get_node("/root/World/YSort/Player/StatusDisplay/Frenzy").connect("frenzy_removed", self, "delete_status_progress")
+	get_node(status_nodepath).connect("frenzy_removed", self, "delete_status_progress")
 	start_status_icon()
 
 func start_status_icon():

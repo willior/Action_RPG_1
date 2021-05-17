@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://assets/Audio/SFX/Miss.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.gd" type="Script" id=2]
@@ -10,12 +10,12 @@
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/Player/Player2.gd" type="Script" id=9]
 [ext_resource path="res://assets/Audio/Swipe.wav" type="AudioStream" id=10]
-[ext_resource path="res://assets/Player/SwordHitbox2.gd" type="Script" id=11]
+[ext_resource path="res://assets/Player/SwordHitbox.gd" type="Script" id=11]
 [ext_resource path="res://assets/Player/Player2.png" type="Texture" id=12]
 [ext_resource path="res://assets/UI/InteractNotice.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/UI/Sweat.tscn" type="PackedScene" id=15]
-[ext_resource path="res://assets/UI/ChargeUI2.gd" type="Script" id=16]
+[ext_resource path="res://assets/UI/Popups/DamageContainer.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/Audio/Bamboo.wav" type="AudioStream" id=18]
 
@@ -1943,10 +1943,6 @@ radius = 5.0
 [sub_resource type="CapsuleShape2D" id=121]
 height = 5.43185
 
-[sub_resource type="CapsuleShape2D" id=122]
-radius = 180.0
-height = 260.0
-
 [sub_resource type="Animation" id=123]
 length = 0.2
 loop = true
@@ -2088,7 +2084,6 @@ parameters/Shade/blend_position = Vector2( 0.0241064, -0.406441 )
 
 [node name="ChargeUI" parent="." instance=ExtResource( 14 )]
 z_index = 3
-script = ExtResource( 16 )
 
 [node name="InteractNotice" parent="." instance=ExtResource( 13 )]
 visible = false
@@ -2109,6 +2104,19 @@ margin_left = -5.0
 margin_top = -7.0
 margin_right = -5.0
 margin_bottom = -7.0
+
+[node name="DamageDisplay" type="Node2D" parent="."]
+z_index = 3
+
+[node name="DamageContainer" parent="DamageDisplay" instance=ExtResource( 16 )]
+show_behind_parent = false
+margin_left = 11.0
+margin_top = 0.0
+margin_right = 11.0
+margin_bottom = 0.0
+
+[node name="StatusDisplay" type="Node2D" parent="."]
+position = Vector2( 0, -20 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
@@ -2158,17 +2166,6 @@ collision_mask = 768
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collectbox"]
 position = Vector2( -0.488346, -7.73805 )
 shape = SubResource( 121 )
-
-[node name="SpawnBox" type="Area2D" parent="."]
-visible = false
-monitoring = false
-monitorable = false
-collision_layer = 0
-collision_mask = 1536
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnBox"]
-rotation = 1.5708
-shape = SubResource( 122 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )

@@ -11,11 +11,14 @@ func _ready():
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(PlayerStats.attack_speed*potency)
-		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost/5)
-		var icon = Icon.instance()
-		icon.duration = duration
-		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").add_child(icon)
+		body.set_attack_timescale(body.stats.attack_speed*potency)
+		body.set_stamina_attack_cost(body.stats.stamina_attack_cost/5)
+		match body.name:
+			"Player":
+				var icon = Icon.instance()
+				icon.duration = duration
+				icon.status_nodepath = self.get_path()
+				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").add_child(icon)
 	$Timer.start(duration)
 	$AnimatedSprite.play()
 
@@ -24,9 +27,11 @@ func refresh_status(new_duration, new_potency):
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(PlayerStats.attack_speed*new_potency)
-		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost/5)
-		get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon(new_duration)
+		body.set_attack_timescale(body.stats.attack_speed*new_potency)
+		body.set_stamina_attack_cost(body.stats.stamina_attack_cost/5)
+		match body.name:
+			"Player":
+				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon(new_duration)
 	$Timer.start(new_duration)
 	$AnimatedSprite.play()
 
@@ -34,8 +39,8 @@ func _on_Timer_timeout():
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(PlayerStats.attack_speed)
-		body.set_stamina_attack_cost(PlayerStats.stamina_attack_cost)
+		body.set_attack_timescale(body.stats.attack_speed)
+		body.set_stamina_attack_cost(body.stats.stamina_attack_cost)
 	queue_free()
 
 func _on_Frenzy_tree_exiting():
