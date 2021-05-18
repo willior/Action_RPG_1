@@ -13,7 +13,7 @@ var on_title_screen = false
 var existing_inventory
 var player
 var player2
-var multiplayer_2 = true
+var multiplayer_2 = false
 
 signal player_initialized
 signal player_reinitialized
@@ -168,6 +168,7 @@ func multiplayer_2_toggle():
 		get_tree().get_root().get_node("/root/World/YSort").add_child(player2)
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 1
 		# set_deferred("multiplayer_2", true)
+	get_tree().get_root().get_node("/root/World/GUI").toggle_multiplayer_gui()
 
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):

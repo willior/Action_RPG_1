@@ -20,9 +20,9 @@ func set_level(value):
 	levelBox.set_text(str(Player2Stats.level))
 	
 func _ready():
-	if !GameManager.multiplayer_2:
-		queue_free()
-		return
+#	if !GameManager.multiplayer_2:
+#		queue_free()
+#		return
 	self.max_experience = Player2Stats.experience_required
 	self.experienceProgress = Player2Stats.experience
 	self.level = Player2Stats.level

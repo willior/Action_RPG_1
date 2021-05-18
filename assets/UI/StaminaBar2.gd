@@ -15,9 +15,9 @@ func set_max_stamina(value):
 	stamBar.rect_min_size.x = max_stamina/3
 
 func _ready():
-	if !GameManager.multiplayer_2:
-		queue_free()
-		return
+#	if !GameManager.multiplayer_2:
+#		queue_free()
+#		return
 	self.max_stamina = Player2Stats.max_stamina
 	self.stamina = Player2Stats.stamina
 # warning-ignore:return_value_discarded
