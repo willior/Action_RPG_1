@@ -136,7 +136,7 @@ func _input(event):
 					state = ATTACK1
 				elif interacting && interactObject.interactable && !dying:
 					talkTimer.start()
-					interactObject.interact()
+					interactObject.interact(self)
 					if examining:
 						self.noticeDisplay = false
 				elif talking && interactObject.talkable && talkTimer.is_stopped() && !dying:
@@ -227,8 +227,8 @@ func _input(event):
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right_2") - Input.get_action_strength ("ui_left_2")
-	input_vector.y = Input.get_action_strength("ui_down_2") - Input.get_action_strength("ui_up_2")
+	input_vector.x = Input.get_action_strength("right_2") - Input.get_action_strength ("left_2")
+	input_vector.y = Input.get_action_strength("down_2") - Input.get_action_strength("up_2")
 	input_vector = input_vector.normalized()
 	stamina_regeneration()
 	# if player is moving

@@ -142,19 +142,19 @@ position = Vector2( 320, 256 )
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="IngredientPickup" parent="YSort/Items" instance=ExtResource( 2 )]
-position = Vector2( 144, 112 )
+position = Vector2( 248, 552 )
 ingredient_name = "Rock"
 
 [node name="IngredientPickup2" parent="YSort/Items" instance=ExtResource( 2 )]
-position = Vector2( 160, 112 )
+position = Vector2( 264, 552 )
 ingredient_name = "Clay"
 
 [node name="IngredientPickup3" parent="YSort/Items" instance=ExtResource( 2 )]
-position = Vector2( 144, 128 )
+position = Vector2( 248, 568 )
 ingredient_name = "Salt"
 
 [node name="IngredientPickup4" parent="YSort/Items" instance=ExtResource( 2 )]
-position = Vector2( 160, 128 )
+position = Vector2( 264, 568 )
 ingredient_name = "Water"
 
 [node name="Doodads" type="YSort" parent="YSort"]

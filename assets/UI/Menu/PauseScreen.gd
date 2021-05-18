@@ -25,8 +25,32 @@ onready var GUI = get_tree().get_root().get_node("World/GUI")
 var closing = false
 var moving = false
 var player
-
+var up
+var down
+var left
+var right
+var accept
+var cancel
+var start
 func _ready():
+	up = "ui_up"
+	down = "ui_down"
+	left = "ui_left"
+	right = "ui_right"
+	accept = "ui_accept"
+	cancel = "ui_cancel"
+	if player.name == "Player2":
+		start = "start_2"
+	else:
+		start = "start"
+#		"Player2":
+#			up = "ui_up_2"
+#			down = "ui_down_2"
+#			left = "ui_left_2"
+#			right = "ui_right_2"
+#			accept = "ui_accept_2"
+#			cancel = "ui_cancel_2"
+#			start = "start_2"
 	$Tween.interpolate_property($CanvasLayer/PanelTop, "rect_position",
 	Vector2(0, -45),
 	Vector2(0, 0),
@@ -127,19 +151,70 @@ func enable_menu_focus():
 	for b in $MenuPanel/Menu.get_children().size():
 		$MenuPanel/Menu.get_child(b).set_focus_mode(2)
 
+func _input(event):
+	match player.name:
+		"Player":
+			match event.as_text():
+				"I":
+					get_tree().set_input_as_handled()
+					return
+				"J":
+					get_tree().set_input_as_handled()
+					return
+				"K":
+					get_tree().set_input_as_handled()
+					return
+				"L":
+					get_tree().set_input_as_handled()
+					return
+				"Slash":
+					get_tree().set_input_as_handled()
+					return
+				"Shift":
+					get_tree().set_input_as_handled()
+					return
+				"Semicolon":
+					get_tree().set_input_as_handled()
+					return
+				"Enter":
+					get_tree().set_input_as_handled()
+					return
+		"Player2":
+			match event.as_text():
+				"W":
+					get_tree().set_input_as_handled()
+					return
+				"S": 
+					get_tree().set_input_as_handled()
+					return
+				"A": 
+					get_tree().set_input_as_handled()
+					return
+				"D": 
+					get_tree().set_input_as_handled()
+					return
+				"V": 
+					get_tree().set_input_as_handled()
+					return
+				"B": 
+					get_tree().set_input_as_handled()
+					return
+				"F": 
+					get_tree().set_input_as_handled()
+					return
+				"Space":
+					get_tree().set_input_as_handled()
+					return
+
 func _on_PauseScreen_gui_input(event):
 	get_tree().set_input_as_handled()
 	if closing or moving:
 		return
-	elif event.is_action_pressed("ui_cancel") or event.is_action_pressed("start"):
+	elif event.is_action_pressed(cancel) or event.is_action_pressed(start):
 		hide_status_display()
 		close_pause_menu()
 
 func close_pause_menu():
-#	$StatsDisplay.hide()
-#	$AlchemyDisplay.hide()
-#	$PouchDisplay.hide()
-#	$ConfigDisplay.hide()
 	for b in $MenuPanel/Menu.get_children().size():
 		$MenuPanel/Menu.get_child(b).set_focus_mode(0)
 	closing = true
@@ -189,13 +264,13 @@ func _on_ButtonStatus_focus_exited():
 	pass
 
 func _on_ButtonSTAT_gui_input(event, description_index):
-	if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down"):
+	if event.is_action_pressed(up) or event.is_action_pressed(down):
 		audio_menu_move()
-	elif event.is_action_pressed("ui_cancel"):
+	elif event.is_action_pressed(cancel):
 		hide_status_display()
 		enable_menu_focus()
 		$MenuPanel/Menu/ButtonStatus.grab_focus()
-	elif event.is_action_pressed("ui_select"):
+	elif event.is_action_pressed(accept):
 		audio_menu_select()
 		var stat_description
 		match description_index:
@@ -213,7 +288,7 @@ func _on_ButtonSTAT_gui_input(event, description_index):
 			}
 		]
 		get_node("/root/World/GUI").add_child(dialogBox)
-	elif event.is_action_pressed("start"):
+	elif event.is_action_pressed(start):
 		hide_status_display()
 		close_pause_menu()
 
@@ -275,25 +350,25 @@ func _on_ButtonConfig_focus_exited():
 	pass
 
 func _on_ButtonControls_gui_input(event):
-	if event.is_action_pressed("ui_select") and !$CanvasLayer1/ControlsDisplay.visible:
+	if event.is_action_pressed(accept) and !$CanvasLayer1/ControlsDisplay.visible:
 		$CanvasLayer1/ControlsDisplay.show()
 		$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(-480, 0), Vector2(0, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_OUT)
 		$Tween.start()
 		moving = true
 		yield($Tween, "tween_all_completed")
 		moving = false
-	elif (event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_select")) and $CanvasLayer1/ControlsDisplay.visible and !moving:
+	elif (event.is_action_pressed(cancel) or event.is_action_pressed(accept)) and $CanvasLayer1/ControlsDisplay.visible and !moving:
 		$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(0, 0), Vector2(480, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_IN)
 		$Tween.start()
 		moving = true
 		yield($Tween, "tween_all_completed")
 		moving = false
 		$CanvasLayer1/ControlsDisplay.hide()
-	elif event.is_action_pressed("ui_cancel"):
+	elif event.is_action_pressed(cancel):
 		hide_config_display()
 		enable_menu_focus()
 		$MenuPanel/Menu/ButtonConfig.grab_focus()
-	elif event.is_action_pressed("start"):
+	elif event.is_action_pressed(start):
 		if $CanvasLayer1/ControlsDisplay.visible and !moving:
 			$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(0, 0), Vector2(480, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_IN)
 			$Tween.start()
@@ -338,10 +413,12 @@ func hide_config_display():
 func _on_ButtonInventory_focus_entered():
 	return
 # warning-ignore:unreachable_code
+# warning-ignore:unreachable_code
 	$InventoryDisplay.show()
 	audio_menu_move()
 
 func _on_ButtonInventory_focus_exited():
 	return
+# warning-ignore:unreachable_code
 # warning-ignore:unreachable_code
 	$InventoryDisplay.hide()

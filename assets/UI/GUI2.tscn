@@ -277,9 +277,9 @@ __meta__ = {
 [node name="MessageDisplay1" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
+margin_left = 64.0
 margin_top = -78.0
-margin_right = 16.0
+margin_right = 64.0
 margin_bottom = -78.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -290,7 +290,6 @@ show_behind_parent = true
 grow_vertical = 0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -588,10 +587,12 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -16.0
+margin_left = -64.0
 margin_top = -78.0
-margin_right = -16.0
+margin_right = -64.0
 margin_bottom = -78.0
+grow_horizontal = 0
+size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -600,8 +601,7 @@ __meta__ = {
 show_behind_parent = true
 grow_horizontal = 0
 grow_vertical = 0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 8
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false

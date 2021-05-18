@@ -127,8 +127,7 @@ func _input(event):
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
 		elif get_tree().paused == false:
 			open_pause_menu(player)
-#		else:
-#			close_pause_menu()
+
 	if event.is_action_pressed("start_2"):
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or Player2Stats.dying and !Player2Stats.dead:
 			print('start discarded: ', Global.changingScene)

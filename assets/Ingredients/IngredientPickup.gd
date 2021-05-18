@@ -21,21 +21,22 @@ func examine():
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true
 
-func interact():
-	GameManager.player.state = 8
+func interact(player):
+	player.state = 8
 	var timer = Timer.new()
 	timer.wait_time = 0.4
 	add_child(timer)
 	timer.start()
 	yield(timer, "timeout")
-	GameManager.player.pouch.add_ingredient(ingredient_name, 1)
+	player.pouch.add_ingredient(ingredient_name, 1)
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	# argument determines sound effect; 0 = heartCollect
 	itemCollectEffect.playSound(0)
 	var displayMessage = "Found " + str(ingredient_name) + " x1"
-	display_pickup_message(displayMessage)
+	display_pickup_message(displayMessage, player.name)
 	queue_free()
+
 # warning-ignore:shadowed_variable
 func check_ingredient(ingredient_name):
 # warning-ignore:shadowed_variable
@@ -45,8 +46,12 @@ func check_ingredient(ingredient_name):
 		return
 	return ingredient
 
-func display_pickup_message(value):
+func display_pickup_message(value, who):
 	var pickupPopup = PickupPopup.instance()
 	pickupPopup.message = value
-	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(pickupPopup)
+	match who:
+		"Player":
+			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(pickupPopup)
+		"Player2":
+			get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(pickupPopup)
 	pickupPopup.pickup_flash()
