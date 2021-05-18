@@ -248,8 +248,8 @@ func move_state(delta):
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.speed_mod), stats.acceleration * delta)
 		if GameManager.multiplayer_2:
-			if position.x - Global.player2.position.x > 288 or position.x - Global.player2.position.x < -288 or position.y - Global.player2.position.y > 160 or position.y - Global.player2.position.y < -136:
-				Global.player2.position = position
+			if position.x - GameManager.player2.position.x > 288 or position.x - GameManager.player2.position.x < -288 or position.y - GameManager.player2.position.y > 160 or position.y - GameManager.player2.position.y < -136:
+				GameManager.player2.position = position
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)

@@ -93,6 +93,7 @@ onready var bamboo = $BambooAudio
 signal player_saved
 
 func _ready():
+	GameManager.multiplayer_2 = true
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
 	if Global.get_attribute("inventory") != null:
@@ -200,7 +201,6 @@ func _input(event):
 #							else:
 #								talkTimer.start()
 #								interactObject.use_item_on_object()
-		
 		ATTACK1:
 			if event.is_action_pressed("attack_2") && !event.is_echo():
 				if stats.stamina <= 0:
@@ -247,8 +247,8 @@ func move_state(delta):
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.speed_mod), stats.acceleration * delta)
 		if GameManager.multiplayer_2:
-			if position.x - Global.player2.position.x > 288 or position.x - Global.player2.position.x < -288 or position.y - Global.player2.position.y > 160 or position.y - Global.player2.position.y < -136:
-				Global.player2.position = position
+			if position.x - GameManager.player.position.x > 288 or position.x - GameManager.player.position.x < -288 or position.y - GameManager.player.position.y > 160 or position.y - GameManager.player.position.y < -136:
+				GameManager.player2.position = position
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
@@ -361,17 +361,17 @@ func apply_status(status):
 
 func move():
 	if GameManager.multiplayer_2:
-		if position.x - Global.player2.position.x > 272:
-			Global.player2.position.x += 1
+		if position.x - Global.player1.position.x > 272:
+			Global.player1.position.x += 1
 			#return
-		if position.x - Global.player2.position.x < -272:
-			Global.player2.position.x -= 1
+		if position.x - Global.player1.position.x < -272:
+			Global.player1.position.x -= 1
 			#return
-		if position.y - Global.player2.position.y > 136:
-			Global.player2.position.y += 1
+		if position.y - Global.player1.position.y > 136:
+			Global.player1.position.y += 1
 			#return
-		if position.y - Global.player2.position.y < -136:
-			Global.player2.position.y -= 1
+		if position.y - Global.player1.position.y < -136:
+			Global.player1.position.y -= 1
 			#return
 	velocity = move_and_slide(velocity)
 

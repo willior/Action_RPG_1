@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/UI/FormulaUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/UI/8x6_Progress.png" type="Texture" id=17]
 [ext_resource path="res://assets/Font/small_dynamicfont.tres" type="DynamicFont" id=18]
 [ext_resource path="res://assets/Shaders/pixel_text_outline_material.tres" type="Material" id=19]
+[ext_resource path="res://assets/UI/GUI.gd" type="Script" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
@@ -83,6 +84,7 @@ tracks/1/keys = {
 
 [node name="GUI" type="CanvasLayer"]
 pause_mode = 2
+script = ExtResource( 20 )
 
 [node name="HealthUI1" type="Control" parent="."]
 pause_mode = 2

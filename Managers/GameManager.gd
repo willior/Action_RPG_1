@@ -144,13 +144,30 @@ func initialize_player2():
 		player2.formulabook.add_formula("Heal")
 		player2.formulabook.add_formula("Fury")
 		# warning-ignore:return_value_discarded
-		ResourceSaver.save("user://formulabook.tres", player2.formulabook)
+		ResourceSaver.save("user://formulabook_2.tres", player2.formulabook)
 		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))
 	else:
 		var loaded_formulabook = load("user://formulabook_2.tres")
 		if loaded_formulabook:
 			player2.formulabook.set_formulas(loaded_formulabook.get_formulas())
 			print("formulabook loaded from disk.")
+
+func multiplayer_2_toggle():
+	if multiplayer_2:
+		var REMOTE2D = load("res://assets/System/RemoteTransform2D.tscn")
+		var remoteTransform2D = REMOTE2D.instance()
+		player.add_child(remoteTransform2D)
+		player2.queue_free()
+		get_tree().get_root().get_node("/root/World/Camera2D").state = 0
+		player2 = null
+		multiplayer_2 = false
+	else:
+		player.get_node("RemoteTransform2D").queue_free()
+		player2 = load("res://assets/Player/Player2.tscn").instance()
+		player2.global_position = player.global_position
+		get_tree().get_root().get_node("/root/World/YSort").add_child(player2)
+		get_tree().get_root().get_node("/root/World/Camera2D").state = 1
+		# set_deferred("multiplayer_2", true)
 
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):

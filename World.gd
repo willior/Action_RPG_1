@@ -106,6 +106,9 @@ func _input(event):
 	if event.is_action_pressed("test4"): # O
 		player.formulabook.remove_formula("Fury")
 	
+	if event.is_action_pressed("select_2"):
+		GameManager.multiplayer_2_toggle()
+	
 	if event.is_action_pressed("start"): # SPACEBAR
 		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
 			print('start discarded: ', Global.changingScene)
@@ -129,7 +132,7 @@ func _input(event):
 			open_pause_menu(player)
 
 	if event.is_action_pressed("start_2"):
-		if Global.dialogOpen or Global.chapter_name or Global.changingScene or Player2Stats.dying and !Player2Stats.dead:
+		if !GameManager.multiplayer_2 or Global.dialogOpen or Global.chapter_name or Global.changingScene or Player2Stats.dying and !Player2Stats.dead:
 			print('start discarded: ', Global.changingScene)
 			return
 		if Player2Stats.dead:
@@ -148,7 +151,7 @@ func _input(event):
 			Player2Stats.dead = false
 			Player2Stats.experience -= (Player2Stats.experience_required / 10)
 		elif get_tree().paused == false:
-			open_pause_menu(player2)
+			open_pause_menu(GameManager.player2)
 
 func open_pause_menu(body):
 	music.stream_paused = true

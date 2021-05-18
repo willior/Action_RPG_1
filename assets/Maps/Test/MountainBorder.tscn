@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/Tilesets/GrassBasicLight.png" type="Texture" id=1]
 [ext_resource path="res://assets/Audio/Hello_drone.ogg" type="AudioStream" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/Tilesets/Mountain_TileMap64x88.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/System/RemoteTransform2D.tscn" type="PackedScene" id=20]
 
 [sub_resource type="TileSet" id=1]
 0/name = "GrassBasicDark.png 0"
@@ -120,8 +121,7 @@ pause_mode = 1
 process_priority = 0
 position = Vector2( 323, 259 )
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
-remote_path = NodePath("../../../Camera2D")
+[node name="RemoteTransform2D" parent="YSort/Player" instance=ExtResource( 20 )]
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
