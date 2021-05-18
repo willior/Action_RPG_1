@@ -14,7 +14,7 @@ func ability_start():
 	$CanvasLayer/ScreenTint.flash()
 
 func cast():
-	StatusHandler.apply_status(status, player)
+	# StatusHandler.apply_status(status, player)
 	print(status)
 
 func ability_end():

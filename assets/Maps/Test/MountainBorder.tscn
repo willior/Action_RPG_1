@@ -137,6 +137,7 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit/StaticBody2D"]
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Map/Exit"]
 texture = ExtResource( 22 )

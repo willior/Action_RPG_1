@@ -10,6 +10,10 @@ onready var FadeIn = load("res://assets/Misc/FadeIn.tscn")
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
 onready var PauseScreen = load("res://assets/UI/Menu/PauseScreen.tscn")
 
+func _init():
+	if GameManager.multiplayer_2:
+		player2 = load("res://assets/Player/Player2.tscn").instance()
+
 func _ready():
 	var fade_in = FadeIn.instance()
 	add_child(fade_in)
@@ -24,7 +28,6 @@ func _ready():
 		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
 		Global.chapter_name = null
 	if GameManager.multiplayer_2:
-		player2 = load("res://assets/Player/Player2.tscn").instance()
 		player2.global_position = player.global_position
 		get_node("YSort").add_child(player2)
 

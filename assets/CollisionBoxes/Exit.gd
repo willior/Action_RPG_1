@@ -1,5 +1,7 @@
 extends Area2D
-
+# Exit scene
+# the shape CollisionShape2D must be shared by the StaticBody2D child and the Exit area node itself.
+# StaticBody2D World collision gets enabled on Player dying, preventing zoning while dying.
 export(String, FILE) var map_file
 export var selected_location = Vector2()
 var facing_direction = Vector2()
@@ -9,9 +11,6 @@ func _ready():
 	PlayerStats.connect("player_dying", self, "disable_exit")
 # warning-ignore:return_value_discarded
 	Player2Stats.connect("player_dying", self, "disable_exit")
-# warning-ignore:return_value_discarded
-	get_node("/root/World/YSort/Player").connect("player_saved", self, "enable_exit")
-	# GameManager.player.connect("player_saved", self, "enable_exit")
 
 func _on_Exit_body_entered(_body):
 	facing_direction = _body.dir_vector

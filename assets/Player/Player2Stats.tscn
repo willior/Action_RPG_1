@@ -11,6 +11,7 @@ var shade_speed = 420
 var friction = 800
 var shade_friction = 840
 var dir_vector = Vector2.DOWN
+var affinity = 0
 
 var vitality = 12 setget set_vitality
 var endurance = 12 setget set_endurance

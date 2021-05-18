@@ -108,6 +108,10 @@ func damage_calculation(attack, defense, random, element_mod):
 #	print("base damage = ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage, " ]]]")
 	return random_variance(base_damage, random)
 
+func formula_calculation(amount, defense, random, element_mod):
+	var base_damage = max(amount-defense, 1) * element_mod
+	return random_variance(base_damage, random)
+
 func random_variance(base_damage, random):
 	rng.randomize()
 	var random_value = rng.randf_range(1-random, 1+random)

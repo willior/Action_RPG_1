@@ -22,10 +22,6 @@ signal player_reinitialized
 signal player2_initialized
 signal player2_reinitialized
 
-func _ready():
-	pass
-	
-# warning-ignore:unused_argument
 func reinitialize_player(inventory, pouch, formulabook):
 	print('attempting to reinitialize player...')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")

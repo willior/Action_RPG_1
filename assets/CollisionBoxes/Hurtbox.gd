@@ -2,7 +2,6 @@ extends Area2D
 
 const HitEffect = preload("res://assets/Effects/HitEffect.tscn")
 const DamagePopup = preload("res://assets/UI/Popups/DamagePopup.tscn")
-const HealPopup = preload("res://assets/UI/Popups/HealPopup.tscn")
 onready var timer = $Timer
 onready var collision = $CollisionShape2D
 onready var main = get_tree().get_root().get_node("World")
@@ -33,11 +32,6 @@ func display_damage_popup(value, crit, kind="Normal"):
 	damagePopup.is_crit = crit
 	damagePopup.kind = kind
 	get_parent().get_node("DamageDisplay/DamageContainer").add_child(damagePopup)
-
-func display_heal_popup(value):
-	var healPopup = HealPopup.instance()
-	healPopup.damageDisplay = value
-	get_parent().get_node("DamageDisplay/DamageContainer").add_child(healPopup)
 
 func _on_Timer_timeout():
 	self.invincible = false # if self prefixes invincible, calls the setter

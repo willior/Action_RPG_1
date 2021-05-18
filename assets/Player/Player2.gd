@@ -81,7 +81,6 @@ onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var interactHitbox = $HitboxPivot/InteractHitbox/CollisionShape2D
 onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
-onready var collect = $Collectbox
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
 onready var notice = $ExamineNotice
@@ -332,7 +331,7 @@ func stamina_regeneration():
 			5:
 				stats.stamina += stats.stamina_regen_rate * 32
 		
-		if Input.is_action_pressed("attack") || Input.is_action_pressed("roll"):
+		if Input.is_action_pressed("attack_2") || Input.is_action_pressed("roll_2"):
 			if timer.is_stopped():
 				timer.start()
 			return
@@ -435,7 +434,7 @@ func attack_animation_finished():
 		stamina_regen_reset()
 		state = MOVE
 	# if attack button is held when an attack animation finishes
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack_2"):
 		attack_charging = true
 		# charge_reset()
 
@@ -474,7 +473,7 @@ func shade_state(delta):
 # warning-ignore:integer_division
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	else:
-		if Input.is_action_just_released("attack"):
+		if Input.is_action_just_released("attack_2"):
 			attack2_queued = true
 	animationState.travel("Shade")
 	move()
@@ -585,7 +584,7 @@ func roll_state(delta):
 		# warning-ignore:integer_division
 		velocity = dir_vector * (stats.roll_speed/4)
 	animationState.travel("Roll")
-	if Input.is_action_just_released("attack"):
+	if Input.is_action_just_released("attack_2"):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
@@ -641,7 +640,7 @@ func backstep_state(delta):
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
 	animationState.travel("Backstep")
-	if Input.is_action_just_released("attack"):
+	if Input.is_action_just_released("attack_2"):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
@@ -687,7 +686,7 @@ func backstep_animation_finished():
 		charge.stop_charge()
 		charge_reset()
 		state = FLASH
-	elif Input.is_action_pressed("attack"):
+	elif Input.is_action_pressed("attack_2"):
 		attack_animation_finished()
 	elif attack1_queued:
 		velocity = dir_vector * (stats.roll_speed*0.75)
@@ -695,22 +694,49 @@ func backstep_animation_finished():
 	else:
 		attack_animation_finished()
 
+func _on_Formulabox_area_entered(area):
+	if area.get("status"):
+		StatusHandler.apply_status(area.status, self)
+	if area.get("buff")!=null or area.get("debuff")!=null:
+		return
+	var element_mod
+	if area.get("element")!=null and stats.get("affinity")!=null:
+		element_mod = Element.calculate_element_ratio(area.element, stats.affinity)
+	else:
+		element_mod = 1
+	if area.get("formula"):
+		damageTaken = Global.formula_calculation(area.potency, 0, area.randomness, element_mod)
+		stats.health -= damageTaken
+		if damageTaken < 0:
+			hurtbox.display_damage_popup(str(abs(damageTaken)), false, "Heal")
+		else:
+			hurtbox.display_damage_popup(str(damageTaken), false)
+		return
+
 func _on_Hurtbox_area_entered(area):
-	if area.get("healing"):
-		hurtbox.display_damage_popup(str(area.amount), false, "Heal")
+	if area.get("status"):
+		StatusHandler.apply_status(area.status, self)
+	if area.get("buff")!=null or area.get("debuff")!=null:
 		return
-	if area.get("buff"):
+	var element_mod
+	if area.get("element")!=null and stats.get("affinity")!=null:
+		element_mod = Element.calculate_element_ratio(area.element, stats.affinity)
+	else:
+		element_mod = 1
+	if area.get("formula"):
+		damageTaken = Global.formula_calculation(area.potency, 0, area.randomness, element_mod)
+		stats.health -= damageTaken
+		if damageTaken < 0:
+			hurtbox.display_damage_popup(str(abs(damageTaken)), false, "Heal")
+		else:
+			hurtbox.display_damage_popup(str(damageTaken), false)
 		return
+	
 	if z_index != area.get_parent().z_index: # automatic miss if z_index mismatch
 		$DodgeAudio.play()
 		hurtbox.display_damage_popup("Miss!", false)
 		print(area.get_parent().name, ' missed Player due to altitude difference')
 		return
-	var element_mod
-	if area.get("element") and stats.get("affinity"):
-		element_mod = Element.calculate_element_ratio(area.element, stats.affinity)
-	else:
-		element_mod = 1
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
 	if hit:
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness, element_mod)
@@ -776,7 +802,7 @@ func hit_animation_finished():
 	stamina_regen_reset()
 	player_state_reset()
 	charge.stop_charge()
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack_2"):
 		charge_reset()
 		attack_charging = true
 	state = MOVE
@@ -851,7 +877,7 @@ func pickup_state(delta):
 
 func pickup_finished():
 	reset_interaction()
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack_2"):
 		charge_reset()
 		attack_charging = true
 	state = MOVE
@@ -875,7 +901,7 @@ func action_finished():
 		state = STUN
 		animationState.travel("Stun")
 		return
-	if Input.is_action_pressed("attack"):
+	if Input.is_action_pressed("attack_2"):
 		charge_reset()
 		attack_charging = true
 	state = MOVE
@@ -965,7 +991,7 @@ func reset_animation():
 	animationTree.set("parameters/Idle/blend_position", dir_vector)
 
 func check_attack_input():
-	if !Input.is_action_pressed("attack"):
+	if !Input.is_action_pressed("attack_2"):
 		charge.stop_charge()
 		charge_reset()
 	get_node("/root/World/Music").stream_paused = false

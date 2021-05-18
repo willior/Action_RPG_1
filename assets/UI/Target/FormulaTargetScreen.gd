@@ -3,13 +3,32 @@ onready var EnemyTarget = load("res://assets/UI/Target/EnemyTarget.tscn")
 onready var music = get_tree().get_root().get_node("World/Music")
 onready var sfx1 = get_tree().get_root().get_node("World/SFX")
 onready var sfx2 = get_tree().get_root().get_node("World/SFX2")
+var player
 var enemies
 var count
 export var formula_range : int
 export var formula_shape : Shape2D
 export var formula_size : int
-
+var up
+var down
+var left
+var right
+var next
 func _ready():
+	player = get_parent().player
+	match player.name:
+		"Player":
+			up = "up_1"
+			down = "down_1"
+			left = "left_1"
+			right = "right_1"
+			next = "next_1"
+		"Player2":
+			up = "up_2"
+			down = "down_2"
+			left = "left_2"
+			right = "right_2"
+			next = "next_2"
 	sfx1.stream_paused = true
 	sfx2.stream_paused = true
 	AudioServer.set_bus_effect_enabled(0, 0, true)
@@ -28,8 +47,8 @@ func _ready():
 
 func _process(_delta):
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength ("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector.x = Input.get_action_strength(right) - Input.get_action_strength (left)
+	input_vector.y = Input.get_action_strength(down) - Input.get_action_strength(up)
 	input_vector = input_vector.normalized()
 	$TargetArea.position += input_vector*2
 	if $TargetArea.position.x > 160:
@@ -42,14 +61,73 @@ func _process(_delta):
 		$TargetArea.position.y = -90
 
 func _input(event):
+	match player.name:
+		"Player":
+			match event.as_text():
+				"I":
+					get_tree().set_input_as_handled()
+					return
+				"J":
+					get_tree().set_input_as_handled()
+					return
+				"K":
+					get_tree().set_input_as_handled()
+					return
+				"L":
+					get_tree().set_input_as_handled()
+					return
+				"P":
+					get_tree().set_input_as_handled()
+					return
+				"Slash":
+					get_tree().set_input_as_handled()
+					return
+				"Shift":
+					get_tree().set_input_as_handled()
+					return
+				"Semicolon":
+					get_tree().set_input_as_handled()
+					return
+				"Enter":
+					get_tree().set_input_as_handled()
+					return
+		"Player2":
+			match event.as_text():
+				"W":
+					get_tree().set_input_as_handled()
+					return
+				"S": 
+					get_tree().set_input_as_handled()
+					return
+				"A": 
+					get_tree().set_input_as_handled()
+					return
+				"D": 
+					get_tree().set_input_as_handled()
+					return
+				"V": 
+					get_tree().set_input_as_handled()
+					return
+				"B": 
+					get_tree().set_input_as_handled()
+					return
+				"F": 
+					get_tree().set_input_as_handled()
+					return
+				"R": 
+					get_tree().set_input_as_handled()
+					return
+				"Space":
+					get_tree().set_input_as_handled()
+					return
 	get_tree().set_input_as_handled()
-	if event.is_action_pressed("ui_accept"): # or event.is_action_pressed("alchemy"):
+	if event.is_action_pressed("ui_accept"):
 		get_parent().start()
 		get_parent().get_node("FormulaHitbox").position = $TargetArea.position
 		end_target_screen()
-	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("examine"):
+	if event.is_action_pressed("ui_cancel"):
 		cancel_target_screen()
-	if event.is_action_pressed("next"):
+	if event.is_action_pressed(next):
 		next_enemy()
 
 func next_enemy():
@@ -60,7 +138,7 @@ func next_enemy():
 	if count >= enemies.size():
 		count = 0
 	if enemy_out_of_range():
-		print(enemies[count], ' enemy out of range; skipping')
+		print(enemies[count].name, ' enemy out of range; skipping')
 		enemies.remove(count)
 		count -= 1
 		next_enemy()
@@ -90,5 +168,5 @@ func _on_TargetArea_body_entered(body):
 
 func _on_TargetArea_body_exited(body):
 	body.modulate = Color(1,1,1,1)
-	if $TargetArea.get_overlapping_bodies().size() == 1:
+	if $TargetArea.get_overlapping_bodies().size() == 0:
 		$TargetArea.modulate = Color(1,1,1,1)

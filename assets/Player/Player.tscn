@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=2]
+[gd_scene load_steps=167 format=2]
 
 [ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
@@ -2134,9 +2134,6 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id=145]
 radius = 5.0
 
-[sub_resource type="CapsuleShape2D" id=146]
-height = 5.43185
-
 [sub_resource type="Animation" id=147]
 length = 0.1
 loop = true
@@ -2335,14 +2332,14 @@ shape = SubResource( 145 )
 [node name="Timer" type="Timer" parent="Hurtbox"]
 one_shot = true
 
-[node name="Collectbox" type="Area2D" parent="."]
+[node name="Formulabox" type="Area2D" parent="."]
 visible = false
-collision_layer = 0
-collision_mask = 768
+collision_layer = 64
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collectbox"]
-position = Vector2( -0.488346, -7.73805 )
-shape = SubResource( 146 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Formulabox"]
+position = Vector2( 0, -2 )
+shape = SubResource( 145 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
@@ -2389,4 +2386,5 @@ one_shot = true
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
+[connection signal="area_entered" from="Formulabox" to="." method="_on_Formulabox_area_entered"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]
