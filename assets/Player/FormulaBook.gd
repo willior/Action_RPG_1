@@ -40,7 +40,6 @@ func advance_selected_formula():
 func previous_selected_formula():
 	if _formulas.size() <= 1:
 		GameManager.player.bamboo.play()
-
 	else:
 		SoundPlayer.play_sound("miss")
 		current_selected_formula -= 1
