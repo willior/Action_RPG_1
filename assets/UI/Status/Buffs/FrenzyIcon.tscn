@@ -39,8 +39,10 @@ tracks/0/keys = {
 
 [node name="FrenzyIcon" type="TextureProgress"]
 pause_mode = 1
-margin_right = 16.0
-margin_bottom = 16.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 17.0
+margin_bottom = 17.0
 max_value = 16.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 2 )

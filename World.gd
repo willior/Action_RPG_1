@@ -89,7 +89,8 @@ func _input(event):
 		get_tree().quit()
 	
 	if event.is_action_pressed("test1"): # T
-		player.formulabook.add_formula("Fury")
+		pass
+		# player.formulabook.add_formula("Fury")
 	
 	if event.is_action_pressed("test2"): # Y
 		player.level_up()
@@ -104,7 +105,8 @@ func _input(event):
 		player.pouch.add_ingredient("Salt", 10)
 	
 	if event.is_action_pressed("test4"): # O
-		player.formulabook.remove_formula("Fury")
+		pass
+		# player.formulabook.remove_formula("Fury")
 	
 	if event.is_action_pressed("select_2"):
 		GameManager.multiplayer_2_toggle()

@@ -10,8 +10,8 @@ const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 
-var inventory_resource = load("res://assets/Player/Inventory.gd")
-var inventory = inventory_resource.new()
+#var inventory_resource = load("res://assets/Player/Inventory.gd")
+#var inventory = inventory_resource.new()
 var pouch_resource = load("res://assets/Player/Pouch.gd")
 var pouch = pouch_resource.new()
 var formulabook_resource = load("res://assets/Player/FormulaBook.gd")
@@ -96,10 +96,10 @@ func _ready():
 	GameManager.multiplayer_2 = true
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
-	if Global.get_attribute("inventory") != null:
-		pouch.set_ingredients(Global.get_attribute("inventory")[1].get_ingredients())
-		formulabook.set_formulas(Global.get_attribute("inventory")[2].get_formulas())
-		GameManager.reinitialize_player2(inventory, pouch, formulabook)
+	if Global.get_attribute("inventory_2") != null:
+		pouch.set_ingredients(Global.get_attribute("inventory_2")[0].get_ingredients())
+		formulabook.set_formulas(Global.get_attribute("inventory_2")[1].get_formulas())
+		GameManager.reinitialize_player2(pouch, formulabook)
 	else:
 		GameManager.initialize_player2()
 	animationTree.active = true # animation not active until game starts
@@ -935,7 +935,7 @@ func _on_InteractHitbox_area_entered(area):
 		self.interactNoticeDisplay = true
 		interacting = true
 	if "item_usable" in interactObject:
-		var item_to_use = inventory._items[inventory.current_selected_item]
+		var item_to_use = GameManager.player.inventory._items[GameManager.player.inventory.current_selected_item]
 		if item_to_use.item_reference.name == interactObject.item_needed:
 			using_item = true
 			print('using_item = true')
@@ -974,7 +974,6 @@ func save():
 	# instead of saving a REFERENCE to the inventory's _items array, the array data itself should be gotten
 	# this requires parsing through the array
 	var save_dict = {
-		"inventory": inventory._items,
 		"pouch": pouch._ingredients
 	}
 	return save_dict

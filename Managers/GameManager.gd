@@ -15,6 +15,8 @@ var player
 var player2
 var multiplayer_2 = false
 
+var player2_data = [null, null]
+
 signal player_initialized
 signal player_reinitialized
 signal player2_initialized
@@ -88,15 +90,16 @@ func initialize_player():
 			player.formulabook.set_formulas(loaded_formulabook.get_formulas())
 			print("formulabook loaded from disk.")
 
-func reinitialize_player2(inventory, pouch, formulabook):
+func reinitialize_player2(pouch, formulabook):
 	print('attempting to reinitialize player2...')
 	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
 	if not player2:
 		return
 	emit_signal("player2_reinitialized", player2) 
-	player2.inventory.set_items(inventory.get_items())
 	player2.pouch.set_ingredients(pouch.get_ingredients())
 	player2.formulabook.set_formulas(formulabook.get_formulas())
+	player2_data[0] = player2.pouch
+	player2_data[1] = player2.formulabook
 	print('player2 reinitialized.')
 	
 func initialize_player2():
@@ -106,23 +109,11 @@ func initialize_player2():
 		print('player2 not created; cannot initialize.')
 		return
 	emit_signal("player2_initialized", player2)
-	player2.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
 	player2.pouch.connect("pouch_changed", self, "_on_player_pouch_changed")
 	player2.formulabook.connect("formulabook_changed", self, "_on_player_formulabook_changed")
+	player2_data[0] = player2.pouch
+	player2_data[1] = player2.formulabook
 	print('player2 successfully initialized.')
-	
-	if !ResourceLoader.exists("user://inventory_2.tres"):
-		print("inventory resource not found. creating...")
-		player2.inventory.add_item("Potion", 3)
-		# warning-ignore:return_value_discarded
-		ResourceSaver.save("user://inventory_2.tres", player.inventory)
-		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
-	else:
-		var loaded_inventory = load("user://inventory_2.tres")
-		if loaded_inventory:
-			player.inventory.set_items(loaded_inventory.get_items())
-			print("inventory loaded from disk.")
-	
 	if !ResourceLoader.exists("user://pouch_2.tres"):
 		print("pouch resource not found. creating...")
 		player2.pouch.add_ingredient("Rock", 20)
@@ -154,20 +145,20 @@ func initialize_player2():
 
 func multiplayer_2_toggle():
 	if multiplayer_2:
+		player2_data[0] = player2.pouch
+		player2_data[1] = player2.formulabook
 		var REMOTE2D = load("res://assets/System/RemoteTransform2D.tscn")
 		var remoteTransform2D = REMOTE2D.instance()
 		player.add_child(remoteTransform2D)
 		player2.queue_free()
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 0
-		player2 = null
 		multiplayer_2 = false
 	else:
 		player.get_node("RemoteTransform2D").queue_free()
 		player2 = load("res://assets/Player/Player2.tscn").instance()
-		player2.global_position = player.global_position
 		get_tree().get_root().get_node("/root/World/YSort").add_child(player2)
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 1
-		# set_deferred("multiplayer_2", true)
+		player2.global_position = player.global_position
 	get_tree().get_root().get_node("/root/World/GUI").toggle_multiplayer_gui()
 
 # warning-ignore:unused_argument

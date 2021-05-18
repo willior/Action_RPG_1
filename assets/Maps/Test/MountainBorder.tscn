@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/Tilesets/GrassBasicLight.png" type="Texture" id=1]
 [ext_resource path="res://assets/Audio/Hello_drone.ogg" type="AudioStream" id=2]
@@ -20,6 +20,8 @@
 [ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/System/RemoteTransform2D.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/CollisionBoxes/Exit.gd" type="Script" id=21]
+[ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "GrassBasicDark.png 0"
@@ -71,6 +73,8 @@
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="RectangleShape2D" id=3]
+
 [node name="World" type="Node2D"]
 pause_mode = 2
 script = ExtResource( 3 )
@@ -111,6 +115,33 @@ z_index = 2
 tile_set = ExtResource( 12 )
 cell_size = Vector2( 64, 48 )
 format = 1
+
+[node name="Exit" type="Area2D" parent="Map"]
+pause_mode = 2
+position = Vector2( 319, 105 )
+monitorable = false
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource( 21 )
+map_file = "res://assets/Maps/Test/LayerTest.tscn"
+selected_location = Vector2( 814, 238 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit"]
+shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="Map/Exit"]
+wait_time = 0.8
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Map/Exit"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit/StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="Map/Exit"]
+texture = ExtResource( 22 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
@@ -757,3 +788,5 @@ bus = "Reverb"
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
 
 [node name="GUI" parent="." instance=ExtResource( 10 )]
+
+[connection signal="body_entered" from="Map/Exit" to="Map/Exit" method="_on_Exit_body_entered"]
