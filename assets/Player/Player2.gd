@@ -95,12 +95,12 @@ signal player_saved
 func _ready():
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
-#	if Global.get_attribute("inventory") != null:
-#		pouch.set_ingredients(Global.get_attribute("inventory")[1].get_ingredients())
-#		formulabook.set_formulas(Global.get_attribute("inventory")[2].get_formulas())
-#		GameManager.reinitialize_player(inventory, pouch, formulabook)
-#	else:
-#		GameManager.initialize_player()
+	if Global.get_attribute("inventory") != null:
+		pouch.set_ingredients(Global.get_attribute("inventory")[1].get_ingredients())
+		formulabook.set_formulas(Global.get_attribute("inventory")[2].get_formulas())
+		GameManager.reinitialize_player2(inventory, pouch, formulabook)
+	else:
+		GameManager.initialize_player2()
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector
 	collision.disabled = false
@@ -719,7 +719,7 @@ func _on_Hurtbox_area_entered(area):
 			damageTaken *= 2
 			var critPopup = MessagePopup.instance()
 			critPopup.message = str(self.name, " gets whacked!")
-			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
+			get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(critPopup)
 			critPopup.crit_flash()
 		var player_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
 		if attack2_queued && player_staggered:
@@ -825,10 +825,10 @@ func game_over():
 	get_node("/root/World/Music").stream_paused = true
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
-	get_node("/root/World/GUI/HealthUI1").visible = false
-	get_node("/root/World/GUI/ExpBar1").visible = false
-	get_node("/root/World/GUI/StaminaBar1").visible = false
-	get_node("/root/World/GUI/FormulaUI1").visible = false
+	get_node("/root/World/GUI/HealthUI2").visible = false
+	get_node("/root/World/GUI/ExpBar2").visible = false
+	get_node("/root/World/GUI/StaminaBar2").visible = false
+	get_node("/root/World/GUI/FormulaUI2").visible = false
 #	for d in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").get_children():
 #		d.queue_free()
 #	for b in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").get_children():

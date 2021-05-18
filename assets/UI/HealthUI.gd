@@ -14,7 +14,6 @@ func _ready():
 	PlayerStats.connect("health_changed", self, "set_health") # connecting to the "health_changed" signal to the UI, connecting the value passed to the "set_health" function
 # warning-ignore:return_value_discarded
 	PlayerStats.connect("max_health_changed", self, "set_max_health")
-	healthBack.value = health
 
 func set_health(value):
 	var old_health = health

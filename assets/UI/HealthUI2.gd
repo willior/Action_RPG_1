@@ -5,12 +5,25 @@ var max_health = Player2Stats.max_health setget set_max_health
 
 onready var healthBar = $HealthTexture
 onready var healthBack = $HealthBack
-	
+
+func _ready():
+	if !GameManager.multiplayer_2:
+		queue_free()
+		return
+	$hp.set_text(str(health) + "/" + str(max_health))
+	self.max_health = Player2Stats.max_health
+	self.health = Player2Stats.health
+# warning-ignore:return_value_discarded
+	Player2Stats.connect("health_changed", self, "set_health") # connecting to the "health_changed" signal to the UI, connecting the value passed to the "set_health" function
+# warning-ignore:return_value_discarded
+	Player2Stats.connect("max_health_changed", self, "set_max_health")
+
 func set_health(value):
 	var old_health = health
 	health = value
 	healthBar.value = health
 	if old_health < health:
+		$hp.set_text(str(health) + "/" + str(max_health))
 		reset_health_background()
 	else:
 		set_health_background(health)
@@ -40,19 +53,9 @@ func health_tick():
 	if healthBack.value > health:
 		healthBack.value -= 1
 		Player2Stats.final_health = healthBack.value
+		$hp.set_text(str(Player2Stats.final_health) + "/" + str(max_health))
 		$Timer.start()
 		yield($Timer, "timeout")
 		health_tick()
 	elif healthBack.value == 0 && !Player2Stats.dead:
 		Player2Stats.dead = true
-	
-func _ready():
-	if !GameManager.multiplayer_2:
-		queue_free()
-		return
-	self.max_health = Player2Stats.max_health
-	self.health = Player2Stats.health
-# warning-ignore:return_value_discarded
-	Player2Stats.connect("health_changed", self, "set_health") # connecting to the "health_changed" signal to the UI, connecting the value passed to the "set_health" function
-# warning-ignore:return_value_discarded
-	Player2Stats.connect("max_health_changed", self, "set_max_health")

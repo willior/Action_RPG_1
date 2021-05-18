@@ -11,12 +11,14 @@ func _ready():
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
+		var icon = Icon.instance()
+		icon.duration = duration
+		icon.status_nodepath = self.get_path()
 		match body.name:
 			"Player":
-				var icon = Icon.instance()
-				icon.duration = duration
-				icon.status_nodepath = self.get_path()
 				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").add_child(icon)
+			"Player2":
+				get_node("/root/World/GUI/StatusDisplay2/StatusContainer/Buffs").add_child(icon)
 	$Timer.start(duration)
 	$AnimatedSprite.play()
 
@@ -28,6 +30,8 @@ func refresh_status(new_duration, new_potency):
 		match body.name:
 			"Player":
 				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/RegenIcon").refresh_status_icon(new_duration)
+			"Player2":
+				get_node("/root/World/GUI/StatusDisplay2/StatusContainer/Buffs/RegenIcon").refresh_status_icon(new_duration)
 	$Timer.start(new_duration)
 	potency = new_potency
 

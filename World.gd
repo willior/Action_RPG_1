@@ -4,6 +4,7 @@ onready var music = $Music
 onready var sfx1 = $SFX
 onready var sfx2 = $SFX2
 onready var player = $YSort/Player
+onready var player2
 onready var dim = $GUI/Dim
 onready var FadeIn = load("res://assets/Misc/FadeIn.tscn")
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
@@ -23,7 +24,7 @@ func _ready():
 		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
 		Global.chapter_name = null
 	if GameManager.multiplayer_2:
-		var player2 = load("res://assets/Player/Player2.tscn").instance()
+		player2 = load("res://assets/Player/Player2.tscn").instance()
 		player2.global_position = player.global_position
 		get_node("YSort").add_child(player2)
 
@@ -93,7 +94,7 @@ func _input(event):
 	if event.is_action_pressed("test2"): # Y
 		player.level_up()
 		if GameManager.multiplayer_2:
-			Global.player2.level_up()
+			GameManager.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
 		print('adding ingredients...')
@@ -125,18 +126,39 @@ func _input(event):
 			PlayerStats.dead = false
 			PlayerStats.experience -= (PlayerStats.experience_required / 10)
 		elif get_tree().paused == false:
-			open_pause_menu()
+			open_pause_menu(player)
 #		else:
 #			close_pause_menu()
+	if event.is_action_pressed("start_2"):
+		if Global.dialogOpen or Global.chapter_name or Global.changingScene or Player2Stats.dying and !Player2Stats.dead:
+			print('start discarded: ', Global.changingScene)
+			return
+		if Player2Stats.dead:
+			print('resuming')
+			music.stream_paused = false
+			get_tree().paused = false
+			get_node("/root/World/GUI/GameOver").queue_free()
+			get_node("/root/World/GUI/HealthUI2").visible = true
+			get_node("/root/World/GUI/ExpBar2").visible = true
+			get_node("/root/World/GUI/StaminaBar2").visible = true
+			get_node("/root/World/GUI/FormulaUI2").visible = true
+			get_node("/root/World/YSort/Player2").visible = true
+			Player2Stats.health += Player2Stats.max_health
+			get_node("/root/World/GUI/HealthUI2/HealthBack").value = Player2Stats.health
+			Player2Stats.continue_count += 1
+			Player2Stats.dead = false
+			Player2Stats.experience -= (Player2Stats.experience_required / 10)
+		elif get_tree().paused == false:
+			open_pause_menu(player2)
 
-func open_pause_menu():
+func open_pause_menu(body):
 	music.stream_paused = true
 	sfx1.stream_paused = true
 	sfx2.stream_paused = true
 	get_tree().paused = true
 	# dim.visible = true
 	var pauseScreen = PauseScreen.instance()
-	pauseScreen.player = GameManager.player
+	pauseScreen.player = body
 	$GUI.add_child(pauseScreen)
 
 func close_pause_menu():

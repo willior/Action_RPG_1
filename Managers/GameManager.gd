@@ -17,6 +17,8 @@ var multiplayer_2 = true
 
 signal player_initialized
 signal player_reinitialized
+signal player2_initialized
+signal player2_reinitialized
 
 func _ready():
 	pass
@@ -84,6 +86,70 @@ func initialize_player():
 		var loaded_formulabook = load("user://formulabook.tres")
 		if loaded_formulabook:
 			player.formulabook.set_formulas(loaded_formulabook.get_formulas())
+			print("formulabook loaded from disk.")
+
+func reinitialize_player2(inventory, pouch, formulabook):
+	print('attempting to reinitialize player2...')
+	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
+	if not player2:
+		return
+	emit_signal("player2_reinitialized", player2) 
+	player2.inventory.set_items(inventory.get_items())
+	player2.pouch.set_ingredients(pouch.get_ingredients())
+	player2.formulabook.set_formulas(formulabook.get_formulas())
+	print('player2 reinitialized.')
+	
+func initialize_player2():
+	print('attempting to initialize player2...')
+	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
+	if not player2:
+		print('player2 not created; cannot initialize.')
+		return
+	emit_signal("player2_initialized", player2)
+	player2.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
+	player2.pouch.connect("pouch_changed", self, "_on_player_pouch_changed")
+	player2.formulabook.connect("formulabook_changed", self, "_on_player_formulabook_changed")
+	print('player2 successfully initialized.')
+	
+	if !ResourceLoader.exists("user://inventory_2.tres"):
+		print("inventory resource not found. creating...")
+		player2.inventory.add_item("Potion", 3)
+		# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://inventory_2.tres", player.inventory)
+		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
+	else:
+		var loaded_inventory = load("user://inventory_2.tres")
+		if loaded_inventory:
+			player.inventory.set_items(loaded_inventory.get_items())
+			print("inventory loaded from disk.")
+	
+	if !ResourceLoader.exists("user://pouch_2.tres"):
+		print("pouch resource not found. creating...")
+		player2.pouch.add_ingredient("Rock", 20)
+		player2.pouch.add_ingredient("Clay", 20)
+		player2.pouch.add_ingredient("Salt", 20)
+		player2.pouch.add_ingredient("Water", 20)
+		# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://pouch_2.tres", player2.pouch)
+		prints("saved pouch resource to " + str(OS.get_user_data_dir()))
+	else:
+		var loaded_pouch = load("user://pouch_2.tres")
+		if loaded_pouch:
+			player2.pouch.set_ingredients(loaded_pouch.get_ingredients())
+			print("pouch loaded from disk.")
+	
+	if !ResourceLoader.exists("user://formulabook_2.tres"):
+		print("formulabook resource not found. creating...")
+		player2.formulabook.add_formula("Flash")
+		player2.formulabook.add_formula("Heal")
+		player2.formulabook.add_formula("Fury")
+		# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://formulabook.tres", player2.formulabook)
+		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))
+	else:
+		var loaded_formulabook = load("user://formulabook_2.tres")
+		if loaded_formulabook:
+			player2.formulabook.set_formulas(loaded_formulabook.get_formulas())
 			print("formulabook loaded from disk.")
 
 # warning-ignore:unused_argument

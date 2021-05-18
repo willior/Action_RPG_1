@@ -52,20 +52,20 @@ func _ready():
 	Tween.TRANS_QUART, Tween.EASE_OUT
 	)
 	$Tween.start()
-	healthBox.set_text(str(PlayerStats.vitality)) # + " (" + str(PlayerStats.health) + "/" + str(PlayerStats.max_health) + "HP)")
-	enduranceBox.set_text(str(PlayerStats.endurance))
-	defenseBox.set_text(str(PlayerStats.defense))
-	strengthBox.set_text(str(PlayerStats.strength))
-	dexterityBox.set_text(str(PlayerStats.dexterity))
-	speedBox.set_text(str(PlayerStats.speed))
-	magicBox.set_text(str(PlayerStats.magic))
-	vitBar.value = PlayerStats.vitality
-	endBar.value = PlayerStats.endurance
-	defBar.value = PlayerStats.defense
-	strBar.value = PlayerStats.strength
-	dexBar.value = PlayerStats.dexterity
-	spdBar.value = PlayerStats.speed
-	magBar.value = PlayerStats.magic
+	healthBox.set_text(str(player.stats.vitality)) # + " (" + str(player.stats.health) + "/" + str(player.stats.max_health) + "HP)")
+	enduranceBox.set_text(str(player.stats.endurance))
+	defenseBox.set_text(str(player.stats.defense))
+	strengthBox.set_text(str(player.stats.strength))
+	dexterityBox.set_text(str(player.stats.dexterity))
+	speedBox.set_text(str(player.stats.speed))
+	magicBox.set_text(str(player.stats.magic))
+	vitBar.value = player.stats.vitality
+	endBar.value = player.stats.endurance
+	defBar.value = player.stats.defense
+	strBar.value = player.stats.strength
+	dexBar.value = player.stats.dexterity
+	spdBar.value = player.stats.speed
+	magBar.value = player.stats.magic
 	for i in player.inventory.get_items().size():
 		var inventory_item = player.inventory.get_item(i)
 		var label_item = Label_Item.instance()
@@ -199,13 +199,13 @@ func _on_ButtonSTAT_gui_input(event, description_index):
 		audio_menu_select()
 		var stat_description
 		match description_index:
-			0: stat_description = PlayerStats.vitality_description
-			1: stat_description = PlayerStats.endurance_description
-			2: stat_description = PlayerStats.defense_description
-			3: stat_description = PlayerStats.strength_description
-			4: stat_description = PlayerStats.dexterity_description
-			5: stat_description = PlayerStats.speed_description
-			6: stat_description = PlayerStats.magic_description
+			0: stat_description = player.stats.vitality_description
+			1: stat_description = player.stats.endurance_description
+			2: stat_description = player.stats.defense_description
+			3: stat_description = player.stats.strength_description
+			4: stat_description = player.stats.dexterity_description
+			5: stat_description = player.stats.speed_description
+			6: stat_description = player.stats.magic_description
 		var dialogBox = DialogBox.instance()
 		dialogBox.dialog_script = [
 			{

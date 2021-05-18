@@ -12,13 +12,14 @@ func _ready():
 	if body.get("ENEMY_NAME"):
 		Enemy.disable_detection(body)
 	else:
+		var icon = Icon.instance()
+		icon.duration = duration
+		icon.status_nodepath = self.get_path()
 		match body.name:
 			"Player":
-				var icon = Icon.instance()
-				icon.duration = duration
-				icon.status_nodepath = self.get_path()
 				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").add_child(icon)
-				
+			"Player2":
+				get_node("/root/World/GUI/StatusDisplay2/StatusContainer/Debuffs").add_child(icon)
 	$Timer.start(duration)
 	$AnimatedSprite.play()
 

@@ -13,12 +13,14 @@ func _ready():
 	else:
 		body.set_attack_timescale(body.stats.attack_speed*potency)
 		body.set_stamina_attack_cost(body.stats.stamina_attack_cost/5)
+		var icon = Icon.instance()
+		icon.duration = duration
+		icon.status_nodepath = self.get_path()
 		match body.name:
 			"Player":
-				var icon = Icon.instance()
-				icon.duration = duration
-				icon.status_nodepath = self.get_path()
 				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").add_child(icon)
+			"Player2":
+				get_node("/root/World/GUI/StatusDisplay2/StatusContainer/Buffs").add_child(icon)
 	$Timer.start(duration)
 	$AnimatedSprite.play()
 

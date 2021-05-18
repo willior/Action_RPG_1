@@ -710,7 +710,7 @@ func _on_Hurtbox_area_entered(area):
 			if attack_2_charged: attack_2_charged = false
 			charge_reset()
 		var is_crit = false # enemies currently do not crit
-		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
+		# damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness)
 		hurtbox.display_damage_popup(str(damageTaken), is_crit)
 		state = HIT
 	else:
