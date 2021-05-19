@@ -3,6 +3,8 @@ extends Node2D
 var lightswitch_examined_while_on = false
 var lightswitch_examined_while_off = false
 
+var player_spawn_pos = Vector2(510, 90)
+
 func _ready():
 	if PlayerLog.chapter_number == 0:
 		return

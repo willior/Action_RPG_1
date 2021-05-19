@@ -20,6 +20,8 @@ func h_flip_handler(sprite, eye, velocity):
 
 func set_player_collision(body):
 	var player = GameManager.player
+	return
+# warning-ignore:unreachable_code
 	if player.z_index == body.z_index:
 		body.set_collision_layer_bit(4, true)
 		Enemy.disable_detection(body)

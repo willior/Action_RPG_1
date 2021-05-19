@@ -92,6 +92,10 @@ onready var bamboo = $BambooAudio
 signal player_saved
 
 func _ready():
+	if name != "Player":
+		print('player duplicate found. deleting ', name)
+		queue_free()
+		return
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
 	if Global.get_attribute("inventory") != null:

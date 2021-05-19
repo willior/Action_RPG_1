@@ -71,7 +71,7 @@ func _ready():
 	set_speed_scale(1)
 	sprite.playing = true
 	eye.playing = true
-	Global.set_world_collision(self, z_index)
+	# Global.set_world_collision(self, z_index)
 
 func set_speed_scale(value):
 	sprite.speed_scale = value

@@ -1,9 +1,9 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/World/Home/Kitchen_Fridge.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/World/Home/Kitchen_Counter.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Misc/BlackScreen.png" type="Texture" id=4]
+[ext_resource path="res://assets/Misc/BlackPixel.png" type="Texture" id=4]
 [ext_resource path="res://assets/World/Home/Kitchen_Stove.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Home/Window_Rain.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/World/Home/Lightswitch.tscn" type="PackedScene" id=7]
@@ -14,7 +14,6 @@
 [ext_resource path="res://assets/World/Home/Home_Kitchen_Cupboard_Bottom.png" type="Texture" id=12]
 [ext_resource path="res://assets/World/Home/Home_Fireplace_Floor.png" type="Texture" id=13]
 [ext_resource path="res://assets/World/Home/Fireplace.tscn" type="PackedScene" id=14]
-[ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Home/OfficeChair.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/World/Home/Home_Rug_Small.png" type="Texture" id=18]
@@ -96,8 +95,8 @@ pause_mode = 1
 script = ExtResource( 25 )
 
 [node name="Background" type="Sprite" parent="Map"]
-position = Vector2( 0, -8 )
-scale = Vector2( 2.2, 1.54444 )
+position = Vector2( -124, -104 )
+scale = Vector2( 1000, 500 )
 texture = ExtResource( 4 )
 centered = false
 
@@ -156,15 +155,15 @@ texture = ExtResource( 12 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 496, 49 )
-frame = 3
+frame = 7
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 139, 17 )
-frame = 3
+frame = 7
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 278, 17 )
-frame = 3
+frame = 7
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
 
@@ -223,13 +222,6 @@ autostart = true
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 
-[node name="Player" parent="YSort" instance=ExtResource( 15 )]
-position = Vector2( 510, 90 )
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
-pause_mode = 2
-remote_path = NodePath("../../../Camera2D")
-
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="NPCs" type="YSort" parent="YSort"]
@@ -266,14 +258,11 @@ autoplay = true
 
 [node name="Overlay" type="CanvasLayer" parent="."]
 layer = 4
+
 [connection signal="timeout" from="Map/Lightning/Timer" to="Map/Lightning" method="_on_Timer_timeout"]
 
 [editable path="Map/Exit_toForest"]
-
 [editable path="Map/Lightswitch_Bedroom"]
-
 [editable path="Map/Lightswitch_Bedroom/TalkBox"]
-
 [editable path="Map/Lightswitch_Main"]
-
 [editable path="Map/Lightswitch_Main/TalkBox"]

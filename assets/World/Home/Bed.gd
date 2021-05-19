@@ -2,8 +2,6 @@ extends StaticBody2D
 
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 
-onready var player = get_node("/root/World/YSort/Player")
-
 var interactable = false
 var talkable = false
 var examined = false

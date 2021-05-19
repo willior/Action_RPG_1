@@ -140,16 +140,16 @@ func initialize_player2():
 			print("formulabook loaded from disk.")
 
 func multiplayer_2_toggle():
-	if multiplayer_2:
+	if multiplayer_2: # OFF TOGGLE
 		player2_data[0] = player2.pouch
 		player2_data[1] = player2.formulabook
 		var REMOTE2D = load("res://assets/System/RemoteTransform2D.tscn")
 		var remoteTransform2D = REMOTE2D.instance()
 		player.add_child(remoteTransform2D)
-		player2.queue_free()
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 0
+		player2.queue_free()
 		multiplayer_2 = false
-	else:
+	else: # ON TOGGLE
 		player.get_node("RemoteTransform2D").queue_free()
 		player2 = load("res://assets/Player/Player2.tscn").instance()
 		get_tree().get_root().get_node("/root/World/YSort").add_child(player2)

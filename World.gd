@@ -3,15 +3,21 @@ extends Node2D
 onready var music = $Music
 onready var sfx1 = $SFX
 onready var sfx2 = $SFX2
-onready var player = $YSort/Player
-onready var player2
 onready var dim = $GUI/Dim
 onready var FadeIn = load("res://assets/Misc/FadeIn.tscn")
 onready var FadeOut = load("res://assets/Misc/FadeOut.tscn")
 onready var PauseScreen = load("res://assets/UI/Menu/PauseScreen.tscn")
 
+var remoteTransform2D
+var player
+var player2
+
 func _init():
-	if GameManager.multiplayer_2:
+	player = load("res://assets/Player/Player.tscn").instance()
+	if !GameManager.multiplayer_2:
+		var REMOTE2D = load("res://assets/System/RemoteTransform2D.tscn")
+		remoteTransform2D = REMOTE2D.instance()
+	else:
 		player2 = load("res://assets/Player/Player2.tscn").instance()
 
 func _ready():
@@ -27,7 +33,13 @@ func _ready():
 		add_child(chapterDisplay)
 		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
 		Global.chapter_name = null
-	if GameManager.multiplayer_2:
+	player.global_position = get_node("Map").player_spawn_pos
+	get_node("YSort").add_child(player)
+	if !GameManager.multiplayer_2:
+		get_tree().get_root().get_node("/root/World/Camera2D").state = 0
+		player.add_child(remoteTransform2D)
+	else:
+		get_tree().get_root().get_node("/root/World/Camera2D").state = 1
 		player2.global_position = player.global_position
 		get_node("YSort").add_child(player2)
 
@@ -37,7 +49,8 @@ func fade_out():
 
 func _input(event):
 	if event.is_action_pressed("quit_game"):
-		get_tree().quit()
+		Global.goto_scene("res://assets/System/MainMenu.tscn")
+		# get_tree().quit()
 	
 	if event.is_action_pressed("test1"): # T
 		pass

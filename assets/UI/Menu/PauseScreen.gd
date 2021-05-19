@@ -391,6 +391,7 @@ func _on_ButtonSave_gui_input(event):
 
 func _on_ButtonLoad_gui_input(event):
 	if event.is_action_pressed(accept):
+		get_tree().paused = false
 		Global.goto_scene("res://assets/System/MainMenu.tscn")
 	elif event.is_action_pressed(cancel):
 		hide_config_display()
