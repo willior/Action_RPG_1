@@ -994,12 +994,10 @@ func save():
 	# this requires parsing through the array
 	var save_dict = {
 		"inventory": inventory._items,
-		"pouch": pouch._ingredients
+		"pouch": pouch._ingredients,
+		"formulabook": formulabook._formulas
 	}
 	return save_dict
 
 func set_z_index(value):
 	z_index = value
-
-
-
