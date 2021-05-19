@@ -10,11 +10,9 @@ extends Node
 # which sets the current player scene's inventory to that of the argument's.
 
 var on_title_screen = false
-var existing_inventory
 var player
 var player2
 var multiplayer_2 = false
-
 var player2_data = [null, null]
 
 signal player_initialized
@@ -157,6 +155,38 @@ func multiplayer_2_toggle():
 		player2.global_position = player.global_position
 	get_tree().get_root().get_node("/root/World/GUI").toggle_multiplayer_gui()
 
+func save_game():
+	var save_game = File.new()
+	save_game.open("user://savegame.save", File.WRITE)
+	var save_nodes = get_tree().get_nodes_in_group("Persist")
+	for node in save_nodes:
+		if !node.has_method("save"):
+			print("persistent node '%s' does not have a save method, skipped" % node.name)
+			continue
+		var node_data = node.call("save")
+		save_game.store_line(to_json(node_data))
+	save_game.close()
+
+func load_game():
+	var map_path
+	var save_game = File.new()
+	if not save_game.file_exists("user://savegame.save"):
+		print('error: no save file found')
+		return
+	save_game.open("user://savegame.save", File.READ)
+	while save_game.get_position() < save_game.get_len():
+		var node_data = parse_json(save_game.get_line())
+		for i in node_data.keys():
+			if i == "map_filename":
+				map_path = node_data["map_filename"]
+				continue
+			else:
+				print(i)
+				print(PlayerStats.get(i))
+		
+	Global.goto_scene(map_path)
+	save_game.close()
+
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):
 	pass
@@ -168,53 +198,3 @@ func _on_player_pouch_changed(pouch):
 # warning-ignore:unused_argument
 func _on_player_formulabook_changed(formulabook):
 	pass
-
-func save_game():
-	var save_game = File.new()
-	save_game.open("user://savegame.save", File.WRITE)
-	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	for node in save_nodes:
-#		if node.filename.empty():
-#			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
-#			continue
-		if !node.has_method("save"):
-			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
-			continue
-		var node_data = node.call("save")
-		save_game.store_line(to_json(node_data))
-	save_game.close()
-
-func load_game():
-	var save_game = File.new()
-	if not save_game.file_exists("user://savegame.save"):
-		print('error: no save file found')
-		return
-	
-#	var save_nodes = get_tree().get_nodes_in_group("Persist")
-#	for i in save_nodes:
-#		i.queue_free() # deleting saveable objects
-	
-	var map_path
-	var loaded_inventory
-	var loaded_pouch
-	var loaded_formulabook
-	save_game.open("user://savegame.save", File.READ)
-	while save_game.get_position() < save_game.get_len():
-		var node_data = parse_json(save_game.get_line())
-		for i in node_data.keys():
-			if i == "map_filename":
-				map_path = node_data["map_filename"]
-			if i == "player1_inventory":
-				loaded_inventory = node_data[i]
-			if i == "player1_pouch":
-				loaded_pouch = node_data[i]
-			if i == "player1_formulabook":
-				loaded_formulabook = node_data[i]
-			if i == "filename" or i == "parent":
-				continue
-			# new_object.set(i, node_data[i])
-			
-	var new_inventory = [loaded_inventory, loaded_pouch, loaded_formulabook]
-	print('new_inventory = ', new_inventory)
-	Global.goto_scene(map_path)
-	save_game.close()

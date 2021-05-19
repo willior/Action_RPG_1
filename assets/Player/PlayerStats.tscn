@@ -130,10 +130,8 @@ func _ready():
 func save():
 	print('saving PlayerStats...')
 	var save_dict = {
-#		\"filename\": get_filename(),
-#		\"parent\": get_parent().get_path(),
-		\"name\": name,
 		\"vitality\": vitality,
+		\"health\": health,
 		\"endurance\": endurance,
 		\"defense\": defense,
 		\"strength\": strength,

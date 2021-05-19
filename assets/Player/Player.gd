@@ -664,7 +664,7 @@ func backstep_state(delta):
 			else:
 				attack1_queued = true
 	
-	elif Input.is_action_just_pressed("roll"):
+	elif Input.is_action_just_pressed("roll_1"):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
