@@ -141,6 +141,7 @@ func save():
 		\"experience_required\": experience_required,
 		\"experience_total\": experience_total
 	}
+	return save_dict
 
 func set_status(value):
 	status = value

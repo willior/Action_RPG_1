@@ -993,9 +993,9 @@ func save():
 	# instead of saving a REFERENCE to the inventory's _items array, the array data itself should be gotten
 	# this requires parsing through the array
 	var save_dict = {
-		"inventory": inventory._items,
-		"pouch": pouch._ingredients,
-		"formulabook": formulabook._formulas
+		"player1_inventory": inventory._items,
+		"player1_pouch": pouch._ingredients,
+		"player1_formulabook": formulabook._formulas
 	}
 	return save_dict
 

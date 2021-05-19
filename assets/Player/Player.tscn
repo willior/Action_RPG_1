@@ -2134,7 +2134,7 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id=145]
 radius = 5.0
 
-[sub_resource type="Animation" id=147]
+[sub_resource type="Animation" id=146]
 length = 0.1
 loop = true
 step = 0.05
@@ -2151,7 +2151,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=148]
+[sub_resource type="Animation" id=147]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -2358,8 +2358,8 @@ stream = ExtResource( 10 )
 volume_db = 12.0
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 147 )
-anims/Stop = SubResource( 148 )
+anims/Start = SubResource( 146 )
+anims/Stop = SubResource( 147 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
