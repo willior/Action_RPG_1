@@ -33,7 +33,8 @@ func _ready():
 		add_child(chapterDisplay)
 		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
 		Global.chapter_name = null
-	player.global_position = get_node("Map").player_spawn_pos
+	
+	# player.global_position = get_node("Map").player_spawn_pos
 	get_node("YSort").add_child(player)
 	if !GameManager.multiplayer_2:
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 0

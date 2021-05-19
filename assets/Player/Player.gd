@@ -98,6 +98,8 @@ func _ready():
 		return
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
+	else:
+		position = get_tree().get_root().get_node("/root/World/Map").player_spawn_pos
 	if Global.get_attribute("inventory") != null:
 		# var new_inventory = Global.get_attribute("inventory").get_items()
 		inventory.set_items(Global.get_attribute("inventory")[0].get_items())

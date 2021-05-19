@@ -50,7 +50,7 @@ func _ready():
 	Global.dialogOpen = true
 	
 func _input(event):
-	if event.is_action_pressed("attack"):
+	if event.is_action_pressed("ui_accept"):
 		if !$TimerDelaySelect.is_stopped() || !waiting_for_input:
 			get_tree().set_input_as_handled()
 			return
