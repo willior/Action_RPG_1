@@ -378,6 +378,17 @@ func _on_ButtonControls_gui_input(event):
 			hide_config_display()
 			close_pause_menu()
 
+func _on_ButtonSave_gui_input(event):
+	if event.is_action_pressed(accept):
+		GameManager.save_game()
+	elif event.is_action_pressed(cancel):
+		hide_config_display()
+		enable_menu_focus()
+		$MenuPanel/Menu/ButtonConfig.grab_focus()
+	elif event.is_action_pressed(start):
+		hide_config_display()
+		close_pause_menu()
+
 func audio_menu_move():
 	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()

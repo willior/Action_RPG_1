@@ -992,6 +992,7 @@ func check_attack_input():
 func save():
 	# instead of saving a REFERENCE to the inventory's _items array, the array data itself should be gotten
 	# this requires parsing through the array
+	print('saving Player resources...')
 	var save_dict = {
 		"player1_inventory": inventory._items,
 		"player1_pouch": pouch._ingredients,

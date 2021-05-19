@@ -168,3 +168,18 @@ func _on_player_pouch_changed(pouch):
 # warning-ignore:unused_argument
 func _on_player_formulabook_changed(formulabook):
 	pass
+
+func save_game():
+	var save_game = File.new()
+	save_game.open("user://savegame.save", File.WRITE)
+	var save_nodes = get_tree().get_nodes_in_group("Persist")
+	for node in save_nodes:
+		if node.filename.empty():
+			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+			continue
+		if !node.has_method("save"):
+			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+			continue
+		var node_data = node.call("save")
+		save_game.store_line(to_json(node_data))
+	save_game.close()
