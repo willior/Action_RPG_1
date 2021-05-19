@@ -59,10 +59,10 @@ func initialize_player():
 	
 	if !ResourceLoader.exists("user://pouch.tres"):
 		print("pouch resource not found. creating...")
-		player.pouch.add_ingredient("Rock", 20)
-		player.pouch.add_ingredient("Clay", 20)
-		player.pouch.add_ingredient("Salt", 20)
-		player.pouch.add_ingredient("Water", 20)
+#		player.pouch.add_ingredient("Rock", 20)
+#		player.pouch.add_ingredient("Clay", 20)
+#		player.pouch.add_ingredient("Salt", 20)
+#		player.pouch.add_ingredient("Water", 20)
 		# warning-ignore:return_value_discarded
 		ResourceSaver.save("user://pouch.tres", player.pouch)
 		prints("saved pouch resource to " + str(OS.get_user_data_dir()))
@@ -174,9 +174,9 @@ func save_game():
 	save_game.open("user://savegame.save", File.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
 	for node in save_nodes:
-		if node.filename.empty():
-			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
-			continue
+#		if node.filename.empty():
+#			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+#			continue
 		if !node.has_method("save"):
 			print("persistent node '%s' is not an instanced scene, skipped" % node.name)
 			continue
@@ -187,22 +187,34 @@ func save_game():
 func load_game():
 	var save_game = File.new()
 	if not save_game.file_exists("user://savegame.save"):
-		return # Error: no save to load
-	var save_nodes = get_tree().get_nodes_in_group("Persist")
-	for i in save_nodes:
-		i.queue_free() # deleting saveable objects
+		print('error: no save file found')
+		return
+	
+#	var save_nodes = get_tree().get_nodes_in_group("Persist")
+#	for i in save_nodes:
+#		i.queue_free() # deleting saveable objects
+	
+	var map_path
+	var loaded_inventory
+	var loaded_pouch
+	var loaded_formulabook
 	save_game.open("user://savegame.save", File.READ)
 	while save_game.get_position() < save_game.get_len():
 		var node_data = parse_json(save_game.get_line())
-		var new_object = load(node_data["filename"]).instance()
-		get_node(node_data["parent"]).add_child(new_object)
-		# new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
 		for i in node_data.keys():
-			if i == "pos_x":
-				new_object.position.x = node_data[i]
-			if i == "pos_y":
-				new_object.position.y = node_data[i]
-			if i == "filename" or i == "parent": # or i == "pos_x" or i == "pos_y":
+			if i == "map_filename":
+				map_path = node_data["map_filename"]
+			if i == "player1_inventory":
+				loaded_inventory = node_data[i]
+			if i == "player1_pouch":
+				loaded_pouch = node_data[i]
+			if i == "player1_formulabook":
+				loaded_formulabook = node_data[i]
+			if i == "filename" or i == "parent":
 				continue
-			new_object.set(i, node_data[i])
+			# new_object.set(i, node_data[i])
+			
+	var new_inventory = [loaded_inventory, loaded_pouch, loaded_formulabook]
+	print('new_inventory = ', new_inventory)
+	Global.goto_scene(map_path)
 	save_game.close()

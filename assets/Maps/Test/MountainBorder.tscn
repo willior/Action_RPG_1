@@ -74,7 +74,9 @@
 
 [sub_resource type="RectangleShape2D" id=3]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=[
+"Persist",
+]]
 pause_mode = 2
 script = ExtResource( 3 )
 __meta__ = {

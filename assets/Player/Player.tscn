@@ -2166,9 +2166,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[node name="Player" type="KinematicBody2D" groups=[
-"Persist",
-]]
+[node name="Player" type="KinematicBody2D"]
 process_priority = -1
 collision_layer = 2
 collision_mask = 1041

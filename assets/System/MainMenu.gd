@@ -6,14 +6,6 @@ onready var quitButton = $MarginContainer/VBoxContainer/QuitButton
 
 func _ready():
 	newGameButton.grab_focus()
-	# set_process_input(true)
-	print(is_processing_input())
-
-func _input(event):
-	print(event)
-
-func _unhandled_input(event):
-	print(event)
 
 func _on_NewGameButton_pressed():
 	Global.goto_scene("res://assets/Maps/0_Prologue/0-1_Home.tscn")

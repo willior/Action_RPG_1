@@ -996,19 +996,20 @@ func check_attack_input():
 	get_node("/root/World/Music").stream_paused = false
 
 func save():
+	pass
 	# instead of saving a REFERENCE to the inventory's _items array, the array data itself should be gotten
 	# this requires parsing through the array
-	print('saving Player resources...')
-	var save_dict = {
-		"filename": get_filename(),
-		"parent": get_parent().get_path(),
-		"pos_x": position.x,
-		"pos_y": position.y,
-		"player1_inventory": inventory._items,
-		"player1_pouch": pouch._ingredients,
-		"player1_formulabook": formulabook._formulas
-	}
-	return save_dict
+#	print('saving Player resources...')
+#	var save_dict = {
+#		"filename": get_filename(),
+#		"parent": get_parent().get_path(),
+##		"pos_x": position.x,
+##		"pos_y": position.y,
+#		"player1_inventory": inventory._items,
+#		"player1_pouch": pouch._ingredients,
+#		"player1_formulabook": formulabook._formulas
+#	}
+#	return save_dict
 
 func set_z_index(value):
 	z_index = value

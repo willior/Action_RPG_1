@@ -79,7 +79,9 @@ extents = Vector2( 34, 74 )
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 10, 30 )
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=[
+"Persist",
+]]
 pause_mode = 2
 script = ExtResource( 10 )
 __meta__ = {

@@ -7,6 +7,8 @@ var above_z = 2
 var middle_z = 0
 var below_z = -2
 
+var player_spawn_pos = Vector2(814, 248)
+
 func _on_MiddleTransition_body_entered(body):
 	if body.z_index == middle_z:
 		return

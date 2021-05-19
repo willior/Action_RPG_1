@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=16]
 [ext_resource path="res://assets/World/Flowers/Flowers_1.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/World/Flowers/Flowers_2.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/Maps/Test/Test.gd" type="Script" id=19]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/Cutscene/CutsceneTrigger.tscn" type="PackedScene" id=23]
@@ -248,7 +249,9 @@ shader_param/tangent_accel_texture = SubResource( 3 )
 
 [sub_resource type="RectangleShape2D" id=5]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=[
+"Persist",
+]]
 pause_mode = 2
 script = ExtResource( 8 )
 __meta__ = {
@@ -263,6 +266,7 @@ smoothing_speed = 8.0
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
 z_index = -1
+script = ExtResource( 19 )
 
 [node name="Sprite" type="Sprite" parent="Map"]
 modulate = Color( 0.882353, 0.882353, 0.882353, 1 )
