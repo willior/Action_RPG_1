@@ -785,6 +785,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ButtonControls" type="Button" parent="ConfigDisplay/VBox"]
+margin_right = 208.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+button_mask = 0
+text = "How to Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ButtonSave" type="Button" parent="ConfigDisplay/VBox"]
 margin_right = 208.0
 margin_bottom = 16.0
@@ -806,7 +827,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonControls" type="Button" parent="ConfigDisplay/VBox"]
+[node name="ButtonQuit" type="Button" parent="ConfigDisplay/VBox"]
 margin_right = 208.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 0, 16 )
@@ -822,7 +843,7 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
 button_mask = 0
-text = "How to Play"
+text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1050,5 +1071,6 @@ __meta__ = {
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonDEX" to="." method="_on_ButtonSTAT_gui_input" binds= [ 4 ]]
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonSPD" to="." method="_on_ButtonSTAT_gui_input" binds= [ 5 ]]
 [connection signal="gui_input" from="StatsDisplay/VBoxButtons/ButtonMAG" to="." method="_on_ButtonSTAT_gui_input" binds= [ 6 ]]
-[connection signal="gui_input" from="ConfigDisplay/VBox/ButtonSave" to="." method="_on_ButtonSave_gui_input"]
 [connection signal="gui_input" from="ConfigDisplay/VBox/ButtonControls" to="." method="_on_ButtonControls_gui_input"]
+[connection signal="gui_input" from="ConfigDisplay/VBox/ButtonSave" to="." method="_on_ButtonSave_gui_input"]
+[connection signal="gui_input" from="ConfigDisplay/VBox/ButtonQuit" to="." method="_on_ButtonLoad_gui_input"]

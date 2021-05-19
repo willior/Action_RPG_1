@@ -994,6 +994,10 @@ func save():
 	# this requires parsing through the array
 	print('saving Player resources...')
 	var save_dict = {
+		"filename": get_filename(),
+		"parent": get_parent().get_path(),
+		"pos_x": position.x,
+		"pos_y": position.y,
 		"player1_inventory": inventory._items,
 		"player1_pouch": pouch._ingredients,
 		"player1_formulabook": formulabook._formulas

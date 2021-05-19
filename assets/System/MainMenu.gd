@@ -8,10 +8,10 @@ func _ready():
 	newGameButton.grab_focus()
 
 func _on_NewGameButton_pressed():
-	pass # Replace with function body.
+	Global.goto_scene("res://assets/Maps/0_Prologue/0-1_Home.tscn")
 
 func _on_ContinueButton_pressed():
-	pass # Replace with function body.
+	GameManager.load_game()
 
 func _on_QuitButton_pressed():
-	pass # Replace with function body.
+	get_tree().quit()

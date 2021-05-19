@@ -389,6 +389,17 @@ func _on_ButtonSave_gui_input(event):
 		hide_config_display()
 		close_pause_menu()
 
+func _on_ButtonLoad_gui_input(event):
+	if event.is_action_pressed(accept):
+		Global.goto_scene("res://assets/System/MainMenu.tscn")
+	elif event.is_action_pressed(cancel):
+		hide_config_display()
+		enable_menu_focus()
+		$MenuPanel/Menu/ButtonConfig.grab_focus()
+	elif event.is_action_pressed(start):
+		hide_config_display()
+		close_pause_menu()
+
 func audio_menu_move():
 	$AudioMenu.stream = AudioMove
 	$AudioMenu.play()
@@ -421,15 +432,11 @@ func hide_config_display():
 	yield($Tween, "tween_all_completed")
 	$ConfigDisplay.hide()
 
-func _on_ButtonInventory_focus_entered():
-	return
-# warning-ignore:unreachable_code
-# warning-ignore:unreachable_code
-	$InventoryDisplay.show()
-	audio_menu_move()
+func _on_ButtonInventory_focus_entered(): pass
+#	return
+#	$InventoryDisplay.show()
+#	audio_menu_move()
 
-func _on_ButtonInventory_focus_exited():
-	return
-# warning-ignore:unreachable_code
-# warning-ignore:unreachable_code
-	$InventoryDisplay.hide()
+func _on_ButtonInventory_focus_exited(): pass
+#	return
+#	$InventoryDisplay.hide()

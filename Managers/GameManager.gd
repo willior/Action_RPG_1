@@ -183,3 +183,26 @@ func save_game():
 		var node_data = node.call("save")
 		save_game.store_line(to_json(node_data))
 	save_game.close()
+
+func load_game():
+	var save_game = File.new()
+	if not save_game.file_exists("user://savegame.save"):
+		return # Error: no save to load
+	var save_nodes = get_tree().get_nodes_in_group("Persist")
+	for i in save_nodes:
+		i.queue_free() # deleting saveable objects
+	save_game.open("user://savegame.save", File.READ)
+	while save_game.get_position() < save_game.get_len():
+		var node_data = parse_json(save_game.get_line())
+		var new_object = load(node_data["filename"]).instance()
+		get_node(node_data["parent"]).add_child(new_object)
+		# new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+		for i in node_data.keys():
+			if i == "pos_x":
+				new_object.position.x = node_data[i]
+			if i == "pos_y":
+				new_object.position.y = node_data[i]
+			if i == "filename" or i == "parent": # or i == "pos_x" or i == "pos_y":
+				continue
+			new_object.set(i, node_data[i])
+	save_game.close()
