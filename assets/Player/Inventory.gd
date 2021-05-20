@@ -14,6 +14,8 @@ var current_selected_item = 0
 func set_items(new_items):
 	_items = new_items
 	emit_signal("inventory_changed", self)
+	if _items.size() == 0:
+		return
 	var new_selected_item = get_item(current_selected_item)
 	emit_signal("current_selected_item_changed", new_selected_item)
 

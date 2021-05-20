@@ -21,19 +21,6 @@ func _init():
 		player2 = load("res://assets/Player/Player2.tscn").instance()
 
 func _ready():
-	var fade_in = FadeIn.instance()
-	add_child(fade_in)
-	sfx1.play()
-	sfx2.play()
-	if GameManager.on_title_screen:
-		GameManager.on_title_screen = false
-	if Global.chapter_name != null:
-		$FadeIn.free()
-		var chapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn").instance()
-		add_child(chapterDisplay)
-		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
-		Global.chapter_name = null
-	
 	# player.global_position = get_node("Map").player_spawn_pos
 	get_node("YSort").add_child(player)
 	if !GameManager.multiplayer_2:
@@ -43,6 +30,20 @@ func _ready():
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 1
 		player2.global_position = player.global_position
 		get_node("YSort").add_child(player2)
+	sfx1.play()
+	sfx2.play()
+	if GameManager.on_title_screen:
+		GameManager.on_title_screen = false
+	if Global.chapter_name != null:
+		var chapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn").instance()
+		add_child(chapterDisplay)
+		get_node("ChapterDisplay/Chapter").text = Global.chapter_name
+		Global.chapter_name = null
+	else:
+		var fade_in = FadeIn.instance()
+		add_child(fade_in)
+	player = GameManager.player
+	player2 = GameManager.player2
 
 func fade_out():
 	var fadeout = FadeOut.instance()
@@ -50,24 +51,24 @@ func fade_out():
 
 func _input(event):
 	if event.is_action_pressed("quit_game"):
-		Global.goto_scene("res://assets/System/MainMenu.tscn")
-		# get_tree().quit()
+		GameManager.quit_to_title()
 	
 	if event.is_action_pressed("test1"): # T
-		pass
-		# player.formulabook.add_formula("Fury")
+		GameManager.player.formulabook.add_formula("Flash")
+		GameManager.player.formulabook.add_formula("Heal")
+		GameManager.player.formulabook.add_formula("Fury")
 	
 	if event.is_action_pressed("test2"): # Y
-		player.level_up()
+		GameManager.player.level_up()
 		if GameManager.multiplayer_2:
 			GameManager.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
 		print('adding ingredients...')
-		player.pouch.add_ingredient("Rock", 20)
-		player.pouch.add_ingredient("Clay", 10)
-		player.pouch.add_ingredient("Water", 20)
-		player.pouch.add_ingredient("Salt", 10)
+		GameManager.player.pouch.add_ingredient("Rock", 20)
+		GameManager.player.pouch.add_ingredient("Clay", 10)
+		GameManager.player.pouch.add_ingredient("Water", 20)
+		GameManager.player.pouch.add_ingredient("Salt", 10)
 	
 	if event.is_action_pressed("test4"): # O
 		pass
@@ -137,7 +138,7 @@ func close_pause_menu():
 	get_tree().paused = false
 	# dim.visible = false
 	$GUI/PauseScreen.queue_free()
-	player.talkTimer.start()
+	GameManager.player.talkTimer.start()
 
 func save():
 	var save_dict = {

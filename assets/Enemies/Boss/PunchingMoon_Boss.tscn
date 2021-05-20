@@ -174,6 +174,9 @@ layer = 0
 visible = false
 modulate = Color( 1, 1, 1, 0 )
 
+[node name="StatusDisplay" type="Node2D" parent="."]
+position = Vector2( 0, -43 )
+
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
 [connection signal="no_health" from="Stats" to="." method="_on_BatStats_no_health"]

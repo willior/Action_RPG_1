@@ -13,20 +13,13 @@ var shade_friction = 840
 var dir_vector = Vector2.DOWN
 var affinity = 0
 
-var vitality = 12 setget set_vitality
-var endurance = 12 setget set_endurance
+var vitality = 4 setget set_vitality
+var endurance = 4 setget set_endurance
 var defense = 4.0 setget set_defense
 var strength = 4.0 setget set_strength
 var dexterity = 4.0 setget set_dexterity
 var speed = 4.0 setget set_speed
 var magic = 4.0 setget set_magic
-var vitality_description = \"Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand.\"
-var endurance_description = \"Lung Capacity determines how many physical actions you can perform in a short period of time.\"
-var defense_description = \"Resilience makes things easier for you when hardship is inevitable, as well as helps in maintaining your composure.\"
-var strength_description = \"Violent Nature is a measure of how much pain you are willing to inflict on others, for survival or otherwise.\"
-var dexterity_description = \"Patience allows for careful observation of threats, augmenting accuracy and the frequency of critical strikes.\"
-var speed_description = \"Swiftness aids in reflexive maneuvers like evasion, as well as the speed with which certain actions are performed.\"
-var magic_description = \"Spirituality governs the amount of aid received from higher planes, as well as one's grasp of the incomprehensible.\"
 
 var level = 1 setget set_level
 var experience = 82 setget set_experience
@@ -66,6 +59,14 @@ var cash = 0 setget set_cash
 
 var status = \"fine\" setget set_status
 var sweating = false
+
+var vitality_description = \"Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand.\"
+var endurance_description = \"Lung Capacity determines how many physical actions you can perform in a short period of time.\"
+var defense_description = \"Resilience makes things easier for you when hardship is inevitable, as well as helps in maintaining your composure.\"
+var strength_description = \"Violent Nature is a measure of how much pain you are willing to inflict on others, for survival or otherwise.\"
+var dexterity_description = \"Patience allows for careful observation of threats, augmenting accuracy and the frequency of critical strikes.\"
+var speed_description = \"Swiftness aids in reflexive maneuvers like evasion, as well as the speed with which certain actions are performed.\"
+var magic_description = \"Spirituality governs the amount of aid received from higher planes, as well as one's grasp of the incomprehensible.\"
 
 signal no_health
 signal vitality_changed(value)
@@ -126,6 +127,41 @@ func _ready():
 	self.charge = charge
 	self.charge_level = charge_level
 
+func save():
+	var save_dict = {
+		\"vitality\": vitality,
+		\"health\": health,
+		\"max_health\": max_health,
+		\"endurance\": endurance,
+		\"stamina\": stamina,
+		\"max_stamina\": max_stamina,
+		\"defense\": defense,
+		\"strength\": strength,
+		\"dexterity\": dexterity,
+		\"speed\": speed,
+		\"magic\": magic,
+		\"level\": level,
+		\"experience\": experience,
+		\"experience_required\": experience_required,
+		\"experience_total\": experience_total
+	}
+	return save_dict
+
+func default_stats():
+	self.vitality = 4
+	self.max_health = 60
+	self.endurance = 4
+	self.max_stamina = 60
+	self.defense = 4
+	self.strength = 4
+	self.dexterity = 4
+	self.speed = 4
+	self.magic = 4
+	self.level = 1
+	self.experience = 0
+	self.experience_required = 100
+	self.experience_total = 0
+
 func set_status(value):
 	status = value
 	match status:
@@ -145,8 +181,8 @@ func set_status(value):
 func set_speed_mod(value):
 	speed_mod = value
 
-func set_vitality(value):
-	vitality = value
+func increment_vitality():
+	self.vitality += 1
 	var health_increase
 	if vitality > 30:
 		health_increase = 1
@@ -158,7 +194,9 @@ func set_vitality(value):
 		health_increase = 9
 	self.max_health += health_increase
 	self.health += health_increase
-	print('vitality changed: health increased by ', health_increase)
+
+func set_vitality(value):
+	vitality = value
 	emit_signal(\"vitality_changed\", vitality)
 
 func set_max_health(value):
@@ -199,8 +237,8 @@ func set_dead(value):
 		emit_signal(\"no_health\")
 		print('setting dead')
 
-func set_endurance(value):
-	endurance = value
+func increment_endurance():
+	self.endurance += 1
 	var stamina_increase
 	if endurance > 30:
 		stamina_increase = 1
@@ -211,6 +249,10 @@ func set_endurance(value):
 	elif endurance <= 10:
 		stamina_increase = 9
 	self.max_stamina += stamina_increase
+	self.stamina += stamina_increase
+
+func set_endurance(value):
+	endurance = value
 	emit_signal(\"endurance_changed\", endurance)
 
 func set_max_stamina(value):
@@ -319,5 +361,7 @@ func set_cash(value):
 	emit_signal(\"cash_changed\", cash)
 "
 
-[node name="Player2Stats" type="Node"]
+[node name="Player2Stats" type="Node" groups=[
+"Persist",
+]]
 script = SubResource( 1 )

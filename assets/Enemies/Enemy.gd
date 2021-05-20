@@ -53,19 +53,20 @@ func enable_detection(enemy):
 
 func hurtbox_entered(enemy, hitbox):
 	enemy.enemyHealth.show_health()
-	if hitbox.get("status"):
-		StatusHandler.apply_status(hitbox.status, enemy)
-	if hitbox.get("status_two"):
-		StatusHandler.apply_status(hitbox.status_two, enemy)
 	var element_mod
 	if hitbox.get("element") and enemy.stats.get("affinity"):
 		element_mod = Element.calculate_element_ratio(hitbox.element, enemy.stats.affinity)
 	else:
 		element_mod = 1
 	if hitbox.get("formula"):
+
 		var damage = Global.damage_calculation(hitbox.potency, enemy.stats.defense, hitbox.randomness, element_mod)
 		deal_damage(enemy, damage, false)
 		if enemy.stats.health > 0:
+			if hitbox.get("status"):
+				StatusHandler.apply_status(hitbox.status, enemy)
+			if hitbox.get("status_two"):
+				StatusHandler.apply_status(hitbox.status_two, enemy)
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
 			"modulate",

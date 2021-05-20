@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/Will/LayerTest/Bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://assets/Will/LayerTest/Bridge.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World.gd" type="Script" id=10]
 [ext_resource path="res://assets/Audio/World/Bird_Ambience.ogg" type="AudioStream" id=11]
@@ -403,12 +402,6 @@ autostart = true
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
-
-[node name="Player" parent="YSort" instance=ExtResource( 8 )]
-position = Vector2( 814, 238 )
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
-remote_path = NodePath("../../../Camera2D")
 
 [node name="Enemies" type="YSort" parent="YSort"]
 

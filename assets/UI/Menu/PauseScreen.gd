@@ -63,7 +63,7 @@ func _ready():
 	0.4,
 	Tween.TRANS_QUINT, Tween.EASE_OUT
 	)
-	$Tween.interpolate_property($CanvasLayer/ColorRect, "color",
+	$Tween.interpolate_property($ColorRect, "color",
 	Color(0,0,0,0),
 	Color(0,0,0,0.5),
 	0.4,
@@ -99,6 +99,9 @@ func _ready():
 			label_item.set_text(str(inventory_item.item_reference.name))
 		$InventoryDisplay/Vbox.add_child(label_item)
 	
+	if player.formulabook.get_formulas().size() == 0:
+		$MenuPanel/Menu/ButtonAlchemy.disabled = true
+	
 	for f in player.formulabook.get_formulas().size():
 		var alchemy_formula = player.formulabook.get_formula(f)
 		var formula_data = FormulaStats.get(alchemy_formula.formula_reference.name)
@@ -128,6 +131,8 @@ func _ready():
 			$AlchemyDisplay/VBoxButtons.get_child(0).focus_neighbour_top = formula_button.get_path()
 		$AlchemyDisplay/Vbox.add_child(Control.new())
 	
+	if player.pouch.get_ingredients().size() == 0:
+		$MenuPanel/Menu/ButtonPouch.disabled = true
 	for n in player.pouch.get_ingredients().size():
 		var pouch_ingredient = player.pouch.get_ingredient(n)
 		var menu_ingredient = MenuIngredient.instance()
@@ -236,7 +241,7 @@ func close_pause_menu():
 	0.4,
 	Tween.TRANS_QUINT, Tween.EASE_IN
 	)
-	$Tween.interpolate_property($CanvasLayer/ColorRect, "color",
+	$Tween.interpolate_property($ColorRect, "color",
 	Color(0,0,0,0.5),
 	Color(0,0,0,0),
 	0.4,
@@ -391,8 +396,7 @@ func _on_ButtonSave_gui_input(event):
 
 func _on_ButtonLoad_gui_input(event):
 	if event.is_action_pressed(accept):
-		get_tree().paused = false
-		Global.goto_scene("res://assets/System/MainMenu.tscn")
+		GameManager.quit_to_title()
 	elif event.is_action_pressed(cancel):
 		hide_config_display()
 		enable_menu_focus()

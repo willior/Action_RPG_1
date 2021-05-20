@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/Misc/Controls.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/UI/Charge_1_UI_noOutline.png" type="Texture" id=14]
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/UI/Charge_2_UI.png" type="Texture" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=10]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 8 )
@@ -59,6 +61,14 @@ light_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -113,6 +123,7 @@ text = "INVENTORY"
 margin_left = 61.0
 margin_right = 111.0
 margin_bottom = 18.0
+custom_styles/disabled = SubResource( 10 )
 toggle_mode = true
 text = "ALCHEMY"
 
@@ -120,6 +131,7 @@ text = "ALCHEMY"
 margin_left = 115.0
 margin_right = 151.0
 margin_bottom = 18.0
+custom_styles/disabled = SubResource( 10 )
 toggle_mode = true
 text = "POUCH"
 
@@ -885,7 +897,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
 
 [node name="PanelTop" type="Panel" parent="CanvasLayer"]
 anchor_right = 1.0
@@ -902,14 +913,6 @@ margin_top = 270.0
 margin_bottom = 315.0
 rect_min_size = Vector2( 0, 45 )
 custom_styles/panel = SubResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

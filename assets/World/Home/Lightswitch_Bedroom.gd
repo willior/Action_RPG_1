@@ -110,7 +110,7 @@ func examine():
 # after interacting, the dialog index always goes to 1
 # checks if it's been examined in the opposite position
 # if not, sets examined to false, which displays the "?!" notice
-func interact():
+func interact(_player):
 	if !$Light2D.visible: # turn on light
 		$AudioStreamPlayer.stream = on_audio
 		$AudioStreamPlayer.play()

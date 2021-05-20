@@ -13,8 +13,8 @@ var shade_friction = 840
 var dir_vector = Vector2.DOWN
 var affinity = 0
 
-var vitality = 12 setget set_vitality
-var endurance = 12 setget set_endurance
+var vitality = 4 setget set_vitality
+var endurance = 4 setget set_endurance
 var defense = 4.0 setget set_defense
 var strength = 4.0 setget set_strength
 var dexterity = 4.0 setget set_dexterity
@@ -131,7 +131,10 @@ func save():
 	var save_dict = {
 		\"vitality\": vitality,
 		\"health\": health,
+		\"max_health\": max_health,
 		\"endurance\": endurance,
+		\"stamina\": stamina,
+		\"max_stamina\": max_stamina,
 		\"defense\": defense,
 		\"strength\": strength,
 		\"dexterity\": dexterity,
@@ -143,6 +146,21 @@ func save():
 		\"experience_total\": experience_total
 	}
 	return save_dict
+
+func default_stats():
+	self.vitality = 4
+	self.max_health = 60
+	self.endurance = 4
+	self.max_stamina = 60
+	self.defense = 4
+	self.strength = 4
+	self.dexterity = 4
+	self.speed = 4
+	self.magic = 4
+	self.level = 1
+	self.experience = 0
+	self.experience_required = 100
+	self.experience_total = 0
 
 func set_status(value):
 	status = value
@@ -163,8 +181,8 @@ func set_status(value):
 func set_speed_mod(value):
 	speed_mod = value
 
-func set_vitality(value):
-	vitality = value
+func increment_vitality():
+	self.vitality += 1
 	var health_increase
 	if vitality > 30:
 		health_increase = 1
@@ -176,7 +194,9 @@ func set_vitality(value):
 		health_increase = 9
 	self.max_health += health_increase
 	self.health += health_increase
-	print('vitality changed: health increased by ', health_increase)
+
+func set_vitality(value):
+	vitality = value
 	emit_signal(\"vitality_changed\", vitality)
 
 func set_max_health(value):
@@ -217,8 +237,8 @@ func set_dead(value):
 		emit_signal(\"no_health\")
 		print('setting dead')
 
-func set_endurance(value):
-	endurance = value
+func increment_endurance():
+	self.endurance += 1
 	var stamina_increase
 	if endurance > 30:
 		stamina_increase = 1
@@ -229,6 +249,10 @@ func set_endurance(value):
 	elif endurance <= 10:
 		stamina_increase = 9
 	self.max_stamina += stamina_increase
+	self.stamina += stamina_increase
+
+func set_endurance(value):
+	endurance = value
 	emit_signal(\"endurance_changed\", endurance)
 
 func set_max_stamina(value):

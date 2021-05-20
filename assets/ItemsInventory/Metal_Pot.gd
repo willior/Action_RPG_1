@@ -7,6 +7,7 @@ var interactable = true
 var talkable = false
 var examined = false
 var answer
+# var player
 
 func _ready():
 	if PlayerLog.metal_pot_collected:
@@ -22,7 +23,8 @@ func examine():
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true
 	
-func interact():
+func interact(_player):
+	# player = _player
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog_object_path = get_path()
 	print(get_path())
@@ -55,7 +57,7 @@ func interact():
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
 	prints("metal pot: " + str(Global.custom_variables))
-	
+
 func acquire_item():
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)

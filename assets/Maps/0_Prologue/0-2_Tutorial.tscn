@@ -3,7 +3,6 @@
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=1]
 [ext_resource path="res://assets/World/Rivers/River_1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/World/Doodads/Rock_Small_5.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Trees/Tree_1_green_alt.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Tilesets/GrassBasicDark.png" type="Texture" id=7]
@@ -26,6 +25,7 @@
 [ext_resource path="res://assets/Audio/Music/LowContrabassAmbience.ogg" type="AudioStream" id=24]
 [ext_resource path="res://assets/Shaders/Night_CanvasModulate.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/Audio/World/Rain_Outside.ogg" type="AudioStream" id=26]
+[ext_resource path="res://assets/Maps/0_Prologue/0-2_Tutorial.gd" type="Script" id=27]
 [ext_resource path="res://assets/Audio/World/Rain_Outside_Night.ogg" type="AudioStream" id=28]
 [ext_resource path="res://assets/World/Doodads/Rock_Medium_1.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/Andrew/Walkways/Walkway_1_1.tscn" type="PackedScene" id=30]
@@ -122,7 +122,9 @@ extents = Vector2( 120, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=[
+"Persist",
+]]
 pause_mode = 2
 script = ExtResource( 20 )
 __meta__ = {
@@ -135,6 +137,7 @@ position = Vector2( 352, 16 )
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
 z_index = -1
+script = ExtResource( 27 )
 
 [node name="GrassDark" type="TileMap" parent="Map"]
 tile_set = SubResource( 1 )
@@ -217,13 +220,6 @@ position = Vector2( 1706, 870 )
 
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
-
-[node name="Player" parent="YSort" instance=ExtResource( 4 )]
-process_priority = 0
-position = Vector2( 352, 16 )
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
-remote_path = NodePath("../../../Camera2D")
 
 [node name="Doodads" type="YSort" parent="YSort"]
 

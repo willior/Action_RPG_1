@@ -16,7 +16,7 @@ func _on_focus_entered():
 	$AudioMenu.play()
 
 func _on_ButtonVIT_pressed():
-	stats.vitality += 1
+	stats.increment_vitality()
 	SoundPlayer.play_sound("iloveit")
 	$Stats/LabelVIT.text = str(stats.vitality)
 	$Tween.interpolate_property($Stats/LabelVIT, "modulate",
@@ -28,7 +28,7 @@ func _on_ButtonVIT_pressed():
 	$Tween.start()
 	
 func _on_ButtonEND_pressed():
-	stats.endurance += 1
+	stats.increment_endurance()
 	SoundPlayer.play_sound("great")
 	$Stats/LabelEND.text = str(stats.endurance)
 	$Tween.interpolate_property($Stats/LabelEND, "modulate",

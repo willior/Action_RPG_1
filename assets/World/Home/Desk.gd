@@ -66,7 +66,7 @@ func examine():
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
-func interact():
+func interact(_player):
 	if !$Light2D.visible:
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Lampswitch_On.wav")
 		$AudioStreamPlayer.play()

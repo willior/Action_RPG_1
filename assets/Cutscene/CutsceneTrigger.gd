@@ -8,7 +8,7 @@ var talkable = false
 var examined = false
 var count
 
-onready var player = get_tree().get_root().get_node("/root/World/YSort/Player")
+var player # = get_tree().get_root().get_node("/root/World/YSort/Player")
 
 func examine():
 	var dialog = DialogBox.instance()
@@ -19,7 +19,8 @@ func examine():
 	]
 	get_node("/root/World/GUI").add_child(dialog)
 	
-func interact():
+func interact(_player):
+	player = _player
 	var enemies = get_tree().get_nodes_in_group("Enemies")
 	for i in enemies:
 		var dialog = DialogBox.instance()

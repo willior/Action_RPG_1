@@ -15,10 +15,46 @@ var player2
 var multiplayer_2 = false
 var player2_data = [null, null]
 
+var file_inventory
+var file_pouch
+var file_formulabook
+
+var inventory_resource = load("res://assets/Player/Inventory.gd")
+var inventory_r = inventory_resource.new()
+var pouch_resource = load("res://assets/Player/Pouch.gd")
+var pouch_r = pouch_resource.new()
+var formulabook_resource = load("res://assets/Player/FormulaBook.gd")
+var formulabook_r = formulabook_resource.new()
+
 signal player_initialized
 signal player_reinitialized
 signal player2_initialized
 signal player2_reinitialized
+
+func _ready():
+	if !ResourceLoader.exists("user://inventory.tres"):
+		file_inventory = inventory_r
+# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://inventory.tres", file_inventory)
+	
+	if !ResourceLoader.exists("user://pouch.tres"):
+		file_pouch = pouch_r
+# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://pouch.tres", file_pouch)
+	
+	if !ResourceLoader.exists("user://formulabook.tres"):
+		file_formulabook = formulabook_r
+# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://formulabook.tres", file_formulabook)
+
+func initialize_player():
+	print('initializing player 1...')
+	player = get_tree().get_root().get_node("/root/World/YSort/Player")
+	emit_signal("player_initialized", player)
+	player.inventory.set_items(file_inventory.get_items())
+	player.pouch.set_ingredients(file_pouch.get_ingredients())
+	player.formulabook.set_formulas(file_formulabook.get_formulas())
+	print('player 1 initialized.')
 
 func reinitialize_player(inventory, pouch, formulabook):
 	print('attempting to reinitialize player...')
@@ -30,59 +66,59 @@ func reinitialize_player(inventory, pouch, formulabook):
 	player.pouch.set_ingredients(pouch.get_ingredients())
 	player.formulabook.set_formulas(formulabook.get_formulas())
 	print('player reinitialized.')
-	
-func initialize_player():
-	print('attempting to initialize player...')
-	player = get_tree().get_root().get_node("/root/World/YSort/Player")
-	if not player:
-		print('player not created; cannot initialize.')
-		return
-	emit_signal("player_initialized", player)
-	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
-	player.pouch.connect("pouch_changed", self, "_on_player_pouch_changed")
-	player.formulabook.connect("formulabook_changed", self, "_on_player_formulabook_changed")
-	print('player successfully initialized.')
-	
-	if !ResourceLoader.exists("user://inventory.tres"):
-		print("inventory resource not found. creating...")
-		player.inventory.add_item("Potion", 3)
-		# warning-ignore:return_value_discarded
-		ResourceSaver.save("user://inventory.tres", player.inventory)
-		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
-	else:
-		var loaded_inventory = load("user://inventory.tres")
-		if loaded_inventory:
-			player.inventory.set_items(loaded_inventory.get_items())
-			print("inventory loaded from disk.")
-	
-	if !ResourceLoader.exists("user://pouch.tres"):
-		print("pouch resource not found. creating...")
-#		player.pouch.add_ingredient("Rock", 20)
-#		player.pouch.add_ingredient("Clay", 20)
-#		player.pouch.add_ingredient("Salt", 20)
-#		player.pouch.add_ingredient("Water", 20)
-		# warning-ignore:return_value_discarded
-		ResourceSaver.save("user://pouch.tres", player.pouch)
-		prints("saved pouch resource to " + str(OS.get_user_data_dir()))
-	else:
-		var loaded_pouch = load("user://pouch.tres")
-		if loaded_pouch:
-			player.pouch.set_ingredients(loaded_pouch.get_ingredients())
-			print("pouch loaded from disk.")
-	
-	if !ResourceLoader.exists("user://formulabook.tres"):
-		print("formulabook resource not found. creating...")
-		player.formulabook.add_formula("Flash")
-		player.formulabook.add_formula("Heal")
-		player.formulabook.add_formula("Fury")
-		# warning-ignore:return_value_discarded
-		ResourceSaver.save("user://formulabook.tres", player.formulabook)
-		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))
-	else:
-		var loaded_formulabook = load("user://formulabook.tres")
-		if loaded_formulabook:
-			player.formulabook.set_formulas(loaded_formulabook.get_formulas())
-			print("formulabook loaded from disk.")
+
+#func old_initialize_player():
+#	print('attempting to initialize player...')
+#	player = get_tree().get_root().get_node("/root/World/YSort/Player")
+#	if not player:
+#		print('player not created; cannot initialize.')
+#		return
+#	emit_signal("player_initialized", player)
+#	player.inventory.connect("inventory_changed", self, "_on_player_inventory_changed")
+#	player.pouch.connect("pouch_changed", self, "_on_player_pouch_changed")
+#	player.formulabook.connect("formulabook_changed", self, "_on_player_formulabook_changed")
+#	print('player successfully initialized.')
+#
+#	if !ResourceLoader.exists("user://inventory.tres"):
+#		print("inventory resource not found. creating...")
+#		player.inventory.add_item("Potion", 3)
+#		# warning-ignore:return_value_discarded
+#		ResourceSaver.save("user://inventory.tres", player.inventory)
+#		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
+#	else:
+#		var loaded_inventory = load("user://inventory.tres")
+#		if loaded_inventory:
+#			player.inventory.set_items(loaded_inventory.get_items())
+#			print("inventory loaded from disk.")
+#
+#	if !ResourceLoader.exists("user://pouch.tres"):
+#		print("pouch resource not found. creating...")
+##		player.pouch.add_ingredient("Rock", 20)
+##		player.pouch.add_ingredient("Clay", 20)
+##		player.pouch.add_ingredient("Salt", 20)
+##		player.pouch.add_ingredient("Water", 20)
+#		# warning-ignore:return_value_discarded
+#		ResourceSaver.save("user://pouch.tres", player.pouch)
+#		prints("saved pouch resource to " + str(OS.get_user_data_dir()))
+#	else:
+#		var loaded_pouch = load("user://pouch.tres")
+#		if loaded_pouch:
+#			player.pouch.set_ingredients(loaded_pouch.get_ingredients())
+#			print("pouch loaded from disk.")
+#
+#	if !ResourceLoader.exists("user://formulabook.tres"):
+#		print("formulabook resource not found. creating...")
+#		player.formulabook.add_formula("Flash")
+#		player.formulabook.add_formula("Heal")
+#		player.formulabook.add_formula("Fury")
+#		# warning-ignore:return_value_discarded
+#		ResourceSaver.save("user://formulabook.tres", player.formulabook)
+#		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))
+#	else:
+#		var loaded_formulabook = load("user://formulabook.tres")
+#		if loaded_formulabook:
+#			player.formulabook.set_formulas(loaded_formulabook.get_formulas())
+#			print("formulabook loaded from disk.")
 
 func reinitialize_player2(pouch, formulabook):
 	print('attempting to reinitialize player2...')
@@ -182,10 +218,44 @@ func load_game():
 				continue
 			else:
 				PlayerStats.set(i, node_data[i])
-				print(PlayerStats.get(i))
-		
+				PlayerLog.set(i, node_data[i])
+	load_player_resources()
 	Global.goto_scene(map_path)
 	save_game.close()
+
+func load_player_resources():
+	if !ResourceLoader.exists("user://inventory.tres"):
+		file_inventory = inventory_r
+# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://inventory.tres", file_inventory)
+	else:
+		file_inventory = load("user://inventory.tres")
+	
+	if !ResourceLoader.exists("user://pouch.tres"):
+		file_pouch = pouch_r
+# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://pouch.tres", file_pouch)
+	else:
+		file_pouch = load("user://pouch.tres")
+	
+	if !ResourceLoader.exists("user://formulabook.tres"):
+		file_formulabook = formulabook_r
+# warning-ignore:return_value_discarded
+		ResourceSaver.save("user://formulabook.tres", file_formulabook)
+	else:
+		file_formulabook = load("user://formulabook.tres")
+
+func quit_to_title():
+	get_tree().paused = false
+	Global.goto_scene("res://assets/System/MainMenu.tscn")
+	PlayerStats.default_stats()
+	PlayerLog.reset_player_log()
+
+func new_game():
+	file_inventory = inventory_r
+	file_pouch = pouch_r
+	file_formulabook = formulabook_r
+	Global.goto_scene("res://assets/Maps/0_Prologue/0-1_Home.tscn")
 
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):

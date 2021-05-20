@@ -63,6 +63,8 @@ signal Tumbleweed_complete()
 # warning-ignore:unused_signal
 signal PunchingMoon_complete()
 # warning-ignore:unused_signal
+signal The_Moon_complete()
+# warning-ignore:unused_signal
 signal home_lightswitch_advance(value)
 # warning-ignore:unused_signal
 signal home_lightswitch_complete()
@@ -73,13 +75,22 @@ signal home_window_complete()
 # warning-ignore:unused_signal
 signal home_sink_complete()
 
+func save():
+	var save_dict = {
+		"chapter_number": chapter_number
+	}
+	return save_dict
+
+func reset_player_log():
+	chapter_number = 0
+
 # when examining an object for the final time, the object sets the
 # global examined variable to true as well as runs a function that
 # tells the PlayerLog which signal to emit. this signal then sets
 # the object's local examined variable to true.
 func set_examined(name, value):
 	enemies_examined[name] = value
-	emit_signal(str(name)+"_complete", value)
+	emit_signal(str(name.replace(" ", "_"))+"_complete", value)
 	# print('examined ' + name)
 	print(enemies_examined[name])
 

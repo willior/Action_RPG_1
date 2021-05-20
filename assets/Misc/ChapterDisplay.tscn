@@ -18,12 +18,12 @@ modulate = Color( 0, 0, 0, 1 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 320, 180 )
+region_rect = Rect2( 0, 0, 480, 270 )
 
 [node name="Chapter" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -12.0
+margin_bottom = -24.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
@@ -38,7 +38,7 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.1
+wait_time = 2.4
 one_shot = true
 autostart = true
 
@@ -47,6 +47,7 @@ stream = ExtResource( 3 )
 autoplay = true
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="finished" from="Audio" to="." method="_on_AudioStreamPlayer_finished"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

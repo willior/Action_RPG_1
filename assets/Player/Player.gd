@@ -350,7 +350,7 @@ func stamina_regeneration():
 func stamina_regen_reset():
 	if stamina_regen_level > 0:
 		stamina_regen_level = 0
-	timer.start(1.5)
+	timer.start(1.2)
 
 func apply_status(status):
 	match status:
@@ -721,9 +721,9 @@ func _on_Formulabox_area_entered(area):
 		return
 
 func _on_Hurtbox_area_entered(area):
-	if area.get("status"):
-		StatusHandler.apply_status(area.status, self)
 	if area.get("buff")!=null or area.get("debuff")!=null:
+		if area.get("status"):
+			StatusHandler.apply_status(area.status, self)
 		return
 	var element_mod
 	if area.get("element")!=null and stats.get("affinity")!=null:
@@ -959,11 +959,11 @@ func _on_InteractHitbox_area_entered(area):
 	if interactObject.interactable:
 		self.interactNoticeDisplay = true
 		interacting = true
-	if "item_usable" in interactObject:
-		var item_to_use = inventory._items[inventory.current_selected_item]
-		if item_to_use.item_reference.name == interactObject.item_needed:
-			using_item = true
-			print('using_item = true')
+#	if "item_usable" in interactObject:
+#		var item_to_use = inventory._items[inventory.current_selected_item]
+#		if item_to_use.item_reference.name == interactObject.item_needed:
+#			using_item = true
+#			print('using_item = true')
 
 func _on_InteractHitbox_area_exited(_area):
 	self.noticeDisplay = false

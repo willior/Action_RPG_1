@@ -2170,7 +2170,7 @@ radius = 10.0499
 [sub_resource type="CircleShape2D" id=147]
 radius = 5.0
 
-[sub_resource type="Animation" id=149]
+[sub_resource type="Animation" id=148]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -2186,7 +2186,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=150]
+[sub_resource type="Animation" id=149]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:material:shader_param/active")
@@ -2201,7 +2201,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=151]
+[sub_resource type="Animation" id=150]
 length = 3.0
 step = 1.0
 tracks/0/type = "value"
@@ -2217,7 +2217,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0.25098, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=152]
+[sub_resource type="Animation" id=151]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate")
@@ -2422,12 +2422,12 @@ stream = ExtResource( 1 )
 volume_db = 12.0
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 149 )
-anims/Stop = SubResource( 150 )
+anims/Start = SubResource( 148 )
+anims/Stop = SubResource( 149 )
 
 [node name="FrenzyAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Start = SubResource( 151 )
-anims/Stop = SubResource( 152 )
+anims/Start = SubResource( 150 )
+anims/Stop = SubResource( 151 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

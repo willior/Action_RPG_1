@@ -45,7 +45,7 @@ func examine():
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
 	
-func interact():
+func interact(_player):
 	if !is_on:
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Open.wav")
 		$AudioStreamPlayer.play()

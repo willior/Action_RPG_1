@@ -343,7 +343,7 @@ func stamina_regeneration():
 func stamina_regen_reset():
 	if stamina_regen_level > 0:
 		stamina_regen_level = 0
-	timer.start(1.5)
+	timer.start(1.2)
 
 func apply_status(status):
 	match status:
@@ -657,7 +657,7 @@ func backstep_state(delta):
 			else:
 				attack1_queued = true
 	
-	elif Input.is_action_just_pressed("roll"):
+	elif Input.is_action_just_pressed("roll_2"):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()

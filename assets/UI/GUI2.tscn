@@ -171,6 +171,7 @@ margin_top = -45.0
 [node name="ExpBarTexture" parent="ExpBar1" index="0"]
 margin_left = 9.0
 margin_right = 50.0
+min_value = 0.0
 
 [node name="TextureRect" parent="ExpBar1" index="1"]
 margin_left = 14.0
@@ -324,6 +325,7 @@ custom_constants/separation = 1
 script = ExtResource( 3 )
 
 [node name="Debuffs" type="HBoxContainer" parent="StatusDisplay1/StatusContainer"]
+margin_left = 1.0
 margin_right = 1.0
 margin_bottom = 18.0
 rect_min_size = Vector2( 0, 18 )
@@ -338,12 +340,11 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -80.0
+margin_left = -53.0
 margin_top = -13.0
-margin_right = -33.182
+margin_right = -33.0
 margin_bottom = -9.0
 grow_horizontal = 0
-rect_min_size = Vector2( 46.818, 0 )
 script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -399,13 +400,14 @@ anchor_left = -0.00833333
 anchor_top = -0.25
 anchor_right = -0.00833333
 anchor_bottom = -0.25
-margin_left = 13.3902
+margin_left = -14.8333
 margin_top = -12.0
-margin_right = 59.3901
+margin_right = 20.1667
 margin_bottom = 1.0
 custom_fonts/font = ExtResource( 18 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "999/999"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -415,12 +417,11 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -93.0
+margin_left = -53.0
 margin_top = -8.0
 margin_right = -33.0
 margin_bottom = -4.0
 grow_horizontal = 0
-rect_min_size = Vector2( 60, 0 )
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -469,6 +470,7 @@ margin_left = -11.0
 margin_top = 0.0
 margin_right = 30.0
 margin_bottom = 4.0
+min_value = 0.0
 
 [node name="TextureRect" parent="ExpBar2" index="1"]
 anchor_left = 1.0
@@ -638,7 +640,7 @@ __meta__ = {
 
 [node name="Debuffs" type="HBoxContainer" parent="StatusDisplay2/StatusContainer"]
 margin_left = 17.0
-margin_right = 18.0
+margin_right = 17.0
 margin_bottom = 18.0
 grow_horizontal = 0
 size_flags_horizontal = 8
