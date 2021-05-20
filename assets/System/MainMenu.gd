@@ -5,6 +5,7 @@ onready var continueButton = $MarginContainer/VBoxContainer/ContinueButton
 onready var quitButton = $MarginContainer/VBoxContainer/QuitButton
 
 func _ready():
+	get_tree().paused = false
 	newGameButton.grab_focus()
 
 func _on_NewGameButton_pressed():

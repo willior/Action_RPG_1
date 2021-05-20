@@ -128,7 +128,6 @@ func _ready():
 	self.charge_level = charge_level
 
 func save():
-	print('saving PlayerStats...')
 	var save_dict = {
 		\"vitality\": vitality,
 		\"health\": health,

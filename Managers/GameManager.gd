@@ -181,7 +181,7 @@ func load_game():
 				map_path = node_data["map_filename"]
 				continue
 			else:
-				print(i)
+				PlayerStats.set(i, node_data[i])
 				print(PlayerStats.get(i))
 		
 	Global.goto_scene(map_path)

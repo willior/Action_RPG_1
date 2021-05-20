@@ -142,10 +142,6 @@ func close_pause_menu():
 func save():
 	var save_dict = {
 		"map_filename": get_filename(),
-#		"parent": get_parent().get_path(),
-#		"player1_inventory": GameManager.player.inventory._items,
-#		"player1_pouch": GameManager.player.pouch._ingredients,
-#		"player1_formulabook": GameManager.player.formulabook._formulas
 	}
 # warning-ignore:return_value_discarded
 	ResourceSaver.save("user://inventory.tres", GameManager.player.inventory)
