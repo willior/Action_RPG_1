@@ -32,6 +32,7 @@ signal player2_initialized
 signal player2_reinitialized
 
 func _ready():
+	# when the game runs, checks for resource files, and creates empty ones if none exist.
 	if !ResourceLoader.exists("res://Save/inventory.tres"):
 		file_inventory = inventory_r
 # warning-ignore:return_value_discarded
@@ -51,9 +52,20 @@ func initialize_player():
 	print('initializing player 1...')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	emit_signal("player_initialized", player)
-	player.inventory.set_items(file_inventory.get_items())
-	player.pouch.set_ingredients(file_pouch.get_ingredients())
-	player.formulabook.set_formulas(file_formulabook.get_formulas())
+	if file_inventory and file_pouch and file_formulabook:
+		print('resources found. continuing initialization.')
+		player.inventory.set_items(file_inventory.get_items())
+		player.pouch.set_ingredients(file_pouch.get_ingredients())
+		player.formulabook.set_formulas(file_formulabook.get_formulas())
+	else:
+		print('resources not found. giving formulas/ingredients.')
+		player.pouch.add_ingredient("Rock", 20)
+		player.pouch.add_ingredient("Clay", 20)
+		player.pouch.add_ingredient("Water", 20)
+		player.pouch.add_ingredient("Salt", 20)
+		player.formulabook.add_formula("Flash")
+		player.formulabook.add_formula("Heal")
+		player.formulabook.add_formula("Fury")
 	print('player 1 initialized.')
 
 func reinitialize_player(inventory, pouch, formulabook):
@@ -248,6 +260,9 @@ func load_player_resources():
 func quit_to_title():
 	get_tree().paused = false
 	Global.goto_scene("res://assets/System/MainMenu.tscn")
+	file_inventory = inventory_r
+	file_pouch = pouch_r
+	file_formulabook = formulabook_r
 	PlayerStats.default_stats()
 	PlayerLog.reset_player_log()
 

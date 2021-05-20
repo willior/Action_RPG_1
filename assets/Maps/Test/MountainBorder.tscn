@@ -84,7 +84,7 @@ __meta__ = {
 }
 
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]
-position = Vector2( 323, 259 )
+position = Vector2( 320, 128 )
 limit_left = 0
 limit_top = 0
 
@@ -120,13 +120,13 @@ format = 1
 
 [node name="Exit" type="Area2D" parent="Map"]
 pause_mode = 2
-position = Vector2( 319, 105 )
+position = Vector2( 320, 104 )
 monitorable = false
 collision_layer = 1024
 collision_mask = 0
 script = ExtResource( 21 )
 map_file = "res://assets/Maps/Test/LayerTest.tscn"
-selected_location = Vector2( 814, 238 )
+selected_location = Vector2( 720, 304 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit"]
 shape = SubResource( 3 )
@@ -154,7 +154,13 @@ pause_mode = 1
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Bat" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 318.204, 154.261 )
+position = Vector2( 373, 245 )
+
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 357, 256 )
+
+[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 9 )]
+position = Vector2( 355, 239 )
 
 [node name="Crow" parent="YSort/Enemies" instance=ExtResource( 19 )]
 position = Vector2( 213, 354 )

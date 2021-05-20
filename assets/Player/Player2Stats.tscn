@@ -361,7 +361,5 @@ func set_cash(value):
 	emit_signal(\"cash_changed\", cash)
 "
 
-[node name="Player2Stats" type="Node" groups=[
-"Persist",
-]]
+[node name="Player2Stats" type="Node"]
 script = SubResource( 1 )

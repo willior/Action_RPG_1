@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://assets/Will/LayerTest/Bottom.png" type="Texture" id=1]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=2]
@@ -78,6 +78,9 @@ extents = Vector2( 34, 74 )
 [sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 10, 30 )
 
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 107, 10 )
+
 [node name="World" type="Node2D" groups=[
 "Persist",
 ]]
@@ -88,7 +91,6 @@ __meta__ = {
 }
 
 [node name="Camera2D" parent="." instance=ExtResource( 2 )]
-position = Vector2( 814, 238 )
 limit_left = 40
 limit_right = 832
 limit_bottom = 320
@@ -332,6 +334,24 @@ shape = SubResource( 13 )
 shape = SubResource( 13 )
 
 [node name="Sprite" type="Sprite" parent="Map/Exit"]
+visible = false
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Exit2" parent="Map" instance=ExtResource( 17 )]
+position = Vector2( 720, 329 )
+z_index = 1
+map_file = "res://assets/Maps/Test/MountainBorder.tscn"
+selected_location = Vector2( 320, 128 )
+
+[node name="CollisionShape2D" parent="Map/Exit2" index="0"]
+shape = SubResource( 14 )
+
+[node name="CollisionShape2D" parent="Map/Exit2/StaticBody2D" index="0"]
+shape = SubResource( 14 )
+
+[node name="Sprite" type="Sprite" parent="Map/Exit2"]
 visible = false
 texture = ExtResource( 14 )
 region_enabled = true
@@ -645,7 +665,7 @@ position = Vector2( 543, 318 )
 position = Vector2( 700, 380 )
 
 [node name="Tree_1_green37" parent="YSort/Trees" instance=ExtResource( 21 )]
-position = Vector2( 718, 366 )
+position = Vector2( 692, 366 )
 
 [node name="Tree_1_green49" parent="YSort/Trees" instance=ExtResource( 21 )]
 position = Vector2( 752, 372 )
@@ -654,7 +674,7 @@ position = Vector2( 752, 372 )
 position = Vector2( 770, 358 )
 
 [node name="Tree_1_green36" parent="YSort/Trees" instance=ExtResource( 21 )]
-position = Vector2( 734, 351 )
+position = Vector2( 650, 336 )
 
 [node name="Tree_1_green16" parent="YSort/Trees" instance=ExtResource( 21 )]
 position = Vector2( 302, 364 )
@@ -1147,7 +1167,6 @@ stream = ExtResource( 11 )
 [node name="SFX2" type="AudioStreamPlayer" parent="."]
 
 [node name="GUI" parent="." instance=ExtResource( 6 )]
-layer = 2
 
 [connection signal="body_entered" from="Map/MiddleTransitionTop" to="Map" method="_on_MiddleTransition_body_entered"]
 [connection signal="body_entered" from="Map/BelowTransitionTop" to="Map" method="_on_BelowTransition_body_entered"]
@@ -1161,3 +1180,4 @@ layer = 2
 [connection signal="timeout" from="Map/Timer" to="Map" method="_on_Timer_timeout"]
 
 [editable path="Map/Exit"]
+[editable path="Map/Exit2"]
