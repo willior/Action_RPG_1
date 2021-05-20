@@ -32,20 +32,20 @@ signal player2_initialized
 signal player2_reinitialized
 
 func _ready():
-	if !ResourceLoader.exists("user://inventory.tres"):
+	if !ResourceLoader.exists("res://Save/inventory.tres"):
 		file_inventory = inventory_r
 # warning-ignore:return_value_discarded
-		ResourceSaver.save("user://inventory.tres", file_inventory)
+		ResourceSaver.save("res://Save/inventory.tres", file_inventory)
 	
-	if !ResourceLoader.exists("user://pouch.tres"):
+	if !ResourceLoader.exists("res://Save/pouch.tres"):
 		file_pouch = pouch_r
 # warning-ignore:return_value_discarded
-		ResourceSaver.save("user://pouch.tres", file_pouch)
+		ResourceSaver.save("res://Save/pouch.tres", file_pouch)
 	
-	if !ResourceLoader.exists("user://formulabook.tres"):
+	if !ResourceLoader.exists("res://Save/formulabook.tres"):
 		file_formulabook = formulabook_r
 # warning-ignore:return_value_discarded
-		ResourceSaver.save("user://formulabook.tres", file_formulabook)
+		ResourceSaver.save("res://Save/formulabook.tres", file_formulabook)
 
 func initialize_player():
 	print('initializing player 1...')
@@ -79,43 +79,43 @@ func reinitialize_player(inventory, pouch, formulabook):
 #	player.formulabook.connect("formulabook_changed", self, "_on_player_formulabook_changed")
 #	print('player successfully initialized.')
 #
-#	if !ResourceLoader.exists("user://inventory.tres"):
+#	if !ResourceLoader.exists("res://Save/inventory.tres"):
 #		print("inventory resource not found. creating...")
 #		player.inventory.add_item("Potion", 3)
 #		# warning-ignore:return_value_discarded
-#		ResourceSaver.save("user://inventory.tres", player.inventory)
+#		ResourceSaver.save("res://Save/inventory.tres", player.inventory)
 #		prints("saved inventory resource to " + str(OS.get_user_data_dir()))
 #	else:
-#		var loaded_inventory = load("user://inventory.tres")
+#		var loaded_inventory = load("res://Save/inventory.tres")
 #		if loaded_inventory:
 #			player.inventory.set_items(loaded_inventory.get_items())
 #			print("inventory loaded from disk.")
 #
-#	if !ResourceLoader.exists("user://pouch.tres"):
+#	if !ResourceLoader.exists("res://Save/pouch.tres"):
 #		print("pouch resource not found. creating...")
 ##		player.pouch.add_ingredient("Rock", 20)
 ##		player.pouch.add_ingredient("Clay", 20)
 ##		player.pouch.add_ingredient("Salt", 20)
 ##		player.pouch.add_ingredient("Water", 20)
 #		# warning-ignore:return_value_discarded
-#		ResourceSaver.save("user://pouch.tres", player.pouch)
+#		ResourceSaver.save("res://Save/pouch.tres", player.pouch)
 #		prints("saved pouch resource to " + str(OS.get_user_data_dir()))
 #	else:
-#		var loaded_pouch = load("user://pouch.tres")
+#		var loaded_pouch = load("res://Save/pouch.tres")
 #		if loaded_pouch:
 #			player.pouch.set_ingredients(loaded_pouch.get_ingredients())
 #			print("pouch loaded from disk.")
 #
-#	if !ResourceLoader.exists("user://formulabook.tres"):
+#	if !ResourceLoader.exists("res://Save/formulabook.tres"):
 #		print("formulabook resource not found. creating...")
 #		player.formulabook.add_formula("Flash")
 #		player.formulabook.add_formula("Heal")
 #		player.formulabook.add_formula("Fury")
 #		# warning-ignore:return_value_discarded
-#		ResourceSaver.save("user://formulabook.tres", player.formulabook)
+#		ResourceSaver.save("res://Save/formulabook.tres", player.formulabook)
 #		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))
 #	else:
-#		var loaded_formulabook = load("user://formulabook.tres")
+#		var loaded_formulabook = load("res://Save/formulabook.tres")
 #		if loaded_formulabook:
 #			player.formulabook.set_formulas(loaded_formulabook.get_formulas())
 #			print("formulabook loaded from disk.")
@@ -144,31 +144,31 @@ func initialize_player2():
 	player2_data[0] = player2.pouch
 	player2_data[1] = player2.formulabook
 	print('player2 successfully initialized.')
-	if !ResourceLoader.exists("user://pouch_2.tres"):
+	if !ResourceLoader.exists("res://Save/pouch_2.tres"):
 		print("pouch resource not found. creating...")
 		player2.pouch.add_ingredient("Rock", 20)
 		player2.pouch.add_ingredient("Clay", 20)
 		player2.pouch.add_ingredient("Salt", 20)
 		player2.pouch.add_ingredient("Water", 20)
 		# warning-ignore:return_value_discarded
-		ResourceSaver.save("user://pouch_2.tres", player2.pouch)
+		ResourceSaver.save("res://Save/pouch_2.tres", player2.pouch)
 		prints("saved pouch resource to " + str(OS.get_user_data_dir()))
 	else:
-		var loaded_pouch = load("user://pouch_2.tres")
+		var loaded_pouch = load("res://Save/pouch_2.tres")
 		if loaded_pouch:
 			player2.pouch.set_ingredients(loaded_pouch.get_ingredients())
 			print("pouch loaded from disk.")
 	
-	if !ResourceLoader.exists("user://formulabook_2.tres"):
+	if !ResourceLoader.exists("res://Save/formulabook_2.tres"):
 		print("formulabook resource not found. creating...")
 		player2.formulabook.add_formula("Flash")
 		player2.formulabook.add_formula("Heal")
 		player2.formulabook.add_formula("Fury")
 		# warning-ignore:return_value_discarded
-		ResourceSaver.save("user://formulabook_2.tres", player2.formulabook)
+		ResourceSaver.save("res://Save/formulabook_2.tres", player2.formulabook)
 		prints("saved formulabook resource to " + str(OS.get_user_data_dir()))
 	else:
-		var loaded_formulabook = load("user://formulabook_2.tres")
+		var loaded_formulabook = load("res://Save/formulabook_2.tres")
 		if loaded_formulabook:
 			player2.formulabook.set_formulas(loaded_formulabook.get_formulas())
 			print("formulabook loaded from disk.")
@@ -193,7 +193,7 @@ func multiplayer_2_toggle():
 
 func save_game():
 	var save_game = File.new()
-	save_game.open("user://savegame.save", File.WRITE)
+	save_game.open("res://Save/savegame.save", File.WRITE)
 	var save_nodes = get_tree().get_nodes_in_group("Persist")
 	for node in save_nodes:
 		if !node.has_method("save"):
@@ -206,10 +206,10 @@ func save_game():
 func load_game():
 	var map_path
 	var save_game = File.new()
-	if not save_game.file_exists("user://savegame.save"):
+	if not save_game.file_exists("res://Save/savegame.save"):
 		print('error: no save file found')
 		return
-	save_game.open("user://savegame.save", File.READ)
+	save_game.open("res://Save/savegame.save", File.READ)
 	while save_game.get_position() < save_game.get_len():
 		var node_data = parse_json(save_game.get_line())
 		for i in node_data.keys():
@@ -224,26 +224,26 @@ func load_game():
 	save_game.close()
 
 func load_player_resources():
-	if !ResourceLoader.exists("user://inventory.tres"):
+	if !ResourceLoader.exists("res://Save/inventory.tres"):
 		file_inventory = inventory_r
 # warning-ignore:return_value_discarded
-		ResourceSaver.save("user://inventory.tres", file_inventory)
+		ResourceSaver.save("res://Save/inventory.tres", file_inventory)
 	else:
-		file_inventory = load("user://inventory.tres")
+		file_inventory = load("res://Save/inventory.tres")
 	
-	if !ResourceLoader.exists("user://pouch.tres"):
+	if !ResourceLoader.exists("res://Save/pouch.tres"):
 		file_pouch = pouch_r
 # warning-ignore:return_value_discarded
-		ResourceSaver.save("user://pouch.tres", file_pouch)
+		ResourceSaver.save("res://Save/pouch.tres", file_pouch)
 	else:
-		file_pouch = load("user://pouch.tres")
+		file_pouch = load("res://Save/pouch.tres")
 	
-	if !ResourceLoader.exists("user://formulabook.tres"):
+	if !ResourceLoader.exists("res://Save/formulabook.tres"):
 		file_formulabook = formulabook_r
 # warning-ignore:return_value_discarded
-		ResourceSaver.save("user://formulabook.tres", file_formulabook)
+		ResourceSaver.save("res://Save/formulabook.tres", file_formulabook)
 	else:
-		file_formulabook = load("user://formulabook.tres")
+		file_formulabook = load("res://Save/formulabook.tres")
 
 func quit_to_title():
 	get_tree().paused = false

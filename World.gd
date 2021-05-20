@@ -145,9 +145,9 @@ func save():
 		"map_filename": get_filename(),
 	}
 # warning-ignore:return_value_discarded
-	ResourceSaver.save("user://inventory.tres", GameManager.player.inventory)
+	ResourceSaver.save("res://Save/inventory.tres", GameManager.player.inventory)
 # warning-ignore:return_value_discarded
-	ResourceSaver.save("user://pouch.tres", GameManager.player.pouch)
+	ResourceSaver.save("res://Save/pouch.tres", GameManager.player.pouch)
 # warning-ignore:return_value_discarded
-	ResourceSaver.save("user://formulabook.tres", GameManager.player.formulabook)
+	ResourceSaver.save("res://Save/formulabook.tres", GameManager.player.formulabook)
 	return save_dict

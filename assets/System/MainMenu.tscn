@@ -7,11 +7,11 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxEmpty" id=4]
-
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource( 3 )
@@ -50,15 +50,15 @@ text = "NEW GAME"
 margin_top = 19.0
 margin_right = 81.0
 margin_bottom = 34.0
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
 text = "CONTINUE"
 
 [node name="QuitButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 38.0
 margin_right = 81.0
 margin_bottom = 53.0
-custom_styles/normal = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
 text = "QUIT"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
