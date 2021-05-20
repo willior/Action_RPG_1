@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/World/Home/Kitchen_Fridge.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/World/Home/Home_Kitchen_Cupboard_Bottom.png" type="Texture" id=12]
 [ext_resource path="res://assets/World/Home/Home_Fireplace_Floor.png" type="Texture" id=13]
 [ext_resource path="res://assets/World/Home/Fireplace.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/Player/Abilities/Pickups/FormulaPickup.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Home/OfficeChair.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/World/Home/Home_Rug_Small.png" type="Texture" id=18]
@@ -157,15 +158,15 @@ texture = ExtResource( 12 )
 
 [node name="Window_Rain" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 496, 49 )
-frame = 1
+frame = 4
 
 [node name="Window_Rain2" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 139, 17 )
-frame = 1
+frame = 4
 
 [node name="Window_Rain3" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 278, 17 )
-frame = 1
+frame = 4
 
 [node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
 
@@ -232,6 +233,18 @@ pause_mode = 1
 
 [node name="Metal_Pot" parent="YSort/Items" instance=ExtResource( 17 )]
 position = Vector2( 45, 87 )
+
+[node name="FormulaPickup" parent="YSort/Items" instance=ExtResource( 15 )]
+position = Vector2( 136, 72 )
+formula_name = "Fury"
+
+[node name="FormulaPickup2" parent="YSort/Items" instance=ExtResource( 15 )]
+position = Vector2( 160, 64 )
+formula_name = "Heal"
+
+[node name="FormulaPickup3" parent="YSort/Items" instance=ExtResource( 15 )]
+position = Vector2( 184, 72 )
+formula_name = "Flash"
 
 [node name="Doodads" type="YSort" parent="YSort"]
 

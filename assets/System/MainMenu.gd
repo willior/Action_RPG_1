@@ -5,6 +5,10 @@ onready var continueButton = $MarginContainer/VBoxContainer/ContinueButton
 onready var quitButton = $MarginContainer/VBoxContainer/QuitButton
 
 func _ready():
+	var save_game = File.new()
+	if not save_game.file_exists("user://savegame.save"):
+		print('error: no save file found')
+		$MarginContainer/VBoxContainer/ContinueButton.disabled = true
 	$Tween.interpolate_property($MarginContainer, "modulate", Color(0,0,0,0), Color(1,1,1,1), 1)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")

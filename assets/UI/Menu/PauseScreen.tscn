@@ -17,15 +17,7 @@
 [ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/UI/Charge_2_UI.png" type="Texture" id=16]
 
-[sub_resource type="StyleBoxEmpty" id=10]
-
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 3, 3 )
-margin_left = 1.0
-margin_right = 1.0
-margin_top = 1.0
-margin_bottom = 1.0
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 8 )
@@ -34,27 +26,35 @@ margin_left = 1.0
 margin_right = 1.0
 margin_top = 1.0
 margin_bottom = 1.0
-modulate_color = Color( 0.25, 1, 1, 1 )
 
-[sub_resource type="StyleBoxEmpty" id=3]
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 3, 3 )
+margin_left = 1.0
+margin_right = 1.0
+margin_top = 1.0
+margin_bottom = 1.0
+modulate_color = Color( 0.25, 1, 1, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
-[sub_resource type="DynamicFont" id=5]
-extra_spacing_top = -3
-extra_spacing_bottom = -2
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxEmpty" id=5]
 
 [sub_resource type="DynamicFont" id=6]
+extra_spacing_top = -3
+extra_spacing_bottom = -2
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=10]
 light_mode = 1
 
 [node name="PauseScreen" type="Control"]
@@ -123,7 +123,7 @@ text = "INVENTORY"
 margin_left = 61.0
 margin_right = 111.0
 margin_bottom = 18.0
-custom_styles/disabled = SubResource( 10 )
+custom_styles/disabled = SubResource( 1 )
 toggle_mode = true
 text = "ALCHEMY"
 
@@ -131,7 +131,7 @@ text = "ALCHEMY"
 margin_left = 115.0
 margin_right = 151.0
 margin_bottom = 18.0
-custom_styles/disabled = SubResource( 10 )
+custom_styles/disabled = SubResource( 1 )
 toggle_mode = true
 text = "POUCH"
 
@@ -181,11 +181,11 @@ focus_previous = NodePath("../ButtonMAG")
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -206,7 +206,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonVIT/HBox"]
 margin_right = 58.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -222,7 +222,7 @@ size_flags_horizontal = 3
 margin_left = 176.0
 margin_right = 204.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -253,11 +253,11 @@ margin_bottom = 33.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -277,7 +277,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonEND/HBox"]
 margin_right = 77.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -293,7 +293,7 @@ size_flags_horizontal = 3
 margin_left = 176.0
 margin_right = 204.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -320,11 +320,11 @@ margin_bottom = 50.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -344,7 +344,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEF/HBox"]
 margin_right = 60.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -360,7 +360,7 @@ size_flags_horizontal = 3
 margin_left = 176.0
 margin_right = 204.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -387,11 +387,11 @@ margin_bottom = 67.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -408,7 +408,7 @@ margin_bottom = 13.0
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSTR/HBox"]
 margin_right = 83.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -424,7 +424,7 @@ size_flags_horizontal = 3
 margin_left = 176.0
 margin_right = 204.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -451,11 +451,11 @@ margin_bottom = 84.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -475,7 +475,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEX/HBox"]
 margin_right = 48.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -491,7 +491,7 @@ size_flags_horizontal = 3
 margin_left = 176.0
 margin_right = 204.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -518,11 +518,11 @@ margin_bottom = 101.0
 rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -542,7 +542,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSPD/HBox"]
 margin_right = 56.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -558,7 +558,7 @@ size_flags_horizontal = 3
 margin_left = 176.0
 margin_right = 204.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -590,11 +590,11 @@ focus_neighbour_bottom = NodePath("../ButtonVIT")
 focus_next = NodePath("../ButtonVIT")
 mouse_filter = 2
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 0.219608, 0.219608, 0.219608, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -614,7 +614,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="StatsDisplay/VBoxButtons/ButtonMAG/HBox"]
 margin_right = 72.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -630,7 +630,7 @@ size_flags_horizontal = 3
 margin_left = 176.0
 margin_right = 204.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -779,7 +779,7 @@ margin_top = 4.0
 margin_right = -8.0
 margin_bottom = -4.0
 focus_mode = 2
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
 text = "WASD : movement
 V : attack / interact
 B : evade / roll
@@ -804,11 +804,11 @@ rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -825,11 +825,11 @@ rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -846,11 +846,11 @@ rect_min_size = Vector2( 0, 16 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
@@ -902,7 +902,7 @@ __meta__ = {
 anchor_right = 1.0
 margin_top = -45.0
 margin_bottom = 3.8147e-06
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -912,7 +912,7 @@ anchor_right = 1.0
 margin_top = 270.0
 margin_bottom = 315.0
 rect_min_size = Vector2( 0, 45 )
-custom_styles/panel = SubResource( 8 )
+custom_styles/panel = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -983,7 +983,7 @@ position = Vector2( 179.136, 23.8903 )
 position = Vector2( 179, 72 )
 
 [node name="ChargeUI" type="Node2D" parent="CanvasLayer1/ControlsDisplay/Information"]
-material = SubResource( 9 )
+material = SubResource( 10 )
 position = Vector2( 215, 115 )
 z_index = 4
 

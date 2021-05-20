@@ -84,6 +84,7 @@ tracks/1/keys = {
 
 [node name="GUI" type="CanvasLayer"]
 pause_mode = 2
+layer = 2
 script = ExtResource( 20 )
 
 [node name="HealthUI1" type="Control" parent="."]
