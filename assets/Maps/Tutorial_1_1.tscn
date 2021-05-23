@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
-[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=6]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=7]
@@ -1163,8 +1162,6 @@ position = Vector2( 128, 120 )
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="Rivers" type="YSort" parent="YSort"]
-
-[node name="GUI" parent="." instance=ExtResource( 4 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )

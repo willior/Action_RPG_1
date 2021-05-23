@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=3]
 [ext_resource path="res://assets/World/Rivers/River_4.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=7]
 [ext_resource path="res://World.gd" type="Script" id=8]
@@ -334,8 +333,6 @@ position = Vector2( 448, 495 )
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Items" type="YSort" parent="YSort"]
-
-[node name="GUI" parent="." instance=ExtResource( 5 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 pitch_scale = 0.8

@@ -1,10 +1,9 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://World.gd" type="Script" id=1]
 [ext_resource path="res://assets/Audio/Music/LowContrabassAmbience.ogg" type="AudioStream" id=2]
 [ext_resource path="res://assets/World/Trees/Tree_1_green_alt.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=6]
 [ext_resource path="res://assets/Andrew/Walkways/Walkway_1_2.png" type="Texture" id=7]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=8]
@@ -1143,8 +1142,6 @@ position = Vector2( 715, 108 )
 
 [node name="Healing_Potion" parent="YSort/Items" instance=ExtResource( 21 )]
 position = Vector2( 356.986, 529.247 )
-
-[node name="GUI" parent="." instance=ExtResource( 5 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

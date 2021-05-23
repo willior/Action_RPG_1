@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/Enemies/Boss/PunchingMoon_Boss.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/Cutscene/CutsceneTrigger.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/World/Space/Stars1.png" type="Texture" id=13]
 
 [node name="World" type="Node2D"]
