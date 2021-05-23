@@ -336,14 +336,14 @@ func stamina_regeneration():
 				timer.start()
 			return
 		elif stamina_regen_level < 5 && timer.is_stopped():
-			timer.start(0.5)
+			timer.start(0.4)
 			yield(timer, "timeout")
 			stamina_regen_level += 1
 
 func stamina_regen_reset():
 	if stamina_regen_level > 0:
 		stamina_regen_level = 0
-	timer.start(1.2)
+	timer.start(1)
 
 func apply_status(status):
 	match status:
