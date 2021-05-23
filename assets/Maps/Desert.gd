@@ -50,8 +50,8 @@ func modulate_wind(start_value_wind, start_value_particles):
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Calm")
 		
-		PlayerStats.status = "not_slow"
-		# PlayerStats.status = "not_poison"
+		Player1Stats.status = "not_slow"
+		Player2Stats.status = "not_slow"
 		
 	elif (end_value_wind > 64 || end_value_wind < -64) && start_value_particles != 6000:
 		end_value_particles = 6000
@@ -61,8 +61,8 @@ func modulate_wind(start_value_wind, start_value_particles):
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Storm")
 		
-		PlayerStats.status = "slow"
-		# PlayerStats.status = "poison"
+		Player1Stats.status = "slow"
+		Player2Stats.status = "slow"
 		
 	else: # pass
 		print('not changing sand amount')

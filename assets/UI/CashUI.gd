@@ -9,6 +9,6 @@ func set_cash(value):
 	cashBox.set_text("$ " + currentCash)
 	
 func _ready():
-	self.currentCash = PlayerStats.cash
+	self.currentCash = Player1Stats.cash
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("cash_changed", self, "set_cash")
+	Player1Stats.connect("cash_changed", self, "set_cash")

@@ -10,37 +10,37 @@ func update_description(text):
 
 func _on_ButtonVIT_focus_entered(stat_color):
 	# show()
-	description = PlayerStats.vitality_description
+	description = Player1Stats.vitality_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonEND_focus_entered(stat_color):
-	description = PlayerStats.endurance_description
+	description = Player1Stats.endurance_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonDEF_focus_entered(stat_color):
-	description = PlayerStats.defense_description
+	description = Player1Stats.defense_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonSTR_focus_entered(stat_color):
-	description = PlayerStats.strength_description
+	description = Player1Stats.strength_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonDEX_focus_entered(stat_color):
-	description = PlayerStats.dexterity_description
+	description = Player1Stats.dexterity_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 
 func _on_ButtonSPD_focus_entered(stat_color):
-	description = PlayerStats.speed_description
+	description = Player1Stats.speed_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 	
 func _on_ButtonMAG_focus_entered(stat_color):
-	description = PlayerStats.magic_description
+	description = Player1Stats.magic_description
 	update_description(description)
 	$NinePatchRect.modulate = Color(stat_color)
 	

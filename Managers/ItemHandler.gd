@@ -10,10 +10,10 @@ func item_handler(item_used, player):
 		0:
 			match player:
 				1:
-					if PlayerStats.dying:
-						PlayerStats.health += item_used.healing/3
+					if Player1Stats.dying:
+						Player1Stats.health += item_used.healing/3
 					else:
-						PlayerStats.health += item_used.healing
+						Player1Stats.health += item_used.healing
 				2:
 					if Player2Stats.dying:
 						Player2Stats.health += item_used.healing/3

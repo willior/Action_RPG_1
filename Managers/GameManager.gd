@@ -80,7 +80,7 @@ func multiplayer_2_toggle():
 	get_tree().get_root().get_node("/root/World/GUI").toggle_multiplayer_gui()
 
 func new_game():
-	PlayerStats.default_stats()
+	Player1Stats.default_stats()
 	Player2Stats.default_stats()
 	reset_resources()
 	Global.goto_scene("res://assets/Maps/0_Prologue/0-1_Home.tscn")
@@ -114,7 +114,7 @@ func load_game():
 			elif i == "player1_stats":
 				var player1_stats = node_data["player1_stats"]
 				for s in player1_stats:
-					PlayerStats.set(s, player1_stats[s])
+					Player1Stats.set(s, player1_stats[s])
 					continue
 				continue
 			elif i == "player2_stats":

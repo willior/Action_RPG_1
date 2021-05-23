@@ -1,5 +1,5 @@
 extends Node2D
-onready var player
+var player
 
 func start():
 	player.state = 9

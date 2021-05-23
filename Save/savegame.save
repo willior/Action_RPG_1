@@ -1,5 +1,5 @@
-{"player1_stats":{"defense":4,"dexterity":4,"endurance":12,"experience":82,"experience_required":100,"experience_total":82,"health":180,"level":1,"magic":4,"max_health":180,"max_stamina":180,"speed":4,"stamina":180,"strength":4,"vitality":12}}
-{"player2_stats":{"defense":4,"dexterity":4,"endurance":12,"experience":82,"experience_required":100,"experience_total":82,"health":180,"level":1,"magic":4,"max_health":180,"max_stamina":180,"speed":4,"stamina":180,"strength":4,"vitality":12}}
+{"player1_stats":{"defense":4,"dexterity":5,"endurance":12,"experience":382.393197,"experience_required":423.606807,"experience_total":906,"health":127,"level":8,"magic":4,"max_health":240,"max_stamina":180,"speed":4,"stamina":33.5,"strength":5,"vitality":24}}
+{"player2_stats":{"defense":4,"dexterity":6,"endurance":24,"experience":382.393197,"experience_required":423.606807,"experience_total":906,"health":36,"level":8,"magic":4,"max_health":180,"max_stamina":240,"speed":4,"stamina":209.86,"strength":4,"vitality":12}}
 {"player3_stats":{"defense":4,"dexterity":4,"endurance":12,"experience":82,"experience_required":100,"experience_total":82,"health":180,"level":1,"magic":4,"max_health":180,"max_stamina":180,"speed":4,"stamina":180,"strength":4,"vitality":12}}
 {"chapter_number":0}
 {"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}

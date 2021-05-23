@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Tilesets/grassBasic_lightInner/tileset_grassBasic_lightInner.tres" type="TileSet" id=2]
 [ext_resource path="res://assets/Tilesets/grassBasic_darkInner/tileset_grassBasic_darkInner.tres" type="TileSet" id=3]
-[ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/UI/GUI2.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://World.gd" type="Script" id=7]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=8]

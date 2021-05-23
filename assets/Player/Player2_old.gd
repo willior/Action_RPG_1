@@ -35,9 +35,9 @@ enum {
 
 var state = MOVE
 var velocity = Vector2.ZERO
-var dir_vector = PlayerStats.dir_vector
+var dir_vector = Player1Stats.dir_vector
 var damageTaken = 0
-var stats = PlayerStats
+var stats = Player2Stats
 var stamina_regen_level = 0
 var levelStats = [0, 1, 2, 3, 4, 5]
 var levelResult = 0

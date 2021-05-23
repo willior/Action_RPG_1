@@ -6,7 +6,7 @@ extends Area2D
 export(String) var formula_name
 export(float) var base_potency
 export(float) var randomness
-var magic_mod = PlayerStats.magic_mod
+var magic_mod # = get_parent().player.stats.magic_mod
 var formula_level
 var duration
 var potency
@@ -16,6 +16,7 @@ var status = ["Frenzy", 1.0]
 var buff = true
 
 func _ready():
+	magic_mod = get_parent().player.stats.magic_mod
 	formula_level = FormulaStats.get(formula_name)[1]
 	duration = 3.0 + formula_level/2.0
 	potency = min(magic_mod, 2)

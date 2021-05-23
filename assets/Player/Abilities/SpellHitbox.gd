@@ -3,7 +3,7 @@ extends Area2D
 export(String) var formula_name
 export(float) var base_potency
 export(float) var randomness
-var magic_mod = PlayerStats.magic_mod
+var magic_mod = get_parent().player.stats.magic_mod
 var formula_level_mod
 var damage
 var knockback_vector = Vector2.ZERO

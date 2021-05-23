@@ -1,13 +1,47 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/UI/3x6_XPprogress.png" type="Texture" id=1]
-[ext_resource path="res://assets/UI/ExpBar.gd" type="Script" id=2]
 [ext_resource path="res://assets/UI/slot.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/3x6_XPunder.png" type="Texture" id=4]
 [ext_resource path="res://assets/UI/3x6_XPover.png" type="Texture" id=5]
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=6]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+
+var experienceProgress setget set_experience
+var max_experience setget set_max_experience
+var level setget set_level
+
+onready var levelBox = $HBoxContainer/TextureRect/Label
+onready var expBar = $ExpBarTexture
+
+func set_experience(value):
+	experienceProgress = value
+	expBar.value = experienceProgress
+	
+func set_max_experience(value):
+	max_experience = value
+	expBar.max_value = max_experience
+	
+func set_level(value):
+	level = value
+	levelBox.set_text(str(PlayerStats.level))
+	
+func _ready():
+	self.max_experience = PlayerStats.experience_required
+	self.experienceProgress = PlayerStats.experience
+	self.level = PlayerStats.level
+	
+# warning-ignore:return_value_discarded
+	PlayerStats.connect(\"experience_changed\", self, \"set_experience\")
+# warning-ignore:return_value_discarded
+	PlayerStats.connect(\"max_experience_changed\", self, \"set_max_experience\")
+# warning-ignore:return_value_discarded
+	PlayerStats.connect(\"level_changed\", self, \"set_level\")
+"
+
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 6 )
 
 [node name="ExpBar" type="Control"]
@@ -15,7 +49,7 @@ margin_left = 4.0
 margin_top = 160.0
 margin_right = 144.0
 margin_bottom = 176.0
-script = ExtResource( 2 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -37,7 +71,7 @@ expand = true
 [node name="Label" type="Label" parent="HBoxContainer/TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 align = 1
 valign = 1
 __meta__ = {

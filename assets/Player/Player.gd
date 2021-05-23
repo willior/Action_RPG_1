@@ -33,7 +33,7 @@ enum {
 	STUN
 }
 
-var stats = PlayerStats
+var stats = Player1Stats
 var state = MOVE
 var velocity = Vector2.ZERO
 var dir_vector = stats.dir_vector

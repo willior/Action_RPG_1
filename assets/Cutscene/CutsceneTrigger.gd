@@ -90,7 +90,7 @@ func drain_hp():
 		return
 	$Timer.start()
 	yield($Timer, "timeout")
-	PlayerStats.health -= 1
+	player.stats.health -= 1
 	$Timer.wait_time = $Timer.wait_time - 0.06
 	count += 1
 	drain_hp()

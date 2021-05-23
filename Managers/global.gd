@@ -118,15 +118,13 @@ func random_variance(base_damage, random):
 	return int(base_damage * random_value)
 
 func distribute_exp(value):
-	#PlayerStats.experience += value
-	#Player2Stats.experience += value
 	var experience_gained = value
 	if GameManager.multiplayer_2:
 		experience_gained /= 2
-		get_node("/root/World/YSort/Player").enemy_killed(experience_gained)
-		get_node("/root/World/YSort/Player2").enemy_killed(experience_gained)
+		GameManager.player.enemy_killed(experience_gained)
+		GameManager.player2.enemy_killed(experience_gained)
 	else:
-		get_node("/root/World/YSort/Player").enemy_killed(experience_gained)
+		GameManager.player.enemy_killed(experience_gained)
 
 func create_blood_effect(damage_count, location, z_index):
 	randomize()
@@ -136,8 +134,6 @@ func create_blood_effect(damage_count, location, z_index):
 	blood_effect.global_position = location
 	blood_effect.z_index = z_index
 	blood_effect.target_position = location + Vector2(randX, randY)
-	# get_parent().add_child(blood_effect)
-	# get_node("/root/World/Map").add_child(blood_effect)
 	get_node("/root/World/Map").call_deferred("add_child", blood_effect)
 
 func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z):
@@ -147,8 +143,12 @@ func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z
 	randomize()
 	var ingredientPickup = IngredientPickup.instance()
 	var check_common = randf()
-	common_chance *= PlayerStats.drop_rate_mod
-	rare_chance *= PlayerStats.drop_rate_mod
+	if GameManager.multiplayer_2:
+		common_chance *= (Player1Stats.drop_rate_mod+Player2Stats.drop_rate_mod)
+		rare_chance *= (Player1Stats.drop_rate_mod+Player2Stats.drop_rate_mod)
+	else:
+		common_chance *= Player1Stats.drop_rate_mod
+		rare_chance *= Player1Stats.drop_rate_mod
 	# print("common chance: ", common_chance*100, "% /// rare chance: ", rare_chance*100, "%")
 	if check_common <= common_chance:
 		var check_rare = randf()

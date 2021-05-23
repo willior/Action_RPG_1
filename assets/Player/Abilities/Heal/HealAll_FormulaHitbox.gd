@@ -3,7 +3,7 @@ extends Area2D
 export(String) var formula_name
 export(float) var base_potency
 export(float) var randomness
-var magic_mod = PlayerStats.magic_mod
+var magic_mod # = get_parent().player.stats.magic_mod
 var formula_level
 var duration
 var potency
@@ -15,6 +15,7 @@ var element = 9
 var formula = true
 
 func _ready():
+	magic_mod = get_parent().player.stats.magic_mod
 	formula_level = FormulaStats.get(formula_name)[1]
 	potency = (base_potency*formula_level) * (magic_mod*magic_mod)
 	duration = 16 + (formula_level*2)

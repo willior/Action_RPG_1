@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/Font/font5x7.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/UI/InventoryUI.gd" type="Script" id=2]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/UI/24x24_Container.png" type="Texture" id=7]
-[ext_resource path="res://assets/UI/StatsDisplay.gd" type="Script" id=8]
 [ext_resource path="res://assets/UI/ExpBar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/HealthUI.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=12]
@@ -71,7 +70,6 @@ __meta__ = {
 visible = false
 margin_right = 40.0
 margin_bottom = 40.0
-script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var player
+var player
 var status = ["Frenzy", 1.0] # "Name", application chance, duration, potency
 
 func _ready():

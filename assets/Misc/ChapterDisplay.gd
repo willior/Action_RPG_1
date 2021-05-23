@@ -10,7 +10,6 @@ func _ready():
 	get_tree().paused = true
 
 func _on_Timer_timeout():
-	print('timeout ', index)
 	match index:
 		0:
 			$Chapter.visible = true
@@ -34,11 +33,4 @@ func _on_Timer_timeout():
 			)
 			$Tween.start()
 			yield($Tween, "tween_all_completed")
-			print('done!')
 			queue_free()
-
-func _on_AudioStreamPlayer_finished():
-	print('audio done')
-
-func _on_Tween_tween_completed(object, key):
-	print("object: ", object, " //// key: ", key)

@@ -21,5 +21,5 @@ func _on_HeartCollectBox_area_entered(_area):
 	get_parent().add_child(itemCollectEffect)
 	# argument determines sound effect; 0 = heartCollect
 	itemCollectEffect.playSound(0)
-	PlayerStats.health += 1
+	Player1Stats.health += 1
 	queue_free()

@@ -4,7 +4,7 @@ const ExpNotice = preload("res://assets/UI/ExpNotice.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
 const IngredientPickup = preload("res://assets/Ingredients/IngredientPickup.tscn")
 const EnemySpawner = preload("res://assets/Spawners/EnemySpawner.tscn")
-
+const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 enum {
 	IDLE,
 	WANDER,
@@ -50,10 +50,19 @@ func enable_detection(enemy):
 
 func hurtbox_entered(enemy, hitbox):
 	enemy.enemyHealth.show_health()
-	if hitbox.formula:
-		var damage = Global.damage_calculation(hitbox.potency, enemy.stats.defense, hitbox.randomness)
+	var element_mod
+	if hitbox.get("element") and enemy.stats.get("affinity"):
+		element_mod = Element.calculate_element_ratio(hitbox.element, enemy.stats.affinity)
+	else:
+		element_mod = 1
+	if hitbox.get("formula"):
+		var damage = Global.damage_calculation(hitbox.potency, enemy.stats.defense, hitbox.randomness, element_mod)
 		deal_damage(enemy, damage, false)
 		if enemy.stats.health > 0:
+			if hitbox.get("status"):
+				StatusHandler.apply_status(hitbox.status, enemy)
+			if hitbox.get("status_two"):
+				StatusHandler.apply_status(hitbox.status_two, enemy)
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
 			"modulate",
@@ -65,24 +74,33 @@ func hurtbox_entered(enemy, hitbox):
 			)
 			enemy.tween.start()
 		else:
-			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on killing blow
+			enemy.knockback = hitbox.knockback_vector * 160 # knockback velocity on killing blow
 		return true
-	
-	if enemy.z_index != hitbox.get_parent().get_parent().z_index:
+	var player = hitbox.get_parent().get_parent()
+	if enemy.z_index != player.z_index:
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)
 		return
-	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, enemy.stats.evasion+enemy.evasion_mod)
+	var hit = Global.player_hit_calculation(player.stats.base_accuracy, player.stats.dexterity, player.stats.dexterity_mod, enemy.stats.evasion+enemy.evasion_mod)
 	if !hit:
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)
 	else:
-		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
-		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness)
+		var is_crit = Global.crit_calculation(player.stats.base_crit_rate, player.stats.dexterity, player.stats.dexterity_mod)
+		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness, element_mod)
 		if is_crit:
 			damage *= 2
+			var critPopup = MessagePopup.instance()
+			critPopup.message = str(enemy.ENEMY_NAME, " gets whacked!")
+			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
+			critPopup.crit_flash()
 		deal_damage(enemy, damage, is_crit)
+
 		if enemy.stats.health > 0:
+			if hitbox.get("status"):
+				StatusHandler.apply_status(hitbox.status, enemy)
+			if hitbox.get("status_two"):
+				StatusHandler.apply_status(hitbox.status_two, enemy)
 			enemy.knockback = hitbox.knockback_vector * 120 # knockback velocity
 			enemy.tween.interpolate_property(enemy.sprite,
 			"modulate",
@@ -94,7 +112,7 @@ func hurtbox_entered(enemy, hitbox):
 			)
 			enemy.tween.start()
 		else:
-			enemy.knockback = hitbox.knockback_vector * 180 # knockback velocity on kill
+			enemy.knockback = hitbox.knockback_vector * 160 # knockback velocity on kill
 	return hit
 
 func deal_damage(enemy, damage, is_crit):

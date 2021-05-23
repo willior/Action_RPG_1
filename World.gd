@@ -87,10 +87,10 @@ func _input(event):
 		GameManager.multiplayer_2_toggle()
 	
 	if event.is_action_pressed("start"): # SPACEBAR
-		if Global.dialogOpen or Global.chapter_name or Global.changingScene or PlayerStats.dying and !PlayerStats.dead:
-			print('start discarded: ', Global.changingScene)
+		if Global.dialogOpen or Global.chapter_name or Global.changingScene or (Player1Stats.dying and !Player1Stats.dead):
+			print('start discarded')
 			return
-		if PlayerStats.dead:
+		if Player1Stats.dead:
 			print('resuming')
 			music.stream_paused = false
 			get_tree().paused = false
@@ -100,16 +100,16 @@ func _input(event):
 			get_node("/root/World/GUI/StaminaBar1").visible = true
 			get_node("/root/World/GUI/FormulaUI1").visible = true
 			get_node("/root/World/YSort/Player").visible = true
-			PlayerStats.health += PlayerStats.max_health
-			get_node("/root/World/GUI/HealthUI1/HealthBack").value = PlayerStats.health
-			PlayerStats.continue_count += 1
-			PlayerStats.dead = false
-			PlayerStats.experience -= (PlayerStats.experience_required / 10)
+			Player1Stats.health += Player1Stats.max_health
+			get_node("/root/World/GUI/HealthUI1/HealthBack").value = Player1Stats.health
+			Player1Stats.continue_count += 1
+			Player1Stats.dead = false
+			Player1Stats.experience -= (Player1Stats.experience_required / 10)
 		elif get_tree().paused == false:
 			open_pause_menu(GameManager.player)
 
 	if event.is_action_pressed("start_2"):
-		if !GameManager.multiplayer_2 or Global.dialogOpen or Global.chapter_name or Global.changingScene or Player2Stats.dying and !Player2Stats.dead:
+		if !GameManager.multiplayer_2 or Global.dialogOpen or Global.chapter_name or Global.changingScene or (Player2Stats.dying and !Player2Stats.dead):
 			print('start discarded: ', Global.changingScene)
 			return
 		if Player2Stats.dead:

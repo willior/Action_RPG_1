@@ -8,7 +8,7 @@ var facing_direction = Vector2()
 
 func _ready():
 # warning-ignore:return_value_discarded
-	PlayerStats.connect("player_dying", self, "disable_exit")
+	Player1Stats.connect("player_dying", self, "disable_exit")
 # warning-ignore:return_value_discarded
 	Player2Stats.connect("player_dying", self, "disable_exit")
 
