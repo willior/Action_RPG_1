@@ -92,7 +92,6 @@ onready var bamboo = $BambooAudio
 signal player_saved
 
 func _ready():
-	print(formulabook)
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
 	if Global.get_attribute("inventory_2") != null:

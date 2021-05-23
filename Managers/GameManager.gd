@@ -125,14 +125,22 @@ func save_resources():
 	ResourceSaver.save("res://Save/p1_pouch.tres", player.pouch)
 # warning-ignore:return_value_discarded
 	ResourceSaver.save("res://Save/p1_formulabook.tres", player.formulabook)
+# warning-ignore:return_value_discarded
+	ResourceSaver.save("res://Save/p2_pouch.tres", player2.pouch)
+# warning-ignore:return_value_discarded
+	ResourceSaver.save("res://Save/p2_formulabook.tres", player2.formulabook)
 
 func load_resources():
 	p1_pouch = load("res://Save/p1_pouch.tres")
 	p1_formulabook = load("res://Save/p1_formulabook.tres")
+	p2_pouch = load("res://Save/p2_pouch.tres")
+	p2_formulabook = load("res://Save/p2_formulabook.tres")
 
 func reset_resources():
 	p1_pouch = load("res://assets/Player/Pouch.gd").new()
 	p1_formulabook =load("res://assets/Player/FormulaBook.gd").new()
+	p2_pouch = load("res://assets/Player/Pouch.gd").new()
+	p2_formulabook =load("res://assets/Player/FormulaBook.gd").new()
 
 func quit_to_title():
 	get_tree().paused = false

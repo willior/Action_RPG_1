@@ -5,20 +5,20 @@
 [ext_resource path="res://assets/System/MainMenu.gd" type="Script" id=3]
 [ext_resource path="res://assets/Audio/Music/piano_intro.ogg" type="AudioStream" id=4]
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 width = 480
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource( 3 )
@@ -39,7 +39,7 @@ __meta__ = {
 margin_left = 480.0
 margin_right = 871.0
 margin_bottom = 270.0
-texture = SubResource( 6 )
+texture = SubResource( 2 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -68,22 +68,22 @@ __meta__ = {
 
 [node name="NewGameButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_right = 81.0
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 3 )
 text = "NEW GAME"
 
 [node name="ContinueButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 19.0
 margin_right = 81.0
 margin_bottom = 34.0
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
 text = "CONTINUE"
 
 [node name="QuitButton" parent="MarginContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 38.0
 margin_right = 81.0
 margin_bottom = 53.0
-custom_styles/normal = SubResource( 4 )
+custom_styles/normal = SubResource( 6 )
 text = "QUIT"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
