@@ -8,15 +8,23 @@ extends Node
 # when the player is reinitialized, the old inventory is stored,
 # and used as the argument to run the "reinitialize_player" function,
 # which sets the current player scene's inventory to that of the argument's.
+
 var on_title_screen = false
 var player
 var player2
 var multiplayer_2 = false
+
+# variables from which we intialize Player resources
+# empty when we quit to title or select new game
+# load from disk when we select Continue
 var p1_pouch
 var p1_formulabook
 var p2_pouch
 var p2_formulabook
+
+# variable to store player2 data when multiplayer is toggled off
 var player2_data = [null, null]
+
 signal player_initialized
 signal player_reinitialized
 signal player2_initialized
@@ -29,6 +37,12 @@ func initialize_player():
 		player.pouch.set_ingredients(p1_pouch.get_ingredients())
 		player.formulabook.set_formulas(p1_formulabook.get_formulas())
 
+func reinitialize_player(pouch, formulabook):
+	player = get_tree().get_root().get_node("/root/World/YSort/Player")
+	emit_signal("player_reinitialized", player) 
+	player.pouch.set_ingredients(pouch.get_ingredients())
+	player.formulabook.set_formulas(formulabook.get_formulas())
+
 func initialize_player_2():
 	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
 	emit_signal("player2_initialized", player2)
@@ -38,12 +52,6 @@ func initialize_player_2():
 		print('player 2 initialized')
 	player2_data[0] = player2.pouch
 	player2_data[1] = player2.formulabook
-
-func reinitialize_player(pouch, formulabook):
-	player = get_tree().get_root().get_node("/root/World/YSort/Player")
-	emit_signal("player_reinitialized", player) 
-	player.pouch.set_ingredients(pouch.get_ingredients())
-	player.formulabook.set_formulas(formulabook.get_formulas())
 
 func reinitialize_player_2(pouch, formulabook):
 	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
@@ -61,6 +69,7 @@ func multiplayer_2_toggle():
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 0
 		player2.queue_free()
 		multiplayer_2 = false
+		player2 = null
 	else: # ON TOGGLE
 		multiplayer_2 = true
 		player.get_node("RemoteTransform2D").queue_free()
@@ -125,20 +134,41 @@ func save_resources():
 	ResourceSaver.save("res://Save/p1_pouch.tres", player.pouch)
 # warning-ignore:return_value_discarded
 	ResourceSaver.save("res://Save/p1_formulabook.tres", player.formulabook)
-# warning-ignore:return_value_discarded
-	ResourceSaver.save("res://Save/p2_pouch.tres", player2.pouch)
-# warning-ignore:return_value_discarded
-	ResourceSaver.save("res://Save/p2_formulabook.tres", player2.formulabook)
+	if player2 == null:
+		print('player2 is null. checking for last known resources to disk.')
+		if player2_data[0] == null:
+			print('player2_data is null. not saving.')
+			return
+		else:
+			print('last known data detected; saving to disk.')
+		# warning-ignore:return_value_discarded
+			ResourceSaver.save("res://Save/p2_pouch.tres", player2_data[0])
+		# warning-ignore:return_value_discarded
+			ResourceSaver.save("res://Save/p2_formulabook.tres", player2_data[1])
+			return
+	else:
+		print('saving player 2 resources.')
+	# warning-ignore:return_value_discarded
+		ResourceSaver.save("res://Save/p2_pouch.tres", player2.pouch)
+	# warning-ignore:return_value_discarded
+		ResourceSaver.save("res://Save/p2_formulabook.tres", player2.formulabook)
 
 func load_resources():
 	p1_pouch = load("res://Save/p1_pouch.tres")
 	p1_formulabook = load("res://Save/p1_formulabook.tres")
-	p2_pouch = load("res://Save/p2_pouch.tres")
-	p2_formulabook = load("res://Save/p2_formulabook.tres")
+	if ResourceLoader.exists("res://Save/p2_pouch.tres"):
+		p2_pouch = load("res://Save/p2_pouch.tres")
+	else:
+		print('p2_pouch.tres not found; cannot load')
+	if ResourceLoader.exists("res://Save/p2_formulabook.tres"):
+		p2_formulabook = load("res://Save/p2_formulabook.tres")
+	else:
+		print('p2_formulabook.tres not found; cannot load')
 
 func reset_resources():
 	p1_pouch = load("res://assets/Player/Pouch.gd").new()
 	p1_formulabook =load("res://assets/Player/FormulaBook.gd").new()
+	
 	p2_pouch = load("res://assets/Player/Pouch.gd").new()
 	p2_formulabook =load("res://assets/Player/FormulaBook.gd").new()
 

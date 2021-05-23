@@ -57,6 +57,10 @@ func _input(event):
 		GameManager.player.formulabook.add_formula("Flash")
 		GameManager.player.formulabook.add_formula("Heal")
 		GameManager.player.formulabook.add_formula("Fury")
+		if GameManager.multiplayer_2:
+			GameManager.player2.formulabook.add_formula("Flash")
+			GameManager.player2.formulabook.add_formula("Heal")
+			GameManager.player2.formulabook.add_formula("Fury")
 	
 	if event.is_action_pressed("test2"): # Y
 		GameManager.player.level_up()
@@ -69,6 +73,11 @@ func _input(event):
 		GameManager.player.pouch.add_ingredient("Clay", 10)
 		GameManager.player.pouch.add_ingredient("Water", 20)
 		GameManager.player.pouch.add_ingredient("Salt", 10)
+		if GameManager.multiplayer_2:
+			GameManager.player2.pouch.add_ingredient("Rock", 20)
+			GameManager.player2.pouch.add_ingredient("Clay", 10)
+			GameManager.player2.pouch.add_ingredient("Water", 20)
+			GameManager.player2.pouch.add_ingredient("Salt", 10)
 	
 	if event.is_action_pressed("test4"): # O
 		pass

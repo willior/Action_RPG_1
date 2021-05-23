@@ -1,7 +1,4 @@
-[gd_scene load_steps=2 format=2]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node
+extends Node
 
 var acceleration = 800
 var max_speed = 100
@@ -57,16 +54,16 @@ var drop_rate_mod = 1.0 setget set_drop_rate_mod
 
 var cash = 0 setget set_cash
 
-var status = \"fine\" setget set_status
+var status = "fine" setget set_status
 var sweating = false
 
-var vitality_description = \"Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand.\"
-var endurance_description = \"Lung Capacity determines how many physical actions you can perform in a short period of time.\"
-var defense_description = \"Resilience makes things easier for you when hardship is inevitable, as well as helps in maintaining your composure.\"
-var strength_description = \"Violent Nature is a measure of how much pain you are willing to inflict on others, for survival or otherwise.\"
-var dexterity_description = \"Patience allows for careful observation of threats, augmenting accuracy and the frequency of critical strikes.\"
-var speed_description = \"Swiftness aids in reflexive maneuvers like evasion, as well as the speed with which certain actions are performed.\"
-var magic_description = \"Spirituality governs the amount of aid received from higher planes, as well as one's grasp of the incomprehensible.\"
+var vitality_description = "Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand."
+var endurance_description = "Lung Capacity determines how many physical actions you can perform in a short period of time."
+var defense_description = "Resilience makes things easier for you when hardship is inevitable, as well as helps in maintaining your composure."
+var strength_description = "Violent Nature is a measure of how much pain you are willing to inflict on others, for survival or otherwise."
+var dexterity_description = "Patience allows for careful observation of threats, augmenting accuracy and the frequency of critical strikes."
+var speed_description = "Swiftness aids in reflexive maneuvers like evasion, as well as the speed with which certain actions are performed."
+var magic_description = "Spirituality governs the amount of aid received from higher planes, as well as one's grasp of the incomprehensible."
 
 signal no_health
 signal vitality_changed(value)
@@ -128,27 +125,28 @@ func _ready():
 	self.charge_level = charge_level
 
 func save():
-	var player2_stats = {
-		\"vitality\": vitality,
-		\"health\": health,
-		\"max_health\": max_health,
-		\"endurance\": endurance,
-		\"stamina\": stamina,
-		\"max_stamina\": max_stamina,
-		\"defense\": defense,
-		\"strength\": strength,
-		\"dexterity\": dexterity,
-		\"speed\": speed,
-		\"magic\": magic,
-		\"level\": level,
-		\"experience\": experience,
-		\"experience_required\": experience_required,
-		\"experience_total\": experience_total
-	}
-	var save_dict = {
-		\"player2_stats\": player2_stats
-	}
-	return save_dict
+	print('PlayerStats save()')
+#	var player1_stats = {
+#		"vitality": vitality,
+#		"health": health,
+#		"max_health": max_health,
+#		"endurance": endurance,
+#		"stamina": stamina,
+#		"max_stamina": max_stamina,
+#		"defense": defense,
+#		"strength": strength,
+#		"dexterity": dexterity,
+#		"speed": speed,
+#		"magic": magic,
+#		"level": level,
+#		"experience": experience,
+#		"experience_required": experience_required,
+#		"experience_total": experience_total
+#	}
+#	var save_dict = {
+#		"player1_stats": player1_stats
+#	}
+#	return save_dict
 
 func default_stats():
 	self.vitality = 4
@@ -170,18 +168,18 @@ func default_stats():
 func set_status(value):
 	status = value
 	match status:
-		\"fine\":
+		"fine":
 			speed_mod = 0
-		\"sweating\":
+		"sweating":
 			sweating = true
-		\"sweating_end\":
+		"sweating_end":
 			sweating = false
-		\"slow\":
+		"slow":
 			speed_mod = -max_speed/2
-		\"default_speed\":
+		"default_speed":
 			speed_mod = 0
 			
-	emit_signal(\"status_changed\", status)
+	emit_signal("status_changed", status)
 
 func set_speed_mod(value):
 	speed_mod = value
@@ -202,12 +200,12 @@ func increment_vitality():
 
 func set_vitality(value):
 	vitality = value
-	emit_signal(\"vitality_changed\", vitality)
+	emit_signal("vitality_changed", vitality)
 
 func set_max_health(value):
 	max_health = value
 	self.health = min(health, max_health)
-	emit_signal(\"max_health_changed\", max_health)
+	emit_signal("max_health_changed", max_health)
 
 func set_health(value):
 	old_health = health
@@ -219,27 +217,27 @@ func set_health(value):
 	elif dying && value > 0:
 		set_dying(false)
 		
-	emit_signal(\"health_changed\", health) # every time the health is set, emits a signal \"health_changed\" along with an argument, our new health value
+	emit_signal("health_changed", health) # every time the health is set, emits a signal "health_changed" along with an argument, our new health value
 
 func set_final_health(value):
 	final_health = value
-	emit_signal(\"final_health_changed\", final_health)
+	emit_signal("final_health_changed", final_health)
 
 func set_dying(value):
 	dying = value
 	if value:
 		# self.stamina = 0
-		self.status = \"slow\"
-		# self.status = \"sweating\"
+		self.status = "slow"
+		# self.status = "sweating"
 	else:
-		self.status = \"default_speed\"
+		self.status = "default_speed"
 	
-	emit_signal(\"player_dying\", value)
+	emit_signal("player_dying", value)
 
 func set_dead(value):
 	dead = value
 	if dead:
-		emit_signal(\"no_health\")
+		emit_signal("no_health")
 		print('setting dead')
 
 func increment_endurance():
@@ -258,29 +256,29 @@ func increment_endurance():
 
 func set_endurance(value):
 	endurance = value
-	emit_signal(\"endurance_changed\", endurance)
+	emit_signal("endurance_changed", endurance)
 
 func set_max_stamina(value):
 	max_stamina = value
-	emit_signal(\"max_stamina_changed\", max_stamina)
+	emit_signal("max_stamina_changed", max_stamina)
 
 func set_stamina(value):
 	stamina = value
 	stamina = clamp(value, -15, max_stamina)
-	emit_signal(\"stamina_changed\", stamina)
+	emit_signal("stamina_changed", stamina)
 
 func set_stamina_regen_rate(value):
 	stamina_regen_rate = value
-	emit_signal(\"stamina_regen_rate_changed\", stamina_regen_rate)
+	emit_signal("stamina_regen_rate_changed", stamina_regen_rate)
 
 func set_defense(value):
 	defense = value
 	self.status_resistance = defense/128
-	emit_signal(\"defense_changed\", defense)
+	emit_signal("defense_changed", defense)
 
 func set_defense_mod(value):
 	defense_mod = value
-	emit_signal(\"defense_mod_changed\", defense_mod)
+	emit_signal("defense_mod_changed", defense_mod)
 
 func set_status_resistance(value):
 	status_resistance = value
@@ -289,84 +287,78 @@ func set_status_resistance(value):
 func set_strength(value):
 	print('strength set: ', value)
 	strength = value
-	emit_signal(\"strength_changed\", strength)
+	emit_signal("strength_changed", strength)
 
 func set_strength_mod(value):
 	strength_mod = value
-	emit_signal(\"strength_mod_changed\", strength_mod)
+	emit_signal("strength_mod_changed", strength_mod)
 
 func set_dexterity(value):
 	dexterity = value
-	emit_signal(\"dexterity_changed\", dexterity)
+	emit_signal("dexterity_changed", dexterity)
 
 func set_dexterity_mod(value):
 	dexterity_mod = value
-	emit_signal(\"dexterity_mod_changed\", dexterity_mod)
+	emit_signal("dexterity_mod_changed", dexterity_mod)
 
 func set_speed(value):
 	speed = value
 	self.attack_speed = 1 + (speed / 120)
 	charge_rate = 0.5 + (speed / 120)
-	emit_signal(\"speed_changed\", speed)
+	emit_signal("speed_changed", speed)
 
 func set_attack_speed(value):
 	attack_speed = value
-	emit_signal(\"attack_speed_changed\", attack_speed)
+	emit_signal("attack_speed_changed", attack_speed)
 
 func set_iframes(value):
 	iframes = value
-	emit_signal(\"iframes_changed\", iframes)
+	emit_signal("iframes_changed", iframes)
 
 func set_max_charge(value):
 	max_charge = value
-	emit_signal(\"max_charge_changed\", max_charge)
+	emit_signal("max_charge_changed", max_charge)
 
 func set_charge(value):
 	charge = value
-	emit_signal(\"charge_changed\", charge)
+	emit_signal("charge_changed", charge)
 
 func set_max_charge_level(value):
 	max_charge_level = value
-	emit_signal(\"max_charge_level_changed\", max_charge_level)
+	emit_signal("max_charge_level_changed", max_charge_level)
 
 func set_charge_level(value):
 	charge_level = value
-	emit_signal(\"charge_level_changed\", charge_level)
+	emit_signal("charge_level_changed", charge_level)
 
 func set_magic(value):
 	magic = value
 	self.magic_mod = 1 + (magic / 32) # + ~3.125% per point
 	self.drop_rate_mod = 1 + (magic / 64) # + ~1.5625% per point
-	emit_signal(\"magic_changed\", magic)
+	emit_signal("magic_changed", magic)
 
 func set_magic_mod(value):
 	magic_mod = value
 	print('magic mod set: ', magic_mod)
-	# emit_signal(\"magic_mod_changed\", magic_mod)
+	# emit_signal("magic_mod_changed", magic_mod)
 
 func set_drop_rate_mod(value):
 	drop_rate_mod = value
 	print('luck bonus set: ', drop_rate_mod)
-	# emit_signal(\"drop_rate_mod_changed\")
+	# emit_signal("drop_rate_mod_changed")
 
 func set_max_experience(value):
 	experience_required = value
-	emit_signal(\"max_experience_changed\", experience_required)
+	emit_signal("max_experience_changed", experience_required)
 
 func set_experience(value):
 	experience = value
-	emit_signal(\"experience_changed\", experience)
+	emit_signal("experience_changed", experience)
 
 func set_level(value):
 	level = value
-	emit_signal(\"level_changed\", level)
+	emit_signal("level_changed", level)
 
 func set_cash(value):
 	cash = value
-	emit_signal(\"cash_changed\", cash)
-"
-
-[node name="Player2Stats" type="Node" groups=[
-"Persist",
-]]
-script = SubResource( 1 )
+	emit_signal("cash_changed", cash)
