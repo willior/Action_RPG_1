@@ -10,7 +10,7 @@ var knockback_vector = Vector2.ZERO
 var formula = true
 
 func _ready():
-	formula_level_mod = FormulaStats.get(formula_name)[1]
+	formula_level_mod = get_parent().player.formulaData.get(formula_name)[1]
 	damage = base_potency * (magic_mod*magic_mod) * formula_level_mod
 	
 	# maybe: (base_damage*formula_level_mod) * (magic_mod*magic_mod)

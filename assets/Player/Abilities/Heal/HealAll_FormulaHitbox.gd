@@ -16,7 +16,7 @@ var formula = true
 
 func _ready():
 	magic_mod = get_parent().player.stats.magic_mod
-	formula_level = FormulaStats.get(formula_name)[1]
+	formula_level = get_parent().player.formulaData.get(formula_name)[1]
 	potency = (base_potency*formula_level) * (magic_mod*magic_mod)
 	duration = 16 + (formula_level*2)
 	status.append(duration) # status duration

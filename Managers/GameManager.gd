@@ -123,6 +123,16 @@ func load_game():
 					Player2Stats.set(s, player2_stats[s])
 					continue
 				continue
+			elif i == "player1_formulaData":
+				var player1_formulaData = node_data["player1_formulaData"]
+				for f in player1_formulaData:
+					P1FormulaData.set(f, player1_formulaData[f])
+					continue
+			elif i == "player2_formulaData":
+				var player2_formulaData = node_data["player2_formulaData"]
+				for f in player2_formulaData:
+					P2FormulaData.set(f, player2_formulaData[f])
+					continue
 			else:
 				PlayerLog.set(i, node_data[i])
 	load_resources()

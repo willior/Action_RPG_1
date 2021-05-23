@@ -17,7 +17,7 @@ var buff = true
 
 func _ready():
 	magic_mod = get_parent().player.stats.magic_mod
-	formula_level = FormulaStats.get(formula_name)[1]
+	formula_level = get_parent().player.formulaData.get(formula_name)[1]
 	duration = 3.0 + formula_level/2.0
 	potency = min(magic_mod, 2)
 	status.append(duration)

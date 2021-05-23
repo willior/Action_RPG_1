@@ -104,7 +104,7 @@ func _ready():
 	
 	for f in player.formulabook.get_formulas().size():
 		var alchemy_formula = player.formulabook.get_formula(f)
-		var formula_data = FormulaStats.get(alchemy_formula.formula_reference.name)
+		var formula_data = player.formulaData.get(alchemy_formula.formula_reference.name)
 		var formula_item = Formula_Item.instance()
 		var ingredients_needed = alchemy_formula.formula_reference.cost.values()
 		formula_item.formula_name = alchemy_formula.formula_reference.name
@@ -157,6 +157,9 @@ func enable_menu_focus():
 		$MenuPanel/Menu.get_child(b).set_focus_mode(2)
 
 func _input(event):
+	if event.as_text() == "BackSlash":
+		get_tree().set_input_as_handled()
+		return
 	match player.name:
 		"Player":
 			match event.as_text():

@@ -15,6 +15,6 @@ var formula = true
 
 func _ready():
 	magic_mod = get_parent().player.stats.magic_mod
-	formula_level_mod = FormulaStats.get(formula_name)[1]
+	formula_level_mod = get_parent().player.formulaData.get(formula_name)[1]
 	potency = (base_potency*formula_level_mod) * (magic_mod*magic_mod)
 	print('formula potency: ', base_potency, " * ", formula_level_mod, " * ", magic_mod*magic_mod, " = ", potency)

@@ -34,6 +34,7 @@ enum {
 }
 
 var stats = Player1Stats
+var formulaData = P1FormulaData
 var state = MOVE
 var velocity = Vector2.ZERO
 var dir_vector = stats.dir_vector
@@ -178,7 +179,7 @@ func _input(event):
 					yield($CastTimer, "timeout")
 					casting = false
 					if get_node("/root/World").has_node(formula_used.formula_reference.name):
-						FormulaStats.apply_xp_to_formula(formula_used.formula_reference.name)
+						formulaData.apply_xp_to_formula(formula_used.formula_reference.name)
 						for i in range(0,2):
 							pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
 				else:
