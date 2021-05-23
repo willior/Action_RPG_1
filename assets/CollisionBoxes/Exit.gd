@@ -12,13 +12,13 @@ func _ready():
 # warning-ignore:return_value_discarded
 	Player2Stats.connect("player_dying", self, "disable_exit")
 
-func _on_Exit_body_entered(body):
-	facing_direction = body.dir_vector
+func _on_Exit_body_entered(_body):
+	facing_direction = _body.dir_vector
 	get_node("/root/World/").fade_out()
 	$Timer.start()
 	yield($Timer, "timeout")
 	var new_inventory = [GameManager.player.pouch, GameManager.player.formulabook]
-	if GameManager.multiplayer_2:
+	if GameManager.player2 != null:
 		var new_inventory_2 = GameManager.player2_data
 		Global.goto_scene(map_file, {"direction": facing_direction, "location":selected_location, "inventory":new_inventory, "inventory_2":new_inventory_2})
 		return

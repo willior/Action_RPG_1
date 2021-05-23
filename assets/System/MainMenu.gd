@@ -10,7 +10,7 @@ func _ready():
 		print('menu: no save file, disabling Continue button')
 		$MarginContainer/VBoxContainer/ContinueButton.disabled = true
 	$Tween.interpolate_property($MarginContainer, "modulate", Color(0,0,0,0), Color(1,1,1,1), 1)
-	$Tween.interpolate_property($ColorRect, "rect_position", Vector2(0,0), Vector2(-640,0), 1, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	$Tween.interpolate_property($ColorRect, "rect_position", Vector2(0,0), Vector2(-640,0), 1)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	newGameButton.grab_focus()

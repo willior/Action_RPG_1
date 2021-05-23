@@ -2372,6 +2372,7 @@ one_shot = true
 
 [node name="LevelTimer" type="Timer" parent="."]
 wait_time = 0.4
+one_shot = true
 
 [node name="Tween" type="Tween" parent="."]
 

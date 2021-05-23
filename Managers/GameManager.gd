@@ -8,48 +8,64 @@ extends Node
 # when the player is reinitialized, the old inventory is stored,
 # and used as the argument to run the "reinitialize_player" function,
 # which sets the current player scene's inventory to that of the argument's.
+
 var on_title_screen = false
 var player
 var player2
 var multiplayer_2 = false
+var player2_data = [null, null]
+
+var pouch_resource = load("res://assets/Player/Pouch.gd")
+var pouch_r = pouch_resource.new()
+var formulabook_resource = load("res://assets/Player/FormulaBook.gd")
+var formulabook_r = formulabook_resource.new()
+
+var file_pouch
+var file_formulabook
+
 var p1_pouch
 var p1_formulabook
+# var p2_inventory
 var p2_pouch
 var p2_formulabook
-var player2_data = [null, null]
+
 signal player_initialized
 signal player_reinitialized
+# warning-ignore:unused_signal
 signal player2_initialized
+# warning-ignore:unused_signal
 signal player2_reinitialized
 
 func initialize_player():
+	print('initializing player 1...')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
 	emit_signal("player_initialized", player)
-	if p1_pouch!= null and p1_formulabook!=null:
+	if p1_pouch!=null and p1_formulabook!=null:
+		print('resources found. continuing initialization.')
+		# player.inventory.set_items(p1_inventory.get_items())
 		player.pouch.set_ingredients(p1_pouch.get_ingredients())
 		player.formulabook.set_formulas(p1_formulabook.get_formulas())
-
-func initialize_player_2():
-	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
-	emit_signal("player2_initialized", player2)
-	if p2_pouch!= null and p2_formulabook!=null:
-		player2.pouch.set_ingredients(p2_pouch.get_ingredients())
-		player2.formulabook.set_formulas(p2_formulabook.get_formulas())
-		print('player 2 initialized')
-	player2_data[0] = player2.pouch
-	player2_data[1] = player2.formulabook
+	else:
+		print('resources not found. giving formulas/ingredients.')
+		player.pouch.add_ingredient("Rock", 10)
+		player.pouch.add_ingredient("Clay", 10)
+		player.pouch.add_ingredient("Water", 10)
+		player.pouch.add_ingredient("Salt", 10)
+		player.formulabook.add_formula("Flash")
+		player.formulabook.add_formula("Heal")
+		player.formulabook.add_formula("Fury")
+	print('player 1 initialized.')
 
 func reinitialize_player(pouch, formulabook):
+	print('attempting to reinitialize player...')
 	player = get_tree().get_root().get_node("/root/World/YSort/Player")
+	if not player:
+		return
 	emit_signal("player_reinitialized", player) 
+	# player.inventory.set_items(inventory.get_items())
 	player.pouch.set_ingredients(pouch.get_ingredients())
 	player.formulabook.set_formulas(formulabook.get_formulas())
-
-func reinitialize_player_2(pouch, formulabook):
-	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
-	emit_signal("player2_reinitialized", player2) 
-	player2.pouch.set_ingredients(pouch.get_ingredients())
-	player2.formulabook.set_formulas(formulabook.get_formulas())
+	print('player reinitialized.')
 
 func multiplayer_2_toggle():
 	if multiplayer_2: # OFF TOGGLE
@@ -62,7 +78,6 @@ func multiplayer_2_toggle():
 		player2.queue_free()
 		multiplayer_2 = false
 	else: # ON TOGGLE
-		multiplayer_2 = true
 		player.get_node("RemoteTransform2D").queue_free()
 		player2 = load("res://assets/Player/Player2.tscn").instance()
 		get_tree().get_root().get_node("/root/World/YSort").add_child(player2)
@@ -71,9 +86,9 @@ func multiplayer_2_toggle():
 	get_tree().get_root().get_node("/root/World/GUI").toggle_multiplayer_gui()
 
 func new_game():
-	PlayerStats.default_stats()
-	Player2Stats.default_stats()
-	reset_resources()
+	# p1_inventory = inventory_r
+	p1_pouch = pouch_r
+	p1_formulabook = formulabook_r
 	Global.goto_scene("res://assets/Maps/0_Prologue/0-1_Home.tscn")
 
 func save_game():
@@ -86,7 +101,7 @@ func save_game():
 			continue
 		var node_data = node.call("save")
 		save_game.store_line(to_json(node_data))
-	save_resources()
+	save_p1_resources()
 	save_game.close()
 
 func load_game():
@@ -116,28 +131,26 @@ func load_game():
 				continue
 			else:
 				PlayerLog.set(i, node_data[i])
-	load_resources()
+	load_p1_resources()
 	Global.goto_scene(map_path)
 	save_game.close()
 
-func save_resources():
+func save_p1_resources():
 # warning-ignore:return_value_discarded
 	ResourceSaver.save("res://Save/p1_pouch.tres", player.pouch)
 # warning-ignore:return_value_discarded
 	ResourceSaver.save("res://Save/p1_formulabook.tres", player.formulabook)
 
-func load_resources():
+func load_p1_resources():
 	p1_pouch = load("res://Save/p1_pouch.tres")
 	p1_formulabook = load("res://Save/p1_formulabook.tres")
-
-func reset_resources():
-	p1_pouch = load("res://assets/Player/Pouch.gd").new()
-	p1_formulabook =load("res://assets/Player/FormulaBook.gd").new()
 
 func quit_to_title():
 	get_tree().paused = false
 	Global.goto_scene("res://assets/System/MainMenu.tscn")
-	reset_resources()
+	p1_pouch = pouch_r
+	p1_formulabook = formulabook_r
+	PlayerStats.default_stats()
 	PlayerLog.reset_player_log()
 
 # warning-ignore:unused_argument

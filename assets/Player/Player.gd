@@ -70,7 +70,7 @@ var talkNoticeDisplay = false setget set_talk_notice
 var interactNoticeDisplay = false setget set_interact_notice
 var sweating = false
 var dying = false
-var just_leveled = false
+var just_leveled = 0
 
 onready var sprite = $Sprite
 onready var animationPlayer = $AnimationPlayer
@@ -101,6 +101,8 @@ func _ready():
 	else:
 		position = get_tree().get_root().get_node("/root/World/Map").player_spawn_pos
 	if Global.get_attribute("inventory") != null:
+		# var new_inventory = Global.get_attribute("inventory").get_items()
+		# inventory.set_items(Global.get_attribute("inventory")[0].get_items())
 		pouch.set_ingredients(Global.get_attribute("inventory")[0].get_ingredients())
 		formulabook.set_formulas(Global.get_attribute("inventory")[1].get_formulas())
 		GameManager.reinitialize_player(pouch, formulabook)
