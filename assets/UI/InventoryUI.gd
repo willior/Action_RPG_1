@@ -10,7 +10,7 @@ func _init():
 	GameManager.connect("player_reinitialized", self, "_on_player_initialized")
 	
 func _on_player_initialized(player):
-	player.inventory.connect("selected_item_quantity_updated", self, "_on_selected_item_quantity_updated")
+	# player.inventory.connect("selected_item_quantity_updated", self, "_on_selected_item_quantity_updated")
 	player.inventory.connect("current_selected_item_changed", self, "_on_current_selected_item_changed")
 	player.inventory.connect("item_quantity_zero", self, "_on_item_quantity_zero")
 

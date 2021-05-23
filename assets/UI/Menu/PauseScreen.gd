@@ -90,14 +90,14 @@ func _ready():
 	dexBar.value = player.stats.dexterity
 	spdBar.value = player.stats.speed
 	magBar.value = player.stats.magic
-	for i in player.inventory.get_items().size():
-		var inventory_item = player.inventory.get_item(i)
-		var label_item = Label_Item.instance()
-		if inventory_item.item_reference.type == 0: # if item is consumable, show quantity
-			label_item.set_text(str(inventory_item.item_reference.name) + " x" + str(inventory_item.quantity))
-		else:
-			label_item.set_text(str(inventory_item.item_reference.name))
-		$InventoryDisplay/Vbox.add_child(label_item)
+#	for i in player.inventory.get_items().size():
+#		var inventory_item = player.inventory.get_item(i)
+#		var label_item = Label_Item.instance()
+#		if inventory_item.item_reference.type == 0: # if item is consumable, show quantity
+#			label_item.set_text(str(inventory_item.item_reference.name) + " x" + str(inventory_item.quantity))
+#		else:
+#			label_item.set_text(str(inventory_item.item_reference.name))
+#		$InventoryDisplay/Vbox.add_child(label_item)
 	
 	if player.formulabook.get_formulas().size() == 0:
 		$MenuPanel/Menu/ButtonAlchemy.disabled = true

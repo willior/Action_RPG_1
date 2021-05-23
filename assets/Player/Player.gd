@@ -10,8 +10,8 @@ const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 
-var inventory_resource = load("res://assets/Player/Inventory.gd")
-var inventory = inventory_resource.new()
+#var inventory_resource = load("res://assets/Player/Inventory.gd")
+#var inventory = inventory_resource.new()
 var pouch_resource = load("res://assets/Player/Pouch.gd")
 var pouch = pouch_resource.new()
 var formulabook_resource = load("res://assets/Player/FormulaBook.gd")
@@ -102,10 +102,10 @@ func _ready():
 		position = get_tree().get_root().get_node("/root/World/Map").player_spawn_pos
 	if Global.get_attribute("inventory") != null:
 		# var new_inventory = Global.get_attribute("inventory").get_items()
-		inventory.set_items(Global.get_attribute("inventory")[0].get_items())
-		pouch.set_ingredients(Global.get_attribute("inventory")[1].get_ingredients())
-		formulabook.set_formulas(Global.get_attribute("inventory")[2].get_formulas())
-		GameManager.reinitialize_player(inventory, pouch, formulabook)
+		# inventory.set_items(Global.get_attribute("inventory")[0].get_items())
+		pouch.set_ingredients(Global.get_attribute("inventory")[0].get_ingredients())
+		formulabook.set_formulas(Global.get_attribute("inventory")[1].get_formulas())
+		GameManager.reinitialize_player(pouch, formulabook)
 	else:
 		GameManager.initialize_player()
 	animationTree.active = true # animation not active until game starts

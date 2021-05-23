@@ -1,15 +1,12 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/UI/FormulaUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/Font/fontm3x6.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/UI/Status/Buffs.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/ExpBar1.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/UI/18x18_Container.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/StaminaBar.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/UI/InventoryUI.gd" type="Script" id=7]
 [ext_resource path="res://assets/UI/3x3_Container.png" type="Texture" id=8]
 [ext_resource path="res://assets/UI/FormulaUI2.gd" type="Script" id=9]
-[ext_resource path="res://assets/UI/CashUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/UI/HealthUI.gd" type="Script" id=11]
 [ext_resource path="res://assets/UI/ExpBar2.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/UI/StaminaBar2.gd" type="Script" id=13]
@@ -657,59 +654,6 @@ rect_min_size = Vector2( 0, 18 )
 size_flags_horizontal = 8
 custom_constants/separation = 1
 script = ExtResource( 3 )
-
-[node name="CashUI" parent="." instance=ExtResource( 10 )]
-visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -36.0
-margin_top = -18.0
-margin_right = -36.0
-margin_bottom = -18.0
-
-[node name="InventoryUI" type="Control" parent="."]
-visible = false
-margin_left = 13.0
-margin_top = 141.0
-margin_right = 32.0
-margin_bottom = 160.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="TextureRect" parent="InventoryUI"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 1
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sprite" type="TextureRect" parent="InventoryUI/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="InventoryUI/Panel"]
-margin_left = 2.0
-margin_top = -3.0
-margin_right = 18.0
-margin_bottom = 10.0
-custom_fonts/font = SubResource( 1 )
-text = "?"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Dim" type="ColorRect" parent="."]
 visible = false

@@ -1,9 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/System/Intro/TitleScreenBackground.png" type="Texture" id=1]
 [ext_resource path="res://assets/UI/Menu/ButtonDefault.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/System/MainMenu.gd" type="Script" id=3]
 [ext_resource path="res://assets/Audio/Music/piano_intro.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+width = 480
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -19,6 +26,24 @@ script = ExtResource( 3 )
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 centered = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+margin_left = 480.0
+margin_right = 871.0
+margin_bottom = 270.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 modulate = Color( 0, 0, 0, 0 )

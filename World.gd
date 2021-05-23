@@ -144,10 +144,4 @@ func save():
 	var save_dict = {
 		"map_filename": get_filename(),
 	}
-# warning-ignore:return_value_discarded
-	ResourceSaver.save("res://Save/inventory.tres", GameManager.player.inventory)
-# warning-ignore:return_value_discarded
-	ResourceSaver.save("res://Save/pouch.tres", GameManager.player.pouch)
-# warning-ignore:return_value_discarded
-	ResourceSaver.save("res://Save/formulabook.tres", GameManager.player.formulabook)
 	return save_dict
