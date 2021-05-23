@@ -238,7 +238,7 @@ func set_dead(value):
 	dead = value
 	if dead:
 		emit_signal("no_health")
-		print('setting dead')
+		# print('setting dead')
 
 func increment_endurance():
 	self.endurance += 1
@@ -282,10 +282,10 @@ func set_defense_mod(value):
 
 func set_status_resistance(value):
 	status_resistance = value
-	print('status_resistance set: ', status_resistance)
+	# print('status_resistance set: ', status_resistance)
 
 func set_strength(value):
-	print('strength set: ', value)
+	# print('strength set: ', value)
 	strength = value
 	emit_signal("strength_changed", strength)
 
@@ -339,12 +339,12 @@ func set_magic(value):
 
 func set_magic_mod(value):
 	magic_mod = value
-	print('magic mod set: ', magic_mod)
+	# print('magic mod set: ', magic_mod)
 	# emit_signal("magic_mod_changed", magic_mod)
 
 func set_drop_rate_mod(value):
 	drop_rate_mod = value
-	print('luck bonus set: ', drop_rate_mod)
+	# print('luck bonus set: ', drop_rate_mod)
 	# emit_signal("drop_rate_mod_changed")
 
 func set_max_experience(value):

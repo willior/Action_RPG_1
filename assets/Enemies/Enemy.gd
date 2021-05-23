@@ -59,7 +59,6 @@ func hurtbox_entered(enemy, hitbox):
 	else:
 		element_mod = 1
 	if hitbox.get("formula"):
-
 		var damage = Global.damage_calculation(hitbox.potency, enemy.stats.defense, hitbox.randomness, element_mod)
 		deal_damage(enemy, damage, false)
 		if enemy.stats.health > 0:
@@ -80,17 +79,17 @@ func hurtbox_entered(enemy, hitbox):
 		else:
 			enemy.knockback = hitbox.knockback_vector * 160 # knockback velocity on killing blow
 		return true
-	
-	if enemy.z_index != hitbox.get_parent().get_parent().z_index:
+	var player = hitbox.get_parent().get_parent()
+	if enemy.z_index != player.z_index:
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)
 		return
-	var hit = Global.player_hit_calculation(PlayerStats.base_accuracy, PlayerStats.dexterity, PlayerStats.dexterity_mod, enemy.stats.evasion+enemy.evasion_mod)
+	var hit = Global.player_hit_calculation(player.stats.base_accuracy, player.stats.dexterity, player.stats.dexterity_mod, enemy.stats.evasion+enemy.evasion_mod)
 	if !hit:
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)
 	else:
-		var is_crit = Global.crit_calculation(PlayerStats.base_crit_rate, PlayerStats.dexterity, PlayerStats.dexterity_mod)
+		var is_crit = Global.crit_calculation(player.stats.base_crit_rate, player.stats.dexterity, player.stats.dexterity_mod)
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness, element_mod)
 		if is_crit:
 			damage *= 2
