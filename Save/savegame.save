@@ -1,7 +1,0 @@
-{"player1_stats":{"defense":4,"dexterity":4,"endurance":6,"experience":167.212857,"experience_required":423.606807,"experience_total":707,"health":60,"level":4,"magic":4,"max_health":96,"max_stamina":78,"speed":4,"stamina":78,"strength":4,"vitality":8}}
-{"player2_stats":{"defense":4,"dexterity":5,"endurance":8,"experience":95.212857,"experience_required":423.606807,"experience_total":635,"health":60,"level":4,"magic":4,"max_health":60,"max_stamina":96,"speed":5,"stamina":59.4,"strength":4,"vitality":4}}
-{"player3_stats":{"defense":4,"dexterity":4,"endurance":12,"experience":82,"experience_required":100,"experience_total":82,"health":180,"level":1,"magic":4,"max_health":180,"max_stamina":180,"speed":4,"stamina":180,"strength":4,"vitality":12}}
-{"player1_formulaData":{"Flash":["Flash",3,130,144,350],"Fury":["Fury",2,0,120,100],"Heal":["Heal",1,50,100,50]}}
-{"player2_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",2,50,120,150],"Heal":["Heal",1,0,100,0]}}
-{"chapter_number":1}
-{"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}

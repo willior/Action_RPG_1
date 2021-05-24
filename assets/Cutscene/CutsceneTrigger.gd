@@ -7,8 +7,11 @@ var interactable = true
 var talkable = false
 var examined = false
 var count
+var player
 
-var player # = get_tree().get_root().get_node("/root/World/YSort/Player")
+func _ready():
+	if name in PlayerLog.examined_list:
+		examined = true
 
 func examine():
 	var dialog = DialogBox.instance()

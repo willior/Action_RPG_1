@@ -8,7 +8,7 @@ var examined = false
 var index = 0
 
 func _ready():
-	if PlayerLog.home_fireplace_examined:
+	if name in PlayerLog.examined_list:
 		examined = true
 
 func examine():
@@ -24,8 +24,7 @@ func examine():
 				{'text': "It's cold, and there's no wood anywhere."}
 			]
 			index = 0
-			if !PlayerLog.home_fireplace_examined:
-				PlayerLog.home_fireplace_examined = true
-				examined = true
-			
+			PlayerLog.set_examined(name)
+			examined = true
+	
 	get_node("/root/World/GUI").add_child(dialogBox)

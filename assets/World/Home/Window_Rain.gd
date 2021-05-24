@@ -12,9 +12,8 @@ func _ready():
 	PlayerLog.connect("home_window_complete", self, "examine_complete")
 # warning-ignore:return_value_discarded
 	PlayerLog.connect("home_window_advance", self, "advance_dialog_index")
-	
-	if PlayerLog.home_window_examined:
-		examine_complete(true)
+	if name in PlayerLog.examined_list:
+		examined = true
 	
 func examine():
 	var dialogBox = DialogBox.instance()
@@ -35,10 +34,7 @@ func examine():
 				{'text': "Strange."}
 			]
 			PlayerLog.set_dialog_index("home_window", 0)
-
-			if !PlayerLog.home_window_examined:
-				PlayerLog.set_examined("home_window", true)
-				PlayerLog.home_window_examined = true
+			PlayerLog.set_examined_and_signal("home_window")
 				
 	get_node("/root/World/GUI").add_child(dialogBox)
 	

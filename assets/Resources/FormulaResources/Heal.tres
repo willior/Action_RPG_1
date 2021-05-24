@@ -115,7 +115,9 @@ script = ExtResource( 1 )
 scene = ExtResource( 3 )
 name = "Heal"
 icon = SubResource( 25 )
-description = [  ]
+description = [ {
+"text": "Heals the user's HP."
+} ]
 description_string = "Heals the user's HP."
 cost = {
 "Salt": 1,

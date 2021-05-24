@@ -19,7 +19,7 @@
 [ext_resource path="res://assets/ItemsInventory/Metal_Pot.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/World/Home/Home_Rug_Small.png" type="Texture" id=18]
 [ext_resource path="res://assets/World/Home/Desk.tscn" type="PackedScene" id=19]
-[ext_resource path="res://assets/World/Home/Bed.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/World/Home/Home_Bed.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/World/Home/Home_Rug_Large.png" type="Texture" id=22]
 [ext_resource path="res://assets/World/Home/Bookshelf.tscn" type="PackedScene" id=23]
@@ -144,49 +144,49 @@ texture = ExtResource( 18 )
 position = Vector2( 74, 109 )
 texture = ExtResource( 11 )
 
-[node name="Kitchen_Fridge" parent="Map" instance=ExtResource( 2 )]
+[node name="Home_Kitchen_Fridge" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 100, 62 )
 
-[node name="Kitchen_Counter" parent="Map" instance=ExtResource( 3 )]
+[node name="Home_Kitchen_Counter" parent="Map" instance=ExtResource( 3 )]
 
-[node name="Kitchen_Stove" parent="Map" instance=ExtResource( 5 )]
+[node name="Home_Kitchen_Stove" parent="Map" instance=ExtResource( 5 )]
 
 [node name="Kitchen_Cupboard" type="Sprite" parent="Map"]
 position = Vector2( 67, 150 )
 z_index = 2
 texture = ExtResource( 12 )
 
-[node name="Window_Rain" parent="Map" instance=ExtResource( 6 )]
+[node name="Home_Window" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 496, 49 )
-frame = 6
+frame = 4
 
-[node name="Window_Rain2" parent="Map" instance=ExtResource( 6 )]
+[node name="Home_Window2" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 139, 17 )
-frame = 6
+frame = 4
 
-[node name="Window_Rain3" parent="Map" instance=ExtResource( 6 )]
+[node name="Home_Window3" parent="Map" instance=ExtResource( 6 )]
 position = Vector2( 278, 17 )
-frame = 6
+frame = 4
 
-[node name="Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
+[node name="Home_Lightswitch_Bedroom" parent="Map" instance=ExtResource( 7 )]
 
-[node name="CollisionShape2D" parent="Map/Lightswitch_Bedroom/TalkBox" index="0"]
+[node name="CollisionShape2D" parent="Map/Home_Lightswitch_Bedroom/TalkBox" index="0"]
 position = Vector2( 0, 3 )
 shape = SubResource( 2 )
 
-[node name="Light2D" parent="Map/Lightswitch_Bedroom" index="1"]
+[node name="Light2D" parent="Map/Home_Lightswitch_Bedroom" index="1"]
 position = Vector2( 80.5, -17.5 )
 scale = Vector2( 167, 131 )
 
-[node name="Lightswitch_Main" parent="Map" instance=ExtResource( 7 )]
+[node name="Home_Lightswitch_Main" parent="Map" instance=ExtResource( 7 )]
 position = Vector2( 323, 113 )
 script = ExtResource( 8 )
 
-[node name="CollisionShape2D" parent="Map/Lightswitch_Main/TalkBox" index="0"]
+[node name="CollisionShape2D" parent="Map/Home_Lightswitch_Main/TalkBox" index="0"]
 position = Vector2( 0, 3 )
 shape = SubResource( 3 )
 
-[node name="Light2D" parent="Map/Lightswitch_Main" index="1"]
+[node name="Light2D" parent="Map/Home_Lightswitch_Main" index="1"]
 position = Vector2( -144.5, -17.5 )
 scale = Vector2( 295, 195 )
 
@@ -248,15 +248,15 @@ formula_name = "Flash"
 
 [node name="Doodads" type="YSort" parent="YSort"]
 
-[node name="OfficeChair" parent="YSort/Doodads" instance=ExtResource( 16 )]
+[node name="Home_OfficeChair" parent="YSort/Doodads" instance=ExtResource( 16 )]
 
-[node name="Desk" parent="YSort/Doodads" instance=ExtResource( 19 )]
+[node name="Home_Desk" parent="YSort/Doodads" instance=ExtResource( 19 )]
 
-[node name="Bed" parent="YSort/Doodads" instance=ExtResource( 20 )]
+[node name="Home_Bed" parent="YSort/Doodads" instance=ExtResource( 20 )]
 
-[node name="Fireplace" parent="YSort/Doodads" instance=ExtResource( 14 )]
+[node name="Home_Fireplace" parent="YSort/Doodads" instance=ExtResource( 14 )]
 
-[node name="Bookshelf" parent="YSort/Doodads" instance=ExtResource( 23 )]
+[node name="Home_Bookshelf" parent="YSort/Doodads" instance=ExtResource( 23 )]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 
@@ -277,7 +277,7 @@ layer = 4
 [connection signal="timeout" from="Map/Lightning/Timer" to="Map/Lightning" method="_on_Timer_timeout"]
 
 [editable path="Map/Exit_toForest"]
-[editable path="Map/Lightswitch_Bedroom"]
-[editable path="Map/Lightswitch_Bedroom/TalkBox"]
-[editable path="Map/Lightswitch_Main"]
-[editable path="Map/Lightswitch_Main/TalkBox"]
+[editable path="Map/Home_Lightswitch_Bedroom"]
+[editable path="Map/Home_Lightswitch_Bedroom/TalkBox"]
+[editable path="Map/Home_Lightswitch_Main"]
+[editable path="Map/Home_Lightswitch_Main/TalkBox"]

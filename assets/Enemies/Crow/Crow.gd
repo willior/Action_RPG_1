@@ -11,7 +11,7 @@ const hitSFX = preload("res://assets/Audio/Enemies/Crow/Crow_caw.wav")
 export var ACCELERATION = 200
 export var MAX_SPEED = 400
 export var WANDER_SPEED = 80
-export var ATTACK_SPEED = 4000
+export var ATTACK_SPEED = 3200
 export var FRICTION = 320
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
@@ -68,7 +68,7 @@ onready var enemyHealth = $EnemyHealth
 func _ready():
 # warning-ignore:return_value_discarded
 	PlayerLog.connect("Crow_complete", self, "examine_complete")
-	if PlayerLog.enemies_examined[ENEMY_NAME]:
+	if ENEMY_NAME in PlayerLog.examined_list:
 		examined = true
 	add_to_group("Enemies")
 	animationTree.active = true

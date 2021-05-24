@@ -19,7 +19,7 @@ var index = 0
 var is_on = false
 
 func _ready():
-	if PlayerLog.home_sink_examined:
+	if name in PlayerLog.examined_list:
 		examined = true
 	sinkSprite.play("OffComplete")
 	$AnimationTree.active = true
@@ -40,8 +40,8 @@ func examine():
 			if !examined: examined = true
 			if !examined_while_on: examined_while_on = true
 			
-	if examined_while_off && examined_while_on && !PlayerLog.home_sink_examined:
-		PlayerLog.home_sink_examined = true
+	if examined_while_off && examined_while_on:
+		PlayerLog.set_examined(name)
 		examined = true
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
@@ -74,8 +74,7 @@ func use_item_on_object():
 				'skip': '0'
 				}
 			]
-
-		GameManager.player.inventory.remove_item("Metal Pot", 1)
+		# GameManager.player.inventory.remove_item("Metal Pot", 1)
 		# PlayerLog.metal_pot_water_collected = true
 
 	get_node("/root/World/GUI").add_child(dialogBox)
@@ -84,7 +83,7 @@ func acquire_item():
 	var itemCollectEffect = ItemCollectEffect.instance()
 	get_parent().add_child(itemCollectEffect)
 	itemCollectEffect.playSound(1)
-	GameManager.player.inventory.add_item("Metal Pot (Water)", 1)
+#	GameManager.player.inventory.add_item("Metal Pot (Water)", 1)
 #	PlayerLog.metal_pot_collected = true
 #	queue_free()
 

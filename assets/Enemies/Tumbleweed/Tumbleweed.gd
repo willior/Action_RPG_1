@@ -45,7 +45,7 @@ onready var map = get_parent().get_parent().get_parent().get_node("Map")
 func _ready():
 # warning-ignore:return_value_discarded
 	PlayerLog.connect("Tumbleweed_complete", self, "examine_complete")
-	if PlayerLog.enemies_examined[ENEMY_NAME]:
+	if ENEMY_NAME in PlayerLog.examined_list:
 		examined = true
 	add_to_group("enemies")
 	animationPlayer.play("Animate")

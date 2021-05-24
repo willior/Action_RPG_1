@@ -10,6 +10,8 @@ var examined = false
 var formula_description : Array
 
 func _ready():
+	if formula_name in PlayerLog.examined_list:
+		examined = true
 	var formula = check_formula(formula_name)
 	$Sprite.frames = formula.icon
 	$Sprite.play()
@@ -21,6 +23,7 @@ func examine():
 	dialogBox.dialog_script = formula_description
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined: examined = true
+	PlayerLog.set_examined(formula_name)
 
 func interact(player):
 	player.state = 8

@@ -10,7 +10,7 @@ var examined_while_on = false
 var index = 0
 
 func _ready():
-	if PlayerLog.home_fridge_examined:
+	if name in PlayerLog.examined_list:
 		examined = true
 		examined_while_off = true
 		examined_while_on = true
@@ -48,8 +48,7 @@ func examine():
 			if !examined: examined = true
 			if !examined_while_on: examined_while_on = true
 			if !examined_while_off: examined_while_off = true
-			if !PlayerLog.home_fridge_examined:
-				PlayerLog.home_fridge_examined = true
+			PlayerLog.set_examined(name)
 		3: # dialog for 2nd examination while off
 			dialogBox.dialog_script = [
 				{'text': "It's running."}

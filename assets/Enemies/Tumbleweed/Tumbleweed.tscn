@@ -92,8 +92,8 @@ wait_time = 0.5
 stream = ExtResource( 6 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 
 [editable path="Talkbox"]
-
 [editable path="Hitbox"]

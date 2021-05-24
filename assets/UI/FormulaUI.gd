@@ -32,7 +32,7 @@ func _on_ingredient_quantity_updated(_ingredient):
 
 func update_formula_quantity(selected_formula):
 	if selected_formula == null: return
-	var ingredients = get_node("/root/World/YSort/Player").pouch.get_ingredients()
+	var ingredients = GameManager.player.pouch.get_ingredients()
 	var ingredients_needed = selected_formula.formula_reference.cost.keys()
 	var quantity_needed = selected_formula.formula_reference.cost.values()
 	a = 0

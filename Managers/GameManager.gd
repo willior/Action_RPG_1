@@ -80,6 +80,7 @@ func multiplayer_2_toggle():
 	get_tree().get_root().get_node("/root/World/GUI").toggle_multiplayer_gui()
 
 func new_game():
+	PlayerLog.reset_player_log()
 	Player1Stats.default_stats()
 	Player2Stats.default_stats()
 	reset_resources()

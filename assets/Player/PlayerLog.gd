@@ -2,38 +2,9 @@ extends Node
 
 var chapter_number = 0
 
-# Items
-var heart_examined = false
-var penny_examined = false
+var examined_list = []
 
-# Enemies
-#var Bat_examined = false
-#var crow_examined = false
-#var wolf_examined = false
-#var tumbleweed_examined = false
-
-var enemies_examined = {
-	"Bat": false,
-	"Crow": false,
-	"Wolf": false,
-	"Tumbleweed": false,
-	"PunchingMoon": false,
-	"The Moon": false
-}
-
-# Home
-var home_bed_examined = false
-var home_window_examined = false
-var home_chair_examined = false
-var home_desk_examined = false
-var home_lightswitch_examined = false
-var home_fireplace_examined = false
-var home_bookshelf_examined = false
-var home_fridge_examined = false
-var home_stove_examined = false
-var home_sink_examined = false
 var metal_pot_use_index = 0
-
 var home_desk_on = false
 var home_lightswitch_checked = false
 var home_lightswitch_bedroom_on = false
@@ -64,6 +35,7 @@ signal Tumbleweed_complete()
 signal PunchingMoon_complete()
 # warning-ignore:unused_signal
 signal The_Moon_complete()
+
 # warning-ignore:unused_signal
 signal home_lightswitch_advance(value)
 # warning-ignore:unused_signal
@@ -72,27 +44,29 @@ signal home_lightswitch_complete()
 signal home_window_advance(value)
 # warning-ignore:unused_signal
 signal home_window_complete()
-# warning-ignore:unused_signal
-signal home_sink_complete()
 
 func save():
 	var save_dict = {
-		"chapter_number": chapter_number
+		"chapter_number": chapter_number,
+		"examined_list": examined_list
 	}
 	return save_dict
 
 func reset_player_log():
+	examined_list = []
 	chapter_number = 0
+	metal_pot_use_index = 0
 
 # when examining an object for the final time, the object sets the
 # global examined variable to true as well as runs a function that
 # tells the PlayerLog which signal to emit. this signal then sets
 # the object's local examined variable to true.
-func set_examined(name, value):
-	enemies_examined[name] = value
+func set_examined(name):
+	examined_list.append(name)
+	
+func set_examined_and_signal(name, value=true):
+	examined_list.append(name)
 	emit_signal(str(name.replace(" ", "_"))+"_complete", value)
-	# print('examined ' + name)
-	print(enemies_examined[name])
 
 # the PlayerLog is now responsible for advancing the dialog index in the
 # function set_dialog_index(name, value) where 'name' is the name of the

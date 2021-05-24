@@ -115,7 +115,9 @@ script = ExtResource( 1 )
 scene = ExtResource( 3 )
 name = "Flash"
 icon = SubResource( 25 )
-description = [  ]
+description = [ {
+"text": "Deals damage to enemies in area."
+} ]
 description_string = "Deals damage to enemies in area."
 cost = {
 "Clay": 1,

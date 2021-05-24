@@ -57,6 +57,7 @@ func add_ingredient(ingredient_name, quantity):
 		if inventory_ingredient.quantity+quantity > ingredient.max_stack_size:
 			print("max stack (", ingredient.max_stack_size, ") reached; discarding extras (", ingredient.max_stack_size-(inventory_ingredient.quantity+quantity), ")")
 			inventory_ingredient.quantity = ingredient.max_stack_size
+			emit_signal("ingredient_quantity_updated", get_ingredient(i))
 			return
 		else: 
 			inventory_ingredient.quantity += quantity

@@ -13,7 +13,7 @@ var index = 0
 var is_on = false
 
 func _ready():
-	if PlayerLog.home_stove_examined:
+	if name in PlayerLog.examined_list:
 		examined = true
 	
 func examine():
@@ -30,18 +30,15 @@ func examine():
 					{'text': "It's off."}
 				]
 				examined_while_off = true
-				examined = true
 			else:
 				dialogBox.dialog_script = [
 					{'text': "One of the burners is on."}
 				]
 				examined_while_on = true
-				examined = true
-			
 			index = 0
-			if !PlayerLog.home_stove_examined && examined_while_off && examined_while_on:
-				PlayerLog.home_stove_examined = true
-				
+			if examined_while_off && examined_while_on:
+				PlayerLog.set_examined(name)
+				examined = true
 			
 	get_node("/root/World/GUI").add_child(dialogBox)
 	

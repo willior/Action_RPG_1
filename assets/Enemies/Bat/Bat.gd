@@ -61,7 +61,7 @@ onready var enemyHealth = $EnemyHealth
 func _ready():
 # warning-ignore:return_value_discarded
 	PlayerLog.connect("Bat_complete", self, "examine_complete")
-	if PlayerLog.enemies_examined[ENEMY_NAME]:
+	if ENEMY_NAME in PlayerLog.examined_list:
 		examined = true
 	add_to_group("Enemies")
 	rng.randomize()

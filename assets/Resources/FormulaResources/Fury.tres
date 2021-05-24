@@ -83,7 +83,9 @@ script = ExtResource( 1 )
 scene = ExtResource( 2 )
 name = "Fury"
 icon = SubResource( 17 )
-description = [  ]
+description = [ {
+"text": "Bestows the Frenzy status onto the user."
+} ]
 description_string = "Bestows the Frenzy status onto the user."
 cost = {
 "Rock": 2,

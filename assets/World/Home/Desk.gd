@@ -10,7 +10,7 @@ var examined_while_on = false
 var index = 0
 
 func _ready():
-	if PlayerLog.home_desk_examined:
+	if name in PlayerLog.examined_list:
 		examined = true
 		examined_while_off = true
 		examined_while_on = true
@@ -56,8 +56,7 @@ func examine():
 			if !examined: examined = true
 			if !examined_while_on: examined_while_on = true
 			if !examined_while_off: examined_while_off = true
-			if !PlayerLog.home_desk_examined:
-				PlayerLog.home_desk_examined = true
+			PlayerLog.set_examined(name)
 		4:
 			dialogBox.dialog_script = [
 				{'text': "Please try and remember to switch off the lights before leaving the house."}

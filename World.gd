@@ -80,8 +80,7 @@ func _input(event):
 			GameManager.player2.pouch.add_ingredient("Salt", 10)
 	
 	if event.is_action_pressed("test4"): # O
-		pass
-		# player.formulabook.remove_formula("Fury")
+		print(PlayerLog.examined_list)
 	
 	if event.is_action_pressed("select_2"):
 		GameManager.multiplayer_2_toggle()

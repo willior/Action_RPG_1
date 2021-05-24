@@ -31,13 +31,16 @@ func set_player_collision(body):
 	else:
 		body.set_collision_layer_bit(4, false)
 
+func check_examined(name):
+	if name in PlayerLog.examined_list:
+		return true
+
 func examine(dialog_script, examined, enemy_name):
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog_script = dialog_script
 	get_node("/root/World/GUI").add_child(dialogBox)
 	if !examined:
-		examined = true
-		PlayerLog.set_examined(enemy_name, true)
+		PlayerLog.set_examined_and_signal(enemy_name)
 		
 func accelerate_towards_point(enemy, point, speed, delta):
 	var direction = enemy.global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument

@@ -8,9 +8,9 @@ var examined = false
 var index = 0
 
 func _ready():
-	if PlayerLog.home_bookshelf_examined:
+	if name in PlayerLog.examined_list:
 		examined = true
-	
+
 func examine():
 	var dialogBox = DialogBox.instance()
 	match index:
@@ -24,8 +24,7 @@ func examine():
 				{'text': "There are a lot of old psychology books here."}
 			]
 			index = 0
-			if !PlayerLog.home_bookshelf_examined:
-				PlayerLog.home_bookshelf_examined = true
-				examined = true
-			
+			PlayerLog.set_examined(name)
+			examined = true
+	
 	get_node("/root/World/GUI").add_child(dialogBox)
