@@ -131,7 +131,7 @@ func _input(event):
 	get_tree().set_input_as_handled()
 	if event.is_action_pressed("ui_accept"):
 		get_parent().start()
-		get_parent().get_node("FormulaHitbox").position = target_area.position
+		get_parent().get_node("FormulaHitbox").position = target_body.position
 		end_target_screen()
 	if event.is_action_pressed("ui_cancel"):
 		cancel_target_screen()
