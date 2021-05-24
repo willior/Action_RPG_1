@@ -3,6 +3,8 @@ onready var EnemyTarget = load("res://assets/UI/Target/EnemyTarget.tscn")
 onready var music = get_tree().get_root().get_node("World/Music")
 onready var sfx1 = get_tree().get_root().get_node("World/SFX")
 onready var sfx2 = get_tree().get_root().get_node("World/SFX2")
+onready var target_area = $KinematicBody2D/TargetArea
+onready var target_body = $KinematicBody2D
 var player
 var enemies
 var count
@@ -14,6 +16,7 @@ var down
 var left
 var right
 var next
+var velocity = Vector2.ZERO
 func _ready():
 	player = get_parent().player
 	match player.name:
@@ -46,19 +49,24 @@ func _ready():
 		get_tree().get_root().get_node("World/Targets").add_child(enemy_target)
 
 func _process(_delta):
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength(right) - Input.get_action_strength (left)
-	input_vector.y = Input.get_action_strength(down) - Input.get_action_strength(up)
-	input_vector = input_vector.normalized()
-	$TargetArea.position += input_vector*2
-	if $TargetArea.position.x > 160:
-		$TargetArea.position.x = 160
-	if $TargetArea.position.x < -160:
-		$TargetArea.position.x = -160
-	if $TargetArea.position.y > 90:
-		$TargetArea.position.y = 90
-	if $TargetArea.position.y < -90:
-		$TargetArea.position.y = -90
+	velocity = Vector2()
+	if Input.is_action_pressed(right):
+		velocity.x += 1
+	if Input.is_action_pressed(left):
+		velocity.x -= 1
+	if Input.is_action_pressed(down):
+		velocity.y += 1
+	if Input.is_action_pressed(up):
+		velocity.y -= 1
+	velocity = velocity.normalized()*160
+	velocity = target_body.move_and_slide(velocity)
+#	var input_vector = Vector2.ZERO
+#	input_vector.x = Input.get_action_strength(right) - Input.get_action_strength(left)
+#	input_vector.y = Input.get_action_strength(down) - Input.get_action_strength(up)
+#	input_vector = input_vector.normalized()
+#	velocity = input_vector*100
+#	target_area.position.move_toward(velocity, _delta*100)
+	target_body.position = target_body.position.clamped(135)
 
 func _input(event):
 	match player.name:
@@ -123,7 +131,7 @@ func _input(event):
 	get_tree().set_input_as_handled()
 	if event.is_action_pressed("ui_accept"):
 		get_parent().start()
-		get_parent().get_node("FormulaHitbox").position = $TargetArea.position
+		get_parent().get_node("FormulaHitbox").position = target_area.position
 		end_target_screen()
 	if event.is_action_pressed("ui_cancel"):
 		cancel_target_screen()
@@ -143,7 +151,7 @@ func next_enemy():
 		count -= 1
 		next_enemy()
 		return
-	$TargetArea.global_position = enemies[count].global_position
+	target_area.global_position = enemies[count].global_position
 
 func enemy_out_of_range():
 	if get_tree().get_root().get_node("World/YSort/Player").position.distance_to(enemies[count].position) > 184:
@@ -163,10 +171,10 @@ func end_target_screen():
 	queue_free()
 
 func _on_TargetArea_body_entered(body):
-	$TargetArea.modulate = Color(1,0,0,1)
+	target_area.modulate = Color(1,0,0,1)
 	body.modulate = Color(1,0,0,1)
 
 func _on_TargetArea_body_exited(body):
 	body.modulate = Color(1,1,1,1)
-	if $TargetArea.get_overlapping_bodies().size() == 0:
-		$TargetArea.modulate = Color(1,1,1,1)
+	if target_area.get_overlapping_bodies().size() == 0:
+		target_area.modulate = Color(1,1,1,1)

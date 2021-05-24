@@ -69,19 +69,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TargetArea" type="Area2D" parent="FormulaTarget"]
+[node name="KinematicBody2D" type="KinematicBody2D" parent="FormulaTarget"]
+
+[node name="TargetArea" type="Area2D" parent="FormulaTarget/KinematicBody2D"]
 pause_mode = 2
 material = SubResource( 1 )
 z_index = 1
 collision_layer = 0
 collision_mask = 256
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaTarget/TargetArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaTarget/KinematicBody2D/TargetArea"]
 pause_mode = 2
 visible = false
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="FormulaTarget/TargetArea"]
+[node name="Sprite" type="Sprite" parent="FormulaTarget/KinematicBody2D/TargetArea"]
 pause_mode = 2
 light_mask = 0
 use_parent_material = true
@@ -89,7 +91,7 @@ z_index = -1
 texture = ExtResource( 8 )
 offset = Vector2( 0, -16 )
 
-[node name="Sprite2" type="Sprite" parent="FormulaTarget/TargetArea"]
+[node name="Sprite2" type="Sprite" parent="FormulaTarget/KinematicBody2D/TargetArea"]
 pause_mode = 2
 use_parent_material = true
 texture = ExtResource( 5 )
@@ -127,6 +129,6 @@ stream = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="body_entered" from="FormulaTarget/TargetArea" to="FormulaTarget" method="_on_TargetArea_body_entered"]
-[connection signal="body_exited" from="FormulaTarget/TargetArea" to="FormulaTarget" method="_on_TargetArea_body_exited"]
+[connection signal="body_entered" from="FormulaTarget/KinematicBody2D/TargetArea" to="FormulaTarget" method="_on_TargetArea_body_entered"]
+[connection signal="body_exited" from="FormulaTarget/KinematicBody2D/TargetArea" to="FormulaTarget" method="_on_TargetArea_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
