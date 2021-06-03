@@ -21,7 +21,6 @@ func _init():
 		player2 = load("res://assets/Player/Player2.tscn").instance()
 
 func _ready():
-	# player.global_position = get_node("Map").player_spawn_pos
 	get_node("YSort").add_child(player)
 	if !GameManager.multiplayer_2:
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 0

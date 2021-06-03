@@ -1,5 +1,5 @@
 extends Node2D
-
+var player_spawn_pos = Vector2(288,72)
 onready var timer = $Timer
 onready var tween = $Tween
 onready var shade = $CanvasModulate

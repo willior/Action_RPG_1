@@ -93,10 +93,6 @@ onready var bamboo = $BambooAudio
 signal player_saved
 
 func _ready():
-	if name != "Player":
-		print('player duplicate found. deleting ', name)
-		queue_free()
-		return
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
 	else:
@@ -320,7 +316,6 @@ func stamina_regeneration():
 			sweating = false
 			$Sweat.visible = false
 			$ChargeUI.sweatFlag = false
-			stats.status = "sweating_end"
 	
 	elif stats.stamina < stats.max_stamina:
 		match stamina_regen_level:
@@ -355,8 +350,6 @@ func apply_status(status):
 	match status:
 		"default_speed":
 			animationTree.set("parameters/Run/TimeScale/scale", 1)
-		"sweating":
-			set_sweating()
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"frenzy":
@@ -366,18 +359,14 @@ func apply_status(status):
 
 func move():
 	if GameManager.multiplayer_2:
-		if position.x - Global.player2.position.x > 272:
-			Global.player2.position.x += 1
-			#return
-		if position.x - Global.player2.position.x < -272:
-			Global.player2.position.x -= 1
-			#return
-		if position.y - Global.player2.position.y > 136:
-			Global.player2.position.y += 1
-			#return
-		if position.y - Global.player2.position.y < -136:
-			Global.player2.position.y -= 1
-			#return
+		if position.x - GameManager.player2.position.x > 272:
+			GameManager.player2.position.x += 1
+		if position.x - GameManager.player2.position.x < -272:
+			GameManager.player2.position.x -= 1
+		if position.y - GameManager.player2.position.y > 136:
+			GameManager.player2.position.y += 1
+		if position.y - GameManager.player2.position.y < -136:
+			GameManager.player2.position.y -= 1
 	velocity = move_and_slide(velocity)
 
 func noStamina():
@@ -452,7 +441,7 @@ func charge_state(_delta):
 		charge.stop_charge()
 		charge_reset()
 		if !sweating:
-			stats.status = "sweating"
+			set_sweating()
 			noStamina()
 		return
 	if charge_count < stats.max_charge:
@@ -993,22 +982,6 @@ func check_attack_input():
 		charge.stop_charge()
 		charge_reset()
 	get_node("/root/World/Music").stream_paused = false
-
-func save():
-	pass
-	# instead of saving a REFERENCE to the inventory's _items array, the array data itself should be gotten
-	# this requires parsing through the array
-#	print('saving Player resources...')
-#	var save_dict = {
-#		"filename": get_filename(),
-#		"parent": get_parent().get_path(),
-##		"pos_x": position.x,
-##		"pos_y": position.y,
-#		"player1_inventory": inventory._items,
-#		"player1_pouch": pouch._ingredients,
-#		"player1_formulabook": formulabook._formulas
-#	}
-#	return save_dict
 
 func set_z_index(value):
 	z_index = value

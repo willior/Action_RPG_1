@@ -1,7 +1,6 @@
 extends Node2D
 
 const TUMBLEWEED = preload("res://assets/Enemies/Tumbleweed/Tumbleweed.tscn")
-onready var player = get_parent().get_parent().get_node("Player")
 onready var map = get_parent().get_parent().get_parent().get_node("Map")
 onready var timer = $Timer
 var enemies
@@ -28,9 +27,9 @@ func spawner():
 		# tumbleweeds spawn 1 screen to the right of the player
 		# y-position is modulated by half of the player's Y-velocity
 		if map.wind_direction == "left":
-			tumbleweedSpawn.position = player.position + Vector2(320, rand_range(0, player.velocity.y/2))
+			tumbleweedSpawn.position = GameManager.player.position + Vector2(320, rand_range(0, GameManager.player.velocity.y/2))
 		elif map.wind_direction == "right":
-			tumbleweedSpawn.position = player.position + Vector2(-320, rand_range(0, player.velocity.y/2))
+			tumbleweedSpawn.position = GameManager.player.position + Vector2(-320, rand_range(0, GameManager.player.velocity.y/2))
 
 		get_parent().add_child(tumbleweedSpawn)
 		if tumbleweedSpawn.global_position.x < -6:

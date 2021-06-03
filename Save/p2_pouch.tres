@@ -1,23 +1,23 @@
 [gd_resource type="Resource" load_steps=6 format=2]
 
-[ext_resource path="res://assets/Player/Pouch.gd" type="Script" id=1]
-[ext_resource path="res://assets/Resources/IngredientResources/Clay.tres" type="Resource" id=2]
-[ext_resource path="res://assets/Resources/IngredientResources/Rock.tres" type="Resource" id=3]
-[ext_resource path="res://assets/Resources/IngredientResources/Salt.tres" type="Resource" id=4]
-[ext_resource path="res://assets/Resources/IngredientResources/Water.tres" type="Resource" id=5]
+[ext_resource path="res://assets/Resources/IngredientResources/Water.tres" type="Resource" id=1]
+[ext_resource path="res://assets/Player/Pouch.gd" type="Script" id=2]
+[ext_resource path="res://assets/Resources/IngredientResources/Clay.tres" type="Resource" id=3]
+[ext_resource path="res://assets/Resources/IngredientResources/Rock.tres" type="Resource" id=4]
+[ext_resource path="res://assets/Resources/IngredientResources/Salt.tres" type="Resource" id=5]
 
 [resource]
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 _ingredients = [ {
+"ingredient_reference": ExtResource( 4 ),
+"quantity": 20
+}, {
 "ingredient_reference": ExtResource( 3 ),
 "quantity": 20
 }, {
-"ingredient_reference": ExtResource( 2 ),
-"quantity": 10
+"ingredient_reference": ExtResource( 1 ),
+"quantity": 20
 }, {
 "ingredient_reference": ExtResource( 5 ),
 "quantity": 20
-}, {
-"ingredient_reference": ExtResource( 4 ),
-"quantity": 10
 } ]

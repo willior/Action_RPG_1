@@ -1,5 +1,5 @@
 extends Node2D
-
+var player_spawn_pos = Vector2(480,264)
 var wind_direction = "left" setget set_wind_direction
 var wind_strength = 0 setget set_wind_strength
 var particle_amount = 100 setget set_particle_amount
@@ -50,8 +50,8 @@ func modulate_wind(start_value_wind, start_value_particles):
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Calm")
 		
-		Player1Stats.status = "not_slow"
-		Player2Stats.status = "not_slow"
+#		Player1Stats.status = "not_slow"
+#		Player2Stats.status = "not_slow"
 		
 	elif (end_value_wind > 64 || end_value_wind < -64) && start_value_particles != 6000:
 		end_value_particles = 6000
@@ -61,8 +61,8 @@ func modulate_wind(start_value_wind, start_value_particles):
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Storm")
 		
-		Player1Stats.status = "slow"
-		Player2Stats.status = "slow"
+#		Player1Stats.status = "slow"
+#		Player2Stats.status = "slow"
 		
 	else: # pass
 		print('not changing sand amount')

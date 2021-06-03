@@ -95,6 +95,8 @@ signal player_saved
 func _ready():
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
+	else:
+		position = get_tree().get_root().get_node("/root/World/Map").player_spawn_pos
 	if Global.get_attribute("inventory_2") != null:
 		pouch.set_ingredients(Global.get_attribute("inventory_2")[0].get_ingredients())
 		formulabook.set_formulas(Global.get_attribute("inventory_2")[1].get_formulas())
@@ -314,7 +316,6 @@ func stamina_regeneration():
 			sweating = false
 			$Sweat.visible = false
 			$ChargeUI.sweatFlag = false
-			stats.status = "sweating_end"
 	
 	elif stats.stamina < stats.max_stamina:
 		match stamina_regen_level:
@@ -349,8 +350,6 @@ func apply_status(status):
 	match status:
 		"default_speed":
 			animationTree.set("parameters/Run/TimeScale/scale", 1)
-		"sweating":
-			set_sweating()
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"frenzy":
@@ -360,18 +359,14 @@ func apply_status(status):
 
 func move():
 	if GameManager.multiplayer_2:
-		if position.x - Global.player1.position.x > 272:
-			Global.player1.position.x += 1
-			#return
-		if position.x - Global.player1.position.x < -272:
-			Global.player1.position.x -= 1
-			#return
-		if position.y - Global.player1.position.y > 136:
-			Global.player1.position.y += 1
-			#return
-		if position.y - Global.player1.position.y < -136:
-			Global.player1.position.y -= 1
-			#return
+		if position.x - GameManager.player.position.x > 272:
+			GameManager.player.position.x += 1
+		if position.x - GameManager.player.position.x < -272:
+			GameManager.player.position.x -= 1
+		if position.y - GameManager.player.position.y > 136:
+			GameManager.player.position.y += 1
+		if position.y - GameManager.player.position.y < -136:
+			GameManager.player.position.y -= 1
 	velocity = move_and_slide(velocity)
 
 func noStamina():
@@ -446,7 +441,7 @@ func charge_state(_delta):
 		charge.stop_charge()
 		charge_reset()
 		if !sweating:
-			stats.status = "sweating"
+			set_sweating()
 			noStamina()
 		return
 	if charge_count < stats.max_charge:
@@ -986,14 +981,6 @@ func check_attack_input():
 		charge.stop_charge()
 		charge_reset()
 	get_node("/root/World/Music").stream_paused = false
-
-func save():
-	# instead of saving a REFERENCE to the inventory's _items array, the array data itself should be gotten
-	# this requires parsing through the array
-	var save_dict = {
-		"pouch": pouch._ingredients
-	}
-	return save_dict
 
 func set_z_index(value):
 	z_index = value

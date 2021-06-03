@@ -146,10 +146,6 @@ func set_status(value):
 	match status:
 		"fine":
 			speed_mod = 0
-		"sweating":
-			sweating = true
-		"sweating_end":
-			sweating = false
 		"slow":
 			speed_mod = -max_speed/2
 		"default_speed":
