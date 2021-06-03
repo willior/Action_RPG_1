@@ -15,7 +15,10 @@ var is_on = false
 func _ready():
 	if name in PlayerLog.examined_list:
 		examined = true
-	
+	if PlayerLog.home.stove_on:
+		$Light2D.visible = false
+		$Sprite.frame = 0
+
 func examine():
 	var dialogBox = DialogBox.instance()
 	match index:
@@ -47,19 +50,19 @@ func interact(_player):
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Open.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.visible = true
-		is_on = true
-		PlayerLog.home_stove_on = true
-		if examined && !examined_while_on: examined = false
 		$Sprite.frame = 1
+		is_on = true
+		if examined && !examined_while_on: examined = false
 		
 	else:
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Close.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.visible = false
-		is_on = false
-		PlayerLog.home_stove_on = false
-		if !examined_while_off: examined = false
 		$Sprite.frame = 0
+		is_on = false
+		if !examined_while_off: examined = false
+		
+	PlayerLog.home.stove_on = is_on
 	
 func use_item_on_object():
 	var dialogBox = DialogBox.instance()

@@ -10,7 +10,7 @@ var answer
 # var player
 
 func _ready():
-	if PlayerLog.metal_pot_collected:
+	if PlayerLog.home.metal_pot_collected:
 		queue_free()
 	
 func examine():
@@ -63,5 +63,5 @@ func acquire_item():
 	get_parent().add_child(itemCollectEffect)
 	itemCollectEffect.playSound(1)
 	# GameManager.player.inventory.add_item("Metal Pot", 1)
-	PlayerLog.metal_pot_collected = true
+	PlayerLog.home.metal_pot_collected = true
 	queue_free()

@@ -1,23 +1,50 @@
 extends Node
 
-var chapter_number = 0
-
 var examined_list = []
+var chapter_number = 0
+var home = {
+	desk_on = false,
+	lightswitch_checked = false,
+	lightswitch_bedroom_on = false,
+	lightswitch_main_on = false,
+	fridge_open = false,
+	sink_on = false,
+	stove_on = false,
+	metal_pot_collected = false
+}
 
-var metal_pot_use_index = 0
-var home_desk_on = false
-var home_lightswitch_checked = false
-var home_lightswitch_bedroom_on = false
-var home_lightswitch_main_on = false
-var home_fridge_open = false
-var home_sink_on = false
-var home_stove_on = false
-var home_music_on = false
+func save():
+	var save_dict = {
+		"chapter_number": chapter_number,
+		"examined_list": examined_list,
+		"home": home
+	}
+	return save_dict
 
-var metal_pot_collected = false
+func reset_player_log():
+	examined_list = []
+	chapter_number = 0
+	home = {
+		desk_on = false,
+		lightswitch_checked = false,
+		lightswitch_bedroom_on = false,
+		lightswitch_main_on = false,
+		fridge_open = false,
+		sink_on = false,
+		stove_on = false,
+		metal_pot_collected = false
+	}
 
-# NPCs
-var skeleton_1_examined = false
+# when examining an object for the final time, the object sets the
+# global examined variable to true as well as runs a function that
+# tells the PlayerLog which signal to emit. this signal then sets
+# the object's local examined variable to true.
+func set_examined(name):
+	examined_list.append(name)
+	
+func set_examined_and_signal(name, value=true):
+	examined_list.append(name)
+	emit_signal(str(name.replace(" ", "_"))+"_complete", value)
 
 # warning-ignore:unused_signal
 signal heart_complete()
@@ -35,7 +62,6 @@ signal Tumbleweed_complete()
 signal PunchingMoon_complete()
 # warning-ignore:unused_signal
 signal The_Moon_complete()
-
 # warning-ignore:unused_signal
 signal home_lightswitch_advance(value)
 # warning-ignore:unused_signal
@@ -44,29 +70,6 @@ signal home_lightswitch_complete()
 signal home_window_advance(value)
 # warning-ignore:unused_signal
 signal home_window_complete()
-
-func save():
-	var save_dict = {
-		"chapter_number": chapter_number,
-		"examined_list": examined_list
-	}
-	return save_dict
-
-func reset_player_log():
-	examined_list = []
-	chapter_number = 0
-	metal_pot_use_index = 0
-
-# when examining an object for the final time, the object sets the
-# global examined variable to true as well as runs a function that
-# tells the PlayerLog which signal to emit. this signal then sets
-# the object's local examined variable to true.
-func set_examined(name):
-	examined_list.append(name)
-	
-func set_examined_and_signal(name, value=true):
-	examined_list.append(name)
-	emit_signal(str(name.replace(" ", "_"))+"_complete", value)
 
 # the PlayerLog is now responsible for advancing the dialog index in the
 # function set_dialog_index(name, value) where 'name' is the name of the

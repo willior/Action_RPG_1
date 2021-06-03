@@ -27,3 +27,8 @@ func show_formula_level_notice(formula_data):
 	yield(get_tree().create_timer(1), "timeout")
 	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
 	messagePopup.level_flash()
+
+func default_formula_data():
+	Flash = ["Flash", 1, 0, 100, 0]
+	Heal = ["Heal", 1, 0, 100, 0]
+	Fury = ["Fury", 1, 0, 100, 0]

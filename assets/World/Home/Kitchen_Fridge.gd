@@ -14,12 +14,12 @@ func _ready():
 		examined = true
 		examined_while_off = true
 		examined_while_on = true
-	if PlayerLog.home_fridge_open:
+	if PlayerLog.home.fridge_open:
 		$Light2D.visible = true
 		$Sprite.frame = 1
 		index = 4
 		examined = false
-	elif !PlayerLog.home_fridge_open:
+	elif !PlayerLog.home.fridge_open:
 		$Light2D.visible = false
 		$Sprite.frame = 0
 	
@@ -75,7 +75,7 @@ func interact(_player):
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Open.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.show()
-		PlayerLog.home_fridge_open = true
+		PlayerLog.home.fridge_open = true
 		index = 1
 		if examined && !examined_while_on: examined = false
 		$Sprite.frame = 1
@@ -84,7 +84,7 @@ func interact(_player):
 		$AudioStreamPlayer.stream = load("res://assets/Audio/Fridge_Close.wav")
 		$AudioStreamPlayer.play()
 		$Light2D.hide()
-		PlayerLog.home_fridge_open = false
+		PlayerLog.home.fridge_open = false
 		index = 1
 		if !examined_while_off: examined = false
 		$Sprite.frame = 0

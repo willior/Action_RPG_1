@@ -21,7 +21,12 @@ var is_on = false
 func _ready():
 	if name in PlayerLog.examined_list:
 		examined = true
-	sinkSprite.play("OffComplete")
+	if PlayerLog.home.sink_on:
+		sinkAnim.travel("Run")
+		index = 1
+		is_on = true
+	else:
+		sinkSprite.play("OffComplete")
 	$AnimationTree.active = true
 	
 func examine():
@@ -57,6 +62,7 @@ func interact(_player):
 		index = 0
 		is_on = false
 		if !examined_while_off: examined = false
+	PlayerLog.home.sink_on = is_on
 
 func use_item_on_object():
 	var dialogBox = DialogBox.instance()

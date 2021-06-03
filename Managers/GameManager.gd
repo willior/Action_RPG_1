@@ -83,7 +83,13 @@ func new_game():
 	PlayerLog.reset_player_log()
 	Player1Stats.default_stats()
 	Player2Stats.default_stats()
-	reset_resources()
+	P1FormulaData.default_formula_data()
+	P2FormulaData.default_formula_data()
+	p1_pouch = null
+	p1_formulabook = null
+	p2_pouch = null
+	p2_formulabook = null
+	# reset_resources()
 	Global.goto_scene("res://assets/Maps/0_Prologue/0-1_Home.tscn")
 
 func save_game():
@@ -177,11 +183,14 @@ func load_resources():
 		print('p2_formulabook.tres not found; cannot load')
 
 func reset_resources():
-	p1_pouch = load("res://assets/Player/Pouch.gd").new()
-	p1_formulabook =load("res://assets/Player/FormulaBook.gd").new()
-	
-	p2_pouch = load("res://assets/Player/Pouch.gd").new()
-	p2_formulabook =load("res://assets/Player/FormulaBook.gd").new()
+	p1_pouch = null
+	p1_formulabook = null
+	p2_pouch = null
+	p2_formulabook = null
+#	p1_pouch = load("res://assets/Player/Pouch.gd").new()
+#	p1_formulabook = load("res://assets/Player/FormulaBook.gd").new()
+#	p2_pouch = load("res://assets/Player/Pouch.gd").new()
+#	p2_formulabook = load("res://assets/Player/FormulaBook.gd").new()
 
 func quit_to_title():
 	get_tree().paused = false
