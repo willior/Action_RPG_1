@@ -1,24 +1,24 @@
 [gd_scene load_steps=167 format=2]
 
-[ext_resource path="res://assets/Player/Player_default.gd" type="Script" id=1]
-[ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
-[ext_resource path="res://assets/Player/SwordHitbox.gd" type="Script" id=3]
-[ext_resource path="res://assets/UI/TalkNotice.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/CollisionBoxes/Hurtbox.gd" type="Script" id=5]
-[ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=6]
-[ext_resource path="res://assets/UI/Popups/DamageContainer.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/Audio/Evade.wav" type="AudioStream" id=8]
-[ext_resource path="res://assets/Audio/SFX/Miss.wav" type="AudioStream" id=10]
-[ext_resource path="res://assets/UI/InteractNotice.tscn" type="PackedScene" id=11]
-[ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=12]
-[ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=13]
-[ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=14]
-[ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=15]
-[ext_resource path="res://assets/UI/Sweat.tscn" type="PackedScene" id=16]
-[ext_resource path="res://assets/Audio/Bamboo.wav" type="AudioStream" id=17]
-[ext_resource path="res://assets/Audio/Player/Sword_Attack_1.wav" type="AudioStream" id=18]
-[ext_resource path="res://assets/Player/Abilities/Cast.tres" type="Animation" id=19]
-[ext_resource path="res://assets/Audio/Player/Clap2.wav" type="AudioStream" id=21]
+[ext_resource path="res://assets/Audio/cursLo.wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/Audio/SFX/Miss.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/UI/Notice.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Player/Player_default.gd" type="Script" id=4]
+[ext_resource path="res://assets/Player/Player.png" type="Texture" id=5]
+[ext_resource path="res://assets/Audio/Evade.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=7]
+[ext_resource path="res://assets/Audio/Bamboo.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/Audio/Hurt.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/Audio/Player/Sword_Attack_1.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/Audio/Player/Clap2.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/Player/SwordHitbox.gd" type="Script" id=12]
+[ext_resource path="res://assets/CollisionBoxes/Hurtbox.gd" type="Script" id=13]
+[ext_resource path="res://assets/Player/Abilities/Cast.tres" type="Animation" id=14]
+[ext_resource path="res://assets/UI/Sweat.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/UI/ChargeUI.tscn" type="PackedScene" id=16]
+[ext_resource path="res://assets/UI/Popups/DamageContainer.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/UI/TalkNotice.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/UI/InteractNotice.tscn" type="PackedScene" id=19]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -688,7 +688,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 18 )
+"stream": ExtResource( 10 )
 } ],
 "times": PoolRealArray( 0.2 )
 }
@@ -776,7 +776,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 18 )
+"stream": ExtResource( 10 )
 } ],
 "times": PoolRealArray( 0.2 )
 }
@@ -864,7 +864,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 18 )
+"stream": ExtResource( 10 )
 } ],
 "times": PoolRealArray( 0.2 )
 }
@@ -952,7 +952,7 @@ tracks/3/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 18 )
+"stream": ExtResource( 10 )
 } ],
 "times": PoolRealArray( 0.2 )
 }
@@ -1095,7 +1095,7 @@ tracks/2/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 21 )
+"stream": ExtResource( 11 )
 } ],
 "times": PoolRealArray( 0.37 )
 }
@@ -1420,7 +1420,7 @@ tracks/2/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 8 )
+"stream": ExtResource( 6 )
 } ],
 "times": PoolRealArray( 0.1 )
 }
@@ -1470,7 +1470,7 @@ tracks/2/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 8 )
+"stream": ExtResource( 6 )
 } ],
 "times": PoolRealArray( 0.1 )
 }
@@ -1519,7 +1519,7 @@ tracks/2/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 8 )
+"stream": ExtResource( 6 )
 } ],
 "times": PoolRealArray( 0.1 )
 }
@@ -1568,7 +1568,7 @@ tracks/2/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 8 )
+"stream": ExtResource( 6 )
 } ],
 "times": PoolRealArray( 0.1 )
 }
@@ -2170,18 +2170,18 @@ tracks/0/keys = {
 process_priority = -1
 collision_layer = 2
 collision_mask = 1041
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
 position = Vector2( 0, 1 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -9 )
-texture = ExtResource( 2 )
+texture = ExtResource( 5 )
 hframes = 60
 vframes = 5
-frame = 39
+frame = 252
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2207,7 +2207,7 @@ anims/AttackShadeRight = SubResource( 16 )
 anims/AttackShadeUp = SubResource( 17 )
 anims/BackstepLeft = SubResource( 18 )
 anims/BackstepRight = SubResource( 19 )
-anims/Cast = ExtResource( 19 )
+anims/Cast = ExtResource( 14 )
 anims/Cast_1 = SubResource( 20 )
 anims/Cast_2 = SubResource( 21 )
 anims/Death = SubResource( 22 )
@@ -2251,22 +2251,22 @@ parameters/Run/BlendSpace2D/blend_position = Vector2( 0.000634074, 0.974286 )
 parameters/Run/TimeScale/scale = 1.0
 parameters/Shade/blend_position = Vector2( 0.0241064, -0.406441 )
 
-[node name="ChargeUI" parent="." instance=ExtResource( 13 )]
+[node name="ChargeUI" parent="." instance=ExtResource( 16 )]
 z_index = 2
 
-[node name="InteractNotice" parent="." instance=ExtResource( 11 )]
+[node name="InteractNotice" parent="." instance=ExtResource( 19 )]
 visible = false
 light_mask = 0
 
-[node name="TalkNotice" parent="." instance=ExtResource( 4 )]
+[node name="TalkNotice" parent="." instance=ExtResource( 18 )]
 visible = false
 light_mask = 0
 
-[node name="ExamineNotice" parent="." instance=ExtResource( 12 )]
+[node name="ExamineNotice" parent="." instance=ExtResource( 3 )]
 visible = false
 light_mask = 0
 
-[node name="Sweat" parent="." instance=ExtResource( 16 )]
+[node name="Sweat" parent="." instance=ExtResource( 15 )]
 visible = false
 light_mask = 0
 margin_left = -8.0
@@ -2277,7 +2277,7 @@ margin_bottom = -11.0
 [node name="DamageDisplay" type="Node2D" parent="."]
 z_index = 3
 
-[node name="DamageContainer" parent="DamageDisplay" instance=ExtResource( 7 )]
+[node name="DamageContainer" parent="DamageDisplay" instance=ExtResource( 17 )]
 show_behind_parent = false
 margin_left = 11.0
 margin_top = 0.0
@@ -2298,14 +2298,14 @@ monitoring = false
 monitorable = false
 collision_layer = 0
 collision_mask = 8
-script = ExtResource( 3 )
+script = ExtResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxPivot/SwordHitbox"]
 position = Vector2( -9.53674e-07, 0 )
 shape = SubResource( 143 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitboxPivot/SwordHitbox"]
-stream = ExtResource( 18 )
+stream = ExtResource( 10 )
 
 [node name="InteractHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 15, 0 )
@@ -2321,7 +2321,7 @@ shape = SubResource( 144 )
 visible = false
 collision_layer = 4
 collision_mask = 0
-script = ExtResource( 5 )
+script = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -2 )
@@ -2340,19 +2340,19 @@ position = Vector2( 0, -2 )
 shape = SubResource( 145 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 21 )
+stream = ExtResource( 11 )
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 17 )
+stream = ExtResource( 8 )
 
 [node name="NoticeAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 15 )
+stream = ExtResource( 1 )
 
 [node name="HurtAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 14 )
+stream = ExtResource( 9 )
 
 [node name="DodgeAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 10 )
+stream = ExtResource( 2 )
 volume_db = 12.0
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]

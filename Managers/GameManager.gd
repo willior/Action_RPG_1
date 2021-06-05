@@ -12,7 +12,7 @@ extends Node
 var on_title_screen = false
 var player
 var player2
-var multiplayer_2 = false
+var multiplayer_2 = true
 
 # variables from which we intialize Player resources
 # empty when we quit to title or select new game

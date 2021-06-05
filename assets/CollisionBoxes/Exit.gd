@@ -18,6 +18,7 @@ func _on_Exit_body_entered(body):
 	$Timer.start()
 	yield($Timer, "timeout")
 	var new_inventory = [GameManager.player.pouch, GameManager.player.formulabook]
+	
 	if GameManager.multiplayer_2:
 		var new_inventory_2 = GameManager.player2_data
 		Global.goto_scene(map_file, {"direction": facing_direction, "location":selected_location, "inventory":new_inventory, "inventory_2":new_inventory_2})

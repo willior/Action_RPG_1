@@ -62,9 +62,11 @@ func _input(event):
 			GameManager.player2.formulabook.add_formula("Fury")
 	
 	if event.is_action_pressed("test2"): # Y
-		GameManager.player.level_up()
-		if GameManager.multiplayer_2:
-			GameManager.player2.level_up()
+		print("p1 pouch: ", player.pouch._ingredients)
+		print("p2 pouch: ", player2.pouch._ingredients)
+#		GameManager.player.level_up()
+#		if GameManager.multiplayer_2:
+#			GameManager.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
 		print('adding ingredients...')

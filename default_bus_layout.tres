@@ -31,6 +31,7 @@ feedback/active = true
 feedback/delay_ms = 100.0
 
 [resource]
+bus/0/volume_db = -33.989
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = false
 bus/1/name = "Delay"

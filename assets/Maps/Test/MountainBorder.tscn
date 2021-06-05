@@ -1,13 +1,13 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/Tilesets/GrassBasicLight.png" type="Texture" id=1]
 [ext_resource path="res://assets/Audio/Hello_drone.ogg" type="AudioStream" id=2]
 [ext_resource path="res://World.gd" type="Script" id=3]
+[ext_resource path="res://assets/Ingredients/IngredientPickup.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/World/Trees/Tree_2_pine.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/World/Trees/Tree_1_orange.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/World/Trees/Tree_1_yellow.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/Tilesets/GrassBasicDark.png" type="Texture" id=11]
 [ext_resource path="res://assets/Tilesets/MountainBorder.tres" type="TileSet" id=12]
@@ -16,8 +16,6 @@
 [ext_resource path="res://assets/World/Doodads/Rock_Large_3.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Doodads/Rock_Large_5.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/Tilesets/Mountain_TileMap64x88.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=18]
-[ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/CollisionBoxes/Exit.gd" type="Script" id=21]
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=22]
 [ext_resource path="res://assets/Maps/Test/MountainBorderMap.gd" type="Script" id=23]
@@ -153,28 +151,23 @@ pause_mode = 1
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
-[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 373, 245 )
-
-[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 357, 256 )
-
-[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 9 )]
-position = Vector2( 355, 239 )
-
-[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 19 )]
-position = Vector2( 213, 354 )
-
-[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 19 )]
-position = Vector2( 413, 361 )
-
-[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 18 )]
-position = Vector2( 195, 198 )
-
-[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 18 )]
-position = Vector2( 543, 259 )
-
 [node name="Items" type="YSort" parent="YSort"]
+
+[node name="IngredientPickup" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 230, 212 )
+ingredient_name = "Rock"
+
+[node name="IngredientPickup2" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 251, 227 )
+ingredient_name = "Clay"
+
+[node name="IngredientPickup3" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 275, 238 )
+ingredient_name = "Water"
+
+[node name="IngredientPickup4" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 313, 231 )
+ingredient_name = "Salt"
 
 [node name="Doodads" type="YSort" parent="YSort"]
 
