@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 # class_name FormulaBook
 
 signal formulabook_changed

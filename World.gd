@@ -63,7 +63,8 @@ func _input(event):
 	
 	if event.is_action_pressed("test2"): # Y
 		print("p1 pouch: ", player.pouch._ingredients)
-		print("p2 pouch: ", player2.pouch._ingredients)
+		if GameManager.multiplayer_2:
+			print("p2 pouch: ", player2.pouch._ingredients)
 #		GameManager.player.level_up()
 #		if GameManager.multiplayer_2:
 #			GameManager.player2.level_up()

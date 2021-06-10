@@ -85,11 +85,10 @@ func new_game():
 	Player2Stats.default_stats()
 	P1FormulaData.default_formula_data()
 	P2FormulaData.default_formula_data()
-	p1_pouch = null
-	p1_formulabook = null
-	p2_pouch = null
-	p2_formulabook = null
-	# reset_resources()
+	p1_pouch = load("res://assets/System/InventoryResources/empty_pouch.tres")
+	p1_formulabook = load("res://assets/System/InventoryResources/empty_formulabook.tres")
+	p2_pouch = load("res://assets/System/InventoryResources/empty_pouch.tres").duplicate()
+	p2_formulabook = load("res://assets/System/InventoryResources/empty_formulabook.tres").duplicate()
 	Global.goto_scene("res://assets/Maps/0_Prologue/0-1_Home.tscn")
 
 func save_game():
@@ -187,10 +186,6 @@ func reset_resources():
 	p1_formulabook = null
 	p2_pouch = null
 	p2_formulabook = null
-#	p1_pouch = load("res://assets/Player/Pouch.gd").new()
-#	p1_formulabook = load("res://assets/Player/FormulaBook.gd").new()
-#	p2_pouch = load("res://assets/Player/Pouch.gd").new()
-#	p2_formulabook = load("res://assets/Player/FormulaBook.gd").new()
 
 func quit_to_title():
 	get_tree().paused = false

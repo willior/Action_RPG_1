@@ -1,4 +1,4 @@
-extends Node
+extends Resource
 # class_name Pouch
 
 signal pouch_changed
