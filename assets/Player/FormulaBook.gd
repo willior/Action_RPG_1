@@ -1,10 +1,8 @@
-extends Resource
-class_name FormulaBook
-# FormulaBook
+extends Node
+# class_name FormulaBook
 
 signal formulabook_changed
 signal current_selected_formula_changed
-
 export var _formulas = Array() setget set_formulas, get_formulas
 
 var current_selected_formula = 0

@@ -1,5 +1,5 @@
-extends Resource
-class_name Pouch
+extends Node
+# class_name Pouch
 
 signal pouch_changed
 signal ingredient_quantity_updated

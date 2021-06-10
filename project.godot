@@ -10,11 +10,6 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
-"class": "FormulaBook",
-"language": "GDScript",
-"path": "res://assets/Player/FormulaBook.gd"
-}, {
-"base": "Resource",
 "class": "FormulaResource",
 "language": "GDScript",
 "path": "res://assets/Resources/Formula.gd"
@@ -33,19 +28,12 @@ _global_script_classes=[ {
 "class": "ItemResource",
 "language": "GDScript",
 "path": "res://assets/Resources/Item.gd"
-}, {
-"base": "Resource",
-"class": "Pouch",
-"language": "GDScript",
-"path": "res://assets/Player/Pouch.gd"
 } ]
 _global_script_class_icons={
-"FormulaBook": "",
 "FormulaResource": "",
 "IngredientResource": "",
 "Inventory": "",
-"ItemResource": "",
-"Pouch": ""
+"ItemResource": ""
 }
 
 [application]

@@ -12,10 +12,12 @@ const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 
 #var inventory_resource = load("res://assets/Player/Inventory.gd")
 #var inventory = inventory_resource.new()
-var pouch_resource = load("res://assets/Player/Pouch.gd")
-var pouch = pouch_resource.new()
-var formulabook_resource = load("res://assets/Player/FormulaBook.gd")
-var formulabook = formulabook_resource.new()
+var pouch_resource = load("res://assets/Player/Pouch.tscn")
+var pouch = pouch_resource.instance()
+
+var formulabook_resource = load("res://assets/Player/FormulaBook.tscn")
+var formulabook = formulabook_resource.instance()
+
 var ingredient1_OK : bool
 var ingredient2_OK : bool
 
@@ -91,6 +93,10 @@ onready var charge = $ChargeUI
 onready var bamboo = $BambooAudio
 
 signal player_saved
+
+func _init():
+	add_child(pouch)
+	add_child(formulabook)
 
 func _ready():
 	if Global.get_attribute("location") != null:
