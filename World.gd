@@ -18,7 +18,25 @@ func _init():
 		var REMOTE2D = load("res://assets/System/RemoteTransform2D.tscn")
 		remoteTransform2D = REMOTE2D.instance()
 	else:
-		player2 = load("res://assets/Player/Player2.tscn").instance()
+		player2 = load("res://assets/Player/Player.tscn").instance()
+		player2.name = "Player2"
+		player2.stats = Player2Stats
+		player2.formulaData = P2FormulaData
+		player2.get_node("Sprite").texture = load("res://assets/Player/Player2.png")
+		player2.player_inputs = {
+			"left": "left_2",
+			"right": "right_2",
+			"up": "up_2",
+			"down": "down_2",
+			"attack": "attack_2",
+			"roll": "roll_2",
+			"examine": "examine_2",
+			"alchemy": "alchemy_2",
+			"previous": "previous_2",
+			"next": "next_2",
+			"start": "start_2",
+			"select": "select_2"
+		}
 
 func _ready():
 	get_node("YSort").add_child(player)
@@ -62,12 +80,12 @@ func _input(event):
 			GameManager.player2.formulabook.add_formula("Fury")
 	
 	if event.is_action_pressed("test2"): # Y
-		print("p1 pouch: ", player.pouch._ingredients)
-		if GameManager.multiplayer_2:
-			print("p2 pouch: ", player2.pouch._ingredients)
-#		GameManager.player.level_up()
+#		print("p1 pouch: ", player.pouch._ingredients)
 #		if GameManager.multiplayer_2:
-#			GameManager.player2.level_up()
+#			print("p2 pouch: ", player2.pouch._ingredients)
+		GameManager.player.level_up()
+		if GameManager.multiplayer_2:
+			GameManager.player2.level_up()
 	
 	if event.is_action_pressed("test3"): # U
 		print('adding ingredients...')

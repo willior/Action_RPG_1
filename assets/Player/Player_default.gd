@@ -116,9 +116,9 @@ func _ready():
 	if Global.get_attribute("inventory") != null:
 		pouch.set_ingredients(Global.get_attribute("inventory")[0].get_ingredients())
 		formulabook.set_formulas(Global.get_attribute("inventory")[1].get_formulas())
-		GameManager.reinitialize_player(pouch, formulabook)
+		GameManager.reinitialize_player(name, pouch, formulabook)
 	else:
-		GameManager.initialize_player()
+		GameManager.initialize_player(name)
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector
 	collision.disabled = false

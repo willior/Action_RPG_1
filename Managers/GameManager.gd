@@ -30,18 +30,36 @@ signal player_reinitialized
 signal player2_initialized
 signal player2_reinitialized
 
-func initialize_player():
-	player = get_tree().get_root().get_node("/root/World/YSort/Player")
-	emit_signal("player_initialized", player)
-	if p1_pouch!= null and p1_formulabook!=null:
-		player.pouch.set_ingredients(p1_pouch.get_ingredients())
-		player.formulabook.set_formulas(p1_formulabook.get_formulas())
+func initialize_player(player_name):
+	match player_name:
+		"Player":
+			player = get_tree().get_root().get_node("/root/World/YSort/Player")
+			emit_signal("player_initialized", player)
+			if p1_pouch!= null and p1_formulabook!=null:
+				player.pouch.set_ingredients(p1_pouch.get_ingredients())
+				player.formulabook.set_formulas(p1_formulabook.get_formulas())
+		"Player2":
+			player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
+			emit_signal("player2_initialized", player2)
+			if p2_pouch!= null and p2_formulabook!=null:
+				player2.pouch.set_ingredients(p2_pouch.get_ingredients())
+				player2.formulabook.set_formulas(p2_formulabook.get_formulas())
+				print('player 2 initialized')
+			player2_data[0] = player2.pouch
+			player2_data[1] = player2.formulabook
 
-func reinitialize_player(pouch, formulabook):
-	player = get_tree().get_root().get_node("/root/World/YSort/Player")
-	emit_signal("player_reinitialized", player) 
-	player.pouch.set_ingredients(pouch.get_ingredients())
-	player.formulabook.set_formulas(formulabook.get_formulas())
+func reinitialize_player(player_name, pouch, formulabook):
+	match player_name:
+		"Player":
+			player = get_tree().get_root().get_node("/root/World/YSort/Player")
+			emit_signal("player_reinitialized", player) 
+			player.pouch.set_ingredients(pouch.get_ingredients())
+			player.formulabook.set_formulas(formulabook.get_formulas())
+		"Player2":
+			player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
+			emit_signal("player2_reinitialized", player2) 
+			player2.pouch.set_ingredients(pouch.get_ingredients())
+			player2.formulabook.set_formulas(formulabook.get_formulas())
 
 func initialize_player_2():
 	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
