@@ -161,7 +161,7 @@ func display_message_popup(message):
 	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(message)
 
 func reset_input_after_dialog():
-	GameManager.player1.check_attack_input()
+	GameManager.player.check_attack_input()
 	if GameManager.multiplayer_2:
 		GameManager.player2.check_attack_input()
 

@@ -7,12 +7,9 @@ onready var healthBar = $HealthTexture
 onready var healthBack = $HealthBack
 
 func _ready():
-#	if !GameManager.multiplayer_2:
-#		queue_free()
-#		return
-	$hp.set_text(str(health) + "/" + str(max_health))
 	self.max_health = Player2Stats.max_health
 	self.health = Player2Stats.health
+	$hp.set_text(str(health) + "/" + str(max_health))
 # warning-ignore:return_value_discarded
 	Player2Stats.connect("health_changed", self, "set_health") # connecting to the "health_changed" signal to the UI, connecting the value passed to the "set_health" function
 # warning-ignore:return_value_discarded

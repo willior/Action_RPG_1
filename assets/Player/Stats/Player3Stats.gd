@@ -1,7 +1,6 @@
 extends "res://assets/Player/Stats/PlayerStats.gd"
 
 func save():
-	print('Player3Stats save()')
 	var player3_stats = {
 		"vitality": vitality,
 		"health": health,

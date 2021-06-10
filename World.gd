@@ -53,13 +53,9 @@ func _input(event):
 		GameManager.quit_to_title()
 	
 	if event.is_action_pressed("test1"):
-		GameManager.player.formulabook.add_formula("Flash")
-		GameManager.player.formulabook.add_formula("Heal")
-		GameManager.player.formulabook.add_formula("Fury")
+		GameManager.player.stats.health -= 10
 		if GameManager.multiplayer_2:
-			GameManager.player2.formulabook.add_formula("Flash")
-			GameManager.player2.formulabook.add_formula("Heal")
-			GameManager.player2.formulabook.add_formula("Fury")
+			GameManager.player2.stats.health -= 10
 	
 	if event.is_action_pressed("test2"):
 		GameManager.player.level_up()
@@ -67,12 +63,17 @@ func _input(event):
 			GameManager.player2.level_up()
 	
 	if event.is_action_pressed("test3"):
-		print('adding ingredients...')
+		GameManager.player.formulabook.add_formula("Flash")
+		GameManager.player.formulabook.add_formula("Heal")
+		GameManager.player.formulabook.add_formula("Fury")
 		GameManager.player.pouch.add_ingredient("Rock", 20)
 		GameManager.player.pouch.add_ingredient("Clay", 10)
 		GameManager.player.pouch.add_ingredient("Water", 20)
 		GameManager.player.pouch.add_ingredient("Salt", 10)
 		if GameManager.multiplayer_2:
+			GameManager.player2.formulabook.add_formula("Flash")
+			GameManager.player2.formulabook.add_formula("Heal")
+			GameManager.player2.formulabook.add_formula("Fury")
 			GameManager.player2.pouch.add_ingredient("Rock", 20)
 			GameManager.player2.pouch.add_ingredient("Clay", 10)
 			GameManager.player2.pouch.add_ingredient("Water", 20)
@@ -91,20 +92,8 @@ func _input(event):
 			print('start discarded')
 			return
 		if Player1Stats.dead:
-			print('resuming')
-			music.stream_paused = false
-			get_tree().paused = false
 			get_node("/root/World/GUI/GameOver").queue_free()
-			get_node("/root/World/GUI/HealthUI1").visible = true
-			get_node("/root/World/GUI/ExpBar1").visible = true
-			get_node("/root/World/GUI/StaminaBar1").visible = true
-			get_node("/root/World/GUI/FormulaUI1").visible = true
-			get_node("/root/World/YSort/Player").visible = true
-			Player1Stats.health += Player1Stats.max_health
-			get_node("/root/World/GUI/HealthUI1/HealthBack").value = Player1Stats.health
-			Player1Stats.continue_count += 1
-			Player1Stats.dead = false
-			Player1Stats.experience -= (Player1Stats.experience_required / 10)
+			GameManager.quit_to_title()
 		elif get_tree().paused == false:
 			open_pause_menu(GameManager.player)
 	if event.is_action_pressed("start_2"):
@@ -112,20 +101,8 @@ func _input(event):
 			print('start discarded: ', Global.changingScene)
 			return
 		if Player2Stats.dead:
-			print('resuming')
-			music.stream_paused = false
-			get_tree().paused = false
 			get_node("/root/World/GUI/GameOver").queue_free()
-			get_node("/root/World/GUI/HealthUI2").visible = true
-			get_node("/root/World/GUI/ExpBar2").visible = true
-			get_node("/root/World/GUI/StaminaBar2").visible = true
-			get_node("/root/World/GUI/FormulaUI2").visible = true
-			get_node("/root/World/YSort/Player2").visible = true
-			Player2Stats.health += Player2Stats.max_health
-			get_node("/root/World/GUI/HealthUI2/HealthBack").value = Player2Stats.health
-			Player2Stats.continue_count += 1
-			Player2Stats.dead = false
-			Player2Stats.experience -= (Player2Stats.experience_required / 10)
+			GameManager.quit_to_title()
 		elif get_tree().paused == false:
 			open_pause_menu(GameManager.player2)
 

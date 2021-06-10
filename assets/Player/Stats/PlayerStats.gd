@@ -140,6 +140,8 @@ func default_stats():
 	self.experience = 0
 	self.experience_required = 100
 	self.experience_total = 0
+	self.dying = false
+	self.dead = false
 
 func set_status(value):
 	status = value
@@ -198,9 +200,7 @@ func set_final_health(value):
 func set_dying(value):
 	dying = value
 	if value:
-		# self.stamina = 0
 		self.status = "slow"
-		# self.status = "sweating"
 	else:
 		self.status = "default_speed"
 	
@@ -210,7 +210,6 @@ func set_dead(value):
 	dead = value
 	if dead:
 		emit_signal("no_health")
-		# print('setting dead')
 
 func increment_endurance():
 	self.endurance += 1

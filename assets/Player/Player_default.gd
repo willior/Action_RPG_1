@@ -108,6 +108,7 @@ onready var charge = $ChargeUI
 onready var bamboo = $BambooAudio
 
 signal player_saved
+signal player_dead
 
 func _ready():
 	if Global.get_attribute("location") != null:
@@ -264,13 +265,14 @@ func move_state(delta):
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.speed_mod), stats.acceleration * delta)
+		
 		if GameManager.multiplayer_2:
+			# Global.check_players_distance()
 			if position.x - GameManager.player2.position.x > 288 or position.x - GameManager.player2.position.x < -288 or position.y - GameManager.player2.position.y > 160 or position.y - GameManager.player2.position.y < -136:
 				GameManager.player2.position = position
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
-		
 	move()
 	
 	if Input.is_action_just_pressed(player_inputs.examine): # F
@@ -286,15 +288,9 @@ func move_state(delta):
 			
 	if Input.is_action_just_pressed(player_inputs.next): # R
 		formulabook.advance_selected_formula()
-#		inventory.advance_selected_item()
-#		interactHitbox.disabled = true
-#		interactHitbox.disabled = false
 		
 	if Input.is_action_just_pressed(player_inputs.previous): # E
 		formulabook.previous_selected_formula()
-#		inventory.previous_selected_item()
-#		interactHitbox.disabled = true
-#		interactHitbox.disabled = false
 
 	if Input.is_action_pressed(player_inputs.attack):
 		if !talkTimer.is_stopped():
@@ -856,15 +852,11 @@ func game_over():
 	get_node("/root/World/Music").stream_paused = true
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
-	get_node("/root/World/GUI/HealthUI1").visible = false
-	get_node("/root/World/GUI/ExpBar1").visible = false
-	get_node("/root/World/GUI/StaminaBar1").visible = false
-	get_node("/root/World/GUI/FormulaUI1").visible = false
-#	for d in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").get_children():
-#		d.queue_free()
-	self.visible = false
 	get_tree().paused = true
-	
+	emit_signal("player_dead", name)
+	get_node("/root/World/GUI").hide_UI_elements()
+	self.visible = false
+
 func pickup_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
 	move()

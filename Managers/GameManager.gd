@@ -237,6 +237,10 @@ func quit_to_title():
 	Global.goto_scene("res://assets/System/MainMenu.tscn")
 	reset_resources()
 	PlayerLog.reset_player_log()
+	Player1Stats.default_stats()
+	Player2Stats.default_stats()
+	P1FormulaData.default_formula_data()
+	P2FormulaData.default_formula_data()
 
 # warning-ignore:unused_argument
 func _on_player_inventory_changed(inventory):
