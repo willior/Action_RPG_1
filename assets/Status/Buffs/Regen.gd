@@ -1,5 +1,5 @@
 extends Node2D
-
+var buff
 const Icon = preload("res://assets/UI/Status/Buffs/RegenIcon.tscn")
 var duration # number of ticks
 var potency # damage per tick

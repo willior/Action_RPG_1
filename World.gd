@@ -52,7 +52,7 @@ func _input(event):
 	if event.is_action_pressed("quit_game"):
 		GameManager.quit_to_title()
 	
-	if event.is_action_pressed("test1"): # T
+	if event.is_action_pressed("test1"):
 		GameManager.player.formulabook.add_formula("Flash")
 		GameManager.player.formulabook.add_formula("Heal")
 		GameManager.player.formulabook.add_formula("Fury")
@@ -61,15 +61,12 @@ func _input(event):
 			GameManager.player2.formulabook.add_formula("Heal")
 			GameManager.player2.formulabook.add_formula("Fury")
 	
-	if event.is_action_pressed("test2"): # Y
-#		print("p1 pouch: ", player.pouch._ingredients)
-#		if GameManager.multiplayer_2:
-#			print("p2 pouch: ", player2.pouch._ingredients)
+	if event.is_action_pressed("test2"):
 		GameManager.player.level_up()
 		if GameManager.multiplayer_2:
 			GameManager.player2.level_up()
 	
-	if event.is_action_pressed("test3"): # U
+	if event.is_action_pressed("test3"):
 		print('adding ingredients...')
 		GameManager.player.pouch.add_ingredient("Rock", 20)
 		GameManager.player.pouch.add_ingredient("Clay", 10)
@@ -81,8 +78,10 @@ func _input(event):
 			GameManager.player2.pouch.add_ingredient("Water", 20)
 			GameManager.player2.pouch.add_ingredient("Salt", 10)
 	
-	if event.is_action_pressed("test4"): # O
-		print(PlayerLog.examined_list)
+	if event.is_action_pressed("test4"):
+		StatusHandler.remove_buffs(GameManager.player)
+		if GameManager.multiplayer_2:
+			StatusHandler.remove_buffs(GameManager.player2)
 	
 	if event.is_action_pressed("select_2"):
 		GameManager.multiplayer_2_toggle()
@@ -108,7 +107,6 @@ func _input(event):
 			Player1Stats.experience -= (Player1Stats.experience_required / 10)
 		elif get_tree().paused == false:
 			open_pause_menu(GameManager.player)
-
 	if event.is_action_pressed("start_2"):
 		if !GameManager.multiplayer_2 or Global.dialogOpen or Global.chapter_name or Global.changingScene or (Player2Stats.dying and !Player2Stats.dead):
 			print('start discarded: ', Global.changingScene)

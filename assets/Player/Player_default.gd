@@ -821,6 +821,7 @@ func _on_Hurtbox_invincibility_ended():
 	
 func dying_effect(value):
 	if value && !dying:
+		StatusHandler.remove_buffs(self)
 		Engine.time_scale = 0.6
 		set_collision_mask_bit(10, false)
 		var heartbeat = Heartbeat.instance()
@@ -861,8 +862,6 @@ func game_over():
 	get_node("/root/World/GUI/FormulaUI1").visible = false
 #	for d in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").get_children():
 #		d.queue_free()
-#	for b in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").get_children():
-#		b.queue_free()
 	self.visible = false
 	get_tree().paused = true
 	

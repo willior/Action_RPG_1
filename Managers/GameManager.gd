@@ -79,6 +79,9 @@ func reinitialize_player(player_name, pouch, formulabook):
 
 func multiplayer_2_toggle():
 	if multiplayer_2: # OFF TOGGLE
+		if player2.state != 0:
+			print('player2 tried quitting while not idle; returning')
+			return
 		player2_data[0] = player2.pouch
 		player2_data[1] = player2.formulabook
 		var REMOTE2D = load("res://assets/System/RemoteTransform2D.tscn")
@@ -229,6 +232,7 @@ func reset_resources():
 	p2_formulabook = null
 
 func quit_to_title():
+	Engine.time_scale = 1
 	get_tree().paused = false
 	Global.goto_scene("res://assets/System/MainMenu.tscn")
 	reset_resources()

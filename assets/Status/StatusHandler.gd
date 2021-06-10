@@ -57,3 +57,9 @@ func apply_status(status, body):
 			pass
 		"Ablaze":
 			pass
+
+func remove_buffs(body):
+	var status_display = body.get_node("StatusDisplay")
+	for b in status_display.get_children():
+		if "buff" in status_display.get_node(b.name):
+			b.queue_free()

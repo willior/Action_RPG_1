@@ -9,7 +9,6 @@ var duration
 var potency
 var amount
 var knockback_vector = Vector2.ZERO
-
 var status = ["Regen", 1]
 var element = 9
 var formula = true

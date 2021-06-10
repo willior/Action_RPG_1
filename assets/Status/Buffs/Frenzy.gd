@@ -1,5 +1,5 @@
 extends Node2D
-
+var buff
 const Icon = preload("res://assets/UI/Status/Buffs/FrenzyIcon.tscn")
 var duration
 var potency
