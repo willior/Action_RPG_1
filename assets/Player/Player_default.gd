@@ -16,6 +16,7 @@ const pouch_resource = preload("res://assets/Player/Pouch.gd")
 var pouch = pouch_resource.new()
 const formulabook_resource = preload("res://assets/Player/FormulaBook.gd")
 var formulabook = formulabook_resource.new()
+var inventory_ref = "inventory"
 
 var ingredient1_OK : bool
 var ingredient2_OK : bool
@@ -113,9 +114,9 @@ func _ready():
 		position = Global.get_attribute("location")
 	else:
 		position = get_tree().get_root().get_node("/root/World/Map").player_spawn_pos
-	if Global.get_attribute("inventory") != null:
-		pouch.set_ingredients(Global.get_attribute("inventory")[0].get_ingredients())
-		formulabook.set_formulas(Global.get_attribute("inventory")[1].get_formulas())
+	if Global.get_attribute(inventory_ref) != null:
+		pouch.set_ingredients(Global.get_attribute(inventory_ref)[0].get_ingredients())
+		formulabook.set_formulas(Global.get_attribute(inventory_ref)[1].get_formulas())
 		GameManager.reinitialize_player(name, pouch, formulabook)
 	else:
 		GameManager.initialize_player(name)

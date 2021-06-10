@@ -61,21 +61,21 @@ func reinitialize_player(player_name, pouch, formulabook):
 			player2.pouch.set_ingredients(pouch.get_ingredients())
 			player2.formulabook.set_formulas(formulabook.get_formulas())
 
-func initialize_player_2():
-	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
-	emit_signal("player2_initialized", player2)
-	if p2_pouch!= null and p2_formulabook!=null:
-		player2.pouch.set_ingredients(p2_pouch.get_ingredients())
-		player2.formulabook.set_formulas(p2_formulabook.get_formulas())
-		print('player 2 initialized')
-	player2_data[0] = player2.pouch
-	player2_data[1] = player2.formulabook
-
-func reinitialize_player_2(pouch, formulabook):
-	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
-	emit_signal("player2_reinitialized", player2) 
-	player2.pouch.set_ingredients(pouch.get_ingredients())
-	player2.formulabook.set_formulas(formulabook.get_formulas())
+#func initialize_player_2():
+#	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
+#	emit_signal("player2_initialized", player2)
+#	if p2_pouch!= null and p2_formulabook!=null:
+#		player2.pouch.set_ingredients(p2_pouch.get_ingredients())
+#		player2.formulabook.set_formulas(p2_formulabook.get_formulas())
+#		print('player 2 initialized')
+#	player2_data[0] = player2.pouch
+#	player2_data[1] = player2.formulabook
+#
+#func reinitialize_player_2(pouch, formulabook):
+#	player2 = get_tree().get_root().get_node("/root/World/YSort/Player2")
+#	emit_signal("player2_reinitialized", player2) 
+#	player2.pouch.set_ingredients(pouch.get_ingredients())
+#	player2.formulabook.set_formulas(formulabook.get_formulas())
 
 func multiplayer_2_toggle():
 	if multiplayer_2: # OFF TOGGLE
@@ -91,11 +91,34 @@ func multiplayer_2_toggle():
 	else: # ON TOGGLE
 		multiplayer_2 = true
 		player.get_node("RemoteTransform2D").queue_free()
-		player2 = load("res://assets/Player/Player2.tscn").instance()
+		load_player2()
 		get_tree().get_root().get_node("/root/World/YSort").add_child(player2)
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 1
 		player2.global_position = player.global_position
 	get_tree().get_root().get_node("/root/World/GUI").toggle_multiplayer_gui()
+
+func load_player2():
+	player2 = load("res://assets/Player/Player.tscn").instance()
+	player2.name = "Player2"
+	player2.stats = Player2Stats
+	player2.formulaData = P2FormulaData
+	player2.inventory_ref = "inventory_2"
+	player2.get_node("Sprite").texture = load("res://assets/Player/Player2.png")
+	player2.player_inputs = {
+		"left": "left_2",
+		"right": "right_2",
+		"up": "up_2",
+		"down": "down_2",
+		"attack": "attack_2",
+		"roll": "roll_2",
+		"examine": "examine_2",
+		"alchemy": "alchemy_2",
+		"previous": "previous_2",
+		"next": "next_2",
+		"start": "start_2",
+		"select": "select_2"
+	}
+	return player2
 
 func new_game():
 	PlayerLog.reset_player_log()

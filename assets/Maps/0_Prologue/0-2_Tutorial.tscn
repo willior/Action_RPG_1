@@ -191,7 +191,7 @@ region_filter_clip = true
 [node name="Exit2" parent="Map" instance=ExtResource( 9 )]
 position = Vector2( 331, 70 )
 map_file = "res://assets/Maps/Test/Test.tscn"
-selected_location = Vector2( 250, 64 )
+selected_location = Vector2( 48, 48 )
 
 [node name="CollisionShape2D" parent="Map/Exit2" index="0"]
 shape = SubResource( 4 )

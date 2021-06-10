@@ -19,12 +19,7 @@ func _ready():
 	var root = get_tree().get_root()
 	current_scene = root.get_child( root.get_child_count() -1 )
 	rng.randomize()
-		
-func update_player():
-	player1 = get_node("/root/World/YSort/Player")
-	if GameManager.multiplayer_2:
-		player2 = get_node("/root/World/YSort/Player2")
-		
+
 func goto_scene(path, attributes=null):
 	_attributes = attributes
 	# This function will usually be called from a signal callback,
@@ -166,8 +161,9 @@ func display_message_popup(message):
 	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(message)
 
 func reset_input_after_dialog():
-	update_player()
-	player1.check_attack_input()
+	GameManager.player1.check_attack_input()
+	if GameManager.multiplayer_2:
+		GameManager.player2.check_attack_input()
 
 func change_floor(body, destination_z_index):
 	# print(body.name, " z_index: ", body.z_index, " to ", destination_z_index)
