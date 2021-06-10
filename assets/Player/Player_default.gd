@@ -945,22 +945,17 @@ func set_interact_notice(value):
 	elif !value:
 		interactNotice.visible = false
 
-# function that runs when the player's InteractHitbox detects an area entererd
 func _on_InteractHitbox_area_entered(area):
-	# gets the object in the interact bounding box
+	print(area.get_parent().name, " entered interaction zone")
 	if dying:
 		return
-	#interactObject = area.get_owner()
 	interactObject = area.get_parent()
 	examining = true
-	# displays notice is object not examined
 	if !interactObject.examined:
 		self.noticeDisplay = true
-	# displays talk notice if the object is talkable
 	if interactObject.talkable:
 		self.talkNoticeDisplay = true
 		talking = true
-	# else displays interact notice if the object is interactable
 	if interactObject.interactable:
 		self.interactNoticeDisplay = true
 		interacting = true
@@ -970,21 +965,22 @@ func _on_InteractHitbox_area_entered(area):
 #			using_item = true
 #			print('using_item = true')
 
-func _on_InteractHitbox_area_exited(_area):
-	self.noticeDisplay = false
-	self.talkNoticeDisplay = false
-	self.interactNoticeDisplay = false
-	if examining:
-		examining = false
-	if talking:
-		talking = false
-	if interacting:
-		interacting = false
-	if using_item:
-		using_item = false
-	if interactObject:
+func _on_InteractHitbox_area_exited(area):
+	print(area.get_parent().name, " left interaction zone")
+	if interactObject == area.get_parent():
 		interactObject = null
-	reset_interaction()
+		self.noticeDisplay = false
+		self.talkNoticeDisplay = false
+		self.interactNoticeDisplay = false
+		if examining:
+			examining = false
+		if talking:
+			talking = false
+		if interacting:
+			interacting = false
+		if using_item:
+			using_item = false
+		reset_interaction()
 	
 func reset_interaction():
 	interactHitbox.set_deferred("disabled", true)
