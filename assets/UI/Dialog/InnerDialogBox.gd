@@ -1,7 +1,5 @@
 extends Control
 
-# export(String, FILE, "*.json") var extenal_file = ''
-
 const BUTTON = preload("Dialog_Button.tscn")
 onready var label = $Text/RichTextLabel
 
@@ -15,10 +13,7 @@ var dialog_object_path
 var dialog_script
 
 func _ready():
-#	if extenal_file != '':
-#		dialog_script = file(extenal_file)
 	event_handler(dialog_script[dialog_index])
-	# get_tree().paused = true
 	Global.dialogOpen = true
 
 func _process(_delta):
@@ -27,44 +22,22 @@ func _process(_delta):
 	else:
 		$OptionsRect.visible = false
 
-#func file(file_path):
-#	# Reading a json file to use as a dialog.
-#	var file = File.new()
-#	var fileExists = file.file_exists(file_path)
-#	var dict = []
-#	if fileExists:
-#		file.open(file_path, File.READ)
-#		var content = file.get_as_text()
-#		dict = parse_json(content)
-#		file.close()
-#		return dict
-#	else:
-#		push_error("File " + file_path  + " doesn't exist. ")
-#	return dict
-	
 func parse_text(text):
-	# This will parse the text and automatically format some of your available variables
 	var end_text = text
 	var c_variable
 	for g in Global.custom_variables:
 		if Global.custom_variables.has(g):
 			c_variable = Global.custom_variables[g]
-			# If it is a dictionary, get the label key
 			if typeof(c_variable) == TYPE_DICTIONARY:
 				if c_variable.has('label'):
 					if '.value' in end_text:
 						end_text = end_text.replace(g + '.value', c_variable['value'])
 					end_text = end_text.replace('[' + g + ']', c_variable['label'])
-			# Otherwise, just replace the value
 			else:
 				end_text = end_text.replace('[' + g + ']', c_variable)
 	return end_text
 	
 func _input(event):
-#	if Input.is_action_just_pressed("attack") || Input.is_action_just_pressed("examine") || Input.is_action_just_pressed("item"):
-#		get_tree().set_input_as_handled()
-#		load_dialog()
-		
 	if event.is_action_pressed("ui_accept"):
 		return
 # warning-ignore:unreachable_code
@@ -79,16 +52,10 @@ func _input(event):
 			load_dialog()
 		
 func update_name(event):
-	# search for the name key and parse it into the NameLabel
 	if event.has('name'):
 		$Text/NameLabel.bbcode_text = parse_text(event['name'])
-#		if '[name]' in event['name']:
-#			$CloseUp.visible = true
-#		else:
-#			$CloseUp.visible = false
 	else:
 		$Text/NameLabel.bbcode_text = ''
-		# $CloseUp.visible = false
 
 func update_text(text):
 	label.bbcode_text = parse_text(text)

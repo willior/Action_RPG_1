@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/Tilesets/GrassBasicLight.png" type="Texture" id=1]
 [ext_resource path="res://assets/Audio/Hello_drone.ogg" type="AudioStream" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/World/Trees/Tree_1_orange.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/World/Trees/Tree_1_yellow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/System/SavePoint/SavePoint.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/Tilesets/GrassBasicDark.png" type="Texture" id=11]
 [ext_resource path="res://assets/Tilesets/MountainBorder.tres" type="TileSet" id=12]
@@ -773,6 +774,9 @@ position = Vector2( 736, 472 )
 
 [node name="Tree_3_tall_green97" parent="YSort/Trees" instance=ExtResource( 13 )]
 position = Vector2( 741, 457 )
+
+[node name="SavePoint" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 256, 192 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )

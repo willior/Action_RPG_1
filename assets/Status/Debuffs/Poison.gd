@@ -1,6 +1,5 @@
 extends Node2D
-
-# const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
+var debuff
 const Icon = preload("res://assets/UI/Status/Debuffs/PoisonIcon.tscn")
 var duration = 16 # number of ticks
 var potency = 1 # damage per tick

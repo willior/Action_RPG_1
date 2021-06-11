@@ -130,4 +130,5 @@ stream = ExtResource( 3 )
 
 [node name="AudioMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+
 [connection signal="timeout" from="TimerText" to="." method="_on_TimerText_timeout"]

@@ -63,3 +63,9 @@ func remove_buffs(body):
 	for b in status_display.get_children():
 		if "buff" in status_display.get_node(b.name):
 			b.queue_free()
+
+func remove_debuffs(body):
+	var status_display = body.get_node("StatusDisplay")
+	for d in status_display.get_children():
+		if "debuff" in status_display.get_node(d.name):
+			d.queue_free()

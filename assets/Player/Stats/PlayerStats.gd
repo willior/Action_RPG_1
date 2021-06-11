@@ -143,6 +143,10 @@ func default_stats():
 	self.dying = false
 	self.dead = false
 
+func recovery():
+	self.health = max_health
+	self.stamina = max_stamina
+
 func set_status(value):
 	status = value
 	match status:

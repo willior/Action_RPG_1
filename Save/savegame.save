@@ -1,7 +1,7 @@
-{"player1_stats":{"defense":4,"dexterity":4,"endurance":4,"experience":9,"experience_required":100,"experience_total":9,"health":60,"level":1,"magic":4,"max_health":60,"max_stamina":60,"speed":4,"stamina":60,"strength":4,"vitality":4}}
-{"player2_stats":{"defense":4,"dexterity":4,"endurance":4,"experience":9,"experience_required":100,"experience_total":9,"health":60,"level":1,"magic":4,"max_health":60,"max_stamina":60,"speed":4,"stamina":60,"strength":4,"vitality":4}}
+{"player1_stats":{"defense":5,"dexterity":4,"endurance":5,"experience":9,"experience_required":100,"experience_total":9,"health":60,"level":2,"magic":4,"max_health":60,"max_stamina":69,"speed":4,"stamina":69,"strength":4,"vitality":4}}
+{"player2_stats":{"defense":5,"dexterity":4,"endurance":4,"experience":9,"experience_required":100,"experience_total":9,"health":69,"level":2,"magic":4,"max_health":69,"max_stamina":60,"speed":4,"stamina":60,"strength":4,"vitality":5}}
 {"player3_stats":{"defense":4,"dexterity":4,"endurance":12,"experience":82,"experience_required":100,"experience_total":82,"health":180,"level":1,"magic":4,"max_health":180,"max_stamina":180,"speed":4,"stamina":180,"strength":4,"vitality":12}}
 {"player1_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",1,50,100,50],"Heal":["Heal",1,0,100,0]}}
 {"player2_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,0,100,0]}}
 {"chapter_number":0,"examined_list":[],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
-{"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}
+{"map_filename":"res://assets/Maps/Test/Test.tscn"}
