@@ -55,7 +55,6 @@ func _input(event):
 			get_tree().set_input_as_handled()
 			return
 		elif waiting_for_input:
-			print('stats remaining = ', stats_remaining)
 			if stats_remaining == 0:
 				waiting_for_input = false
 				return
@@ -254,10 +253,7 @@ func _on_level_selected(value):
 		$TimerDelaySelect.start()
 		yield($TimerDelaySelect, "timeout")
 		load_dialog()
-		
-	else:
-		print(value, ' incremented... ', stats_remaining, ' stats remaining.')
-		
+
 func reset_level_stats():
 	print('resetting level stats.')
 	stats_remaining = default_stats_remaining

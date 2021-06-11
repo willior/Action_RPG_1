@@ -1,7 +1,6 @@
-[gd_scene load_steps=167 format=2]
+[gd_scene load_steps=169 format=2]
 
 [ext_resource path="res://assets/Player/Player_default.gd" type="Script" id=1]
-[ext_resource path="res://assets/Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://assets/Player/SwordHitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/TalkNotice.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.gd" type="Script" id=5]
@@ -19,6 +18,30 @@
 [ext_resource path="res://assets/Audio/Player/Sword_Attack_1.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/Player/Abilities/Cast.tres" type="Animation" id=19]
 [ext_resource path="res://assets/Audio/Player/Clap2.wav" type="AudioStream" id=21]
+
+[sub_resource type="Shader" id=148]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	vec4 white_color = vec4(1.0, 1.0, 1.0, previous_color.a);
+	vec4 new_color = previous_color;
+	if (active == true) {
+		new_color = white_color;
+	}
+	COLOR = new_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=149]
+resource_local_to_scene = true
+shader = SubResource( 148 )
+shader_param/active = false
+
+[sub_resource type="StreamTexture" id=150]
+load_path = "res://.import/Player.png-61b615209b2db0e0e302f774418adebd.stex"
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -2143,7 +2166,7 @@ tracks/0/path = NodePath("Sprite:material:shader_param/active")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = false
+tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05 ),
 "transitions": PoolRealArray( 1, 1 ),
@@ -2177,11 +2200,12 @@ position = Vector2( 0, 1 )
 texture = ExtResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 149 )
 position = Vector2( 0, -9 )
-texture = ExtResource( 2 )
+texture = SubResource( 150 )
 hframes = 60
 vframes = 5
-frame = 18
+frame = 131
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2289,7 +2313,7 @@ position = Vector2( 0, -20 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 1.5708
+rotation = -1.5708
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 process_priority = -1
@@ -2306,6 +2330,10 @@ shape = SubResource( 143 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HitboxPivot/SwordHitbox"]
 stream = ExtResource( 18 )
+
+[node name="HitboxTimer" type="Timer" parent="HitboxPivot/SwordHitbox"]
+wait_time = 0.1
+one_shot = true
 
 [node name="InteractHitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2( 11, -4.00543e-05 )
@@ -2342,6 +2370,7 @@ shape = SubResource( 145 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 21 )
+bus = "Delay"
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )

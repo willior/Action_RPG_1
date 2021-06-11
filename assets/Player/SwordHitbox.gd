@@ -44,15 +44,19 @@ func sword_attack_audio():
 		audio.stream = sword_attack
 	audio.play()
 
-func shade_begin():
+func enable_sword_hitbox(time=0.1):
+	print('sword hitbox on ', time)
 	set_deferred("monitorable", true)
+	$HitboxTimer.start(time)
+	yield($HitboxTimer, "timeout")
+	set_deferred("monitorable", false)
+
+func shade_begin():
+	enable_sword_hitbox(0.3)
 	knockback_vector = Vector2.ZERO
 	stats.dexterity_mod = 8
 	orig_damage = damage
 	damage = modify_damage(damage, 3)
-
-func shade_end():
-	reset_damage()
 
 func flash_whoosh_audio():
 	audio.stream = flash_whoosh
@@ -62,12 +66,9 @@ func flash_begin():
 	audio.stream = flash_swing
 	audio.play()
 	$CollisionShape2D.scale.x = 2
-	set_deferred("monitorable", true)
-	knockback_vector *= 1.5
+	enable_sword_hitbox()
+	knockback_vector *= 1.33
 	stats.dexterity_mod = 4
 	orig_damage = damage
 	damage = modify_damage(damage, 2)
 	status = ["Stun", 1.0]
-
-func flash_end():
-	reset_damage()

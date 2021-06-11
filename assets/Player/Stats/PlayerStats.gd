@@ -278,8 +278,13 @@ func set_dexterity_mod(value):
 
 func set_speed(value):
 	speed = value
-	self.attack_speed = 1 + (speed / 120)
-	charge_rate = 0.5 + (speed / 120)
+	max_speed = 100 + (speed / 2)
+	roll_speed = 200 + speed
+	shade_speed = 420 + (speed * 3)
+	self.attack_speed = 1 + (speed / 128)
+	charge_rate = 0.5 + (speed / 128)
+	self.iframes = 0.1 + (speed / 128)
+	print('iframes: ', iframes)
 	emit_signal("speed_changed", speed)
 
 func set_attack_speed(value):

@@ -1,5 +1,5 @@
 extends Node2D
-
+var debuff
 const Icon = preload("res://assets/UI/Status/Debuffs/StunIcon.tscn")
 onready var body = get_parent().get_parent()
 var duration = 2.0

@@ -415,12 +415,12 @@ func attack2_state(delta):
 	animationState.travel("Attack2")
 
 func attack1_stamina_drain():
-	swordHitbox.set_deferred("monitorable", true)
+	swordHitbox.enable_sword_hitbox()
 	stats.stamina -= stamina_attack_cost
 	swordHitbox.sword_attack_audio()
 
 func attack2_stamina_drain():
-	swordHitbox.set_deferred("monitorable", true)
+	swordHitbox.enable_sword_hitbox()
 	stats.stamina -= stamina_attack_cost/1.5
 	swordHitbox.sword_attack_audio()
 
@@ -449,7 +449,7 @@ func attack_animation_finished():
 func charge_state(_delta):
 	if stamina_regen_level > 0:
 		stamina_regen_reset()
-	stats.stamina -= 0.55
+	stats.stamina -= 0.4
 	if stats.stamina <= 0:
 		charge.stop_charge()
 		charge_reset()
@@ -507,7 +507,7 @@ func shade_stop():
 		)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
-	swordHitbox.shade_end()
+	swordHitbox.reset_damage()
 	shade_moving = false
 
 func flash_state(delta):
@@ -527,7 +527,7 @@ func flash_start():
 
 func flash_stop():
 	base_enemy_accuracy = 66
-	swordHitbox.flash_end()
+	swordHitbox.reset_damage()
 
 func player_state_reset():
 	base_enemy_accuracy = 66
@@ -581,8 +581,7 @@ func show_level_up_screen():
 func roll_stamina_drain():
 	stats.stamina -= 15
 	base_enemy_accuracy = 32
-	if hurtbox.timer.is_stopped(): 
-		hurtbox.start_invincibility(stats.iframes)
+	hurtbox.start_invincibility(min(stats.iframes, 0.35))
 
 # warning-ignore:unused_argument
 func roll_state(delta):
@@ -636,12 +635,8 @@ func roll_animation_finished():
 func backstep_stamina_drain():
 	stats.stamina -= 5
 	base_enemy_accuracy = 16
-	if hurtbox.timer.is_stopped(): 
-		hurtbox.start_invincibility(stats.iframes)
-	else:
-		pass
+	hurtbox.start_invincibility(min(stats.iframes, 0.24))
 
-# warning-ignore:unused_argument
 func backstep_state(delta):
 	if backstep_moving:
 		velocity = -dir_vector * (stats.roll_speed*0.66)
@@ -759,7 +754,7 @@ func _on_Hurtbox_area_entered(area):
 		if state != ACTION:
 			if state == STUN:
 				player_state_reset()
-				velocity = -dir_vector * (stats.roll_speed/4)
+				velocity = -dir_vector * 50
 				animationState.travel("Stun")
 				return
 			elif player_staggered:
@@ -794,7 +789,7 @@ func stun_state(delta):
 
 func hit_state(_delta):
 # warning-ignore:integer_division
-	velocity = -dir_vector * (stats.roll_speed/2)
+	velocity = -dir_vector * 100
 	animationState.travel("Hit")
 	move()
 
@@ -808,12 +803,10 @@ func hit_animation_finished():
 	state = MOVE
 
 func _on_Hurtbox_invincibility_started():
-	pass
-	# blinkAnimationPlayer.play("Start")
+	blinkAnimationPlayer.play("Start")
 
 func _on_Hurtbox_invincibility_ended():
-	pass
-	# blinkAnimationPlayer.play("Stop")
+	blinkAnimationPlayer.play("Stop")
 	
 func dying_effect(value):
 	if value && !dying:
@@ -937,7 +930,6 @@ func set_interact_notice(value):
 		interactNotice.visible = false
 
 func _on_InteractHitbox_area_entered(area):
-	print(area.get_parent().name, " entered interaction zone")
 	if dying:
 		return
 	interactObject = area.get_parent()
@@ -957,7 +949,6 @@ func _on_InteractHitbox_area_entered(area):
 #			print('using_item = true')
 
 func _on_InteractHitbox_area_exited(area):
-	print(area.get_parent().name, " left interaction zone")
 	if interactObject == area.get_parent():
 		interactObject = null
 		self.noticeDisplay = false

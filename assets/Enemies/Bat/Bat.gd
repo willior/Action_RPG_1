@@ -56,7 +56,6 @@ onready var attackController = $AttackController
 onready var animationPlayer = $AnimationPlayer
 onready var audio = $AudioStreamPlayer
 onready var enemyHealth = $EnemyHealth
-# onready var player = GameManager.player()
 
 func _ready():
 # warning-ignore:return_value_discarded
