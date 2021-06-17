@@ -219,7 +219,6 @@ func _on_PauseScreen_gui_input(event):
 	if closing or moving:
 		return
 	elif event.is_action_pressed(cancel) or event.is_action_pressed(start):
-		hide_status_display()
 		close_pause_menu()
 
 func close_pause_menu():

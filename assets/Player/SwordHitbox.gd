@@ -45,7 +45,6 @@ func sword_attack_audio():
 	audio.play()
 
 func enable_sword_hitbox(time=0.1):
-	print('sword hitbox on ', time)
 	set_deferred("monitorable", true)
 	$HitboxTimer.start(time)
 	yield($HitboxTimer, "timeout")

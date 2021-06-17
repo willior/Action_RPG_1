@@ -372,13 +372,13 @@ func apply_status(status):
 
 func move():
 	if GameManager.multiplayer_2:
-		if position.x - GameManager.player2.position.x > 272:
+		if position.x - GameManager.player2.position.x > 360:
 			GameManager.player2.position.x += 1
-		if position.x - GameManager.player2.position.x < -272:
+		if position.x - GameManager.player2.position.x < -360:
 			GameManager.player2.position.x -= 1
-		if position.y - GameManager.player2.position.y > 136:
+		if position.y - GameManager.player2.position.y > 200:
 			GameManager.player2.position.y += 1
-		if position.y - GameManager.player2.position.y < -136:
+		if position.y - GameManager.player2.position.y < -200:
 			GameManager.player2.position.y -= 1
 	velocity = move_and_slide(velocity)
 

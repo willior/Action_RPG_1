@@ -18,7 +18,6 @@ export var max_y = 32
 
 func _ready():
 	if GameManager.multiplayer_2:
-		# get_node("/root/World/YSort/Player/RemoteTransform2D").queue_free()
 		state = MULTI_2
 	else:
 		state = SOLO
@@ -34,8 +33,8 @@ func _process(delta):
 		SOLO:
 			pass
 		MULTI_2:
-			player1pos = get_node("/root/World/YSort/Player").position
-			player2pos = get_node("/root/World/YSort/Player2").position
+			player1pos = GameManager.player.position
+			player2pos = GameManager.player2.position
 			position = (player1pos + player2pos)/2
 	
 	time += delta
