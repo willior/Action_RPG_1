@@ -194,43 +194,10 @@ func set_world_collision(body, z_index):
 	else: # if it wasn't the player that changed floors, update the body (the enemy) only
 		Enemy.set_player_collision(body)
 
-func dying_effect(player, value):
-	if value and !player.dying:
-		player.dying = true
-		StatusHandler.remove_buffs(player)
-		Engine.time_scale = 0.6
-		Global.enable_exits(false)
-		if !has_node("/root/World/Heartbeat"):
-			var heartbeat = Heartbeat.instance()
-			get_node("/root/World/").add_child(heartbeat)
-		if !has_node("/root/World/GUI/Greyscale"):
-			var greyscale = Greyscale.instance()
-			get_node("/root/World/GUI").add_child(greyscale)
-		if !has_node("/root/World/GUI/Red"):
-			var redFlash = RedFlash.instance()
-			get_node("/root/World/GUI").add_child(redFlash)
-		get_node("/root/World/Music").stream_paused = true
-		get_node("/root/World/SFX").stream_paused = true
-		get_node("/root/World/SFX2").stream_paused = true
-	elif !value and player.dying:
-		player.dying = false
-		for p in get_tree().get_nodes_in_group("Players"):
-			if p.dying:
-				return
-		Engine.time_scale = 1
-		AudioServer.set_bus_effect_enabled(0, 0, false)
-		get_node("/root/World/Heartbeat").queue_free()
-		get_node("/root/World/GUI/Greyscale").queue_free()
-		get_node("/root/World/GUI/Red").queue_free()
-		get_node("/root/World/Music").stream_paused = false
-		get_node("/root/World/SFX").stream_paused = false
-		get_node("/root/World/SFX2").stream_paused = false
-		for p in get_tree().get_nodes_in_group("Players"):
-			if p.stats.leveling: # just_leveled:
-				p.start_level_timer()
-			else:
-				Global.enable_exits(true)
-
 func enable_exits(value):
+	print('enable_exits: ', value)
+	var opposite = false if value else true
 	for p in get_tree().get_nodes_in_group("Players"):
 		p.set_collision_mask_bit(10, value)
+	for e in get_tree().get_nodes_in_group("Exits"):
+		e.set_collision_mask_bit(0, opposite)

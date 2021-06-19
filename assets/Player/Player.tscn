@@ -2194,7 +2194,7 @@ position = Vector2( 0, -9 )
 texture = SubResource( 3 )
 hframes = 60
 vframes = 5
-frame = 131
+frame = 68
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2302,7 +2302,7 @@ position = Vector2( 0, -20 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = -1.5708
+rotation = 3.14159
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 process_priority = -1
@@ -2358,8 +2358,7 @@ position = Vector2( 0, -2 )
 shape = SubResource( 148 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 21 )
-bus = "Delay"
+stream = ExtResource( 18 )
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
@@ -2390,7 +2389,6 @@ wait_time = 0.4
 one_shot = true
 
 [node name="LevelTimer" type="Timer" parent="."]
-wait_time = 0.4
 
 [node name="Tween" type="Tween" parent="."]
 

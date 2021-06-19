@@ -283,7 +283,6 @@ func set_speed(value):
 	self.attack_speed = 1 + (speed / 128)
 	charge_rate = 0.5 + (speed / 128)
 	self.iframes = 0.1 + (speed / 128)
-	print('iframes: ', iframes)
 	emit_signal("speed_changed", speed)
 
 func set_attack_speed(value):

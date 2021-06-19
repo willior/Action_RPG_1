@@ -53,16 +53,7 @@ func _input(event):
 		GameManager.quit_to_title()
 	
 	if event.is_action_pressed("test1"):
-		GameManager.player.stats.health -= 100
-		if GameManager.multiplayer_2:
-			GameManager.player2.stats.health -= 100
-	
-	if event.is_action_pressed("test2"):
-		GameManager.player.level_up()
-		if GameManager.multiplayer_2:
-			GameManager.player2.level_up()
-	
-	if event.is_action_pressed("test3"):
+		print('1: giving P1 formulas/ingredients')
 		GameManager.player.formulabook.add_formula("Flash")
 		GameManager.player.formulabook.add_formula("Heal")
 		GameManager.player.formulabook.add_formula("Fury")
@@ -70,6 +61,8 @@ func _input(event):
 		GameManager.player.pouch.add_ingredient("Clay", 10)
 		GameManager.player.pouch.add_ingredient("Water", 20)
 		GameManager.player.pouch.add_ingredient("Salt", 10)
+	if event.is_action_pressed("test2"):
+		print('2: giving P2 formulas/ingredients')
 		if GameManager.multiplayer_2:
 			GameManager.player2.formulabook.add_formula("Flash")
 			GameManager.player2.formulabook.add_formula("Heal")
@@ -78,11 +71,29 @@ func _input(event):
 			GameManager.player2.pouch.add_ingredient("Clay", 10)
 			GameManager.player2.pouch.add_ingredient("Water", 20)
 			GameManager.player2.pouch.add_ingredient("Salt", 10)
-	
+		else:
+			print('no P2. cannot give ingredients.')
+	if event.is_action_pressed("test3"):
+		print('3: levelling P1')
+		GameManager.player.level_up()
 	if event.is_action_pressed("test4"):
-		StatusHandler.remove_buffs(GameManager.player)
+		print('4: leveling P2')
 		if GameManager.multiplayer_2:
-			StatusHandler.remove_buffs(GameManager.player2)
+			GameManager.player2.level_up()
+		else:
+			print('no P2. cannot level.')
+	if event.is_action_pressed("test5"):
+		print('5: damaging P1.')
+		GameManager.player.stats.health -= 1000
+	if event.is_action_pressed("test6"):
+		print('6: damaging P2.')
+		GameManager.player2.stats.health -= 1000
+	if event.is_action_pressed("test7"):
+		print('7: recovering P1 health.')
+		GameManager.player.stats.health += 1000
+	if event.is_action_pressed("test8"):
+		print('8: recovering P2 health.')
+		GameManager.player2.stats.health += 1000
 	
 	if event.is_action_pressed("select_2"):
 		GameManager.multiplayer_2_toggle()

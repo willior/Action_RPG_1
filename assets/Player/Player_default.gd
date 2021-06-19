@@ -101,6 +101,7 @@ onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
+onready var levelTimer = $LevelTimer
 onready var notice = $ExamineNotice
 onready var talkNotice = $TalkNotice
 onready var interactNotice = $InteractNotice
@@ -532,54 +533,6 @@ func player_state_reset():
 	base_enemy_accuracy = 66
 	swordHitbox.reset_damage()
 
-func enemy_killed(experience_from_kill):
-	stats.experience += experience_from_kill
-	stats.experience_total += experience_from_kill
-	while stats.experience >= stats.experience_required:
-		level_up()
-		stats.experience -= stats.experience_required
-		stats.experience_required = round(stats.experience_required * 1.618034)
-
-func level_up():
-	# just_leveled = true
-	stats.leveling = true
-	stats.level += 1
-	if stats.level < 11:
-		stats_to_allocate += 2
-	elif stats.level < 21:
-		stats_to_allocate += 3
-	elif stats.level < 31:
-		stats_to_allocate += 4
-	elif stats.level >= 31:
-		stats_to_allocate += 5
-	for p in get_tree().get_nodes_in_group("Players"):
-		if p.dying:
-			return
-		else:
-			start_level_timer()
-
-func start_level_timer():
-	Global.enable_exits(false)
-	$LevelTimer.start()
-	yield($LevelTimer, "timeout")
-	if stats.leveling: #just_leveled:
-		show_level_up_screen()
-
-func show_level_up_screen():
-	get_node("/root/World/Music").stream_paused = true
-	get_node("/root/World/SFX").stream_paused = true
-	get_node("/root/World/SFX2").stream_paused = true
-	var tweenGreyscale = TweenGreyscale.instance()
-	get_node("/root/World/GUI").add_child(tweenGreyscale)
-	var levelUpScreen = LevelUpScreen.instance()
-	levelUpScreen.player_stats = stats
-	levelUpScreen.stats_remaining = stats_to_allocate
-	stats_to_allocate = 0
-	get_node("/root/World/GUI").add_child(levelUpScreen)
-	#just_leveled = false
-	stats.leveling = false
-	Global.enable_exits(true)
-
 func roll_stamina_drain():
 	stats.stamina -= 15
 	base_enemy_accuracy = 32
@@ -809,13 +762,66 @@ func _on_Hurtbox_invincibility_started():
 
 func _on_Hurtbox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
-	
+
+func enemy_killed(experience_from_kill):
+	stats.experience += experience_from_kill
+	stats.experience_total += experience_from_kill
+	while stats.experience >= stats.experience_required:
+		level_up()
+		stats.experience -= stats.experience_required
+		stats.experience_required = round(stats.experience_required * 1.618034)
+
+func level_up():
+	# just_leveled = true
+	stats.leveling = true
+	stats.level += 1
+	if stats.level < 11:
+		stats_to_allocate += 2
+	elif stats.level < 21:
+		stats_to_allocate += 3
+	elif stats.level < 31:
+		stats_to_allocate += 4
+	elif stats.level >= 31:
+		stats_to_allocate += 5
+	for p in get_tree().get_nodes_in_group("Players"):
+		if p.dying:
+			return
+	start_level_timer()
+
+func start_level_timer():
+	Global.enable_exits(false)
+	levelTimer.start()
+	yield(levelTimer, "timeout")
+	if stats.leveling: #just_leveled:
+		show_level_up_screen()
+
+func show_level_up_screen():
+	get_node("/root/World/Music").stream_paused = true
+	get_node("/root/World/SFX").stream_paused = true
+	get_node("/root/World/SFX2").stream_paused = true
+	var tweenGreyscale = TweenGreyscale.instance()
+	get_node("/root/World/GUI").add_child(tweenGreyscale)
+	var levelUpScreen = LevelUpScreen.instance()
+	levelUpScreen.player_stats = stats
+	levelUpScreen.stats_remaining = stats_to_allocate
+	stats_to_allocate = 0
+	get_node("/root/World/GUI").add_child(levelUpScreen)
+	#just_leveled = false
+	stats.leveling = false
+	for p in get_tree().get_nodes_in_group("Players"):
+		if p.stats.leveling:
+			return
+	Global.enable_exits(true)
+
 func dying_effect(value):
 	if value && !dying:
 		dying = true
+		Global.enable_exits(false)
+		for p in get_tree().get_nodes_in_group("Players"):
+			if p.stats.leveling: # just_leveled:
+				p.levelTimer.stop()
 		StatusHandler.remove_buffs(self)
 		Engine.time_scale = 0.6
-		Global.enable_exits(false)
 		if !has_node("/root/World/Heartbeat"):
 			var heartbeat = Heartbeat.instance()
 			get_node("/root/World/").add_child(heartbeat)
