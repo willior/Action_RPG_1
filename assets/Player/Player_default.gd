@@ -539,7 +539,7 @@ func enemy_killed(experience_from_kill):
 	while stats.experience >= stats.experience_required:
 		level_up()
 		stats.experience -= stats.experience_required
-		stats.experience_required *= 1.618034
+		stats.experience_required = round(stats.experience_required * 1.618034)
 
 func level_up():
 	just_leveled = true

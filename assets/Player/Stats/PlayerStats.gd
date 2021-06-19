@@ -207,7 +207,6 @@ func set_dying(value):
 		self.status = "slow"
 	else:
 		self.status = "default_speed"
-	
 	emit_signal("player_dying", value)
 
 func set_dead(value):
