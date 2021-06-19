@@ -2,7 +2,9 @@
 
 [ext_resource path="res://assets/CollisionBoxes/Exit.gd" type="Script" id=1]
 
-[node name="Exit" type="Area2D"]
+[node name="Exit" type="Area2D" groups=[
+"Exits",
+]]
 pause_mode = 2
 monitorable = false
 collision_layer = 1024

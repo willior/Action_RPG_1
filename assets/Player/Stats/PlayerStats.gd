@@ -22,6 +22,7 @@ var level = 1 setget set_level
 var experience = 82 setget set_experience
 var experience_required = 100 setget set_max_experience
 var experience_total = 82
+var leveling = false setget set_leveling
 
 var max_health = vitality*15 setget set_max_health
 var health = max_health setget set_health
@@ -97,6 +98,7 @@ signal charge_level_changed(value)
 signal experience_changed(value)
 signal max_experience_changed(value)
 signal level_changed(value)
+signal player_leveling(value)
 signal cash_changed(value)
 
 func _ready():
@@ -191,10 +193,8 @@ func set_health(value):
 	health = clamp(value, 0, max_health)
 	if health <= 0 && !dying:
 		set_dying(true)
-		
 	elif dying && value > 0:
 		set_dying(false)
-		
 	emit_signal("health_changed", health) # every time the health is set, emits a signal "health_changed" along with an argument, our new health value
 
 func set_final_health(value):
@@ -318,13 +318,9 @@ func set_magic(value):
 
 func set_magic_mod(value):
 	magic_mod = value
-	# print('magic mod set: ', magic_mod)
-	# emit_signal("magic_mod_changed", magic_mod)
 
 func set_drop_rate_mod(value):
 	drop_rate_mod = value
-	# print('luck bonus set: ', drop_rate_mod)
-	# emit_signal("drop_rate_mod_changed")
 
 func set_max_experience(value):
 	experience_required = value
@@ -337,6 +333,10 @@ func set_experience(value):
 func set_level(value):
 	level = value
 	emit_signal("level_changed", level)
+
+func set_leveling(value):
+	leveling = value
+	emit_signal("player_leveling", value)
 
 func set_cash(value):
 	cash = value

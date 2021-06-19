@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/World/Doodads/Rock_Large_3.tscn" type="PackedScene" id=15]
 [ext_resource path="res://assets/World/Doodads/Rock_Large_5.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/Tilesets/Mountain_TileMap64x88.tscn" type="PackedScene" id=17]
-[ext_resource path="res://assets/CollisionBoxes/Exit.gd" type="Script" id=21]
+[ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=22]
 [ext_resource path="res://assets/Maps/Test/MountainBorderMap.gd" type="Script" id=23]
 
@@ -117,27 +117,15 @@ tile_set = ExtResource( 12 )
 cell_size = Vector2( 64, 48 )
 format = 1
 
-[node name="Exit" type="Area2D" parent="Map"]
-pause_mode = 2
-position = Vector2( 320, 104 )
-monitorable = false
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource( 21 )
+[node name="Exit" parent="Map" instance=ExtResource( 18 )]
+position = Vector2( 320, 99 )
 map_file = "res://assets/Maps/Test/LayerTest.tscn"
 selected_location = Vector2( 720, 304 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit"]
+[node name="CollisionShape2D" parent="Map/Exit" index="0"]
 shape = SubResource( 3 )
 
-[node name="Timer" type="Timer" parent="Map/Exit"]
-wait_time = 0.8
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Map/Exit"]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit/StaticBody2D"]
+[node name="CollisionShape2D" parent="Map/Exit/StaticBody2D" index="0"]
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Map/Exit"]
@@ -789,4 +777,4 @@ bus = "Reverb"
 
 [node name="GUI" parent="." instance=ExtResource( 10 )]
 
-[connection signal="body_entered" from="Map/Exit" to="Map/Exit" method="_on_Exit_body_entered"]
+[editable path="Map/Exit"]

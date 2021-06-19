@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/UI/pixelWhite.png" type="Texture" id=3]
-[ext_resource path="res://assets/CollisionBoxes/Exit.gd" type="Script" id=4]
+[ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/System/SavePoint/SavePoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=7]
@@ -324,27 +324,16 @@ randomness = 1.0
 visibility_rect = Rect2( -240, -135, 480, 270 )
 process_material = SubResource( 4 )
 
-[node name="Exit" type="Area2D" parent="Map"]
-pause_mode = 2
-position = Vector2( 128.13, 0 )
-monitorable = false
-collision_layer = 1024
-collision_mask = 0
-script = ExtResource( 4 )
+[node name="Exit" parent="Map" instance=ExtResource( 4 )]
+position = Vector2( 144, -16 )
 map_file = "res://assets/Maps/Test/LayerTest.tscn"
 selected_location = Vector2( 814, 238 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit"]
+[node name="CollisionShape2D" parent="Map/Exit" index="0"]
 shape = SubResource( 5 )
 
-[node name="Timer" type="Timer" parent="Map/Exit"]
-wait_time = 0.8
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Map/Exit"]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Exit/StaticBody2D"]
+[node name="CollisionShape2D" parent="Map/Exit/StaticBody2D" index="0"]
+shape = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Map/Exit"]
 texture = ExtResource( 1 )
@@ -461,4 +450,4 @@ volume_db = -48.0
 
 [node name="GUI" parent="." instance=ExtResource( 6 )]
 
-[connection signal="body_entered" from="Map/Exit" to="Map/Exit" method="_on_Exit_body_entered"]
+[editable path="Map/Exit"]

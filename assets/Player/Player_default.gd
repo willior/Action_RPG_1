@@ -73,7 +73,7 @@ var talkNoticeDisplay = false setget set_talk_notice
 var interactNoticeDisplay = false setget set_interact_notice
 var sweating = false
 var dying = false
-var just_leveled = false
+# var just_leveled = false
 
 var player_inputs = {
 	"left": "left_1",
@@ -107,7 +107,6 @@ onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
 onready var bamboo = $BambooAudio
 
-signal player_saved
 signal player_dead
 
 func _ready():
@@ -542,7 +541,8 @@ func enemy_killed(experience_from_kill):
 		stats.experience_required = round(stats.experience_required * 1.618034)
 
 func level_up():
-	just_leveled = true
+	# just_leveled = true
+	stats.leveling = true
 	stats.level += 1
 	if stats.level < 11:
 		stats_to_allocate += 2
@@ -552,24 +552,23 @@ func level_up():
 		stats_to_allocate += 4
 	elif stats.level >= 31:
 		stats_to_allocate += 5
-	print('Level ', stats.level, ' achieved. Current total stats_to_allocate: ', stats_to_allocate)
-	if dying:
-		return
-	else:
-		start_level_timer()
+	for p in get_tree().get_nodes_in_group("Players"):
+		if p.dying:
+			return
+		else:
+			start_level_timer()
 
 func start_level_timer():
+	Global.enable_exits(false)
 	$LevelTimer.start()
 	yield($LevelTimer, "timeout")
-	if just_leveled:
+	if stats.leveling: #just_leveled:
 		show_level_up_screen()
 
 func show_level_up_screen():
 	get_node("/root/World/Music").stream_paused = true
 	get_node("/root/World/SFX").stream_paused = true
 	get_node("/root/World/SFX2").stream_paused = true
-	print('Instancing LevelUp. Final total stats_to_allocate = ', stats_to_allocate)
-	just_leveled = false
 	var tweenGreyscale = TweenGreyscale.instance()
 	get_node("/root/World/GUI").add_child(tweenGreyscale)
 	var levelUpScreen = LevelUpScreen.instance()
@@ -577,6 +576,9 @@ func show_level_up_screen():
 	levelUpScreen.stats_remaining = stats_to_allocate
 	stats_to_allocate = 0
 	get_node("/root/World/GUI").add_child(levelUpScreen)
+	#just_leveled = false
+	stats.leveling = false
+	Global.enable_exits(true)
 
 func roll_stamina_drain():
 	stats.stamina -= 15
@@ -810,33 +812,40 @@ func _on_Hurtbox_invincibility_ended():
 	
 func dying_effect(value):
 	if value && !dying:
+		dying = true
 		StatusHandler.remove_buffs(self)
 		Engine.time_scale = 0.6
-		set_collision_mask_bit(10, false)
-		var heartbeat = Heartbeat.instance()
-		var greyscale = Greyscale.instance()
-		var redFlash = RedFlash.instance()
-		get_node("/root/World/").add_child(heartbeat)
-		get_node("/root/World/GUI").add_child(greyscale)
-		get_node("/root/World/GUI").add_child(redFlash)
+		Global.enable_exits(false)
+		if !has_node("/root/World/Heartbeat"):
+			var heartbeat = Heartbeat.instance()
+			get_node("/root/World/").add_child(heartbeat)
+		if !has_node("/root/World/GUI/Greyscale"):
+			var greyscale = Greyscale.instance()
+			get_node("/root/World/GUI").add_child(greyscale)
+		if !has_node("/root/World/GUI/Red"):
+			var redFlash = RedFlash.instance()
+			get_node("/root/World/GUI").add_child(redFlash)
 		get_node("/root/World/Music").stream_paused = true
 		get_node("/root/World/SFX").stream_paused = true
 		get_node("/root/World/SFX2").stream_paused = true
-		dying = true
 	elif !value && dying:
+		dying = false
+		for p in get_tree().get_nodes_in_group("Players"):
+			if p.dying:
+				return
 		Engine.time_scale = 1
-		set_collision_mask_bit(10, true)
 		AudioServer.set_bus_effect_enabled(0, 0, false)
+		get_node("/root/World/Heartbeat").queue_free()
 		get_node("/root/World/GUI/Greyscale").queue_free()
 		get_node("/root/World/GUI/Red").queue_free()
-		get_node("/root/World/Heartbeat").queue_free()
 		get_node("/root/World/Music").stream_paused = false
 		get_node("/root/World/SFX").stream_paused = false
 		get_node("/root/World/SFX2").stream_paused = false
-		dying = false
-		emit_signal("player_saved")
-		if just_leveled:
-			start_level_timer()
+		for p in get_tree().get_nodes_in_group("Players"):
+			if p.stats.leveling: # just_leveled:
+				p.start_level_timer()
+			else:
+				Global.enable_exits(true)
 
 func game_over():
 	Engine.time_scale = 1

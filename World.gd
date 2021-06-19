@@ -53,9 +53,9 @@ func _input(event):
 		GameManager.quit_to_title()
 	
 	if event.is_action_pressed("test1"):
-		GameManager.player.stats.health -= 10
+		GameManager.player.stats.health -= 100
 		if GameManager.multiplayer_2:
-			GameManager.player2.stats.health -= 10
+			GameManager.player2.stats.health -= 100
 	
 	if event.is_action_pressed("test2"):
 		GameManager.player.level_up()
