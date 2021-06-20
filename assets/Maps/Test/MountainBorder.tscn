@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Tilesets/GrassBasicLight.png" type="Texture" id=1]
 [ext_resource path="res://assets/Audio/Hello_drone.ogg" type="AudioStream" id=2]
@@ -18,6 +18,9 @@
 [ext_resource path="res://assets/World/Doodads/Rock_Large_5.tscn" type="PackedScene" id=16]
 [ext_resource path="res://assets/Tilesets/Mountain_TileMap64x88.tscn" type="PackedScene" id=17]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=22]
 [ext_resource path="res://assets/Maps/Test/MountainBorderMap.gd" type="Script" id=23]
 
@@ -139,6 +142,60 @@ pause_mode = 1
 [node name="MoutainTileset" parent="YSort" instance=ExtResource( 17 )]
 
 [node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 404, 277 )
+
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 400, 284 )
+
+[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 395, 278 )
+
+[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 396, 276 )
+
+[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 399, 271 )
+
+[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 405, 269 )
+
+[node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 410, 273 )
+
+[node name="Bat8" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 414, 284 )
+
+[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 405, 289 )
+
+[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 19 )]
+position = Vector2( 391, 288 )
+
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 270, 338 )
+
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 291, 339 )
+
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 311, 336 )
+
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 321, 337 )
+
+[node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 21 )]
+position = Vector2( 165, 274 )
+
+[node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 21 )]
+position = Vector2( 483, 295 )
+
+[node name="Wolf3" parent="YSort/Enemies" instance=ExtResource( 21 )]
+position = Vector2( 615, 292 )
+
+[node name="Wolf4" parent="YSort/Enemies" instance=ExtResource( 21 )]
+position = Vector2( 459, 188 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

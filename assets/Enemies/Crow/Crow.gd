@@ -49,6 +49,7 @@ onready var stats = $CrowStats
 onready var timer = $Timer
 onready var sprite = $Sprite
 onready var eye = $Sprite/AnimatedSpriteEye
+onready var outline = $Sprite/Outline
 onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
@@ -120,6 +121,7 @@ func _physics_process(delta):
 		velocity += softCollision.get_push_vector() * delta * 400
 		
 	velocity = move_and_slide(velocity)
+	outline.frame = sprite.frame
 
 func reset_state():
 	$DelayTimer.stop()
@@ -144,6 +146,7 @@ func accelerate_towards_point(point, speed, delta):
 	if flying:
 		Enemy.accelerate_towards_point(self, point, speed, delta)
 		Enemy.h_flip_handler(sprite, eye, velocity)
+		outline.flip_h = velocity.x < 0
 
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
@@ -227,6 +230,7 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_CrowStats_no_health():
+	hide_outline()
 	animationState.travel("Dead")
 	var death_effect = EnemyDeathEffect.instance()
 	Enemy.no_health(self, death_effect)
@@ -279,3 +283,9 @@ func audio_cawcawcaw():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	Enemy.despawn_offscreen(self)
+
+func show_outline():
+	outline.show()
+
+func hide_outline():
+	outline.hide()

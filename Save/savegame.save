@@ -1,7 +1,7 @@
-{"player1_stats":{"defense":12,"dexterity":12,"endurance":24,"experience":2064,"experience_required":2906,"experience_total":6604,"health":260,"level":46,"magic":99,"max_health":260,"max_stamina":240,"speed":21,"stamina":240,"strength":12,"vitality":32}}
-{"player2_stats":{"defense":20,"dexterity":29,"endurance":32,"experience":2064,"experience_required":2906,"experience_total":6604,"health":272,"level":47,"magic":40,"max_health":272,"max_stamina":260,"speed":32,"stamina":260,"strength":20,"vitality":44}}
+{"player1_stats":{"defense":12,"dexterity":16,"endurance":24,"experience":1163,"experience_required":12310,"experience_total":20919,"health":264,"level":49,"magic":99,"max_health":264,"max_stamina":240,"speed":28,"stamina":240,"strength":12,"vitality":36}}
+{"player2_stats":{"defense":24,"dexterity":32,"endurance":32,"experience":1163,"experience_required":12310,"experience_total":20919,"health":272,"level":50,"magic":44,"max_health":272,"max_stamina":260,"speed":32,"stamina":260,"strength":24,"vitality":44}}
 {"player3_stats":{"defense":4,"dexterity":4,"endurance":32,"experience":82,"experience_required":100,"experience_total":82,"health":480,"level":1,"magic":4,"max_health":480,"max_stamina":480,"speed":4,"stamina":480,"strength":4,"vitality":32}}
-{"player1_formulaData":{"Flash":["Flash",2,0,120,100],"Fury":["Fury",2,100,120,200],"Heal":["Heal",2,100,120,200]}}
-{"player2_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,50,100,50]}}
-{"chapter_number":0,"examined_list":["Salt","Bat","Rock","Clay","Water","Wolf","Crow"],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
+{"player1_formulaData":{"Flash":["Flash",4,86,172.8,450],"Fury":["Fury",5,63.2,207.36,600],"Heal":["Heal",2,100,120,200]}}
+{"player2_formulaData":{"Flash":["Flash",2,0,120,100],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,50,100,50]}}
+{"chapter_number":0,"examined_list":["Salt","Bat","Rock","Clay","Water","Wolf","Crow","PunchingMoon"],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
 {"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}

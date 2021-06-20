@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=14]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf_spritesheet.png" type="Texture" id=15]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf_eye_spritesheet.png" type="Texture" id=16]
+[ext_resource path="res://assets/Enemies/Wolf/Wolf_outline.png" type="Texture" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -483,6 +484,15 @@ frame = 38
 
 [node name="SpriteEye" type="Sprite" parent="Sprite"]
 texture = ExtResource( 16 )
+offset = Vector2( 0, -12 )
+hframes = 19
+vframes = 3
+frame = 38
+
+[node name="Outline" type="Sprite" parent="Sprite"]
+visible = false
+z_index = 10
+texture = ExtResource( 17 )
 offset = Vector2( 0, -12 )
 hframes = 19
 vframes = 3

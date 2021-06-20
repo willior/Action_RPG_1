@@ -40,10 +40,13 @@ var common_drop_chance = 0.50
 var rare_drop_name = "Clay"
 var rare_drop_chance = 0.125
 
+var outline_color = Color(1,0,0,1)
+
 onready var stats = $BatStats
 onready var timer = $Timer
 onready var sprite = $AnimatedSprite
 onready var eye = $AnimatedSprite/AnimatedSpriteEye
+onready var outline = $AnimatedSprite/Outline
 onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
@@ -67,15 +70,19 @@ func _ready():
 	random_number = rng.randi_range(0, 4)
 	sprite.frame = random_number
 	eye.frame = sprite.frame
+	outline.frame = sprite.frame
 	set_speed_scale(1)
 	sprite.playing = true
 	eye.playing = true
+	outline.playing = true
 	# Global.set_world_collision(self, z_index)
 
 func set_speed_scale(value):
 	sprite.speed_scale = value
 	eye.speed_scale = sprite.speed_scale
 	eye.frame = sprite.frame
+	outline.speed_scale = sprite.speed_scale
+	outline.frame = sprite.frame
 
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
@@ -134,6 +141,7 @@ func examine_complete(value):
 func accelerate_towards_point(point, speed, delta):
 	Enemy.accelerate_towards_point(self, point, speed, delta)
 	Enemy.h_flip_handler(sprite, eye, velocity)
+	outline.flip_h = velocity.x < 0
 
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
@@ -193,6 +201,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		state = IDLE
 
 func _on_BatStats_no_health():
+	hide_outline()
 	var death_effect = EnemyDeathEffect.instance()
 	Enemy.no_health(self, death_effect)
 	sprite.playing = false # stop animation
@@ -212,6 +221,12 @@ func _on_BatStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
+
+func show_outline():
+	outline.show()
+
+func hide_outline():
+	outline.hide()
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")

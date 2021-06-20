@@ -959,6 +959,8 @@ func _on_InteractHitbox_area_entered(area):
 	if interactObject.interactable:
 		self.interactNoticeDisplay = true
 		interacting = true
+	if "outline" in interactObject:
+		interactObject.show_outline()
 #	if "item_usable" in interactObject:
 #		var item_to_use = inventory._items[inventory.current_selected_item]
 #		if item_to_use.item_reference.name == interactObject.item_needed:
@@ -966,6 +968,8 @@ func _on_InteractHitbox_area_entered(area):
 #			print('using_item = true')
 
 func _on_InteractHitbox_area_exited(area):
+	if "outline" in area.get_parent():
+		area.get_parent().hide_outline()
 	if interactObject == area.get_parent():
 		interactObject = null
 		self.noticeDisplay = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/Shadows/SmallShadow.png" type="Texture" id=15]
 [ext_resource path="res://assets/Enemies/Bat/Bat_eye.png" type="Texture" id=16]
 [ext_resource path="res://assets/Audio/Enemies/Bat/Bat.wav" type="AudioStream" id=17]
+[ext_resource path="res://assets/Enemies/Bat/Bat_outline.png" type="Texture" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -25,23 +26,23 @@ shader_param/active = false
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 14 )
-region = Rect2( 0, 0, 16, 24 )
+region = Rect2( 0, 0, 18, 24 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 14 )
-region = Rect2( 16, 0, 16, 24 )
+region = Rect2( 18, 0, 18, 24 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 14 )
-region = Rect2( 32, 0, 16, 24 )
+region = Rect2( 36, 0, 18, 24 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 14 )
-region = Rect2( 48, 0, 16, 24 )
+region = Rect2( 54, 0, 18, 24 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 14 )
-region = Rect2( 64, 0, 16, 24 )
+region = Rect2( 72, 0, 18, 24 )
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
@@ -53,23 +54,23 @@ animations = [ {
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 16 )
-region = Rect2( 0, 0, 16, 24 )
+region = Rect2( 0, 0, 18, 24 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 16 )
-region = Rect2( 16, 0, 16, 24 )
+region = Rect2( 18, 0, 18, 24 )
 
 [sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 16 )
-region = Rect2( 32, 0, 16, 24 )
+region = Rect2( 36, 0, 18, 24 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 16 )
-region = Rect2( 48, 0, 16, 24 )
+region = Rect2( 54, 0, 18, 24 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 16 )
-region = Rect2( 64, 0, 16, 24 )
+region = Rect2( 72, 0, 18, 24 )
 
 [sub_resource type="SpriteFrames" id=13]
 animations = [ {
@@ -79,10 +80,38 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=14]
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 0, 18, 24 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 18 )
+region = Rect2( 18, 0, 18, 24 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 18 )
+region = Rect2( 36, 0, 18, 24 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 18 )
+region = Rect2( 54, 0, 18, 24 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 18 )
+region = Rect2( 72, 0, 18, 24 )
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=20]
 radius = 4.0
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=21]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -98,7 +127,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=22]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
@@ -113,20 +142,20 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="CircleShape2D" id=17]
+[sub_resource type="CircleShape2D" id=23]
 
-[sub_resource type="CircleShape2D" id=18]
+[sub_resource type="CircleShape2D" id=24]
 radius = 9.0
 
-[sub_resource type="CircleShape2D" id=19]
+[sub_resource type="CircleShape2D" id=25]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id=20]
+[sub_resource type="CircleShape2D" id=26]
 
-[sub_resource type="CircleShape2D" id=21]
+[sub_resource type="CircleShape2D" id=27]
 radius = 5.0
 
-[sub_resource type="CircleShape2D" id=22]
+[sub_resource type="CircleShape2D" id=28]
 radius = 5.0
 
 [node name="Bat" type="KinematicBody2D"]
@@ -144,19 +173,25 @@ modulate = Color( 0, 0, 0, 1 )
 frames = SubResource( 13 )
 offset = Vector2( 0, -12 )
 
+[node name="Outline" type="AnimatedSprite" parent="AnimatedSprite"]
+visible = false
+z_index = 10
+frames = SubResource( 19 )
+offset = Vector2( 0, -12 )
+
 [node name="ShadowSprite" type="Sprite" parent="."]
 texture = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -3 )
-shape = SubResource( 14 )
+shape = SubResource( 20 )
 
 [node name="BatStats" parent="." instance=ExtResource( 11 )]
 script = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/StartFlashing = SubResource( 15 )
-anims/StopFlashing = SubResource( 16 )
+anims/StartFlashing = SubResource( 21 )
+anims/StopFlashing = SubResource( 22 )
 
 [node name="Talkbox" type="Area2D" parent="."]
 collision_layer = 128
@@ -164,7 +199,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
 position = Vector2( 0, -14 )
-shape = SubResource( 17 )
+shape = SubResource( 23 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 pause_mode = 2
@@ -174,7 +209,7 @@ script = ExtResource( 12 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -14 )
-shape = SubResource( 18 )
+shape = SubResource( 24 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
 
@@ -184,7 +219,7 @@ monitorable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 scale = Vector2( 4, 4 )
-shape = SubResource( 19 )
+shape = SubResource( 25 )
 
 [node name="AttackController" parent="." instance=ExtResource( 2 )]
 
@@ -196,7 +231,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 20 )
+shape = SubResource( 26 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8
@@ -209,13 +244,13 @@ damage = 8.0
 status = [ "Poison", 1.0 ]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 21 )
+shape = SubResource( 27 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 9 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 22 )
+shape = SubResource( 28 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
@@ -244,8 +279,8 @@ __meta__ = {
 "_editor_description_": "	"
 }
 
-[connection signal="no_health" from="BatStats" to="EnemyHealth" method="_on_stats_no_health"]
 [connection signal="no_health" from="BatStats" to="." method="_on_BatStats_no_health"]
+[connection signal="no_health" from="BatStats" to="EnemyHealth" method="_on_stats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

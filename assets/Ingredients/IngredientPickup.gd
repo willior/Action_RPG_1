@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 const PickupPopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 const DialogBox = preload("res://assets/UI/DialogBox.tscn")
@@ -8,6 +8,7 @@ var interactable = true
 var talkable = false
 var examined = false
 var ingredient_description : Array
+var outline = Color(0,1,1,1)
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -64,3 +65,9 @@ func display_pickup_message(value, who):
 		"Player2":
 			get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(pickupPopup)
 	pickupPopup.pickup_flash()
+
+func show_outline():
+	$Sprite.material.set_shader_param("outline_color", outline)
+
+func hide_outline():
+	$Sprite.material.set_shader_param("outline_color", Color(0,1,1,0))

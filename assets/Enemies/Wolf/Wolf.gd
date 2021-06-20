@@ -50,6 +50,7 @@ onready var stats = $WolfStats
 onready var cooldownTimer = $CooldownTimer
 onready var sprite = $Sprite
 onready var eye = $Sprite/SpriteEye
+onready var outline = $Sprite/Outline
 onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
@@ -135,6 +136,7 @@ func _physics_process(delta):
 		velocity += softCollision.get_push_vector() * delta * 400
 
 	velocity = move_and_slide(velocity)
+	outline.frame = sprite.frame
 
 func reset_state():
 	$DelayTimer.stop()
@@ -158,6 +160,7 @@ func examine_complete(value):
 func accelerate_towards_point(point, speed, delta):
 	Enemy.accelerate_towards_point(self, point, speed, delta)
 	Enemy.h_flip_handler(sprite, eye, velocity)
+	outline.flip_h = velocity.x < 0
 
 func seek_player(): # runs every frame of the IDLE and WANDER states
 	if playerDetectionZone.can_see_player() && !attacking && !seeking:
@@ -264,3 +267,9 @@ func audio_hit():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	Enemy.despawn_offscreen(self)
+
+func show_outline():
+	outline.show()
+
+func hide_outline():
+	outline.hide()
