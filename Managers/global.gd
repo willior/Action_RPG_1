@@ -161,6 +161,12 @@ func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z
 		ingredientPickup.global_position = pos
 		ingredientPickup.z_index = z
 
+func show_outline(object):
+	object.outline.show()
+
+func hide_outline(object):
+	object.outline.hide()
+
 func display_message_popup(message):
 	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(message)
 

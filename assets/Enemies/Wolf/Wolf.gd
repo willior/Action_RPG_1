@@ -69,6 +69,7 @@ onready var enemyHealth = $EnemyHealth
 
 func _ready():
 # warning-ignore:return_value_discarded
+# warning-ignore:return_value_discarded
 	PlayerLog.connect("Wolf_complete", self, "examine_complete")
 	if ENEMY_NAME in PlayerLog.examined_list:
 		examined = true
@@ -158,8 +159,7 @@ func examine_complete(value):
 
 func accelerate_towards_point(point, speed, delta):
 	Enemy.accelerate_towards_point(self, point, speed, delta)
-	Enemy.h_flip_handler(sprite, eye, velocity)
-	outline.flip_h = velocity.x < 0
+	Enemy.h_flip_handler(sprite, eye, outline, velocity)
 
 func seek_player(): # runs every frame of the IDLE and WANDER states
 	if playerDetectionZone.can_see_player() && !attacking && !seeking:
@@ -219,7 +219,7 @@ func update_wander_state():
 		else:
 			pass # otherwise plays the idle animation
 	elif state == 1: # WANDER STATE
-		Enemy.h_flip_handler(sprite, eye, velocity)
+		# Enemy.h_flip_handler(sprite, eye, outline, velocity)
 		wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
 
 func pick_random_state(state_list): 
@@ -243,6 +243,7 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_WolfStats_no_health():
+	outline.hide()
 	var death_effect = EnemyDeathEffect.instance()
 	Enemy.no_health(self, death_effect)
 	$Hitbox/CollisionShape2D.queue_free()
@@ -266,9 +267,3 @@ func audio_hit():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	Enemy.despawn_offscreen(self)
-
-func show_outline():
-	outline.show()
-
-func hide_outline():
-	outline.hide()

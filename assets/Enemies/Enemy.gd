@@ -14,9 +14,10 @@ enum {
 	STUN
 }
 
-func h_flip_handler(sprite, eye, velocity):
+func h_flip_handler(sprite, eye, outline, velocity):
 	sprite.flip_h = velocity.x < 0
 	eye.flip_h = velocity.x < 0
+	outline.flip_h = velocity.x < 0
 
 func set_player_collision(body):
 	var player = GameManager.player

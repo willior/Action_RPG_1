@@ -43,6 +43,7 @@ onready var stats = $PunchingMoonStats
 onready var timer = $Timer
 onready var sprite = $Sprite
 onready var eye = $Sprite/AnimatedSpriteEye
+onready var outline = $Sprite/Outline
 onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
@@ -118,7 +119,7 @@ func examine_complete(value):
 
 func accelerate_towards_point(point, speed, delta):
 	Enemy.accelerate_towards_point(self, point, speed, delta)
-	Enemy.h_flip_handler(sprite, eye, velocity)
+	Enemy.h_flip_handler(sprite, eye, outline, velocity)
 
 func seek_player():
 	return
@@ -188,7 +189,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 	$Timer.start(0.8)
 	yield($Timer, "timeout")
 	print('changing scene')
-	var new_inventory = [get_node("/root/World/YSort/Player").inventory, get_node("/root/World/YSort/Player").pouch, get_node("/root/World/YSort/Player").formulabook]
+	var new_inventory = [get_node("/root/World/YSort/Player").pouch, get_node("/root/World/YSort/Player").formulabook]
 	Global.goto_scene("res://assets/Maps/Test/Space.tscn", {"direction": facing_direction, "location":Vector2(320,580), "inventory":new_inventory})
 	var hit = Enemy.hurtbox_entered(self, area)
 	if hit && state == ATTACK:

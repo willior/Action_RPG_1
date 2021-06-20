@@ -27,7 +27,7 @@ func set_damage(value):
 	damage = base_damage + value
 	orig_damage = damage
 	orig_status = status
-	print('STR increased. new damage set = ', damage)
+	print(get_parent().get_parent().name, ' damage set = ', damage)
 
 func modify_damage(base, modulator):
 	return int(base * modulator)

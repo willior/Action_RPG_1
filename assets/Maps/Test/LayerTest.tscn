@@ -97,9 +97,6 @@ limit_bottom = 320
 [node name="Map" type="Node2D" parent="."]
 pause_mode = 1
 script = ExtResource( 12 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="BelowFloor" type="Sprite" parent="Map"]
 position = Vector2( 40, 16 )

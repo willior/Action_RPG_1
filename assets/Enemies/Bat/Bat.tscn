@@ -80,38 +80,38 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=29]
 atlas = ExtResource( 18 )
 region = Rect2( 0, 0, 18, 24 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=30]
 atlas = ExtResource( 18 )
 region = Rect2( 18, 0, 18, 24 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=31]
 atlas = ExtResource( 18 )
 region = Rect2( 36, 0, 18, 24 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=32]
 atlas = ExtResource( 18 )
 region = Rect2( 54, 0, 18, 24 )
 
-[sub_resource type="AtlasTexture" id=18]
+[sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 18 )
 region = Rect2( 72, 0, 18, 24 )
 
-[sub_resource type="SpriteFrames" id=19]
+[sub_resource type="SpriteFrames" id=34]
 animations = [ {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=20]
+[sub_resource type="CircleShape2D" id=35]
 radius = 4.0
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=36]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -127,7 +127,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=37]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:material:shader_param/active")
@@ -176,7 +176,7 @@ offset = Vector2( 0, -12 )
 [node name="Outline" type="AnimatedSprite" parent="AnimatedSprite"]
 visible = false
 z_index = 2
-frames = SubResource( 19 )
+frames = SubResource( 34 )
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]
@@ -184,14 +184,14 @@ texture = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -3 )
-shape = SubResource( 20 )
+shape = SubResource( 35 )
 
 [node name="BatStats" parent="." instance=ExtResource( 11 )]
 script = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/StartFlashing = SubResource( 21 )
-anims/StopFlashing = SubResource( 22 )
+anims/StartFlashing = SubResource( 36 )
+anims/StopFlashing = SubResource( 37 )
 
 [node name="Talkbox" type="Area2D" parent="."]
 collision_layer = 128

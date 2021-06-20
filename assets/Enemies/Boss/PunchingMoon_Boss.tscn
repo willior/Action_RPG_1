@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/CollisionBoxes/Hitbox.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Shadows/ExtraLargeShadow.png" type="Texture" id=14]
 [ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.png" type="Texture" id=15]
+[ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon_outline.png" type="Texture" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -83,6 +84,11 @@ offset = Vector2( 0, -12 )
 
 [node name="AnimatedSpriteEye" type="AnimatedSprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
+offset = Vector2( 0, -12 )
+
+[node name="Outline" type="Sprite" parent="Sprite"]
+visible = false
+texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
 
 [node name="ShadowSprite" type="Sprite" parent="."]

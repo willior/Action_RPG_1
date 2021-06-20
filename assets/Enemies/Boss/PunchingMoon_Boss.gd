@@ -44,6 +44,7 @@ onready var stats = $Stats
 onready var timer = $Timer
 onready var sprite = $Sprite
 onready var eye = $Sprite/AnimatedSpriteEye
+onready var outline = $Sprite/Outline
 onready var tween = $Tween
 onready var hitbox = $Hitbox
 onready var hurtbox = $Hurtbox
@@ -56,7 +57,6 @@ onready var attackController = $AttackController
 onready var animationPlayer = $AnimationPlayer
 onready var audio = $AudioStreamPlayer
 onready var enemyHealth = $CanvasLayer/BossHealth
-onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -96,7 +96,7 @@ func _physics_process(delta):
 				audio.play()
 				attacking = false
 			accelerate_towards_point(target, ATTACK_SPEED, delta)
-			if global_position.distance_to(player.global_position) <= ATTACK_TARGET_RANGE:
+			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -119,7 +119,7 @@ func examine_complete(value):
 
 func accelerate_towards_point(point, speed, delta):
 	Enemy.accelerate_towards_point(self, point, speed, delta)
-	Enemy.h_flip_handler(sprite, eye, velocity)
+	Enemy.h_flip_handler(sprite, eye, outline, velocity)
 
 func seek_player():
 	return
@@ -188,6 +188,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		state = IDLE
 
 func _on_BatStats_no_health():
+	outline.hide()
 	var death_effect = EnemyDeathEffect.instance()
 	Enemy.no_health(self, death_effect)
 	# sprite.playing = false # stop animation
@@ -207,6 +208,7 @@ func _on_BatStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
+	get_tree().get_root().get_node("/root/World/Map/Timer").start(2)
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")
@@ -215,7 +217,6 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_VisibilityNotifier2D_screen_entered():
-	print('hi')
 	get_tree().get_root().get_node("World/Music").stream = BossMusic
 	get_tree().get_root().get_node("World/Music").play()
 	enemyHealth.show_health()

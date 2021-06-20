@@ -8,7 +8,7 @@ var interactable = true
 var talkable = false
 var examined = false
 var ingredient_description : Array
-var outline = Color(0,1,1,1)
+onready var outline = $Outline
 
 func _ready():
 # warning-ignore:return_value_discarded
@@ -17,6 +17,7 @@ func _ready():
 		examined = true
 	var ingredient = check_ingredient(ingredient_name)
 	$Sprite.texture = ingredient.texture
+	outline.texture = ingredient.outline
 	ingredient_description = ingredient.description
 	global_position = global_position.round()
 
@@ -66,8 +67,8 @@ func display_pickup_message(value, who):
 			get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(pickupPopup)
 	pickupPopup.pickup_flash()
 
-func show_outline():
-	$Sprite.material.set_shader_param("outline_color", outline)
-
-func hide_outline():
-	$Sprite.material.set_shader_param("outline_color", Color(0,1,1,0))
+#func show_outline():
+#	$Sprite.material.set_shader_param("outline_color", outline)
+#
+#func hide_outline():
+#	$Sprite.material.set_shader_param("outline_color", Color(0,1,1,0))

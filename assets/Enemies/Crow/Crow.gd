@@ -11,7 +11,7 @@ const hitSFX = preload("res://assets/Audio/Enemies/Crow/Crow_caw.wav")
 export var ACCELERATION = 200
 export var MAX_SPEED = 400
 export var WANDER_SPEED = 80
-export var ATTACK_SPEED = 3200
+export var ATTACK_SPEED = 2400
 export var FRICTION = 320
 export var WANDER_TARGET_RANGE = 4
 export var ATTACK_TARGET_RANGE = 4
@@ -144,8 +144,7 @@ func examine_complete(value):
 func accelerate_towards_point(point, speed, delta):
 	if flying:
 		Enemy.accelerate_towards_point(self, point, speed, delta)
-		Enemy.h_flip_handler(sprite, eye, velocity)
-		outline.flip_h = velocity.x < 0
+		Enemy.h_flip_handler(sprite, eye, outline, velocity)
 
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
@@ -229,7 +228,7 @@ func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("StopFlashing")
 
 func _on_CrowStats_no_health():
-	hide_outline()
+	outline.hide()
 	animationState.travel("Dead")
 	var death_effect = EnemyDeathEffect.instance()
 	Enemy.no_health(self, death_effect)
@@ -282,9 +281,3 @@ func audio_cawcawcaw():
 
 func _on_VisibilityNotifier2D_screen_exited():
 	Enemy.despawn_offscreen(self)
-
-func show_outline():
-	outline.show()
-
-func hide_outline():
-	outline.hide()

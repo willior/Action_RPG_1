@@ -12,11 +12,11 @@ var affinity = 0
 
 var vitality = 32 setget set_vitality
 var endurance = 32 setget set_endurance
-var defense = 4.0 setget set_defense
-var strength = 4.0 setget set_strength
-var dexterity = 4.0 setget set_dexterity
-var speed = 4.0 setget set_speed
-var magic = 4.0 setget set_magic
+var defense: float = 12.0 setget set_defense
+var strength: float = 12.0 setget set_strength
+var dexterity: float = 12.0 setget set_dexterity
+var speed: float = 12.0 setget set_speed
+var magic: float = 12.0 setget set_magic
 
 var level = 1 setget set_level
 var experience = 82 setget set_experience
@@ -101,18 +101,27 @@ signal level_changed(value)
 signal player_leveling(value)
 signal cash_changed(value)
 
+func _ready():
+	self.vitality = vitality
+	self.endurance = endurance
+	self.defense = defense
+	self.strength = strength
+	self.dexterity = dexterity
+	self.speed = speed
+	self.magic = magic
+
 func reset_stats():
-	self.vitality = 99
+	self.vitality = 40
 	self.max_health = 999
 	self.health = 999
-	self.endurance = 99
+	self.endurance = 40
 	self.max_stamina = 999
 	self.stamina = 999
-	self.defense = 99
-	self.strength = 99
-	self.dexterity = 99
-	self.speed = 99
-	self.magic = 99
+	self.defense = 40.0
+	self.strength = 40.0
+	self.dexterity = 40.0
+	self.speed = 40.0
+	self.magic = 40.0
 	self.level = 1
 	self.experience = 0
 	self.experience_required = 100
@@ -270,6 +279,7 @@ func set_dexterity_mod(value):
 	emit_signal("dexterity_mod_changed", dexterity_mod)
 
 func set_speed(value):
+	
 	speed = value
 	max_speed = 100 + (speed / 2)
 	roll_speed = 200 + speed
@@ -277,6 +287,7 @@ func set_speed(value):
 	self.attack_speed = 1 + (speed / 128)
 	charge_rate = 0.5 + (speed / 128)
 	self.iframes = 0.1 + (speed / 128)
+	# print(name, ' speed set: ', attack_speed)
 	emit_signal("speed_changed", speed)
 
 func set_attack_speed(value):

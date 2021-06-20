@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Audio/cursHi.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/CollisionBoxes/TalkBox.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Ingredients/IngredientPickup.gd" type="Script" id=3]
-[ext_resource path="res://assets/Shaders/InteractOutline_material.tres" type="Material" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 2.0
@@ -13,8 +12,12 @@ position = Vector2( 0, -4 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = ExtResource( 4 )
 position = Vector2( 0, 2 )
+
+[node name="Outline" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, 2 )
+z_index = 2
 
 [node name="TalkBox" parent="." instance=ExtResource( 2 )]
 scale = Vector2( 2, 2 )

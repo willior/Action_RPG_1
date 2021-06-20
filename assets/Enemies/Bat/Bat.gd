@@ -140,8 +140,7 @@ func examine_complete(value):
 
 func accelerate_towards_point(point, speed, delta):
 	Enemy.accelerate_towards_point(self, point, speed, delta)
-	Enemy.h_flip_handler(sprite, eye, velocity)
-	outline.flip_h = velocity.x < 0
+	Enemy.h_flip_handler(sprite, eye, outline, velocity)
 
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
@@ -201,7 +200,7 @@ func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtb
 		state = IDLE
 
 func _on_BatStats_no_health():
-	hide_outline()
+	outline.hide()
 	var death_effect = EnemyDeathEffect.instance()
 	Enemy.no_health(self, death_effect)
 	sprite.playing = false # stop animation
@@ -221,12 +220,6 @@ func _on_BatStats_no_health():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
-
-func show_outline():
-	outline.show()
-
-func hide_outline():
-	outline.hide()
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("StartFlashing")
