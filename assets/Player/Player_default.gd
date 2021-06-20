@@ -803,6 +803,7 @@ func show_level_up_screen():
 	var tweenGreyscale = TweenGreyscale.instance()
 	get_node("/root/World/GUI").add_child(tweenGreyscale)
 	var levelUpScreen = LevelUpScreen.instance()
+	levelUpScreen.player_name = name
 	levelUpScreen.player_stats = stats
 	levelUpScreen.stats_remaining = stats_to_allocate
 	stats_to_allocate = 0

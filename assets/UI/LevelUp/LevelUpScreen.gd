@@ -27,6 +27,7 @@ var dialog_script = [
 		'action': 'end_dialog'
 	}
 ]
+var player_name
 var player_stats
 
 func parse_text(text):
@@ -50,6 +51,62 @@ func _ready():
 	Global.dialogOpen = true
 	
 func _input(event):
+	if event.as_text() == "BackSlash":
+		get_tree().set_input_as_handled()
+		return
+#	match player_name:
+#		"Player":
+#			match event.as_text():
+#				"I":
+#					get_tree().set_input_as_handled()
+#					return
+#				"J":
+#					get_tree().set_input_as_handled()
+#					return
+#				"K":
+#					get_tree().set_input_as_handled()
+#					return
+#				"L":
+#					get_tree().set_input_as_handled()
+#					return
+#				"Slash":
+#					get_tree().set_input_as_handled()
+#					return
+#				"Shift":
+#					get_tree().set_input_as_handled()
+#					return
+#				"Semicolon":
+#					get_tree().set_input_as_handled()
+#					return
+#				"Enter":
+#					get_tree().set_input_as_handled()
+#					return
+#		"Player2":
+#			match event.as_text():
+#				"W":
+#					get_tree().set_input_as_handled()
+#					return
+#				"S": 
+#					get_tree().set_input_as_handled()
+#					return
+#				"A": 
+#					get_tree().set_input_as_handled()
+#					return
+#				"D": 
+#					get_tree().set_input_as_handled()
+#					return
+#				"V": 
+#					get_tree().set_input_as_handled()
+#					return
+#				"B": 
+#					get_tree().set_input_as_handled()
+#					return
+#				"F": 
+#					get_tree().set_input_as_handled()
+#					return
+#				"Space":
+#					get_tree().set_input_as_handled()
+#					return
 	if event.is_action_pressed("ui_accept"):
 		if !$TimerDelaySelect.is_stopped() || !waiting_for_input:
 			get_tree().set_input_as_handled()
