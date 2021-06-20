@@ -2194,7 +2194,7 @@ position = Vector2( 0, -9 )
 texture = SubResource( 3 )
 hframes = 60
 vframes = 5
-frame = 68
+frame = 240
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2302,7 +2302,6 @@ position = Vector2( 0, -20 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 3.14159
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 process_priority = -1

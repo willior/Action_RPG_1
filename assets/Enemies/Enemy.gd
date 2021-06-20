@@ -101,7 +101,6 @@ func hurtbox_entered(enemy, hitbox):
 			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
 			critPopup.crit_flash()
 		deal_damage(enemy, damage, is_crit)
-
 		if enemy.stats.health > 0:
 			if hitbox.get("status"):
 				StatusHandler.apply_status(hitbox.status, enemy)
@@ -155,7 +154,7 @@ func no_health(enemy, death_effect):
 	Tween.EASE_IN
 	)
 	enemy.tween.start()
-	yield(get_tree().create_timer(0.5), "timeout")
+	yield(enemy.tween, "tween_all_completed")
 	death_effect.global_position = enemy.global_position
 	death_effect.z_index = enemy.z_index
 	get_node("/root/World/Map").call_deferred("add_child", death_effect)

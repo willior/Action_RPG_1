@@ -596,7 +596,7 @@ margin_top = -78.0
 margin_right = -64.0
 margin_bottom = -78.0
 grow_horizontal = 0
-size_flags_horizontal = 3
+size_flags_horizontal = 11
 __meta__ = {
 "_edit_use_anchors_": false
 }

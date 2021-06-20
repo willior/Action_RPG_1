@@ -1,7 +1,7 @@
-{"player1_stats":{"defense":12,"dexterity":16,"endurance":24,"experience":1163,"experience_required":12310,"experience_total":20919,"health":264,"level":49,"magic":99,"max_health":264,"max_stamina":240,"speed":28,"stamina":240,"strength":12,"vitality":36}}
-{"player2_stats":{"defense":24,"dexterity":32,"endurance":32,"experience":1163,"experience_required":12310,"experience_total":20919,"health":272,"level":50,"magic":44,"max_health":272,"max_stamina":260,"speed":32,"stamina":260,"strength":24,"vitality":44}}
+{"player1_stats":{"defense":12,"dexterity":16,"endurance":24,"experience":9116,"experience_required":12310,"experience_total":28872,"health":264,"level":49,"magic":99,"max_health":264,"max_stamina":240,"speed":28,"stamina":240,"strength":4,"vitality":36}}
+{"player2_stats":{"defense":24,"dexterity":32,"endurance":32,"experience":9116,"experience_required":12310,"experience_total":28872,"health":272,"level":50,"magic":44,"max_health":272,"max_stamina":260,"speed":32,"stamina":260,"strength":24,"vitality":44}}
 {"player3_stats":{"defense":4,"dexterity":4,"endurance":32,"experience":82,"experience_required":100,"experience_total":82,"health":480,"level":1,"magic":4,"max_health":480,"max_stamina":480,"speed":4,"stamina":480,"strength":4,"vitality":32}}
-{"player1_formulaData":{"Flash":["Flash",4,86,172.8,450],"Fury":["Fury",5,63.2,207.36,600],"Heal":["Heal",2,100,120,200]}}
-{"player2_formulaData":{"Flash":["Flash",2,0,120,100],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,50,100,50]}}
+{"player1_formulaData":{"Flash":["Flash",5,13.2,207.36,550],"Fury":["Fury",6,205.84,248.832,950],"Heal":["Heal",3,80,144,300]}}
+{"player2_formulaData":{"Flash":["Flash",2,100,120,200],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,50,100,50]}}
 {"chapter_number":0,"examined_list":["Salt","Bat","Rock","Clay","Water","Wolf","Crow","PunchingMoon"],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
 {"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}

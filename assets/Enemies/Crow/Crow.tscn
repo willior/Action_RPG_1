@@ -617,7 +617,7 @@ vframes = 2
 
 [node name="Outline" type="Sprite" parent="Sprite"]
 visible = false
-z_index = 10
+z_index = 2
 texture = ExtResource( 19 )
 offset = Vector2( 0, -12 )
 hframes = 12

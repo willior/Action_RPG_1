@@ -59,6 +59,7 @@ var charge_count = 0
 var charge_level_count = 0
 var base_enemy_accuracy = 66
 var stamina_attack_cost = stats.stamina_attack_cost
+var knockback_modifier = 1
 
 var interactObject
 var talkObject
@@ -163,6 +164,8 @@ func _input(event):
 					interactObject.talk()
 				elif stats.stamina <= 0:
 					noStamina()
+				else:
+					state = ATTACK1
 			
 			if event.is_action_pressed(player_inputs.alchemy): # G
 				if formulabook._formulas.size() <= 0 or casting:
@@ -253,7 +256,6 @@ func move_state(delta):
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		dir_vector = input_vector
-		swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/BlendSpace2D/blend_position", input_vector)
 		animationTree.set("parameters/Attack1/BlendSpace2D/blend_position", input_vector)
@@ -273,6 +275,7 @@ func move_state(delta):
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
+	swordHitbox.knockback_vector = dir_vector * knockback_modifier
 	move()
 	
 	if Input.is_action_just_pressed(player_inputs.examine): # F
@@ -367,7 +370,7 @@ func apply_status(status):
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"frenzy":
-			swordHitbox.knockback_vector = dir_vector / 10
+			swordHitbox.knockback_vector = dir_vector / 8
 		"frenzy_end":
 			swordHitbox.knockback_vector = dir_vector
 
@@ -521,7 +524,6 @@ func flash_state(delta):
 
 func flash_start():
 	stats.stamina -= 25
-	stats.dexterity_mod = 4
 	charge.stop_charge()
 	swordHitbox.flash_begin()
 	# stats.strength_mod = 2
@@ -881,7 +883,7 @@ func pickup_state(delta):
 	animationState.travel("Pickup")
 
 func pickup_finished():
-	reset_interaction()
+	# reset_interaction()
 	if Input.is_action_pressed(player_inputs.attack):
 		charge_reset()
 		attack_charging = true
@@ -987,7 +989,6 @@ func _on_InteractHitbox_area_exited(area):
 
 func reset_interaction():
 	interactHitbox.set_deferred("disabled", true)
-	yield(get_tree().create_timer(0.1), "timeout")
 	interactHitbox.set_deferred("disabled", false)
 
 func reset_animation():

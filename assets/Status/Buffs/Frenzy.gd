@@ -13,6 +13,7 @@ func _ready():
 	else:
 		body.set_attack_timescale(body.stats.attack_speed*potency)
 		body.set_stamina_attack_cost(body.stats.stamina_attack_cost/5)
+		body.knockback_modifier = 0.2
 		var icon = Icon.instance()
 		icon.duration = duration
 		icon.status_nodepath = self.get_path()
@@ -34,6 +35,8 @@ func refresh_status(new_duration, new_potency):
 		match body.name:
 			"Player":
 				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon(new_duration)
+			"Player2":
+				get_node("/root/World/GUI/StatusDisplay2/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon(new_duration)
 	$Timer.start(new_duration)
 	$AnimatedSprite.play()
 
@@ -43,6 +46,7 @@ func _on_Timer_timeout():
 	else:
 		body.set_attack_timescale(body.stats.attack_speed)
 		body.set_stamina_attack_cost(body.stats.stamina_attack_cost)
+		body.knockback_modifier = 1
 	queue_free()
 
 func _on_Frenzy_tree_exiting():

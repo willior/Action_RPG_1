@@ -66,7 +66,6 @@ onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var audio = $AudioStreamPlayer
 onready var enemyHealth = $EnemyHealth
-# onready var player = get_parent().get_parent().get_node("Player")
 
 func _ready():
 # warning-ignore:return_value_discarded

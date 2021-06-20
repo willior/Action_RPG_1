@@ -36,6 +36,7 @@ func reset_damage():
 	stats.dexterity_mod = 0
 	damage = orig_damage
 	status = orig_status
+	knockback_vector = get_parent().get_parent().dir_vector
 	$CollisionShape2D.scale.x = 1
 	set_deferred("monitorable", false)
 
@@ -66,7 +67,7 @@ func flash_begin():
 	audio.play()
 	$CollisionShape2D.scale.x = 2
 	enable_sword_hitbox()
-	knockback_vector *= 1.33
+	knockback_vector = get_parent().get_parent().dir_vector * 1.33
 	stats.dexterity_mod = 4
 	orig_damage = damage
 	damage = modify_damage(damage, 2)
