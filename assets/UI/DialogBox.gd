@@ -110,11 +110,11 @@ func load_dialog():
 		# displays all the characters in the current dialog_index
 		label.set_visible_characters(label.get_total_character_count())
 		finished = true
-		
+
 func end_dialog():
 	get_tree().paused = false
-	get_node("/root/World/YSort/Player").noticeDisplay = false
-	get_node("/root/World/YSort/Player").talkNoticeDisplay = false
+#	get_node("/root/World/YSort/Player").noticeDisplay = false
+#	get_node("/root/World/YSort/Player").talkNoticeDisplay = false
 	Global.dialogOpen = false
 	queue_free()
 

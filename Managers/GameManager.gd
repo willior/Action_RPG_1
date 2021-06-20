@@ -237,8 +237,8 @@ func quit_to_title():
 	Global.goto_scene("res://assets/System/MainMenu.tscn")
 	reset_resources()
 	PlayerLog.reset_player_log()
-	Player1Stats.default_stats()
-	Player2Stats.default_stats()
+	Player1Stats.reset_stats()
+	Player2Stats.reset_stats()
 	P1FormulaData.default_formula_data()
 	P2FormulaData.default_formula_data()
 

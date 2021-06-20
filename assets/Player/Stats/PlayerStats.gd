@@ -10,8 +10,8 @@ var shade_friction = 840
 var dir_vector = Vector2.DOWN
 var affinity = 0
 
-var vitality = 12 setget set_vitality
-var endurance = 12 setget set_endurance
+var vitality = 32 setget set_vitality
+var endurance = 32 setget set_endurance
 var defense = 4.0 setget set_defense
 var strength = 4.0 setget set_strength
 var dexterity = 4.0 setget set_dexterity
@@ -101,30 +101,24 @@ signal level_changed(value)
 signal player_leveling(value)
 signal cash_changed(value)
 
-func _ready():
-	self.acceleration = acceleration
-	self.max_speed = max_speed
-	self.speed_mod = speed_mod
-	self.roll_speed = roll_speed
-	self.shade_speed = shade_speed
-	self.friction = friction
-	self.shade_friction = shade_friction
-	# self.vitality = vitality
-	self.health = health
-	# self.endurance = endurance
-	self.stamina = max_stamina
-	self.defense = defense
-	self.strength = strength
-	self.dexterity = dexterity
-	self.speed = speed
-	self.magic = magic
-	self.iframes = iframes
-	# self.attack_speed = attack_speed
-	self.experience = experience_total
-	self.cash = cash
-	self.status = status
-	self.charge = charge
-	self.charge_level = charge_level
+func reset_stats():
+	self.vitality = 99
+	self.max_health = 999
+	self.health = 999
+	self.endurance = 99
+	self.max_stamina = 999
+	self.stamina = 999
+	self.defense = 99
+	self.strength = 99
+	self.dexterity = 99
+	self.speed = 99
+	self.magic = 99
+	self.level = 1
+	self.experience = 0
+	self.experience_required = 100
+	self.experience_total = 0
+	self.dying = false
+	self.dead = false
 
 func default_stats():
 	self.vitality = 4

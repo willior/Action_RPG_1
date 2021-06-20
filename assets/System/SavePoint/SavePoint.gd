@@ -11,8 +11,8 @@ func _on_Area2D_body_entered(_body):
 	yield($Timer, "timeout")
 	Player1Stats.recovery()
 	StatusHandler.remove_debuffs(GameManager.player)
-	GameManager.save_game()
-	get_tree().paused = false
 	if GameManager.multiplayer_2:
 		Player2Stats.recovery()
 		StatusHandler.remove_debuffs(GameManager.player2)
+	get_tree().paused = false
+	GameManager.save_game()

@@ -47,9 +47,13 @@ func set_examined_and_signal(name, value=true):
 	emit_signal(str(name.replace(" ", "_"))+"_complete", value)
 
 # warning-ignore:unused_signal
-signal heart_complete()
+signal Rock_complete()
 # warning-ignore:unused_signal
-signal penny_complete()
+signal Clay_complete()
+# warning-ignore:unused_signal
+signal Water_complete()
+# warning-ignore:unused_signal
+signal Salt_complete()
 # warning-ignore:unused_signal
 signal Bat_complete()
 # warning-ignore:unused_signal

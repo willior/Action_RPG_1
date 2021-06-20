@@ -143,19 +143,35 @@ pause_mode = 1
 [node name="Items" type="YSort" parent="YSort"]
 
 [node name="IngredientPickup" parent="YSort/Items" instance=ExtResource( 4 )]
-position = Vector2( 230, 212 )
+position = Vector2( 231, 228 )
 ingredient_name = "Rock"
 
 [node name="IngredientPickup2" parent="YSort/Items" instance=ExtResource( 4 )]
-position = Vector2( 251, 227 )
+position = Vector2( 252, 243 )
 ingredient_name = "Clay"
 
 [node name="IngredientPickup3" parent="YSort/Items" instance=ExtResource( 4 )]
-position = Vector2( 275, 238 )
+position = Vector2( 276, 254 )
 ingredient_name = "Water"
 
 [node name="IngredientPickup4" parent="YSort/Items" instance=ExtResource( 4 )]
-position = Vector2( 313, 231 )
+position = Vector2( 314, 247 )
+ingredient_name = "Salt"
+
+[node name="IngredientPickup5" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 224, 250 )
+ingredient_name = "Rock"
+
+[node name="IngredientPickup6" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 245, 265 )
+ingredient_name = "Clay"
+
+[node name="IngredientPickup7" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 269, 276 )
+ingredient_name = "Water"
+
+[node name="IngredientPickup8" parent="YSort/Items" instance=ExtResource( 4 )]
+position = Vector2( 307, 269 )
 ingredient_name = "Salt"
 
 [node name="Doodads" type="YSort" parent="YSort"]

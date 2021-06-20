@@ -285,6 +285,7 @@ func move_state(delta):
 			elif examining && talkTimer.is_stopped():
 				talkTimer.start()
 				interactObject.examine()
+				self.noticeDisplay = false
 			
 	if Input.is_action_just_pressed(player_inputs.next): # R
 		formulabook.advance_selected_formula()
@@ -929,7 +930,7 @@ func set_notice(value):
 		notice.visible = true
 	elif !value:
 		notice.visible = false
-		
+
 func set_talk_notice(value):
 	if value:
 		$NoticeAudio.play()

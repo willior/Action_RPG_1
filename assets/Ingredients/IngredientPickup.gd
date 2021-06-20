@@ -10,6 +10,10 @@ var examined = false
 var ingredient_description : Array
 
 func _ready():
+# warning-ignore:return_value_discarded
+	PlayerLog.connect(ingredient_name+"_complete", self, "examine_complete")
+	if ingredient_name in PlayerLog.examined_list:
+		examined = true
 	var ingredient = check_ingredient(ingredient_name)
 	$Sprite.texture = ingredient.texture
 	ingredient_description = ingredient.description
@@ -19,7 +23,12 @@ func examine():
 	var dialogBox = DialogBox.instance()
 	dialogBox.dialog_script = ingredient_description
 	get_node("/root/World/GUI").add_child(dialogBox)
-	if !examined: examined = true
+	if !examined:
+		PlayerLog.set_examined_and_signal(ingredient_name)
+
+func examine_complete(value):
+	print(ingredient_name, ' examined: ', value)
+	examined = value
 
 func interact(player):
 	player.state = 8
