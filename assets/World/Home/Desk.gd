@@ -31,7 +31,7 @@ func examine():
 			]
 			index = 1
 		1:
-			if PlayerLog.home_lightswitch_bedroom_on:
+			if PlayerLog.home.lightswitch_bedroom_on:
 				dialogBox.dialog_script = [
 					{'text': "The lamp is off."}
 				]

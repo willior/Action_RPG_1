@@ -41,10 +41,14 @@ func reset_player_log():
 # the object's local examined variable to true.
 func set_examined(name):
 	examined_list.append(name)
+	for p in get_tree().get_nodes_in_group("Players"):
+		p.reset_interaction()
 	
 func set_examined_and_signal(name, value=true):
 	examined_list.append(name)
 	emit_signal(str(name.replace(" ", "_"))+"_complete", value)
+	for p in get_tree().get_nodes_in_group("Players"):
+		p.reset_interaction()
 
 # warning-ignore:unused_signal
 signal Rock_complete()

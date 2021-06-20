@@ -53,7 +53,7 @@ func _input(event):
 		GameManager.quit_to_title()
 	
 	if event.is_action_pressed("test1"):
-		print('1: giving P1 formulas/ingredients')
+		print('1: giving formulas/ingredients')
 		GameManager.player.formulabook.add_formula("Flash")
 		GameManager.player.formulabook.add_formula("Heal")
 		GameManager.player.formulabook.add_formula("Fury")
@@ -61,8 +61,6 @@ func _input(event):
 		GameManager.player.pouch.add_ingredient("Clay", 10)
 		GameManager.player.pouch.add_ingredient("Water", 20)
 		GameManager.player.pouch.add_ingredient("Salt", 10)
-	if event.is_action_pressed("test2"):
-		print('2: giving P2 formulas/ingredients')
 		if GameManager.multiplayer_2:
 			GameManager.player2.formulabook.add_formula("Flash")
 			GameManager.player2.formulabook.add_formula("Heal")
@@ -73,11 +71,15 @@ func _input(event):
 			GameManager.player2.pouch.add_ingredient("Salt", 10)
 		else:
 			print('no P2. cannot give ingredients.')
+	if event.is_action_pressed("test2"):
+		print('2: resetting player interaction')
+		for p in get_tree().get_nodes_in_group("Players"):
+			p.reset_interaction()
 	if event.is_action_pressed("test3"):
-		print('3: levelling P1')
-		GameManager.player.level_up()
+		print('3: no use!')
 	if event.is_action_pressed("test4"):
-		print('4: leveling P2')
+		print('4: leveling up')
+		GameManager.player.level_up()
 		if GameManager.multiplayer_2:
 			GameManager.player2.level_up()
 		else:

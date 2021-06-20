@@ -979,9 +979,10 @@ func _on_InteractHitbox_area_exited(area):
 		if using_item:
 			using_item = false
 		reset_interaction()
-	
+
 func reset_interaction():
 	interactHitbox.set_deferred("disabled", true)
+	yield(get_tree().create_timer(0.1), "timeout")
 	interactHitbox.set_deferred("disabled", false)
 
 func reset_animation():
