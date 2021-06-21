@@ -5,6 +5,13 @@ onready var Regen = preload("res://assets/Status/Buffs/Regen.tscn")
 onready var Poison = preload("res://assets/Status/Debuffs/Poison.tscn")
 onready var Frenzy = preload("res://assets/Status/Buffs/Frenzy.tscn")
 onready var Stun = preload("res://assets/Status/Debuffs/Stun.tscn")
+onready var Slow = preload("res://assets/Status/Debuffs/Slow.tscn")
+
+# status is an array with 4 indexes:
+# 0. name (String)
+# 1. chance (Float)
+# 2. duration
+# 3. potency
 
 func apply_status(status, body):
 	var status_display = body.get_node("StatusDisplay")
@@ -33,7 +40,7 @@ func apply_status(status, body):
 					var poison = Poison.instance()
 					status_display.add_child(poison)
 				else:
-					# print('poison check unsuccessful; RNG ', status_check*100, '% was greater than ', (status[1]-body.stats.status_resistance)*100, '% (status_chance - status_resistance)')
+					body.hurtbox.display_damage_popup("Resisted!", false, "Poison")
 					return
 		"Frenzy":
 			if status_display.has_node("Frenzy"):
@@ -53,8 +60,21 @@ func apply_status(status, body):
 				if status_check <= status[1] - body.stats.status_resistance:
 					var stun = Stun.instance()
 					status_display.add_child(stun)
+				else:
+					body.hurtbox.display_damage_popup("Resisted!", false, "Yellow")
 		"Slow":
-			pass
+			if status_display.has_node("Slow"):
+				return
+			else:
+				randomize()
+				var status_check = randf()
+				if status_check <= status[1] - body.stats.status_resistance:
+					if status_display.has_node("Haste"):
+						status_display.get_node("Haste").queue_free()
+					var slow = Slow.instance()
+					status_display.add_child(slow)
+				else:
+					body.hurtbox.display_damage_popup("Resisted!", false, "Grey")
 		"Ablaze":
 			pass
 

@@ -249,7 +249,8 @@ func _on_WolfStats_no_health():
 	$Hitbox/CollisionShape2D.queue_free()
 	animationPlayer.stop()
 	Enemy.disable_detection(self)
-	yield(get_tree().create_timer(0.5), "timeout")
+	$DeathTimer.start()
+	yield($DeathTimer, "timeout")
 	for i in range (16, 32):
 		Global.create_blood_effect(i, global_position, z_index)
 

@@ -194,7 +194,6 @@ func update_wander_state():
 			animationState.travel("Caw") # otherwise plays the caw animation
 	elif state == 1: # WANDER STATE
 		fly_animation()
-	
 	wanderController.start_wander_timer(state_rng) # starts wander timer between 2s & 4s
 
 func pick_random_state(state_list): 
@@ -249,7 +248,8 @@ func _on_CrowStats_no_health():
 		Tween.TRANS_QUART,
 		Tween.EASE_IN
 		)
-	yield(get_tree().create_timer(0.5), "timeout")
+	timer.start()
+	yield(timer, "timeout")
 	for _i in range(0, 4):
 		create_hit_effect(32)
 		Global.create_blood_effect(40, global_position, z_index)

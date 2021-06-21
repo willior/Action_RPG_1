@@ -131,7 +131,6 @@ func _ready():
 	stats.connect("no_health", self, "game_over")
 	stats.connect("attack_speed_changed", self, "set_attack_timescale")
 	set_attack_timescale(stats.attack_speed)
-	stats.status = "default_speed"
 	Global.set_world_collision(self, z_index)
 
 func _process(delta):
@@ -266,7 +265,7 @@ func move_state(delta):
 		animationTree.set("parameters/Backstep/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
-		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.speed_mod), stats.acceleration * delta)
+		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.max_speed_mod), stats.acceleration * delta)
 		
 		if GameManager.multiplayer_2:
 			# Global.check_players_distance()

@@ -16,6 +16,9 @@ func _ready():
 	match kind:
 		"Normal":
 			fade = red_fade
+		"Grey":
+			popup_color = Color(0.6, 0.6, 0.6, 1)
+			fade = red_fade
 		"Poison":
 			popup_color = Color(0.5, 0, 1, 1)
 			fade = red_fade

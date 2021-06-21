@@ -76,12 +76,14 @@ func _input(event):
 		for p in get_tree().get_nodes_in_group("Players"):
 			p.reset_interaction()
 	if event.is_action_pressed("test3"):
-		print('3: no use!')
+		print('3: applying slow!')
+		for p in get_tree().get_nodes_in_group("Players"):
+			StatusHandler.apply_status(["Slow", 1.0], p)
 	if event.is_action_pressed("test4"):
 		print('4: leveling up')
-		GameManager.player.level_up()
+		GameManager.player.enemy_killed(1000)
 		if GameManager.multiplayer_2:
-			GameManager.player2.level_up()
+			GameManager.player2.enemy_killed(1000)
 		else:
 			print('no P2. cannot level.')
 	if event.is_action_pressed("test5"):

@@ -668,10 +668,11 @@ shape = SubResource( 56 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
-position = Vector2( 0, -10 )
+position = Vector2( 0, -4 )
 collision_mask = 4
 damage = 16.0
 accuracy = 4.0
+status = [ "Slow", 0.5 ]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 3 )
@@ -683,7 +684,7 @@ collision_layer = 8
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -20 )
+position = Vector2( 0, -16 )
 shape = SubResource( 58 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
@@ -742,7 +743,7 @@ visible = false
 position = Vector2( 0, 3 )
 
 [node name="StatusDisplay" type="Node2D" parent="."]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -20 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -4, -4, 8, 8 )

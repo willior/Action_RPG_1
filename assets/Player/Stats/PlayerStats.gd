@@ -2,7 +2,7 @@ extends Node
 
 var acceleration = 800
 var max_speed = 100
-var speed_mod = 0 setget set_speed_mod
+var max_speed_mod = 0 setget set_max_speed_mod
 var roll_speed = 200
 var shade_speed = 420
 var friction = 800
@@ -154,18 +154,10 @@ func recovery():
 
 func set_status(value):
 	status = value
-	match status:
-		"fine":
-			speed_mod = 0
-		"slow":
-			speed_mod = -max_speed/2
-		"default_speed":
-			speed_mod = 0
-			
 	emit_signal("status_changed", status)
 
-func set_speed_mod(value):
-	speed_mod = value
+func set_max_speed_mod(value):
+	max_speed_mod = value
 
 func increment_vitality():
 	self.vitality += 1
@@ -207,9 +199,9 @@ func set_final_health(value):
 func set_dying(value):
 	dying = value
 	if value:
-		self.status = "slow"
+		pass
 	else:
-		self.status = "default_speed"
+		pass
 	emit_signal("player_dying", value)
 
 func set_dead(value):
@@ -279,9 +271,8 @@ func set_dexterity_mod(value):
 	emit_signal("dexterity_mod_changed", dexterity_mod)
 
 func set_speed(value):
-	
 	speed = value
-	max_speed = 100 + (speed / 2)
+	max_speed = 100 + (speed / 2) 
 	roll_speed = 200 + speed
 	shade_speed = 420 + (speed * 3)
 	self.attack_speed = 1 + (speed / 128)
