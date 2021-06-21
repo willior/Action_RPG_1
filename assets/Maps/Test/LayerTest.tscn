@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/Will/LayerTest/Bridge.png" type="Texture" id=5]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Audio/Music/63_4_01.ogg" type="AudioStream" id=8]
 [ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World.gd" type="Script" id=10]
 [ext_resource path="res://assets/Audio/World/Bird_Ambience.ogg" type="AudioStream" id=11]
@@ -34,7 +35,6 @@
 [ext_resource path="res://assets/Will/LayerTest/Background_1.png" type="Texture" id=34]
 [ext_resource path="res://assets/World/Plants/Plant_16_green_alt.tscn" type="PackedScene" id=36]
 [ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.tscn" type="PackedScene" id=37]
-[ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=38]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 32 )
@@ -1143,7 +1143,7 @@ position = Vector2( 524, 107 )
 position = Vector2( 542, 106 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 38 )
+stream = ExtResource( 8 )
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
