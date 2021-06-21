@@ -17,6 +17,7 @@ var left
 var right
 var next
 var velocity = Vector2.ZERO
+var ending = false
 func _ready():
 	player = get_parent().player
 	match player.name:
@@ -35,7 +36,6 @@ func _ready():
 	sfx1.stream_paused = true
 	sfx2.stream_paused = true
 	AudioServer.set_bus_effect_enabled(0, 0, true)
-#	Engine.time_scale = 0.1
 	get_tree().paused = true
 	Physics2DServer.set_active(true)
 	count = 0
@@ -47,6 +47,62 @@ func _ready():
 		var enemy_target = EnemyTarget.instance()
 		enemy_target.global_position = enemies[e].global_position
 		get_tree().get_root().get_node("World/Targets").add_child(enemy_target)
+	begin_animate_target()
+
+func begin_animate_target():
+	$Tween.interpolate_property(self,
+	"modulate",
+	Color(1,1,1,0),
+	Color(1,1,1,1),
+	0.25,
+	Tween.TRANS_QUART,
+	Tween.EASE_OUT
+	)
+	$Tween.interpolate_property($KinematicBody2D/TargetArea/Sprite,
+	"scale",
+	Vector2(4,4),
+	Vector2(1,1),
+	0.25,
+	Tween.TRANS_QUART,
+	Tween.EASE_OUT
+	)
+	$Tween.interpolate_property($KinematicBody2D/TargetArea/Sprite2,
+	"scale",
+	Vector2(4,4),
+	Vector2(1,1),
+	0.25,
+	Tween.TRANS_QUART,
+	Tween.EASE_OUT
+	)
+	$Tween.start()
+
+func end_animate_target():
+	ending = true
+	$Tween.interpolate_property(self,
+	"modulate",
+	Color(1,1,1,1),
+	Color(1,1,1,0),
+	0.25,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
+	$Tween.interpolate_property($KinematicBody2D/TargetArea/Sprite,
+	"scale",
+	Vector2(1,1),
+	Vector2(4,4),
+	0.25,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
+	$Tween.interpolate_property($KinematicBody2D/TargetArea/Sprite2,
+	"scale",
+	Vector2(1,1),
+	Vector2(4,4),
+	0.25,
+	Tween.TRANS_QUART,
+	Tween.EASE_IN
+	)
+	$Tween.start()
 
 func _process(_delta):
 	velocity = Vector2()
@@ -60,15 +116,12 @@ func _process(_delta):
 		velocity.y -= 1
 	velocity = velocity.normalized()*160
 	velocity = target_body.move_and_slide(velocity)
-#	var input_vector = Vector2.ZERO
-#	input_vector.x = Input.get_action_strength(right) - Input.get_action_strength(left)
-#	input_vector.y = Input.get_action_strength(down) - Input.get_action_strength(up)
-#	input_vector = input_vector.normalized()
-#	velocity = input_vector*100
-#	target_area.position.move_toward(velocity, _delta*100)
 	target_body.position = target_body.position.clamped(135)
 
 func _input(event):
+	if ending:
+		get_tree().set_input_as_handled()
+		return
 	match player.name:
 		"Player":
 			match event.as_text():
@@ -134,6 +187,8 @@ func _input(event):
 		get_parent().get_node("FormulaHitbox").position = target_body.position
 		end_target_screen()
 	if event.is_action_pressed("ui_cancel"):
+		end_animate_target()
+		yield($Tween, "tween_all_completed")
 		cancel_target_screen()
 	if event.is_action_pressed(next):
 		next_enemy()
@@ -162,12 +217,13 @@ func cancel_target_screen():
 	get_parent().queue_free()
 
 func end_target_screen():
+	end_animate_target()
 	sfx1.stream_paused = false
 	sfx2.stream_paused = false
 	AudioServer.set_bus_effect_enabled(0, 0, false)
-#	Engine.time_scale = 1
 	get_tree().paused = false
 	get_tree().get_root().get_node("World/Targets").queue_free()
+	yield($Tween, "tween_all_completed")
 	queue_free()
 
 func _on_TargetArea_body_entered(body):
