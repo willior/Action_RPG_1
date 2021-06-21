@@ -1,5 +1,5 @@
 extends Control
-onready var EnemyTarget = load("res://assets/UI/Target/EnemyTarget.tscn")
+onready var Target = load("res://assets/UI/Target/Target.tscn")
 onready var music = get_tree().get_root().get_node("World/Music")
 onready var sfx1 = get_tree().get_root().get_node("World/SFX")
 onready var sfx2 = get_tree().get_root().get_node("World/SFX2")
@@ -7,12 +7,13 @@ onready var target_area = $KinematicBody2D/TargetArea
 onready var target_body = $KinematicBody2D
 
 var player
-var enemies
+var target_bodies
 var count
 
 export var formula_range : int
 export var formula_shape : Shape2D
 export var formula_size : int
+export var target_color : Color
 
 var up
 var down
@@ -20,6 +21,7 @@ var left
 var right
 var next
 var previous
+
 var velocity = Vector2.ZERO
 var ending = false
 
@@ -46,14 +48,14 @@ func _ready():
 	get_tree().paused = true
 	Physics2DServer.set_active(true)
 	count = 0
-	enemies = get_tree().get_nodes_in_group("Enemies")
+	target_bodies = get_tree().get_nodes_in_group("Players")
 	var targets = Node.new()
 	targets.set_name("Targets")
 	get_tree().get_root().get_node("World").add_child(targets)
-	for e in range(0, enemies.size()):
-		var enemy_target = EnemyTarget.instance()
-		enemy_target.global_position = enemies[e].global_position
-		get_tree().get_root().get_node("World/Targets").add_child(enemy_target)
+	for e in range(0, target_bodies.size()):
+		var target = Target.instance()
+		target.global_position = target_bodies[e].global_position
+		get_tree().get_root().get_node("World/Targets").add_child(target)
 	begin_animate_target()
 
 func begin_animate_target():
@@ -111,19 +113,19 @@ func end_animate_target():
 	)
 	$Tween.start()
 
-func _process(_delta):
-	velocity = Vector2()
-	if Input.is_action_pressed(right):
-		velocity.x += 1
-	if Input.is_action_pressed(left):
-		velocity.x -= 1
-	if Input.is_action_pressed(down):
-		velocity.y += 1
-	if Input.is_action_pressed(up):
-		velocity.y -= 1
-	velocity = velocity.normalized()*160
-	velocity = target_body.move_and_slide(velocity)
-	target_body.position = target_body.position.clamped(135)
+#func _process(_delta):
+#	velocity = Vector2()
+#	if Input.is_action_pressed(right):
+#		velocity.x += 1
+#	if Input.is_action_pressed(left):
+#		velocity.x -= 1
+#	if Input.is_action_pressed(down):
+#		velocity.y += 1
+#	if Input.is_action_pressed(up):
+#		velocity.y -= 1
+#	velocity = velocity.normalized()*160
+#	velocity = target_body.move_and_slide(velocity)
+#	target_body.position = target_body.position.clamped(135)
 
 func _input(event):
 	if ending:
@@ -203,43 +205,44 @@ func _input(event):
 		end_animate_target()
 		yield($Tween, "tween_all_completed")
 		cancel_target_screen()
-	if event.is_action_pressed(next):
-		next_enemy()
-	if event.is_action_pressed(previous):
-		previous_enemy()
+	
+#	if event.is_action_pressed(next):
+#		next_target_body()
+#	if event.is_action_pressed(previous):
+#		previous_target_body()
 
-func next_enemy():
-	if enemies.size() <= 0:
-		print('no enemies detected')
+func next_target_body():
+	if target_bodies.size() <= 0:
+		print('no target_bodies detected')
 		return
 	count += 1
-	if count >= enemies.size():
+	if count >= target_bodies.size():
 		count = 0
-	if enemy_out_of_range():
-		print(enemies[count].name, ' enemy out of range; skipping')
-		enemies.remove(count)
+	if target_body_out_of_range():
+		print(target_bodies[count].name, ' target_body out of range; skipping')
+		target_bodies.remove(count)
 		count -= 1
-		next_enemy()
+		next_target_body()
 		return
-	target_area.global_position = enemies[count].global_position
+	target_area.global_position = target_bodies[count].global_position
 
-func previous_enemy():
-	if enemies.size() <= 0:
-		print('no enemies detected')
+func previous_target_body():
+	if target_bodies.size() <= 0:
+		print('no target_bodies detected')
 		return
 	count -= 1
 	if count < 0:
-		count = enemies.size()-1
-	if enemy_out_of_range():
-		print(enemies[count].name, ' enemy out of range; skipping')
-		enemies.remove(count)
+		count = target_bodies.size()-1
+	if target_body_out_of_range():
+		print(target_bodies[count].name, ' target_body out of range; skipping')
+		target_bodies.remove(count)
 		count -= 1
-		previous_enemy()
+		previous_target_body()
 		return
-	target_area.global_position = enemies[count].global_position
+	target_area.global_position = target_bodies[count].global_position
 
-func enemy_out_of_range():
-	if player.position.distance_to(enemies[count].position) > 184:
+func target_body_out_of_range():
+	if player.position.distance_to(target_bodies[count].position) > 184:
 		return true
 
 func cancel_target_screen():
@@ -257,8 +260,8 @@ func end_target_screen():
 	queue_free()
 
 func _on_TargetArea_body_entered(body):
-	target_area.modulate = Color(1,0,0,1)
-	body.modulate = Color(1,0,0,1)
+	target_area.modulate = target_color
+	body.modulate = target_color
 
 func _on_TargetArea_body_exited(body):
 	body.modulate = Color(1,1,1,1)

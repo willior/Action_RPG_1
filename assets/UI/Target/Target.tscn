@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/UI/Target/Ring_16.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 4.0
+
+[node name="Target" type="StaticBody2D"]
+pause_mode = 2
+collision_layer = 256
+collision_mask = 0
+
+[node name="Area2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
