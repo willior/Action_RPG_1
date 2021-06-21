@@ -1,7 +1,7 @@
-{"player1_stats":{"defense":16,"dexterity":19,"endurance":32,"experience":11870,"experience_required":12310,"experience_total":31626,"health":480,"level":11,"magic":18,"max_health":480,"max_stamina":480,"speed":16,"stamina":480,"strength":12,"vitality":32}}
-{"player2_stats":{"defense":16,"dexterity":12,"endurance":32,"experience":11870,"experience_required":12310,"experience_total":31626,"health":483,"level":11,"magic":24,"max_health":483,"max_stamina":480,"speed":12,"stamina":480,"strength":14,"vitality":35}}
+{"player1_stats":{"defense":16,"dexterity":20,"endurance":32,"experience":348,"experience_required":19918,"experience_total":32414,"health":482,"level":12,"magic":18,"max_health":482,"max_stamina":480,"speed":16,"stamina":480,"strength":12,"vitality":34}}
+{"player2_stats":{"defense":16,"dexterity":12,"endurance":35,"experience":348,"experience_required":19918,"experience_total":32414,"health":483,"level":12,"magic":24,"max_health":483,"max_stamina":483,"speed":12,"stamina":483,"strength":14,"vitality":35}}
 {"player3_stats":{"defense":12,"dexterity":12,"endurance":32,"experience":82,"experience_required":100,"experience_total":82,"health":480,"level":1,"magic":12,"max_health":480,"max_stamina":480,"speed":12,"stamina":480,"strength":12,"vitality":32}}
-{"player1_formulaData":{"Flash":["Flash",5,113.2,207.36,650],"Fury":["Fury",2,50,120,150],"Heal":["Heal",3,30,144,250]}}
+{"player1_formulaData":{"Flash":["Flash",6,105.84,248.832,850],"Fury":["Fury",2,50,120,150],"Heal":["Heal",3,80,144,300]}}
 {"player2_formulaData":{"Flash":["Flash",2,0,120,100],"Fury":["Fury",1,50,100,50],"Heal":["Heal",2,0,120,100]}}
-{"chapter_number":0,"examined_list":[],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
+{"chapter_number":0,"examined_list":["Bat","Wolf","Crow"],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
 {"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}

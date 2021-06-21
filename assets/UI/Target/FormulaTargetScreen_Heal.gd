@@ -26,6 +26,7 @@ var velocity = Vector2.ZERO
 var ending = false
 
 func _ready():
+	get_tree().paused = true
 	player = get_parent().player
 	match player.name:
 		"Player":
@@ -45,7 +46,6 @@ func _ready():
 	sfx1.stream_paused = true
 	sfx2.stream_paused = true
 	AudioServer.set_bus_effect_enabled(0, 0, true)
-	get_tree().paused = true
 	Physics2DServer.set_active(true)
 	count = 0
 	target_bodies = get_tree().get_nodes_in_group("Players")
@@ -224,7 +224,7 @@ func next_target_body():
 		count -= 1
 		next_target_body()
 		return
-	target_area.global_position = target_bodies[count].global_position
+	target_body.global_position = target_bodies[count].global_position
 
 func previous_target_body():
 	if target_bodies.size() <= 0:
@@ -239,10 +239,10 @@ func previous_target_body():
 		count -= 1
 		previous_target_body()
 		return
-	target_area.global_position = target_bodies[count].global_position
+	target_body.global_position = target_bodies[count].global_position
 
 func target_body_out_of_range():
-	if player.position.distance_to(target_bodies[count].position) > 184:
+	if player.global_position.distance_to(target_bodies[count].global_position) > 184:
 		return true
 
 func cancel_target_screen():

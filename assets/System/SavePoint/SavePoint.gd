@@ -14,6 +14,5 @@ func _on_Area2D_body_entered(_body):
 	$Timer.start(.9)
 	get_tree().paused = true
 	yield($Timer, "timeout")
-
 	get_tree().paused = false
 	GameManager.save_game()
