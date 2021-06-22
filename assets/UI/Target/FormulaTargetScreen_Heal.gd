@@ -1,4 +1,11 @@
 extends Control
+
+# types of targetting:
+# free target AoE circle (Flash)
+# static AoE circle (Nova)
+# single-target line (Hardball)
+# multi-target line (Laser)
+
 onready var Target = load("res://assets/UI/Target/Target.tscn")
 onready var music = get_tree().get_root().get_node("World/Music")
 onready var sfx1 = get_tree().get_root().get_node("World/SFX")
@@ -26,6 +33,7 @@ var velocity = Vector2.ZERO
 var ending = false
 
 func _ready():
+	Global.target_screen_open = true
 	get_tree().paused = true
 	player = get_parent().player
 	match player.name:
@@ -257,6 +265,7 @@ func end_target_screen():
 	get_tree().paused = false
 	get_tree().get_root().get_node("World/Targets").queue_free()
 	yield($Tween, "tween_all_completed")
+	Global.target_screen_open = false
 	queue_free()
 
 func _on_TargetArea_body_entered(body):

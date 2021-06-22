@@ -24,6 +24,7 @@ var velocity = Vector2.ZERO
 var ending = false
 
 func _ready():
+	Global.target_screen_open = true
 	get_tree().paused = true
 	player = get_parent().player
 	match player.name:
@@ -247,12 +248,13 @@ func cancel_target_screen():
 	get_parent().queue_free()
 
 func end_target_screen():
-	end_animate_target()
+	Global.target_screen_open = false
 	sfx1.stream_paused = false
 	sfx2.stream_paused = false
 	AudioServer.set_bus_effect_enabled(0, 0, false)
 	get_tree().paused = false
 	get_tree().get_root().get_node("World/Targets").queue_free()
+	end_animate_target()
 	yield($Tween, "tween_all_completed")
 	queue_free()
 

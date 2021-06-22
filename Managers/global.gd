@@ -9,14 +9,20 @@ const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 
 var player1
 var player2
-var chapter_display
-var chapter_name
-var custom_variables = {}
-var dialogOpen = false
+
 var changingScene = false
 var _attributes = null
 var current_scene = null
+
+var chapter_display
+var chapter_name
+
+var custom_variables = {}
+var dialogOpen = false
+
 var in_cutscene = false
+var target_screen_open = false
+
 var rng = RandomNumberGenerator.new()
 
 func _ready():
