@@ -3,7 +3,7 @@ extends Node2D
 var player
 var status = ["Frenzy", 1.0] # "Name", application chance, duration, potency
 
-func _ready():
+func start():
 	player.state = 9
 	player.animationTree.active = false
 	player.animationPlayer.play("Cast_1")

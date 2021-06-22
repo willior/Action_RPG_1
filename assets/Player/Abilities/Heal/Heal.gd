@@ -2,9 +2,6 @@ extends Node2D
 
 var player
 
-func _ready():
-	pass
-
 func start():
 	player.state = 9
 	player.animationTree.active = false
