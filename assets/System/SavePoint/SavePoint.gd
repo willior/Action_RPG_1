@@ -18,4 +18,4 @@ func _on_Area2D_body_entered(_body):
 	if Global.target_screen_open:
 		return
 	get_tree().paused = false
-	
+	Global.reset_input_after_dialog()

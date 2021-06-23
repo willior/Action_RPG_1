@@ -55,6 +55,7 @@ func _ready():
 		var enemy_target = EnemyTarget.instance()
 		enemy_target.global_position = enemies[e].global_position
 		get_tree().get_root().get_node("World/Targets").add_child(enemy_target)
+		# Global.show_outline(enemies[e])
 	begin_animate_target()
 
 func begin_animate_target():
@@ -248,6 +249,10 @@ func cancel_target_screen():
 	get_parent().queue_free()
 
 func end_target_screen():
+	enemies = get_tree().get_nodes_in_group("Enemies")
+#	for e in range(0, enemies.size()):
+#		Global.hide_outline(enemies[e])
+		
 	Global.target_screen_open = false
 	sfx1.stream_paused = false
 	sfx2.stream_paused = false

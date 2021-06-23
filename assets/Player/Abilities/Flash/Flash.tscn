@@ -71,14 +71,14 @@ __meta__ = {
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="FormulaTarget"]
 collision_layer = 0
-collision_mask = 256
+collision_mask = 384
 
 [node name="TargetArea" type="Area2D" parent="FormulaTarget/KinematicBody2D"]
 pause_mode = 2
 material = SubResource( 1 )
 z_index = 1
 collision_layer = 0
-collision_mask = 256
+collision_mask = 384
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaTarget/KinematicBody2D/TargetArea"]
 pause_mode = 2

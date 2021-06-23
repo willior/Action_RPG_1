@@ -3,10 +3,20 @@ extends Control
 onready var text = $Label
 onready var tween = $Tween
 var message : String
+var flash : String
 var fade = Color(1, 1, 1, 0)
 
 func _ready():
 	text.set_text(message)
+	match flash:
+		"crit":
+			crit_flash()
+		"pickup":
+			pickup_flash()
+		"level":
+			level_flash()
+		"poison":
+			poison_flash()
 
 func crit_flash():
 	$AnimationPlayer.play("crit_flash")

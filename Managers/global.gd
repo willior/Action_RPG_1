@@ -2,7 +2,7 @@ extends Node
 
 const BloodHitEffect = preload("res://assets/Effects/Blood_HitEffect.tscn")
 var IngredientPickup = load("res://assets/Ingredients/IngredientPickup.tscn")
-
+const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
 const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
@@ -173,8 +173,17 @@ func show_outline(object):
 func hide_outline(object):
 	object.outline.hide()
 
-func display_message_popup(message):
-	get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(message)
+func display_message_popup(who, message, flash):
+	var messagePopup = MessagePopup.instance()
+	messagePopup.message = message
+	messagePopup.flash = flash
+	match who:
+		"Player":
+			messagePopup.get_node("Label").align = 0
+			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
+		"Player2":
+			messagePopup.get_node("Label").align = 2
+			get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(messagePopup)
 
 func reset_input_after_dialog():
 	GameManager.player.check_attack_input()

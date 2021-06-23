@@ -694,10 +694,18 @@ func _on_Hurtbox_area_entered(area):
 		var is_crit = Global.enemy_crit_calculation(area.crit_chance)
 		if is_crit:
 			damageTaken *= 2
-			var critPopup = MessagePopup.instance()
-			critPopup.message = str(self.name, " gets whacked!")
-			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
-			critPopup.crit_flash()
+#			var critPopup = MessagePopup.instance()
+#			critPopup.message = str(self.name, " gets whacked!")
+			print(self.name, " got critted")
+			Global.display_message_popup(self.name, str(self.name, " gets whacked!"), "crit")
+#			match self.name:
+#				"Player":
+#					critPopup.get_node("Label").align = 0
+#					get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
+#				"Player2":
+#					critPopup.get_node("Label").align = 2
+#					get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(critPopup)
+			# critPopup.crit_flash()
 		var player_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
 		if attack2_queued && player_staggered:
 			attack2_queued = false
