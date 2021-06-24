@@ -38,7 +38,8 @@ func interact(player):
 	# argument determines sound effect; 0 = heartCollect
 	itemCollectEffect.playSound(0)
 	var displayMessage = "Acquired the " + str(formula_name) + " formula!"
-	display_pickup_message(displayMessage, player.name)
+	# display_pickup_message(displayMessage, player.name)
+	Global.display_message_popup(player.name, displayMessage, "pickup")
 	queue_free()
 
 # warning-ignore:shadowed_variable

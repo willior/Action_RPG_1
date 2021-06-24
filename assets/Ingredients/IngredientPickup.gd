@@ -44,8 +44,9 @@ func interact(player):
 	get_parent().add_child(itemCollectEffect)
 	# argument determines sound effect; 0 = heartCollect
 	itemCollectEffect.playSound(0)
-	var displayMessage = "Found " + str(ingredient_name) + " x1"
-	display_pickup_message(displayMessage, player.name)
+	# var displayMessage = "Found " + str(ingredient_name) + " x1"
+	# display_pickup_message(displayMessage, player.name)
+	Global.display_message_popup(player.name, "Found " + str(ingredient_name) + " x1", "pickup")
 	queue_free()
 
 # warning-ignore:shadowed_variable
@@ -57,15 +58,15 @@ func check_ingredient(ingredient_name):
 		return
 	return ingredient
 
-func display_pickup_message(value, who):
-	var pickupPopup = PickupPopup.instance()
-	pickupPopup.message = value
-	match who:
-		"Player":
-			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(pickupPopup)
-		"Player2":
-			get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(pickupPopup)
-	pickupPopup.pickup_flash()
+#func display_pickup_message(value, who):
+#	var pickupPopup = PickupPopup.instance()
+#	pickupPopup.message = value
+#	match who:
+#		"Player":
+#			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(pickupPopup)
+#		"Player2":
+#			get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(pickupPopup)
+#	pickupPopup.pickup_flash()
 
 #func show_outline():
 #	$Sprite.material.set_shader_param("outline_color", outline)

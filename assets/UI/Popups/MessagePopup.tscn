@@ -90,7 +90,6 @@ size_flags_vertical = 1
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.976471, 0.976471, 0.976471, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -105,5 +104,4 @@ anims/crit_flash = SubResource( 1 )
 anims/level_flash = SubResource( 2 )
 anims/pickup_flash = SubResource( 3 )
 anims/poison_flash = SubResource( 4 )
-
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

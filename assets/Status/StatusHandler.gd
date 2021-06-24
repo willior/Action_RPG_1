@@ -1,6 +1,5 @@
 extends Node
 
-onready var MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 onready var Regen = preload("res://assets/Status/Buffs/Regen.tscn")
 onready var Poison = preload("res://assets/Status/Debuffs/Poison.tscn")
 onready var Frenzy = preload("res://assets/Status/Buffs/Frenzy.tscn")

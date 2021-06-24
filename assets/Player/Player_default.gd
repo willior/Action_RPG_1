@@ -195,7 +195,7 @@ func _input(event):
 					yield($CastTimer, "timeout")
 					casting = false
 					if get_node("/root/World").has_node(formula_used.formula_reference.name):
-						formulaData.apply_xp_to_formula(formula_used.formula_reference.name)
+						formulaData.apply_xp_to_formula(formula_used.formula_reference.name, self.name)
 						for i in range(0,2):
 							pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
 				else:

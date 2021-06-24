@@ -173,16 +173,18 @@ func show_outline(object):
 func hide_outline(object):
 	object.outline.hide()
 
-func display_message_popup(who, message, flash):
+func display_message_popup(who, message, flash=null):
 	var messagePopup = MessagePopup.instance()
 	messagePopup.message = message
 	messagePopup.flash = flash
 	match who:
 		"Player":
 			messagePopup.get_node("Label").align = 0
+			messagePopup.get_node("Label").grow_horizontal = 1
 			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(messagePopup)
 		"Player2":
 			messagePopup.get_node("Label").align = 2
+			messagePopup.get_node("Label").grow_horizontal = 0
 			get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(messagePopup)
 
 func reset_input_after_dialog():
