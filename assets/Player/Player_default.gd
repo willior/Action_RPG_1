@@ -746,14 +746,11 @@ func stun_state(delta):
 	if examining:
 		self.noticeDisplay = false
 	if talking:
-		# talking = false
 		self.talkNoticeDisplay = false
 	if interacting:
-		# interacting = false
 		self.interactNoticeDisplay = false
 
 func hit_state(_delta):
-# warning-ignore:integer_division
 	velocity = -dir_vector * 100
 	animationState.travel("Hit")
 	move()
@@ -782,7 +779,6 @@ func enemy_killed(experience_from_kill):
 		stats.experience_required = round(stats.experience_required * 1.618034)
 
 func level_up():
-	# just_leveled = true
 	stats.leveling = true
 	stats.level += 1
 	if stats.level < 11:
@@ -817,7 +813,6 @@ func show_level_up_screen():
 	levelUpScreen.stats_remaining = stats_to_allocate
 	stats_to_allocate = 0
 	get_node("/root/World/GUI").add_child(levelUpScreen)
-	#just_leveled = false
 	stats.leveling = false
 	for p in get_tree().get_nodes_in_group("Players"):
 		if p.stats.leveling:
@@ -902,10 +897,8 @@ func action_state(delta):
 	if examining:
 		self.noticeDisplay = false
 	if talking:
-		# talking = false
 		self.talkNoticeDisplay = false
 	if interacting:
-		# interacting = false
 		self.interactNoticeDisplay = false
 
 func action_finished():

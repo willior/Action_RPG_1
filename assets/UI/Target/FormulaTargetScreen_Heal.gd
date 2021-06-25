@@ -258,6 +258,7 @@ func cancel_target_screen():
 	get_parent().queue_free()
 
 func end_target_screen():
+	Global.target_screen_open = false
 	end_animate_target()
 	sfx1.stream_paused = false
 	sfx2.stream_paused = false
@@ -265,7 +266,6 @@ func end_target_screen():
 	get_tree().paused = false
 	get_tree().get_root().get_node("World/Targets").queue_free()
 	yield($Tween, "tween_all_completed")
-	Global.target_screen_open = false
 	queue_free()
 
 func _on_TargetArea_body_entered(body):

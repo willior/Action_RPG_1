@@ -90,6 +90,7 @@ text = "QUIT"
 stream = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
