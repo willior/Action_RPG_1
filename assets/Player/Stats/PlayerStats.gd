@@ -18,6 +18,8 @@ var dexterity: float = 12.0 setget set_dexterity
 var speed: float = 12.0 setget set_speed
 var magic: float = 12.0 setget set_magic
 
+var speed_mod : float = 1 setget set_speed_mod
+
 var level = 1 setget set_level
 var experience = 82 setget set_experience
 var experience_required = 100 setget set_max_experience
@@ -254,7 +256,6 @@ func set_status_resistance(value):
 	# print('status_resistance set: ', status_resistance)
 
 func set_strength(value):
-	# print('strength set: ', value)
 	strength = value
 	emit_signal("strength_changed", strength)
 
@@ -272,14 +273,17 @@ func set_dexterity_mod(value):
 
 func set_speed(value):
 	speed = value
-	max_speed = 100 + (speed / 2) 
-	roll_speed = 200 + speed
-	shade_speed = 420 + (speed * 3)
-	self.attack_speed = 1 + (speed / 128)
-	charge_rate = 0.5 + (speed / 128)
-	self.iframes = 0.1 + (speed / 128)
-	# print(name, ' speed set: ', attack_speed)
+	max_speed = (100 + (speed / 2)) * speed_mod
+	roll_speed = (200 + speed) * speed_mod
+	shade_speed = (420 + (speed * 3)) * speed_mod
+	charge_rate = (0.5 + (speed / 128)) * speed_mod
+	self.attack_speed = (1 + (speed / 128)) * speed_mod
+	self.iframes = (0.1 + (speed / 128)) * speed_mod
 	emit_signal("speed_changed", speed)
+
+func set_speed_mod(value):
+	speed_mod = value
+	set_speed(speed)
 
 func set_attack_speed(value):
 	attack_speed = value

@@ -14,6 +14,13 @@ onready var strengthBox = $StatsDisplay/VBoxButtons/ButtonSTR/HBox/STR
 onready var dexterityBox = $StatsDisplay/VBoxButtons/ButtonDEX/HBox/DEX
 onready var speedBox = $StatsDisplay/VBoxButtons/ButtonSPD/HBox/SPD
 onready var magicBox = $StatsDisplay/VBoxButtons/ButtonMAG/HBox/MAG
+onready var healthMod = $StatsDisplay/VBoxButtons/ButtonVIT/HBox/MOD
+onready var enduranceMod = $StatsDisplay/VBoxButtons/ButtonEND/HBox/MOD
+onready var defenseMod = $StatsDisplay/VBoxButtons/ButtonDEF/HBox/MOD
+onready var strengthMod = $StatsDisplay/VBoxButtons/ButtonSTR/HBox/MOD
+onready var dexterityMod = $StatsDisplay/VBoxButtons/ButtonDEX/HBox/MOD
+onready var speedMod = $StatsDisplay/VBoxButtons/ButtonSPD/HBox/MOD
+onready var magicMod = $StatsDisplay/VBoxButtons/ButtonMAG/HBox/MOD
 onready var vitBar = $StatsDisplay/VBoxButtons/ButtonVIT/ColorRect
 onready var endBar = $StatsDisplay/VBoxButtons/ButtonEND/ColorRect
 onready var defBar = $StatsDisplay/VBoxButtons/ButtonDEF/ColorRect
@@ -83,6 +90,13 @@ func _ready():
 	dexterityBox.set_text(str(player.stats.dexterity))
 	speedBox.set_text(str(player.stats.speed))
 	magicBox.set_text(str(player.stats.magic))
+	
+	if player.stats.speed_mod == 0: return
+	elif player.stats.speed_mod > 0:
+		pass
+	elif player.stats.speed_mod < 0:
+		pass
+	
 	vitBar.value = player.stats.vitality
 	endBar.value = player.stats.endurance
 	defBar.value = player.stats.defense

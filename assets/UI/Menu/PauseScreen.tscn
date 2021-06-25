@@ -145,7 +145,6 @@ toggle_mode = true
 text = "CONFIG"
 
 [node name="StatsDisplay" type="NinePatchRect" parent="."]
-visible = false
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -110.0
@@ -214,19 +213,27 @@ text = "WILLPOWER"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonVIT/HBox"]
 margin_left = 62.0
-margin_right = 172.0
+margin_right = 196.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="VIT" type="Label" parent="StatsDisplay/VBoxButtons/ButtonVIT/HBox"]
-margin_left = 176.0
+margin_left = 200.0
+margin_right = 200.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+
+[node name="MOD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonVIT/HBox"]
+margin_left = 204.0
 margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
 
 [node name="ColorRect" type="TextureProgress" parent="StatsDisplay/VBoxButtons/ButtonVIT"]
 modulate = Color( 0.8, 0.466667, 0, 1 )
@@ -285,19 +292,27 @@ text = "LUNG CAPACITY"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonEND/HBox"]
 margin_left = 81.0
-margin_right = 172.0
+margin_right = 196.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="END" type="Label" parent="StatsDisplay/VBoxButtons/ButtonEND/HBox"]
-margin_left = 176.0
+margin_left = 200.0
+margin_right = 200.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+
+[node name="MOD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonEND/HBox"]
+margin_left = 204.0
 margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
 
 [node name="ColorRect" type="TextureProgress" parent="StatsDisplay/VBoxButtons/ButtonEND"]
 modulate = Color( 0.368627, 0.752941, 0.411765, 1 )
@@ -352,19 +367,27 @@ text = "RESILIENCE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonDEF/HBox"]
 margin_left = 64.0
-margin_right = 172.0
+margin_right = 196.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="DEF" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEF/HBox"]
-margin_left = 176.0
+margin_left = 200.0
+margin_right = 200.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+
+[node name="MOD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEF/HBox"]
+margin_left = 204.0
 margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
 
 [node name="ColorRect" type="TextureProgress" parent="StatsDisplay/VBoxButtons/ButtonDEF"]
 modulate = Color( 0.278431, 0.278431, 1, 1 )
@@ -416,19 +439,27 @@ text = "VIOLENT NATURE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonSTR/HBox"]
 margin_left = 87.0
-margin_right = 172.0
+margin_right = 196.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="STR" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSTR/HBox"]
-margin_left = 176.0
+margin_left = 200.0
+margin_right = 200.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+
+[node name="MOD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSTR/HBox"]
+margin_left = 204.0
 margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
 
 [node name="ColorRect" type="TextureProgress" parent="StatsDisplay/VBoxButtons/ButtonSTR"]
 modulate = Color( 0.721569, 0.152941, 0.12549, 1 )
@@ -483,19 +514,27 @@ text = "PATIENCE"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonDEX/HBox"]
 margin_left = 52.0
-margin_right = 172.0
+margin_right = 196.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="DEX" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEX/HBox"]
-margin_left = 176.0
+margin_left = 200.0
+margin_right = 200.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+
+[node name="MOD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonDEX/HBox"]
+margin_left = 204.0
 margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
 
 [node name="ColorRect" type="TextureProgress" parent="StatsDisplay/VBoxButtons/ButtonDEX"]
 modulate = Color( 0.321569, 0.619608, 0.701961, 1 )
@@ -550,19 +589,27 @@ text = "SWIFTNESS"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonSPD/HBox"]
 margin_left = 60.0
-margin_right = 172.0
+margin_right = 196.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="SPD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSPD/HBox"]
-margin_left = 176.0
+margin_left = 200.0
+margin_right = 200.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+
+[node name="MOD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonSPD/HBox"]
+margin_left = 204.0
 margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
 
 [node name="ColorRect" type="TextureProgress" parent="StatsDisplay/VBoxButtons/ButtonSPD"]
 modulate = Color( 1, 1, 0.752941, 1 )
@@ -622,19 +669,27 @@ text = "SPIRITUALITY"
 
 [node name="Control" type="Control" parent="StatsDisplay/VBoxButtons/ButtonMAG/HBox"]
 margin_left = 76.0
-margin_right = 172.0
+margin_right = 196.0
 margin_bottom = 13.0
 size_flags_horizontal = 3
 
 [node name="MAG" type="Label" parent="StatsDisplay/VBoxButtons/ButtonMAG/HBox"]
-margin_left = 176.0
+margin_left = 200.0
+margin_right = 200.0
+margin_bottom = 13.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+
+[node name="MOD" type="Label" parent="StatsDisplay/VBoxButtons/ButtonMAG/HBox"]
+margin_left = 204.0
 margin_right = 204.0
 margin_bottom = 13.0
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "stats"
 
 [node name="ColorRect" type="TextureProgress" parent="StatsDisplay/VBoxButtons/ButtonMAG"]
 modulate = Color( 0.662745, 0, 1, 1 )

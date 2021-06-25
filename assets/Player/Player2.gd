@@ -511,7 +511,6 @@ func flash_start():
 	stats.dexterity_mod = 4
 	charge.stop_charge()
 	swordHitbox.flash_begin()
-	# stats.strength_mod = 2
 
 func flash_stop():
 	base_enemy_accuracy = 66
