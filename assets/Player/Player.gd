@@ -429,7 +429,7 @@ func attack2_stamina_drain():
 func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
 	base_enemy_accuracy = 66
-	stats.dexterity_mod = 0
+	stats.dexterity_bonus = 0
 	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
