@@ -686,7 +686,7 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.display_damage_popup("Miss!", false)
 		print(area.get_parent().name, ' missed Player due to altitude difference')
 		return
-	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
+	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.evasion)
 	if hit:
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness, element_mod)
 		var is_crit = Global.enemy_crit_calculation(area.crit_chance)

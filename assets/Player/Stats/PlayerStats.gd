@@ -18,8 +18,6 @@ var dexterity: float = 12.0 setget set_dexterity
 var speed: float = 12.0 setget set_speed
 var magic: float = 12.0 setget set_magic
 
-var speed_mod : float = 1 setget set_speed_mod
-
 var level = 1 setget set_level
 var experience = 82 setget set_experience
 var experience_required = 100 setget set_max_experience
@@ -39,21 +37,29 @@ var stamina = max_stamina setget set_stamina
 var stamina_regen_rate = 0.2 setget set_stamina_regen_rate
 var stamina_attack_cost = 15
 
-var strength_mod = 0 setget set_strength_mod
-var defense_mod = 0 setget set_defense_mod
+var strength_mod : float = 1 setget set_strength_mod
+
+var defense_mod : float = 1 setget set_defense_mod
 var status_resistance setget set_status_resistance
-var dexterity_mod = 0.0 setget set_dexterity_mod
+
+var dexterity_mod : float = 0.0 setget set_dexterity_mod
 var base_accuracy = 75
 var base_crit_rate = 4
+
+var speed_mod : float = 1 setget set_speed_mod
+var evasion
 var attack_speed = 1.0 setget set_attack_speed
 var iframes = 0.1 setget set_iframes
+var charge_rate = 0.5
+
+var magic_mod : float = 1 setget set_magic_mod
+var spell_mod = 1.0 setget set_spell_mod
+var drop_rate_mod = 1.0 setget set_drop_rate_mod
+
 var max_charge = 100 setget set_max_charge
 var charge = 0 setget set_charge
-var charge_rate = 0.5
 var max_charge_level = 2 setget set_max_charge_level
 var charge_level = 0 setget set_charge_level
-var magic_mod = 1.0 setget set_magic_mod
-var drop_rate_mod = 1.0 setget set_drop_rate_mod
 
 var cash = 0 setget set_cash
 
@@ -69,26 +75,26 @@ var speed_description = "Swiftness aids in reflexive maneuvers like evasion, as 
 var magic_description = "Spirituality governs the amount of aid received from higher planes, as well as one's grasp of the incomprehensible."
 
 signal no_health
-signal vitality_changed(value)
+# signal vitality_changed(value)
 signal health_changed(value)
 signal max_health_changed(value)
 signal final_health_changed(value)
 signal player_dying(value)
-signal endurance_changed(value)
+# signal endurance_changed(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
-signal stamina_regen_rate_changed(value)
+# signal stamina_regen_rate_changed(value)
 signal strength_changed(value)
-signal strength_mod_changed(value)
-signal dexterity_changed(value)
-signal dexterity_mod_changed(value)
-signal defense_changed(value)
-signal defense_mod_changed(value)
-signal iframes_changed(value)
-signal speed_changed(value)
+# signal strength_mod_changed(value)
+# signal dexterity_changed(value)
+# signal dexterity_mod_changed(value)
+# signal defense_changed(value)
+# signal defense_mod_changed(value)
+# signal iframes_changed(value)
+# signal speed_changed(value)
 signal attack_speed_changed(value)
-signal magic_changed(value)
-# signal magic_mod_changed(value)
+# signal magic_changed(value)
+# signal spell_mod_changed(value)
 signal status_changed(value)
 
 signal max_charge_changed(value)
@@ -177,7 +183,7 @@ func increment_vitality():
 
 func set_vitality(value):
 	vitality = value
-	emit_signal("vitality_changed", vitality)
+	# emit_signal("vitality_changed", vitality)
 
 func set_max_health(value):
 	max_health = value
@@ -227,7 +233,7 @@ func increment_endurance():
 
 func set_endurance(value):
 	endurance = value
-	emit_signal("endurance_changed", endurance)
+	# emit_signal("endurance_changed", endurance)
 
 func set_max_stamina(value):
 	max_stamina = value
@@ -240,16 +246,16 @@ func set_stamina(value):
 
 func set_stamina_regen_rate(value):
 	stamina_regen_rate = value
-	emit_signal("stamina_regen_rate_changed", stamina_regen_rate)
+	# emit_signal("stamina_regen_rate_changed", stamina_regen_rate)
 
 func set_defense(value):
 	defense = value
 	self.status_resistance = defense/128
-	emit_signal("defense_changed", defense)
+	# emit_signal("defense_changed", defense)
 
 func set_defense_mod(value):
 	defense_mod = value
-	emit_signal("defense_mod_changed", defense_mod)
+	# emit_signal("defense_mod_changed", defense_mod)
 
 func set_status_resistance(value):
 	status_resistance = value
@@ -261,25 +267,26 @@ func set_strength(value):
 
 func set_strength_mod(value):
 	strength_mod = value
-	emit_signal("strength_mod_changed", strength_mod)
+	# emit_signal("strength_mod_changed", strength_mod)
 
 func set_dexterity(value):
 	dexterity = value
-	emit_signal("dexterity_changed", dexterity)
+	# emit_signal("dexterity_changed", dexterity)
 
 func set_dexterity_mod(value):
 	dexterity_mod = value
-	emit_signal("dexterity_mod_changed", dexterity_mod)
+	# emit_signal("dexterity_mod_changed", dexterity_mod)
 
 func set_speed(value):
 	speed = value
+	evasion = (speed / 2) * speed_mod
 	max_speed = (100 + (speed / 2)) * speed_mod
 	roll_speed = (200 + speed) * speed_mod
 	shade_speed = (420 + (speed * 3)) * speed_mod
 	charge_rate = (0.5 + (speed / 128)) * speed_mod
+	iframes = (0.1 + (speed / 128)) * speed_mod
 	self.attack_speed = (1 + (speed / 128)) * speed_mod
-	self.iframes = (0.1 + (speed / 128)) * speed_mod
-	emit_signal("speed_changed", speed)
+	# emit_signal("speed_changed", speed)
 
 func set_speed_mod(value):
 	speed_mod = value
@@ -291,7 +298,7 @@ func set_attack_speed(value):
 
 func set_iframes(value):
 	iframes = value
-	emit_signal("iframes_changed", iframes)
+	# emit_signal("iframes_changed", iframes)
 
 func set_max_charge(value):
 	max_charge = value
@@ -311,12 +318,16 @@ func set_charge_level(value):
 
 func set_magic(value):
 	magic = value
-	self.magic_mod = 1 + (magic / 32) # + ~3.125% per point
-	self.drop_rate_mod = 1 + (magic / 64) # + ~1.5625% per point
-	emit_signal("magic_changed", magic)
+	spell_mod = 1 + (magic / 32) # + ~3.125% per point
+	drop_rate_mod = 1 + (magic / 64) # + ~1.5625% per point
+	# emit_signal("magic_changed", magic)
 
 func set_magic_mod(value):
 	magic_mod = value
+	set_magic(magic)
+
+func set_spell_mod(value):
+	spell_mod = value
 
 func set_drop_rate_mod(value):
 	drop_rate_mod = value

@@ -8,14 +8,15 @@ const TweenGreyscale = preload("res://assets/Shaders/Greyscale_TweenCanvasModula
 const Greyscale = preload("res://assets/Shaders/Greyscale_CanvasModulate.tscn")
 const RedFlash = preload("res://assets/Shaders/Red_CanvasModulate.tscn")
 const Heartbeat = preload("res://assets/Audio/SFX/Heartbeat.tscn")
-const MessagePopup = preload("res://assets/UI/Popups/MessagePopup.tscn")
 
 #var inventory_resource = load("res://assets/Player/Inventory.gd")
 #var inventory = inventory_resource.new()
-var pouch_resource = load("res://assets/Player/Pouch.gd")
+const pouch_resource = preload("res://assets/Player/Pouch.gd")
 var pouch = pouch_resource.new()
-var formulabook_resource = load("res://assets/Player/FormulaBook.gd")
+const formulabook_resource = preload("res://assets/Player/FormulaBook.gd")
 var formulabook = formulabook_resource.new()
+var inventory_ref = "inventory"
+
 var ingredient1_OK : bool
 var ingredient2_OK : bool
 
@@ -57,6 +58,7 @@ var charge_count = 0
 var charge_level_count = 0
 var base_enemy_accuracy = 66
 var stamina_attack_cost = stats.stamina_attack_cost
+var knockback_modifier = 1
 
 var interactObject
 var talkObject
@@ -71,9 +73,9 @@ var talkNoticeDisplay = false setget set_talk_notice
 var interactNoticeDisplay = false setget set_interact_notice
 var sweating = false
 var dying = false
-var just_leveled = false
+# var just_leveled = false
 
-var inputs = {
+var player_inputs = {
 	"left": "left_1",
 	"right": "right_1",
 	"up": "up_1",
@@ -99,25 +101,26 @@ onready var hurtbox = $Hurtbox
 onready var collision = $Hurtbox/CollisionShape2D
 onready var timer = $Timer
 onready var talkTimer = $TalkTimer
+onready var levelTimer = $LevelTimer
 onready var notice = $ExamineNotice
 onready var talkNotice = $TalkNotice
 onready var interactNotice = $InteractNotice
 onready var charge = $ChargeUI
 onready var bamboo = $BambooAudio
 
-signal player_saved
+signal player_dead
 
 func _ready():
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
 	else:
 		position = get_tree().get_root().get_node("/root/World/Map").player_spawn_pos
-	if Global.get_attribute("inventory") != null:
-		pouch.set_ingredients(Global.get_attribute("inventory")[0].get_ingredients())
-		formulabook.set_formulas(Global.get_attribute("inventory")[1].get_formulas())
-		GameManager.reinitialize_player(self.name, pouch, formulabook)
+	if Global.get_attribute(inventory_ref) != null:
+		pouch.set_ingredients(Global.get_attribute(inventory_ref)[0].get_ingredients())
+		formulabook.set_formulas(Global.get_attribute(inventory_ref)[1].get_formulas())
+		GameManager.reinitialize_player(name, pouch, formulabook)
 	else:
-		GameManager.initialize_player(self.name)
+		GameManager.initialize_player(name)
 	animationTree.active = true # animation not active until game starts
 	swordHitbox.knockback_vector = dir_vector
 	collision.disabled = false
@@ -127,7 +130,6 @@ func _ready():
 	stats.connect("no_health", self, "game_over")
 	stats.connect("attack_speed_changed", self, "set_attack_timescale")
 	set_attack_timescale(stats.attack_speed)
-	stats.status = "default_speed"
 	Global.set_world_collision(self, z_index)
 
 func _process(delta):
@@ -147,7 +149,7 @@ func _process(delta):
 func _input(event):
 	match state:
 		MOVE:
-			if event.is_action_pressed("attack_1") && !event.is_echo():
+			if event.is_action_pressed(player_inputs.attack) && !event.is_echo():
 				if (!talking && !interacting) && stats.stamina > 0:
 					state = ATTACK1
 				elif interacting && interactObject.interactable && !dying:
@@ -160,8 +162,10 @@ func _input(event):
 					interactObject.talk()
 				elif stats.stamina <= 0:
 					noStamina()
+				else:
+					state = ATTACK1
 			
-			if event.is_action_pressed("alchemy_1"): # G
+			if event.is_action_pressed(player_inputs.alchemy): # G
 				if formulabook._formulas.size() <= 0 or casting:
 					bamboo.play()
 					return
@@ -190,7 +194,7 @@ func _input(event):
 					yield($CastTimer, "timeout")
 					casting = false
 					if get_node("/root/World").has_node(formula_used.formula_reference.name):
-						formulaData.apply_xp_to_formula(formula_used.formula_reference.name)
+						formulaData.apply_xp_to_formula(formula_used.formula_reference.name, self.name)
 						for i in range(0,2):
 							pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
 				else:
@@ -218,13 +222,13 @@ func _input(event):
 #								interactObject.use_item_on_object()
 		
 		ATTACK1:
-			if event.is_action_pressed("attack_1") && !event.is_echo():
+			if event.is_action_pressed(player_inputs.attack) && !event.is_echo():
 				if stats.stamina <= 0:
 					noStamina()
 				else:
 					attack2_queued = true
 		ATTACK2:
-			if event.is_action_pressed("attack_1") && !event.is_echo():
+			if event.is_action_pressed(player_inputs.attack) && !event.is_echo():
 				if stats.stamina <= 0:
 					noStamina()
 				else:
@@ -232,7 +236,7 @@ func _input(event):
 		ACTION:
 			pass
 		STUN:
-			if event.is_action_pressed("attack_1") or event.is_action_pressed("roll_1") or event.is_action_pressed("examine_1") or event.is_action_pressed("alchemy_1"):
+			if event.is_action_pressed(player_inputs.attack) or event.is_action_pressed(player_inputs.roll) or event.is_action_pressed(player_inputs.examine) or event.is_action_pressed(player_inputs.alchemy):
 				get_tree().set_input_as_handled()
 				var new_time = get_node("StatusDisplay/Stun/Timer").get_time_left()-0.25
 				if new_time > 0:
@@ -243,14 +247,13 @@ func _input(event):
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("right_1") - Input.get_action_strength ("left_1")
-	input_vector.y = Input.get_action_strength("down_1") - Input.get_action_strength("up_1")
+	input_vector.x = Input.get_action_strength(player_inputs.right) - Input.get_action_strength (player_inputs.left)
+	input_vector.y = Input.get_action_strength(player_inputs.down) - Input.get_action_strength(player_inputs.up)
 	input_vector = input_vector.normalized()
 	stamina_regeneration()
 	# if player is moving
 	if input_vector != Vector2.ZERO:
 		dir_vector = input_vector
-		swordHitbox.knockback_vector = input_vector
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/BlendSpace2D/blend_position", input_vector)
 		animationTree.set("parameters/Attack1/BlendSpace2D/blend_position", input_vector)
@@ -261,17 +264,19 @@ func move_state(delta):
 		animationTree.set("parameters/Backstep/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
-		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.speed_mod), stats.acceleration * delta)
+		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.max_speed_mod), stats.acceleration * delta)
+		
 		if GameManager.multiplayer_2:
+			# Global.check_players_distance()
 			if position.x - GameManager.player2.position.x > 288 or position.x - GameManager.player2.position.x < -288 or position.y - GameManager.player2.position.y > 160 or position.y - GameManager.player2.position.y < -136:
 				GameManager.player2.position = position
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
-		
+	swordHitbox.knockback_vector = dir_vector * knockback_modifier
 	move()
 	
-	if Input.is_action_just_pressed("examine_1"): # F
+	if Input.is_action_just_pressed(player_inputs.examine): # F
 		if !dying and !casting:
 			if !examining && talkTimer.is_stopped():
 				talkTimer.start()
@@ -281,20 +286,15 @@ func move_state(delta):
 			elif examining && talkTimer.is_stopped():
 				talkTimer.start()
 				interactObject.examine()
+				self.noticeDisplay = false
 			
-	if Input.is_action_just_pressed("next_1"): # R
+	if Input.is_action_just_pressed(player_inputs.next): # R
 		formulabook.advance_selected_formula()
-#		inventory.advance_selected_item()
-#		interactHitbox.disabled = true
-#		interactHitbox.disabled = false
 		
-	if Input.is_action_just_pressed("previous_1"): # E
+	if Input.is_action_just_pressed(player_inputs.previous): # E
 		formulabook.previous_selected_formula()
-#		inventory.previous_selected_item()
-#		interactHitbox.disabled = true
-#		interactHitbox.disabled = false
 
-	if Input.is_action_pressed("attack_1"):
+	if Input.is_action_pressed(player_inputs.attack):
 		if !talkTimer.is_stopped():
 			return
 		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 1:
@@ -303,7 +303,7 @@ func move_state(delta):
 			charge.begin_charge_2()
 		charge_state(delta)
 		
-	if Input.is_action_just_released("attack_1"): # V
+	if Input.is_action_just_released(player_inputs.attack): # V
 		if attack_2_charged or stats.charge_level == 2:
 			attack_2_charged = false
 			state = SHADE
@@ -313,7 +313,7 @@ func move_state(delta):
 		charge.stop_charge()
 		charge_reset()
 		
-	if Input.is_action_just_pressed("roll_1"): # B
+	if Input.is_action_just_pressed(player_inputs.roll): # B
 		if stats.stamina > 0:
 			if input_vector != Vector2.ZERO:
 				roll_moving = true
@@ -347,7 +347,7 @@ func stamina_regeneration():
 			5:
 				stats.stamina += stats.stamina_regen_rate * 32
 		
-		if Input.is_action_pressed("attack_1") || Input.is_action_pressed("roll_1"):
+		if Input.is_action_pressed(player_inputs.attack) || Input.is_action_pressed(player_inputs.roll):
 			if timer.is_stopped():
 				timer.start()
 			return
@@ -368,19 +368,19 @@ func apply_status(status):
 		"slow":
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"frenzy":
-			swordHitbox.knockback_vector = dir_vector / 10
+			swordHitbox.knockback_vector = dir_vector / 8
 		"frenzy_end":
 			swordHitbox.knockback_vector = dir_vector
 
 func move():
 	if GameManager.multiplayer_2:
-		if position.x - GameManager.player2.position.x > 272:
+		if position.x - GameManager.player2.position.x > 360:
 			GameManager.player2.position.x += 1
-		if position.x - GameManager.player2.position.x < -272:
+		if position.x - GameManager.player2.position.x < -360:
 			GameManager.player2.position.x -= 1
-		if position.y - GameManager.player2.position.y > 136:
+		if position.y - GameManager.player2.position.y > 200:
 			GameManager.player2.position.y += 1
-		if position.y - GameManager.player2.position.y < -136:
+		if position.y - GameManager.player2.position.y < -200:
 			GameManager.player2.position.y -= 1
 	velocity = move_and_slide(velocity)
 
@@ -417,12 +417,12 @@ func attack2_state(delta):
 	animationState.travel("Attack2")
 
 func attack1_stamina_drain():
-	swordHitbox.set_deferred("monitorable", true)
+	swordHitbox.enable_sword_hitbox()
 	stats.stamina -= stamina_attack_cost
 	swordHitbox.sword_attack_audio()
 
 func attack2_stamina_drain():
-	swordHitbox.set_deferred("monitorable", true)
+	swordHitbox.enable_sword_hitbox()
 	stats.stamina -= stamina_attack_cost/1.5
 	swordHitbox.sword_attack_audio()
 
@@ -444,14 +444,14 @@ func attack_animation_finished():
 		stamina_regen_reset()
 		state = MOVE
 	# if attack button is held when an attack animation finishes
-	if Input.is_action_pressed("attack_1"):
+	if Input.is_action_pressed(player_inputs.attack):
 		attack_charging = true
 		# charge_reset()
 
 func charge_state(_delta):
 	if stamina_regen_level > 0:
 		stamina_regen_reset()
-	stats.stamina -= 0.55
+	stats.stamina -= 0.4
 	if stats.stamina <= 0:
 		charge.stop_charge()
 		charge_reset()
@@ -483,7 +483,7 @@ func shade_state(delta):
 # warning-ignore:integer_division
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	else:
-		if Input.is_action_just_released("attack_1"):
+		if Input.is_action_just_released(player_inputs.attack):
 			attack2_queued = true
 	animationState.travel("Shade")
 	move()
@@ -509,7 +509,7 @@ func shade_stop():
 		)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
-	swordHitbox.shade_end()
+	swordHitbox.reset_damage()
 	shade_moving = false
 
 func flash_state(delta):
@@ -522,69 +522,21 @@ func flash_state(delta):
 
 func flash_start():
 	stats.stamina -= 25
-	stats.dexterity_mod = 4
 	charge.stop_charge()
 	swordHitbox.flash_begin()
-	# stats.strength_mod = 2
 
 func flash_stop():
 	base_enemy_accuracy = 66
-	swordHitbox.flash_end()
+	swordHitbox.reset_damage()
 
 func player_state_reset():
 	base_enemy_accuracy = 66
 	swordHitbox.reset_damage()
 
-func enemy_killed(experience_from_kill):
-	stats.experience += experience_from_kill
-	stats.experience_total += experience_from_kill
-	while stats.experience >= stats.experience_required:
-		level_up()
-		stats.experience -= stats.experience_required
-		stats.experience_required *= 1.618034
-
-func level_up():
-	just_leveled = true
-	stats.level += 1
-	if stats.level < 11:
-		stats_to_allocate += 2
-	elif stats.level < 21:
-		stats_to_allocate += 3
-	elif stats.level < 31:
-		stats_to_allocate += 4
-	elif stats.level >= 31:
-		stats_to_allocate += 5
-	print('Level ', stats.level, ' achieved. Current total stats_to_allocate: ', stats_to_allocate)
-	if dying:
-		return
-	else:
-		start_level_timer()
-
-func start_level_timer():
-	$LevelTimer.start()
-	yield($LevelTimer, "timeout")
-	if just_leveled:
-		show_level_up_screen()
-
-func show_level_up_screen():
-	get_node("/root/World/Music").stream_paused = true
-	get_node("/root/World/SFX").stream_paused = true
-	get_node("/root/World/SFX2").stream_paused = true
-	print('Instancing LevelUp. Final total stats_to_allocate = ', stats_to_allocate)
-	just_leveled = false
-	var tweenGreyscale = TweenGreyscale.instance()
-	get_node("/root/World/GUI").add_child(tweenGreyscale)
-	var levelUpScreen = LevelUpScreen.instance()
-	levelUpScreen.player_stats = stats
-	levelUpScreen.stats_remaining = stats_to_allocate
-	stats_to_allocate = 0
-	get_node("/root/World/GUI").add_child(levelUpScreen)
-
 func roll_stamina_drain():
 	stats.stamina -= 15
 	base_enemy_accuracy = 32
-	if hurtbox.timer.is_stopped(): 
-		hurtbox.start_invincibility(stats.iframes)
+	hurtbox.start_invincibility(min(stats.iframes, 0.35))
 
 # warning-ignore:unused_argument
 func roll_state(delta):
@@ -594,7 +546,7 @@ func roll_state(delta):
 		# warning-ignore:integer_division
 		velocity = dir_vector * (stats.roll_speed/4)
 	animationState.travel("Roll")
-	if Input.is_action_just_released("attack_1"):
+	if Input.is_action_just_released(player_inputs.attack):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
@@ -638,19 +590,15 @@ func roll_animation_finished():
 func backstep_stamina_drain():
 	stats.stamina -= 5
 	base_enemy_accuracy = 16
-	if hurtbox.timer.is_stopped(): 
-		hurtbox.start_invincibility(stats.iframes)
-	else:
-		pass
+	hurtbox.start_invincibility(min(stats.iframes, 0.24))
 
-# warning-ignore:unused_argument
 func backstep_state(delta):
 	if backstep_moving:
 		velocity = -dir_vector * (stats.roll_speed*0.66)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
 	animationState.travel("Backstep")
-	if Input.is_action_just_released("attack_1"):
+	if Input.is_action_just_released(player_inputs.attack):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
@@ -667,7 +615,7 @@ func backstep_state(delta):
 			else:
 				attack1_queued = true
 	
-	elif Input.is_action_just_pressed("roll_1"):
+	elif Input.is_action_just_pressed(player_inputs.roll):
 		if stats.stamina <= 0:
 			noStamina()
 			charge.stop_charge()
@@ -696,7 +644,7 @@ func backstep_animation_finished():
 		charge.stop_charge()
 		charge_reset()
 		state = FLASH
-	elif Input.is_action_pressed("attack_1"):
+	elif Input.is_action_pressed(player_inputs.attack):
 		attack_animation_finished()
 	elif attack1_queued:
 		velocity = dir_vector * (stats.roll_speed*0.75)
@@ -738,16 +686,14 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.display_damage_popup("Miss!", false)
 		print(area.get_parent().name, ' missed Player due to altitude difference')
 		return
-	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.speed)
+	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.evasion)
 	if hit:
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness, element_mod)
 		var is_crit = Global.enemy_crit_calculation(area.crit_chance)
 		if is_crit:
 			damageTaken *= 2
-			var critPopup = MessagePopup.instance()
-			critPopup.message = str(self.name, " gets whacked!")
-			get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
-			critPopup.crit_flash()
+			print(self.name, " got critted")
+			Global.display_message_popup(self.name, str(self.name, " gets whacked!"), "crit")
 		var player_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
 		if attack2_queued && player_staggered:
 			attack2_queued = false
@@ -761,7 +707,7 @@ func _on_Hurtbox_area_entered(area):
 		if state != ACTION:
 			if state == STUN:
 				player_state_reset()
-				velocity = -dir_vector * (stats.roll_speed/4)
+				velocity = -dir_vector * 50
 				animationState.travel("Stun")
 				return
 			elif player_staggered:
@@ -788,15 +734,12 @@ func stun_state(delta):
 	if examining:
 		self.noticeDisplay = false
 	if talking:
-		# talking = false
 		self.talkNoticeDisplay = false
 	if interacting:
-		# interacting = false
 		self.interactNoticeDisplay = false
 
 func hit_state(_delta):
-# warning-ignore:integer_division
-	velocity = -dir_vector * (stats.roll_speed/2)
+	velocity = -dir_vector * 100
 	animationState.travel("Hit")
 	move()
 
@@ -804,47 +747,105 @@ func hit_animation_finished():
 	stamina_regen_reset()
 	player_state_reset()
 	charge.stop_charge()
-	if Input.is_action_pressed("attack_1"):
+	if Input.is_action_pressed(player_inputs.attack):
 		charge_reset()
 		attack_charging = true
 	state = MOVE
 
 func _on_Hurtbox_invincibility_started():
-	pass
-	# blinkAnimationPlayer.play("Start")
+	blinkAnimationPlayer.play("Start")
 
 func _on_Hurtbox_invincibility_ended():
-	pass
-	# blinkAnimationPlayer.play("Stop")
-	
+	blinkAnimationPlayer.play("Stop")
+
+func enemy_killed(experience_from_kill):
+	stats.experience += experience_from_kill
+	stats.experience_total += experience_from_kill
+	while stats.experience >= stats.experience_required:
+		level_up()
+		stats.experience -= stats.experience_required
+		stats.experience_required = round(stats.experience_required * 1.618034)
+
+func level_up():
+	stats.leveling = true
+	stats.level += 1
+	if stats.level < 11:
+		stats_to_allocate += 2
+	elif stats.level < 21:
+		stats_to_allocate += 3
+	elif stats.level < 31:
+		stats_to_allocate += 4
+	elif stats.level >= 31:
+		stats_to_allocate += 5
+	for p in get_tree().get_nodes_in_group("Players"):
+		if p.dying:
+			return
+	start_level_timer()
+
+func start_level_timer():
+	Global.enable_exits(false)
+	levelTimer.start()
+	yield(levelTimer, "timeout")
+	if stats.leveling: #just_leveled:
+		show_level_up_screen()
+
+func show_level_up_screen():
+	get_node("/root/World/Music").stream_paused = true
+	get_node("/root/World/SFX").stream_paused = true
+	get_node("/root/World/SFX2").stream_paused = true
+	var tweenGreyscale = TweenGreyscale.instance()
+	get_node("/root/World/GUI").add_child(tweenGreyscale)
+	var levelUpScreen = LevelUpScreen.instance()
+	levelUpScreen.player_name = name
+	levelUpScreen.player_stats = stats
+	levelUpScreen.stats_remaining = stats_to_allocate
+	stats_to_allocate = 0
+	get_node("/root/World/GUI").add_child(levelUpScreen)
+	stats.leveling = false
+	for p in get_tree().get_nodes_in_group("Players"):
+		if p.stats.leveling:
+			return
+	Global.enable_exits(true)
+
 func dying_effect(value):
 	if value && !dying:
+		dying = true
+		Global.enable_exits(false)
+		for p in get_tree().get_nodes_in_group("Players"):
+			if p.stats.leveling: # just_leveled:
+				p.levelTimer.stop()
+		StatusHandler.remove_buffs(self)
 		Engine.time_scale = 0.6
-		set_collision_mask_bit(10, false)
-		var heartbeat = Heartbeat.instance()
-		var greyscale = Greyscale.instance()
-		var redFlash = RedFlash.instance()
-		get_node("/root/World/").add_child(heartbeat)
-		get_node("/root/World/GUI").add_child(greyscale)
-		get_node("/root/World/GUI").add_child(redFlash)
+		if !has_node("/root/World/Heartbeat"):
+			var heartbeat = Heartbeat.instance()
+			get_node("/root/World/").add_child(heartbeat)
+		if !has_node("/root/World/GUI/Greyscale"):
+			var greyscale = Greyscale.instance()
+			get_node("/root/World/GUI").add_child(greyscale)
+		if !has_node("/root/World/GUI/Red"):
+			var redFlash = RedFlash.instance()
+			get_node("/root/World/GUI").add_child(redFlash)
 		get_node("/root/World/Music").stream_paused = true
 		get_node("/root/World/SFX").stream_paused = true
 		get_node("/root/World/SFX2").stream_paused = true
-		dying = true
 	elif !value && dying:
+		dying = false
+		for p in get_tree().get_nodes_in_group("Players"):
+			if p.dying:
+				return
 		Engine.time_scale = 1
-		set_collision_mask_bit(10, true)
 		AudioServer.set_bus_effect_enabled(0, 0, false)
+		get_node("/root/World/Heartbeat").queue_free()
 		get_node("/root/World/GUI/Greyscale").queue_free()
 		get_node("/root/World/GUI/Red").queue_free()
-		get_node("/root/World/Heartbeat").queue_free()
 		get_node("/root/World/Music").stream_paused = false
 		get_node("/root/World/SFX").stream_paused = false
 		get_node("/root/World/SFX2").stream_paused = false
-		dying = false
-		emit_signal("player_saved")
-		if just_leveled:
-			start_level_timer()
+		for p in get_tree().get_nodes_in_group("Players"):
+			if p.stats.leveling: # just_leveled:
+				p.start_level_timer()
+			else:
+				Global.enable_exits(true)
 
 func game_over():
 	Engine.time_scale = 1
@@ -853,17 +854,11 @@ func game_over():
 	get_node("/root/World/Music").stream_paused = true
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)
-	get_node("/root/World/GUI/HealthUI1").visible = false
-	get_node("/root/World/GUI/ExpBar1").visible = false
-	get_node("/root/World/GUI/StaminaBar1").visible = false
-	get_node("/root/World/GUI/FormulaUI1").visible = false
-#	for d in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").get_children():
-#		d.queue_free()
-#	for b in get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs").get_children():
-#		b.queue_free()
-	self.visible = false
 	get_tree().paused = true
-	
+	emit_signal("player_dead", name)
+	get_node("/root/World/GUI").hide_UI_elements()
+	self.visible = false
+
 func pickup_state(delta):
 	velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
 	move()
@@ -878,8 +873,8 @@ func pickup_state(delta):
 	animationState.travel("Pickup")
 
 func pickup_finished():
-	reset_interaction()
-	if Input.is_action_pressed("attack_1"):
+	# reset_interaction()
+	if Input.is_action_pressed(player_inputs.attack):
 		charge_reset()
 		attack_charging = true
 	state = MOVE
@@ -890,10 +885,8 @@ func action_state(delta):
 	if examining:
 		self.noticeDisplay = false
 	if talking:
-		# talking = false
 		self.talkNoticeDisplay = false
 	if interacting:
-		# interacting = false
 		self.interactNoticeDisplay = false
 
 func action_finished():
@@ -903,7 +896,7 @@ func action_finished():
 		state = STUN
 		animationState.travel("Stun")
 		return
-	if Input.is_action_pressed("attack_1"):
+	if Input.is_action_pressed(player_inputs.attack):
 		charge_reset()
 		attack_charging = true
 	state = MOVE
@@ -928,7 +921,7 @@ func set_notice(value):
 		notice.visible = true
 	elif !value:
 		notice.visible = false
-		
+
 func set_talk_notice(value):
 	if value:
 		$NoticeAudio.play()
@@ -943,47 +936,47 @@ func set_interact_notice(value):
 	elif !value:
 		interactNotice.visible = false
 
-# function that runs when the player's InteractHitbox detects an area entererd
 func _on_InteractHitbox_area_entered(area):
-	# gets the object in the interact bounding box
 	if dying:
 		return
-	#interactObject = area.get_owner()
 	interactObject = area.get_parent()
 	examining = true
-	# displays notice is object not examined
 	if !interactObject.examined:
 		self.noticeDisplay = true
-	# displays talk notice if the object is talkable
 	if interactObject.talkable:
 		self.talkNoticeDisplay = true
 		talking = true
-	# else displays interact notice if the object is interactable
 	if interactObject.interactable:
 		self.interactNoticeDisplay = true
 		interacting = true
+	if "outline" in interactObject:
+		# interactObject.show_outline()
+		Global.show_outline(interactObject)
 #	if "item_usable" in interactObject:
 #		var item_to_use = inventory._items[inventory.current_selected_item]
 #		if item_to_use.item_reference.name == interactObject.item_needed:
 #			using_item = true
 #			print('using_item = true')
 
-func _on_InteractHitbox_area_exited(_area):
-	self.noticeDisplay = false
-	self.talkNoticeDisplay = false
-	self.interactNoticeDisplay = false
-	if examining:
-		examining = false
-	if talking:
-		talking = false
-	if interacting:
-		interacting = false
-	if using_item:
-		using_item = false
-	if interactObject:
+func _on_InteractHitbox_area_exited(area):
+	if "outline" in area.get_parent():
+		# area.get_parent().hide_outline()
+		Global.hide_outline(area.get_parent())
+	if interactObject == area.get_parent():
 		interactObject = null
-	reset_interaction()
-	
+		self.noticeDisplay = false
+		self.talkNoticeDisplay = false
+		self.interactNoticeDisplay = false
+		if examining:
+			examining = false
+		if talking:
+			talking = false
+		if interacting:
+			interacting = false
+		if using_item:
+			using_item = false
+		reset_interaction()
+
 func reset_interaction():
 	interactHitbox.set_deferred("disabled", true)
 	interactHitbox.set_deferred("disabled", false)
@@ -993,7 +986,7 @@ func reset_animation():
 	animationTree.set("parameters/Idle/blend_position", dir_vector)
 
 func check_attack_input():
-	if !Input.is_action_pressed("attack_1"):
+	if !Input.is_action_pressed(player_inputs.attack):
 		charge.stop_charge()
 		charge_reset()
 	get_node("/root/World/Music").stream_paused = false

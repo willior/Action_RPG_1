@@ -1,6 +1,6 @@
 [gd_scene load_steps=169 format=2]
 
-[ext_resource path="res://assets/Player/Player_default.gd" type="Script" id=1]
+[ext_resource path="res://assets/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/SwordHitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/TalkNotice.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/CollisionBoxes/Hurtbox.gd" type="Script" id=5]
