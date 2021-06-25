@@ -91,11 +91,13 @@ func _ready():
 	speedBox.set_text(str(player.stats.speed))
 	magicBox.set_text(str(player.stats.magic))
 	
-	if player.stats.speed_mod == 0: return
-	elif player.stats.speed_mod > 0:
-		pass
-	elif player.stats.speed_mod < 0:
-		pass
+	if player.stats.speed_mod == 1: pass
+	elif player.stats.speed_mod > 1:
+		speedMod.modulate = Color(0,1,1,1)
+		speedMod.set_text("(+" + str(player.stats.speed_mod*100) + "%)")
+	elif player.stats.speed_mod < 1:
+		speedMod.modulate = Color(1,0,0,1)
+		speedMod.set_text("(-" + str(player.stats.speed_mod*100) + "%)")
 	
 	vitBar.value = player.stats.vitality
 	endBar.value = player.stats.endurance
