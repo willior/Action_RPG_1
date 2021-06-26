@@ -429,7 +429,7 @@ func attack2_stamina_drain():
 func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
 	base_enemy_accuracy = 66
-	stats.dexterity_bonus = 0
+	if stats.dexterity_bonus != 0: stats.dexterity_bonus = 0
 	if attack2_queued:
 		attack2_queued = false
 		state = ATTACK2
@@ -689,7 +689,7 @@ func _on_Hurtbox_area_entered(area):
 	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.evasion)
 	if hit:
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness, element_mod)
-		var is_crit = Global.enemy_crit_calculation(area.crit_chance)
+		var is_crit = Global.crit_calculation(area.crit_chance)
 		if is_crit:
 			damageTaken *= 2
 			print(self.name, " got critted")

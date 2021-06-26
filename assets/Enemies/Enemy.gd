@@ -94,7 +94,7 @@ func hurtbox_entered(enemy, hitbox):
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)
 	else:
-		var is_crit = Global.crit_calculation(player.stats.base_crit_rate, player.stats.dexterity, player.stats.dexterity_bonus)
+		var is_crit = Global.crit_calculation(player.stats.crit_rate)
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness, element_mod)
 		if is_crit:
 			damage *= 2

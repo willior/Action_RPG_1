@@ -33,7 +33,7 @@ func modify_damage(base, modulator):
 	return int(base * modulator)
 
 func reset_damage():
-	stats.dexterity_bonus = 0
+	if stats.dexterity_bonus != 0: stats.dexterity_bonus = 0
 	damage = orig_damage
 	status = orig_status
 	knockback_vector = get_parent().get_parent().dir_vector

@@ -48,9 +48,11 @@ var dexterity_bonus = 0 setget set_dexterity_bonus
 var base_accuracy = 75
 var base_crit_rate = 4
 var accuracy setget set_accuracy
+var crit_rate setget set_crit_rate
 
 var speed_mod : float = 1 setget set_speed_mod
 var evasion
+var evasion_bonus = 0 setget set_evasion_bonus
 var iframes = 0.1
 var charge_rate = 0.5
 var attack_speed = 1.0 setget set_attack_speed
@@ -204,10 +206,6 @@ func set_final_health(value):
 
 func set_dying(value):
 	dying = value
-	if value:
-		pass
-	else:
-		pass
 	emit_signal("player_dying", value)
 
 func set_dead(value):
@@ -269,6 +267,7 @@ func set_attack_power(value):
 func set_dexterity(value):
 	dexterity = value
 	self.accuracy = base_accuracy + 2*(dexterity * dexterity_mod + dexterity_bonus)
+	self.crit_rate = base_crit_rate + (dexterity * dexterity_mod + dexterity_bonus)/4
 
 func set_dexterity_mod(value):
 	dexterity_mod = value
@@ -281,9 +280,12 @@ func set_dexterity_bonus(value):
 func set_accuracy(value):
 	accuracy = value
 
+func set_crit_rate(value):
+	crit_rate = value
+
 func set_speed(value):
 	speed = value
-	evasion = (speed / 2) * speed_mod
+	evasion = (speed / 2) * speed_mod + evasion_bonus
 	max_speed = (100 + (speed / 2)) * speed_mod
 	roll_speed = (200 + speed) * speed_mod
 	shade_speed = (420 + (speed * 3)) * speed_mod
@@ -294,6 +296,12 @@ func set_speed(value):
 func set_speed_mod(value):
 	speed_mod = value
 	set_speed(speed)
+
+func set_evasion_bonus(value):
+	evasion_bonus = value
+	print("evasion_bonus set: ", evasion_bonus)
+	evasion = (speed / 2) * speed_mod + evasion_bonus
+	print("evasion = ", evasion)
 
 func set_attack_speed(value):
 	attack_speed = value

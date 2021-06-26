@@ -72,9 +72,8 @@ func _deferred_goto_scene(path):
 func player_hit_calculation(accuracy, evasion):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
-	var final_hit_rate = accuracy - evasion
-	if final_hit_rate >= random_value: return true
-	elif final_hit_rate < random_value: return false
+	if accuracy-evasion >= random_value: return true
+	else: return false
 
 func enemy_hit_calculation(base_accuracy, accuracy, evasion):
 	rng.randomize()
@@ -82,21 +81,12 @@ func enemy_hit_calculation(base_accuracy, accuracy, evasion):
 	var base_hit_rate = base_accuracy + (4*accuracy)
 	var final_hit_rate = base_hit_rate - (evasion)
 	if final_hit_rate >= random_value: return true
-	elif final_hit_rate < random_value: return false
+	else: return false
 
-func crit_calculation(base_crit_rate, dexterity, dexterity_bonus):
+func crit_calculation(crit_rate):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
-	var final_crit_rate = base_crit_rate + (dexterity/4) + (dexterity_bonus/2)
-	if final_crit_rate >= random_value:
-		SoundPlayer.play_sound("crit")
-		return true
-	elif final_crit_rate < random_value: return false
-
-func enemy_crit_calculation(crit_chance):
-	rng.randomize()
-	var random_value = rng.randf_range(0, 100)
-	if crit_chance > random_value:
+	if crit_rate >= random_value:
 		SoundPlayer.play_sound("crit")
 		return true
 	else: return false
