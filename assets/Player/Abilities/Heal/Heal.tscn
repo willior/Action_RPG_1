@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/Player/Abilities/Heal/HealAll_FormulaHitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/Audio/SFX/Synth1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/Player/Abilities/ScreenTint.gd" type="Script" id=5]
-[ext_resource path="res://assets/UI/Target/FormulaTargetScreen_Heal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/UI/Target/FormulaTargetScreen.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Ability"
@@ -36,8 +36,7 @@ radius = 135.0
 pause_mode = 1
 script = ExtResource( 1 )
 
-[node name="FormulaTargetScreen_Heal" parent="." instance=ExtResource( 6 )]
-target_color = Color( 0, 1, 1, 1 )
+[node name="FormulaTargetScreen" parent="." instance=ExtResource( 6 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Ability = SubResource( 1 )
