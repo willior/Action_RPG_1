@@ -14,6 +14,13 @@ onready var strengthBox = $StatsDisplay/VBoxButtons/ButtonSTR/HBox/STR
 onready var dexterityBox = $StatsDisplay/VBoxButtons/ButtonDEX/HBox/DEX
 onready var speedBox = $StatsDisplay/VBoxButtons/ButtonSPD/HBox/SPD
 onready var magicBox = $StatsDisplay/VBoxButtons/ButtonMAG/HBox/MAG
+onready var healthMod = $StatsDisplay/VBoxButtons/ButtonVIT/HBox/MOD
+onready var enduranceMod = $StatsDisplay/VBoxButtons/ButtonEND/HBox/MOD
+onready var defenseMod = $StatsDisplay/VBoxButtons/ButtonDEF/HBox/MOD
+onready var strengthMod = $StatsDisplay/VBoxButtons/ButtonSTR/HBox/MOD
+onready var dexterityMod = $StatsDisplay/VBoxButtons/ButtonDEX/HBox/MOD
+onready var speedMod = $StatsDisplay/VBoxButtons/ButtonSPD/HBox/MOD
+onready var magicMod = $StatsDisplay/VBoxButtons/ButtonMAG/HBox/MOD
 onready var vitBar = $StatsDisplay/VBoxButtons/ButtonVIT/ColorRect
 onready var endBar = $StatsDisplay/VBoxButtons/ButtonEND/ColorRect
 onready var defBar = $StatsDisplay/VBoxButtons/ButtonDEF/ColorRect
@@ -83,6 +90,47 @@ func _ready():
 	dexterityBox.set_text(str(player.stats.dexterity))
 	speedBox.set_text(str(player.stats.speed))
 	magicBox.set_text(str(player.stats.magic))
+	
+	if player.stats.defense_mod == 1: pass
+	elif player.stats.defense_mod > 1:
+		defenseMod.modulate = Color(0,1,1,1)
+		defenseMod.set_text("(+" + str(player.stats.defense_mod*100-100) + "%)")
+	elif player.stats.defense_mod < 1:
+		defenseMod.modulate = Color(1,0,0,1)
+		defenseMod.set_text("(-" + str(player.stats.defense_mod*100) + "%)")
+	
+	if player.stats.strength_mod == 1: pass
+	elif player.stats.strength_mod > 1:
+		strengthMod.modulate = Color(0,1,1,1)
+		strengthMod.set_text("(+" + str(player.stats.strength_mod*100-100) + "%)")
+	elif player.stats.strength_mod < 1:
+		strengthMod.modulate = Color(1,0,0,1)
+		strengthMod.set_text("(-" + str(player.stats.strength_mod*100) + "%)")
+	
+	if player.stats.dexterity_mod == 1: pass
+	elif player.stats.dexterity_mod > 1:
+		dexterityMod.modulate = Color(0,1,1,1)
+		dexterityMod.set_text("(+" + str(player.stats.dexterity_mod*100-100) + "%)")
+	elif player.stats.dexterity_mod < 1:
+		dexterityMod.modulate = Color(1,0,0,1)
+		dexterityMod.set_text("(-" + str(player.stats.dexterity_mod*100) + "%)")
+	
+	if player.stats.speed_mod == 1: pass
+	elif player.stats.speed_mod > 1:
+		speedMod.modulate = Color(0,1,1,1)
+		speedMod.set_text("(+" + str(player.stats.speed_mod*100-100) + "%)")
+	elif player.stats.speed_mod < 1:
+		speedMod.modulate = Color(1,0,0,1)
+		speedMod.set_text("(-" + str(player.stats.speed_mod*100) + "%)")
+	
+	if player.stats.magic_mod == 1: pass
+	elif player.stats.magic_mod > 1:
+		magicMod.modulate = Color(0,1,1,1)
+		magicMod.set_text("(+" + str(player.stats.magic_mod*100-100) + "%)")
+	elif player.stats.magic_mod < 1:
+		magicMod.modulate = Color(1,0,0,1)
+		magicMod.set_text("(-" + str(player.stats.magic_mod*100) + "%)")
+	
 	vitBar.value = player.stats.vitality
 	endBar.value = player.stats.endurance
 	defBar.value = player.stats.defense

@@ -18,8 +18,8 @@ var stats
 func _ready():
 	stats = get_parent().get_parent().stats
 # warning-ignore:return_value_discarded
-	stats.connect("strength_changed", self, "set_damage")
-	damage = base_damage + stats.strength
+	stats.connect("attack_power_changed", self, "set_damage")
+	damage = base_damage + stats.attack_power
 	orig_damage = damage
 	orig_status = status
 
@@ -33,7 +33,7 @@ func modify_damage(base, modulator):
 	return int(base * modulator)
 
 func reset_damage():
-	stats.dexterity_mod = 0
+	if stats.dexterity_bonus != 0: stats.dexterity_bonus = 0
 	damage = orig_damage
 	status = orig_status
 	knockback_vector = get_parent().get_parent().dir_vector
@@ -54,7 +54,7 @@ func enable_sword_hitbox(time=0.1):
 func shade_begin():
 	enable_sword_hitbox(0.3)
 	knockback_vector = Vector2.ZERO
-	stats.dexterity_mod = 8
+	stats.dexterity_bonus = 8
 	orig_damage = damage
 	damage = modify_damage(damage, 3)
 
@@ -68,7 +68,7 @@ func flash_begin():
 	$CollisionShape2D.scale.x = 2
 	enable_sword_hitbox()
 	knockback_vector = get_parent().get_parent().dir_vector * 1.33
-	stats.dexterity_mod = 4
+	stats.dexterity_bonus = 4
 	orig_damage = damage
 	damage = modify_damage(damage, 2)
 	status = ["Stun", 1.0]

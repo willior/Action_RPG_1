@@ -72,15 +72,19 @@ func _input(event):
 		else:
 			print('no P2. cannot give ingredients.')
 	if event.is_action_pressed("test2"):
-		print('2: resetting player interaction')
+		print('2: applying stat modifiers')
 		for p in get_tree().get_nodes_in_group("Players"):
-			p.reset_interaction()
+			p.stats.strength_mod = 2
+			p.stats.defense_mod = 2
+			p.stats.dexterity_mod = 2
+			p.stats.speed_mod = 2
+			p.stats.magic_mod = 2
 	if event.is_action_pressed("test3"):
 		print('3: applying slow!')
 		for p in get_tree().get_nodes_in_group("Players"):
 			StatusHandler.apply_status(["Slow", 1.0], p)
 	if event.is_action_pressed("test4"):
-		print('4: leveling up')
+		print('4: giving XP')
 		GameManager.player.enemy_killed(1000)
 		if GameManager.multiplayer_2:
 			GameManager.player2.enemy_killed(1000)

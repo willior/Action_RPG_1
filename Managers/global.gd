@@ -58,59 +58,45 @@ func _deferred_goto_scene(path):
 	# optional, to make it compatible with the SceneTree.change_scene() API
 	get_tree().set_current_scene( current_scene )
 
-func player_hit_calculation(base_accuracy, dexterity, modifier, evasion):
+#func player_hit_calculation(base_accuracy, dexterity, dexterity_bonus, evasion):
+#	rng.randomize()
+#	var random_value = rng.randf_range(0, 100)
+#	var base_hit_rate = base_accuracy + (2*(dexterity+dexterity_bonus))
+#	var final_hit_rate = base_hit_rate - evasion
+#	# print("player final_hit_rate: ", final_hit_rate, "% > ", "RNG: ", random_value)
+#	if final_hit_rate >= random_value:
+#		return true
+#	elif final_hit_rate < random_value:
+#		return false
+
+func player_hit_calculation(accuracy, evasion):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
-	var base_hit_rate = base_accuracy + (2*(dexterity+modifier))
-	var final_hit_rate = base_hit_rate - evasion
-	# print("player final_hit_rate: ", final_hit_rate, "% > ", "RNG: ", random_value)
-	if final_hit_rate >= random_value:
-		return true
-	elif final_hit_rate < random_value:
-		return false
+	if accuracy-evasion >= random_value: return true
+	else: return false
 
 func enemy_hit_calculation(base_accuracy, accuracy, evasion):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
 	var base_hit_rate = base_accuracy + (4*accuracy)
 	var final_hit_rate = base_hit_rate - (evasion)
-	# print("enemy final_hit_rate: ", final_hit_rate, "% > ", "RNG: ", random_value)
-	if final_hit_rate >= random_value:
-		return true
-	elif final_hit_rate < random_value:
-		return false
+	if final_hit_rate >= random_value: return true
+	else: return false
 
-func crit_calculation(base_crit_rate, dexterity, dexterity_mod):
+func crit_calculation(crit_rate):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
-	var final_crit_rate = base_crit_rate + (dexterity/4) + (dexterity_mod/2)
-	# print("crit calculation: ", final_crit_rate, "% > ", "RNG: ", random_value)
-	if final_crit_rate >= random_value:
+	if crit_rate >= random_value:
 		SoundPlayer.play_sound("crit")
 		return true
-	elif final_crit_rate < random_value:
-		return false
-
-func enemy_crit_calculation(crit_chance):
-	rng.randomize()
-	var random_value = rng.randf_range(0, 100)
-	if crit_chance > random_value:
-		SoundPlayer.play_sound("crit")
-		return true
-	else:
-		return false
+	else: return false
 
 func player_stagger_calculation(player_max_hp, enemy_damage, is_crit):
-	if (enemy_damage / (player_max_hp/10.0) > 1) or is_crit:
-		return true
-	else:
-		return false
+	if (enemy_damage / (player_max_hp/10.0) > 1) or is_crit: return true
+	else: return false
 
 func damage_calculation(attack, defense, random, element_mod):
-	# var base_damage = 2 * (attack*attack / (max(attack+defense, 1)))
 	var base_damage = (2*element_mod) * (attack*attack / (max(attack+defense, 1)))
-#	print('[[[ attack = ', attack, " vs. ", "defense = ", defense)
-#	print("base damage = ", "2 * (", attack*attack, " / ", attack+defense, ") = ", base_damage, " ]]]")
 	return random_variance(base_damage, random)
 
 func formula_calculation(amount, defense, random, element_mod):
@@ -128,8 +114,7 @@ func distribute_exp(value):
 		experience_gained /= 2
 		GameManager.player.enemy_killed(experience_gained)
 		GameManager.player2.enemy_killed(experience_gained)
-	else:
-		GameManager.player.enemy_killed(experience_gained)
+	else: GameManager.player.enemy_killed(experience_gained)
 
 func create_blood_effect(damage_count, location, z_index):
 	randomize()
@@ -154,15 +139,10 @@ func ingredient_drop(common_drop , common_chance, rare_drop, rare_chance, pos, z
 	else:
 		common_chance *= Player1Stats.drop_rate_mod
 		rare_chance *= Player1Stats.drop_rate_mod
-	# print("common chance: ", common_chance*100, "% /// rare chance: ", rare_chance*100, "%")
 	if check_common <= common_chance:
 		var check_rare = randf()
-		if check_rare <= rare_chance:
-			# print('rare drop: ', rare_drop)
-			ingredientPickup.ingredient_name = rare_drop
-		else:
-			# print('common drop: ', common_drop)
-			ingredientPickup.ingredient_name = common_drop
+		if check_rare <= rare_chance: ingredientPickup.ingredient_name = rare_drop
+		else: ingredientPickup.ingredient_name = common_drop
 		get_node("/root/World/YSort/Items").call_deferred("add_child", ingredientPickup)
 		ingredientPickup.global_position = pos
 		ingredientPickup.z_index = z
@@ -193,7 +173,6 @@ func reset_input_after_dialog():
 		GameManager.player2.check_attack_input()
 
 func change_floor(body, destination_z_index):
-	# print(body.name, " z_index: ", body.z_index, " to ", destination_z_index)
 	body.set_z_index(destination_z_index) # sets the intended z_index for the body enterred
 	set_world_collision(body, body.z_index)
 
