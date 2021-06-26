@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Player/Abilities/Fury/Fury.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Abilities/ScreenTint.gd" type="Script" id=2]
-[ext_resource path="res://assets/Player/Abilities/Fury/FuryHitbox.gd" type="Script" id=3]
+[ext_resource path="res://assets/Player/Abilities/Fury/Fury_Hitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/Target/FormulaTargetScreen.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Animation" id=1]

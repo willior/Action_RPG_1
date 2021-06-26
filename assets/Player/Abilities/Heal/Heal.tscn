@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Player/Abilities/Heal/Heal.gd" type="Script" id=1]
 [ext_resource path="res://assets/Shaders/White_Flash_CanvasMod.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/Player/Abilities/Heal/HealAll_FormulaHitbox.gd" type="Script" id=3]
+[ext_resource path="res://assets/Player/Abilities/Heal/Heal_Hitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/Audio/SFX/Synth1.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/Player/Abilities/ScreenTint.gd" type="Script" id=5]
 [ext_resource path="res://assets/UI/Target/FormulaTargetScreen.tscn" type="PackedScene" id=6]
