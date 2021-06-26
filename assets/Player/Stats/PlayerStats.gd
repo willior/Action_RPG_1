@@ -52,7 +52,7 @@ var crit_rate setget set_crit_rate
 
 var speed_mod : float = 1 setget set_speed_mod
 var evasion
-var evasion_bonus = 0 setget set_evasion_bonus
+var evasion_action_bonus = 0 setget set_evasion_action_bonus
 var iframes = 0.1
 var charge_rate = 0.5
 var attack_speed = 1.0 setget set_attack_speed
@@ -285,7 +285,7 @@ func set_crit_rate(value):
 
 func set_speed(value):
 	speed = value
-	evasion = (speed / 2) * speed_mod + evasion_bonus
+	evasion = (speed / 2 + evasion_action_bonus) * speed_mod
 	max_speed = (100 + (speed / 2)) * speed_mod
 	roll_speed = (200 + speed) * speed_mod
 	shade_speed = (420 + (speed * 3)) * speed_mod
@@ -297,11 +297,10 @@ func set_speed_mod(value):
 	speed_mod = value
 	set_speed(speed)
 
-func set_evasion_bonus(value):
-	evasion_bonus = value
-	print("evasion_bonus set: ", evasion_bonus)
-	evasion = (speed / 2) * speed_mod + evasion_bonus
-	print("evasion = ", evasion)
+func set_evasion_action_bonus(value):
+	evasion_action_bonus = value
+	print("evasion_action_bonus set: ", evasion_action_bonus)
+	evasion = (speed / 2 + evasion_action_bonus) * speed_mod
 
 func set_attack_speed(value):
 	attack_speed = value

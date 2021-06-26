@@ -89,7 +89,7 @@ func hurtbox_entered(enemy, hitbox):
 		enemy.hurtbox.display_damage_popup("Miss!", false)
 		return
 	# var hit = Global.player_hit_calculation(player.stats.base_accuracy, player.stats.dexterity, player.stats.dexterity_bonus, enemy.stats.evasion+enemy.evasion_mod)
-	var hit = Global.player_hit_calculation(player.stats.accuracy, enemy.stats.evasion+enemy.evasion_mod)
+	var hit = Global.hit_calculation(player.stats.accuracy, enemy.stats.evasion+enemy.evasion_mod)
 	if !hit:
 		SoundPlayer.play_sound("miss")
 		enemy.hurtbox.display_damage_popup("Miss!", false)

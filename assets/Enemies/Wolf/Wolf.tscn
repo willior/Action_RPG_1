@@ -543,7 +543,7 @@ shape = SubResource( 43 )
 position = Vector2( 0, -8 )
 collision_mask = 4
 damage = 16.0
-accuracy = 4.0
+accuracy = 88.0
 status = [ "Stun", 1.0 ]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]

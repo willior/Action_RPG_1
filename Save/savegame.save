@@ -1,7 +1,7 @@
-{"player1_stats":{"defense":4,"dexterity":10,"endurance":7,"experience":127,"experience_required":1110,"experience_total":1761,"health":60,"level":6,"magic":4,"max_health":60,"max_stamina":87,"speed":5,"stamina":87,"strength":4,"vitality":4}}
-{"player2_stats":{"defense":5,"dexterity":4,"endurance":4,"experience":127,"experience_required":1110,"experience_total":1761,"health":69,"level":6,"magic":4,"max_health":69,"max_stamina":60,"speed":12,"stamina":60,"strength":4,"vitality":5}}
+{"player1_stats":{"defense":4,"dexterity":12,"endurance":12,"experience":4265,"experience_required":7608,"experience_total":16413,"health":60,"level":10,"magic":4,"max_health":60,"max_stamina":126,"speed":6,"stamina":126,"strength":4,"vitality":4}}
+{"player2_stats":{"defense":5,"dexterity":4,"endurance":12,"experience":4265,"experience_required":7608,"experience_total":16413,"health":69,"level":10,"magic":4,"max_health":69,"max_stamina":126,"speed":12,"stamina":126,"strength":4,"vitality":5}}
 {"player3_stats":{"defense":12,"dexterity":12,"endurance":32,"experience":82,"experience_required":100,"experience_total":82,"health":480,"level":1,"magic":12,"max_health":480,"max_stamina":480,"speed":12,"stamina":480,"strength":12,"vitality":32}}
-{"player1_formulaData":{"Flash":["Flash",1,50,100,50],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,0,100,0]}}
+{"player1_formulaData":{"Flash":["Flash",3,30,144,250],"Fury":["Fury",1,50,100,50],"Heal":["Heal",1,50,100,50]}}
 {"player2_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,0,100,0]}}
 {"chapter_number":0,"examined_list":[],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
 {"map_filename":"res://assets/Maps/Test/Test.tscn"}

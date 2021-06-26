@@ -69,19 +69,19 @@ func _deferred_goto_scene(path):
 #	elif final_hit_rate < random_value:
 #		return false
 
-func player_hit_calculation(accuracy, evasion):
+func hit_calculation(accuracy, evasion):
 	rng.randomize()
 	var random_value = rng.randf_range(0, 100)
 	if accuracy-evasion >= random_value: return true
 	else: return false
 
-func enemy_hit_calculation(base_accuracy, accuracy, evasion):
-	rng.randomize()
-	var random_value = rng.randf_range(0, 100)
-	var base_hit_rate = base_accuracy + (4*accuracy)
-	var final_hit_rate = base_hit_rate - (evasion)
-	if final_hit_rate >= random_value: return true
-	else: return false
+#func enemy_hit_calculation(base_accuracy, accuracy, evasion):
+#	rng.randomize()
+#	var random_value = rng.randf_range(0, 100)
+#	var base_hit_rate = base_accuracy + (4*accuracy)
+#	var final_hit_rate = base_hit_rate - (evasion)
+#	if final_hit_rate >= random_value: return true
+#	else: return false
 
 func crit_calculation(crit_rate):
 	rng.randomize()

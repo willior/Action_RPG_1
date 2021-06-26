@@ -2060,7 +2060,6 @@ animation = "Stun"
 [sub_resource type="AnimationNodeStateMachineTransition" id=123]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=124]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=125]
 
@@ -2194,7 +2193,7 @@ position = Vector2( 0, -9 )
 texture = SubResource( 3 )
 hframes = 60
 vframes = 5
-frame = 240
+frame = 180
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2302,6 +2301,7 @@ position = Vector2( 0, -20 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
+rotation = 3.14159
 
 [node name="SwordHitbox" type="Area2D" parent="HitboxPivot"]
 process_priority = -1

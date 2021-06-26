@@ -56,7 +56,7 @@ var shade_queued = false
 var shade_moving = false
 var charge_count = 0
 var charge_level_count = 0
-var base_enemy_accuracy = 66
+# var base_enemy_accuracy = 66
 var stamina_attack_cost = stats.stamina_attack_cost
 var knockback_modifier = 1
 
@@ -309,6 +309,7 @@ func move_state(delta):
 			state = SHADE
 		elif attack_1_charged and stats.charge_level == 1:
 			attack_1_charged = false
+			apply_evasion_action_bonus(50)
 			state = FLASH
 		charge.stop_charge()
 		charge_reset()
@@ -428,7 +429,8 @@ func attack2_stamina_drain():
 
 func attack_animation_finished():
 	swordHitbox.set_deferred("monitorable", false)
-	base_enemy_accuracy = 66
+	# base_enemy_accuracy = 66
+	apply_evasion_action_bonus(0)
 	if stats.dexterity_bonus != 0: stats.dexterity_bonus = 0
 	if attack2_queued:
 		attack2_queued = false
@@ -513,9 +515,6 @@ func shade_stop():
 	shade_moving = false
 
 func flash_state(delta):
-	if base_enemy_accuracy > 25:
-		base_enemy_accuracy = 25
-# warning-ignore:integer_division
 	velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	animationState.travel("Flash")
 	move()
@@ -526,16 +525,19 @@ func flash_start():
 	swordHitbox.flash_begin()
 
 func flash_stop():
-	base_enemy_accuracy = 66
+	apply_evasion_action_bonus(0)
+	# base_enemy_accuracy = 66
 	swordHitbox.reset_damage()
 
 func player_state_reset():
-	base_enemy_accuracy = 66
+	apply_evasion_action_bonus(0)
+	# base_enemy_accuracy = 66
 	swordHitbox.reset_damage()
 
 func roll_stamina_drain():
 	stats.stamina -= 15
-	base_enemy_accuracy = 32
+	apply_evasion_action_bonus(50)
+	# base_enemy_accuracy = 32
 	hurtbox.start_invincibility(min(stats.iframes, 0.35))
 
 # warning-ignore:unused_argument
@@ -574,12 +576,13 @@ func roll_animation_finished():
 		attack_charging = false
 		state = SHADE
 	elif flash_queued:
-		base_enemy_accuracy = 16
+		# base_enemy_accuracy = 16
 		flash_queued = false
 		velocity = dir_vector * (stats.roll_speed/2)
 		charge.stop_charge()
 		charge_reset()
 		attack_charging = false
+		apply_evasion_action_bonus(66)
 		state = FLASH
 	elif attack1_queued:
 		velocity = dir_vector * -(stats.roll_speed/2)
@@ -589,7 +592,8 @@ func roll_animation_finished():
 
 func backstep_stamina_drain():
 	stats.stamina -= 5
-	base_enemy_accuracy = 16
+	apply_evasion_action_bonus(66)
+	# base_enemy_accuracy = 16
 	hurtbox.start_invincibility(min(stats.iframes, 0.24))
 
 func backstep_state(delta):
@@ -625,7 +629,8 @@ func backstep_state(delta):
 	move()
 
 func backstep_stop():
-	base_enemy_accuracy = 50
+	apply_evasion_action_bonus(50)
+	# base_enemy_accuracy = 50
 	backstep_moving = false
 
 func backstep_animation_finished():
@@ -638,11 +643,12 @@ func backstep_animation_finished():
 		attack_charging = false
 		state = SHADE
 	elif flash_queued:
-		base_enemy_accuracy = 0 # Player becomes very difficult to hit during a queued flash
+		# base_enemy_accuracy = 0 
 		flash_queued = false
 		velocity = dir_vector * (stats.roll_speed)
 		charge.stop_charge()
 		charge_reset()
+		apply_evasion_action_bonus(75)# Player becomes very difficult to hit during a queued flash
 		state = FLASH
 	elif Input.is_action_pressed(player_inputs.attack):
 		attack_animation_finished()
@@ -651,6 +657,10 @@ func backstep_animation_finished():
 		attack_animation_finished()
 	else:
 		attack_animation_finished()
+
+func apply_evasion_action_bonus(value):
+	if value != stats.evasion_action_bonus:
+		stats.evasion_action_bonus = value
 
 func _on_Formulabox_area_entered(area):
 	if area.get("status"):
@@ -686,7 +696,7 @@ func _on_Hurtbox_area_entered(area):
 		hurtbox.display_damage_popup("Miss!", false)
 		print(area.get_parent().name, ' missed Player due to altitude difference')
 		return
-	var hit = Global.enemy_hit_calculation(base_enemy_accuracy, area.accuracy, stats.evasion)
+	var hit = Global.hit_calculation(area.accuracy, stats.evasion)
 	if hit:
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness, element_mod)
 		var is_crit = Global.crit_calculation(area.crit_chance)
