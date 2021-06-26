@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/Player/Abilities/Heal/Heal.gd" type="Script" id=1]
 [ext_resource path="res://assets/Shaders/White_Flash_CanvasMod.tscn" type="PackedScene" id=2]
@@ -29,14 +29,14 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 135.0
-
 [node name="Heal" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 1 )
+formula_size = 3
 
 [node name="FormulaTargetScreen" parent="." instance=ExtResource( 6 )]
+target_mode = 1
+formula_range = 135
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Ability = SubResource( 1 )
@@ -60,7 +60,6 @@ base_potency = 4.0
 randomness = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
-shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

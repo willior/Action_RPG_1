@@ -211,4 +211,5 @@ patch_margin_bottom = 1
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpriteContainer"]
 position = Vector2( 9, 9 )
 frames = SubResource( 25 )
+frame = 23
 playing = true

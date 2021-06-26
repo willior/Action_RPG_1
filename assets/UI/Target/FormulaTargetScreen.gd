@@ -1,15 +1,25 @@
 extends Control
 
 # types of targetting:
-# free target AoE circle (Flash)
-# static AoE circle (Nova)
-# single-target line (Hardball)
-# multi-target line (Laser)
+# 0: static AoE circle (Nova)
+# 1: free target AoE circle (Flash)
+# 2: single-target line (Hardball)
+# 3: multi-target line (Laser)
+
+# formula target sizes:
+# 0: tiny 16x16
+# 1: small 32x32
+# 2: medium 64x64
+# 3: large 128x128
+# 4: huge 256x256
+# 5: screen everything
 
 onready var Target = load("res://assets/UI/Target/Target.tscn")
 onready var music = get_tree().get_root().get_node("World/Music")
 onready var sfx1 = get_tree().get_root().get_node("World/SFX")
 onready var sfx2 = get_tree().get_root().get_node("World/SFX2")
+onready var target_shape = $KinematicBody2D/TargetArea/CollisionShape2D
+onready var target_sprite = $KinematicBody2D/TargetArea/Sprite
 onready var target_area = $KinematicBody2D/TargetArea
 onready var target_body = $KinematicBody2D
 
@@ -19,10 +29,9 @@ var group_to_target : String
 var target_color : Color
 var count
 
-export var formula_shape : Shape2D
-export var formula_size : int
+var target_size
 enum targetMode { NONE, FREE, ANGLE }
-export(targetMode) var mode
+export(targetMode) var target_mode
 export var formula_range : int
 export var attack_formula : bool
 
@@ -38,6 +47,25 @@ var ending = false
 
 func _ready():
 	Global.target_screen_open = true
+	target_size = get_parent().formula_size
+	match target_size:
+		0:
+			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_8.tres")
+			target_sprite.texture = load("res://assets/UI/Target/Ring_0_TINY_16.png")
+		1:
+			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_16.tres")
+			target_sprite.texture = load("res://assets/UI/Target/Ring_1_SMALL_32.png")
+		2:
+			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_32.tres")
+			target_sprite.texture = load("res://assets/UI/Target/Ring_2_MEDIUM_64.png")
+		3:
+			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_64.tres")
+			target_sprite.texture = load("res://assets/UI/Target/Ring_3_LARGE_128.png")
+		4:
+			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_128.tres")
+			target_sprite.texture = load("res://assets/UI/Target/Ring_4_HUGE_256.png")
+		5:
+			pass
 	if attack_formula:
 		target_color = Color(1,0,0,1)
 		group_to_target = "Enemies"
@@ -132,7 +160,7 @@ func end_animate_target():
 	$Tween.start()
 
 func _process(_delta):
-	match mode:
+	match target_mode:
 		1:
 			velocity = Vector2()
 			if Input.is_action_pressed(right):

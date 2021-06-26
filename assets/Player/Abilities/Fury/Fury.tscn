@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Player/Abilities/Fury/Fury.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Abilities/ScreenTint.gd" type="Script" id=2]
@@ -16,26 +16,21 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.375, 0.95, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.375, 1.25 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "ability_start"
-}, {
-"args": [  ],
-"method": "cast"
 }, {
 "args": [  ],
 "method": "ability_end"
 } ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 135.0
-
 [node name="Fury" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 1 )
+formula_size = 4
 
 [node name="FormulaTargetScreen" parent="." instance=ExtResource( 4 )]
 
@@ -67,7 +62,6 @@ formula_name = "Fury"
 base_potency = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
-shape = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 

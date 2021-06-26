@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Ring_64.png-a32c4488d6de1457a9ca6527abb6baa0.stex"
+path="res://.import/Ring_2_MEDIUM_64.png-9a5459a719e2a78eec7516fa4da68dd4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/Target/Ring_64.png"
-dest_files=[ "res://.import/Ring_64.png-a32c4488d6de1457a9ca6527abb6baa0.stex" ]
+source_file="res://assets/UI/Target/Ring_2_MEDIUM_64.png"
+dest_files=[ "res://.import/Ring_2_MEDIUM_64.png-9a5459a719e2a78eec7516fa4da68dd4.stex" ]
 
 [params]
 

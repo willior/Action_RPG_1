@@ -1,19 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/Player/Abilities/Flash/Flash.gd" type="Script" id=1]
 [ext_resource path="res://assets/Shaders/White_Flash_CanvasMod.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Player/Abilities/DamageAll_FormulaHitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/Audio/Player/Tinnitus_1s.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/UI/Target/Ring_64_bottom.png" type="Texture" id=5]
-[ext_resource path="res://assets/UI/Target/FormulaTargetScreen.gd" type="Script" id=6]
+[ext_resource path="res://assets/UI/Target/FormulaTargetScreen.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Player/Abilities/Flash/Flash_64_dither.png" type="Texture" id=7]
-[ext_resource path="res://assets/UI/Target/Ring_64.png" type="Texture" id=8]
-
-[sub_resource type="CanvasItemMaterial" id=1]
-light_mode = 1
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 32.0
 
 [sub_resource type="Animation" id=3]
 length = 1.55
@@ -42,66 +34,15 @@ tracks/0/keys = {
 } ]
 }
 
-[sub_resource type="CircleShape2D" id=4]
-radius = 32.0
-
 [node name="Flash" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 1 )
+formula_size = 2
 
-[node name="FormulaTarget" type="Control" parent="."]
-pause_mode = 2
-light_mask = 0
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-mode = 1
+[node name="FormulaTargetScreen" parent="." instance=ExtResource( 5 )]
+target_mode = 1
 formula_range = 135
 attack_formula = true
-
-[node name="ColorRect" type="ColorRect" parent="FormulaTarget"]
-show_behind_parent = true
-margin_left = -480.0
-margin_top = -270.0
-margin_right = 480.0
-margin_bottom = 270.0
-rect_min_size = Vector2( 960, 540 )
-color = Color( 0, 0, 0, 0.5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="FormulaTarget"]
-collision_layer = 0
-collision_mask = 384
-
-[node name="TargetArea" type="Area2D" parent="FormulaTarget/KinematicBody2D"]
-pause_mode = 2
-material = SubResource( 1 )
-z_index = 1
-collision_layer = 0
-collision_mask = 256
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaTarget/KinematicBody2D/TargetArea"]
-pause_mode = 2
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="FormulaTarget/KinematicBody2D/TargetArea"]
-pause_mode = 2
-light_mask = 0
-use_parent_material = true
-z_index = -1
-texture = ExtResource( 8 )
-
-[node name="Sprite2" type="Sprite" parent="FormulaTarget/KinematicBody2D/TargetArea"]
-pause_mode = 2
-visible = false
-use_parent_material = true
-texture = ExtResource( 5 )
-offset = Vector2( 0, 16 )
-
-[node name="Tween" type="Tween" parent="FormulaTarget"]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Ability = SubResource( 3 )
@@ -124,7 +65,6 @@ randomness = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
 visible = false
-shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="FormulaHitbox"]
 visible = false
@@ -135,6 +75,4 @@ stream = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="body_entered" from="FormulaTarget/KinematicBody2D/TargetArea" to="FormulaTarget" method="_on_TargetArea_body_entered"]
-[connection signal="body_exited" from="FormulaTarget/KinematicBody2D/TargetArea" to="FormulaTarget" method="_on_TargetArea_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

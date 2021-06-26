@@ -1,10 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://assets/UI/Target/FormulaTargetScreen.gd" type="Script" id=1]
-[ext_resource path="res://assets/UI/Target/Ring_270.png" type="Texture" id=2]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 135.0
 
 [node name="FormulaTargetScreen" type="Control"]
 pause_mode = 2
@@ -30,13 +26,11 @@ __meta__ = {
 
 [node name="TargetArea" type="Area2D" parent="KinematicBody2D"]
 pause_mode = 2
-modulate = Color( 1, 1, 1, 0.5 )
 collision_layer = 0
 collision_mask = 256
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D/TargetArea"]
 pause_mode = 2
-texture = ExtResource( 2 )
 
 [node name="Sprite2" type="Sprite" parent="KinematicBody2D/TargetArea"]
 pause_mode = 2
@@ -45,7 +39,6 @@ position = Vector2( 0, 16 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/TargetArea"]
 pause_mode = 2
-shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="KinematicBody2D"]
 
