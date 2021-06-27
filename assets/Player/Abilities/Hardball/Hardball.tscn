@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/Player/Abilities/Hardball/Hardball.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Abilities/Hardball/Hardball_Hitbox.gd" type="Script" id=2]
@@ -6,7 +6,8 @@
 [ext_resource path="res://assets/UI/Target/FormulaTargetScreen.gd" type="Script" id=4]
 
 [sub_resource type="RayShape2D" id=1]
-length = 270.0
+custom_solver_bias = 1.0
+length = 256.0
 
 [sub_resource type="Animation" id=2]
 length = 1.55
@@ -28,9 +29,6 @@ tracks/0/keys = {
 "method": "ability_end"
 } ]
 }
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 4, 135 )
 
 [node name="Hardball" type="Node2D"]
 script = ExtResource( 1 )
@@ -71,11 +69,6 @@ texture = ExtResource( 3 )
 centered = false
 offset = Vector2( -1, 0 )
 
-[node name="Sprite2" type="Sprite" parent="FormulaTargetScreen/KinematicBody2D/TargetArea"]
-pause_mode = 2
-visible = false
-position = Vector2( 0, 16 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaTargetScreen/KinematicBody2D/TargetArea"]
 pause_mode = 2
 shape = SubResource( 1 )
@@ -88,6 +81,7 @@ anims/Ability = SubResource( 2 )
 [node name="FormulaHitbox" type="Area2D" parent="."]
 monitoring = false
 monitorable = false
+collision_layer = 0
 collision_mask = 8
 script = ExtResource( 2 )
 formula_name = "Hardball"
@@ -95,8 +89,8 @@ base_potency = 8.0
 randomness = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
-position = Vector2( 0, 135 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
+disabled = true
 
 [node name="Sprite" type="Sprite" parent="FormulaHitbox"]
 visible = false
@@ -104,9 +98,14 @@ modulate = Color( 0.454902, 0, 1, 1 )
 texture = ExtResource( 3 )
 centered = false
 
+[node name="RayCast2D" type="RayCast2D" parent="FormulaHitbox"]
+enabled = true
+cast_to = Vector2( 0, 256 )
+collision_mask = 9
+collide_with_areas = true
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="body_entered" from="FormulaTargetScreen/KinematicBody2D/TargetArea" to="FormulaTargetScreen" method="_on_TargetArea_body_entered"]
 [connection signal="body_exited" from="FormulaTargetScreen/KinematicBody2D/TargetArea" to="FormulaTargetScreen" method="_on_TargetArea_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="area_entered" from="FormulaHitbox" to="." method="_on_FormulaHitbox_area_entered"]

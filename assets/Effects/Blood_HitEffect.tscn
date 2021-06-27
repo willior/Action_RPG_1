@@ -60,4 +60,5 @@ playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 6 )
+
 [connection signal="screen_exited" from="BloodSprite/VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

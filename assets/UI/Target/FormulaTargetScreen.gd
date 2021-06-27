@@ -47,8 +47,8 @@ var ending = false
 
 func _ready():
 	Global.target_screen_open = true
-	target_size = get_parent().formula_size
 	if target_mode == 0 or target_mode == 1:
+		target_size = get_parent().formula_size
 		match target_size:
 			0:
 				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_8.tres")
@@ -105,7 +105,7 @@ func _ready():
 	get_tree().get_root().get_node("World").add_child(targets)
 	for e in range(0, target_bodies.size()):
 		var target = Target.instance()
-		target.global_position = target_bodies[e].global_position
+		target.global_position = target_bodies[e].hurtbox.get_child(0).global_position
 		get_tree().get_root().get_node("World/Targets").add_child(target)
 	begin_animate_target()
 
@@ -126,14 +126,14 @@ func begin_animate_target():
 	Tween.TRANS_QUART,
 	Tween.EASE_OUT
 	)
-	$Tween.interpolate_property($KinematicBody2D/TargetArea/Sprite2,
-	"scale",
-	Vector2(4,4),
-	Vector2(1,1),
-	0.25,
-	Tween.TRANS_QUART,
-	Tween.EASE_OUT
-	)
+#	$Tween.interpolate_property($KinematicBody2D/TargetArea/Sprite2,
+#	"scale",
+#	Vector2(4,4),
+#	Vector2(1,1),
+#	0.25,
+#	Tween.TRANS_QUART,
+#	Tween.EASE_OUT
+#	)
 	$Tween.start()
 
 func end_animate_target():
@@ -154,14 +154,14 @@ func end_animate_target():
 	Tween.TRANS_QUART,
 	Tween.EASE_IN
 	)
-	$Tween.interpolate_property($KinematicBody2D/TargetArea/Sprite2,
-	"scale",
-	Vector2(1,1),
-	Vector2(4,4),
-	0.25,
-	Tween.TRANS_QUART,
-	Tween.EASE_IN
-	)
+#	$Tween.interpolate_property($KinematicBody2D/TargetArea/Sprite2,
+#	"scale",
+#	Vector2(1,1),
+#	Vector2(4,4),
+#	0.25,
+#	Tween.TRANS_QUART,
+#	Tween.EASE_IN
+#	)
 	$Tween.start()
 
 func _process(_delta):
@@ -265,17 +265,18 @@ func _input(event):
 			get_parent().get_node("FormulaHitbox").position = target_body.position
 		elif target_mode == 2:
 			get_parent().get_node("FormulaHitbox").rotation_degrees = target_body.rotation_degrees
-			print('setting hitbox angle... ', get_parent().get_node("FormulaHitbox").rotation_degrees)
+			print('setting RayCast2D angle... ', get_parent().get_node("FormulaHitbox").rotation_degrees)
 		end_target_screen()
 	if event.is_action_pressed("ui_cancel"):
 		end_animate_target()
 		yield($Tween, "tween_all_completed")
 		cancel_target_screen()
-	
-#	if event.is_action_pressed(next):
-#		next_target_body()
-#	if event.is_action_pressed(previous):
-#		previous_target_body()
+	if event.is_action_pressed(next):
+		if target_mode == 1:
+			next_target_body()
+	if event.is_action_pressed(previous):
+		if target_mode == 1:
+			previous_target_body()
 
 func next_target_body():
 	if target_bodies.size() <= 0:

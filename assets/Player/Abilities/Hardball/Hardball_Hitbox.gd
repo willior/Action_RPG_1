@@ -8,9 +8,8 @@ var spell_mod
 var formula_level_mod
 var potency
 var knockback_vector = Vector2.ZERO
-
-var status = []
-var element
+var status = ["Stun", 0.5]
+var element = 6
 # 0 : normal
 # 1 : fire
 # 2 : ice

@@ -6,6 +6,7 @@ var defense = 2.0
 var status_resistance = 0.0
 var evasion = 12
 var experience_pool = 378
+var affinity = 8 # Dark
 
 signal no_health
 signal health_changed(value)
