@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/World/Flowers/Flowers_2.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/Maps/Test/Test.gd" type="Script" id=19]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/Player/Abilities/Pickups/FormulaPickup.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf.tscn" type="PackedScene" id=22]
 [ext_resource path="res://assets/Cutscene/CutsceneTrigger.tscn" type="PackedScene" id=23]
 
@@ -428,6 +429,10 @@ position = Vector2( -39, 151 )
 position = Vector2( 8, 56 )
 
 [node name="CutsceneTrigger" parent="YSort/Items" instance=ExtResource( 23 )]
+
+[node name="FormulaPickup" parent="YSort/Items" instance=ExtResource( 21 )]
+position = Vector2( 104, 60 )
+formula_name = "Hardball"
 
 [node name="NPCs" type="YSort" parent="YSort"]
 

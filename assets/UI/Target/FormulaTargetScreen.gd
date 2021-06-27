@@ -48,24 +48,29 @@ var ending = false
 func _ready():
 	Global.target_screen_open = true
 	target_size = get_parent().formula_size
-	match target_size:
-		0:
-			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_8.tres")
-			target_sprite.texture = load("res://assets/UI/Target/Ring_0_TINY_16.png")
-		1:
-			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_16.tres")
-			target_sprite.texture = load("res://assets/UI/Target/Ring_1_SMALL_32.png")
-		2:
-			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_32.tres")
-			target_sprite.texture = load("res://assets/UI/Target/Ring_2_MEDIUM_64.png")
-		3:
-			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_64.tres")
-			target_sprite.texture = load("res://assets/UI/Target/Ring_3_LARGE_128.png")
-		4:
-			target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_128.tres")
-			target_sprite.texture = load("res://assets/UI/Target/Ring_4_HUGE_256.png")
-		5:
-			pass
+	if target_mode == 0 or target_mode == 1:
+		match target_size:
+			0:
+				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_8.tres")
+				target_sprite.texture = load("res://assets/UI/Target/Ring_0_TINY_16.png")
+			1:
+				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_16.tres")
+				target_sprite.texture = load("res://assets/UI/Target/Ring_1_SMALL_32.png")
+			2:
+				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_32.tres")
+				target_sprite.texture = load("res://assets/UI/Target/Ring_2_MEDIUM_64.png")
+			3:
+				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_64.tres")
+				target_sprite.texture = load("res://assets/UI/Target/Ring_3_LARGE_128.png")
+			4:
+				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_128.tres")
+				target_sprite.texture = load("res://assets/UI/Target/Ring_4_HUGE_256.png")
+			5:
+				pass
+	elif target_mode == 2:
+		target_sprite.centered = false
+		target_sprite.texture = load("res://assets/UI/Target/Line_1_SMALL_V.png")
+		
 	if attack_formula:
 		target_color = Color(1,0,0,1)
 		group_to_target = "Enemies"
@@ -174,6 +179,15 @@ func _process(_delta):
 			velocity = velocity.normalized()*160
 			velocity = target_body.move_and_slide(velocity)
 			target_body.position = target_body.position.clamped(135)
+		2:
+			if Input.is_action_pressed(right):
+				target_body.rotation_degrees += 2
+			if Input.is_action_pressed(left):
+				target_body.rotation_degrees -= 2
+			if Input.is_action_pressed(down):
+				target_body.rotation_degrees += 2
+			if Input.is_action_pressed(up):
+				target_body.rotation_degrees -= 2
 
 func _input(event):
 	if ending:
@@ -247,7 +261,11 @@ func _input(event):
 	get_tree().set_input_as_handled()
 	if event.is_action_pressed("ui_accept"):
 		get_parent().start()
-		get_parent().get_node("FormulaHitbox").position = target_body.position
+		if target_mode == 0 or target_mode == 1:
+			get_parent().get_node("FormulaHitbox").position = target_body.position
+		elif target_mode == 2:
+			get_parent().get_node("FormulaHitbox").rotation_degrees = target_body.rotation_degrees
+			print('setting hitbox angle... ', get_parent().get_node("FormulaHitbox").rotation_degrees)
 		end_target_screen()
 	if event.is_action_pressed("ui_cancel"):
 		end_animate_target()

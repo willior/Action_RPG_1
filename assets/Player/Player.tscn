@@ -2193,7 +2193,7 @@ position = Vector2( 0, -9 )
 texture = SubResource( 3 )
 hframes = 60
 vframes = 5
-frame = 180
+frame = 252
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -2357,7 +2357,7 @@ position = Vector2( 0, -2 )
 shape = SubResource( 148 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 18 )
+stream = ExtResource( 21 )
 
 [node name="BambooAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
@@ -2395,10 +2395,10 @@ wait_time = 0.4
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Formulabox" to="." method="_on_Formulabox_area_entered"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]

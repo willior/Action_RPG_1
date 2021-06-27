@@ -299,7 +299,6 @@ func set_speed_mod(value):
 
 func set_evasion_action_bonus(value):
 	evasion_action_bonus = value
-	print("evasion_action_bonus set: ", evasion_action_bonus)
 	evasion = (speed / 2 + evasion_action_bonus) * speed_mod
 
 func set_attack_speed(value):

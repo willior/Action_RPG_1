@@ -54,6 +54,7 @@ func _input(event):
 	
 	if event.is_action_pressed("test1"):
 		print('1: giving formulas/ingredients')
+		GameManager.player.formulabook.add_formula("Hardball")
 		GameManager.player.formulabook.add_formula("Flash")
 		GameManager.player.formulabook.add_formula("Heal")
 		GameManager.player.formulabook.add_formula("Fury")
@@ -62,6 +63,7 @@ func _input(event):
 		GameManager.player.pouch.add_ingredient("Water", 20)
 		GameManager.player.pouch.add_ingredient("Salt", 10)
 		if GameManager.multiplayer_2:
+			GameManager.player2.formulabook.add_formula("Hardball")
 			GameManager.player2.formulabook.add_formula("Flash")
 			GameManager.player2.formulabook.add_formula("Heal")
 			GameManager.player2.formulabook.add_formula("Fury")

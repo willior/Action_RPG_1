@@ -1,6 +1,7 @@
 extends Node
 
 var growth_rate = 50
+var Hardball = ["Hardball", 1, 0, 100, 0]
 var Flash = ["Flash", 1, 0, 100, 0]
 var Heal = ["Heal", 1, 0, 100, 0]
 var Fury = ["Fury", 1, 0, 100, 0]
@@ -28,6 +29,7 @@ func apply_xp_to_formula(formula_name, who):
 	# messagePopup.level_flash()
 
 func default_formula_data():
+	Hardball = ["Hardball", 1, 0, 100, 0]
 	Flash = ["Flash", 1, 0, 100, 0]
 	Heal = ["Heal", 1, 0, 100, 0]
 	Fury = ["Fury", 1, 0, 100, 0]
