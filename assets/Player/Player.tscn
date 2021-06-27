@@ -1745,7 +1745,7 @@ nodes/BlendSpace2D/position = Vector2( 30, 110 )
 nodes/TimeScale/node = SubResource( 50 )
 nodes/TimeScale/position = Vector2( 210, 110 )
 nodes/output/position = Vector2( 360, 110 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
+node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=52]
 animation = "Attack2Down"
@@ -1781,7 +1781,7 @@ nodes/BlendSpace2D/position = Vector2( 140, 120 )
 nodes/TimeScale/node = SubResource( 57 )
 nodes/TimeScale/position = Vector2( 340, 100 )
 nodes/output/position = Vector2( 540, 90 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
+node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=59]
 animation = "BackstepLeft"
@@ -1839,7 +1839,7 @@ nodes/BlendSpace2D/node = SubResource( 68 )
 nodes/BlendSpace2D/position = Vector2( -80, 100 )
 nodes/TimeScale/node = SubResource( 69 )
 nodes/TimeScale/position = Vector2( 140, 120 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
+node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=71]
 animation = "AttackFlashLeft"
@@ -1999,7 +1999,7 @@ nodes/BlendSpace2D/position = Vector2( -70, 140 )
 nodes/TimeScale/node = SubResource( 101 )
 nodes/TimeScale/position = Vector2( 110, 140 )
 nodes/output/position = Vector2( 260, 140 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "BlendSpace2D" ]
+node_connections = [ "TimeScale", 0, "BlendSpace2D", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeAnimation" id=103]
 animation = "AttackShadeLeft"
@@ -2395,10 +2395,10 @@ wait_time = 0.4
 [connection signal="area_entered" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_entered"]
 [connection signal="area_exited" from="HitboxPivot/InteractHitbox" to="." method="_on_InteractHitbox_area_exited"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
-[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_ended" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="invincibility_started" from="Hurtbox" to="Hurtbox" method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="Hurtbox/Timer" to="Hurtbox" method="_on_Timer_timeout"]
 [connection signal="area_entered" from="Formulabox" to="." method="_on_Formulabox_area_entered"]
 [connection signal="timeout" from="TalkTimer" to="." method="_on_TalkTimer_timeout"]

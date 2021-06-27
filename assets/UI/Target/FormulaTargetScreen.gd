@@ -79,11 +79,13 @@ func _ready():
 	var targets = Node.new()
 	targets.set_name("Targets")
 	get_tree().get_root().get_node("World").add_child(targets)
-	var closest_target
+	
 	for e in range(0, target_bodies.size()):
 		var target = Target.instance()
 		target.global_position = target_bodies[e].hurtbox.get_child(0).global_position
 		get_tree().get_root().get_node("World/Targets").add_child(target)
+	
+	var closest_target = target_bodies[0]
 	
 	if target_mode == 0 or target_mode == 1:
 		target_size = get_parent().formula_size
@@ -108,7 +110,10 @@ func _ready():
 	elif target_mode == 2:
 		target_sprite.centered = false
 		target_sprite.texture = load("res://assets/UI/Target/Line_1_SMALL_V.png")
-		
+		for t in range(0, target_bodies.size()):
+			if get_parent().global_position.distance_to(target_bodies[t].global_position) < get_parent().global_position.distance_to(closest_target.global_position):
+				closest_target = target_bodies[t]
+				print('new closest target: ', closest_target.name)
 	
 	begin_animate_target()
 
