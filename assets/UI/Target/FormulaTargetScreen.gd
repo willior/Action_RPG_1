@@ -47,6 +47,44 @@ var ending = false
 
 func _ready():
 	Global.target_screen_open = true
+	get_tree().paused = true
+	player = get_parent().player
+	match player.name:
+		"Player":
+			up = "up_1"
+			down = "down_1"
+			left = "left_1"
+			right = "right_1"
+			next = "next_1"
+			previous = "previous_1"
+		"Player2":
+			up = "up_2"
+			down = "down_2"
+			left = "left_2"
+			right = "right_2"
+			next = "next_2"
+			previous = "previous_2"
+	sfx1.stream_paused = true
+	sfx2.stream_paused = true
+	AudioServer.set_bus_effect_enabled(0, 0, true)
+	Physics2DServer.set_active(true)
+	count = 0
+	if attack_formula:
+		target_color = Color(1,0,0,1)
+		group_to_target = "Enemies"
+	else:
+		target_color = Color(0,1,1,1)
+		group_to_target = "Players"
+	target_bodies = get_tree().get_nodes_in_group(group_to_target)
+	var targets = Node.new()
+	targets.set_name("Targets")
+	get_tree().get_root().get_node("World").add_child(targets)
+	var closest_target
+	for e in range(0, target_bodies.size()):
+		var target = Target.instance()
+		target.global_position = target_bodies[e].hurtbox.get_child(0).global_position
+		get_tree().get_root().get_node("World/Targets").add_child(target)
+	
 	if target_mode == 0 or target_mode == 1:
 		target_size = get_parent().formula_size
 		match target_size:
@@ -71,42 +109,7 @@ func _ready():
 		target_sprite.centered = false
 		target_sprite.texture = load("res://assets/UI/Target/Line_1_SMALL_V.png")
 		
-	if attack_formula:
-		target_color = Color(1,0,0,1)
-		group_to_target = "Enemies"
-	else:
-		target_color = Color(0,1,1,1)
-		group_to_target = "Players"
-	get_tree().paused = true
-	player = get_parent().player
-	match player.name:
-		"Player":
-			up = "up_1"
-			down = "down_1"
-			left = "left_1"
-			right = "right_1"
-			next = "next_1"
-			previous = "previous_1"
-		"Player2":
-			up = "up_2"
-			down = "down_2"
-			left = "left_2"
-			right = "right_2"
-			next = "next_2"
-			previous = "previous_2"
-	sfx1.stream_paused = true
-	sfx2.stream_paused = true
-	AudioServer.set_bus_effect_enabled(0, 0, true)
-	Physics2DServer.set_active(true)
-	count = 0
-	target_bodies = get_tree().get_nodes_in_group(group_to_target)
-	var targets = Node.new()
-	targets.set_name("Targets")
-	get_tree().get_root().get_node("World").add_child(targets)
-	for e in range(0, target_bodies.size()):
-		var target = Target.instance()
-		target.global_position = target_bodies[e].hurtbox.get_child(0).global_position
-		get_tree().get_root().get_node("World/Targets").add_child(target)
+	
 	begin_animate_target()
 
 func begin_animate_target():
