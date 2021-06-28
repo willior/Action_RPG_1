@@ -1,4 +1,5 @@
 extends Node2D
+var Projectile = load("res://assets/Player/Abilities/Projectile_2/Projectile_2.tscn")
 #enum formulaSize {TINY, SMALL, MEDIUM, LARGE, HUGE}
 #export(formulaSize) var formula_size
 #onready var formula_shape = $FormulaHitbox/CollisionShape2D
@@ -14,6 +15,14 @@ func start():
 	$AnimationPlayer.play("Ability")
 
 func ability_start():
+#	var projectile = Projectile.instance()
+#	projectile.player = player
+#	projectile.position = position
+#	if $FormulaHitbox/RayCast2D.get_collider() != null:
+#		projectile.target = $FormulaHitbox/RayCast2D.get_collider().global_position
+#	else:
+#		projectile.target = $FormulaHitbox/RayCast2D.get_cast_to()
+#	get_tree().current_scene.add_child(projectile)
 	if $FormulaHitbox/RayCast2D.is_colliding():
 		if $FormulaHitbox/RayCast2D.get_collider().name == "Hurtbox":
 			print('Hardball hit a hurtbox: ', $FormulaHitbox/RayCast2D.get_collider().get_parent().name)

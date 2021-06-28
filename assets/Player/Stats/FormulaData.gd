@@ -19,7 +19,7 @@ func apply_xp_to_formula(formula_name, who):
 		formula_data[2] -= formula_data[3]
 		formula_data[3] *= 1.2
 		# show_formula_level_notice(formula_data, who)
-		yield(get_tree().create_timer(1), "timeout")
+		# yield(get_tree().create_timer(1), "timeout")
 		Global.display_message_popup(who, str(formula_data[0], " is now level " + str(formula_data[1])), "level")
 
 # func show_formula_level_notice(formula_data, who):
