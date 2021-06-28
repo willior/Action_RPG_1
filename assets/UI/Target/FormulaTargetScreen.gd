@@ -121,8 +121,16 @@ func _ready():
 			if get_parent().global_position.distance_to(target_bodies[t].global_position) < get_parent().global_position.distance_to(closest_target.global_position):
 				closest_target = target_bodies[t].hurtbox.get_child(0)
 				print('new closest target: ', closest_target.get_parent().get_parent().name)
+				count = t
 		target_body.look_at(closest_target.global_position)
 	begin_animate_target()
+
+func sort_target_bodies(a, b):
+	if target_mode == 1 and a.position.x < b.position.x:
+		return true
+	elif target_mode == 2 and get_parent().global_position.angle_to_point(a.hurtbox.get_child(0).global_position) < get_parent().global_position.angle_to_point(b.hurtbox.get_child(0).global_position):
+		return true
+	return false
 
 func begin_animate_target():
 	$Tween.interpolate_property(self,
@@ -334,11 +342,6 @@ func target_body_out_of_range():
 	elif target_mode == 2:
 		if player.global_position.distance_to(target_bodies[count].hurtbox.get_child(0).global_position) > formula_range + 4:
 			return true
-
-func sort_target_bodies(a, b):
-	if a.position.x < b.position.x:
-		return true
-	return false
 
 func cancel_target_screen():
 	end_target_screen()

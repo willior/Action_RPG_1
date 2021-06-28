@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/UI/Target/Line_1_SMALL.png" type="Texture" id=5]
 
 [sub_resource type="RayShape2D" id=1]
-custom_solver_bias = 1.0
 length = 256.0
 
 [sub_resource type="Animation" id=2]
