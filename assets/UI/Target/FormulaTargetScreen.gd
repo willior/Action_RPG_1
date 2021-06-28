@@ -190,6 +190,7 @@ func end_animate_target():
 func _process(_delta):
 	match target_mode:
 		1:
+			if ending: return
 			velocity = Vector2()
 			if Input.is_action_pressed(right):
 				velocity.x += 1
@@ -203,6 +204,7 @@ func _process(_delta):
 			velocity = target_body.move_and_slide(velocity)
 			target_body.position = target_body.position.clamped(formula_range)
 		2:
+			if ending: return
 			if Input.is_action_pressed(right):
 				target_body.rotation_degrees += 2
 			if Input.is_action_pressed(left):
