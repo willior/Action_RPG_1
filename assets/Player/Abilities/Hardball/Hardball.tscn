@@ -2,8 +2,8 @@
 
 [ext_resource path="res://assets/Player/Abilities/Hardball/Hardball.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Abilities/Hardball/Hardball_Hitbox.gd" type="Script" id=2]
-[ext_resource path="res://assets/UI/Target/Line_1_SMALL_V.png" type="Texture" id=3]
 [ext_resource path="res://assets/UI/Target/FormulaTargetScreen.gd" type="Script" id=4]
+[ext_resource path="res://assets/UI/Target/Line_1_SMALL.png" type="Texture" id=5]
 
 [sub_resource type="RayShape2D" id=1]
 custom_solver_bias = 1.0
@@ -65,12 +65,12 @@ collision_mask = 256
 
 [node name="Sprite" type="Sprite" parent="FormulaTargetScreen/KinematicBody2D/TargetArea"]
 pause_mode = 2
-texture = ExtResource( 3 )
 centered = false
-offset = Vector2( -1, 0 )
+offset = Vector2( -1, -1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaTargetScreen/KinematicBody2D/TargetArea"]
 pause_mode = 2
+rotation = -1.5708
 shape = SubResource( 1 )
 
 [node name="Tween" type="Tween" parent="FormulaTargetScreen/KinematicBody2D"]
@@ -88,19 +88,16 @@ formula_name = "Hardball"
 base_potency = 8.0
 randomness = 0.2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
-shape = SubResource( 1 )
-disabled = true
-
 [node name="Sprite" type="Sprite" parent="FormulaHitbox"]
 visible = false
 modulate = Color( 0.454902, 0, 1, 1 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 centered = false
+offset = Vector2( -1, -1 )
 
 [node name="RayCast2D" type="RayCast2D" parent="FormulaHitbox"]
 enabled = true
-cast_to = Vector2( 0, 256 )
+cast_to = Vector2( 256, 0 )
 collision_mask = 9
 collide_with_areas = true
 

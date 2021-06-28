@@ -96,15 +96,16 @@ func _input(event):
 		print('5: damaging P1.')
 		GameManager.player.stats.health -= 1000
 	if event.is_action_pressed("test6"):
-		print('6: damaging P2.')
-		GameManager.player2.stats.health -= 1000
+		if GameManager.multiplayer_2:
+			print('6: damaging P2.')
+			GameManager.player2.stats.health -= 1000
 	if event.is_action_pressed("test7"):
 		print('7: recovering P1 health.')
 		GameManager.player.stats.health += 1000
 	if event.is_action_pressed("test8"):
-		print('8: recovering P2 health.')
-		GameManager.player2.stats.health += 1000
-	
+		if GameManager.multiplayer_2:
+			print('8: recovering P2 health.')
+			GameManager.player2.stats.health += 1000
 	if event.is_action_pressed("select_2"):
 		GameManager.multiplayer_2_toggle()
 	

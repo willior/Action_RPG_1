@@ -113,8 +113,12 @@ signal player_dead
 func _ready():
 	if Global.get_attribute("location") != null:
 		position = Global.get_attribute("location")
-	else:
+	elif get_tree().get_root().get_node("/root/World/Map").get("player_spawn_pos"):
 		position = get_tree().get_root().get_node("/root/World/Map").player_spawn_pos
+		print('setting player position to map default')
+	else:
+		print('no map default; setting player position to that of Camera2D')
+		position = get_tree().get_root().get_node("/root/World/Camera2D").position
 	if Global.get_attribute(inventory_ref) != null:
 		pouch.set_ingredients(Global.get_attribute(inventory_ref)[0].get_ingredients())
 		formulabook.set_formulas(Global.get_attribute(inventory_ref)[1].get_formulas())

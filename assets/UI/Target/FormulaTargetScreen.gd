@@ -79,14 +79,13 @@ func _ready():
 	var targets = Node.new()
 	targets.set_name("Targets")
 	get_tree().get_root().get_node("World").add_child(targets)
-	
 	for e in range(0, target_bodies.size()):
 		var target = Target.instance()
 		target.global_position = target_bodies[e].hurtbox.get_child(0).global_position
 		get_tree().get_root().get_node("World/Targets").add_child(target)
-	
-	var closest_target = target_bodies[0]
-	
+	var closest_target
+	if target_bodies.size() > 0:
+		closest_target = target_bodies[0].hurtbox.get_child(0)
 	if target_mode == 0 or target_mode == 1:
 		target_size = get_parent().formula_size
 		match target_size:
@@ -109,12 +108,15 @@ func _ready():
 				pass
 	elif target_mode == 2:
 		target_sprite.centered = false
-		target_sprite.texture = load("res://assets/UI/Target/Line_1_SMALL_V.png")
+		target_sprite.texture = load("res://assets/UI/Target/Line_1_SMALL.png")
+		if target_bodies.size() == 0:
+			begin_animate_target()
+			return
 		for t in range(0, target_bodies.size()):
 			if get_parent().global_position.distance_to(target_bodies[t].global_position) < get_parent().global_position.distance_to(closest_target.global_position):
-				closest_target = target_bodies[t]
-				print('new closest target: ', closest_target.name)
-	
+				closest_target = target_bodies[t].hurtbox.get_child(0)
+				print('new closest target: ', closest_target.get_parent().get_parent().name)
+		target_body.look_at(closest_target.global_position)
 	begin_animate_target()
 
 func begin_animate_target():
@@ -280,11 +282,9 @@ func _input(event):
 		yield($Tween, "tween_all_completed")
 		cancel_target_screen()
 	if event.is_action_pressed(next):
-		if target_mode == 1:
-			next_target_body()
+		next_target_body()
 	if event.is_action_pressed(previous):
-		if target_mode == 1:
-			previous_target_body()
+		previous_target_body()
 
 func next_target_body():
 	if target_bodies.size() <= 0:
@@ -293,13 +293,16 @@ func next_target_body():
 	count += 1
 	if count >= target_bodies.size():
 		count = 0
-	if target_body_out_of_range():
-		print(target_bodies[count].name, ' target_body out of range; skipping')
-		target_bodies.remove(count)
-		count -= 1
-		next_target_body()
-		return
-	target_body.global_position = target_bodies[count].global_position
+	if target_mode == 1:
+		if target_body_out_of_range():
+			print(target_bodies[count].name, ' target_body out of range; skipping')
+			target_bodies.remove(count)
+			count -= 1
+			next_target_body()
+			return
+		target_body.global_position = target_bodies[count].global_position
+	elif target_mode == 2:
+		print('next target')
 
 func previous_target_body():
 	if target_bodies.size() <= 0:
@@ -308,13 +311,16 @@ func previous_target_body():
 	count -= 1
 	if count < 0:
 		count = target_bodies.size()-1
-	if target_body_out_of_range():
-		print(target_bodies[count].name, ' target_body out of range; skipping')
-		target_bodies.remove(count)
-		count -= 1
-		previous_target_body()
-		return
-	target_body.global_position = target_bodies[count].global_position
+	if target_mode == 1:
+		if target_body_out_of_range():
+			print(target_bodies[count].name, ' target_body out of range; skipping')
+			target_bodies.remove(count)
+			count -= 1
+			previous_target_body()
+			return
+		target_body.global_position = target_bodies[count].global_position
+	elif target_mode == 2:
+		print('previous target')
 
 func target_body_out_of_range():
 	if player.global_position.distance_to(target_bodies[count].global_position) > 184:
