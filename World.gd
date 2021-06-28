@@ -82,7 +82,7 @@ func _input(event):
 			p.stats.speed_mod = 2
 			p.stats.magic_mod = 2
 	if event.is_action_pressed("test3"):
-		print('3: applying slow!')
+		print('3: testing projectile!')
 		for p in get_tree().get_nodes_in_group("Players"):
 			StatusHandler.apply_status(["Slow", 1.0], p)
 	if event.is_action_pressed("test4"):
