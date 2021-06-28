@@ -41,7 +41,7 @@ formula_size = 2
 
 [node name="FormulaTargetScreen" parent="." instance=ExtResource( 5 )]
 target_mode = 1
-formula_range = 135
+formula_range = 128
 attack_formula = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

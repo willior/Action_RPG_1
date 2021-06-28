@@ -76,6 +76,7 @@ func _ready():
 		target_color = Color(0,1,1,1)
 		group_to_target = "Players"
 	target_bodies = get_tree().get_nodes_in_group(group_to_target)
+	target_bodies.sort_custom(self, "sort_target_bodies")
 	var targets = Node.new()
 	targets.set_name("Targets")
 	get_tree().get_root().get_node("World").add_child(targets)
@@ -92,18 +93,22 @@ func _ready():
 			0:
 				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_8.tres")
 				target_sprite.texture = load("res://assets/UI/Target/Ring_0_TINY_16.png")
+				formula_range += 24
 			1:
 				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_16.tres")
 				target_sprite.texture = load("res://assets/UI/Target/Ring_1_SMALL_32.png")
+				formula_range += 16
 			2:
 				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_32.tres")
 				target_sprite.texture = load("res://assets/UI/Target/Ring_2_MEDIUM_64.png")
 			3:
 				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_64.tres")
 				target_sprite.texture = load("res://assets/UI/Target/Ring_3_LARGE_128.png")
+				formula_range -= 32
 			4:
 				target_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_128.tres")
 				target_sprite.texture = load("res://assets/UI/Target/Ring_4_HUGE_256.png")
+				formula_range -= 96
 			5:
 				pass
 	elif target_mode == 2:
@@ -188,7 +193,7 @@ func _process(_delta):
 				velocity.y -= 1
 			velocity = velocity.normalized()*160
 			velocity = target_body.move_and_slide(velocity)
-			target_body.position = target_body.position.clamped(135)
+			target_body.position = target_body.position.clamped(formula_range)
 		2:
 			if Input.is_action_pressed(right):
 				target_body.rotation_degrees += 2
@@ -198,7 +203,6 @@ func _process(_delta):
 				target_body.rotation_degrees += 2
 			if Input.is_action_pressed(up):
 				target_body.rotation_degrees -= 2
-			print(target_body.rotation_degrees)
 
 func _input(event):
 	if ending:
@@ -324,8 +328,17 @@ func previous_target_body():
 		target_body.look_at(target_bodies[count].hurtbox.get_child(0).global_position)
 
 func target_body_out_of_range():
-	if player.global_position.distance_to(target_bodies[count].global_position) > 184:
+	if target_mode == 1:
+		if player.global_position.distance_to(target_bodies[count].hurtbox.get_child(0).global_position) > formula_range + target_shape.shape.radius + 4:
+			return true
+	elif target_mode == 2:
+		if player.global_position.distance_to(target_bodies[count].hurtbox.get_child(0).global_position) > formula_range + 4:
+			return true
+
+func sort_target_bodies(a, b):
+	if a.position.x < b.position.x:
 		return true
+	return false
 
 func cancel_target_screen():
 	end_target_screen()
