@@ -198,6 +198,7 @@ func _process(_delta):
 				target_body.rotation_degrees += 2
 			if Input.is_action_pressed(up):
 				target_body.rotation_degrees -= 2
+			print(target_body.rotation_degrees)
 
 func _input(event):
 	if ending:
@@ -293,16 +294,16 @@ func next_target_body():
 	count += 1
 	if count >= target_bodies.size():
 		count = 0
+	if target_body_out_of_range():
+		print(target_bodies[count].name, ' target_body out of range; skipping')
+		target_bodies.remove(count)
+		count -= 1
+		next_target_body()
+		return
 	if target_mode == 1:
-		if target_body_out_of_range():
-			print(target_bodies[count].name, ' target_body out of range; skipping')
-			target_bodies.remove(count)
-			count -= 1
-			next_target_body()
-			return
-		target_body.global_position = target_bodies[count].global_position
+		target_body.global_position = target_bodies[count].hurtbox.get_child(0).global_position
 	elif target_mode == 2:
-		print('next target')
+		target_body.look_at(target_bodies[count].hurtbox.get_child(0).global_position)
 
 func previous_target_body():
 	if target_bodies.size() <= 0:
@@ -311,16 +312,16 @@ func previous_target_body():
 	count -= 1
 	if count < 0:
 		count = target_bodies.size()-1
+	if target_body_out_of_range():
+		print(target_bodies[count].name, ' target_body out of range; skipping')
+		target_bodies.remove(count)
+		count -= 1
+		previous_target_body()
+		return
 	if target_mode == 1:
-		if target_body_out_of_range():
-			print(target_bodies[count].name, ' target_body out of range; skipping')
-			target_bodies.remove(count)
-			count -= 1
-			previous_target_body()
-			return
-		target_body.global_position = target_bodies[count].global_position
+		target_body.global_position = target_bodies[count].hurtbox.get_child(0).global_position
 	elif target_mode == 2:
-		print('previous target')
+		target_body.look_at(target_bodies[count].hurtbox.get_child(0).global_position)
 
 func target_body_out_of_range():
 	if player.global_position.distance_to(target_bodies[count].global_position) > 184:
