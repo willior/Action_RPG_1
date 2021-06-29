@@ -4,4 +4,4 @@
 {"player1_formulaData":{"Flash":["Flash",6,205.84,248.832,950],"Fury":["Fury",3,130,144,350],"Heal":["Heal",4,136,172.8,500]}}
 {"player2_formulaData":{"Flash":["Flash",2,50,120,150],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,0,100,0]}}
 {"chapter_number":0,"examined_list":[],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
-{"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}
+{"map_filename":"res://assets/Maps/Test/Test.tscn"}
