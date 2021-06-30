@@ -10,7 +10,6 @@ radius = 4.0
 [node name="Projectile" type="KinematicBody2D"]
 pause_mode = 1
 collision_layer = 0
-collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -22,7 +21,7 @@ shape = SubResource( 1 )
 [node name="FormulaHitbox" type="Area2D" parent="."]
 monitoring = false
 collision_layer = 0
-collision_mask = 8
+collision_mask = 25
 script = ExtResource( 4 )
 formula_name = "Hardball"
 base_potency = 8.0
