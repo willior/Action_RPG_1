@@ -67,6 +67,7 @@ func _input(event):
 			GameManager.player2.formulabook.add_formula("Hardball")
 			GameManager.player2.formulabook.add_formula("Flash")
 			GameManager.player2.formulabook.add_formula("Heal")
+			GameManager.player2.formulabook.add_formula("Cleanse")
 			GameManager.player2.formulabook.add_formula("Fury")
 			GameManager.player2.pouch.add_ingredient("Rock", 20)
 			GameManager.player2.pouch.add_ingredient("Clay", 10)
@@ -86,6 +87,7 @@ func _input(event):
 		print('3: testing projectile!')
 		for p in get_tree().get_nodes_in_group("Players"):
 			StatusHandler.apply_status(["Slow", 1.0], p)
+			StatusHandler.apply_status(["Poison", 1.0], p)
 	if event.is_action_pressed("test4"):
 		print('4: giving XP')
 		GameManager.player.enemy_killed(1000)

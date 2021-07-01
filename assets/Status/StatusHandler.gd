@@ -15,6 +15,8 @@ onready var Slow = preload("res://assets/Status/Debuffs/Slow.tscn")
 func apply_status(status, body):
 	var status_display = body.get_node("StatusDisplay")
 	match status[0]:
+		"Cleanse":
+			remove_debuff(body)
 		"Regen":
 			if status_display.has_node("Poison"):
 				status_display.get_node("Poison").queue_free()
@@ -82,6 +84,14 @@ func remove_buffs(body):
 	for b in status_display.get_children():
 		if "buff" in status_display.get_node(b.name):
 			b.queue_free()
+
+func remove_debuff(body):
+	var status_display = body.get_node("StatusDisplay")
+	for d in status_display.get_children():
+		if "debuff" in status_display.get_node(d.name):
+			body.hurtbox.display_damage_popup(str(d.name)+" Cleansed", false, "Heal")
+			d.queue_free()
+			return
 
 func remove_debuffs(body):
 	var status_display = body.get_node("StatusDisplay")
