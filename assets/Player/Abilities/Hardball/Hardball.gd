@@ -1,5 +1,6 @@
 extends Node2D
 var Projectile = load("res://assets/Player/Abilities/Hardball/Projectile_Hardball.tscn")
+# var Trail = load("res://assets/Effects/Trail.tscn")
 #enum formulaSize {TINY, SMALL, MEDIUM, LARGE, HUGE}
 #export(formulaSize) var formula_size
 #onready var formula_shape = $FormulaHitbox/CollisionShape2D
@@ -22,6 +23,9 @@ func ability_start():
 	projectile.target = $FormulaHitbox/RayCast2D.to_global($FormulaHitbox/RayCast2D.get_cast_to())
 	projectile.knockback_vector = global_position.direction_to(projectile.target)
 	get_tree().get_root().get_node("World/YSort").add_child(projectile)
+#	var trail = Trail.instance()
+#	trail.target = projectile
+#	get_tree().get_root().get_node("World/YSort").add_child(trail)
 #	if $FormulaHitbox/RayCast2D.is_colliding():
 #		if $FormulaHitbox/RayCast2D.get_collider().name == "Hurtbox":
 #			print('Hardball hit a hurtbox: ', $FormulaHitbox/RayCast2D.get_collider().get_parent().name)

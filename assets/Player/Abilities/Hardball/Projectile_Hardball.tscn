@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Player/Abilities/Hardball/Hardball_Hitbox.gd" type="Script" id=1]
 [ext_resource path="res://assets/Player/Abilities/Hardball/Projectile_Hardball.gd" type="Script" id=2]
 [ext_resource path="res://assets/Ingredients/Rock.png" type="Texture" id=3]
+[ext_resource path="res://assets/Effects/Trail.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
@@ -25,3 +26,12 @@ script = ExtResource( 1 )
 formula_name = "Hardball"
 base_potency = 4.0
 randomness = 0.2
+
+[node name="Trail" parent="." instance=ExtResource( 4 )]
+process_priority = -1
+
+[node name="Timer" type="Timer" parent="Trail"]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="tree_exiting" from="Trail" to="." method="_on_Trail_tree_exiting"]
