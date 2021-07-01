@@ -120,7 +120,7 @@ func _ready():
 		for t in range(0, target_bodies.size()):
 			if get_parent().global_position.distance_to(target_bodies[t].global_position) < get_parent().global_position.distance_to(closest_target.global_position):
 				closest_target = target_bodies[t].hurtbox.get_child(0)
-				print('new closest target: ', closest_target.get_parent().get_parent().name)
+				# print('new closest target: ', closest_target.get_parent().get_parent().name)
 				count = t
 		target_body.look_at(closest_target.global_position)
 	begin_animate_target()
@@ -290,7 +290,6 @@ func _input(event):
 			get_parent().get_node("FormulaHitbox").position = target_body.position
 		elif target_mode == 2:
 			get_parent().get_node("FormulaHitbox").rotation_degrees = target_body.rotation_degrees
-			print('setting RayCast2D angle... ', get_parent().get_node("FormulaHitbox").rotation_degrees)
 		end_target_screen()
 	if event.is_action_pressed("ui_cancel"):
 		end_animate_target()

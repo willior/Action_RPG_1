@@ -1,12 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/World/Plants/Plant_16_green_alt.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World.gd" type="Script" id=4]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Ground_Test_2_500.png" type="Texture" id=6]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=8]
+[ext_resource path="res://assets/World/Grass/TallGrass_1.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -47,6 +49,12 @@ pause_mode = 1
 [node name="Doodads" type="YSort" parent="YSort"]
 
 [node name="Plants" type="YSort" parent="YSort"]
+
+[node name="Plant_16_green_alt" parent="YSort/Plants" instance=ExtResource( 3 )]
+position = Vector2( 178, 127 )
+
+[node name="TallGrass" parent="YSort/Plants" instance=ExtResource( 9 )]
+position = Vector2( 240, 126 )
 
 [node name="Grass" type="YSort" parent="YSort"]
 

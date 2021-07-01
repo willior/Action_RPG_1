@@ -30,6 +30,7 @@ rotation = -1.5708
 shape = SubResource( 1 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+monitorable = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]

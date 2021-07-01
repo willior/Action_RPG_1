@@ -1,9 +1,8 @@
-extends Area2D
-
+extends Node
 export(String) var formula_name
 export(float) var base_potency
 export(float) var randomness
-
+var formula = true
 var spell_mod
 var formula_level_mod
 var potency
@@ -21,9 +20,8 @@ var element = 6
 # 8 : dark
 # 9 : verve
 # 10 : entropy
-var formula = true
-
 func _ready():
+	knockback_vector = get_parent().knockback_vector
 	spell_mod = get_parent().player.stats.spell_mod
 	formula_level_mod = get_parent().player.formulaData.get(formula_name)[1]
 	potency = (base_potency*formula_level_mod) * (spell_mod*spell_mod)

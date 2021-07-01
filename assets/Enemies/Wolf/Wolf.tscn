@@ -24,7 +24,7 @@ shader = ExtResource( 1 )
 shader_param/active = false
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 4.0
+radius = 8.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "IdleDown"

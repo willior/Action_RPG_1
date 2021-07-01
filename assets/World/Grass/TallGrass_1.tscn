@@ -76,8 +76,8 @@ animations = [ {
 "speed": 6.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=15]
-extents = Vector2( 7, 7 )
+[sub_resource type="CircleShape2D" id=15]
+radius = 8.0
 
 [node name="TallGrass" type="Node2D"]
 script = ExtResource( 3 )
@@ -86,14 +86,18 @@ script = ExtResource( 3 )
 position = Vector2( -16, -16 )
 frames = SubResource( 14 )
 animation = "Uncut"
+frame = 1
 playing = true
 centered = false
 
 [node name="Hurtbox" parent="." instance=ExtResource( 1 )]
+input_pickable = false
+monitorable = false
 collision_layer = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 15 )
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="Hurtbox"]
