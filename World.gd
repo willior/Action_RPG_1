@@ -57,6 +57,7 @@ func _input(event):
 		GameManager.player.formulabook.add_formula("Hardball")
 		GameManager.player.formulabook.add_formula("Flash")
 		GameManager.player.formulabook.add_formula("Heal")
+		GameManager.player.formulabook.add_formula("Cleanse")
 		GameManager.player.formulabook.add_formula("Fury")
 		GameManager.player.pouch.add_ingredient("Rock", 20)
 		GameManager.player.pouch.add_ingredient("Clay", 10)

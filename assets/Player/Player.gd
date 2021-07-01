@@ -910,8 +910,11 @@ func action_finished():
 		state = STUN
 		animationState.travel("Stun")
 		return
-	if Input.is_action_pressed(player_inputs.attack):
+	if !Input.is_action_pressed(player_inputs.attack):
+		charge.stop_charge()
 		charge_reset()
+	elif Input.is_action_pressed(player_inputs.attack):
+		# charge_reset()
 		attack_charging = true
 	state = MOVE
 

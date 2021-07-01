@@ -6,7 +6,6 @@ var player
 
 func _ready():
 	$FormulaTargetScreen.target_size = formula_size
-	print("heal ready: formula_size set: ", formula_size)
 	match formula_size:
 		0:
 			formula_shape.shape = load("res://assets/CollisionBoxes/Circles/Circle_8.tres")

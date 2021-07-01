@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/Player/Abilities/ScreenTint.gd" type="Script" id=1]
+[ext_resource path="res://assets/Player/Abilities/Heal/Heal.gd" type="Script" id=2]
+[ext_resource path="res://assets/Player/Abilities/Cleanse/CleanseHitbox.gd" type="Script" id=3]
+[ext_resource path="res://assets/UI/Target/FormulaTargetScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Shaders/White_Flash_CanvasMod.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Audio/SFX/Synth1.wav" type="AudioStream" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Ability"
+length = 1.55
+step = 0.025
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.375, 1.25 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "ability_start"
+}, {
+"args": [  ],
+"method": "ability_end"
+} ]
+}
+
+[node name="Cleanse" type="Node2D"]
+pause_mode = 1
+script = ExtResource( 2 )
+formula_size = 1
+
+[node name="FormulaTargetScreen" parent="." instance=ExtResource( 4 )]
+target_mode = 1
+formula_range = 128
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Ability = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScreenTint" parent="CanvasLayer" instance=ExtResource( 5 )]
+color = Color( 0, 1, 1, 0 )
+script = ExtResource( 1 )
+start_color = Color( 0, 1, 1, 0 )
+end_color = Color( 0, 1, 1, 0.25 )
+
+[node name="FormulaHitbox" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+collision_layer = 0
+collision_mask = 64
+script = ExtResource( 3 )
+formula_name = "Cleanse"
+base_potency = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
