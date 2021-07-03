@@ -52,5 +52,5 @@ func calculate_element_ratio(source_element=0, target_element=0):
 		8: elementRatio = DarkMod
 		9: elementRatio = VerveMod
 		10: elementRatio = EntropyMod
-	print(source_element, " vs ", target_element, " = ", elementRatio[target_element])
+	# print(source_element, " vs ", target_element, " = ", elementRatio[target_element])
 	return elementRatio[target_element]

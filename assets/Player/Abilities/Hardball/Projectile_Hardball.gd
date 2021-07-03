@@ -13,13 +13,10 @@ func _physics_process(delta):
 	velocity = velocity.move_toward(knockback_vector*speed, delta*ACCELERATION) # multiplies that by the speed argument
 	var collision = move_and_collide(velocity)
 	if collision:
-		print('collision detected. determining behaviour...')
 		if collision.collider.has_method("_on_Hurtbox_area_entered"):
 			collision.collider._on_Hurtbox_area_entered($FormulaHitbox)
-		print('projectile collided with ', collision.collider.name, '; deleting projectile.')
 		collision()
 	if global_position.distance_to(target) <= 16:
-		print('projectile reached target. deleting projectile.')
 		collision()
 
 #func accelerate_towards_point(point):

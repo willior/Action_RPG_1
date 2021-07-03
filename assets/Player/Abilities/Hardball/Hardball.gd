@@ -40,4 +40,5 @@ func ability_end():
 	player.animationPlayer.play("Cast_2")
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
+	print('deleting hardball')
 	queue_free()

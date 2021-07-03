@@ -197,10 +197,14 @@ func _input(event):
 					$CastTimer.start()
 					yield($CastTimer, "timeout")
 					casting = false
+					print('player checking for formula instance on world...')
 					if get_node("/root/World").has_node(formula_used.formula_reference.name):
+						print(formula_used.formula_reference.name, ' found. applying xp.')
 						formulaData.apply_xp_to_formula(formula_used.formula_reference.name, self.name)
 						for i in range(0,2):
 							pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
+					else:
+						print('what')
 				else:
 					casting = false
 					ingredient1_OK = false
@@ -729,7 +733,7 @@ func _on_Hurtbox_area_entered(area):
 				return
 			elif player_staggered:
 				player_state_reset()
-				print('hit not in stun state; staggered')
+				# print('hit not in stun state; staggered')
 				state = HIT
 	else:
 		$DodgeAudio.play()
@@ -737,7 +741,7 @@ func _on_Hurtbox_area_entered(area):
 
 func hit_damage():
 	if self.has_node("StatusDisplay/Stun") and get_node("StatusDisplay/Stun").get_stun_time_remaining() < get_node("StatusDisplay/Stun").duration:
-		print('interrupting stun...')
+		# print('interrupting stun...')
 		get_node("StatusDisplay/Stun").interrupt_stun()
 	stats.health -= damageTaken
 	damageTaken = 0
