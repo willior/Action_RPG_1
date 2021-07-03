@@ -77,8 +77,8 @@ func _ready():
 	Tween.TRANS_QUINT, Tween.EASE_OUT
 	)
 	$Tween.interpolate_property($MenuPanel, "rect_position",
-	Vector2(-220, 60),
-	Vector2(130, 60),
+	Vector2(-220, 52),
+	Vector2(130, 52),
 	0.4,
 	Tween.TRANS_QUART, Tween.EASE_OUT
 	)
@@ -274,8 +274,8 @@ func close_pause_menu():
 		$MenuPanel/Menu.get_child(b).set_focus_mode(0)
 	closing = true
 	$Tween.interpolate_property($MenuPanel, "rect_position",
-	Vector2(128, 60),
-	Vector2(480, 60),
+	Vector2(128, 52),
+	Vector2(480, 52),
 	0.4,
 	Tween.TRANS_QUINT, Tween.EASE_IN
 	)
@@ -353,7 +353,7 @@ func _on_ButtonAlchemy_focus_entered():
 
 func _on_ButtonAlchemy_pressed():
 	audio_menu_select()
-	$Tween.interpolate_property($AlchemyDisplay, "rect_size", Vector2(220, 0), Vector2(220, 130), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.interpolate_property($AlchemyDisplay, "rect_size", Vector2(220, 0), Vector2(220, 136), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	$Tween.start()
 	$AlchemyDisplay.show()
 	disable_menu_focus()
@@ -373,7 +373,7 @@ func _on_ButtonPouch_focus_entered():
 
 func _on_ButtonPouch_pressed():
 	audio_menu_select()
-	$Tween.interpolate_property($PouchDisplay, "rect_size", Vector2(220, 0), Vector2(220, 130), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.interpolate_property($PouchDisplay, "rect_size", Vector2(220, 0), Vector2(220, 134), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	$Tween.start()
 	$PouchDisplay.show()
 	disable_menu_focus()
@@ -394,7 +394,7 @@ func _on_ButtonConfig_focus_entered():
 func _on_ButtonConfig_pressed():
 	audio_menu_select()
 	disable_menu_focus()
-	$Tween.interpolate_property($ConfigDisplay, "rect_size", Vector2(220, 0), Vector2(220, 130), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.interpolate_property($ConfigDisplay, "rect_size", Vector2(220, 0), Vector2(220, 134), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	$Tween.start()
 	$ConfigDisplay.show()
 	yield($Tween, "tween_all_completed")
