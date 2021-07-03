@@ -78,7 +78,7 @@ icon = SubResource( 15 )
 description = [ {
 "text": "Deals damage to the first enemy it hits in a line."
 } ]
-description_string = "Deals damage to enemies in area."
+description_string = "Deals damage to a single target"
 cost = {
 "Clay": 1,
 "Rock": 1

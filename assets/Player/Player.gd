@@ -242,6 +242,9 @@ func _input(event):
 		STUN:
 			if event.is_action_pressed(player_inputs.attack) or event.is_action_pressed(player_inputs.roll) or event.is_action_pressed(player_inputs.examine) or event.is_action_pressed(player_inputs.alchemy):
 				get_tree().set_input_as_handled()
+				if !get_node("StatusDisplay").has_node("Stun"):
+					print('input detected in player stun state, but no stun node found. returning.')
+					return
 				var new_time = get_node("StatusDisplay/Stun/Timer").get_time_left()-0.25
 				if new_time > 0:
 					get_node("StatusDisplay/Stun").advance_stun_time(new_time)

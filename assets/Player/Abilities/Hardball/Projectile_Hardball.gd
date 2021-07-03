@@ -1,5 +1,5 @@
 extends KinematicBody2D
-
+var HitEffect = load("res://assets/Effects/Abilities/Hardball_HitEffect.tscn")
 const ACCELERATION = 800
 var target
 var speed = 12
@@ -17,16 +17,10 @@ func _physics_process(delta):
 		if collision.collider.has_method("_on_Hurtbox_area_entered"):
 			collision.collider._on_Hurtbox_area_entered($FormulaHitbox)
 		print('projectile collided with ', collision.collider.name, '; deleting projectile.')
-		# queue_free()
-		done = true
-		$Sprite.hide()
-		$CollisionShape2D.set_deferred("disabled", true)
+		collision()
 	if global_position.distance_to(target) <= 16:
 		print('projectile reached target. deleting projectile.')
-		# queue_free()
-		done = true
-		$Sprite.hide()
-		$CollisionShape2D.set_deferred("disabled", true)
+		collision()
 
 #func accelerate_towards_point(point):
 #	var knockback_vector = global_position.knockback_vector_to(point) # gets the knockback_vector by grabbing the target position, the point argument
@@ -34,6 +28,14 @@ func _physics_process(delta):
 #	if global_position.distance_to(target) <= 16:
 #		print('projectile reached target. deleting projectile.')
 #		queue_free()
+
+func collision():
+	done = true
+	$Sprite.hide()
+	$CollisionShape2D.set_deferred("disabled", true)
+	var hit_effect = HitEffect.instance()
+	hit_effect.position = position
+	get_tree().get_root().get_node("World/YSort").add_child(hit_effect)
 
 func _on_Trail_tree_exiting():
 	queue_free()

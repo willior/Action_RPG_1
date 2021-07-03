@@ -13,6 +13,8 @@ var element = 9
 func _ready():
 	spell_mod = get_parent().player.stats.spell_mod
 	formula_level = get_parent().player.formulaData.get(formula_name)[1]
+	potency = formula_level
+	status.append(potency)
 	# duration = 16 + (formula_level*2)
 	# potency = (base_potency*formula_level) * (spell_mod*spell_mod)
 	# status.append(duration) # status duration

@@ -16,7 +16,7 @@ func apply_status(status, body):
 	var status_display = body.get_node("StatusDisplay")
 	match status[0]:
 		"Cleanse":
-			remove_debuff(body)
+			remove_last_debuff(body, status[2])
 		"Regen":
 			if status_display.has_node("Poison"):
 				status_display.get_node("Poison").queue_free()
@@ -85,13 +85,21 @@ func remove_buffs(body):
 		if "buff" in status_display.get_node(b.name):
 			b.queue_free()
 
-func remove_debuff(body):
+func remove_last_debuff(body, cleanse_level):
 	var status_display = body.get_node("StatusDisplay")
-	for d in status_display.get_children():
-		if "debuff" in status_display.get_node(d.name):
-			body.hurtbox.display_damage_popup(str(d.name)+" Cleansed", false, "Heal")
-			d.queue_free()
-			return
+	var debuffs_to_cleanse = cleanse_level
+	for d in range(status_display.get_child_count()-1, -1, -1):
+		if "debuff" in status_display.get_child(d):
+			if status_display.get_child(d).name == "Stun":
+				print("can't cleanse Stun; continuing")
+				continue
+			body.hurtbox.display_damage_popup(str(status_display.get_child(d).name+" Cleansed!"), false, "Heal")
+			status_display.get_child(d).queue_free()
+			debuffs_to_cleanse -= 1
+			if debuffs_to_cleanse > 0:
+				continue
+			else:
+				return
 
 func remove_debuffs(body):
 	var status_display = body.get_node("StatusDisplay")

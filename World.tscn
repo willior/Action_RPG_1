@@ -1,7 +1,7 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://assets/Background/water_background.png" type="Texture" id=1]
-[ext_resource path="res://assets/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_green_1_sheet.png" type="Texture" id=4]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=5]
@@ -11,7 +11,6 @@
 [ext_resource path="res://assets/NPCs/Skeleton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World.gd" type="Script" id=12]
 [ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=18]
-[ext_resource path="res://assets/ItemDrops/HeartPickup.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=20]
 [ext_resource path="res://assets/World/Trees/Tree_1_fuschia.tscn" type="PackedScene" id=24]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_orange_1_sheet.png" type="Texture" id=25]
@@ -761,6 +760,8 @@ __meta__ = {
 "_edit_vertical_guides_": [ 128.0 ]
 }
 
+[node name="Camera2D" parent="." instance=ExtResource( 2 )]
+
 [node name="Map" type="Node2D" parent="."]
 
 [node name="GrassBasicDark" type="TileMap" parent="Map"]
@@ -817,26 +818,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 280, 40 )
-current = true
-limit_left = 0
-limit_top = 0
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_speed = 10.0
-drag_margin_top = 0.1
-
 [node name="YSort" type="YSort" parent="."]
 pause_mode = 1
 position = Vector2( 360, 200 )
-
-[node name="Player" parent="YSort" instance=ExtResource( 2 )]
-process_priority = 1
-position = Vector2( -80, -160 )
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
-remote_path = NodePath("../../../Camera2D")
 
 [node name="Doodads" type="YSort" parent="YSort"]
 
@@ -2234,21 +2218,6 @@ position = Vector2( 936, 144 )
 
 [node name="PennyPickup92" parent="YSort/Items" instance=ExtResource( 33 )]
 position = Vector2( 944, 144 )
-
-[node name="HeartPickup" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( 112, 480 )
-
-[node name="HeartPickup2" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( 128, 480 )
-
-[node name="HeartPickup4" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( 112, 496 )
-
-[node name="HeartPickup3" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( 128, 496 )
-
-[node name="HeartPickup5" parent="YSort/Items" instance=ExtResource( 19 )]
-position = Vector2( 312, 72 )
 
 [node name="PennyPickup13" parent="YSort/Items" instance=ExtResource( 33 )]
 position = Vector2( 288, 88 )
