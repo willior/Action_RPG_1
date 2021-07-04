@@ -673,34 +673,22 @@ func apply_evasion_action_bonus(value):
 		stats.evasion_action_bonus = value
 
 func _on_Formulabox_area_entered(area):
-	if area.get("status"):
-		StatusHandler.apply_status(area.status, self)
-	if area.get("buff")!=null or area.get("debuff")!=null:
-		return
 	var element_mod
 	if area.get("element")!=null and stats.get("affinity")!=null:
 		element_mod = Element.calculate_element_ratio(area.element, stats.affinity)
 	else:
 		element_mod = 1
-	if area.get("formula"):
+	if area.get("damage_formula"):
 		damageTaken = Global.formula_calculation(area.potency, 0, area.randomness, element_mod)
 		stats.health -= damageTaken
 		if damageTaken < 0:
 			hurtbox.display_damage_popup(str(abs(damageTaken)), false, "Heal")
 		else:
 			hurtbox.display_damage_popup(str(damageTaken), false)
-		return
+	if area.get("status"):
+		StatusHandler.apply_status(area.status, self)
 
 func _on_Hurtbox_area_entered(area):
-	if area.get("buff")!=null or area.get("debuff")!=null:
-		if area.get("status"):
-			StatusHandler.apply_status(area.status, self)
-		return
-	var element_mod
-	if area.get("element")!=null and stats.get("affinity")!=null:
-		element_mod = Element.calculate_element_ratio(area.element, stats.affinity)
-	else:
-		element_mod = 1
 	if z_index != area.get_parent().z_index: # automatic miss if z_index mismatch
 		$DodgeAudio.play()
 		hurtbox.display_damage_popup("Miss!", false)
@@ -708,6 +696,11 @@ func _on_Hurtbox_area_entered(area):
 		return
 	var hit = Global.hit_calculation(area.accuracy, stats.evasion)
 	if hit:
+		var element_mod
+		if area.get("element")!=null and stats.get("affinity")!=null:
+			element_mod = Element.calculate_element_ratio(area.element, stats.affinity)
+		else:
+			element_mod = 1
 		damageTaken = Global.damage_calculation(area.damage, stats.defense, area.randomness, element_mod)
 		var is_crit = Global.crit_calculation(area.crit_chance)
 		if is_crit:

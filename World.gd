@@ -60,9 +60,9 @@ func _input(event):
 		GameManager.player.formulabook.add_formula("Cleanse")
 		GameManager.player.formulabook.add_formula("Fury")
 		GameManager.player.pouch.add_ingredient("Rock", 20)
-		GameManager.player.pouch.add_ingredient("Clay", 10)
+		GameManager.player.pouch.add_ingredient("Clay", 20)
 		GameManager.player.pouch.add_ingredient("Water", 20)
-		GameManager.player.pouch.add_ingredient("Salt", 10)
+		GameManager.player.pouch.add_ingredient("Salt", 20)
 		if GameManager.multiplayer_2:
 			GameManager.player2.formulabook.add_formula("Hardball")
 			GameManager.player2.formulabook.add_formula("Flash")
@@ -70,9 +70,9 @@ func _input(event):
 			GameManager.player2.formulabook.add_formula("Cleanse")
 			GameManager.player2.formulabook.add_formula("Fury")
 			GameManager.player2.pouch.add_ingredient("Rock", 20)
-			GameManager.player2.pouch.add_ingredient("Clay", 10)
+			GameManager.player2.pouch.add_ingredient("Clay", 20)
 			GameManager.player2.pouch.add_ingredient("Water", 20)
-			GameManager.player2.pouch.add_ingredient("Salt", 10)
+			GameManager.player2.pouch.add_ingredient("Salt", 20)
 		else:
 			print('no P2. cannot give ingredients.')
 	if event.is_action_pressed("test2"):
@@ -84,7 +84,7 @@ func _input(event):
 			p.stats.speed_mod = 2
 			p.stats.magic_mod = 2
 	if event.is_action_pressed("test3"):
-		print('3: testing projectile!')
+		print('3: applying debuffs!')
 		for p in get_tree().get_nodes_in_group("Players"):
 			StatusHandler.apply_status(["Slow", 1.0], p)
 			StatusHandler.apply_status(["Poison", 1.0], p)

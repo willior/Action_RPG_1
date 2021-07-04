@@ -62,7 +62,7 @@ func hurtbox_entered(enemy, hitbox):
 		element_mod = Element.calculate_element_ratio(hitbox.element, enemy.stats.affinity)
 	else:
 		element_mod = 1
-	if hitbox.get("formula"):
+	if hitbox.get("damage_formula"):
 		var damage = Global.damage_calculation(hitbox.potency, enemy.stats.defense, hitbox.randomness, element_mod)
 		deal_damage(enemy, damage, false)
 		if enemy.stats.health > 0:
@@ -98,15 +98,8 @@ func hurtbox_entered(enemy, hitbox):
 		var damage = Global.damage_calculation(hitbox.damage, enemy.stats.defense, hitbox.randomness, element_mod)
 		if is_crit:
 			damage *= 2
-			# var critPopup = MessagePopup.instance()
 			var message = str(enemy.ENEMY_NAME, " gets whacked!")
 			Global.display_message_popup(player.name, message, "crit")
-#			match player.name:
-#				"Player":
-#					get_node("/root/World/GUI/MessageDisplay1/MessageContainer").add_child(critPopup)
-#				"Player2":
-#					get_node("/root/World/GUI/MessageDisplay2/MessageContainer").add_child(critPopup)
-#			critPopup.crit_flash()
 		deal_damage(enemy, damage, is_crit)
 		if enemy.stats.health > 0:
 			if hitbox.get("status"):

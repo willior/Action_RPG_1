@@ -8,7 +8,6 @@ var duration # duration is 3 seconds + formula_level/2 seconds
 var potency # potency is 2 or spell_mod, whichever is less
 var knockback_vector = Vector2.ZERO
 var status = ["Frenzy", 1.0]
-var buff = true
 
 func _ready():
 	spell_mod = get_parent().player.stats.spell_mod

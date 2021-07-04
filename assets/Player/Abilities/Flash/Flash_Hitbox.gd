@@ -9,7 +9,7 @@ var potency
 var knockback_vector = Vector2.ZERO
 var status = ["Stun", 1.0]
 var element = 7
-var formula = true
+var damage_formula = true
 
 func _ready():
 	spell_mod = get_parent().player.stats.spell_mod

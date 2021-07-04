@@ -3,7 +3,6 @@ enum formulaSize {TINY, SMALL, MEDIUM, LARGE, HUGE, SCREEN}
 export(formulaSize) var formula_size
 onready var formula_shape = $FormulaHitbox/CollisionShape2D
 var player
-var status = ["Frenzy", 1.0] # "Name", application chance, duration, potency
 
 func _ready():
 	$FormulaTargetScreen.target_size = formula_size

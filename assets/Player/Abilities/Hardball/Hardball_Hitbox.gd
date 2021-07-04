@@ -8,7 +8,7 @@ var potency
 var knockback_vector = Vector2.ZERO
 var status = ["Stun", 0.5]
 var element = 6
-var formula = true
+var damage_formula = true
 # 0 : normal
 # 1 : fire
 # 2 : ice
