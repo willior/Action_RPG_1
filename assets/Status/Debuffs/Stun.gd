@@ -7,7 +7,7 @@ signal stun_advanced(value)
 signal stun_removed
 
 func _ready():
-	body.hurtbox.display_damage_popup("Stunned!", false, "Yellow")
+	body.hurtbox.display_damage_popup("Stunned!", false, name)
 	body.state = body.get("STUN")
 	if body.get("ENEMY_NAME"):
 		Enemy.disable_detection(body)

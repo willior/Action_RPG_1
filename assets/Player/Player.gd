@@ -196,10 +196,6 @@ func _input(event):
 					$CastTimer.start()
 					yield($CastTimer, "timeout")
 					casting = false
-					print(formula_used.formula_reference.name, ' found. applying xp.')
-					formulaData.apply_xp_to_formula(formula_used.formula_reference.name, self.name)
-					for i in range(0,2):
-						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
 				else:
 					casting = false
 					ingredient1_OK = false

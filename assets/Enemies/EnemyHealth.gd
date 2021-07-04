@@ -6,7 +6,7 @@ var max_health setget set_max_health
 onready var healthBar = $HealthTexture
 onready var healthBack = $HealthBack
 onready var tween = $Tween
-onready var stats = get_owner().get_node(get_owner().ENEMY_NAME+"Stats")
+onready var stats = get_parent().get_node("Stats")
 
 func show_health():
 	tween.stop(self)

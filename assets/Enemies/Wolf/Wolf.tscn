@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=11]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf.gd" type="Script" id=12]
-[ext_resource path="res://assets/Enemies/Wolf/WolfStats.gd" type="Script" id=13]
 [ext_resource path="res://assets/Shadows/MediumShadow.png" type="Texture" id=14]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf_spritesheet.png" type="Texture" id=15]
 [ext_resource path="res://assets/Enemies/Wolf/Wolf_eye_spritesheet.png" type="Texture" id=16]
@@ -502,8 +501,13 @@ frame = 38
 position = Vector2( 0, -3 )
 shape = SubResource( 2 )
 
-[node name="WolfStats" parent="." instance=ExtResource( 10 )]
-script = ExtResource( 13 )
+[node name="Stats" parent="." instance=ExtResource( 10 )]
+max_health = 66
+defense = 16.0
+status_resistance = 0.2
+evasion = 8
+experience_pool = 748
+affinity = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "IdleDown"
@@ -624,7 +628,7 @@ position = Vector2( 0, -24 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
-[connection signal="no_health" from="WolfStats" to="." method="_on_WolfStats_no_health"]
+[connection signal="no_health" from="Stats" to="." method="_on_WolfStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

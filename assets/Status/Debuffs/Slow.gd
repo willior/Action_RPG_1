@@ -8,14 +8,11 @@ var old_speed
 signal slow_removed()
 
 func _ready():
-	body.hurtbox.display_damage_popup("Slowed!", false, "Grey")
+	body.hurtbox.display_damage_popup("Slowed!", false, name)
+	body.stats.speed_mod = 0.5
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-#		old_speed = body.stats.speed
-#		body.stats.speed = int(old_speed/2)
-#		body.stats.max_speed_mod = body.stats.max_speed/-2
-		body.stats.speed_mod = 0.5
 		body.animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		var icon = Icon.instance()
 		icon.duration = duration
@@ -29,16 +26,18 @@ func _ready():
 	$AnimatedSprite.play()
 
 func _on_Timer_timeout():
-#	body.stats.speed = old_speed
-#	body.stats.max_speed_mod = 0
 	body.stats.speed_mod = 1
-	body.animationTree.set("parameters/Run/TimeScale/scale", 1)
+	if body.get("ENEMY_NAME"):
+		pass
+	else:
+		body.animationTree.set("parameters/Run/TimeScale/scale", 1)
 	queue_free()
 
 func _on_SlowNotice_tree_exiting():
 	if !$Timer.is_stopped():
-#		body.stats.speed = old_speed
-#		body.stats.max_speed_mod = 0
 		body.stats.speed_mod = 1
-		body.animationTree.set("parameters/Run/TimeScale/scale", 1)
+		if body.get("ENEMY_NAME"):
+			pass
+		else:
+			body.animationTree.set("parameters/Run/TimeScale/scale", 1)
 	emit_signal("slow_removed")

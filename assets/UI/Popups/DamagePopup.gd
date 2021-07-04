@@ -2,9 +2,11 @@ extends Control
 
 onready var text = $Label
 onready var tween = $Tween
-var is_crit
+
+var is_crit : bool
+var is_miss : bool
+var mod
 var kind
-var is_miss
 var popup_color = Color(1, 1, 1, 1)
 var red_fade = Color(1, 0.1, 0, 0)
 var teal_fade = Color(0, 1, 1, 0)
@@ -16,7 +18,7 @@ func _ready():
 	match kind:
 		"Normal":
 			fade = red_fade
-		"Grey":
+		"Slow":
 			popup_color = Color(0.6, 0.6, 0.6, 1)
 			fade = red_fade
 		"Poison":
@@ -25,13 +27,12 @@ func _ready():
 		"Red":
 			popup_color = Color(1, 0, 0, 1)
 			fade = red_fade
-		"Yellow":
+		"Stun":
 			popup_color = Color(1, 1, 0, 1)
 			fade = red_fade
 		"Heal":
 			popup_color = Color(0, 1, 1, 1)
 			fade = teal_fade
-	
 	if damageDisplay == "Miss!":
 		fade = white_fade
 	if is_crit:
@@ -43,6 +44,29 @@ func _ready():
 		call_deferred("set_visible", true)
 	text.modulate = popup_color
 	text.set_text(damageDisplay)
+	match mod:
+		0: # mod to white / resisted
+			tween.interpolate_property(
+				text,
+				"modulate",
+				popup_color,
+				Color(1, 1, 1, 1),
+				0.6,
+				Tween.TRANS_QUAD,
+				Tween.EASE_IN
+			)
+			fade = white_fade
+		1: # mod to teal / Cleansed
+			tween.interpolate_property(
+				text,
+				"modulate",
+				popup_color,
+				Color(0, 1, 1, 1),
+				0.6,
+				Tween.TRANS_QUAD,
+				Tween.EASE_IN
+			)
+			fade = teal_fade
 	tween.interpolate_property(
 		text,
 		"rect_position",
@@ -57,7 +81,7 @@ func _ready():
 	tween.interpolate_property(
 		text,
 		"modulate",
-		popup_color,
+		text.modulate,
 		fade,
 		1.4,
 		Tween.TRANS_QUART,

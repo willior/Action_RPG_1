@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/Player/Abilities/Formula.gd" type="Script" id=1]
+
+[node name="Formula" type="Node2D"]
+script = ExtResource( 1 )

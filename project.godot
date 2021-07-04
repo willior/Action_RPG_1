@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Formula",
+"language": "GDScript",
+"path": "res://assets/Player/Abilities/Formula.gd"
+}, {
 "base": "Resource",
 "class": "FormulaResource",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://assets/Resources/Item.gd"
 } ]
 _global_script_class_icons={
+"Formula": "",
 "FormulaResource": "",
 "IngredientResource": "",
 "Inventory": "",

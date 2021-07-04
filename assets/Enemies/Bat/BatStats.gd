@@ -2,9 +2,10 @@ extends Node
 
 var max_health = 26 setget set_max_health
 var health = max_health setget set_health
-var defense = 2.0 setget set_defense
+var defense = 2.0
 var status_resistance = 0.0
 var evasion = 8
+var speed_mod = 1.0 setget set_speed_mod
 var experience_pool = 18
 var affinity = 8 # Dark
 
@@ -24,8 +25,8 @@ func set_health(value):
 	if health <= 0:
 		emit_signal("no_health")
 
-func set_defense(value):
-	defense = value
+func set_speed_mod(value):
+	speed_mod = value
 
 func _ready():
 	self.health = max_health

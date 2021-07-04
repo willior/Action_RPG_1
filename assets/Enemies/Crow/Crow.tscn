@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://assets/Enemies/AttackPlayerZone.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/Enemies/Crow/Crow.gd" type="Script" id=10]
-[ext_resource path="res://assets/Enemies/Crow/CrowStats.gd" type="Script" id=11]
 [ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=12]
 [ext_resource path="res://assets/Audio/Enemies/Crow/Crow_caw.wav" type="AudioStream" id=13]
 [ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=14]
@@ -604,7 +603,7 @@ texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
 hframes = 12
 vframes = 2
-frame = 4
+frame = 12
 
 [node name="AnimatedSpriteEye" type="Sprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
@@ -615,7 +614,7 @@ texture = ExtResource( 17 )
 offset = Vector2( 0, -12 )
 hframes = 12
 vframes = 2
-frame = 4
+frame = 12
 
 [node name="Outline" type="Sprite" parent="Sprite"]
 visible = false
@@ -633,8 +632,12 @@ visible = false
 position = Vector2( 0, -3 )
 shape = SubResource( 3 )
 
-[node name="CrowStats" parent="." instance=ExtResource( 12 )]
-script = ExtResource( 11 )
+[node name="Stats" parent="." instance=ExtResource( 12 )]
+max_health = 66
+defense = 2.0
+evasion = 12
+experience_pool = 378
+affinity = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Caw = SubResource( 4 )
@@ -750,7 +753,7 @@ position = Vector2( 0, -24 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -4, -4, 8, 8 )
 
-[connection signal="no_health" from="CrowStats" to="." method="_on_CrowStats_no_health"]
+[connection signal="no_health" from="Stats" to="." method="_on_CrowStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

@@ -1,8 +1,9 @@
-extends Node2D
+extends Formula
 enum formulaSize {TINY, SMALL, MEDIUM, LARGE, HUGE, SCREEN}
 export(formulaSize) var formula_size
 onready var formula_shape = $FormulaHitbox/CollisionShape2D
 var player
+onready var formula_used = player.formulabook._formulas[player.formulabook.current_selected_formula]
 
 func _ready():
 	$FormulaTargetScreen.target_size = formula_size
@@ -20,12 +21,6 @@ func _ready():
 		5:
 			pass
 
-func start():
-	player.state = 9
-	player.animationTree.active = false
-	player.animationPlayer.play("Cast_1")
-	$AnimationPlayer.play("Ability")
-
 func ability_start():
 	$AudioStreamPlayer.play()
 	$CanvasLayer/ScreenTint.flash()
@@ -35,4 +30,5 @@ func ability_end():
 	player.animationPlayer.play("Cast_2")
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
+	player.formulaData.apply_xp_to_formula(formula_used.formula_reference.name, player.name)
 	queue_free()

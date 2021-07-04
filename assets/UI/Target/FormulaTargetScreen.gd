@@ -23,7 +23,7 @@ onready var target_sprite = $KinematicBody2D/TargetArea/Sprite
 onready var target_area = $KinematicBody2D/TargetArea
 onready var target_body = $KinematicBody2D
 
-var player
+onready var player = get_parent().player
 var target_bodies
 var group_to_target : String
 var target_color : Color
@@ -48,7 +48,6 @@ var ending = false
 func _ready():
 	Global.target_screen_open = true
 	get_tree().paused = true
-	player = get_parent().player
 	match player.name:
 		"Player":
 			up = "up_1"
@@ -284,13 +283,15 @@ func _input(event):
 					get_tree().set_input_as_handled()
 					return
 	get_tree().set_input_as_handled()
+	
 	if event.is_action_pressed("ui_accept"):
-		get_parent().start()
+		get_parent().start(player, get_parent().formula_used)
 		if target_mode == 0 or target_mode == 1:
 			get_parent().get_node("FormulaHitbox").position = target_body.position
 		elif target_mode == 2:
 			get_parent().get_node("FormulaHitbox").rotation_degrees = target_body.rotation_degrees
 		end_target_screen()
+	
 	if event.is_action_pressed("ui_cancel"):
 		end_animate_target()
 		yield($Tween, "tween_all_completed")

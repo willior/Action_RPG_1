@@ -26,11 +26,12 @@ func create_hit_effect():
 	main.add_child(effect)
 	effect.global_position = global_position
 	
-func display_damage_popup(value, crit, kind="Normal"):
+func display_damage_popup(value, crit, kind="Normal", mod=null):
 	var damagePopup = DamagePopup.instance()
 	damagePopup.damageDisplay = value
 	damagePopup.is_crit = crit
 	damagePopup.kind = kind
+	damagePopup.mod = mod
 	get_parent().get_node("DamageDisplay/DamageContainer").add_child(damagePopup)
 
 func _on_Timer_timeout():

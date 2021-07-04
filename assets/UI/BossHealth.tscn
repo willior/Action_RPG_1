@@ -70,7 +70,7 @@ wait_time = 2.5
 one_shot = true
 
 [node name="DrainTimer" type="Timer" parent="."]
-wait_time = 0.06
+wait_time = 0.1
 
 [node name="Tween" type="Tween" parent="."]
 

@@ -31,6 +31,7 @@ collision_mask = 256
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D/TargetArea"]
 pause_mode = 2
+modulate = Color( 1, 1, 1, 0.75 )
 rotation = -3.14159
 offset = Vector2( 0, -1 )
 

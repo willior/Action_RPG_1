@@ -42,7 +42,7 @@ var rare_drop_chance = 0.125
 
 var outline_color = Color(1,0,0,1)
 
-onready var stats = $BatStats
+onready var stats = $Stats
 onready var timer = $Timer
 onready var sprite = $AnimatedSprite
 onready var eye = $AnimatedSprite/AnimatedSpriteEye
@@ -78,7 +78,7 @@ func _ready():
 	# Global.set_world_collision(self, z_index)
 
 func set_speed_scale(value):
-	sprite.speed_scale = value
+	sprite.speed_scale = value * stats.speed_mod
 	eye.speed_scale = sprite.speed_scale
 	eye.frame = sprite.frame
 	outline.speed_scale = sprite.speed_scale
@@ -98,13 +98,13 @@ func _physics_process(delta):
 			seek_player()
 			if wanderController.get_time_left() == 0:
 				update_wander_state()
-			accelerate_towards_point(wanderController.target_position, WANDER_SPEED, delta)
+			accelerate_towards_point(wanderController.target_position, WANDER_SPEED*stats.speed_mod, delta)
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
 				
 		CHASE:
 			if playerDetectionZone.player != null:
-				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
+				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED*stats.speed_mod, delta)
 				attack_player()
 			else:
 				set_speed_scale(1)
@@ -114,7 +114,7 @@ func _physics_process(delta):
 			if attacking:
 				audio.play()
 				attacking = false
-			accelerate_towards_point(target, ATTACK_SPEED, delta)
+			accelerate_towards_point(target, ATTACK_SPEED*stats.speed_mod, delta)
 			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				set_speed_scale(1)
 				state = IDLE

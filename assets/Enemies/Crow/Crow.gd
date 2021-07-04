@@ -45,7 +45,7 @@ var common_drop_chance = 0.50
 var rare_drop_name = "Salt"
 var rare_drop_chance = 0.125
 
-onready var stats = $CrowStats
+onready var stats = $Stats
 onready var timer = $Timer
 onready var sprite = $Sprite
 onready var eye = $Sprite/AnimatedSpriteEye

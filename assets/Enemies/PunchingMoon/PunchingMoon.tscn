@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.png" type="Texture" id=1]
 [ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon.gd" type="Script" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://assets/CollisionBoxes/SoftCollision.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/Enemies/EnemyStats.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/CollisionBoxes/EnemyHurtbox.gd" type="Script" id=12]
-[ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoonStats.gd" type="Script" id=13]
 [ext_resource path="res://assets/Shadows/ExtraLargeShadow.png" type="Texture" id=14]
 [ext_resource path="res://assets/Enemies/PunchingMoon/PunchingMoon_outline.png" type="Texture" id=15]
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=17]
@@ -100,8 +99,9 @@ position = Vector2( 1, -5.36449 )
 rotation = 1.5708
 shape = SubResource( 2 )
 
-[node name="PunchingMoonStats" parent="." instance=ExtResource( 11 )]
-script = ExtResource( 13 )
+[node name="Stats" parent="." instance=ExtResource( 11 )]
+max_health = 200
+experience_pool = 99999
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/StartFlashing = SubResource( 3 )
@@ -201,8 +201,8 @@ __meta__ = {
 "_editor_description_": "	"
 }
 
-[connection signal="no_health" from="PunchingMoonStats" to="." method="_on_BatStats_no_health"]
-[connection signal="no_health" from="PunchingMoonStats" to="EnemyHealth" method="_on_stats_no_health"]
+[connection signal="no_health" from="Stats" to="EnemyHealth" method="_on_stats_no_health"]
+[connection signal="no_health" from="Stats" to="." method="_on_BatStats_no_health"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]

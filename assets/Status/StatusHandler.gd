@@ -41,7 +41,7 @@ func apply_status(status, body):
 					var poison = Poison.instance()
 					status_display.add_child(poison)
 				else:
-					body.hurtbox.display_damage_popup("Resisted!", false, "Poison")
+					resist_status(body, status[0])
 					return
 		"Frenzy":
 			if status_display.has_node("Frenzy"):
@@ -62,7 +62,7 @@ func apply_status(status, body):
 					var stun = Stun.instance()
 					status_display.add_child(stun)
 				else:
-					body.hurtbox.display_damage_popup("Resisted!", false, "Yellow")
+					resist_status(body, status[0])
 		"Slow":
 			if status_display.has_node("Slow"):
 				return
@@ -75,9 +75,13 @@ func apply_status(status, body):
 					var slow = Slow.instance()
 					status_display.add_child(slow)
 				else:
-					body.hurtbox.display_damage_popup("Resisted!", false, "Grey")
+					resist_status(body, status[0])
+					#body.hurtbox.display_damage_popup("Resisted!", false, status[0])
 		"Ablaze":
 			pass
+
+func resist_status(body, status_name:String):
+	body.hurtbox.display_damage_popup(str(status_name + " Resisted!"), false, status_name, 0)
 
 func remove_buffs(body):
 	var status_display = body.get_node("StatusDisplay")
@@ -93,7 +97,7 @@ func remove_last_debuff(body, cleanse_level):
 			if status_display.get_child(d).name == "Stun":
 				print("can't cleanse Stun; continuing")
 				continue
-			body.hurtbox.display_damage_popup(str(status_display.get_child(d).name+" Cleansed!"), false, "Heal")
+			body.hurtbox.display_damage_popup(str(status_display.get_child(d).name+" Cleansed!"), false, str(status_display.get_child(d).name), 1)
 			status_display.get_child(d).queue_free()
 			debuffs_to_cleanse -= 1
 			if debuffs_to_cleanse > 0:

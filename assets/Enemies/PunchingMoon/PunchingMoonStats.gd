@@ -5,6 +5,7 @@ var health = max_health setget set_health
 var defense = 0.0 setget set_defense
 var status_resistance = 0.0
 var evasion = 8
+var speed_mod = 1.0
 var experience_pool = 999999
 
 signal no_health

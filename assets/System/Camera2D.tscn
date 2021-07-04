@@ -5,6 +5,7 @@
 [sub_resource type="OpenSimplexNoise" id=1]
 
 [node name="Camera2D" type="Camera2D"]
+pause_mode = 1
 position = Vector2( 48, 48 )
 offset = Vector2( 0, -8 )
 current = true

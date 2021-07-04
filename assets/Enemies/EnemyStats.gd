@@ -1,9 +1,13 @@
 extends Node
 
-var max_health = 4 setget set_max_health
+export var max_health : int setget set_max_health
 var health = max_health setget set_health
-var experience_pool = 18
-var affinity
+export var defense : float
+export var status_resistance : float
+export var evasion : int
+export var speed_mod : float = 1.0 setget set_speed_mod
+export var experience_pool : int
+export var affinity : int
 
 signal no_health
 signal health_changed(value)
@@ -17,9 +21,12 @@ func set_max_health(value):
 func set_health(value):
 	health = value
 	health = clamp(value, 0, max_health)
-	emit_signal("health_changed", health) # every time the health is set, emits a signal "health_changed" along with an argument, our new health value
+	emit_signal("health_changed", health)
 	if health <= 0:
 		emit_signal("no_health")
+
+func set_speed_mod(value):
+	speed_mod = value
 
 func _ready():
 	self.health = max_health

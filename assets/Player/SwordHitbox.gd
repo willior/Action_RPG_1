@@ -12,7 +12,7 @@ var randomness = 0.16
 var knockback_vector = Vector2.ZERO
 var status
 var orig_status
-var status_two # = ["Poison", 0.5]
+var status_two = ["Slow", 0.9]
 var stats
 
 func _ready():

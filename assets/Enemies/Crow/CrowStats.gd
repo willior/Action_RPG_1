@@ -5,6 +5,7 @@ var health = max_health setget set_health
 var defense = 2.0
 var status_resistance = 0.0
 var evasion = 12
+var speed_mod = 1.0 setget set_speed_mod
 var experience_pool = 378
 var affinity = 8 # Dark
 
@@ -23,6 +24,9 @@ func set_health(value):
 	emit_signal("health_changed", health) # every time the health is set, emits a signal "health_changed" along with an argument, our new health value
 	if health <= 0:
 		emit_signal("no_health")
+
+func set_speed_mod(value):
+	speed_mod = value
 
 func _ready():
 	self.health = max_health

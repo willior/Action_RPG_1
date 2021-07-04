@@ -46,7 +46,7 @@ var common_drop_chance = 0.50
 var rare_drop_name = "Salt"
 var rare_drop_chance = 0.125
 
-onready var stats = $WolfStats
+onready var stats = $Stats
 onready var cooldownTimer = $CooldownTimer
 onready var sprite = $Sprite
 onready var eye = $Sprite/SpriteEye
@@ -68,7 +68,6 @@ onready var audio = $AudioStreamPlayer
 onready var enemyHealth = $EnemyHealth
 
 func _ready():
-# warning-ignore:return_value_discarded
 # warning-ignore:return_value_discarded
 	PlayerLog.connect("Wolf_complete", self, "examine_complete")
 	if ENEMY_NAME in PlayerLog.examined_list:

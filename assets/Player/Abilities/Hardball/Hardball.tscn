@@ -7,7 +7,7 @@
 length = 256.0
 
 [sub_resource type="Animation" id=2]
-length = 0.8
+length = 1.25
 step = 0.025
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -16,7 +16,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.375, 0.8 ),
+"times": PoolRealArray( 0.5, 0.75 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -62,6 +62,7 @@ collision_mask = 256
 
 [node name="Sprite" type="Sprite" parent="FormulaTargetScreen/KinematicBody2D/TargetArea"]
 pause_mode = 2
+modulate = Color( 1, 1, 1, 0.75 )
 centered = false
 offset = Vector2( -1, -1 )
 

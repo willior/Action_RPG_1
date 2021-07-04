@@ -7,6 +7,7 @@ var velocity = Vector2.ZERO
 var knockback_vector = Vector2.ZERO
 var player
 var done = false
+var projectile
 
 func _physics_process(delta):
 	if done: return

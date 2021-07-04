@@ -7,7 +7,7 @@ onready var body = get_parent().get_parent()
 signal poison_removed()
 
 func _ready():
-	body.hurtbox.display_damage_popup("Poisoned!", false, "Poison")
+	body.hurtbox.display_damage_popup("Poisoned!", false, name)
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
