@@ -108,7 +108,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=29]
+[sub_resource type="CapsuleShape2D" id=20]
 radius = 5.0
 height = 10.0
 
@@ -143,18 +143,18 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="CircleShape2D" id=24]
+[sub_resource type="CircleShape2D" id=23]
 radius = 9.0
 
-[sub_resource type="CircleShape2D" id=25]
+[sub_resource type="CircleShape2D" id=24]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id=26]
+[sub_resource type="CircleShape2D" id=25]
 
-[sub_resource type="CircleShape2D" id=27]
+[sub_resource type="CircleShape2D" id=26]
 radius = 5.0
 
-[sub_resource type="CircleShape2D" id=28]
+[sub_resource type="CircleShape2D" id=27]
 radius = 5.0
 
 [node name="Bat" type="KinematicBody2D"]
@@ -183,7 +183,7 @@ texture = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -9 )
-shape = SubResource( 29 )
+shape = SubResource( 20 )
 
 [node name="BatStats" parent="." instance=ExtResource( 11 )]
 script = ExtResource( 13 )
@@ -198,7 +198,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
 position = Vector2( 0, -14 )
-shape = SubResource( 24 )
+shape = SubResource( 23 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 pause_mode = 2
@@ -207,7 +207,7 @@ script = ExtResource( 12 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -14 )
-shape = SubResource( 24 )
+shape = SubResource( 23 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
 
@@ -217,7 +217,7 @@ monitorable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 scale = Vector2( 4, 4 )
-shape = SubResource( 25 )
+shape = SubResource( 24 )
 
 [node name="AttackController" parent="." instance=ExtResource( 2 )]
 
@@ -228,7 +228,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 26 )
+shape = SubResource( 25 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8
@@ -241,13 +241,13 @@ damage = 8.0
 accuracy = 75.0
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 27 )
+shape = SubResource( 26 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 9 )]
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 28 )
+shape = SubResource( 27 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

@@ -2,13 +2,13 @@ extends Node
 export(String) var formula_name
 export(float) var base_potency
 export(float) var randomness
-var formula = true
 var spell_mod
 var formula_level_mod
 var potency
 var knockback_vector = Vector2.ZERO
 var status = ["Stun", 0.5]
 var element = 6
+var formula = true
 # 0 : normal
 # 1 : fire
 # 2 : ice

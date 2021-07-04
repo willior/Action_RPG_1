@@ -3,12 +3,10 @@ extends Area2D
 export(String) var formula_name
 export(float) var base_potency
 export(float) var randomness
-
 var spell_mod
 var formula_level_mod
 var potency
 var knockback_vector = Vector2.ZERO
-
 var status = ["Stun", 1.0]
 var element = 7
 var formula = true

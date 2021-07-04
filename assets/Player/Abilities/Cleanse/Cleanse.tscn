@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/Player/Abilities/ScreenTint.gd" type="Script" id=1]
-[ext_resource path="res://assets/Player/Abilities/Heal/Heal.gd" type="Script" id=2]
+[ext_resource path="res://assets/Player/Abilities/Cleanse/Cleanse.gd" type="Script" id=2]
 [ext_resource path="res://assets/Player/Abilities/Cleanse/CleanseHitbox.gd" type="Script" id=3]
 [ext_resource path="res://assets/UI/Target/FormulaTargetScreen.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Shaders/White_Flash_CanvasMod.tscn" type="PackedScene" id=5]
@@ -9,7 +9,7 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "Ability"
-length = 1.55
+length = 1.3
 step = 0.025
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -32,7 +32,6 @@ tracks/0/keys = {
 [node name="Cleanse" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 2 )
-formula_size = 1
 
 [node name="FormulaTargetScreen" parent="." instance=ExtResource( 4 )]
 target_mode = 1

@@ -10,6 +10,7 @@ var knockback_vector = Vector2.ZERO
 var status = ["Regen", 1]
 var element = 9
 var formula = true
+
 func _ready():
 	spell_mod = get_parent().player.stats.spell_mod
 	formula_level = get_parent().player.formulaData.get(formula_name)[1]

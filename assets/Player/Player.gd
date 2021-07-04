@@ -193,18 +193,13 @@ func _input(event):
 					formula.player = self
 					formula.global_position = global_position
 					get_node("/root/World").add_child(formula)
-					# formula.connect("tree_exited", self, "set", ["formula", null])
 					$CastTimer.start()
 					yield($CastTimer, "timeout")
 					casting = false
-					print('player checking for formula instance on world...')
-					if get_node("/root/World").has_node(formula_used.formula_reference.name):
-						print(formula_used.formula_reference.name, ' found. applying xp.')
-						formulaData.apply_xp_to_formula(formula_used.formula_reference.name, self.name)
-						for i in range(0,2):
-							pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
-					else:
-						print('what')
+					print(formula_used.formula_reference.name, ' found. applying xp.')
+					formulaData.apply_xp_to_formula(formula_used.formula_reference.name, self.name)
+					for i in range(0,2):
+						pouch.remove_ingredient(ingredients_needed[i], quantity_needed[i])
 				else:
 					casting = false
 					ingredient1_OK = false
@@ -376,12 +371,16 @@ func stamina_regen_reset():
 func apply_status(status):
 	match status:
 		"default_speed":
+			print('default speed')
 			animationTree.set("parameters/Run/TimeScale/scale", 1)
 		"slow":
+			print('slow')
 			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
 		"frenzy":
+			print('frenzy')
 			swordHitbox.knockback_vector = dir_vector / 8
 		"frenzy_end":
+			print('frenzy end')
 			swordHitbox.knockback_vector = dir_vector
 
 func move():
