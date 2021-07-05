@@ -121,7 +121,7 @@ description = [ {
 description_string = "Heals the user's HP."
 cost = {
 "Petal": 1,
-"Water": 1
+"Water": 2
 }
 ing_1_icon = ExtResource( 5 )
 ing_2_icon = ExtResource( 4 )
