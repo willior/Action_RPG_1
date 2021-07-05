@@ -12,7 +12,7 @@ var randomness = 0.16
 var knockback_vector = Vector2.ZERO
 var status
 var orig_status
-var status_two = ["Slow", 0.9]
+var status_two
 var stats
 
 func _ready():
@@ -57,6 +57,7 @@ func shade_begin():
 	stats.dexterity_bonus = 8
 	orig_damage = damage
 	damage = modify_damage(damage, 3)
+	status = ["Slow", 1.0]
 
 func flash_whoosh_audio():
 	audio.stream = flash_whoosh

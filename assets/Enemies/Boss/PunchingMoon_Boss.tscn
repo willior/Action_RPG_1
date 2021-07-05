@@ -103,7 +103,6 @@ shape = SubResource( 2 )
 max_health = 200
 defense = 16.0
 status_resistance = 0.25
-evasion = 8
 experience_pool = 99999
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -71,13 +71,16 @@ func _ready():
 	sprite.frame = random_number
 	eye.frame = sprite.frame
 	outline.frame = sprite.frame
-	set_speed_scale(1)
+	set_animation_scale(1)
 	sprite.playing = true
 	eye.playing = true
 	outline.playing = true
 	# Global.set_world_collision(self, z_index)
 
-func set_speed_scale(value):
+func set_speed_scale():
+	set_animation_scale(1)
+
+func set_animation_scale(value):
 	sprite.speed_scale = value * stats.speed_mod
 	eye.speed_scale = sprite.speed_scale
 	eye.frame = sprite.frame
@@ -107,7 +110,7 @@ func _physics_process(delta):
 				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED*stats.speed_mod, delta)
 				attack_player()
 			else:
-				set_speed_scale(1)
+				set_animation_scale(1)
 				eye.modulate = Color(0,0,0)
 				state = IDLE
 		ATTACK:
@@ -116,7 +119,7 @@ func _physics_process(delta):
 				attacking = false
 			accelerate_towards_point(target, ATTACK_SPEED*stats.speed_mod, delta)
 			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
-				set_speed_scale(1)
+				set_animation_scale(1)
 				state = IDLE
 		DEAD:
 			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -144,7 +147,7 @@ func accelerate_towards_point(point, speed, delta):
 
 func seek_player():
 	if playerDetectionZone.can_see_player() && !attacking:
-		set_speed_scale(2)
+		set_animation_scale(2)
 		eye.modulate = Color(1,0.8,0)
 		state = CHASE
 
@@ -159,7 +162,7 @@ func attack_player():
 			attacking = false
 			return
 		hitbox.set_deferred("monitorable", true)
-		set_speed_scale(4)
+		set_animation_scale(4)
 		eye.modulate = Color(1,0,0)
 		attackTimer.start()
 		state = ATTACK
@@ -167,7 +170,7 @@ func attack_player():
 func _on_AttackTimer_timeout():
 	attack_on_cooldown = true
 	hitbox.set_deferred("monitorable", false)
-	set_speed_scale(1)
+	set_animation_scale(1)
 	eye.modulate = Color(0,0,0)
 	if state == STUN:
 		attacking = false

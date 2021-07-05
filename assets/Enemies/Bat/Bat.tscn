@@ -188,7 +188,7 @@ shape = SubResource( 20 )
 max_health = 26
 defense = 2.0
 status_resistance = 0.2
-evasion = 8
+base_evasion = 2
 experience_pool = 18
 affinity = 8
 

@@ -4,7 +4,8 @@ export var max_health : int setget set_max_health
 var health = max_health setget set_health
 export var defense : float
 export var status_resistance : float
-export var evasion : int
+export var base_evasion : int
+var evasion : float
 export var speed_mod : float = 1.0 setget set_speed_mod
 export var experience_pool : int
 export var affinity : int
@@ -27,6 +28,9 @@ func set_health(value):
 
 func set_speed_mod(value):
 	speed_mod = value
+	evasion = base_evasion*speed_mod
+	get_parent().set_speed_scale()
 
 func _ready():
 	self.health = max_health
+	self.evasion = base_evasion*speed_mod

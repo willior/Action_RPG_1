@@ -74,6 +74,12 @@ func _ready():
 	animationTree.active = true
 	Enemy.set_player_collision(self)
 
+func set_speed_scale():
+	animationTree.set("parameters/Peck/TimeScale/scale", stats.speed_mod)
+	animationTree.set("parameters/Takeoff/TimeScale/scale", stats.speed_mod)
+	animationTree.set("parameters/Landing/TimeScale/scale", stats.speed_mod)
+	animationTree.set("parameters/Fly/TimeScale/scale", stats.speed_mod)
+
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
 	knockback = move_and_slide(knockback)
@@ -89,13 +95,13 @@ func _physics_process(delta):
 				update_wander_state()
 			
 			fly_animation()
-			accelerate_towards_point(wanderController.target_position, WANDER_SPEED, delta)
+			accelerate_towards_point(wanderController.target_position, WANDER_SPEED * stats.speed_mod, delta)
 			
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
 		CHASE:
 			if playerDetectionZone.player != null:
-				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
+				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED * stats.speed_mod, delta)
 				attack_player()
 			else:
 				eye.modulate = Color(0,0,0)
@@ -107,7 +113,7 @@ func _physics_process(delta):
 				audio_cawcawcaw()
 				fly_animation()
 			
-			accelerate_towards_point(target, ATTACK_SPEED, delta)
+			accelerate_towards_point(target, ATTACK_SPEED * stats.speed_mod, delta)
 			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				state = IDLE
 		DEAD:

@@ -14,7 +14,7 @@ export var WANDER_SPEED = 48
 export var ATTACK_SPEED = 3200
 export var FRICTION = 1600
 export var WANDER_TARGET_RANGE = 4
-export var ATTACK_TARGET_RANGE = 16
+export var ATTACK_TARGET_RANGE = 4
 
 enum {
 	IDLE,
@@ -76,6 +76,11 @@ func _ready():
 	animationTree.active = true
 	Global.set_world_collision(self, z_index)
 
+func set_speed_scale():
+	animationTree.set("parameters/Idle/TimeScale/scale", stats.speed_mod)
+	animationTree.set("parameters/Move/TimeScale/scale", stats.speed_mod)
+	animationTree.set("parameters/Leap/TimeScale/scale", stats.speed_mod)
+
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
 	knockback = move_and_slide(knockback)
@@ -102,14 +107,14 @@ func _physics_process(delta):
 			if wanderController.get_time_left() == 0:
 				update_wander_state()
 			
-			accelerate_towards_point(wanderController.target_position, WANDER_SPEED, delta)
+			accelerate_towards_point(wanderController.target_position, WANDER_SPEED * stats.speed_mod, delta)
 			if global_position.distance_to(wanderController.target_position) <= WANDER_TARGET_RANGE: # when enemy arrives at its wander target
 				update_wander_state()
 		
 		CHASE:
 			if playerDetectionZone.player != null:
 				animationState.travel("Move")
-				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED, delta)
+				accelerate_towards_point(playerDetectionZone.player.global_position, MAX_SPEED * stats.speed_mod, delta)
 				attack_player()
 			elif !attacking:
 				eye.modulate = Color(0,0,0,0)
@@ -121,7 +126,7 @@ func _physics_process(delta):
 				attacking = false
 				audio_attack()
 				
-			accelerate_towards_point(target, ATTACK_SPEED, delta)
+			accelerate_towards_point(target, ATTACK_SPEED * stats.speed_mod, delta)
 			if global_position.distance_to(target) <= ATTACK_TARGET_RANGE:
 				state = IDLE
 		

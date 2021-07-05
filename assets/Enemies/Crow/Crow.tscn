@@ -84,7 +84,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 11, 10, 9, 3, 10 ]
+"values": [ 7, 9, 3, 11, 10 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -427,6 +427,7 @@ animation = "Dead"
 [sub_resource type="AnimationNodeTimeScale" id=17]
 
 [sub_resource type="AnimationNodeBlendTree" id=18]
+graph_offset = Vector2( -135.786, -33 )
 nodes/Animation/node = SubResource( 16 )
 nodes/Animation/position = Vector2( -20, 180 )
 nodes/TimeScale/node = SubResource( 17 )
@@ -494,7 +495,7 @@ animation = "Takeoff"
 nodes/Animation/node = SubResource( 31 )
 nodes/Animation/position = Vector2( 104, 108 )
 nodes/TimeScale/node = SubResource( 32 )
-nodes/TimeScale/position = Vector2( 323, 165 )
+nodes/TimeScale/position = Vector2( 320, 120 )
 nodes/output/position = Vector2( 580, 140 )
 node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
@@ -603,7 +604,7 @@ texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
 hframes = 12
 vframes = 2
-frame = 12
+frame = 7
 
 [node name="AnimatedSpriteEye" type="Sprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
@@ -614,7 +615,7 @@ texture = ExtResource( 17 )
 offset = Vector2( 0, -12 )
 hframes = 12
 vframes = 2
-frame = 12
+frame = 7
 
 [node name="Outline" type="Sprite" parent="Sprite"]
 visible = false
@@ -635,7 +636,7 @@ shape = SubResource( 3 )
 [node name="Stats" parent="." instance=ExtResource( 12 )]
 max_health = 66
 defense = 2.0
-evasion = 12
+base_evasion = 12
 experience_pool = 378
 affinity = 8
 
@@ -673,7 +674,7 @@ shape = SubResource( 56 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
 visible = false
-position = Vector2( 0, -10 )
+position = Vector2( 0, -14 )
 collision_mask = 4
 damage = 16.0
 accuracy = 66.0
@@ -689,7 +690,7 @@ collision_layer = 8
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -20 )
+position = Vector2( 0, -24 )
 shape = SubResource( 58 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
@@ -748,7 +749,7 @@ visible = false
 position = Vector2( 0, 3 )
 
 [node name="StatusDisplay" type="Node2D" parent="."]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -28 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -4, -4, 8, 8 )

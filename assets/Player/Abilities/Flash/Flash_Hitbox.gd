@@ -7,7 +7,7 @@ var spell_mod
 var formula_level_mod
 var potency
 var knockback_vector = Vector2.ZERO
-var status = ["Stun", 1.0]
+var status = ["Slow", 1.0]
 var element = 7
 var damage_formula = true
 

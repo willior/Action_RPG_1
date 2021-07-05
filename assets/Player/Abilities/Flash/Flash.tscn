@@ -60,8 +60,8 @@ collision_layer = 0
 collision_mask = 8
 script = ExtResource( 3 )
 formula_name = "Flash"
-base_potency = 4.0
-randomness = 0.1
+base_potency = 2.0
+randomness = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FormulaHitbox"]
 visible = false

@@ -2130,7 +2130,7 @@ states/Stun/node = SubResource( 108 )
 states/Stun/position = Vector2( -345.171, 0.5 )
 transitions = [ "Idle", "Roll", SubResource( 109 ), "Roll", "Idle", SubResource( 110 ), "Idle", "Hit", SubResource( 111 ), "Hit", "Idle", SubResource( 112 ), "Roll", "Hit", SubResource( 113 ), "Idle", "Shade", SubResource( 114 ), "Shade", "Idle", SubResource( 115 ), "Shade", "Hit", SubResource( 116 ), "Idle", "Flash", SubResource( 117 ), "Flash", "Idle", SubResource( 118 ), "Flash", "Hit", SubResource( 119 ), "Idle", "Backstep", SubResource( 120 ), "Backstep", "Idle", SubResource( 121 ), "Backstep", "Hit", SubResource( 122 ), "Backstep", "Shade", SubResource( 123 ), "Backstep", "Flash", SubResource( 124 ), "Idle", "Run", SubResource( 125 ), "Run", "Idle", SubResource( 126 ), "Run", "Hit", SubResource( 127 ), "Attack1", "Hit", SubResource( 128 ), "Idle", "Attack1", SubResource( 129 ), "Backstep", "Attack1", SubResource( 130 ), "Attack2", "Attack1", SubResource( 131 ), "Attack1", "Attack2", SubResource( 132 ), "Shade", "Attack2", SubResource( 133 ), "Attack2", "Idle", SubResource( 134 ), "Attack2", "Hit", SubResource( 135 ), "Attack1", "Idle", SubResource( 136 ), "Idle", "Pickup", SubResource( 137 ), "Pickup", "Idle", SubResource( 138 ), "Idle", "Cast", SubResource( 139 ), "Cast", "Idle", SubResource( 140 ), "Stun", "Idle", SubResource( 141 ), "Stun", "Hit", SubResource( 142 ), "Idle", "Stun", SubResource( 143 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -518.368, -153.046 )
+graph_offset = Vector2( -589.951, -167.184 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=145]
 
@@ -2251,7 +2251,7 @@ parameters/Attack1/BlendSpace2D/blend_position = Vector2( -0.00126582, 0.963019 
 parameters/Attack1/TimeScale/scale = 1.0
 parameters/Attack2/BlendSpace2D/blend_position = Vector2( -0.00258398, 0.983774 )
 parameters/Attack2/TimeScale/scale = 1.0
-parameters/Backstep/blend_position = Vector2( 0.00119328, 0.0167301 )
+parameters/Backstep/blend_position = Vector2( 0.41357, -0.524924 )
 parameters/Cast/BlendSpace2D/blend_position = Vector2( 0, 0 )
 parameters/Cast/TimeScale/scale = 1.0
 parameters/Flash/blend_position = Vector2( -0.00122851, 1.09371 )

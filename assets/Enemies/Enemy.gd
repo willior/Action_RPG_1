@@ -19,18 +19,17 @@ func h_flip_handler(sprite, eye, outline, velocity):
 	eye.flip_h = velocity.x < 0
 	outline.flip_h = velocity.x < 0
 
-func set_player_collision(body):
-	var player = GameManager.player
-	return
-# warning-ignore:unreachable_code
-	if player.z_index == body.z_index:
-		body.set_collision_layer_bit(4, true)
-		Enemy.disable_detection(body)
-		Enemy.enable_detection(body)
-#		body.disable_detection()
-#		body.enable_detection()
-	else:
-		body.set_collision_layer_bit(4, false)
+func set_player_collision(_body):
+	pass
+#	var player = GameManager.player
+#	if player.z_index == body.z_index:
+#		body.set_collision_layer_bit(4, true)
+#		Enemy.disable_detection(body)
+#		Enemy.enable_detection(body)
+##		body.disable_detection()
+##		body.enable_detection()
+#	else:
+#		body.set_collision_layer_bit(4, false)
 
 func check_examined(name):
 	if name in PlayerLog.examined_list:
@@ -45,7 +44,7 @@ func examine(dialog_script, examined, enemy_name):
 		
 func accelerate_towards_point(enemy, point, speed, delta):
 	var direction = enemy.global_position.direction_to(point) # gets the direction by grabbing the target position, the point argument
-	enemy.velocity = enemy.velocity.move_toward(direction * speed, enemy.ACCELERATION * delta) # multiplies that by the speed argument
+	enemy.velocity = enemy.velocity.move_toward(direction * speed, (enemy.ACCELERATION*enemy.stats.speed_mod) * delta) # multiplies that by the speed argument
 
 func disable_detection(enemy):
 	enemy.attackPlayerZone.set_deferred("monitoring", false)
