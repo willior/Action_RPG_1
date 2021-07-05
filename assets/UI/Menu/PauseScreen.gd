@@ -185,12 +185,12 @@ func _ready():
 		var pouch_ingredient = player.pouch.get_ingredient(n)
 		var menu_ingredient = MenuIngredient.instance()
 		menu_ingredient.pouch_ingredient = pouch_ingredient
-		$PouchDisplay/VBox.add_child(menu_ingredient)
+		$PouchDisplay/HBox/VBox.add_child(menu_ingredient)
 #		if n == 0:
 #			$MenuPanel/Menu/ButtonPouch.focus_neighbour_right = $PouchDisplay/VBox.get_child(0).get_child(0).get_path()
 		if player.pouch.get_ingredients().size()-1 == n:
-			menu_ingredient.get_child(0).focus_neighbour_bottom = $PouchDisplay/VBox.get_child(0).get_child(0).get_path()
-			$PouchDisplay/VBox.get_child(0).get_child(0).focus_neighbour_top = menu_ingredient.get_child(0).get_path()
+			menu_ingredient.get_child(0).focus_neighbour_bottom = $PouchDisplay/HBox/VBox.get_child(0).get_child(0).get_path()
+			$PouchDisplay/HBox/VBox.get_child(0).get_child(0).focus_neighbour_top = menu_ingredient.get_child(0).get_path()
 	
 	$TimerDelaySelect.start()
 	yield($TimerDelaySelect, "timeout")
@@ -373,15 +373,15 @@ func _on_ButtonPouch_focus_entered():
 
 func _on_ButtonPouch_pressed():
 	audio_menu_select()
-	$Tween.interpolate_property($PouchDisplay, "rect_size", Vector2(220, 0), Vector2(220, 134), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.interpolate_property($PouchDisplay, "rect_size", Vector2(220, 0), Vector2(220, 136), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	$Tween.start()
 	$PouchDisplay.show()
 	disable_menu_focus()
 	yield($Tween, "tween_all_completed")
-	if $PouchDisplay/VBox.get_child_count() < 1:
+	if $PouchDisplay/HBox/VBox.get_child_count() < 1:
 		return
 	else:
-		$PouchDisplay/VBox.get_child(0).get_child(0).grab_focus()
+		$PouchDisplay/HBox/VBox.get_child(0).get_child(0).grab_focus()
 		audio_menu_move()
 
 func _on_ButtonPouch_focus_exited():
@@ -394,7 +394,7 @@ func _on_ButtonConfig_focus_entered():
 func _on_ButtonConfig_pressed():
 	audio_menu_select()
 	disable_menu_focus()
-	$Tween.interpolate_property($ConfigDisplay, "rect_size", Vector2(220, 0), Vector2(220, 134), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
+	$Tween.interpolate_property($ConfigDisplay, "rect_size", Vector2(220, 0), Vector2(220, 136), 0.4, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	$Tween.start()
 	$ConfigDisplay.show()
 	yield($Tween, "tween_all_completed")
@@ -470,19 +470,19 @@ func hide_status_display():
 	$StatsDisplay.hide()
 
 func hide_alchemy_display():
-	$Tween.interpolate_property($AlchemyDisplay, "rect_size", Vector2(220, 130), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
+	$Tween.interpolate_property($AlchemyDisplay, "rect_size", Vector2(220, 136), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	$AlchemyDisplay.hide()
 
 func hide_pouch_display():
-	$Tween.interpolate_property($PouchDisplay, "rect_size", Vector2(220, 130), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
+	$Tween.interpolate_property($PouchDisplay, "rect_size", Vector2(220, 136), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	$PouchDisplay.hide()
 	
 func hide_config_display():
-	$Tween.interpolate_property($ConfigDisplay, "rect_size", Vector2(220, 130), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
+	$Tween.interpolate_property($ConfigDisplay, "rect_size", Vector2(220, 136), Vector2(220, 0), 0.2, Tween.TRANS_QUINT, Tween.EASE_IN)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
 	$ConfigDisplay.hide()

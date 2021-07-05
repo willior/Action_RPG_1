@@ -1,7 +1,7 @@
-{"player1_stats":{"defense":4,"dexterity":4,"endurance":12,"experience":1126,"experience_required":4702,"experience_total":8572,"health":126,"level":9,"magic":4,"max_health":126,"max_stamina":126,"speed":4,"stamina":126,"strength":4,"vitality":12}}
-{"player2_stats":{"defense":6,"dexterity":4,"endurance":10,"experience":1126,"experience_required":4702,"experience_total":8572,"health":126,"level":9,"magic":4,"max_health":126,"max_stamina":114,"speed":4,"stamina":114,"strength":4,"vitality":12}}
+{"player1_stats":{"defense":4,"dexterity":4,"endurance":12,"experience":1504,"experience_required":4702,"experience_total":8950,"health":126,"level":9,"magic":4,"max_health":126,"max_stamina":126,"speed":4,"stamina":126,"strength":4,"vitality":12}}
+{"player2_stats":{"defense":6,"dexterity":4,"endurance":10,"experience":1504,"experience_required":4702,"experience_total":8950,"health":126,"level":9,"magic":4,"max_health":126,"max_stamina":114,"speed":4,"stamina":114,"strength":4,"vitality":12}}
 {"player3_stats":{"defense":12,"dexterity":12,"endurance":32,"experience":82,"experience_required":100,"experience_total":82,"health":480,"level":1,"magic":12,"max_health":480,"max_stamina":480,"speed":12,"stamina":480,"strength":12,"vitality":32}}
-{"player1_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,50,100,50]}}
+{"player1_formulaData":{"Flash":["Flash",2,0,120,100],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,50,100,50]}}
 {"player2_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,0,100,0]}}
-{"chapter_number":0,"examined_list":[],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
+{"chapter_number":0,"examined_list":["Oil","Petal","Mushroom","Hardball"],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
 {"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}

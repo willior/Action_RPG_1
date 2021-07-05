@@ -57,7 +57,13 @@ signal Clay_complete()
 # warning-ignore:unused_signal
 signal Water_complete()
 # warning-ignore:unused_signal
+signal Oil_complete()
+# warning-ignore:unused_signal
 signal Salt_complete()
+# warning-ignore:unused_signal
+signal Petal_complete()
+# warning-ignore:unused_signal
+signal Mushroom_complete()
 # warning-ignore:unused_signal
 signal Bat_complete()
 # warning-ignore:unused_signal

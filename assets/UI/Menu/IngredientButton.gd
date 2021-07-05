@@ -1,6 +1,6 @@
 extends Button
 const DialogBox = preload("res://assets/UI/Dialog/PopupDialogBox.tscn")
-onready var pauseMenu = get_parent().get_parent().get_parent().get_parent()
+onready var pauseMenu = get_parent().get_parent().get_parent().get_parent().get_parent()
 onready var pouchButton = pauseMenu.get_node("MenuPanel/Menu/ButtonPouch")
 var description
 

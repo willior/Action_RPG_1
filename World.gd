@@ -63,6 +63,9 @@ func _input(event):
 		GameManager.player.pouch.add_ingredient("Clay", 20)
 		GameManager.player.pouch.add_ingredient("Water", 20)
 		GameManager.player.pouch.add_ingredient("Salt", 20)
+		GameManager.player.pouch.add_ingredient("Oil", 20)
+		GameManager.player.pouch.add_ingredient("Petal", 20)
+		GameManager.player.pouch.add_ingredient("Mushroom", 20)
 		if GameManager.multiplayer_2:
 			GameManager.player2.formulabook.add_formula("Hardball")
 			GameManager.player2.formulabook.add_formula("Flash")
@@ -73,6 +76,9 @@ func _input(event):
 			GameManager.player2.pouch.add_ingredient("Clay", 20)
 			GameManager.player2.pouch.add_ingredient("Water", 20)
 			GameManager.player2.pouch.add_ingredient("Salt", 20)
+			GameManager.player2.pouch.add_ingredient("Oil", 20)
+			GameManager.player2.pouch.add_ingredient("Petal", 20)
+			GameManager.player2.pouch.add_ingredient("Mushroom", 20)
 		else:
 			print('no P2. cannot give ingredients.')
 	if event.is_action_pressed("test2"):

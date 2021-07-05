@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/Player/Abilities/Heal/Heal-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://assets/Player/Abilities/Heal/Heal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Ingredients/Water.png" type="Texture" id=4]
-[ext_resource path="res://assets/Ingredients/Salt.png" type="Texture" id=5]
+[ext_resource path="res://assets/Ingredients/Petal.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -120,8 +120,8 @@ description = [ {
 } ]
 description_string = "Heals the user's HP."
 cost = {
-"Salt": 1,
-"Water": 2
+"Petal": 1,
+"Water": 1
 }
 ing_1_icon = ExtResource( 5 )
 ing_2_icon = ExtResource( 4 )

@@ -78,7 +78,7 @@ func remove_formula(formula_name):
 		# var updated_selected_formula = get_formula(current_selected_formula)
 
 func add_formula(formula_name):
-	prints("adding formula: " + str(formula_name))
+	# prints("adding formula: " + str(formula_name))
 	var formula = check_formula(formula_name)
 	var new_formula = {
 		formula_reference = formula
@@ -86,10 +86,10 @@ func add_formula(formula_name):
 	for i in range(_formulas.size()):
 		var formulabook_formula = _formulas[i]
 		if formulabook_formula.formula_reference.name == formula_name:
-			print(formula_name, ' already in book. returning.')
+			# print(formula_name, ' already in book. returning.')
 			return
 	_formulas.append(new_formula)
-	print('added ', formula_name, ' to book.')
+	# print('added ', formula_name, ' to book.')
 	current_selected_formula = _formulas.size()
 	if current_selected_formula >= _formulas.size():
 		current_selected_formula = 0

@@ -772,38 +772,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBox" type="VBoxContainer" parent="PouchDisplay"]
+[node name="HBox" type="HBoxContainer" parent="PouchDisplay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 6.0
 margin_top = 6.0
-margin_right = 155.0
-margin_bottom = 112.0
+margin_right = -6.0
+margin_bottom = -6.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="PouchDisplay/HBox"]
+margin_right = 102.0
+margin_bottom = 118.0
 size_flags_horizontal = 3
 custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxButtons" type="VBoxContainer" parent="PouchDisplay"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 6.0
-margin_top = 6.0
-margin_right = -6.0
-margin_bottom = -2.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxIcons" type="VBoxContainer" parent="PouchDisplay"]
-visible = false
-anchor_left = 0.062
-anchor_right = 0.164
-anchor_bottom = 1.0
-margin_left = 0.0639906
-margin_top = 7.0
-margin_right = 0.00798988
-margin_bottom = -4.0
+[node name="VBox2" type="VBoxContainer" parent="PouchDisplay/HBox"]
+margin_left = 106.0
+margin_right = 208.0
+margin_bottom = 118.0
+size_flags_horizontal = 3
+custom_constants/separation = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
