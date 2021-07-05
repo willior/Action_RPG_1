@@ -25,7 +25,7 @@ enum {
 	STUN
 }
 var state = IDLE
-var evasion_mod = 0
+var evasion_bonus = 0
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
@@ -270,10 +270,10 @@ func fly_animation():
 func set_flying(value):
 	flying = value
 	if !flying:
-		evasion_mod = 0
+		evasion_bonus = 0
 		set_collision_mask_bit(17, true)
 	elif flying:
-		evasion_mod = 32
+		evasion_bonus = 32
 		if z_index == 0:
 			set_collision_mask_bit(17, false)
 

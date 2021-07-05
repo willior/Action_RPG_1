@@ -32,6 +32,7 @@ tracks/0/keys = {
 [node name="Cleanse" type="Node2D"]
 pause_mode = 1
 script = ExtResource( 2 )
+formula_size = 1
 
 [node name="FormulaTargetScreen" parent="." instance=ExtResource( 4 )]
 target_mode = 1

@@ -636,7 +636,7 @@ shape = SubResource( 3 )
 [node name="Stats" parent="." instance=ExtResource( 12 )]
 max_health = 66
 defense = 2.0
-base_evasion = 12
+base_evasion = 16
 experience_pool = 378
 affinity = 8
 

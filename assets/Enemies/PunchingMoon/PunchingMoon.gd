@@ -20,7 +20,7 @@ enum {
 	DEAD
 }
 var state = IDLE
-var evasion_mod = 0
+var evasion_bonus = 0
 
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO

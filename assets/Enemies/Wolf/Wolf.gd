@@ -14,7 +14,7 @@ export var WANDER_SPEED = 48
 export var ATTACK_SPEED = 3200
 export var FRICTION = 1600
 export var WANDER_TARGET_RANGE = 4
-export var ATTACK_TARGET_RANGE = 4
+export var ATTACK_TARGET_RANGE = 8
 
 enum {
 	IDLE,
@@ -25,7 +25,7 @@ enum {
 	STUN
 }
 var state = IDLE
-var evasion_mod = 0
+var evasion_bonus = 0
 
 var velocity = Vector2.ZERO
 # var dir_vector = Vector2.DOWN
