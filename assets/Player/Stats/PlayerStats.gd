@@ -24,6 +24,17 @@ var experience_required = 100 setget set_max_experience
 var experience_total = 82
 var leveling = false setget set_leveling
 
+var weapon_level = 1 setget set_weapon_level
+var weapon_xp = 0
+var weapon_xp_required = 100
+var weapon_xp_total = 0
+var weapon_growth_rate = 50
+
+var max_charge = weapon_level*50 setget set_max_charge
+var charge = 0 setget set_charge
+var max_charge_level = 2 setget set_max_charge_level
+var charge_level = 0 setget set_charge_level
+
 var max_health = vitality*15 setget set_max_health
 var health = max_health setget set_health
 var old_health = health
@@ -61,11 +72,6 @@ var magic_mod : float = 1 setget set_magic_mod
 var spell_mod = 1.0 setget set_spell_mod
 var drop_rate_mod = 1.0 setget set_drop_rate_mod
 
-var max_charge = 100 setget set_max_charge
-var charge = 0 setget set_charge
-var max_charge_level = 2 setget set_max_charge_level
-var charge_level = 0 setget set_charge_level
-
 var cash = 0 setget set_cash
 
 var status = "fine" setget set_status
@@ -97,6 +103,7 @@ signal experience_changed(value)
 signal max_experience_changed(value)
 signal level_changed(value)
 signal player_leveling(value)
+signal weapon_level_changed(value)
 signal cash_changed(value)
 
 func _ready():
@@ -129,6 +136,10 @@ func reset_stats():
 	self.experience = 0
 	self.experience_required = 100
 	self.experience_total = 0
+	self.weapon_xp = 0
+	self.weapon_xp_required = 100
+	self.weapon_xp_total = 0
+	self.weapon_level = 1
 	self.dying = false
 	self.dead = false
 
@@ -153,6 +164,10 @@ func default_stats():
 	self.experience = 0
 	self.experience_required = 100
 	self.experience_total = 0
+	self.weapon_xp = 0
+	self.weapon_xp_required = 100
+	self.weapon_xp_total = 0
+	self.weapon_level = 1
 	self.dying = false
 	self.dead = false
 
@@ -351,6 +366,21 @@ func set_level(value):
 func set_leveling(value):
 	leveling = value
 	emit_signal("player_leveling", value)
+
+func apply_weapon_xp(who):
+	weapon_xp += weapon_growth_rate
+	weapon_xp_total += weapon_growth_rate
+	while weapon_xp >= weapon_xp_required:
+		weapon_level += 1
+		weapon_xp -= weapon_xp_required
+		weapon_xp_required *= 1.2
+		weapon_xp_required = round(weapon_xp_required)
+		Global.display_message_popup(who, "Sword is now level " + str(weapon_level), "level")
+
+func set_weapon_level(value):
+	weapon_level = value
+	max_charge = weapon_level*50
+	emit_signal("weapon_level_changed", weapon_level)
 
 func set_cash(value):
 	cash = value

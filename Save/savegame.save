@@ -1,4 +1,4 @@
-{"player1_stats":{"defense":6,"dexterity":6,"endurance":12,"experience":18577,"experience_required":19918,"experience_total":50643,"health":126,"level":12,"magic":6,"max_health":126,"max_stamina":126,"speed":6,"stamina":126,"strength":4,"vitality":12}}
+{"player1_stats":{"defense":6,"dexterity":6,"endurance":12,"experience":18955,"experience_required":19918,"experience_total":51021,"health":126,"level":12,"magic":6,"max_health":126,"max_stamina":126,"speed":6,"stamina":126,"strength":4,"vitality":12}}
 {"player2_stats":{"defense":4,"dexterity":4,"endurance":13,"experience":18577,"experience_required":19918,"experience_total":50643,"health":126,"level":12,"magic":11,"max_health":126,"max_stamina":132,"speed":4,"stamina":132,"strength":4,"vitality":12}}
 {"player3_stats":{"defense":12,"dexterity":12,"endurance":32,"experience":82,"experience_required":100,"experience_total":82,"health":480,"level":1,"magic":12,"max_health":480,"max_stamina":480,"speed":12,"stamina":480,"strength":12,"vitality":32}}
 {"player1_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",2,0,120,100],"Heal":["Heal",1,0,100,0]}}

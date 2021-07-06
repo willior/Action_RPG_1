@@ -117,6 +117,7 @@ func hurtbox_entered(enemy, hitbox):
 			enemy.tween.start()
 		else:
 			enemy.knockback = hitbox.knockback_vector * 160 # knockback velocity on kill
+			player.stats.apply_weapon_xp(player.name)
 	return hit
 
 func deal_damage(enemy, damage, is_crit):

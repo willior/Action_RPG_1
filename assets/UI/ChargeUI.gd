@@ -1,17 +1,23 @@
 extends Node2D
 
+const ChargeBeepAudio_1 = preload("res://assets/Audio/Player/Charge_Beep_1.wav")
+const ChargeBeepAudio_2 = preload("res://assets/Audio/Player/Charge_Beep_2.wav")
+const ChargeBeepAudio_3 = preload("res://assets/Audio/Player/Charge_Beep_3.wav")
+
 onready var progress1 = $TextureProgress1
 onready var animation1 = $TextureProgress1/AnimationPlayer
 onready var progress2 = $TextureProgress2
 onready var animation2 = $TextureProgress2/AnimationPlayer
+onready var progress3 = $TextureProgress3
+onready var animation3 = $TextureProgress3/AnimationPlayer
 onready var staminaProgress = $StaminaProgress
 onready var staminaWarningAnimation = $StaminaProgress/AnimationPlayer
-onready var chargeBeep1 = $ChargeBeep1
-onready var chargeBeep2 = $ChargeBeep2
-onready var chargeSound1 = $ChargeSound1
-onready var chargeSound2 = $ChargeSound2
+onready var chargeBeep = $ChargeBeep
+onready var chargeSound = $ChargeSound
 
-var stats
+onready var stats = get_parent().stats
+
+var weapon_level setget set_weapon_level
 
 var currentCharge = 0 setget set_charge
 var currentChargeLevel = 0 setget set_charge_level
@@ -23,7 +29,6 @@ var staminaWarning = false
 var sweatFlag = false
 
 func _ready():
-	stats = get_parent().stats
 	stats.charge = 0
 	stats.charge_level = 0
 	self.currentMaxStamina = stats.max_stamina
@@ -38,6 +43,11 @@ func _ready():
 	self.currentChargeLevel = stats.charge_level
 # warning-ignore:return_value_discarded
 	stats.connect("charge_level_changed", self, "set_charge_level")
+	stats.connect("weapon_level_changed", self, "set_weapon_level")
+	self.weapon_level = stats.weapon_level
+
+func set_weapon_level(value):
+	weapon_level = value
 
 func set_stamina(value):
 	currentStamina = value
@@ -116,42 +126,54 @@ func toggle_stamina_warning(value):
 		staminaWarningAnimation.play("Off")
 
 func begin_charge_1():
-	chargeSound2.play()
+	chargeSound.play()
 	progress1.visible = true
-	# staminaProgress.visible = true
 	
 func begin_charge_2():
-	chargeSound2.play()
+	chargeSound.play()
 	progress2.visible = true
+
+func begin_charge_3():
+	chargeSound.play()
+	progress3.visible = true
 
 func set_charge(value):
 	currentCharge = value
-	
+	print(currentCharge)
 	if currentChargeLevel == 0:
 		progress1.value = currentCharge
-	elif currentChargeLevel == 1:
+	if currentChargeLevel == 1:
 		progress2.value = currentCharge
+	if currentChargeLevel == 2:
+		progress3.value = currentCharge
 	
-	if currentCharge > 50 && stats.charge_level == 0:
+	if currentCharge >= 50 && stats.charge_level == 0:
 		stats.charge_level = 1
 		begin_charge_2()
-		
-	if currentCharge >= 100 && stats.charge_level == 1:
+	elif currentCharge >= 100 && stats.charge_level == 1:
 		stats.charge_level = 2
+		begin_charge_3()
+	elif currentCharge >= 150 && stats.charge_level == 2:
+		stats.charge_level = 3
 
 func set_charge_level(value):
 	currentChargeLevel = value
 	if currentChargeLevel == 1:
-		chargeBeep1.play()
+		chargeBeep.stream = ChargeBeepAudio_1
+		chargeBeep.play()
 	elif currentChargeLevel == 2:
-		chargeBeep2.play()
+		chargeBeep.stream = ChargeBeepAudio_2
+		chargeBeep.play()
+	elif currentChargeLevel == 3:
+		chargeBeep.stream = ChargeBeepAudio_3
+		chargeBeep.play()
 
 func stop_charge():
-	chargeSound1.stop()
-	chargeSound2.stop()
-	# staminaProgress.visible = false
+	chargeSound.stop()
 	progress1.visible = false
 	progress2.visible = false
+	progress3.visible = false
 	currentCharge = 0
 	progress1.value = currentCharge
 	progress2.value = currentCharge
+	progress3.value = currentCharge
