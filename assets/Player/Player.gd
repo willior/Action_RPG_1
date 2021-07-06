@@ -48,7 +48,7 @@ var backstep_moving = false
 var backstep_queued = false
 var attack2_queued = false
 var attack1_queued = false
-var attack_charging = false
+# attack_charging = false
 var attack_1_charged = false
 var attack_2_charged = false
 var flash_queued = false
@@ -453,11 +453,22 @@ func attack_animation_finished():
 		stamina_regen_reset()
 		state = MOVE
 	# if attack button is held when an attack animation finishes
-	if Input.is_action_pressed(player_inputs.attack):
-		attack_charging = true
+	# if Input.is_action_pressed(player_inputs.attack):
+		# attack_charging = true
 		# charge_reset()
 
 func charge_state(_delta):
+	if stamina_regen_level > 0:
+		stamina_regen_reset()
+	stats.stamina -= 0.4
+	if stats.stamina <= 0:
+		charge.stop_charge()
+		charge_reset()
+		if !sweating:
+			set_sweating()
+			noStamina()
+		return
+	
 	if stats.charge == 0 and stats.charge_level == 0 and stats.stamina > 1:
 		charge.begin_charge_1()
 	elif stats.charge >= 50 and stats.charge_level == 0:
@@ -473,37 +484,24 @@ func charge_state(_delta):
 		if stats.weapon_level > 3:
 			print('we would begin charge 4 here, if it existed')
 	
-	if stamina_regen_level > 0:
-		stamina_regen_reset()
-	stats.stamina -= 0.4
-	if stats.stamina <= 0:
-		charge.stop_charge()
-		charge_reset()
-		if !sweating:
-			set_sweating()
-			noStamina()
-		return
-	
 	if stats.charge < stats.max_charge:
 		stats.charge += stats.charge_rate
 	if stats.charge >= 50 and !attack_1_charged and !attack_2_charged:
 		attack_1_charged = true
-	elif stats.charge >= 100 and attack_charging:
+	elif stats.charge >= 100: # and # attack_charging:
 		attack_1_charged = false
 		attack_2_charged = true
-		attack_charging = false
+		# attack_charging = false
 
 func charge_reset():
-	if stats.charge_level != 0:
-		stats.charge_level = 0
-	stats.charge = 0
-	if attack_charging: attack_charging = false
+	if stats.charge_level != 0: stats.charge_level = 0
+	if stats.charge != 0: stats.charge = 0
+	# if # attack_charging: # attack_charging = false
 	if attack_1_charged: attack_1_charged = false
 	if attack_2_charged: attack_2_charged = false
 
 func shade_state(delta):
 	if shade_moving:
-# warning-ignore:integer_division
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction/2 * delta)
 	else:
 		if Input.is_action_just_released(player_inputs.attack):
@@ -547,26 +545,21 @@ func flash_start():
 
 func flash_stop():
 	apply_evasion_action_bonus(0)
-	# base_enemy_accuracy = 66
 	swordHitbox.reset_damage()
 
 func player_state_reset():
 	apply_evasion_action_bonus(0)
-	# base_enemy_accuracy = 66
 	swordHitbox.reset_damage()
 
 func roll_stamina_drain():
 	stats.stamina -= 15
 	apply_evasion_action_bonus(50)
-	# base_enemy_accuracy = 32
 	hurtbox.start_invincibility(min(stats.iframes, 0.35))
 
-# warning-ignore:unused_argument
-func roll_state(delta):
+func roll_state(_delta):
 	if roll_moving:
 		velocity = dir_vector * stats.roll_speed
 	else:
-		# warning-ignore:integer_division
 		velocity = dir_vector * (stats.roll_speed/4)
 	animationState.travel("Roll")
 	if Input.is_action_just_released(player_inputs.attack):
@@ -591,18 +584,14 @@ func roll_animation_finished():
 	if shade_queued:
 		shade_queued = false
 		velocity = dir_vector * (stats.roll_speed/2)
-		attack_2_charged = false
 		charge.stop_charge()
 		charge_reset()
-		attack_charging = false
 		state = SHADE
 	elif flash_queued:
-		# base_enemy_accuracy = 16
 		flash_queued = false
 		velocity = dir_vector * (stats.roll_speed/2)
 		charge.stop_charge()
 		charge_reset()
-		attack_charging = false
 		apply_evasion_action_bonus(66)
 		state = FLASH
 	elif attack1_queued:
@@ -614,7 +603,6 @@ func roll_animation_finished():
 func backstep_stamina_drain():
 	stats.stamina -= 5
 	apply_evasion_action_bonus(66)
-	# base_enemy_accuracy = 16
 	hurtbox.start_invincibility(min(stats.iframes, 0.24))
 
 func backstep_state(delta):
@@ -651,25 +639,21 @@ func backstep_state(delta):
 
 func backstep_stop():
 	apply_evasion_action_bonus(50)
-	# base_enemy_accuracy = 50
 	backstep_moving = false
 
 func backstep_animation_finished():
 	if shade_queued:
 		shade_queued = false
 		velocity = dir_vector * (stats.roll_speed*0.75)
-		attack_2_charged = false
 		charge.stop_charge()
 		charge_reset()
-		attack_charging = false
 		state = SHADE
 	elif flash_queued:
-		# base_enemy_accuracy = 0 
 		flash_queued = false
 		velocity = dir_vector * (stats.roll_speed)
 		charge.stop_charge()
 		charge_reset()
-		apply_evasion_action_bonus(75)# Player becomes very difficult to hit during a queued flash
+		apply_evasion_action_bonus(75) # Player becomes very difficult to hit during a queued flash
 		state = FLASH
 	elif Input.is_action_pressed(player_inputs.attack):
 		attack_animation_finished()
@@ -736,7 +720,6 @@ func _on_Hurtbox_area_entered(area):
 				return
 			elif player_staggered:
 				player_state_reset()
-				# print('hit not in stun state; staggered')
 				state = HIT
 	else:
 		$DodgeAudio.play()
@@ -744,7 +727,6 @@ func _on_Hurtbox_area_entered(area):
 
 func hit_damage():
 	if self.has_node("StatusDisplay/Stun") and get_node("StatusDisplay/Stun").get_stun_time_remaining() < get_node("StatusDisplay/Stun").duration:
-		# print('interrupting stun...')
 		get_node("StatusDisplay/Stun").interrupt_stun()
 	stats.health -= damageTaken
 	damageTaken = 0
@@ -773,7 +755,7 @@ func hit_animation_finished():
 	charge.stop_charge()
 	if Input.is_action_pressed(player_inputs.attack):
 		charge_reset()
-		attack_charging = true
+		# attack_charging = true
 	state = MOVE
 
 func _on_Hurtbox_invincibility_started():
@@ -810,7 +792,7 @@ func start_level_timer():
 	Global.enable_exits(false)
 	levelTimer.start()
 	yield(levelTimer, "timeout")
-	if stats.leveling: #just_leveled:
+	if stats.leveling:
 		show_level_up_screen()
 
 func show_level_up_screen():
@@ -836,7 +818,7 @@ func dying_effect(value):
 		dying = true
 		Global.enable_exits(false)
 		for p in get_tree().get_nodes_in_group("Players"):
-			if p.stats.leveling: # just_leveled:
+			if p.stats.leveling:
 				p.levelTimer.stop()
 		StatusHandler.remove_buffs(self)
 		Engine.time_scale = 0.6
@@ -889,18 +871,15 @@ func pickup_state(delta):
 	if examining:
 		self.noticeDisplay = false
 	if talking:
-		# talking = false
 		self.talkNoticeDisplay = false
 	if interacting:
-		# interacting = false
 		self.interactNoticeDisplay = false
 	animationState.travel("Pickup")
 
 func pickup_finished():
-	# reset_interaction()
 	if Input.is_action_pressed(player_inputs.attack):
 		charge_reset()
-		attack_charging = true
+		# attack_charging = true
 	state = MOVE
 
 func action_state(delta):
@@ -923,9 +902,9 @@ func action_finished():
 	if !Input.is_action_pressed(player_inputs.attack):
 		charge.stop_charge()
 		charge_reset()
-	elif Input.is_action_pressed(player_inputs.attack):
+	# elif Input.is_action_pressed(player_inputs.attack):
 		# charge_reset()
-		attack_charging = true
+		# attack_charging = true
 	state = MOVE
 
 # when the Player interacts with something, their interactHitbox is disabled
