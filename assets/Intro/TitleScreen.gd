@@ -34,7 +34,6 @@ func _input(event):
 		get_tree().quit()
 
 func _ready():
-	GameManager.on_title_screen = true
 	while !menuOn:
 		label1.visible = false
 		

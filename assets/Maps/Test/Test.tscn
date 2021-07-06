@@ -260,7 +260,6 @@ __meta__ = {
 }
 
 [node name="Camera2D" parent="." instance=ExtResource( 20 )]
-pause_mode = 1
 smoothing_enabled = true
 smoothing_speed = 8.0
 

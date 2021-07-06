@@ -21,6 +21,8 @@ func _init():
 		player2 = GameManager.load_player2()
 
 func _ready():
+	if GameManager.on_title_screen:
+		GameManager.on_title_screen = false
 	get_node("YSort").add_child(player)
 	if !GameManager.multiplayer_2:
 		get_tree().get_root().get_node("/root/World/Camera2D").state = 0
@@ -31,8 +33,6 @@ func _ready():
 		get_node("YSort").add_child(player2)
 	sfx1.play()
 	sfx2.play()
-	if GameManager.on_title_screen:
-		GameManager.on_title_screen = false
 	if Global.chapter_name != null:
 		var chapterDisplay = load("res://assets/Misc/ChapterDisplay.tscn").instance()
 		add_child(chapterDisplay)

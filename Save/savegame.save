@@ -1,7 +1,7 @@
-{"player1_stats":{"defense":6,"dexterity":6,"endurance":12,"experience":2081,"experience_required":32228,"experience_total":54065,"health":126,"level":13,"magic":6,"max_health":126,"max_stamina":126,"speed":9,"stamina":126,"strength":4,"vitality":12}}
-{"player2_stats":{"defense":4,"dexterity":4,"endurance":13,"experience":18577,"experience_required":19918,"experience_total":50643,"health":126,"level":12,"magic":11,"max_health":126,"max_stamina":132,"speed":4,"stamina":132,"strength":4,"vitality":12}}
+{"player1_stats":{"defense":6,"dexterity":6,"endurance":12,"experience":33140,"experience_required":52146,"experience_total":117352,"health":126,"level":14,"magic":6,"max_health":126,"max_stamina":126,"speed":12,"stamina":126,"strength":4,"vitality":12}}
+{"player2_stats":{"defense":4,"dexterity":4,"endurance":14,"experience":710,"experience_required":52146,"experience_total":84922,"health":138,"level":14,"magic":14,"max_health":138,"max_stamina":138,"speed":4,"stamina":138,"strength":4,"vitality":14}}
 {"player3_stats":{"defense":12,"dexterity":12,"endurance":32,"experience":82,"experience_required":100,"experience_total":82,"health":480,"level":1,"magic":12,"max_health":480,"max_stamina":480,"speed":12,"stamina":480,"strength":12,"vitality":32}}
-{"player1_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",2,0,120,100],"Heal":["Heal",1,0,100,0]}}
-{"player2_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,0,100,0]}}
+{"player1_formulaData":{"Flash":["Flash",2,50,120,150],"Fury":["Fury",2,50,120,150],"Heal":["Heal",2,50,120,150]}}
+{"player2_formulaData":{"Flash":["Flash",1,0,100,0],"Fury":["Fury",1,0,100,0],"Heal":["Heal",1,50,100,50]}}
 {"chapter_number":0,"examined_list":["The Moon","The Moon"],"home":{"desk_on":false,"fridge_open":false,"lightswitch_bedroom_on":false,"lightswitch_checked":false,"lightswitch_main_on":false,"metal_pot_collected":false,"sink_on":false,"stove_on":false}}
-{"map_filename":"res://assets/Maps/Test/Test.tscn"}
+{"map_filename":"res://assets/Maps/Test/MountainBorder.tscn"}

@@ -4,9 +4,6 @@ var ChapterScreen = load("res://assets/Misc/ChapterDisplay.tscn")
 
 var ok_to_start = false
 
-func _ready():
-	GameManager.on_title_screen = true
-	
 func _input(event):
 	if event.is_action_pressed("start") && ok_to_start:
 		$ControlsDisplay.queue_free()

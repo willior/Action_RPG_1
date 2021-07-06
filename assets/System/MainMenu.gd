@@ -5,6 +5,8 @@ onready var continueButton = $MarginContainer/VBoxContainer/ContinueButton
 onready var quitButton = $MarginContainer/VBoxContainer/QuitButton
 
 func _ready():
+	GameManager.on_title_screen = true
+	newGameButton.grab_focus()
 	var save_game = File.new()
 	if not save_game.file_exists("res://Save/savegame.save"):
 		print('menu: no save file, disabling Continue button')
@@ -13,8 +15,11 @@ func _ready():
 	$Tween.interpolate_property($ColorRect, "rect_position", Vector2(0,0), Vector2(-640,0), 1, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	$Tween.start()
 	yield($Tween, "tween_all_completed")
-	newGameButton.grab_focus()
 	$Music.play()
+
+func _input(event):
+	if event.is_action_pressed("quit_game"):
+		get_tree().quit()
 
 func _on_NewGameButton_pressed():
 	GameManager.new_game()
