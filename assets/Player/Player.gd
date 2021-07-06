@@ -54,9 +54,6 @@ var attack_2_charged = false
 var flash_queued = false
 var shade_queued = false
 var shade_moving = false
-var charge_count = 0
-var charge_level_count = 0
-# var base_enemy_accuracy = 66
 var stamina_attack_cost = stats.stamina_attack_cost
 var knockback_modifier = 1
 
@@ -153,15 +150,15 @@ func _process(delta):
 func _input(event):
 	match state:
 		MOVE:
-			if event.is_action_pressed(player_inputs.attack) && !event.is_echo():
-				if (!talking && !interacting) && stats.stamina > 0:
+			if event.is_action_pressed(player_inputs.attack) and !event.is_echo():
+				if (!talking and !interacting) and stats.stamina > 0:
 					state = ATTACK1
-				elif interacting && interactObject.interactable && !dying:
+				elif interacting and interactObject.interactable and !dying:
 					talkTimer.start()
 					interactObject.interact(self)
 					if examining:
 						self.noticeDisplay = false
-				elif talking && interactObject.talkable && talkTimer.is_stopped() && !dying:
+				elif talking and interactObject.talkable and talkTimer.is_stopped() and !dying:
 					talkTimer.start()
 					interactObject.talk()
 				elif stats.stamina <= 0:
@@ -179,13 +176,13 @@ func _input(event):
 				var ingredients_needed = formula_used.formula_reference.cost.keys()
 				var quantity_needed = formula_used.formula_reference.cost.values()
 				for i in range(ingredients.size()):
-					if ingredients[i].ingredient_reference.name == ingredients_needed[0] && ingredients[i].quantity >= quantity_needed[0]:
+					if ingredients[i].ingredient_reference.name == ingredients_needed[0] and ingredients[i].quantity >= quantity_needed[0]:
 						ingredient1_OK = true
 						continue
-					if ingredients[i].ingredient_reference.name == ingredients_needed[1] && ingredients[i].quantity >= quantity_needed[1]:
+					if ingredients[i].ingredient_reference.name == ingredients_needed[1] and ingredients[i].quantity >= quantity_needed[1]:
 						ingredient2_OK = true
 						continue
-				if ingredient1_OK && ingredient2_OK:
+				if ingredient1_OK and ingredient2_OK:
 					var FORMULA = formula_used.formula_reference.scene
 					var formula = FORMULA.instance()
 					ingredient1_OK = false
@@ -209,7 +206,7 @@ func _input(event):
 #					1: # TOOL
 #						pass
 #					2: # QUEST
-#						if talkTimer.is_stopped() && !dying:
+#						if talkTimer.is_stopped() and !dying:
 #							if !using_item:
 #								talkTimer.start()
 #								var dialogBox = DialogBox.instance()
@@ -221,13 +218,13 @@ func _input(event):
 #								interactObject.use_item_on_object()
 		
 		ATTACK1:
-			if event.is_action_pressed(player_inputs.attack) && !event.is_echo():
+			if event.is_action_pressed(player_inputs.attack) and !event.is_echo():
 				if stats.stamina <= 0:
 					noStamina()
 				else:
 					attack2_queued = true
 		ATTACK2:
-			if event.is_action_pressed(player_inputs.attack) && !event.is_echo():
+			if event.is_action_pressed(player_inputs.attack) and !event.is_echo():
 				if stats.stamina <= 0:
 					noStamina()
 				else:
@@ -280,12 +277,12 @@ func move_state(delta):
 	
 	if Input.is_action_just_pressed(player_inputs.examine): # F
 		if !dying and !casting:
-			if !examining && talkTimer.is_stopped():
+			if !examining and talkTimer.is_stopped():
 				talkTimer.start()
 				var dialogBox = DialogBox.instance()
 				dialogBox.dialog_script = [{'text': "You find nothing of interest."}]
 				get_node("/root/World/GUI").add_child(dialogBox)
-			elif examining && talkTimer.is_stopped():
+			elif examining and talkTimer.is_stopped():
 				talkTimer.start()
 				interactObject.examine()
 				self.noticeDisplay = false
@@ -299,20 +296,24 @@ func move_state(delta):
 	if Input.is_action_pressed(player_inputs.attack):
 		if !talkTimer.is_stopped():
 			return
-		elif charge_count == 0 && charge_level_count == 0 && stats.stamina > 1:
-			charge.begin_charge_1()
-		elif charge_count == stats.max_charge/2 && charge_level_count == 1:
-			charge.begin_charge_2()
 		charge_state(delta)
 		
 	if Input.is_action_just_released(player_inputs.attack): # V
-		if attack_2_charged or stats.charge_level == 2:
-			attack_2_charged = false
-			state = SHADE
-		elif attack_1_charged and stats.charge_level == 1:
-			attack_1_charged = false
-			apply_evasion_action_bonus(50)
-			state = FLASH
+		match stats.charge_level:
+			1:
+				apply_evasion_action_bonus(50)
+				state = FLASH
+			2:
+				state = SHADE
+			3:
+				print('lv. 3 sword attack not implemented. player state would switch here.')
+#		if stats.charge_level == 2:
+#			# attack_2_charged = false
+#			state = SHADE
+#		elif stats.charge_level == 1:
+#			# attack_1_charged = false
+#			apply_evasion_action_bonus(50)
+#			state = FLASH
 		charge.stop_charge()
 		charge_reset()
 		
@@ -354,7 +355,7 @@ func stamina_regeneration():
 			if timer.is_stopped():
 				timer.start()
 			return
-		elif stamina_regen_level < 5 && timer.is_stopped():
+		elif stamina_regen_level < 5 and timer.is_stopped():
 			timer.start(0.4)
 			yield(timer, "timeout")
 			stamina_regen_level += 1
@@ -457,6 +458,21 @@ func attack_animation_finished():
 		# charge_reset()
 
 func charge_state(_delta):
+	if stats.charge == 0 and stats.charge_level == 0 and stats.stamina > 1:
+		charge.begin_charge_1()
+	elif stats.charge >= 50 and stats.charge_level == 0:
+		stats.charge_level = 1
+		if stats.weapon_level > 1:
+			charge.begin_charge_2()
+	elif stats.charge >= 100 and stats.charge_level == 1:
+		stats.charge_level = 2
+		if stats.weapon_level > 2:
+			charge.begin_charge_3()
+	elif stats.charge >= 150 and stats.charge_level == 2:
+		stats.charge_level = 3
+		if stats.weapon_level > 3:
+			print('we would begin charge 4 here, if it existed')
+	
 	if stamina_regen_level > 0:
 		stamina_regen_reset()
 	stats.stamina -= 0.4
@@ -467,21 +483,20 @@ func charge_state(_delta):
 			set_sweating()
 			noStamina()
 		return
-	if charge_count < stats.max_charge:
-		charge_count += stats.charge_rate
-		stats.charge = charge_count
-	if charge_count >= stats.max_charge/2 && !attack_1_charged && !attack_2_charged:
+	
+	if stats.charge < stats.max_charge:
+		stats.charge += stats.charge_rate
+	if stats.charge >= 50 and !attack_1_charged and !attack_2_charged:
 		attack_1_charged = true
-	elif charge_count >= stats.max_charge && attack_charging:
+	elif stats.charge >= 100 and attack_charging:
 		attack_1_charged = false
 		attack_2_charged = true
 		attack_charging = false
 
 func charge_reset():
-	charge_level_count = 0
-	stats.charge_level = charge_level_count
-	charge_count = 0
-	stats.charge = charge_count
+	if stats.charge_level != 0:
+		stats.charge_level = 0
+	stats.charge = 0
 	if attack_charging: attack_charging = false
 	if attack_1_charged: attack_1_charged = false
 	if attack_2_charged: attack_2_charged = false
@@ -704,9 +719,9 @@ func _on_Hurtbox_area_entered(area):
 			print(self.name, " got critted")
 			Global.display_message_popup(self.name, str(self.name, " gets whacked!"), "crit")
 		var player_staggered = Global.player_stagger_calculation(stats.max_health, damageTaken, is_crit)
-		if attack2_queued && player_staggered:
+		if attack2_queued and player_staggered:
 			attack2_queued = false
-		if charge_count > 0 && player_staggered:
+		if stats.charge > 0 and player_staggered:
 			charge.stop_charge()
 			charge_reset()
 		hurtbox.display_damage_popup(str(damageTaken), is_crit)
@@ -817,7 +832,7 @@ func show_level_up_screen():
 	Global.enable_exits(true)
 
 func dying_effect(value):
-	if value && !dying:
+	if value and !dying:
 		dying = true
 		Global.enable_exits(false)
 		for p in get_tree().get_nodes_in_group("Players"):
@@ -837,7 +852,7 @@ func dying_effect(value):
 		get_node("/root/World/Music").stream_paused = true
 		get_node("/root/World/SFX").stream_paused = true
 		get_node("/root/World/SFX2").stream_paused = true
-	elif !value && dying:
+	elif !value and dying:
 		dying = false
 		for p in get_tree().get_nodes_in_group("Players"):
 			if p.dying:
@@ -924,7 +939,7 @@ func _on_TalkTimer_timeout():
 		if talking:
 			self.talkNoticeDisplay = true
 		# if the Object is not fully examined, sets the notice
-		if examining && !interactObject.examined:
+		if examining and !interactObject.examined:
 			self.noticeDisplay = true
 
 func set_notice(value):

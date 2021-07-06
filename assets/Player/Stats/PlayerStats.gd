@@ -32,7 +32,6 @@ var weapon_growth_rate = 50
 
 var max_charge = weapon_level*50 setget set_max_charge
 var charge = 0 setget set_charge
-var max_charge_level = 2 setget set_max_charge_level
 var charge_level = 0 setget set_charge_level
 
 var max_health = vitality*15 setget set_max_health
@@ -97,13 +96,11 @@ signal attack_speed_changed(value)
 signal status_changed(value)
 signal max_charge_changed(value)
 signal charge_changed(value)
-signal max_charge_level_changed(value)
 signal charge_level_changed(value)
 signal experience_changed(value)
 signal max_experience_changed(value)
 signal level_changed(value)
 signal player_leveling(value)
-signal weapon_level_changed(value)
 signal cash_changed(value)
 
 func _ready():
@@ -320,22 +317,6 @@ func set_attack_speed(value):
 	attack_speed = value
 	emit_signal("attack_speed_changed", attack_speed)
 
-func set_max_charge(value):
-	max_charge = value
-	emit_signal("max_charge_changed", max_charge)
-
-func set_charge(value):
-	charge = value
-	emit_signal("charge_changed", charge)
-
-func set_max_charge_level(value):
-	max_charge_level = value
-	emit_signal("max_charge_level_changed", max_charge_level)
-
-func set_charge_level(value):
-	charge_level = value
-	emit_signal("charge_level_changed", charge_level)
-
 func set_magic(value):
 	magic = value
 	spell_mod = 1 + (magic / 32) # + ~3.125% per point
@@ -371,7 +352,7 @@ func apply_weapon_xp(who):
 	weapon_xp += weapon_growth_rate
 	weapon_xp_total += weapon_growth_rate
 	while weapon_xp >= weapon_xp_required:
-		weapon_level += 1
+		self.weapon_level += 1
 		weapon_xp -= weapon_xp_required
 		weapon_xp_required *= 1.2
 		weapon_xp_required = round(weapon_xp_required)
@@ -379,8 +360,20 @@ func apply_weapon_xp(who):
 
 func set_weapon_level(value):
 	weapon_level = value
-	max_charge = weapon_level*50
-	emit_signal("weapon_level_changed", weapon_level)
+	self.max_charge = weapon_level*50
+	print("weapon_level charnged: max_charge = ", max_charge)
+
+func set_max_charge(value):
+	max_charge = value
+	emit_signal("max_charge_changed", max_charge)
+
+func set_charge(value):
+	charge = min(value, max_charge)
+	emit_signal("charge_changed", charge)
+
+func set_charge_level(value):
+	charge_level = value
+	emit_signal("charge_level_changed", charge_level)
 
 func set_cash(value):
 	cash = value

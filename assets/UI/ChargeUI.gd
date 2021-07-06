@@ -17,8 +17,6 @@ onready var chargeSound = $ChargeSound
 
 onready var stats = get_parent().stats
 
-var weapon_level setget set_weapon_level
-
 var currentCharge = 0 setget set_charge
 var currentChargeLevel = 0 setget set_charge_level
 
@@ -32,22 +30,13 @@ func _ready():
 	stats.charge = 0
 	stats.charge_level = 0
 	self.currentMaxStamina = stats.max_stamina
-# warning-ignore:return_value_discarded
 	stats.connect("max_stamina_changed", self, "set_max_stamina")
 	self.currentStamina = stats.stamina
-# warning-ignore:return_value_discarded
 	stats.connect("stamina_changed", self, "set_stamina")
 	self.currentCharge = stats.charge
-# warning-ignore:return_value_discarded
 	stats.connect("charge_changed", self, "set_charge")
 	self.currentChargeLevel = stats.charge_level
-# warning-ignore:return_value_discarded
 	stats.connect("charge_level_changed", self, "set_charge_level")
-	stats.connect("weapon_level_changed", self, "set_weapon_level")
-	self.weapon_level = stats.weapon_level
-
-func set_weapon_level(value):
-	weapon_level = value
 
 func set_stamina(value):
 	currentStamina = value
@@ -126,45 +115,42 @@ func toggle_stamina_warning(value):
 		staminaWarningAnimation.play("Off")
 
 func begin_charge_1():
+	print('begin_charge_1()')
 	chargeSound.play()
 	progress1.visible = true
 	
 func begin_charge_2():
+	print('begin_charge_2()')
 	chargeSound.play()
 	progress2.visible = true
 
 func begin_charge_3():
+	print('begin_charge_3()')
 	chargeSound.play()
 	progress3.visible = true
 
 func set_charge(value):
 	currentCharge = value
-	print(currentCharge)
 	if currentChargeLevel == 0:
 		progress1.value = currentCharge
 	if currentChargeLevel == 1:
 		progress2.value = currentCharge
 	if currentChargeLevel == 2:
 		progress3.value = currentCharge
-	
-	if currentCharge >= 50 && stats.charge_level == 0:
-		stats.charge_level = 1
-		begin_charge_2()
-	elif currentCharge >= 100 && stats.charge_level == 1:
-		stats.charge_level = 2
-		begin_charge_3()
-	elif currentCharge >= 150 && stats.charge_level == 2:
-		stats.charge_level = 3
 
 func set_charge_level(value):
 	currentChargeLevel = value
+	print("set_charge_level() ", currentChargeLevel)
 	if currentChargeLevel == 1:
+		print('chargeBeep 1')
 		chargeBeep.stream = ChargeBeepAudio_1
 		chargeBeep.play()
 	elif currentChargeLevel == 2:
+		print('chargeBeep 2')
 		chargeBeep.stream = ChargeBeepAudio_2
 		chargeBeep.play()
 	elif currentChargeLevel == 3:
+		print('chargeBeep 3')
 		chargeBeep.stream = ChargeBeepAudio_3
 		chargeBeep.play()
 
