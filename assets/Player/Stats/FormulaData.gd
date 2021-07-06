@@ -17,10 +17,12 @@ func apply_xp_to_formula(formula_name, who):
 	var formula_data = get(formula_name)
 	formula_data[2] += growth_rate
 	formula_data[4] += growth_rate
+	print(formula_name, " Lv.", formula_data[1], ": ", formula_data[2], " / ", formula_data[3], " XP. total: ", formula_data[4])
 	while formula_data[2] >= formula_data[3]:
 		formula_data[1] += 1
 		formula_data[2] -= formula_data[3]
 		formula_data[3] *= 1.2
+		formula_data[3] = round(formula_data[3])
 		# show_formula_level_notice(formula_data, who)
 		# yield(get_tree().create_timer(1), "timeout")
 		Global.display_message_popup(who, str(formula_data[0], " is now level " + str(formula_data[1])), "level")

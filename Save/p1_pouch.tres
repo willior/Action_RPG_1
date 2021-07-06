@@ -13,19 +13,19 @@
 script = ExtResource( 1 )
 _ingredients = [ {
 "ingredient_reference": ExtResource( 3 ),
-"quantity": 16
+"quantity": 20
 }, {
 "ingredient_reference": ExtResource( 2 ),
-"quantity": 16
+"quantity": 20
 }, {
 "ingredient_reference": ExtResource( 5 ),
-"quantity": 18
+"quantity": 20
 }, {
 "ingredient_reference": ExtResource( 4 ),
-"quantity": 19
+"quantity": 20
 }, {
 "ingredient_reference": ExtResource( 6 ),
-"quantity": 16
+"quantity": 20
 }, {
 "ingredient_reference": ExtResource( 7 ),
 "quantity": 20

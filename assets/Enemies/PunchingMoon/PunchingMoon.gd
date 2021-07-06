@@ -183,7 +183,8 @@ func create_hit_effect(_damage_count):
 	pass
 
 func _on_Hurtbox_area_entered(area): # runs when a hitbox enters the bat's hurtbox
-	if area.get("damage_formula") or area.get("projectile") or GameManager.player.dying or GameManager.player2.dying: return
+	if area.get("damage_formula") or area.get("projectile") or GameManager.player.dying or (GameManager.multiplayer_2 and GameManager.player2.dying):
+		return
 	var facing_direction = area.get_parent().get_parent().dir_vector
 	get_node("/root/World/").fade_out()
 	$Timer.start(0.8)
