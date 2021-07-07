@@ -302,8 +302,9 @@ func move_state(delta):
 				state = FLASH
 			2:
 				state = SHADE
-			3:
-				print('lv. 3 sword attack not implemented. player state would switch here.')
+			3: # TEMPORARY LV. 3
+				state = SHADE
+				return
 		charge.stop_charge()
 		charge_reset()
 		
@@ -356,6 +357,7 @@ func stamina_regen_reset():
 	timer.start(1)
 
 func apply_status(status):
+	print('does this get used anymore?')
 	match status:
 		"default_speed":
 			print('default speed')
@@ -473,14 +475,10 @@ func charge_state(_delta):
 			print('we would begin charge 4 here, if it existed')
 	
 	if stats.charge < stats.max_charge:
-		stats.charge += stats.charge_rate
-	if stats.charge >= 50: # and !attack_1_charged and !attack_2_charged:
-		pass # attack_1_charged = true
-	elif stats.charge >= 100: # and # attack_charging:
-		pass
-		# attack_1_charged = false
-		# attack_2_charged = true
-		# attack_charging = false
+		if stats.charge_level >= 2:
+			stats.charge += stats.charge_rate / 2
+		else:
+			stats.charge += stats.charge_rate
 
 func charge_reset():
 	if stats.charge_level != 0: stats.charge_level = 0
@@ -496,12 +494,18 @@ func shade_state(delta):
 	move()
 
 func shade_start():
+	# TEMPORARY LV. 3
+	if stats.charge_level >= 3:
+		velocity = dir_vector * stats.shade_speed * stats.charge_level/2
+	else:
+		velocity = dir_vector * stats.shade_speed
+	charge.stop_charge()
+	charge_reset()
 	set_collision_mask_bit(4, false)
 	yield(get_tree().create_timer(0.05), "timeout")
 	stats.stamina -= 35
 	charge.stop_charge()
 	swordHitbox.shade_begin()
-	velocity = dir_vector * stats.shade_speed
 
 func shade_stop():
 	set_collision_mask_bit(4, true)
@@ -733,6 +737,8 @@ func hit_state(_delta):
 	move()
 
 func hit_animation_finished():
+	if state == MOVE:
+		return
 	stamina_regen_reset()
 	player_state_reset()
 	charge.stop_charge()
@@ -858,9 +864,10 @@ func pickup_state(delta):
 	animationState.travel("Pickup")
 
 func pickup_finished():
+	if state == MOVE:
+		return
 	if Input.is_action_pressed(player_inputs.attack):
 		charge_reset()
-		# attack_charging = true
 	state = MOVE
 
 func action_state(delta):

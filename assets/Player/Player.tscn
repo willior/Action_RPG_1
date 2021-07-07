@@ -1158,7 +1158,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=26]
-length = 0.2
+length = 0.21
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -1188,7 +1188,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=27]
-length = 0.2
+length = 0.21
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -1218,7 +1218,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=28]
-length = 0.2
+length = 0.21
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -1248,7 +1248,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=29]
-length = 0.2
+length = 0.21
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -2193,7 +2193,7 @@ position = Vector2( 0, -9 )
 texture = SubResource( 3 )
 hframes = 60
 vframes = 5
-frame = 252
+frame = 244
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )

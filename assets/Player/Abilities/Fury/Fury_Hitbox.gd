@@ -12,8 +12,8 @@ var status = ["Frenzy", 1.0]
 func _ready():
 	spell_mod = get_parent().player.stats.spell_mod
 	formula_level = get_parent().player.formulaData.get(formula_name)[1]
-	duration = 3.0 + formula_level/2.0
-	potency = min(spell_mod, 2)
+	duration = 3.0 + formula_level/2.0 # duration is 3 seconds + the Formula Level / 2
+	potency = min(spell_mod, 2) # Potency is the spell_mod or 2, whichever is lower
 	status.append(duration)
 	status.append(potency)
 	# potency = (base_potency*formula_level_mod) * (spell_mod*spell_mod)

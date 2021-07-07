@@ -89,7 +89,7 @@ func remove_buffs(body):
 		if "buff" in status_display.get_node(b.name):
 			b.queue_free()
 
-func remove_last_debuff(body, cleanse_level):
+func remove_last_debuff(body, cleanse_level:int):
 	var status_display = body.get_node("StatusDisplay")
 	var debuffs_to_cleanse = cleanse_level
 	for d in range(status_display.get_child_count()-1, -1, -1):

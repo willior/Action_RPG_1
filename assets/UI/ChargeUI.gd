@@ -14,7 +14,6 @@ onready var staminaProgress = $StaminaProgress
 onready var staminaWarningAnimation = $StaminaProgress/AnimationPlayer
 onready var chargeBeep = $ChargeBeep
 onready var chargeSound = $ChargeSound
-
 onready var stats = get_parent().stats
 
 var currentCharge = 0 setget set_charge
