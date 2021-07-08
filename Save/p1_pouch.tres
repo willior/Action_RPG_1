@@ -16,13 +16,13 @@ _ingredients = [ {
 "quantity": 13
 }, {
 "ingredient_reference": ExtResource( 7 ),
-"quantity": 19
+"quantity": 20
 }, {
 "ingredient_reference": ExtResource( 8 ),
 "quantity": 20
 }, {
 "ingredient_reference": ExtResource( 3 ),
-"quantity": 9
+"quantity": 10
 }, {
 "ingredient_reference": ExtResource( 2 ),
 "quantity": 15

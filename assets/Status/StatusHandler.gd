@@ -4,6 +4,7 @@ onready var Regen = preload("res://assets/Status/Buffs/Regen.tscn")
 onready var Poison = preload("res://assets/Status/Debuffs/Poison.tscn")
 onready var Frenzy = preload("res://assets/Status/Buffs/Frenzy.tscn")
 onready var Stun = preload("res://assets/Status/Debuffs/Stun.tscn")
+onready var Haste = preload("res://assets/Status/Buffs/Haste.tscn")
 onready var Slow = preload("res://assets/Status/Debuffs/Slow.tscn")
 
 # status is an array with 4 indexes:
@@ -63,6 +64,18 @@ func apply_status(status, body):
 					status_display.add_child(stun)
 				else:
 					resist_status(body, status[0])
+		"Haste":
+			if status_display.has_node("Slow"):
+				status_display.get_node("Slow").queue_free()
+			if status_display.has_node("Haste"):
+				pass
+				# status_display.get_node("Haste").refresh_status(status[2], status[3])
+			else:
+				var haste = Haste.instance()
+#				haste.duration = status[2]
+#				haste.potency = status[3]
+				status_display.add_child(haste)
+				
 		"Slow":
 			if status_display.has_node("Slow"):
 				return

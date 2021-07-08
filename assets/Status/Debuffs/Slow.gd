@@ -4,7 +4,6 @@ const Icon = preload("res://assets/UI/Status/Debuffs/SlowIcon.tscn")
 var duration = 12 # number of ticks
 var potency = 1
 onready var body = get_parent().get_parent()
-var old_speed
 signal slow_removed()
 
 func _ready():
@@ -26,15 +25,18 @@ func _ready():
 	$AnimatedSprite.play()
 
 func _on_Timer_timeout():
-	body.stats.speed_mod = 1
-	if body.get("ENEMY_NAME"):
-		pass
+	if body.get_node("StatusDisplay").has_node("Haste"):
+		queue_free()
 	else:
-		body.animationTree.set("parameters/Run/TimeScale/scale", 1)
-	queue_free()
+		body.stats.speed_mod = 1
+		if body.get("ENEMY_NAME"):
+			pass
+		else:
+			body.animationTree.set("parameters/Run/TimeScale/scale", 1)
+		queue_free()
 
 func _on_SlowNotice_tree_exiting():
-	if !$Timer.is_stopped():
+	if !$Timer.is_stopped() and !body.get_node("StatusDisplay").has_node("Haste"):
 		body.stats.speed_mod = 1
 		if body.get("ENEMY_NAME"):
 			pass

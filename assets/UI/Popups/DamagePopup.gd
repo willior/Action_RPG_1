@@ -18,6 +18,9 @@ func _ready():
 	match kind:
 		"Normal":
 			fade = red_fade
+		"Haste":
+			popup_color = Color(1, 1, 0.75, 1)
+			fade = teal_fade
 		"Slow":
 			popup_color = Color(0.6, 0.6, 0.6, 1)
 			fade = red_fade

@@ -81,6 +81,7 @@ func _input(event):
 			GameManager.player2.pouch.add_ingredient("Mushroom", 20)
 		else:
 			print('no P2. cannot give ingredients.')
+	
 	if event.is_action_pressed("test2"):
 		print('2: applying stat modifiers')
 		for p in get_tree().get_nodes_in_group("Players"):
@@ -89,11 +90,13 @@ func _input(event):
 			p.stats.dexterity_mod = 2
 			p.stats.speed_mod = 2
 			p.stats.magic_mod = 2
+	
 	if event.is_action_pressed("test3"):
 		print('3: applying debuffs!')
 		for p in get_tree().get_nodes_in_group("Players"):
 			StatusHandler.apply_status(["Slow", 1.0], p)
 			StatusHandler.apply_status(["Poison", 1.0], p)
+	
 	if event.is_action_pressed("test4"):
 		print('4: giving XP')
 		GameManager.player.enemy_killed(1000)
@@ -101,20 +104,26 @@ func _input(event):
 			GameManager.player2.enemy_killed(1000)
 		else:
 			print('no P2. cannot level.')
+		
 	if event.is_action_pressed("test5"):
-		print('5: damaging P1.')
-		GameManager.player.stats.health -= 1000
+		print('5: applying haste.')
+		for p in get_tree().get_nodes_in_group("Players"):
+			StatusHandler.apply_status(["Haste", 1.0], p)
+	
 	if event.is_action_pressed("test6"):
 		if GameManager.multiplayer_2:
 			print('6: damaging P2.')
 			GameManager.player2.stats.health -= 1000
+	
 	if event.is_action_pressed("test7"):
 		print('7: recovering P1 health.')
 		GameManager.player.stats.health += 1000
+	
 	if event.is_action_pressed("test8"):
 		if GameManager.multiplayer_2:
 			print('8: recovering P2 health.')
 			GameManager.player2.stats.health += 1000
+	
 	if event.is_action_pressed("select_2"):
 		GameManager.multiplayer_2_toggle()
 	
