@@ -9,7 +9,10 @@ signal haste_removed()
 func _ready():
 	body.hurtbox.display_damage_popup("Haste!", false, name)
 	body.stats.speed_mod = 1.5
-	print(body.name, " speed_mod = ", body.stats.speed_mod)
+	if body.get_node("StatusDisplay").has_node("Slow"):
+		print('haste overriding slow.')
+		body.stats.attack_speed_penalty = 1.0
+	print(body.name, " hasted; speed_mod = ", body.stats.speed_mod)
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
@@ -26,15 +29,12 @@ func _ready():
 	$AnimatedSprite.play()
 
 func _on_Timer_timeout():
-	if body.get_node("StatusDisplay").has_node("Slow"):
-		queue_free()
+	body.stats.speed_mod = 1
+	if body.get("ENEMY_NAME"):
+		pass
 	else:
-		body.stats.speed_mod = 1
-		if body.get("ENEMY_NAME"):
-			pass
-		else:
-			body.animationTree.set("parameters/Run/TimeScale/scale", 1)
-		queue_free()
+		body.animationTree.set("parameters/Run/TimeScale/scale", 1)
+	queue_free()
 
 func _on_HasteNotice_tree_exiting():
 	if !$Timer.is_stopped() and !body.get_node("StatusDisplay").has_node("Slow"):

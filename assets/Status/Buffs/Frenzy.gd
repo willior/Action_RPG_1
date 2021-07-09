@@ -11,9 +11,11 @@ func _ready():
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(body.stats.attack_speed*potency)
-		body.set_stamina_attack_cost(body.stats.stamina_attack_cost/5)
+		# body.set_attack_timescale(body.stats.attack_speed * potency)
+		body.stats.attack_speed_mod = 1.0 * potency
+		body.set_stamina_attack_cost(body.stats.stamina_attack_cost / 5)
 		body.knockback_modifier = 0.2
+		
 		var icon = Icon.instance()
 		icon.duration = duration
 		icon.status_nodepath = self.get_path()
@@ -30,8 +32,10 @@ func refresh_status(new_duration, new_potency):
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(body.stats.attack_speed*new_potency)
-		body.set_stamina_attack_cost(body.stats.stamina_attack_cost/5)
+		# body.set_attack_timescale(body.stats.attack_speed * new_potency)
+		body.stats.attack_speed_mod = 1.0 * new_potency
+		body.set_stamina_attack_cost(body.stats.stamina_attack_cost / 5)
+		
 		match body.name:
 			"Player":
 				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Buffs/FrenzyIcon").refresh_status_icon(new_duration)
@@ -44,7 +48,9 @@ func _on_Timer_timeout():
 	if body.get("ENEMY_NAME"):
 		pass
 	else:
-		body.set_attack_timescale(body.stats.attack_speed)
+		# body.set_attack_timescale(body.stats.attack_speed)
+		# body.stats.attack_speed = body.stats.attack_speed
+		body.stats.attack_speed_mod = 1.0
 		body.set_stamina_attack_cost(body.stats.stamina_attack_cost)
 		body.knockback_modifier = 1
 	queue_free()

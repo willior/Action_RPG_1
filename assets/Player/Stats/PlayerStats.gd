@@ -65,7 +65,9 @@ var evasion
 var evasion_action_bonus = 0 setget set_evasion_action_bonus
 var iframes = 0.1
 var charge_rate = 0.5
-var attack_speed = 1.0 setget set_attack_speed
+var attack_speed = 1.0
+var attack_speed_mod = 1.0 setget set_attack_speed_mod
+var attack_speed_penalty = 1.0 setget set_attack_speed_penalty
 
 var magic_mod : float = 1 setget set_magic_mod
 var spell_mod = 1.0 setget set_spell_mod
@@ -295,6 +297,11 @@ func set_accuracy(value):
 func set_crit_rate(value):
 	crit_rate = value
 
+
+func increment_speed():
+	self.speed += 1
+	set_attack_speed(attack_speed_mod, attack_speed_penalty)
+
 func set_speed(value):
 	speed = value
 	evasion = (speed / 2 + evasion_action_bonus) * speed_mod
@@ -303,19 +310,32 @@ func set_speed(value):
 	shade_speed = (420 + (speed * 3)) * speed_mod
 	charge_rate = (0.5 + (speed / 128)) * speed_mod
 	iframes = (0.1 + (speed / 128)) * speed_mod
-	self.attack_speed = (1 + (speed / 128)) * speed_mod
+	# self.attack_speed = (1 + (speed / 128)) * speed_mod
 
 func set_speed_mod(value):
 	speed_mod = value
-	set_speed(speed)
+	evasion = (speed / 2 + evasion_action_bonus) * speed_mod
+	max_speed = (100 + (speed / 2)) * speed_mod
+	roll_speed = (200 + speed) * speed_mod
+	shade_speed = (420 + (speed * 3)) * speed_mod
+	charge_rate = (0.5 + (speed / 128)) * speed_mod
+	iframes = (0.1 + (speed / 128)) * speed_mod
+
+func set_attack_speed(mod, penalty):
+	attack_speed = ((1 + (speed / 128)) * mod) * penalty
+	emit_signal("attack_speed_changed", attack_speed)
+
+func set_attack_speed_mod(value):
+	attack_speed_mod = value
+	set_attack_speed(attack_speed_mod, attack_speed_penalty)
+
+func set_attack_speed_penalty(value):
+	attack_speed_penalty = value
+	set_attack_speed(attack_speed_mod, attack_speed_penalty)
 
 func set_evasion_action_bonus(value):
 	evasion_action_bonus = value
 	evasion = (speed / 2 + evasion_action_bonus) * speed_mod
-
-func set_attack_speed(value):
-	attack_speed = value
-	emit_signal("attack_speed_changed", attack_speed)
 
 func set_magic(value):
 	magic = value

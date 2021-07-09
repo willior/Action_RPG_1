@@ -114,17 +114,14 @@ func toggle_stamina_warning(value):
 		staminaWarningAnimation.play("Off")
 
 func begin_charge_1():
-	print('begin_charge_1()')
 	chargeSound.play()
 	progress1.visible = true
 	
 func begin_charge_2():
-	print('begin_charge_2()')
 	chargeSound.play()
 	progress2.visible = true
 
 func begin_charge_3():
-	print('begin_charge_3()')
 	chargeSound.play()
 	progress3.visible = true
 
@@ -139,17 +136,13 @@ func set_charge(value):
 
 func set_charge_level(value):
 	currentChargeLevel = value
-	print("set_charge_level() ", currentChargeLevel)
 	if currentChargeLevel == 1:
-		print('chargeBeep 1')
 		chargeBeep.stream = ChargeBeepAudio_1
 		chargeBeep.play()
 	elif currentChargeLevel == 2:
-		print('chargeBeep 2')
 		chargeBeep.stream = ChargeBeepAudio_2
 		chargeBeep.play()
 	elif currentChargeLevel == 3:
-		print('chargeBeep 3')
 		chargeBeep.stream = ChargeBeepAudio_3
 		chargeBeep.play()
 

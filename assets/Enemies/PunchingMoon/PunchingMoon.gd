@@ -66,6 +66,9 @@ func _ready():
 	add_to_group("Enemies")
 	Global.set_world_collision(self, z_index)
 
+func set_speed_scale():
+	pass
+
 func _physics_process(delta):
 #	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta) # knockback friction
 #	knockback = move_and_slide(knockback)

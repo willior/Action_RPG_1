@@ -444,7 +444,6 @@ func attack_animation_finished():
 		stamina_regen_reset()
 		state = MOVE
 		if !Input.is_action_pressed(player_inputs.attack):
-			print('attack button not held at end of animation. resetting charge.')
 			charge_reset()
 
 func charge_state(_delta):

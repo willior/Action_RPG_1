@@ -19,7 +19,7 @@ func apply_xp_to_formula(formula_name, who):
 	var formula_data = get(formula_name)
 	formula_data[2] += growth_rate
 	formula_data[4] += growth_rate
-	print(formula_name, " Lv.", formula_data[1], ": ", formula_data[2], " / ", formula_data[3], " XP. total: ", formula_data[4])
+	# print(formula_name, " Lv.", formula_data[1], ": ", formula_data[2], " / ", formula_data[3], " XP. total: ", formula_data[4])
 	while formula_data[2] >= formula_data[3]:
 		formula_data[1] += 1
 		formula_data[2] -= formula_data[3]
