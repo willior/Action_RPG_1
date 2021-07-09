@@ -1,6 +1,6 @@
 extends Node2D
 var buff
-# const Icon = preload("res://assets/UI/Status/Debuffs/HasteIcon.tscn")
+const Icon = preload("res://assets/UI/Status/Buffs/HasteIcon.tscn")
 var duration = 12 # number of ticks
 var potency = 1
 onready var body = get_parent().get_parent()
@@ -14,14 +14,14 @@ func _ready():
 		pass
 	else:
 		body.animationTree.set("parameters/Run/TimeScale/scale", 1.5)
-#		var icon = Icon.instance()
-#		icon.duration = duration
-#		icon.status_nodepath = self.get_path()
-#		match body.name:
-#			"Player":
-#				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").add_child(icon)
-#			"Player2":
-#				get_node("/root/World/GUI/StatusDisplay2/StatusContainer/Debuffs").add_child(icon)
+		var icon = Icon.instance()
+		icon.duration = duration
+		icon.status_nodepath = self.get_path()
+		match body.name:
+			"Player":
+				get_node("/root/World/GUI/StatusDisplay1/StatusContainer/Debuffs").add_child(icon)
+			"Player2":
+				get_node("/root/World/GUI/StatusDisplay2/StatusContainer/Debuffs").add_child(icon)
 	$Timer.start(duration)
 	$AnimatedSprite.play()
 

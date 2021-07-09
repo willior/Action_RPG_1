@@ -7,7 +7,9 @@ var Flash = ["Flash", 1, 0, 100, 0]
 var Heal = ["Heal", 1, 0, 100, 0]
 var Cleanse = ["Cleanse", 1, 0, 100, 0]
 
+var Quicken = ["Quicken", 1, 0, 100, 0]
 var Fury = ["Fury", 1, 0, 100, 0]
+
 # formula_data[0] = name
 # formula_data[1] = level
 # formula_data[2] = xp
@@ -38,4 +40,5 @@ func default_formula_data():
 	Flash = ["Flash", 1, 0, 100, 0]
 	Heal = ["Heal", 1, 0, 100, 0]
 	Cleanse = ["Cleanse", 1, 0, 100, 0]
+	Quicken = ["Quicken", 1, 0, 100, 0]
 	Fury = ["Fury", 1, 0, 100, 0]

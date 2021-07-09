@@ -2,8 +2,11 @@ extends "res://assets/Player/Stats/FormulaData.gd"
 
 func save():
 	var player1_formulaData = {
-		"Flash": Flash,
 		"Heal": Heal,
+		"Cleanse": Cleanse,
+		"Hardball": Hardball,
+		"Flash": Flash,
+		"Quicken": Quicken,
 		"Fury": Fury
 	}
 	var save_dict = {
