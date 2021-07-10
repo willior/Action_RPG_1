@@ -8,7 +8,7 @@ onready var stamBar = $StaminaBarTexture
 func set_stamina(value):
 	stamina = value
 	stamBar.value = stamina
-	
+
 func set_max_stamina(value):
 	max_stamina = value
 	stamBar.max_value = max_stamina
@@ -22,11 +22,10 @@ func _ready():
 # warning-ignore:return_value_discarded
 	Player1Stats.connect("max_stamina_changed", self, "set_max_stamina")
 # warning-ignore:return_value_discarded
-	Player1Stats.connect("status_changed", self, "set_sweating")
+	Player1Stats.connect("sweating_changed", self, "set_sweating")
 
 func set_sweating(value):
-	match value:
-		"sweating":
-			$AnimationPlayer.play("Sweating")
-		"sweating_end":
-			$AnimationPlayer.play("Stop")
+	if value:
+		$AnimationPlayer.play("Sweating")
+	else:
+		$AnimationPlayer.play("Stop")

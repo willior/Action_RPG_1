@@ -669,9 +669,9 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
 [connection signal="sort_children" from="StatusDisplay1/StatusContainer/Buffs" to="StatusDisplay1/StatusContainer/Buffs" method="_on_Buffs_sort_children"]
 [connection signal="sort_children" from="StatusDisplay2/StatusContainer/Buffs" to="StatusDisplay2/StatusContainer/Buffs" method="_on_Buffs_sort_children"]
 
 [editable path="ExpBar1"]
-
 [editable path="ExpBar2"]

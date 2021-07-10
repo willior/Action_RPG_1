@@ -42,6 +42,7 @@ var dir_vector = stats.dir_vector
 var damageTaken = 0
 var stamina_regen_level = 0
 var stats_to_allocate = 0
+var movement_speed_mod = 1.0
 
 var roll_moving = false
 var backstep_moving = false
@@ -67,7 +68,6 @@ var talkNoticeDisplay = false setget set_talk_notice
 var interactNoticeDisplay = false setget set_interact_notice
 var sweating = false
 var dying = false
-# var just_leveled = false
 
 var player_inputs = {
 	"left": "left_1",
@@ -123,9 +123,9 @@ func _ready():
 	swordHitbox.knockback_vector = dir_vector
 	collision.disabled = false
 	charge_reset()
-	stats.connect("status_changed", self, "apply_status")
 	stats.connect("player_dying", self, "dying_effect")
 	stats.connect("no_health", self, "game_over")
+	stats.connect("max_speed_mod_changed", self, "set_movement_speed_mod")
 	stats.connect("attack_speed_changed", self, "set_attack_timescale")
 	set_attack_timescale(stats.attack_speed)
 	Global.set_world_collision(self, z_index)
@@ -260,7 +260,7 @@ func move_state(delta):
 		animationTree.set("parameters/Backstep/blend_position", input_vector)
 		animationTree.set("parameters/Hit/blend_position", input_vector)
 		animationState.travel("Run")
-		velocity = velocity.move_toward(input_vector * (stats.max_speed+stats.max_speed_mod), stats.acceleration * delta)
+		velocity = velocity.move_toward(input_vector * stats.max_speed, stats.acceleration * delta)
 		
 		if GameManager.multiplayer_2:
 			# Global.check_players_distance()
@@ -324,6 +324,7 @@ func stamina_regeneration():
 		stats.stamina += (stats.stamina_regen_rate * 0.6) # sweating rate
 		if stats.stamina > 0:
 			sweating = false
+			stats.sweating = sweating
 			$Sweat.visible = false
 			$ChargeUI.sweatFlag = false
 	
@@ -354,23 +355,7 @@ func stamina_regeneration():
 func stamina_regen_reset():
 	if stamina_regen_level > 0:
 		stamina_regen_level = 0
-	timer.start(1)
-
-func apply_status(status):
-	print('does this get used anymore?')
-	match status:
-		"default_speed":
-			print('default speed')
-			animationTree.set("parameters/Run/TimeScale/scale", 1)
-		"slow":
-			print('slow')
-			animationTree.set("parameters/Run/TimeScale/scale", 0.5)
-		"frenzy":
-			print('frenzy')
-			swordHitbox.knockback_vector = dir_vector / 8
-		"frenzy_end":
-			print('frenzy end')
-			swordHitbox.knockback_vector = dir_vector
+	timer.start(0.8)
 
 func move():
 	if GameManager.multiplayer_2:
@@ -390,7 +375,11 @@ func no_stamina():
 func set_sweating():
 	$Sweat.visible = true
 	sweating = true
+	stats.sweating = sweating
 	$ChargeUI.sweatFlag = true
+
+func set_movement_speed_mod(value):
+	animationTree.set("parameters/Run/TimeScale/scale", value)
 
 func set_attack_timescale(value):
 	animationTree.set("parameters/Attack1/TimeScale/scale", value)

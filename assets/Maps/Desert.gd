@@ -15,27 +15,31 @@ func _ready():
 	randomize()
 	self.wind_strength = wind_strength
 	self.particle_amount = particle_amount
-	
+
+func _process(_delta):
+	if wind_strength > 64 or wind_strength < -64:
+		for p in get_tree().get_nodes_in_group("Players"):
+			p.position.x += wind_strength/160
+
 func set_wind_direction(value):
 	wind_direction = value
 	prints("wind_direction = " + wind_direction)
-	
+
 func set_wind_strength(value):
 	wind_strength = value
-	
 	particles.process_material.set_shader_param("initial_linear_velocity", wind_strength)
 	particles.process_material.set_shader_param("angular_velocity", wind_strength)
 	particles.process_material.set_shader_param("linear_accel", wind_strength)
-	
+
 func set_particle_amount(value):
 	particle_amount = int(value)
 	particles.process_material.set_shader_param("number_particles_shown", particle_amount)
-		
+
 func modulate_wind(start_value_wind, start_value_particles):
 	var end_value_wind = rand_range(-160, 160)
 	prints("end_value_wind: " + str(end_value_wind))
 	
-	if end_value_wind < 0:
+	if end_value_wind < 0: # negative = wind blowing west/left
 		wind_direction = "left"
 		self.wind_direction = wind_direction
 	elif end_value_wind >= 0:
@@ -49,21 +53,19 @@ func modulate_wind(start_value_wind, start_value_particles):
 		start_value_particles, end_value_particles, 4,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Calm")
-		
-#		Player1Stats.status = "not_slow"
-#		Player2Stats.status = "not_slow"
-		
-	elif (end_value_wind > 64 || end_value_wind < -64) && start_value_particles != 6000:
+		for p in get_tree().get_nodes_in_group("Players"):
+			p.stats.max_speed_mod = 1
+	
+	elif (end_value_wind > 64 or end_value_wind < -64) && start_value_particles != 6000:
 		end_value_particles = 6000
 		print("strong wind; more sand")
 		tween.interpolate_property(self, "particle_amount",
 		start_value_particles, end_value_particles, 8,
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$AnimationPlayer.play("Storm")
-		
-#		Player1Stats.status = "slow"
-#		Player2Stats.status = "slow"
-		
+		for p in get_tree().get_nodes_in_group("Players"):
+			p.stats.max_speed_mod = 0.5
+	
 	else: # pass
 		print('not changing sand amount')
 		
@@ -71,7 +73,7 @@ func modulate_wind(start_value_wind, start_value_particles):
 		start_value_wind, end_value_wind, 4,
 		Tween.TRANS_LINEAR, Tween.EASE_OUT)
 	tween.start()
-	
+
 func _on_Timer_timeout():
 	current_wind_strength = wind_strength
 	current_particles_amount = particles.process_material.get_shader_param("number_particles_shown")

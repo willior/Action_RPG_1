@@ -2,7 +2,7 @@ extends Node
 
 var acceleration = 800
 var max_speed = 100
-var max_speed_mod = 0 setget set_max_speed_mod
+var max_speed_mod = 1.0 setget set_max_speed_mod
 var roll_speed = 200
 var shade_speed = 420
 var friction = 1200
@@ -75,8 +75,7 @@ var drop_rate_mod = 1.0 setget set_drop_rate_mod
 
 var cash = 0 setget set_cash
 
-var status = "fine" setget set_status
-var sweating = false
+var sweating = false setget set_sweating
 
 var vitality_description = "Willpower is a measure of your ability to press on through hardship, or how much you are willing to withstand."
 var endurance_description = "Lung Capacity determines how many physical actions you can perform in a short period of time."
@@ -93,9 +92,10 @@ signal final_health_changed(value)
 signal player_dying(value)
 signal stamina_changed(value)
 signal max_stamina_changed(value)
+signal max_speed_mod_changed(value)
 signal attack_power_changed(value)
 signal attack_speed_changed(value)
-signal status_changed(value)
+signal sweating_changed(value)
 signal max_charge_changed(value)
 signal charge_changed(value)
 signal charge_level_changed(value)
@@ -175,11 +175,9 @@ func recovery():
 	self.stamina = max_stamina
 
 func set_status(value):
-	status = value
-	emit_signal("status_changed", status)
-
-func set_max_speed_mod(value):
-	max_speed_mod = value
+func set_sweating(value):
+	sweating = value
+	emit_signal("sweating_changed", sweating)
 
 func increment_vitality():
 	self.vitality += 1
@@ -303,22 +301,25 @@ func increment_speed():
 
 func set_speed(value):
 	speed = value
-	evasion = (speed / 2 + evasion_action_bonus) * speed_mod
-	max_speed = (100 + (speed / 2)) * speed_mod
-	roll_speed = (200 + speed) * speed_mod
-	shade_speed = (420 + (speed * 3)) * speed_mod
-	charge_rate = (0.5 + (speed / 128)) * speed_mod
-	iframes = (0.1 + (speed / 128)) * speed_mod
-	# self.attack_speed = (1 + (speed / 128)) * speed_mod
+	calculate_speed_attributes()
 
 func set_speed_mod(value):
 	speed_mod = value
+	calculate_speed_attributes()
+
+func calculate_speed_attributes():
 	evasion = (speed / 2 + evasion_action_bonus) * speed_mod
-	max_speed = (100 + (speed / 2)) * speed_mod
+	max_speed = ((100 + (speed / 2)) * speed_mod) * max_speed_mod
 	roll_speed = (200 + speed) * speed_mod
 	shade_speed = (420 + (speed * 3)) * speed_mod
 	charge_rate = (0.5 + (speed / 128)) * speed_mod
 	iframes = (0.1 + (speed / 128)) * speed_mod
+
+func set_max_speed_mod(value):
+	max_speed_mod = value
+	max_speed = ((100 + (speed / 2)) * speed_mod) * max_speed_mod
+	print("max_speed_mod set: ", max_speed_mod, " /// max_speed = ", max_speed)
+	emit_signal("max_speed_mod_changed", max_speed_mod)
 
 func set_attack_speed(mod, penalty):
 	attack_speed = ((1 + (speed / 128)) * mod) * penalty
@@ -388,6 +389,10 @@ func set_max_charge(value):
 
 func set_charge(value):
 	charge = min(value, max_charge)
+	if charge > 0 and max_speed_mod == 1.0:
+		self.max_speed_mod -= 0.25
+	elif charge == 0 and max_speed_mod == 0.75:
+		self.max_speed_mod += 0.25
 	emit_signal("charge_changed", charge)
 
 func set_charge_level(value):
