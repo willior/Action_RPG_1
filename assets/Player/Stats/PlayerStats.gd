@@ -174,7 +174,6 @@ func recovery():
 	self.health = max_health
 	self.stamina = max_stamina
 
-func set_status(value):
 func set_sweating(value):
 	sweating = value
 	emit_signal("sweating_changed", sweating)
