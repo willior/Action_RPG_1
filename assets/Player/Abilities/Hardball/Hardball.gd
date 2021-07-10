@@ -12,6 +12,7 @@ func ability_start():
 	projectile.target = $FormulaHitbox/RayCast2D.to_global($FormulaHitbox/RayCast2D.get_cast_to())
 	projectile.knockback_vector = global_position.direction_to(projectile.target)
 	get_tree().get_root().get_node("World/YSort").add_child(projectile)
+	
 #	var trail = Trail.instance()
 #	trail.target = projectile
 #	get_tree().get_root().get_node("World/YSort").add_child(trail)

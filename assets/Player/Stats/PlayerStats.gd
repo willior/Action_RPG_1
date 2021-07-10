@@ -297,7 +297,6 @@ func set_accuracy(value):
 func set_crit_rate(value):
 	crit_rate = value
 
-
 func increment_speed():
 	self.speed += 1
 	set_attack_speed(attack_speed_mod, attack_speed_penalty)

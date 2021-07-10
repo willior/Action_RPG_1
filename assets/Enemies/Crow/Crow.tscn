@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
@@ -28,7 +28,7 @@ shader_param/active = false
 light_mode = 1
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 6.0
+radius = 8.0
 
 [sub_resource type="Animation" id=4]
 resource_name = "Caw"
@@ -574,23 +574,14 @@ graph_offset = Vector2( -234.787, -72.4119 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=55]
 
-[sub_resource type="CircleShape2D" id=56]
-radius = 14.0
-
-[sub_resource type="CircleShape2D" id=57]
-radius = 15.0
-
 [sub_resource type="CircleShape2D" id=58]
-radius = 15.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id=59]
 radius = 28.0
 
 [sub_resource type="CircleShape2D" id=60]
-radius = 12.0
-
-[sub_resource type="CircleShape2D" id=61]
-radius = 5.0
+radius = 24.0
 
 [node name="Crow" type="KinematicBody2D"]
 collision_layer = 16
@@ -604,7 +595,7 @@ texture = ExtResource( 16 )
 offset = Vector2( 0, -12 )
 hframes = 12
 vframes = 2
-frame = 7
+frame = 9
 
 [node name="AnimatedSpriteEye" type="Sprite" parent="Sprite"]
 modulate = Color( 0, 0, 0, 1 )
@@ -615,7 +606,7 @@ texture = ExtResource( 17 )
 offset = Vector2( 0, -12 )
 hframes = 12
 vframes = 2
-frame = 7
+frame = 9
 
 [node name="Outline" type="Sprite" parent="Sprite"]
 visible = false
@@ -629,7 +620,6 @@ vframes = 2
 texture = ExtResource( 15 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -3 )
 shape = SubResource( 3 )
 
@@ -670,11 +660,10 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
 position = Vector2( 0, -9 )
-shape = SubResource( 56 )
+shape = SubResource( 58 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
-visible = false
-position = Vector2( 0, -14 )
+position = Vector2( 0, -10 )
 collision_mask = 4
 damage = 16.0
 accuracy = 66.0
@@ -682,7 +671,7 @@ status = [ "Slow", 0.5 ]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 57 )
+shape = SubResource( 58 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0, 4 )
@@ -690,7 +679,7 @@ collision_layer = 8
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 0, -24 )
+position = Vector2( 0, -20 )
 shape = SubResource( 58 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
@@ -707,7 +696,6 @@ shape = SubResource( 59 )
 visible = false
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
-scale = Vector2( 2, 2 )
 collision_layer = 0
 collision_mask = 2
 
@@ -723,7 +711,7 @@ one_shot = true
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 61 )
+shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -749,7 +737,7 @@ visible = false
 position = Vector2( 0, 3 )
 
 [node name="StatusDisplay" type="Node2D" parent="."]
-position = Vector2( 0, -28 )
+position = Vector2( 0, -24 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -4, -4, 8, 8 )

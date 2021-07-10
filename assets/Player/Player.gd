@@ -576,6 +576,7 @@ func roll_animation_finished():
 		charge.stop_charge()
 		charge_reset()
 		state = SHADE
+		return
 	elif flash_queued:
 		flash_queued = false
 		velocity = dir_vector * (stats.roll_speed/2)
@@ -583,12 +584,14 @@ func roll_animation_finished():
 		charge_reset()
 		apply_evasion_action_bonus(66)
 		state = FLASH
-	elif attack1_queued:
+		return
+	if stats.charge > 0:
+		charge.stop_charge()
+		charge_reset()
+	if attack1_queued:
 		velocity = dir_vector * -(stats.roll_speed/2)
 		attack_animation_finished()
 	else:
-		if stats.charge > 0:
-			charge_reset()
 		attack_animation_finished()
 
 func backstep_stamina_drain():

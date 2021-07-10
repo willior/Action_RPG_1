@@ -11,15 +11,15 @@
 [resource]
 script = ExtResource( 1 )
 _formulas = [ {
-"formula_reference": ExtResource( 5 )
-}, {
 "formula_reference": ExtResource( 2 )
 }, {
 "formula_reference": ExtResource( 4 )
 }, {
 "formula_reference": ExtResource( 6 )
 }, {
+"formula_reference": ExtResource( 7 )
+}, {
 "formula_reference": ExtResource( 3 )
 }, {
-"formula_reference": ExtResource( 7 )
+"formula_reference": ExtResource( 5 )
 } ]

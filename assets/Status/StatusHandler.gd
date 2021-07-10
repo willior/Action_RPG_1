@@ -68,12 +68,11 @@ func apply_status(status, body):
 			if status_display.has_node("Slow"):
 				status_display.get_node("Slow").queue_free()
 			if status_display.has_node("Haste"):
-				pass
-				# status_display.get_node("Haste").refresh_status(status[2], status[3])
+				status_display.get_node("Haste").refresh_status(status[2], status[3])
 			else:
 				var haste = Haste.instance()
-#				haste.duration = status[2]
-#				haste.potency = status[3]
+				haste.duration = status[2]
+				haste.potency = status[3]
 				status_display.add_child(haste)
 				
 		"Slow":

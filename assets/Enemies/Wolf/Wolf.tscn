@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
@@ -452,18 +452,10 @@ graph_offset = Vector2( 364.604, 14.194 )
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id=44]
-radius = 18.0
-
-[sub_resource type="CircleShape2D" id=45]
-radius = 16.0
-
-[sub_resource type="CircleShape2D" id=46]
 radius = 32.0
 
-[sub_resource type="CircleShape2D" id=47]
-
-[sub_resource type="CircleShape2D" id=48]
-radius = 6.0
+[sub_resource type="CircleShape2D" id=45]
+radius = 20.0
 
 [node name="Wolf" type="KinematicBody2D"]
 collision_layer = 16
@@ -535,7 +527,6 @@ parameters/Move/BlendSpace2D/blend_position = Vector2( 0, 0 )
 parameters/Move/TimeScale/scale = 1.0
 
 [node name="Talkbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 128
 collision_mask = 0
 
@@ -551,28 +542,26 @@ accuracy = 88.0
 status = [ "Stun", 1.0 ]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource( 44 )
+shape = SubResource( 43 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
-visible = false
 position = Vector2( 0, 4 )
 collision_layer = 8
 script = ExtResource( 11 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -16 )
-shape = SubResource( 45 )
+shape = SubResource( 43 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
 visible = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
-visible = false
 scale = Vector2( 3, 3 )
 input_pickable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-shape = SubResource( 46 )
+shape = SubResource( 44 )
 
 [node name="ChaseTimer" type="Timer" parent="PlayerDetectionZone"]
 wait_time = 0.75
@@ -581,14 +570,12 @@ wait_time = 0.75
 visible = false
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
-visible = false
 scale = Vector2( 2, 2 )
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
-scale = Vector2( 2, 2 )
-shape = SubResource( 47 )
+shape = SubResource( 45 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8
@@ -599,7 +586,7 @@ visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 position = Vector2( 0, -1 )
-shape = SubResource( 48 )
+shape = SubResource( 43 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 0.4

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/Shaders/WhiteColor.shader" type="Shader" id=1]
 [ext_resource path="res://assets/Enemies/AttackController.tscn" type="PackedScene" id=2]
@@ -143,17 +143,15 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=23]
-radius = 9.0
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id=24]
-radius = 16.0
+radius = 64.0
 
 [sub_resource type="CircleShape2D" id=25]
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id=26]
-radius = 5.0
-
-[sub_resource type="CircleShape2D" id=27]
 radius = 5.0
 
 [node name="Bat" type="KinematicBody2D"]
@@ -216,11 +214,9 @@ shape = SubResource( 23 )
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
-visible = false
 monitorable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-scale = Vector2( 4, 4 )
 shape = SubResource( 24 )
 
 [node name="AttackController" parent="." instance=ExtResource( 2 )]
@@ -231,7 +227,6 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
-scale = Vector2( 2, 2 )
 shape = SubResource( 25 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
@@ -251,7 +246,7 @@ shape = SubResource( 26 )
 visible = false
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 27 )
+shape = SubResource( 26 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3
