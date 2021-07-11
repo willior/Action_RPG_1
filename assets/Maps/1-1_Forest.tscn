@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://assets/Maps/1-1_Forest.gd" type="Script" id=1]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=2]
@@ -12,12 +12,14 @@
 [ext_resource path="res://assets/World/Grass/Leaf_bright_green_1_sheet.png" type="Texture" id=10]
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_1.png" type="Texture" id=11]
 [ext_resource path="res://assets/CollisionBoxes/Exit.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/Audio/Music/Forest_BGM_slow.ogg" type="AudioStream" id=14]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_pink_1_sheet.png" type="Texture" id=15]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_red_1_sheet.png" type="Texture" id=16]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_red_1_sheet.png" type="Texture" id=17]
 [ext_resource path="res://World.gd" type="Script" id=18]
 [ext_resource path="res://assets/World/CliffTileset.png" type="Texture" id=19]
+[ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=20]
 [ext_resource path="res://assets/World/Grass/Leaf_dark_orange_1_sheet.png" type="Texture" id=23]
 [ext_resource path="res://assets/World/Grass/Leaf_bright_yellow_1_sheet.png" type="Texture" id=24]
 [ext_resource path="res://assets/Tilesets/grassBasic_lightInner/tileset_grassBasic_lightInner.tres" type="TileSet" id=25]
@@ -1911,6 +1913,93 @@ position = Vector2( 362, 224 )
 position = Vector2( 115, 44 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
+
+[node name="Bat" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 280, 112 )
+
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 184, 56 )
+
+[node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 232, 136 )
+
+[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 88, 80 )
+
+[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 168, 160 )
+
+[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 72, 136 )
+
+[node name="Bat7" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 104, 192 )
+
+[node name="Bat8" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 120, 248 )
+
+[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 264, 352 )
+
+[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 344, 368 )
+
+[node name="Bat11" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 328, 208 )
+
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 256, 736 )
+
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 184, 696 )
+
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 368, 736 )
+
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 48, 688 )
+
+[node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 120, 800 )
+
+[node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 20 )]
+position = Vector2( 328, 792 )
+
+[node name="Bat12" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 432, 224 )
+
+[node name="Bat13" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 504, 168 )
+
+[node name="Bat14" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 592, 144 )
+
+[node name="Bat15" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 704, 144 )
+
+[node name="Bat16" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 528, 368 )
+
+[node name="Bat17" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 536, 376 )
+
+[node name="Bat18" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 520, 384 )
+
+[node name="Bat19" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 536, 392 )
+
+[node name="Bat20" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 560, 368 )
+
+[node name="Bat21" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 568, 376 )
+
+[node name="Bat22" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 552, 384 )
+
+[node name="Bat23" parent="YSort/Enemies" instance=ExtResource( 13 )]
+position = Vector2( 568, 392 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

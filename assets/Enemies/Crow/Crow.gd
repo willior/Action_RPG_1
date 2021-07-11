@@ -286,4 +286,5 @@ func audio_cawcawcaw():
 	audio.play()
 
 func _on_VisibilityNotifier2D_screen_exited():
+	print('deleting enemy ', self.name)
 	Enemy.despawn_offscreen(self)

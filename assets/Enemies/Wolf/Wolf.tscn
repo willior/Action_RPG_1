@@ -527,6 +527,7 @@ parameters/Move/BlendSpace2D/blend_position = Vector2( 0, 0 )
 parameters/Move/TimeScale/scale = 1.0
 
 [node name="Talkbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 128
 collision_mask = 0
 
@@ -535,6 +536,7 @@ position = Vector2( 0, -12 )
 shape = SubResource( 43 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 0, -8 )
 collision_mask = 4
 damage = 16.0
@@ -545,6 +547,7 @@ status = [ "Stun", 1.0 ]
 shape = SubResource( 43 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 0, 4 )
 collision_layer = 8
 script = ExtResource( 11 )
@@ -557,6 +560,7 @@ shape = SubResource( 43 )
 visible = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+visible = false
 scale = Vector2( 3, 3 )
 input_pickable = false
 
@@ -570,6 +574,7 @@ wait_time = 0.75
 visible = false
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
+visible = false
 scale = Vector2( 2, 2 )
 collision_layer = 0
 collision_mask = 2

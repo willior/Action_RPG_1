@@ -260,6 +260,10 @@ __meta__ = {
 }
 
 [node name="Camera2D" parent="." instance=ExtResource( 20 )]
+limit_left = -320
+limit_top = -176
+limit_right = 960
+limit_bottom = 540
 smoothing_enabled = true
 smoothing_speed = 8.0
 
@@ -421,6 +425,36 @@ position = Vector2( -103, 100 )
 
 [node name="Wolf2" parent="YSort/Enemies" instance=ExtResource( 22 )]
 position = Vector2( -39, 151 )
+
+[node name="Wolf3" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( -168, 160 )
+
+[node name="Wolf4" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( -104, 211 )
+
+[node name="Wolf5" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 304, 192 )
+
+[node name="Wolf6" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 368, 243 )
+
+[node name="Wolf7" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 240, 256 )
+
+[node name="Wolf8" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 304, 307 )
+
+[node name="Wolf9" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 392, -104 )
+
+[node name="Wolf10" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 456, -53 )
+
+[node name="Wolf11" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 328, -40 )
+
+[node name="Wolf12" parent="YSort/Enemies" instance=ExtResource( 22 )]
+position = Vector2( 392, 11 )
 
 [node name="Items" type="YSort" parent="YSort"]
 

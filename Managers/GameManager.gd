@@ -87,7 +87,8 @@ func multiplayer_2_toggle():
 		var REMOTE2D = load("res://assets/System/RemoteTransform2D.tscn")
 		var remoteTransform2D = REMOTE2D.instance()
 		player.add_child(remoteTransform2D)
-		get_tree().get_root().get_node("/root/World/Camera2D").state = 0
+		# get_tree().get_root().get_node("/root/World/Camera2D").state = 0
+		get_tree().get_root().get_node("/root/World/Camera2D").multiplayer_2_toggle()
 		player2.queue_free()
 		multiplayer_2 = false
 		player2 = null
@@ -96,7 +97,8 @@ func multiplayer_2_toggle():
 		player.get_node("RemoteTransform2D").queue_free()
 		load_player2()
 		get_tree().get_root().get_node("/root/World/YSort").add_child(player2)
-		get_tree().get_root().get_node("/root/World/Camera2D").state = 1
+		# get_tree().get_root().get_node("/root/World/Camera2D").state = 1
+		get_tree().get_root().get_node("/root/World/Camera2D").multiplayer_2_toggle()
 		player2.global_position = player.global_position
 	get_tree().get_root().get_node("/root/World/GUI").toggle_multiplayer_gui()
 

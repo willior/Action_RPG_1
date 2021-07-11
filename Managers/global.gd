@@ -58,6 +58,33 @@ func _deferred_goto_scene(path):
 	# optional, to make it compatible with the SceneTree.change_scene() API
 	get_tree().set_current_scene( current_scene )
 
+func check_players_distance(player):
+	for p in get_tree().get_nodes_in_group("Players"):
+		if player == p:
+			continue
+		elif player != p:
+			if player.position.x - p.position.x > 440:
+				print('other player too far left')
+				p.position = player.position
+				# p.position.x += 1
+			if player.position.x - p.position.x < -440:
+				print('other player too far right')
+				p.position = player.position
+				# p.position.x -= 1
+			if player.position.y - p.position.y > 250:
+				print('other player too far up')
+				p.position = player.position
+				# p.position.y += 1
+			if player.position.y - p.position.y < -250:
+				print('other player too far down')
+				p.position = player.position
+				# p.position.y -= 1
+			
+			
+#			if p.position.distance_to(player.position) > 270:
+#				print('changing position')
+#				p.position = player.position
+
 #func player_hit_calculation(base_accuracy, dexterity, dexterity_bonus, evasion):
 #	rng.randomize()
 #	var random_value = rng.randf_range(0, 100)

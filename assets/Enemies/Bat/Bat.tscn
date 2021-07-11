@@ -195,6 +195,7 @@ anims/StartFlashing = SubResource( 21 )
 anims/StopFlashing = SubResource( 22 )
 
 [node name="Talkbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 128
 collision_mask = 0
 
@@ -204,6 +205,7 @@ shape = SubResource( 23 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 pause_mode = 2
+visible = false
 collision_layer = 8
 script = ExtResource( 12 )
 
@@ -212,16 +214,20 @@ position = Vector2( 0, -14 )
 shape = SubResource( 23 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+visible = false
 monitorable = false
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 shape = SubResource( 24 )
 
 [node name="AttackController" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
+visible = false
 monitorable = false
 collision_layer = 0
 collision_mask = 2
@@ -234,6 +240,7 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 0, -3 )
 collision_mask = 4
 damage = 8.0

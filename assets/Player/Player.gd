@@ -263,9 +263,9 @@ func move_state(delta):
 		velocity = velocity.move_toward(input_vector * stats.max_speed, stats.acceleration * delta)
 		
 		if GameManager.multiplayer_2:
-			# Global.check_players_distance()
-			if position.x - GameManager.player2.position.x > 288 or position.x - GameManager.player2.position.x < -288 or position.y - GameManager.player2.position.y > 160 or position.y - GameManager.player2.position.y < -136:
-				GameManager.player2.position = position
+			Global.check_players_distance(self)
+#			if position.x - GameManager.player2.position.x > 288 or position.x - GameManager.player2.position.x < -288 or position.y - GameManager.player2.position.y > 160 or position.y - GameManager.player2.position.y < -136:
+#				GameManager.player2.position = position
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, stats.friction * delta)
@@ -359,13 +359,13 @@ func stamina_regen_reset():
 
 func move():
 	if GameManager.multiplayer_2:
-		if position.x - GameManager.player2.position.x > 360:
+		if position.x - GameManager.player2.position.x > 450:
 			GameManager.player2.position.x += 1
-		if position.x - GameManager.player2.position.x < -360:
+		if position.x - GameManager.player2.position.x < -450:
 			GameManager.player2.position.x -= 1
-		if position.y - GameManager.player2.position.y > 200:
+		if position.y - GameManager.player2.position.y > 250:
 			GameManager.player2.position.y += 1
-		if position.y - GameManager.player2.position.y < -200:
+		if position.y - GameManager.player2.position.y < -250:
 			GameManager.player2.position.y -= 1
 	velocity = move_and_slide(velocity)
 

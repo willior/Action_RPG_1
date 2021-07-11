@@ -341,6 +341,18 @@ shape = SubResource( 14 )
 [node name="CollisionShape2D" parent="Map/Exit2/StaticBody2D" index="0"]
 shape = SubResource( 14 )
 
+[node name="Exit3" parent="Map" instance=ExtResource( 17 )]
+position = Vector2( 15, 177 )
+z_index = 1
+map_file = "res://assets/Maps/0_Prologue/0-2_Tutorial.tscn"
+selected_location = Vector2( 1400, 450 )
+
+[node name="CollisionShape2D" parent="Map/Exit3" index="0"]
+shape = SubResource( 13 )
+
+[node name="CollisionShape2D" parent="Map/Exit3/StaticBody2D" index="0"]
+shape = SubResource( 13 )
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="Map"]
 scroll_base_offset = Vector2( 200, 0 )
 
@@ -416,28 +428,22 @@ position = Vector2( 273, 266 )
 position = Vector2( 134, 206 )
 
 [node name="Crow" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 96, 44 )
+position = Vector2( 200, -12 )
 
 [node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 144, 43 )
-
-[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 144, 79 )
-
-[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 108, 85 )
+position = Vector2( 248, -13 )
 
 [node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 114, 125 )
+position = Vector2( 453, 227 )
 
 [node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 100, 187 )
+position = Vector2( 439, 289 )
 
 [node name="Crow7" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 144, 175 )
+position = Vector2( 515, 302 )
 
 [node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 4 )]
-position = Vector2( 156, 116 )
+position = Vector2( 336, 269 )
 
 [node name="Wolf" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 467, 267 )
@@ -588,12 +594,6 @@ position = Vector2( 607, 302 )
 [node name="Tree_1_green45" parent="YSort/Trees" instance=ExtResource( 21 )]
 position = Vector2( 659, 336 )
 
-[node name="Tree_1_green44" parent="YSort/Trees" instance=ExtResource( 21 )]
-position = Vector2( 684, 330 )
-
-[node name="Tree_1_green43" parent="YSort/Trees" instance=ExtResource( 21 )]
-position = Vector2( 688, 346 )
-
 [node name="Tree_1_green42" parent="YSort/Trees" instance=ExtResource( 21 )]
 position = Vector2( 738, 368 )
 
@@ -743,9 +743,6 @@ position = Vector2( 135, 334 )
 
 [node name="Tree_1_orange4" parent="YSort/Trees" instance=ExtResource( 23 )]
 position = Vector2( 41, 137 )
-
-[node name="Tree_1_orange5" parent="YSort/Trees" instance=ExtResource( 23 )]
-position = Vector2( 44, 182 )
 
 [node name="Tree_2_pine" parent="YSort/Trees" instance=ExtResource( 24 )]
 position = Vector2( 96, 50 )
@@ -963,9 +960,6 @@ position = Vector2( 44, 268 )
 [node name="Tree_1_pink2" parent="YSort/Trees" instance=ExtResource( 28 )]
 position = Vector2( 41, 254 )
 
-[node name="Tree_3_tall_pink" parent="YSort/Trees" instance=ExtResource( 31 )]
-position = Vector2( 48, 150 )
-
 [node name="Tree_3_tall_pink2" parent="YSort/Trees" instance=ExtResource( 31 )]
 position = Vector2( 49, 218 )
 
@@ -983,15 +977,6 @@ position = Vector2( 15, 283 )
 
 [node name="Tree_1_pink3" parent="YSort/Trees" instance=ExtResource( 28 )]
 position = Vector2( 12, 269 )
-
-[node name="Tree_3_tall_pink4" parent="YSort/Trees" instance=ExtResource( 31 )]
-position = Vector2( 19, 165 )
-
-[node name="Tree_3_tall_pink5" parent="YSort/Trees" instance=ExtResource( 31 )]
-position = Vector2( 26, 182 )
-
-[node name="Tree_3_tall_pink6" parent="YSort/Trees" instance=ExtResource( 31 )]
-position = Vector2( 23, 197 )
 
 [node name="Tree_3_tall_pink3" parent="YSort/Trees" instance=ExtResource( 31 )]
 position = Vector2( 20, 233 )
@@ -1052,9 +1037,6 @@ position = Vector2( 808, 376 )
 
 [node name="Tree_3_tall_green28" parent="YSort/Trees" instance=ExtResource( 22 )]
 position = Vector2( 802, 349 )
-
-[node name="Tree_3_tall_green22" parent="YSort/Trees" instance=ExtResource( 22 )]
-position = Vector2( 739, 333 )
 
 [node name="Tree_3_tall_green21" parent="YSort/Trees" instance=ExtResource( 22 )]
 position = Vector2( 755, 320 )
@@ -1165,3 +1147,4 @@ stream = ExtResource( 11 )
 
 [editable path="Map/Exit"]
 [editable path="Map/Exit2"]
+[editable path="Map/Exit3"]

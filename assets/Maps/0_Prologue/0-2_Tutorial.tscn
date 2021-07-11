@@ -1,8 +1,9 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://assets/World/Flowers/Flowers_sheet_2.png" type="Texture" id=1]
 [ext_resource path="res://assets/World/Rivers/River_1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/System/Camera2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Enemies/Bat/Bat.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/World/Doodads/Rock_Small_5.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/World/Trees/Tree_1_green_alt.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Tilesets/GrassBasicDark.png" type="Texture" id=7]
@@ -29,10 +30,12 @@
 [ext_resource path="res://assets/Audio/World/Rain_Outside_Night.ogg" type="AudioStream" id=28]
 [ext_resource path="res://assets/World/Doodads/Rock_Medium_1.tscn" type="PackedScene" id=29]
 [ext_resource path="res://assets/Andrew/Walkways/Walkway_1_1.tscn" type="PackedScene" id=30]
+[ext_resource path="res://assets/Enemies/Crow/Crow.tscn" type="PackedScene" id=31]
 [ext_resource path="res://assets/UI/GUI.tscn" type="PackedScene" id=32]
 [ext_resource path="res://assets/World/Rivers/River_3.tscn" type="PackedScene" id=33]
 [ext_resource path="res://assets/Misc/BluePixel.png" type="Texture" id=34]
 [ext_resource path="res://assets/Misc/RedPixel.png" type="Texture" id=35]
+[ext_resource path="res://assets/Ingredients/IngredientPickup.tscn" type="PackedScene" id=36]
 
 [sub_resource type="TileSet" id=1]
 0/name = "GrassBasicDark.png 0"
@@ -121,6 +124,7 @@
 extents = Vector2( 120, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 62, 63 )
 
 [node name="World" type="Node2D" groups=[
 "Persist",
@@ -173,35 +177,35 @@ shape = SubResource( 3 )
 [node name="CollisionShape2D" parent="Map/Exit_toHome/StaticBody2D" index="0"]
 shape = SubResource( 3 )
 
-[node name="Exit" parent="Map" instance=ExtResource( 9 )]
-position = Vector2( 370, 70 )
+[node name="Exit_toLayerTest" parent="Map" instance=ExtResource( 9 )]
+position = Vector2( 1504, 450 )
 map_file = "res://assets/Maps/Test/LayerTest.tscn"
-selected_location = Vector2( 200, 100 )
+selected_location = Vector2( 64, 152 )
 
-[node name="CollisionShape2D" parent="Map/Exit" index="0"]
+[node name="CollisionShape2D" parent="Map/Exit_toLayerTest" index="0"]
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D" parent="Map/Exit/StaticBody2D" index="0"]
+[node name="CollisionShape2D" parent="Map/Exit_toLayerTest/StaticBody2D" index="0"]
 shape = SubResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="Map/Exit"]
+[node name="Sprite" type="Sprite" parent="Map/Exit_toLayerTest"]
 texture = ExtResource( 35 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
 region_filter_clip = true
 
-[node name="Exit2" parent="Map" instance=ExtResource( 9 )]
-position = Vector2( 331, 70 )
+[node name="Exit_toTest" parent="Map" instance=ExtResource( 9 )]
+position = Vector2( 1097, 189 )
 map_file = "res://assets/Maps/Test/Test.tscn"
 selected_location = Vector2( 48, 48 )
 
-[node name="CollisionShape2D" parent="Map/Exit2" index="0"]
+[node name="CollisionShape2D" parent="Map/Exit_toTest" index="0"]
 shape = SubResource( 4 )
 
-[node name="CollisionShape2D" parent="Map/Exit2/StaticBody2D" index="0"]
+[node name="CollisionShape2D" parent="Map/Exit_toTest/StaticBody2D" index="0"]
 shape = SubResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="Map/Exit2"]
+[node name="Sprite" type="Sprite" parent="Map/Exit_toTest"]
 texture = ExtResource( 34 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 16, 16 )
@@ -1053,6 +1057,9 @@ position = Vector2( 56, 807 )
 
 [node name="Tree_1_green_alt274" parent="YSort/Trees" instance=ExtResource( 6 )]
 position = Vector2( 40, 823 )
+
+[node name="Tree_1_green_alt540" parent="YSort/Trees" instance=ExtResource( 6 )]
+position = Vector2( 30, 831 )
 
 [node name="Tree_1_green_alt275" parent="YSort/Trees" instance=ExtResource( 6 )]
 position = Vector2( 117, 757 )
@@ -1989,7 +1996,494 @@ position = Vector2( 1235, 315 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
+[node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 273, 131 )
+
+[node name="Bat4" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 254, 128 )
+
+[node name="Bat17" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 744, 410 )
+
+[node name="Bat18" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 735, 422 )
+
+[node name="Bat19" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 727, 406 )
+
+[node name="Bat20" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 716, 419 )
+
+[node name="Bat21" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 870, 491 )
+
+[node name="Bat22" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 861, 503 )
+
+[node name="Bat23" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 853, 487 )
+
+[node name="Bat24" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 842, 500 )
+
+[node name="Bat25" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1047, 350 )
+
+[node name="Bat26" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1038, 362 )
+
+[node name="Bat27" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1030, 346 )
+
+[node name="Bat28" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1019, 359 )
+
+[node name="Bat29" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1179, 365 )
+
+[node name="Bat30" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1170, 377 )
+
+[node name="Bat31" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1162, 361 )
+
+[node name="Bat32" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1151, 374 )
+
+[node name="Bat33" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1192, 490 )
+
+[node name="Bat34" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1183, 502 )
+
+[node name="Bat35" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1175, 486 )
+
+[node name="Bat36" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 1164, 499 )
+
+[node name="Bat5" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 432, 148 )
+
+[node name="Bat6" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 423, 160 )
+
+[node name="Bat9" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 421, 279 )
+
+[node name="Bat10" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 412, 291 )
+
+[node name="Bat11" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 404, 275 )
+
+[node name="Bat12" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 393, 288 )
+
+[node name="Bat13" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 273, 277 )
+
+[node name="Bat14" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 264, 289 )
+
+[node name="Bat15" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 256, 273 )
+
+[node name="Bat16" parent="YSort/Enemies" instance=ExtResource( 4 )]
+position = Vector2( 245, 286 )
+
+[node name="Crow" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 347, 440 )
+
+[node name="Crow2" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 282, 595 )
+
+[node name="Crow3" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 433, 597 )
+
+[node name="Crow4" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 231, 671 )
+
+[node name="Crow5" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 463, 691 )
+
+[node name="Crow6" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 529, 406 )
+
+[node name="Crow7" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 551, 411 )
+
+[node name="Crow8" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 601, 401 )
+
+[node name="Crow9" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 651, 402 )
+
+[node name="Crow10" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 505, 506 )
+
+[node name="Crow11" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 552, 501 )
+
+[node name="Crow12" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 602, 509 )
+
+[node name="Crow13" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 658, 519 )
+
+[node name="Crow14" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 1271, 305 )
+
+[node name="Crow15" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 1293, 310 )
+
+[node name="Crow16" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 1330, 320 )
+
+[node name="Crow17" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 1380, 321 )
+
+[node name="Crow18" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 1246, 554 )
+
+[node name="Crow19" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 1293, 549 )
+
+[node name="Crow20" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 1343, 557 )
+
+[node name="Crow21" parent="YSort/Enemies" instance=ExtResource( 31 )]
+position = Vector2( 1399, 567 )
+
 [node name="Items" type="YSort" parent="YSort"]
+
+[node name="MushroomPickup" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 71, 833 )
+ingredient_name = "Mushroom"
+
+[node name="RockPickup" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 391, 784 )
+ingredient_name = "Rock"
+
+[node name="RockPickup2" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 403, 783 )
+ingredient_name = "Rock"
+
+[node name="RockPickup3" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 419, 813 )
+ingredient_name = "Rock"
+
+[node name="RockPickup4" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 443, 790 )
+ingredient_name = "Rock"
+
+[node name="RockPickup5" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 552, 768 )
+ingredient_name = "Rock"
+
+[node name="RockPickup6" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 509, 765 )
+ingredient_name = "Rock"
+
+[node name="RockPickup7" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 519, 768 )
+ingredient_name = "Rock"
+
+[node name="RockPickup8" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 460, 413 )
+ingredient_name = "Rock"
+
+[node name="RockPickup9" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 467, 411 )
+ingredient_name = "Rock"
+
+[node name="RockPickup10" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 462, 432 )
+ingredient_name = "Rock"
+
+[node name="RockPickup12" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 484, 434 )
+ingredient_name = "Rock"
+
+[node name="RockPickup13" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 373, 401 )
+ingredient_name = "Rock"
+
+[node name="RockPickup14" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 395, 403 )
+ingredient_name = "Rock"
+
+[node name="RockPickup11" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 470, 434 )
+ingredient_name = "Rock"
+
+[node name="RockPickup15" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 379, 382 )
+ingredient_name = "Rock"
+
+[node name="RockPickup16" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 401, 384 )
+ingredient_name = "Rock"
+
+[node name="RockPickup17" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 219, 229 )
+ingredient_name = "Rock"
+
+[node name="RockPickup18" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 237, 228 )
+ingredient_name = "Rock"
+
+[node name="RockPickup19" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 225, 210 )
+ingredient_name = "Rock"
+
+[node name="RockPickup20" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 238, 214 )
+ingredient_name = "Rock"
+
+[node name="RockPickup21" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 275, 91 )
+ingredient_name = "Rock"
+
+[node name="RockPickup22" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 287, 70 )
+ingredient_name = "Rock"
+
+[node name="PetalPickup" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 286, 97 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup2" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 296, 104 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup3" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 299, 75 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup4" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 311, 83 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup5" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 412, 90 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup6" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 397, 209 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup7" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 373, 471 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup8" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 269, 772 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup9" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 293, 769 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup10" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 285, 788 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup11" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 373, 759 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup12" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 391, 769 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup13" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 400, 745 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup14" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 394, 727 )
+ingredient_name = "Petal"
+
+[node name="PetalPickup15" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 381, 740 )
+ingredient_name = "Petal"
+
+[node name="ClayPickup" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 317, 794 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup2" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 327, 799 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup3" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 338, 805 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup4" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 349, 800 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup6" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 356, 794 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup7" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 316, 805 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup8" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 350, 773 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup9" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 361, 779 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup10" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 372, 774 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup11" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 355, 805 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup5" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 367, 794 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup12" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 377, 807 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup13" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 388, 805 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup14" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 335, 785 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup15" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 342, 779 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup16" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 324, 753 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup17" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 263, 757 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup18" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 345, 764 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup19" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 329, 765 )
+ingredient_name = "Clay"
+
+[node name="ClayPickup20" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 317, 766 )
+ingredient_name = "Clay"
+
+[node name="WaterPickup" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 304, 833 )
+ingredient_name = "Water"
+
+[node name="WaterPickup2" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 315, 832 )
+ingredient_name = "Water"
+
+[node name="WaterPickup3" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 326, 831 )
+ingredient_name = "Water"
+
+[node name="WaterPickup4" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 336, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup5" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 348, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup15" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 252, 835 )
+ingredient_name = "Water"
+
+[node name="WaterPickup16" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 263, 834 )
+ingredient_name = "Water"
+
+[node name="WaterPickup17" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 274, 833 )
+ingredient_name = "Water"
+
+[node name="WaterPickup18" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 284, 832 )
+ingredient_name = "Water"
+
+[node name="WaterPickup19" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 296, 832 )
+ingredient_name = "Water"
+
+[node name="WaterPickup6" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 358, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup7" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 367, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup8" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 377, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup9" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 388, 829 )
+ingredient_name = "Water"
+
+[node name="WaterPickup10" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 400, 831 )
+ingredient_name = "Water"
+
+[node name="WaterPickup11" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 410, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup12" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 422, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup13" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 432, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup14" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 441, 830 )
+ingredient_name = "Water"
+
+[node name="WaterPickup20" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 451, 832 )
+ingredient_name = "Water"
+
+[node name="WaterPickup21" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 462, 833 )
+ingredient_name = "Water"
+
+[node name="WaterPickup22" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 473, 831 )
+ingredient_name = "Water"
+
+[node name="WaterPickup23" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 483, 831 )
+ingredient_name = "Water"
+
+[node name="WaterPickup24" parent="YSort/Items" instance=ExtResource( 36 )]
+position = Vector2( 492, 831 )
+ingredient_name = "Water"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 24 )
@@ -2008,5 +2502,5 @@ volume_db = -48.0
 [node name="CanvasModulate" parent="." instance=ExtResource( 25 )]
 
 [editable path="Map/Exit_toHome"]
-[editable path="Map/Exit"]
-[editable path="Map/Exit2"]
+[editable path="Map/Exit_toLayerTest"]
+[editable path="Map/Exit_toTest"]

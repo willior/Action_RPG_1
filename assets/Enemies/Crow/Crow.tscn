@@ -574,13 +574,13 @@ graph_offset = Vector2( -234.787, -72.4119 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=55]
 
-[sub_resource type="CircleShape2D" id=58]
+[sub_resource type="CircleShape2D" id=56]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id=59]
+[sub_resource type="CircleShape2D" id=57]
 radius = 28.0
 
-[sub_resource type="CircleShape2D" id=60]
+[sub_resource type="CircleShape2D" id=58]
 radius = 24.0
 
 [node name="Crow" type="KinematicBody2D"]
@@ -660,9 +660,10 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Talkbox"]
 position = Vector2( 0, -9 )
-shape = SubResource( 58 )
+shape = SubResource( 56 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 6 )]
+visible = false
 position = Vector2( 0, -10 )
 collision_mask = 4
 damage = 16.0
@@ -671,37 +672,40 @@ status = [ "Slow", 0.5 ]
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( 0, 3 )
-shape = SubResource( 58 )
+shape = SubResource( 56 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 0, 4 )
 collision_layer = 8
 script = ExtResource( 14 )
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -20 )
-shape = SubResource( 58 )
+shape = SubResource( 56 )
 
 [node name="WanderController" parent="." instance=ExtResource( 3 )]
 visible = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 5 )]
+visible = false
 scale = Vector2( 3, 3 )
 script = ExtResource( 18 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-shape = SubResource( 59 )
+shape = SubResource( 57 )
 
 [node name="AttackController" parent="." instance=ExtResource( 2 )]
 visible = false
 
 [node name="AttackPlayerZone" parent="." instance=ExtResource( 8 )]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="AttackPlayerZone" index="0"]
 scale = Vector2( 2, 2 )
-shape = SubResource( 60 )
+shape = SubResource( 58 )
 
 [node name="AttackTimer" type="Timer" parent="AttackPlayerZone"]
 wait_time = 0.8

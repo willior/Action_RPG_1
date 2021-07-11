@@ -18,8 +18,16 @@ export var max_y = 32
 
 func _ready():
 	if GameManager.multiplayer_2:
+		set_drag_margin(MARGIN_BOTTOM, 0.05)
+		set_drag_margin(MARGIN_LEFT, 0.05)
+		set_drag_margin(MARGIN_RIGHT, 0.05)
+		set_drag_margin(MARGIN_TOP, 0.05)
 		state = MULTI_2
 	else:
+		set_drag_margin(MARGIN_BOTTOM, 0.2)
+		set_drag_margin(MARGIN_LEFT, 0.2)
+		set_drag_margin(MARGIN_RIGHT, 0.2)
+		set_drag_margin(MARGIN_TOP, 0.2)
 		state = SOLO
 
 func add_trauma(value):
@@ -43,3 +51,18 @@ func _process(delta):
 	offset.y = noise.get_noise_2d(0, time*time_scale) * max_y * shake
 	if trauma > 0:
 		trauma = clamp(trauma - (delta * decay), 0, 1)
+
+func multiplayer_2_toggle():
+	match state:
+		SOLO:
+			set_drag_margin(MARGIN_BOTTOM, 0.05)
+			set_drag_margin(MARGIN_LEFT, 0.05)
+			set_drag_margin(MARGIN_RIGHT, 0.05)
+			set_drag_margin(MARGIN_TOP, 0.05)
+			state = MULTI_2
+		MULTI_2:
+			set_drag_margin(MARGIN_BOTTOM, 0.2)
+			set_drag_margin(MARGIN_LEFT, 0.2)
+			set_drag_margin(MARGIN_RIGHT, 0.2)
+			set_drag_margin(MARGIN_TOP, 0.2)
+			state = SOLO
