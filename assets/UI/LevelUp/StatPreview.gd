@@ -12,7 +12,7 @@ var stats_remaining : String
 var stats
 
 func _ready():
-	stats = get_parent().player_stats
+	stats = get_parent().stats
 	var origVIT = stats.vitality
 	var origEND = stats.endurance
 	var origDEF = stats.defense

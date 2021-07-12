@@ -23,6 +23,7 @@ var experience = 82 setget set_experience
 var experience_required = 100 setget set_max_experience
 var experience_total = 82
 var leveling = false setget set_leveling
+var attributes_to_allocate = 0 setget set_attributes_to_allocate
 
 var weapon_level = 1 setget set_weapon_level
 var weapon_xp = 0
@@ -103,6 +104,7 @@ signal experience_changed(value)
 signal max_experience_changed(value)
 signal level_changed(value)
 signal player_leveling(value)
+signal attributes_to_allocate_changed(value)
 signal cash_changed(value)
 
 func _ready():
@@ -132,6 +134,7 @@ func reset_stats():
 	self.speed_mod = 1
 	self.magic_mod = 1
 	self.level = 1
+	self.attributes_to_allocate = 0
 	self.experience = 0
 	self.experience_required = 100
 	self.experience_total = 0
@@ -160,6 +163,7 @@ func default_stats():
 	self.speed_mod = 1
 	self.magic_mod = 1
 	self.level = 1
+	self.attributes_to_allocate = 0
 	self.experience = 0
 	self.experience_required = 100
 	self.experience_total = 0
@@ -366,6 +370,11 @@ func set_level(value):
 func set_leveling(value):
 	leveling = value
 	emit_signal("player_leveling", value)
+
+func set_attributes_to_allocate(value):
+	attributes_to_allocate = value
+	print("attributes to allocate set: ", attributes_to_allocate)
+	emit_signal("attributes_to_allocate_changed", attributes_to_allocate)
 
 func apply_weapon_xp(who):
 	weapon_xp += weapon_growth_rate

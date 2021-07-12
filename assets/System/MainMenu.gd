@@ -21,10 +21,21 @@ func _input(event):
 	if event.is_action_pressed("quit_game"):
 		get_tree().quit()
 
+func fade_out_menu():
+	$Tween.interpolate_property($MarginContainer, "modulate", Color(1,1,1,1), Color(0,0,0,0), 1)
+	$Tween.interpolate_property($ColorRect, "rect_position", Vector2(-640,0), Vector2(-960,0), 1, Tween.TRANS_QUAD, Tween.EASE_IN)
+	$Tween.start()
+
 func _on_NewGameButton_pressed():
+	fade_out_menu()
+	yield($Tween, "tween_all_completed")
+	$ColorRect.hide()
 	GameManager.new_game()
 
 func _on_ContinueButton_pressed():
+	fade_out_menu()
+	yield($Tween, "tween_all_completed")
+	$ColorRect.hide()
 	GameManager.load_game()
 
 func _on_QuitButton_pressed():

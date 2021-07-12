@@ -138,10 +138,10 @@ func random_variance(base_damage, random):
 func distribute_exp(value):
 	var experience_gained = value
 	if GameManager.multiplayer_2:
-		experience_gained /= 2
 		GameManager.player.enemy_killed(experience_gained)
 		GameManager.player2.enemy_killed(experience_gained)
-	else: GameManager.player.enemy_killed(experience_gained)
+	else:
+		GameManager.player.enemy_killed(experience_gained)
 
 func create_blood_effect(damage_count, location, z_index):
 	randomize()

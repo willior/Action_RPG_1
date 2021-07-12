@@ -2,8 +2,7 @@ extends Control
 onready var label = $LevelText/RichTextLabel
 onready var stats_remaining_label = $StatPreview/VBoxContainer/RichTextLabel
 var CanvasColorMod = load("res://assets/UI/LevelUp/CanvasColorMod.tscn")
-var default_stats_remaining = 2
-var stats_remaining = default_stats_remaining
+# var stats.attributes_to_allocate
 var VIT_to_add = 0
 var END_to_add = 0
 var DEF_to_add = 0
@@ -28,7 +27,7 @@ var dialog_script = [
 	}
 ]
 var player_name
-var player_stats
+var stats
 
 func parse_text(text):
 	var end_text = text
@@ -46,6 +45,7 @@ func parse_text(text):
 	return end_text
 
 func _ready():
+	print('hi')
 	event_handler(dialog_script[dialog_index])
 	get_tree().paused = true
 	Global.dialogOpen = true
@@ -112,7 +112,7 @@ func _input(event):
 			get_tree().set_input_as_handled()
 			return
 		elif waiting_for_input:
-			if stats_remaining == 0:
+			if stats.attributes_to_allocate == 0:
 				waiting_for_input = false
 				return
 			$AudioSelect.play()
@@ -241,8 +241,8 @@ func _on_option_selected(option, variable, value):
 	print('[!] Option selected: ', option.text, ' \\//\\ value = ' , value)
 	
 func _on_level_selected(value):
-	stats_remaining -= 1
-	$StatPreview.update_stats_remaining(stats_remaining)
+	stats.attributes_to_allocate -= 1
+	$StatPreview.update_stats_remaining(stats.attributes_to_allocate)
 	var canvas_color_mod = CanvasColorMod.instance()
 	canvas_color_mod.duration = 1
 	match value:
@@ -268,7 +268,7 @@ func _on_level_selected(value):
 			canvas_color_mod.color_mod = Color(0.66, 0, 1, 0.1)
 			MAG_to_add += 1
 	add_child(canvas_color_mod)
-	if stats_remaining == 0:
+	if stats.attributes_to_allocate == 0:
 		waiting_for_answer = false
 		waiting_for_level = false
 		waiting_for_input = false
@@ -313,7 +313,6 @@ func _on_level_selected(value):
 
 func reset_level_stats():
 	print('resetting level stats.')
-	stats_remaining = default_stats_remaining
 	VIT_to_add = 0
 	END_to_add = 0
 	DEF_to_add = 0
@@ -343,7 +342,7 @@ func _on_TimerText_timeout():
 		$TimerText.stop()
 		finished = true
 		if waiting_for_answer:
-			$StatPreview.update_stats_remaining(stats_remaining)
+			$StatPreview.update_stats_remaining(stats.attributes_to_allocate)
 			$Tween.interpolate_property($LevelText,
 #			"rect_position",
 #			Vector2(103, 53),
@@ -356,7 +355,7 @@ func _on_TimerText_timeout():
 			)
 			$Tween.interpolate_property($StatPreview/VBoxContainer/RichTextLabel, "visible_characters",
 			0,
-			stats_remaining,
+			stats.attributes_to_allocate,
 			0.6,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 			)

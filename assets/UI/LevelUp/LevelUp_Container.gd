@@ -3,7 +3,7 @@ extends HBoxContainer
 var stats
 
 func _ready():
-	stats = get_parent().get_parent().get_parent().player_stats
+	stats = get_parent().get_parent().get_parent().stats
 	$Stats/LabelVIT.text = str(stats.vitality)
 	$Stats/LabelEND.text = str(stats.endurance)
 	$Stats/LabelDEF.text = str(stats.defense)

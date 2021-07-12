@@ -14,9 +14,14 @@ func save():
 		"speed": speed,
 		"magic": magic,
 		"level": level,
+		"attributes_to_allocate": attributes_to_allocate,
 		"experience": experience,
 		"experience_required": experience_required,
-		"experience_total": experience_total
+		"experience_total": experience_total,
+		"weapon_level": weapon_level,
+		"weapon_xp": weapon_xp,
+		"weapon_xp_required": weapon_xp_required,
+		"weapon_xp_total": weapon_xp_total,
 	}
 	var save_dict = {
 		"player2_stats": player2_stats

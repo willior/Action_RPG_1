@@ -14,6 +14,7 @@ func save():
 		"speed": speed,
 		"magic": magic,
 		"level": level,
+		"attributes_to_allocate": attributes_to_allocate,
 		"experience": experience,
 		"experience_required": experience_required,
 		"experience_total": experience_total,

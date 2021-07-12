@@ -85,17 +85,14 @@ func _input(event):
 			StatusHandler.apply_status(["Poison", 1.0], p)
 	
 	if event.is_action_pressed("test4"):
-		print('4: giving XP')
-		GameManager.player.enemy_killed(1000)
-		if GameManager.multiplayer_2:
-			GameManager.player2.enemy_killed(1000)
-		else:
-			print('no P2. cannot level.')
+		print('4: giving attributes to allocate.')
+		for p in get_tree().get_nodes_in_group("Players"):
+			p.level_up()
 		
 	if event.is_action_pressed("test5"):
-		print('5: applying haste.')
+		print('5: showing level up screen..')
 		for p in get_tree().get_nodes_in_group("Players"):
-			StatusHandler.apply_status(["Haste", 1.0], p)
+			p.start_level_timer()
 	
 	if event.is_action_pressed("test6"):
 		if GameManager.multiplayer_2:

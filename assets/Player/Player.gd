@@ -41,7 +41,6 @@ var velocity = Vector2.ZERO
 var dir_vector = stats.dir_vector
 var damageTaken = 0
 var stamina_regen_level = 0
-var stats_to_allocate = 0
 var movement_speed_mod = 1.0
 
 var roll_moving = false
@@ -754,24 +753,27 @@ func level_up():
 	stats.leveling = true
 	stats.level += 1
 	if stats.level < 11:
-		stats_to_allocate += 2
+		stats.attributes_to_allocate += 2
 	elif stats.level < 21:
-		stats_to_allocate += 3
+		stats.attributes_to_allocate += 3
 	elif stats.level < 31:
-		stats_to_allocate += 4
+		stats.attributes_to_allocate += 4
 	elif stats.level >= 31:
-		stats_to_allocate += 5
+		stats.attributes_to_allocate += 5
 	for p in get_tree().get_nodes_in_group("Players"):
 		if p.dying:
 			return
-	start_level_timer()
+	# start_level_timer()
 
 func start_level_timer():
-	Global.enable_exits(false)
+	# Global.enable_exits(false)
 	levelTimer.start()
 	yield(levelTimer, "timeout")
-	if stats.leveling:
-		show_level_up_screen()
+	if stats.attributes_to_allocate < 1:
+		print('no attributes_to_allocate. cannot level.')
+		bamboo.play()
+		return
+	show_level_up_screen()
 
 func show_level_up_screen():
 	get_node("/root/World/Music").stream_paused = true
@@ -781,9 +783,9 @@ func show_level_up_screen():
 	get_node("/root/World/GUI").add_child(tweenGreyscale)
 	var levelUpScreen = LevelUpScreen.instance()
 	levelUpScreen.player_name = name
-	levelUpScreen.player_stats = stats
-	levelUpScreen.stats_remaining = stats_to_allocate
-	stats_to_allocate = 0
+	levelUpScreen.stats = stats
+	# levelUpScreen.stats_remaining = stats.attributes_to_allocate
+	# stats.attributes_to_allocate = 0
 	get_node("/root/World/GUI").add_child(levelUpScreen)
 	stats.leveling = false
 	for p in get_tree().get_nodes_in_group("Players"):
