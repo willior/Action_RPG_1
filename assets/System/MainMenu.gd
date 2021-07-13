@@ -22,6 +22,8 @@ func _input(event):
 		get_tree().quit()
 
 func fade_out_menu():
+	for b in $MarginContainer/VBoxContainer.get_children().size():
+		$MarginContainer/VBoxContainer.get_child(b).set_focus_mode(0)
 	$Tween.interpolate_property($MarginContainer, "modulate", Color(1,1,1,1), Color(0,0,0,0), 1)
 	$Tween.interpolate_property($ColorRect, "rect_position", Vector2(-640,0), Vector2(-960,0), 1, Tween.TRANS_QUAD, Tween.EASE_IN)
 	$Tween.start()

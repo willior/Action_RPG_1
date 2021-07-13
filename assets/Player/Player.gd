@@ -108,14 +108,16 @@ func _ready():
 		position = Global.get_attribute("location")
 	elif get_tree().get_root().get_node("/root/World/Map").get("player_spawn_pos"):
 		position = get_tree().get_root().get_node("/root/World/Map").player_spawn_pos
-		print('setting player position to map default')
+		# print('setting player position to map default')
 	else:
-		print('no map default; setting player position to that of Camera2D')
+		# print('no map default; setting player position to that of Camera2D')
 		position = get_tree().get_root().get_node("/root/World/Camera2D").position
 	if Global.get_attribute(inventory_ref) != null:
 		pouch.set_ingredients(Global.get_attribute(inventory_ref)[0].get_ingredients())
 		formulabook.set_formulas(Global.get_attribute(inventory_ref)[1].get_formulas())
-		GameManager.reinitialize_player(name, pouch, formulabook)
+		GameManager.initialize_player(name)
+		if Global.get_attribute(inventory_ref)[1].get_formulas().size() > 0:
+			formulabook.set_selected_formula(Global.get_attribute(inventory_ref)[1].current_selected_formula)
 	else:
 		GameManager.initialize_player(name)
 	animationTree.active = true # animation not active until game starts
@@ -811,9 +813,11 @@ func dying_effect(value):
 		if !has_node("/root/World/GUI/Red"):
 			var redFlash = RedFlash.instance()
 			get_node("/root/World/GUI").add_child(redFlash)
+		AudioServer.set_bus_effect_enabled(0, 0, true)
+		get_node("/root/World/Music").volume_db = -48
 		get_node("/root/World/Music").stream_paused = true
-		get_node("/root/World/SFX").stream_paused = true
-		get_node("/root/World/SFX2").stream_paused = true
+		# get_node("/root/World/SFX").stream_paused = true
+		# get_node("/root/World/SFX2").stream_paused = true
 	elif !value and dying:
 		dying = false
 		for p in get_tree().get_nodes_in_group("Players"):
@@ -824,9 +828,10 @@ func dying_effect(value):
 		get_node("/root/World/Heartbeat").queue_free()
 		get_node("/root/World/GUI/Greyscale").queue_free()
 		get_node("/root/World/GUI/Red").queue_free()
+		get_node("/root/World/Music").volume_db = 0
 		get_node("/root/World/Music").stream_paused = false
-		get_node("/root/World/SFX").stream_paused = false
-		get_node("/root/World/SFX2").stream_paused = false
+		# get_node("/root/World/SFX").stream_paused = false
+		# get_node("/root/World/SFX2").stream_paused = false
 		for p in get_tree().get_nodes_in_group("Players"):
 			if p.stats.leveling: # just_leveled:
 				p.start_level_timer()
@@ -837,6 +842,8 @@ func game_over():
 	Engine.time_scale = 1
 	AudioServer.set_bus_effect_enabled(0, 0, false)
 	get_node("/root/World/Heartbeat").stream_paused = true
+	get_node("/root/World/SFX").stream_paused = true
+	get_node("/root/World/SFX2").stream_paused = true
 	get_node("/root/World/Music").stream_paused = true
 	var gameOver = GameOver.instance()
 	get_node("/root/World/GUI").add_child(gameOver)

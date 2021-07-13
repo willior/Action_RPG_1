@@ -25,6 +25,7 @@ onready var target_body = $KinematicBody2D
 
 onready var player = get_parent().player
 var target_bodies
+var target_hurtboxes = Array()
 var group_to_target : String
 var target_color : Color
 var count
@@ -76,6 +77,8 @@ func _ready():
 		group_to_target = "Players"
 	target_bodies = get_tree().get_nodes_in_group(group_to_target)
 	target_bodies.sort_custom(self, "sort_target_bodies")
+	for h in target_bodies:
+		target_hurtboxes.append(h.get_node("Hurtbox"))
 	var targets = Node.new()
 	targets.set_name("Targets")
 	get_tree().get_root().get_node("World").add_child(targets)
@@ -127,7 +130,7 @@ func _ready():
 func sort_target_bodies(a, b):
 	if target_mode == 1 and a.position.x < b.position.x:
 		return true
-	elif target_mode == 2 and get_parent().global_position.angle_to_point(a.hurtbox.get_child(0).global_position) < get_parent().global_position.angle_to_point(b.hurtbox.get_child(0).global_position):
+	elif target_mode == 2 and get_parent().global_position.angle_to_point(a.global_position) < get_parent().global_position.angle_to_point(b.global_position):
 		return true
 	return false
 
@@ -350,13 +353,20 @@ func cancel_target_screen():
 	get_parent().queue_free()
 
 func end_target_screen():
+	var dying_effect = false
 	Global.target_screen_open = false
 	end_animate_target()
-	sfx1.stream_paused = false
-	sfx2.stream_paused = false
-	AudioServer.set_bus_effect_enabled(0, 0, false)
-	get_tree().paused = false
 	get_tree().get_root().get_node("World/Targets").queue_free()
+	get_tree().paused = false
+	for p in get_tree().get_nodes_in_group("Players"):
+		if p.dying:
+			print('formula screen exited while dying. re-pausing music/sfx & leaving LP filter.')
+			music.stream_paused = true
+			dying_effect = true
+			break
+	if !dying_effect:
+		print('formula screen exited without dying effect; removing LowPass filter.')
+		AudioServer.set_bus_effect_enabled(0, 0, false)
 	yield($Tween, "tween_all_completed")
 	queue_free()
 

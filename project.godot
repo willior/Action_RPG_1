@@ -69,6 +69,7 @@ SoundPlayer="*res://Managers/SoundPlayer.tscn"
 Enemy="*res://assets/Enemies/Enemy.gd"
 StatusHandler="*res://assets/Status/StatusHandler.gd"
 Element="*res://Managers/Element.tscn"
+PixelPerfect="*res://Managers/pixel_perfect.gd"
 
 [display]
 

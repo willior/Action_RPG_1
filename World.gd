@@ -112,7 +112,7 @@ func _input(event):
 		GameManager.multiplayer_2_toggle()
 	
 	if event.is_action_pressed("start"): # SPACEBAR
-		if Global.dialogOpen or Global.chapter_name or Global.changingScene or (Player1Stats.dying and !Player1Stats.dead):
+		if Global.dialogOpen or Global.chapter_name or Global.changingScene or (Player1Stats.dying and !Player1Stats.dead) or (Player2Stats.dying and !Player2Stats.dead):
 			print('start discarded')
 			return
 		if Player1Stats.dead:
@@ -120,8 +120,9 @@ func _input(event):
 			GameManager.quit_to_title()
 		elif get_tree().paused == false:
 			open_pause_menu(GameManager.player)
+	
 	if event.is_action_pressed("start_2"):
-		if !GameManager.multiplayer_2 or Global.dialogOpen or Global.chapter_name or Global.changingScene or (Player2Stats.dying and !Player2Stats.dead):
+		if !GameManager.multiplayer_2 or Global.dialogOpen or Global.chapter_name or Global.changingScene or (Player1Stats.dying and !Player1Stats.dead) or (Player2Stats.dying and !Player2Stats.dead):
 			print('start discarded: ', Global.changingScene)
 			return
 		if Player2Stats.dead:

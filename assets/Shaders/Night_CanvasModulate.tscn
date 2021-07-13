@@ -2,6 +2,6 @@
 
 [node name="CanvasModulate" type="CanvasModulate"]
 z_index = 8
-color = Color( 0.25098, 0.262745, 0.501961, 1 )
+color = Color( 0.375, 0.39375, 0.75, 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

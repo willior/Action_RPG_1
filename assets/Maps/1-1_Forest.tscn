@@ -774,7 +774,7 @@ __meta__ = {
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 288, 72 )
-limit_left = 0
+limit_left = 16
 limit_top = 0
 limit_right = 1024
 limit_bottom = 896
