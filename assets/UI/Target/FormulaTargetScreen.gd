@@ -36,12 +36,28 @@ export(targetMode) var target_mode
 export var formula_range : int
 export var attack_formula : bool
 
+var controls = {
+	up: null,
+	down: null,
+	left: null,
+	right: null,
+	next: null,
+	previous: null,
+	attack: null,
+	examine: null,
+	roll: null
+}
+
 var up
 var down
 var left
 var right
 var next
 var previous
+var attack
+var examine
+var alchemy
+var roll
 
 var velocity = Vector2.ZERO
 var ending = false
@@ -57,6 +73,10 @@ func _ready():
 			right = "right_1"
 			next = "next_1"
 			previous = "previous_1"
+			attack = "attack_1"
+			examine = "examine_1"
+			alchemy = "alchemy_1"
+			roll = "roll_1"
 		"Player2":
 			up = "up_2"
 			down = "down_2"
@@ -64,6 +84,11 @@ func _ready():
 			right = "right_2"
 			next = "next_2"
 			previous = "previous_2"
+			attack = "attack_2"
+			examine = "examine_2"
+			alchemy = "alchemy_2"
+			roll = "roll_2"
+			
 	sfx1.stream_paused = true
 	sfx2.stream_paused = true
 	AudioServer.set_bus_effect_enabled(0, 0, true)
@@ -217,77 +242,9 @@ func _process(_delta):
 				target_body.rotation_degrees -= 2
 
 func _input(event):
-	if ending:
-		get_tree().set_input_as_handled()
-		return
-	match player.name:
-		"Player":
-			match event.as_text():
-				"I":
-					get_tree().set_input_as_handled()
-					return
-				"J":
-					get_tree().set_input_as_handled()
-					return
-				"K":
-					get_tree().set_input_as_handled()
-					return
-				"L":
-					get_tree().set_input_as_handled()
-					return
-				"P":
-					get_tree().set_input_as_handled()
-					return
-				"BraceLeft":
-					get_tree().set_input_as_handled()
-					return
-				"Slash":
-					get_tree().set_input_as_handled()
-					return
-				"Shift":
-					get_tree().set_input_as_handled()
-					return
-				"Semicolon":
-					get_tree().set_input_as_handled()
-					return
-				"Enter":
-					get_tree().set_input_as_handled()
-					return
-		"Player2":
-			match event.as_text():
-				"W":
-					get_tree().set_input_as_handled()
-					return
-				"S": 
-					get_tree().set_input_as_handled()
-					return
-				"A": 
-					get_tree().set_input_as_handled()
-					return
-				"D": 
-					get_tree().set_input_as_handled()
-					return
-				"V": 
-					get_tree().set_input_as_handled()
-					return
-				"B": 
-					get_tree().set_input_as_handled()
-					return
-				"F": 
-					get_tree().set_input_as_handled()
-					return
-				"R": 
-					get_tree().set_input_as_handled()
-					return
-				"T": 
-					get_tree().set_input_as_handled()
-					return
-				"Space":
-					get_tree().set_input_as_handled()
-					return
 	get_tree().set_input_as_handled()
 	
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed(attack):
 		get_parent().start(player, get_parent().formula_used)
 		if target_mode == 0 or target_mode == 1:
 			get_parent().get_node("FormulaHitbox").position = target_body.position
@@ -295,7 +252,7 @@ func _input(event):
 			get_parent().get_node("FormulaHitbox").rotation_degrees = target_body.rotation_degrees
 		end_target_screen()
 	
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed(examine):
 		end_animate_target()
 		yield($Tween, "tween_all_completed")
 		cancel_target_screen()

@@ -230,3 +230,6 @@ func enable_exits(value):
 		p.set_collision_mask_bit(10, value)
 	for e in get_tree().get_nodes_in_group("Exits"):
 		e.set_collision_mask_bit(0, opposite)
+
+func set_player_menu_controls(player_name):
+	pass

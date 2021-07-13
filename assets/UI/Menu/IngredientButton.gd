@@ -12,7 +12,7 @@ func _on_Button_gui_input(event):
 		pauseMenu.hide_pouch_display()
 		pauseMenu.enable_menu_focus()
 		pouchButton.grab_focus()
-	elif event.is_action_pressed("ui_select"):
+	elif event.is_action_pressed("ui_accept"):
 		pauseMenu.audio_menu_select()
 	elif event.is_action_pressed(pauseMenu.start):
 		pauseMenu.hide_pouch_display()
