@@ -42,4 +42,5 @@ __meta__ = {
 
 [node name="AudioMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
 [connection signal="focus_entered" from="." to="." method="_on_Button_focus_entered"]

@@ -32,32 +32,10 @@ onready var GUI = get_tree().get_root().get_node("World/GUI")
 var closing = false
 var moving = false
 var player
-var up
-var down
-var left
-var right
-var accept
-var cancel
-var start
+var controls = {}
+
 func _ready():
-	up = "ui_up"
-	down = "ui_down"
-	left = "ui_left"
-	right = "ui_right"
-	accept = "ui_accept"
-	cancel = "ui_cancel"
-	if player.name == "Player2":
-		start = "start_2"
-	else:
-		start = "start"
-#		"Player2":
-#			up = "ui_up_2"
-#			down = "ui_down_2"
-#			left = "ui_left_2"
-#			right = "ui_right_2"
-#			accept = "ui_accept_2"
-#			cancel = "ui_cancel_2"
-#			start = "start_2"
+	controls = Global.set_player_menu_controls(player.name)
 	$Tween.interpolate_property($CanvasLayer/PanelTop, "rect_position",
 	Vector2(0, -45),
 	Vector2(0, 0),
@@ -204,10 +182,14 @@ func enable_menu_focus():
 	for b in $MenuPanel/Menu.get_children().size():
 		$MenuPanel/Menu.get_child(b).set_focus_mode(2)
 
-func _input(event):
-	if event.as_text() == "BackSlash":
-		get_tree().set_input_as_handled()
+func _on_PauseScreen_gui_input(event):
+	get_tree().set_input_as_handled()
+	if closing or moving:
 		return
+	elif event.is_action_pressed(controls.examine) or event.is_action_pressed(controls.start):
+		close_pause_menu()
+
+func _input(event):
 	match player.name:
 		"Player":
 			match event.as_text():
@@ -258,16 +240,18 @@ func _input(event):
 				"F": 
 					get_tree().set_input_as_handled()
 					return
+				"G":
+					get_tree().set_input_as_handled()
+					return
+				"R":
+					get_tree().set_input_as_handled()
+					return
+				"T":
+					get_tree().set_input_as_handled()
+					return
 				"Space":
 					get_tree().set_input_as_handled()
 					return
-
-func _on_PauseScreen_gui_input(event):
-	get_tree().set_input_as_handled()
-	if closing or moving:
-		return
-	elif event.is_action_pressed(cancel) or event.is_action_pressed(start):
-		close_pause_menu()
 
 func close_pause_menu():
 	for b in $MenuPanel/Menu.get_children().size():
@@ -319,13 +303,13 @@ func _on_ButtonStatus_focus_exited():
 	pass
 
 func _on_ButtonSTAT_gui_input(event, description_index):
-	if event.is_action_pressed(up) or event.is_action_pressed(down):
+	if event.is_action_pressed(controls.up) or event.is_action_pressed(controls.down):
 		audio_menu_move()
-	elif event.is_action_pressed(cancel):
+	elif event.is_action_pressed(controls.examine):
 		hide_status_display()
 		enable_menu_focus()
 		$MenuPanel/Menu/ButtonStatus.grab_focus()
-	elif event.is_action_pressed(accept):
+	elif event.is_action_pressed(controls.attack):
 		audio_menu_select()
 		var stat_description
 		match description_index:
@@ -343,7 +327,7 @@ func _on_ButtonSTAT_gui_input(event, description_index):
 			}
 		]
 		get_node("/root/World/GUI").add_child(dialogBox)
-	elif event.is_action_pressed(start):
+	elif event.is_action_pressed(controls.start):
 		hide_status_display()
 		close_pause_menu()
 
@@ -405,25 +389,25 @@ func _on_ButtonConfig_focus_exited():
 	pass
 
 func _on_ButtonControls_gui_input(event):
-	if event.is_action_pressed(accept) and !$CanvasLayer1/ControlsDisplay.visible:
+	if event.is_action_pressed(controls.attack) and !$CanvasLayer1/ControlsDisplay.visible:
 		$CanvasLayer1/ControlsDisplay.show()
 		$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(-480, 0), Vector2(0, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_OUT)
 		$Tween.start()
 		moving = true
 		yield($Tween, "tween_all_completed")
 		moving = false
-	elif (event.is_action_pressed(cancel) or event.is_action_pressed(accept)) and $CanvasLayer1/ControlsDisplay.visible and !moving:
+	elif (event.is_action_pressed(controls.examine) or event.is_action_pressed(controls.attack)) and $CanvasLayer1/ControlsDisplay.visible and !moving:
 		$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(0, 0), Vector2(480, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_IN)
 		$Tween.start()
 		moving = true
 		yield($Tween, "tween_all_completed")
 		moving = false
 		$CanvasLayer1/ControlsDisplay.hide()
-	elif event.is_action_pressed(cancel):
+	elif event.is_action_pressed(controls.examine):
 		hide_config_display()
 		enable_menu_focus()
 		$MenuPanel/Menu/ButtonConfig.grab_focus()
-	elif event.is_action_pressed(start):
+	elif event.is_action_pressed(controls.start):
 		if $CanvasLayer1/ControlsDisplay.visible and !moving:
 			$Tween.interpolate_property($CanvasLayer1/ControlsDisplay, "rect_position", Vector2(0, 0), Vector2(480, 0), 0.4, Tween.TRANS_QUINT, Tween.EASE_IN)
 			$Tween.start()
@@ -434,24 +418,24 @@ func _on_ButtonControls_gui_input(event):
 			close_pause_menu()
 
 func _on_ButtonSave_gui_input(event):
-	if event.is_action_pressed(accept):
+	if event.is_action_pressed(controls.attack):
 		GameManager.save_game()
-	elif event.is_action_pressed(cancel):
+	elif event.is_action_pressed(controls.examine):
 		hide_config_display()
 		enable_menu_focus()
 		$MenuPanel/Menu/ButtonConfig.grab_focus()
-	elif event.is_action_pressed(start):
+	elif event.is_action_pressed(controls.start):
 		hide_config_display()
 		close_pause_menu()
 
 func _on_ButtonLoad_gui_input(event):
-	if event.is_action_pressed(accept):
+	if event.is_action_pressed(controls.attack):
 		GameManager.quit_to_title()
-	elif event.is_action_pressed(cancel):
+	elif event.is_action_pressed(controls.examine):
 		hide_config_display()
 		enable_menu_focus()
 		$MenuPanel/Menu/ButtonConfig.grab_focus()
-	elif event.is_action_pressed(start):
+	elif event.is_action_pressed(controls.start):
 		hide_config_display()
 		close_pause_menu()
 
@@ -487,11 +471,13 @@ func hide_config_display():
 	yield($Tween, "tween_all_completed")
 	$ConfigDisplay.hide()
 
-func _on_ButtonInventory_focus_entered(): pass
+func _on_ButtonInventory_focus_entered():
+	pass
 #	return
 #	$InventoryDisplay.show()
 #	audio_menu_move()
 
-func _on_ButtonInventory_focus_exited(): pass
+func _on_ButtonInventory_focus_exited():
+	pass
 #	return
 #	$InventoryDisplay.hide()

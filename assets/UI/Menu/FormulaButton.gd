@@ -8,13 +8,13 @@ func _ready():
 	self.focus_neighbour_left = alchemyButton.get_path()
 
 func _on_Button_gui_input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed(pauseMenu.controls.examine):
 		pauseMenu.hide_alchemy_display()
 		pauseMenu.enable_menu_focus()
 		alchemyButton.grab_focus()
-	elif event.is_action_pressed("ui_accept"):
+	elif event.is_action_pressed(pauseMenu.controls.attack):
 		pauseMenu.audio_menu_select()
-	elif event.is_action_pressed(pauseMenu.start):
+	elif event.is_action_pressed(pauseMenu.controls.start):
 		pauseMenu.hide_alchemy_display()
 		pauseMenu.close_pause_menu()
 

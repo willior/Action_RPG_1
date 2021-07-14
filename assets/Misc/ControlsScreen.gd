@@ -5,7 +5,7 @@ var ChapterScreen = load("res://assets/Misc/ChapterDisplay.tscn")
 var ok_to_start = false
 
 func _input(event):
-	if event.is_action_pressed("start") && ok_to_start:
+	if event.is_action_pressed("start_1") && ok_to_start:
 		$ControlsDisplay.queue_free()
 #		var chapterScreen = ChapterScreen.instance()
 #		chapterScreen.SCENE_STRING = "res://assets/Maps/0-1_Home.tscn"

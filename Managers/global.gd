@@ -232,4 +232,42 @@ func enable_exits(value):
 		e.set_collision_mask_bit(0, opposite)
 
 func set_player_menu_controls(player_name):
-	pass
+	var controls_dict
+	match player_name:
+		"Player":
+			controls_dict = {
+				up = "up_1",
+				down = "down_1",
+				left = "left_1",
+				right = "right_1",
+				next = "next_1",
+				previous = "previous_1",
+				attack = "attack_1",
+				examine = "examine_1",
+				alchemy = "alchemy_1",
+				roll = "roll_1",
+				start = "start_1"
+			}
+		"Player2":
+			controls_dict = {
+				up = "up_2",
+				down = "down_2",
+				left = "left_2",
+				right = "right_2",
+				next = "next_2",
+				previous = "previous_2",
+				attack = "attack_2",
+				examine = "examine_2",
+				alchemy = "alchemy_2",
+				roll = "roll_2",
+				start = "start_2"
+			}
+	return controls_dict
+
+func set_player_menu_controls_array(player_name):
+	var _controls_array = Array()
+	match player_name:
+		"Player":
+			pass
+		"Player2":
+			pass

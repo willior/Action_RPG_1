@@ -22,7 +22,7 @@ var menuOn = false
 var menuSkipped = false
 
 func _input(event):
-	if event.is_action_pressed("start") && !menuSkipped:
+	if event.is_action_pressed("start_1") && !menuSkipped:
 		$MarginContainer/VBoxContainer.queue_free()
 		wisteria.queue_free()
 		

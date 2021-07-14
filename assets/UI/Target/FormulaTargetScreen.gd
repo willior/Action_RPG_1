@@ -36,59 +36,15 @@ export(targetMode) var target_mode
 export var formula_range : int
 export var attack_formula : bool
 
-var controls = {
-	up: null,
-	down: null,
-	left: null,
-	right: null,
-	next: null,
-	previous: null,
-	attack: null,
-	examine: null,
-	roll: null
-}
-
-var up
-var down
-var left
-var right
-var next
-var previous
-var attack
-var examine
-var alchemy
-var roll
+var controls = {}
 
 var velocity = Vector2.ZERO
 var ending = false
 
 func _ready():
 	Global.target_screen_open = true
+	controls = Global.set_player_menu_controls(player.name)
 	get_tree().paused = true
-	match player.name:
-		"Player":
-			up = "up_1"
-			down = "down_1"
-			left = "left_1"
-			right = "right_1"
-			next = "next_1"
-			previous = "previous_1"
-			attack = "attack_1"
-			examine = "examine_1"
-			alchemy = "alchemy_1"
-			roll = "roll_1"
-		"Player2":
-			up = "up_2"
-			down = "down_2"
-			left = "left_2"
-			right = "right_2"
-			next = "next_2"
-			previous = "previous_2"
-			attack = "attack_2"
-			examine = "examine_2"
-			alchemy = "alchemy_2"
-			roll = "roll_2"
-			
 	sfx1.stream_paused = true
 	sfx2.stream_paused = true
 	AudioServer.set_bus_effect_enabled(0, 0, true)
@@ -219,32 +175,31 @@ func _process(_delta):
 		1:
 			if ending: return
 			velocity = Vector2()
-			if Input.is_action_pressed(right):
+			if Input.is_action_pressed(controls.right):
 				velocity.x += 1
-			if Input.is_action_pressed(left):
+			if Input.is_action_pressed(controls.left):
 				velocity.x -= 1
-			if Input.is_action_pressed(down):
+			if Input.is_action_pressed(controls.down):
 				velocity.y += 1
-			if Input.is_action_pressed(up):
+			if Input.is_action_pressed(controls.up):
 				velocity.y -= 1
 			velocity = velocity.normalized()*160
 			velocity = target_body.move_and_slide(velocity)
 			target_body.position = target_body.position.clamped(formula_range)
 		2:
 			if ending: return
-			if Input.is_action_pressed(right):
+			if Input.is_action_pressed(controls.right):
 				target_body.rotation_degrees += 2
-			if Input.is_action_pressed(left):
+			if Input.is_action_pressed(controls.left):
 				target_body.rotation_degrees -= 2
-			if Input.is_action_pressed(down):
+			if Input.is_action_pressed(controls.down):
 				target_body.rotation_degrees += 2
-			if Input.is_action_pressed(up):
+			if Input.is_action_pressed(controls.up):
 				target_body.rotation_degrees -= 2
 
 func _input(event):
 	get_tree().set_input_as_handled()
-	
-	if event.is_action_pressed(attack):
+	if event.is_action_pressed(controls.attack):
 		get_parent().start(player, get_parent().formula_used)
 		if target_mode == 0 or target_mode == 1:
 			get_parent().get_node("FormulaHitbox").position = target_body.position
@@ -252,13 +207,13 @@ func _input(event):
 			get_parent().get_node("FormulaHitbox").rotation_degrees = target_body.rotation_degrees
 		end_target_screen()
 	
-	if event.is_action_pressed(examine):
+	if event.is_action_pressed(controls.examine):
 		end_animate_target()
 		yield($Tween, "tween_all_completed")
 		cancel_target_screen()
-	if event.is_action_pressed(next):
+	if event.is_action_pressed(controls.next):
 		next_target_body()
-	if event.is_action_pressed(previous):
+	if event.is_action_pressed(controls.previous):
 		previous_target_body()
 
 func next_target_body():
